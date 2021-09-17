@@ -1,5 +1,5 @@
 {
-  "name": "aplicacion2",
+  "name": "PCEI",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,11 +7,33 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "vue": {
+    "pwa": {
+      "name": "Unidad Educativa PCEI",
+      "themeColor": "#191919",
+      "appleMovileWebAppCapable": "yes",
+      "appleMovileWebAppStatusBarStyle": "black-translucent"
+    }
+  },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "datatables.net-dt": "^1.1.0",
+    "firebase": "^8.10.0",
+    "html2pdf.js": "^0.9.3",
+    "jquery": "^3.6.0",
     "register-service-worker": "^1.7.1",
+    "simple-vue-validator": "^0.16.0",
+    "v-tooltip": "^2.1.3",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-notification": "^1.3.20",
+    "vue-router": "^3.2.0",
+    "vue-select": "^3.12.2",
+    "vue2-datepicker": "^3.10.1",
+    "vue2-editor": "^2.10.3",
+    "vue2-timepicker": "^1.1.6",
+    "vuex": "^3.6.2",
+    "xlsx": "^0.17.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
