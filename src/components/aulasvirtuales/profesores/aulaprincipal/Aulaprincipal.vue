@@ -1,356 +1,296 @@
 <template>
   <div>
-    <div class="row ">
-      <Spinner v-if="isData"></Spinner>
-      <div v-else class="col-lg-10 col-12 mx-auto">
-        <!--  <div
-          class="mt-1"
-          style="background-color: #e5f5f8; padding:5px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;"
-        >
-          <div>
-            <p
-              class="text-dark fuente "
-              style="margin:7px;font-weight: 700; font-size: 16px "
+    <Spinner v-if="isData"></Spinner>
+    <div v-else class="row ">
+      <div class="col-lg-11 col-12 mx-auto" v-bind:style="{ backgroundImage: 'url(' + image + ')' }" style="background-color:null;min-height: 63vh; background-size: cover;border-radius: 3px;">
+         <div class=" text-start" >
+            <router-link
+              to="/aulas-lista"
+              class="btn btn-sm "
+              style="box-shadow: none"
             >
-              <router-link
-                to="/aulas-lista"
-                class="badge fuente regresar"
-                style=""
-              >
-                <i class="ni ni-bold-left"></i>&nbsp;Regresar</router-link
-              >
-              &nbsp;&nbsp; &nbsp;&nbsp; Gestíon de Aulas Virtuales => {{ info.nombre }} => {{ info.icono }}
-            </p>
-          </div>
-        </div> -->
-        <div class="">
-          <div class=" p-3 position-relative ">
-            <div class="row mt-3 bOSBYo">
-              <div class="col-lg-5 text-start">
-                <div class="sc-cqCuEk  ">
-                  <router-link
-                    to="/aulas-lista"
-                    class="badge fuente regresar"
-                    style=""
-                  >
-                    <i class="ni ni-bold-left"></i>&nbsp;Regresar</router-link
-                  >
-                  <h4 class=" fuente" style="font-weight: 400;">
-                    {{ info.materia }}
-                  </h4>
-                  <p class="parrafo">
-                    {{ info.nombre }}<br>
-                     {{ info.icono }}
-                  </p>
-                 
-
-                  <!-- <p v-html="info.descripcion" class="parrafo" style="margin:7px; ">
-                           
-                        </p> -->
-                </div>
-              </div>
-
-              <div class="col-lg-7 ">
-                <div class="text-end">
-                  <img
-                    height="230px"
-                    class="w-100"
-                    src="../../../../assets/img/jira/conect.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-                <div class="row mt-5">
-              <h4 class=" fuente" style="font-weight: 400;">Actividades</h4>
-              <hr />
-              <div class="col-lg-10 ">
-                <div @click="empujarAlumnos()" class="row mt-3 fwkeBY1 ">
-                  <div class="col-lg-3 esnRuO1">
-                    <div class="text-center ">
-                      <div class="avatar-group ">
-                              <a
-                                href="javascript:;"
-                                class="avatar avatar-xl avatar-xxl rounded-circle"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title=""
-                                data-bs-original-title="Martin Doe"
-                              >
-                                <img
-                                  alt="Image placeholder"
-                                  src="../../../../assets/img/jira/estudiantes.svg"
-                                />
-                              </a>
-                              <a
-                                href="javascript:;"
-                                class="avatar avatar-xl avatar-xxl rounded-circle"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title=""
-                                data-bs-original-title="Romina Hadid"
-                              >
-                                <img
-                                  alt="Image placeholder"
-                                  src="../../../../assets/img/jira/estudiantes2.svg"
-                                />
-                              </a>
-                             
-                            </div>
-                             <br>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 ">
-                    <div class="">
-                      <p class="h6 fuente mt-2" >
-                        Lista de Estudiantes
-                      </p>
-                      <p class="parrafo">
-                        Se podra visualizar todos los estudiantes que estan
-                        en este curso
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-4 fwkeBY1 ">
-                  <div class="col-lg-3 esnRuO1">
-                    <div class="text-center ">
-                      <div class="">
-                        <div class="">
-                          <img
-                            class="w-45"
-                            src="../../../../assets/img//jira/calificar.svg"
-                            alt="fondo"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 ">
-                    <div class="">
-                      <p class="h6 fuente" >
-                        Tareas
-                      </p>
-                      <button
-                                to="/crear-aula"
-                                class="btn btn-sm mt-2"
-                                style="background-color: #fff;border-color: #ff7a59; color: #ff7a53; font-weight: 500; border-radius: 3px;
-                                 border-style: solid;border-width: 1px;"
-                              >
-                                Calificar
-                              </button>
-                              &nbsp;&nbsp;
-                              <button
-                                to="/crear-aula"
-                                class="btn btnNaranja btn-sm mt-2"
-                              >
-                                Crear Tarea
-                              </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-4 fwkeBY1 ">
-                  <div class="col-lg-3 esnRuO1">
-                    <div class="text-center ">
-                      <div class="">
-                        <div class="">
-                          <img
-                            class="w-75"
-                            src="../../../../assets/img/shapes/tareass.png"
-                            alt="fondo"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 ">
-                    <div class="">
-                      <p class="h6 fuente" >
-                        Evaluaciones
-                      </p>
-                    
-                        <button
-                                to="/crear-aula"
-                                class="btn btn-sm mt-2"
-                                style="background-color: #fff;border-color: #ff7a59; color: #ff7a53; font-weight: 500; border-radius: 3px;
-                                 border-style: solid;border-width: 1px;"
-                              >
-                                Calificar
-                              </button>
-                              &nbsp;&nbsp;
-                              <button
-                                to="/crear-aula"
-                                class="btn btnNaranja btn-sm mt-2"
-                              >
-                                Crear Tarea
-                              </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <img
+                height="23px"
+                src="../../../../assets/img/usados/regresar.png"
+              />
+            </router-link>
+           
             
-            <!--  <div class="row mt-4">
-              <div class="col-lg-12">
-                <h4 class=" fuente" style="font-weight: 400;">Evaluaciones</h4>
-                <hr />
-                <div class="row mt-3">
-                  <div class="col-md-9 col-12">
-                    <div class="table-responsive p-0 mt-2">
-                      <table class="table align-items-center mb-0">
-                        <thead>
-                          <tr class="cabeza">
-                            <th
-                              style="background-color: rgb(222, 235, 255);"
-                              class="text-center "
-                            >
-                              <p class="parrafo">
-                                Evaluaciones
-                              </p>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td
-                              class="text-center"
-                              style="height: 72px; padding: 16px 24px;    "
-                            >
-                              <p class="h5 fuente">
-                                No has creado ningún evaluación
-                              </p>
-                              <p class="parrafo">
-                                Cargar la lista y crear una nueva evaluacón para
-                                que se puedan mostrar<br />
-                                a los participantes
-                              </p>
-                              <router-link
-                                to="/crear-aula"
-                                class="btn btnNaranja btn-sm mt-4 w-40"
-                              >
-                                Cargar Lista
-                              </router-link>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3 col-12">
-                    <div class="card card-plain text-center w-100">
-                      <div class="card-body ">
-                        <router-link :to="`/507`">
-                          <img
-                            class="w-100"
-                            src="../../../../assets/img/shapes/evaluaciones.png"
-                            alt="fondo"
-                          />
-                        </router-link>
-                      </div>
-                    </div>
-                  </div>
+            <span class="fuente h5 links ms-3" style="font-weight: 400;">
+              {{ info.materia }} - {{ info.nombre }} 
+            </span>
+            
+          </div>
+          
+           <hr class="horizontal dark mb-1">
+        <div class="mt-4 h3 text-center" style="font-weight: 700;">
+          <img alt="" class="" src="../../../../assets/img/icons/mark.svg">
+          Módulos del curso</div>
+        
+        <section class="flex-containes mt-5" >
+          <div class="">
+            <a @click="empujarAlumnos()" href="javascript:;">
+              <div
+                class="cajas noactive foco2 text-center"
+                style="max-width: 200px;margin-right: 15px!important; padding: 5px;"
+              >
+                <div class="avatar-group mt-2">
+                  <a
+                    href="javascript:;"
+                    class="avatar avatar-lg avatar-lg rounded-circle"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title=""
+                    data-bs-original-title="Martin Doe"
+                  >
+                    <img
+                      alt="Image placeholder"
+                      src="../../../../assets/img/jira/estudiantes.svg"
+                    />
+                  </a>
+                  <a
+                    href="javascript:;"
+                    class="avatar avatar-lg avatar-lg rounded-circle"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title=""
+                    data-bs-original-title="Romina Hadid"
+                  >
+                    <img
+                      alt="Image placeholder"
+                      src="../../../../assets/img/jira/estudiantes2.svg"
+                    />
+                  </a>
+                  <br />
                 </div>
+                <div class="p-1">
+                <p class="cardTitle fuente mt-1">Estudiantes</p>
+                <p class="parrafo cardSubTitle">
+                  Mostrar la lista de los estudiantes ya registrados en este
+                  curso
+                </p>
+                </div>
+                
               </div>
-            </div> -->
-            <!-- <div class="row mt-4">
-               <div class="col-lg-12">
-                   <h3 class=" fuente" style="font-weight: 400;">Integrantes</h3>
-                   <hr>
-                  <div class="row mt-3">
-                    <div class="col-md-9 col-12">
-                      <a class="btn btnNaranja mt-6" href="javascript;;">
-                            Ver Partisipantes
-                      </a>
-                    </div>
-                    
-                    <div class="col-md-3 col-12">
-                      <div class="card card-plain text-center w-100">
-                        <div class="card-body " >
-                          <router-link :to="`/507`"  href="javascript:;">
-                               <img class="w-100" src="../../../../assets/img/shapes/value-prop-2.7009c5230a70f384093ef76d2ccc26d5.8.png" alt="fondo">
-                            
-                          </router-link>
-                          
-                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            </a>
+          </div>
+          <div class="">
+            <router-link :to="`/task-config/${ids}`" href="javascript:;">
+              <div
+                class="cajas  noactive foco2 text-center"
+                style="max-width: 200px;margin-right: 15px!important;padding: 5px;"
+              >
+                <img
+                  class="w-35 mt-1"
+                  src="../../../../assets/img/logs/tarea.svg"
+                  alt="fondo"
+                />
+                <div class="p-1">
+                  <p class="cardTitle fuente ">Tareas</p>
+                  <p class="parrafo cardSubTitle">
+                    Puede crear eliminar o editar tareas para todos sus estudiantes
+                   </p>
                 </div>
                
-              </div> -->
+              </div>
+            </router-link>
           </div>
+          <div class="">
+            <router-link :to="`/507`" href="javascript:;">
+              <div
+                class="cajas noactive foco2 text-center"
+                style="max-width: 200px;margin-right: 15px!important;padding: 5px;"
+              >
+                <img
+                  class="w-50 mt-2"
+                  src="../../../../assets/img/usados/using.png"
+                  alt="fondo"
+                />
+                <div class="p-1">
+                    <p class="cardTitle fuente mt-1">Evaluaciones</p>
+                <p class="parrafo cardSubTitle">
+                  Registre evaluaciones o test por cada parcial para tener dicho aporte
+                </p>
+                </div>
+                
+              </div>
+            </router-link>
+          </div>
+          <div class="">
+            <router-link :to="`/507`" href="javascript:;">
+              <div
+                class="cajas noactive foco2 text-center"
+                style="max-width: 200px;margin-right: 15px!important;padding: 5px;"
+              >
+                <img
+                  class="w-30 mt-1"
+                  src="../../../../assets/img/usados/turbo.png"
+                  alt="fondo"
+                />
+                <div class="p-1">
+                      <p class="cardTitle fuente mt-1">Foros</p>
+                <p class="parrafo cardSubTitle">
+                  Puede crear foros de discusión para que participen los estudiantes
+                </p>
+                </div>
+               
+              </div>
+            </router-link>
+          </div>
+         
+          <!-- <div class="">
+            <a @click="mostrar()" href="javascript:;">
+              <div
+                class="cajas noactive foco2 text-center"
+                style="max-width: 200px;margin-right: 15px!important;padding: 5px;"
+              >
+                <img
+                  class="w-80 mt-3"
+                  src="../../../../assets/img/shapes/value-prop-1.7b09051298cb7d34c5d9cf9c0225e7c4.8.png"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente text-danger mt-2">Eliminar</p>
+                <p class="parrafo">
+                  Puedes eliminar esta aula virtual si ya no esta en uso
+                </p>
+              </div>
+            </a>
+          </div> -->
+        </section>
+        <div class="text-end mt-4">
+        <a class="links" @click="mostrar()" href="javascript:;">Eliminar Curso</a>
+        
         </div>
+        
       </div>
+   
 
       <div class="fixed-plugin" :class="{ 'show w-100': tabb === 'iniciarr' }">
         <div
-          class="card shadow-lg blur desplega"
+          class="card shadow-lg  desplega"
           :class="{ 'w-100': tabb === 'iniciarr' }"
-          style="overflow-y: auto; z-index: 9999; top:35px;"
+          style="overflow-y: auto; z-index: 9999; "
         >
-          <div class="card-header pb-0 pt-3  bg-transparent ">
+          <div
+             class=""
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
+         padding: 4px 25px 4px 40px;background-color: #253342;"
+          >
             <div class="float-start">
-              <h5 class="mt-3 mb-0 fuente" style="font-weight: 400;">
-               Estudiantes en este curso
-              </h5>
+              <h4 class="mt-2 mb-0 fuente text-white" style="font-weight: 400;">
+                Estudiantes registrados en este curso
+              </h4>
             </div>
-            <div class="float-end mt-4">
-              <button 
+            <div class="float-end mt-2">
+              <button
                 @click="tabb = 'cerrarr'"
                 class="btn btn-link text-dark p-0 fixed-plugin-close-button"
               >
-                <i style="font-size: 30px" class="fa fa-close"></i>
+                <i style="font-size: 30px" class="fa fa-close text-white"></i>
               </button>
             </div>
             <!-- End Toggle Button -->
           </div>
-          <hr class="horizontal dark my-1" />
-          <div class="card-body pt-sm-3 pt-0">
+
+          <div class="card-body pt-sm-3 pt-0" style="overflow-y: auto;height: auto;">
             <!-- Sidebar Backgrounds -->
             <div class="row">
-              <div class="col-lg-6 col-12 mx-auto">
-                <p class="h5 fuente">Personas</p>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <div class="text-center ">
-                      <div class="targetas">
-                       
-                          <div class="avatar avatar-xl position-relative mt-3">
-                            <img
-                              class=""
-                              style="border-radius: 100%;"
-                              src="https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png"
-                              alt="fondo"
-                            />
-                          </div>
+              <div class="col-lg-9 col-12 mx-auto">
+               
+                <Refresh class="mt-10" v-if="isCargar"></Refresh>
+                <section v-else class="flex-containes mt-2">
+                   
+                  <div
+                    v-for="item in inAlumnos"
+                    :key="item.id"
+                    class="text-center"
+                  >
+                    <br />
+                   
+                      <div class="targetas1 cajas " style="min-width:170px;">
+                        <div
+                          class="avatar avatar-xl position-relative mt-3"
+                          v-bind:style="{ 'background-color': item.colors }"
+                          style="border-radius: 100%;"
+                        >
+                          <p class="text-white h3" style="font-weight: 600;">
+                            {{ item.img }}
+                          </p>
+                        </div>
 
-                          <p class="text-xs fuente mt-3">2. Tareas</p>
-                        
+                        <p class="text-xs fuente mt-3">
+                          {{ item.name.slice(0, 30) }}
+                        </p>
                       </div>
-                    </div>
+                   
+                    
                   </div>
-                     <div class="col-sm-3">
-                    <div class="text-center ">
-                      <div class="targetas">
-                       
-                          <div class="avatar avatar-xl position-relative mt-3">
-                            <img
-                              class=""
-                              style="border-radius: 100%;"
-                              src="https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png"
-                              alt="fondo"
-                            />
-                          </div>
+                
+                </section>
+              
+               
+              </div>
+            </div>
+          </div>
+          <div
+          class=" modalFooter"
+         
+        >
+          <div class="text-end">
+            
+              <a
+                class="btn btnNaranjaClaro "
+                @click="tabb = 'cerrarr'"
+              >
+                Cancelar 
+              </a>
+              <a
+                class="btn btnNaranja ms-3"
+                @click="verLista()"
+              >
+                Actualizar lista 
+              </a>
+          </div>
+        </div>
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade "
+        :class="{ 'show ': modals1 === 'opennn' }"
+        :style="[modals1 === 'opennn' ? { display: 'block' } : {}]"
+        style="overflow-y: auto;    z-index: 9999;"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content ">
+            <div class="modal-body">
+              <p class="h4 fuente">
+                ¿Eliminar este curso?
+              </p>
 
-                          <p class="text-xs fuente mt-3">Esteban Wladimir Martinez Martinez</p>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <p class="parrafo">
+                Estás a punto de eliminar a de esta cuenta. Esta acción no se
+                puede deshacer
+              </p>
+              <div class="mt-3">
+                <a
+                  @click="modals1 = 'cier'"
+                  class="btn btn-sm "
+                  style="background-color: #eaf0f6;
+                      border-color: #cbd6e2; color: #506e91; font-weight: 500; border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;"
+                  name="button"
+                  >Cancelar</a
+                >&nbsp; &nbsp;
+                <button @click="__eliminar()" class="btn btn-sm btnRojo">
+                  Eliminar
+                </button>
               </div>
             </div>
           </div>
@@ -408,11 +348,10 @@
   );
 }
 
-
 .targetas {
   border-radius: 3px;
   height: 180px;
- 
+
   box-sizing: border-box;
   transition: box-shadow 0.25s ease-in-out 0s;
   box-shadow: rgb(9 30 66 / 25%) 0px 1px 1px, rgb(9 30 66 / 31%) 0px 0px 1px 0px;
@@ -424,4 +363,13 @@
   box-shadow: rgb(9 30 66 / 25%) 0px 8px 16px -4px,
     rgb(9 30 66 / 31%) 0px 0px 1px;
 }
+.cardTitle {
+  color: #1d1c1d;
+  font-size: 24px;
+  line-height: 30px;
+}
+.cardSubTitle {
+  font-size: 13px!important;color: #516f90!important;
+}
+
 </style>

@@ -28,24 +28,24 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
     response => response,
     error => {
-      if (error.response.status===403||error.response.status===401) {//||error.response.status===401
+      if (!error.response) {
+       console.log('Por favor revise su conexion a internet')
+      }
+      else if(error.response.status===403||error.response.status===401||error.response.status===404) {//||error.response.status===401
         localStorage.removeItem('access_token');
         window.location.reload(true);
       }
-      if (!error.response) {
-        console.log("Please check your internet connection.");
-      }
+      
       return Promise.reject(error);
     }
   );
-let url=null
 
-if(localStorage.getItem("config")!==null){
-    let config = JSON.parse(localStorage.getItem("config"))
-    url = config
-}
+let url = 'https://pcei-tulcan.com/api'; //http://localhost:3000/ https://pcei-tulcan.com
+// if(localStorage.getItem("config")!==null){
+//     let config = JSON.parse(localStorage.getItem("config"))
+//     url = config
+// }
 
-console.log(url)
 export default{
     identityProxy: new IdentityProxy(Axios, url),
     _usuarioProxi: new UsuariosProxi(Axios, url),

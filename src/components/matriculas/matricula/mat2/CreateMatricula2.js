@@ -1,13 +1,15 @@
 import Spinner from "../../../../shared/Spinner";
-import Navss from '../../../../shared/Navss';
 import IsSelect from '../../../../shared/IsSelect'
+import RestResource from "../../../../service/isAdmin";
+const restResourceService = new RestResource();
 export default {
   name: "CreateMatricula2",
   components: {
-    Spinner,Navss ,IsSelect
+    Spinner,IsSelect
   },
   data() {
     return {
+      roles: this.$store.state.user.roles,
       tab: "init1",
       visible: 'uno',
       searchQuery: null,
@@ -33,16 +35,24 @@ export default {
         estado: null,
         typo: null,
         academico: null,
+        nombre : null,
       },
       result : {
         id: null,
         fullname: null,
         foto: null,
-      }
-   
+      },
+      foto: null,
+      isSelecUsers: [],
+      fecha: '',
     };
   },
   methods: {
+    verificarUsuario() {
+      if (!restResourceService.admin(this.roles)) {
+        this.$router.push("/");
+      }
+    },
     getAll() {
       this.isLoading = true;
       let modalidad = 'Extraordinaria';
@@ -112,12 +122,7 @@ export default {
 
         //-----------DE LO CONTRARIO ENTRA A SER UN DOCUMENTO NUEVO
         this.ifLoad = true;
-        if (this.model.estado == true) {
-          this.model.estado = 1;
-        } else {
-          this.model.estado = 0;
-        }
-        this.model.fkestudiante = this.result.id;
+        this.model.estado = 1;
         this.model.fecha = this.fechaActual();
         this.model.academico = this.model.academico._id;
         this.model.fknivel = this.model.fknivel._id;
@@ -127,29 +132,30 @@ export default {
           .createMatricula(this.model) //-----------GUARDAR CON AXIOS
           .then(() => {
             this.ifLoad = false;
-            this.visible = 'tres';
-            this. __limpiarCampos();
+             this.regresar();
+             this.$notify({
+              group: "global",
+              text: "Registro exitoso!!!!",
+            });
           })
           .catch((error) => {
             //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
             this.ifLoad = false;
             if (error.response) {
               if (error.response.status == 400) {
-                
+               
                 this.$notify({
                   group: "global",
                   text: error.response.data.message,
                 });
                 this. __limpiarCampos();
                 this.isDuplicado = true;
-                this.visible = 'cero';
-                //this.$router.push('/Error-reg')
               }
             } else if (error.request) {
               alert("duplicado 2");
             } else {
               console.log("Error", error.message);
-            }
+           }
           });
       });
     },
@@ -201,13 +207,44 @@ export default {
     mostrar(){
       this.visible= "dos";
     },
-
-    nextO(obf){
-        this.result.id = obf._id;
-        this.result.fullname = obf.fullname;
-        this.result.foto = obf.foto;
-        this.visible= "cero";
-    }
+    regresar(){
+      this.visible= "uno";
+      this.isSelecUsers = [];
+    },
+    nextO(){
+      this.__limpiarCampos()
+      this.model.fkestudiante = this.isSelecUsers[0].id;
+      this.model.nombre = this.isSelecUsers[0].name;
+      this.foto = this.isSelecUsers[0].img;
+      this.visible= "dos";
+      this.isDuplicado = false;
+    },
+    selectUser(objeto){
+      let longitud = this.isSelecUsers.length;
+      let isExiste = 0;
+      if(longitud>0){
+         for (let i = 0; i < this.isSelecUsers.length; i++) {
+            if(this.isSelecUsers[i].id==objeto._id){
+             this.isSelecUsers.splice(i, 1); 
+             isExiste = 1;
+             break;
+            }
+         }
+         if(isExiste===0){ 
+           this.isSelecUsers.push({
+            id: objeto._id,
+            name: objeto.fullname,
+            img: objeto.foto,
+           });
+         }
+      }else{
+       this.isSelecUsers.push({
+        id: objeto._id,
+        name: objeto.fullname,
+        img: objeto.foto,
+       });
+      } 
+    },
   },
   computed: {
     resultQuery(){
@@ -215,12 +252,11 @@ export default {
       return this.info.filter((item)=>{
         return this.searchQuery.toLowerCase().split(' ').every(v => item.fullname.toLowerCase().includes(v))
       })
-      }else{
-        return [{_id : 10, fullname:'Puede buscar por nombre o apellido'}]
-       }
+      }
     }
   },
   created() {
+    this.verificarUsuario();
     this.__listPeriodo();
     this.__listNivele();
     this.getAll();

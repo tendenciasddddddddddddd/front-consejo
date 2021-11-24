@@ -1,136 +1,87 @@
 <template>
-  <div class="row ">
-    <div class="col-lg-9 col-12 mx-auto">
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="fuente" style="font-weight: 400;">Aulas Virtuales</h3>
-          <hr>
+   <div>
+    <Analitic v-if="isData"></Analitic>
+  <div v-else class="row ">
+    <div class="col-lg-12 col-12 mx-auto">
+      <div
+        class="card " v-bind:style="{ backgroundImage: 'url(' + imagen + ')' }"
+        style="background-color:null;min-height: 7vh; background-size: cover;border-radius: 3px;"
+      >
+        <div class="card-body text-center pt-4">
+          
+          <h3 class="text-white fuente">
+            Aulas virtuales
+          </h3>
+          <p class="text-white fuente">
+            Crear aula virtual para que sus alumnos se puedan matricular y enviar sus tareas.
+          </p>
+          <!-- <div class="input-group text-center" style="width: 360px;left: 36%;">
+                <span class="input-group-text text-body buscador"
+                  ><i class="fas fa-search colorhs" aria-hidden="true"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control buscador"
+                  placeholder="Buscar cursos"
+                 style="background-color: #fff;"
+                />
+              </div> -->
         </div>
       </div>
+     
+    </div>
+     
+    <div class="col-lg-11 col-12 mx-auto mt-3">
+     
+      
+     
 
-      <Skeleton v-if="isData"></Skeleton>
-      <div v-else>
-        <div v-if="!info.length">
-          <div class="row">
-            <div class="table-responsive p-0 mt-5">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr class="cabeza">
-                    <th
-                      style="background-color: rgb(234, 240, 246);"
-                      class="text-center "
-                    >
-                      <p class="parrafo">
-                        Lista Aulas Virtuales
-                      </p>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td
-                      class="text-center"
-                      style="height: 72px; padding: 16px 24px;    "
-                    >
-                      <p class="h5 fuente">No has creado ningún curso</p>
-                      <p class="parrafo">
-                        Crea nuevas instancias o cursos para que tus estudiantes
-                        se <br />
-                        puedan matricular
-                      </p>
-                      <router-link
-                        to="/crear-aula"
-                        class="btn btnNaranja btn-sm mt-4 w-40"
-                      >
-                        Crear un curso
-                      </router-link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div v-else class="row">
-          <div class="text-end ">
-            <router-link to="/crear-aula" class="btn btn-sm btnNaranja ">
-              Crear un curso
+        <div  class="row">
+         
+          <section class="flex-containes mt-3">
+             <div class="" >
+            <router-link to="/crear-aula" href="javascript:;">
+              <div
+                class="cajas targetas1 borde4 text-center"
+                style="max-width: 200px;margin-right: 15px!important;min-height: 230px;"
+              >
+               <i style="font-size: 52px; color:#00a4bd" class="fa fa-plus mt-5" aria-hidden="true"></i>
+                <div class="p-1 mt-4">
+                     <a class="cardTitle fuente ">Nuevo curso</a><br>
+               
+                </div>
+              </div>
             </router-link>
           </div>
-          <div class="table-responsive p-0 mt-3">
-            <table class="table align-items-center mb-0">
-              <thead>
-                <tr class="cabeza">
-                  <th
-                    style="background-color: rgb(234, 240, 246);"
-                    class="text-start "
-                  >
-                    <p class="parrafo">
-                      Nombre
-                    </p>
-                  </th>
-                  <th
-                    style="background-color: rgb(234, 240, 246);"
-                    class="text-end"
-                  >
-                    <p class="parrafo">
-                      Estado
-                    </p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in info" :key="item.id" :vars="(aux = 0)">
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div class="w-9">
-                        <img
-                          src="../../../../assets/img/logs/bot-avatar.webp"
-                          class=""
-                          style="border-radius: 100%;max-width: 100%; "
-                        />
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <p class="parrafo">
-                          &nbsp;&nbsp; {{ item.materia }} <br>
-                           &nbsp;&nbsp; {{ item.nombre }} /  {{ item.icono }}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td class="align-middle text-end">
-            
-                 <!--    <button
-                      @click="__eliminar(item._id)"
-                      class="btn btn-sm fuente"
-                      style="height:30px; background-color: #eaf0f6; border-color: #cbd6e2; color: black; 
-      font-weight: 500; 
-      border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;"
-                    >
-                      Eliminar
-                    </button> -->
-                     <router-link :to="`/aula-principal/${item._id}`" class="badge  aula text-dark" style="color: black">
-                         &nbsp;Entrar
-                     </router-link>&nbsp;&nbsp;&nbsp;
-                       <p @click="mostrar(item._id,item.materia)" class="badge  aula text-dark" style="color: black">
-                         &nbsp;Eliminar
-                      </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="" v-for="item in info" :key="item.id">
+            <router-link :to="`/aula-principal/${item._id}`" href="javascript:;">
+              <div v-tooltip.bottom="'Curso: '+item.nombre +', Materia: '+item.materia"
+                class="cajas targetas1 borde1 text-center"
+                style="max-width: 200px;margin-right: 15px!important;min-height: 230px;"
+              >
+                <img
+                  class="w-65"
+                  src="../../../../assets/img/usados/profesores.png"
+                  alt="fondo"
+                />
+                <div class="let" style="padding-left:8px; padding-right:8px;">
+                     <a class="cardTitle fuente ">{{ item.icono }}</a>
+                <p class="parrafo cardSubTitle" >
+                   {{ item.nombre.slice(0, 24) }}, {{
+                      item.materia.slice(0, 24)
+                    }}
+                </p>
+                </div>
+              </div>
+            </router-link>
           </div>
+        </section>
+
+    
+          
         </div>
-        <!-- Start of HubSpot Embed Code -->
-        <!-- Button trigger modal -->
-
-
-<!-- Modal -->
- <div
+       
+        <div
           class="modal fade "
           :class="{ 'show ': modals1 === 'opennn' }"
           :style="[modals1 === 'opennn' ? { display: 'block' } : {}]"
@@ -143,30 +94,40 @@
         >
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content ">
-
               <div class="modal-body">
-                <p class="h4 fuente">¿Eliminar a <br>
-                {{curso}}?</p>
-                
-                <p class="parrafo">Estás a punto de eliminar a {{curso}} de esta cuenta. Esta acción no se puede deshacer</p>
+                <p class="h4 fuente">
+                  ¿Eliminar a <br />
+                  {{ curso }}?
+                </p>
+
+                <p class="parrafo">
+                  Estás a punto de eliminar a {{ curso }} de esta cuenta. Esta
+                  acción no se puede deshacer
+                </p>
                 <div class="mt-3">
-                  <a @click="modals1 = 'cier'" class="btn btn-sm " style="background-color: #fff;
-                      border-color: #ff7a59; color: #ff7a53; font-weight: 500; border-radius: 3px;
+                  <a
+                    @click="modals1 = 'cier'"
+                    class="btn btn-sm "
+                    style="background-color: #eaf0f6;
+                      border-color: #cbd6e2; color: #506e91; font-weight: 500; border-radius: 3px;
     border-style: solid;
-    border-width: 1px;" name="button">Cancelar</a>&nbsp; &nbsp;
-                   <button @click="__eliminar()" class="btn btn-sm btnNaranja">
-                           Continuar
-                   </button>
-                 
+    border-width: 1px;"
+                    name="button"
+                    >Cancelar</a
+                  >&nbsp; &nbsp;
+                  <button @click="__eliminar()" class="btn btn-sm btnRojo">
+                    Eliminar
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-<!-- End of HubSpot Embed Code -->
-      </div>
+
     </div>
   </div>
+   </div>
+ 
 </template>
 
 <script src="./AulasListas.js"></script>
@@ -185,5 +146,12 @@
   position: relative;
   padding: 2rem;
   border: 3px solid #eee;
+}
+.let p:first-letter {
+    text-transform: uppercase;
+}
+
+.let p:not(first-letter) {
+    text-transform: lowercase;
 }
 </style>

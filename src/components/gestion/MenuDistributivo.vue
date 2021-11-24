@@ -1,110 +1,85 @@
 <template>
   <div class="row ">
-    <div class="col-lg-9 col-12 mx-auto">
-      <div class="row">
-        <div class="col-sm-12 ">
-          <h3 class="mt-1 fuente" style="font-weight: 400;">Distributivo</h3>
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="mt-2">
-          <div
+    <div class="col-lg-11 col-12 mx-auto">
+     
+           <div
             class=""
             style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
               border-width: 1px; text-align: left;"
           >
             <div>
               <p class="parrafo" style="margin:7px; ">
-                <strong>Nota:</strong> Asignar cursos/paralelos con docentes y materias..
+               <i class="ni ni-bell-55"></i> &nbsp; <strong>Nota:</strong> Asignar cursos y  paralelos con docentes y materias para las dos modalidades..👌
               </p>
             </div>
           </div>
-        </div>
-
-        <div class="col-sm-4 mt-3">
-          <br />
-          <Skeleton v-if="isPeriodo"></Skeleton>
-          <div
-            v-else
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="text-center position-relative">
-                <router-link
-                  :to="`/Distributivo-v1/${idperiodoActualIntensivo}`"
-                  href="javascript:;"
-                >
-                  <div class="blur-shadow-image">
-                    <img
-                      height="170px"
-                      class="img border-radius-lg move-on-hover"
-                      src="../../assets/img/logs/crm.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link
-                    :to="`/Distributivo-v1/${idperiodoActualIntensivo}`"
-                    href="javascript:;"
-                    class="text-dark fuente" style="font-weight: 400;"
-                    >Intensivo</router-link
-                  >
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 mt-3">
-          <br />
-          <Skeleton v-if="isPeriodo"></Skeleton>
-          <div
-            v-else
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="text-center position-relative">
-                <router-link
-                  :to="`/Distributivo-v2/${idperiodoActualExtra}`"
-                  href="javascript:;"
-                >
-                  <div class="blur-shadow-image">
-                    <img
-                      height="170px"
-                      class="img border-radius-lg move-on-hover"
-                      src="../../assets/img/logs/segmented-lists.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body text-center px-0" style="padding:2px;">
-                <h5>
-                  <router-link
-                    :to="`/Distributivo-v2/${idperiodoActualExtra}`"
-                    href="javascript:;"
-                     class="text-dark fuente" style="font-weight: 400;"
-                    >Extraordinario</router-link
-                  >
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
+         <div class="text-center mt-6">
+        <span class="fuente h3 " style="font-weight: 400;"
+          >Distributivo de las dos modalidades</span
+        >
       </div>
+       <Analitic v-if="isPeriodo"></Analitic>
+       <div v-else class="row">
+        <section class="flex-containes mt-4">
+          <div class="">
+            <router-link :to="`/Distributivo-v1/${idperiodoActualIntensivo}`" href="javascript:;">
+              <div
+                class="cajas foco2 borde1 text-center"
+                style="max-width: 200px;margin-right: 23px!important;"
+              >
+                <img
+                  class="w-70"
+                  src="../../assets/img/logs/crm.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Intensivo</p>
+                <p class="parrafo">
+                  Vincular a los docentes con sus materias 👆
+                </p>
+                
+              </div>
+            </router-link>
+          </div>
+          <div class="">
+            <router-link :to="`/Distributivo-v2/${idperiodoActualExtra}`" href="javascript:;">
+              <div
+                class="cajas foco2 borde2 text-center"
+                style="max-width: 200px;margin-right: 13px!important;"
+              >
+                <img
+                  class="w-40"
+                  src="../../assets/img/logs/segmented-lists.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Extraordinaria</p>
+                <p class="parrafo">
+                 Vincular a los docentes con sus materias 👆
+                </p>
+               
+              </div>
+            </router-link>
+          </div>
+         
+          
+        </section>
+      </div>
+      
     </div>
   </div>
 </template>
 
 <script>
-import Skeleton from "../../shared/Skeleton";
+import Analitic from "../../shared/Analitic";
+import RestResource from '../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
   name: "MenuZonas",
   components: {
-    Skeleton,
+    Analitic,
   },
   data() {
     return {
+      roles: this.$store.state.user.roles,
       info: null,
       isPeriodo: false,
       idperiodoActualIntensivo: null,
@@ -118,7 +93,11 @@ export default {
         .getFull()
         .then((x) => {
           const filtro = x.data.niveles;
-          let listPeriodoIntensivo = filtro.filter(
+          if (!filtro.length) {
+            alert("ANTES DE ENTRAR AQUI HAY QUE CREAR UN PERIODO ACADEMICO PARA CADA MODALIDAD !!");
+          }
+          else{
+              let listPeriodoIntensivo = filtro.filter(
             (x) => x.typo == "Intensivo" && x.estado == "1"
           );
           this.idperiodoActualIntensivo = listPeriodoIntensivo[0]._id;
@@ -127,15 +106,24 @@ export default {
             (x) => x.typo == "Extraordinaria" && x.estado == "1"
           );
           this.idperiodoActualExtra = listPeriodoExtra[0]._id;
+         
           this.isPeriodo = false;
+          }
+        
         })
         .catch((err) => {
           console.log("Error", err);
           this.isPeriodo = false;
         });
     },
+    verificarUsuario(){
+       if(!restResourceService.admin(this.roles)){
+         this.$router.push("/");
+       }
+     }
   },
   mounted() {
+    this.verificarUsuario();
     this.__getperiodo();
   },
 };

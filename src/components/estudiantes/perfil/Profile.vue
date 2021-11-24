@@ -1,343 +1,303 @@
 <template>
   <div>
- <div class="row mt-2">
-      <div
-        class="col-lg-11 col-12 mx-auto"
-        style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;"
-      >
-        <div>
-          <p class="text-sm text-dark parrafo" style="margin:7px; ">
-            La información de su perfil, incluidos su nombre y foto de perfil,
-            puede ser visible para otros participantes. Su nombre y dirección de
-            correo electrónico también serán visibles El propietario de la
-            cuenta y el sistema pueden compartir esta
-            información con otras aplicaciones.
-          </p>
-        </div>
+     <div class="row ">
+      <div class="col-lg-11 col-12 mx-auto">
+         <div class="contenidotabs">
+                <a class="tabss fuente" @click="istabs=1" :class="{ 'tabsActive links': istabs=='1' }">Perfil</a>
+                <a class="tabss fuente" @click="istabs=2" :class="{ 'tabsActive links': istabs=='2' }">Información general </a>
+                <a class="tabss fuente" @click="limpiar()">Imagen de perfil</a>
+            </div>
+             <hr style="margin-top:-0px;border-top: 1px solid rgb(203, 214, 226); opacity: inherit;"/>
+        <p class="parrafo mt-2"><i class="ni ni-air-baloon"></i> &nbsp;Estas preferencias solo se aplican a ti.</p>
+        <hr class="horizontal dark my-1"/>
       </div>
     </div>
 
-    <div class="row mt-3">
-      <div class="col-lg-10 col-12 mx-auto">
+    <div class="row mt-2" v-if="istabs=='1'">
+      <div class="col-lg-11 col-12 mx-auto">
         <div class="row">
-          <div  class="col-lg-8 ">
-            <div class="text-center">
-              
-              <img
-                class="w-50"
-                src="../../../assets/img/jira/globo.svg"
-                alt="fondo"
-              />
-             <p style="font-weight: 400;" class="h4 fuente">{{ name }}</p>
+          <Spinner v-if="ifcarga"></Spinner>
+          <div v-else class="col-lg-5">
+            <span class="h5 fuente"> Global</span><br />
+            <span class="parrafo"
+              >Esto se aplica en toda la plataforma administrativa.</span
+            >
+            <p class="parrafo mt-4"><b>Imagen de perfil</b></p>
+
+            <div class=" mt-3">
+              <div class=" position-relative">
+                <div @click="limpiar()" class="maperr avatar avatar-xl">
+                  <img
+                    :src="img1 ? img1 : foto"
+                    class=" "
+                    alt="abc"
+                    style="border-radius: 50%;"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div  class="col-lg-4 ">
-            <div class="text-center mt-8">
-             
-              <button
-                @click="get()"
-                class="btn btnNaranja w-95"
-              >
-                Editar Perfil
-              </button>
-            </div>
+
+            <form @submit.prevent="save" id="pefilD">
+              <div class="row mt-3">
+                <div class="col-sm-12">
+                  <span class="parrafo">Nombres</span>
+                  <input
+                    :class="{ error: validation.hasError('model.nombres') }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.nombres"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.nombres") }}
+                  </p>
+                </div>
+                <div class="col-sm-12 mt-3">
+                  <span class="parrafo">Apellidos</span>
+                  <input
+                    :class="{
+                      error: validation.hasError('model.apellidos'),
+                    }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.apellidos"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.apellidos") }}
+                  </p>
+                </div>
+                <div class="col-sm-12 mt-3">
+                  <span class="parrafo">Email</span>
+                  <input
+                    :class="{
+                      error: validation.hasError('model.email'),
+                    }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.email"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.email") }}
+                  </p>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-sm-6 ">
+                  <span class="parrafo">Parroquia</span>
+
+                  <input
+                    :class="{
+                      error: validation.hasError('model.fkparroquia'),
+                    }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.fkparroquia"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.fkparroquia") }}
+                  </p>
+                </div>
+                <div class="col-sm-6 ">
+                  <span class="parrafo">Etnia</span>
+                  <input
+                    :class="{ error: validation.hasError('model.fketnia') }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.fketnia"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.fketnia") }}
+                  </p>
+                </div>
+              </div>
+              <div class="row ">
+                <div class="col-sm-12 mt-3">
+                  <span class="parrafo">Teléfono</span>
+                  <input
+                    :class="{
+                      error: validation.hasError('model.telefono'),
+                    }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.telefono"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.telefono") }}
+                  </p>
+
+                </div>
+                <div class="col-sm-12 mt-2">
+                  <span class="parrafo">Género</span>
+                  <input
+                    :class="{ error: validation.hasError('model.sexo') }"
+                    class="form-control buscador fuente mt-1"
+                    type="text"
+                    v-model="model.sexo"
+                    @input="OnEdit"
+                  />
+                  <p class="mb-0 text-sm text-danger">
+                    {{ validation.firstError("model.sexo") }}
+                  </p>
+                </div>
+              </div>
+            </form>
           </div>
          
         </div>
       </div>
     </div>
-      <div class="fixed-plugin" :class="{ 'show w-100': tabla === 'perfiles' }">
+
+    <div v-if="tabla === 'perfiles'" class="altural"></div>
+    <div class="fixed-plugin" :class="{ 'show reponv1': tabla === 'perfiles' }">
       <div
-        class="card shadow-lg blur desplega"
-        :class="{ 'w-100': tabla === 'perfiles' }"
-        style="overflow-y: auto; z-index: 9999; top:35px;"
+        class="card shadow-lg desplega"
+        :class="{ reponv1: tabla === 'perfiles' }"
+        style="overflow-y: auto; z-index: 9999; "
       >
         <div
-          class="card-header pb-0 pt-3"
-          style="background-color: #f5f8fa; border-bottom: 1px solid #dfe3eb;"
+          class=" cabesa"
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 58px;
+         padding: 4px 46px 4px 40px;"
         >
           <div class="float-start">
-            <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente">
-              Edita Tu perfil
+            <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente text-white">
+              Edita tu foto de perfil
             </h5>
             <!--  <p class="parrafo">{{nombre}}</p> -->
           </div>
-          <div class="float-end mt-4">
+          <div class="float-end mt-2">
             <button
               @click="tabla = 'termina'"
               class="btn btn-link text-dark p-0 fixed-plugin-close-button"
             >
-              <i style="font-size: 35px;" class="fa fa-close"></i>
+              <i style="font-size: 32px;" class="fa fa-close text-white"></i>
             </button>
           </div>
           <!-- End Toggle Button -->
         </div>
 
-        <div class="card-body pt-sm-3 pt-0">
+        <div
+          class="card-body pt-sm-3 pt-0"
+          style="overflow-y: auto;height: auto;"
+        >
           <!-- Sidebar Backgrounds -->
           <div class="row">
-           
-            <div class="col-lg-3 
-                 
-                  d-md-block d-none
-                  me-n8" style="position:absolute;bottom:0;left:0;">
-                   <div class="top-10" style="">
-                            <img
-                class=""
-                src="../../../assets/img/logos/fondoDerecho.svg"
-                alt="fondo"
-              />
-                  </div>
+            <div class="alertdanger mt-4">
+              <p class="parrafo">
+                Tu foto de avatar es visible para todos en la plataforma y en
+                cualquier contexto público tales como como el chat.
+              </p>
             </div>
-             <Spinner v-if="ifcarga"></Spinner>
-            <div v-else class="col-lg-6 col-12 mx-auto">
-              <form @submit.prevent="save">
-                <div class="row mt-4" v-if="isVisible === 'pan1'">
-                  <!-- <div class="text-center">
-                            <img
-                class="w-20"
-                src="../../../assets/img/shapes/deployments-feature.svg"
-                alt="fondo"
-              />
-                  </div> -->
-                       
-                  <p class="h5 text-center fuente">Fotografia</p>
-                  <p class="parrafo text-center">Cambie la foto de perfil dando clic Subir Archivo, no olvide guardar cambios 😉</p>
-                  <div class="text-center mt-3">
-                    <Skeleton v-if="isImageUploads"></Skeleton>
-                    <div v-else class=" position-relative">
-                      <img
-                        :src="
-                          img1 ? img1 : foto
-                        "
-                        class="border-radius-md w-30"
-                        alt="team-2"
-                      />
-                     
-                    </div>
-                  </div>
-                  <div class="text-center mt-3">
-                     <input
-                       class="parrafo "
-                        type="file"
-                        accept="image/*"
-                        ref="file"
-                        id="file"
-                        v-on:change="onChangeFileUpload()"
-                      />
-                  </div>
-                  
-                
-                  <div class="text-end mt-4">
-                    <a class="parrafo text-start">Paso 1 de 3</a> &nbsp; &nbsp;
-                    &nbsp;
-                 
-                    &nbsp;
-                    <a
-                      class="btn btn-sm btnNaranja"
-                      @click="isVisible = 'pan2'"
-                    >
-                      Continuar
-                    </a>
-                  </div>
-                </div>
-                  <div class="row mt-2" v-if="isVisible === 'pan2'">
-                  <p class="h5 fuente">Información General</p>
-
-                  <div class="row mt-3">
-                    <div class="col-12 col-sm-6">
-                      <p class="parrafo">Nombres</p>
-                      <input
-                        :class="{ error: validation.hasError('model.nombres') }"
-                        class="form-control buscador fuente"
-                        type="text"
-                        v-model="model.nombres"
-                      />
-                      <p class="mb-0 text-sm text-danger">
-                        {{ validation.firstError("model.nombres") }}
-                      </p>
-                    </div>
-                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                       <p class="parrafo">Apellidos</p>
-                      <input
-                        :class="{
-                          error: validation.hasError('model.apellidos'),
-                        }"
-                        class="form-control buscador fuente"
-                        type="text"
-                        v-model="model.apellidos"
-                      />
-                      <p class="mb-0 text-sm text-danger">
-                        {{ validation.firstError("model.apellidos") }}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                   
-                    <div class="col-6">
-                        <p class="parrafo">Parroquia</p>
-                      
-                      <input
-                        :class="{
-                          error: validation.hasError('model.fkparroquia'),
-                        }"
-                        class="form-control buscador fuente"
-                        type="text"
-                        v-model="model.fkparroquia"
-                      />
-                      <p class="mb-0 text-sm text-danger">
-                        {{ validation.firstError("model.fkparroquia") }}
-                      </p>
-                    </div>
-                    <div class="col-6">
-                      
-                       <p class="parrafo">Etnia</p>
-                      <input
-                        :class="{ error: validation.hasError('model.fketnia') }"
-                        class="form-control buscador fuente"
-                        type="text"
-                        v-model="model.fketnia"
-                      />
-                      <p class="mb-0 text-sm text-danger">
-                        {{ validation.firstError("model.fketnia") }}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-sm-6">
-                     
-                      <p class="parrafo">Teléfono</p>
-                      <input
-                        :class="{
-                          error: validation.hasError('model.telefono'),
-                        }"
-                        class="form-control buscador fuente"
-                        type="text"
-                        v-model="model.telefono"
-                      />
-                      <p class="mb-0 text-sm text-danger">
-                        {{ validation.firstError("model.telefono") }}
-                      </p>
-                    
-                       <p class="parrafo mt-3">Descripción (Opcional)</p>
-                      <!-- <p class="form-text text-muted text-xs ms-1 d-inline">
-                  (optional)
-                </p> -->
-                      <textarea
-                       
-                        class="form-control"
-                      >
-                      </textarea>
-                      
-                    </div>
-                    <div class="col-sm-6">
-                     
-                      <p class="parrafo">Genero</p>
-                      <input
-                        :class="{ error: validation.hasError('model.sexo') }"
-                        class="form-control buscador fuente"
-                        type="text"
-                        v-model="model.sexo"
-                      />
-                      <p class="mb-0 text-sm text-danger">
-                        {{ validation.firstError("model.sexo") }}
-                      </p>
-                      <p class="parrafo mt-3">Img</p>
-                      <input
-                        class="form-control buscador fuente"
-                        type="text"
-                        readonly
-                        required
-                        v-model="model.foto"
-                      />
-                    </div>
-                  </div>
-                
-                  
-                     
-                  <div class="text-end mt-4">
-                    <a class="parrafo text-start">Paso 2 de 3</a> &nbsp; &nbsp;
-                    &nbsp;
-                    <a
-                      @click="isVisible = 'pan1'"
-                      type="button"
-                      class="btn btn-sm "
-                      style="background-color: #fff;
-                      border-color: #ff7a59; color: #ff7a53; font-weight: 500; border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;"
-                    >
-                      Regresar
-                    </a>
-                    &nbsp;
-                       <button
-                      v-if="ifLoad"
-                      class="btn btn-sm btnNaranja"
-                      type="button"
-                      disabled
-                    >
-                      <span
-                        class="spinner-border spinner-border-sm"
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      Enviando...
-                    </button>
-                    <button v-else
-                      class="btn btn-sm btnNaranja"
-                      type="submit"
-                    >
-                      Guardar
-                    </button>
-                  </div>
-                </div>
-                <div class="row mt-4" v-if="isVisible === 'pan3'">
-                  <p class="h6 text-center fuente">Felicidades</p>
-                  <p class="parrafo text-center">Su registro es exitoso pero los cambios se aran 
-                    efectivos la próxima vez que inicie sesión 😅.</p>
-                  <div class="text-center mt-3">
-                    <Skeleton v-if="isImageUploads"></Skeleton>
-                    <div v-else class=" position-relative">
-                      <img
-                        src="../../../assets/img/shapes/success-green.svg"
-                        class="border-radius-md w-40"
-                        alt="team-2"
-                      />
-                     
-                    </div>
-                  </div>
-               
-                  
-                     
-                  <div class="text-end mt-4">
-                    <a class="parrafo text-start">Paso 3 de 3</a> &nbsp; &nbsp;
-                    &nbsp;
-                 
-                    &nbsp;
-                    <a
-                      class="btn btn-sm btnNaranja"
-                      @click="tabla = 'salir'"
-                    >
-                     Salir de Aqui
-                    </a>
-                  </div>
-                </div>
-              </form>
+            <div v-if="!isFile" class="fontImg mt-4 text-center p-7">
+              <i
+                style="font-size:66px;"
+                class="fa fa-picture-o"
+                aria-hidden="true"
+              ></i>
+              <span
+                style="cursor: pointer;"
+                class="button fuente tamanio links"
+                @click="$refs.file.click()"
+              >
+                <input
+                  type="file"
+                  class="btn btnNaranja"
+                  ref="file"
+                  @change="uploadImage($event)"
+                  accept=".png, .jpg, .jpeg"
+                />
+                <b>Elegir una foto</b>
+              </span>
             </div>
-            <div class="col-lg-3 d-md-block d-none
-                  
-                 "  style="position:absolute;bottom:0;right:0;">
-                   <div class="" style="">
-                            <img
-                class=""
-                src="../../../assets/img/logos/fondoIzquierdo.svg"
-                alt="fondo"
-              />
-                  </div>
+            <div v-else class="mt-3">
+              <span
+                style="cursor: pointer;"
+                class="button fuente tamanio links"
+                @click="$refs.file.click()"
+              >
+                <input
+                  type="file"
+                  class="btn btnNaranja"
+                  ref="file"
+                  @change="uploadImage($event)"
+                  accept="image/*"
+                />
+                <b>Cambiar foto</b>
+              </span>
+              <div class="fondot mt-2">
+                <cropper
+                  ref="cropper"
+                  class="cropper"
+                  :src="img"
+                  :stencil-component="$options.components.Stencil"
+                  @change="change"
+                ></cropper>
+              </div>
+              <div class="justify-content-center mt-3">
+                <preview
+                  style="border-radius: 50%;left: 40%;"
+                  :width="120"
+                  :height="120"
+                  :image="result.image"
+                  :coordinates="result.coordinates"
+                />
+              </div>
             </div>
           </div>
         </div>
+        <div class="cord-footer modalFooter" style="">
+          <div class="text-end">
+            <a @click="tabla = 'termina'" class="btn btnNaranjaClaro"
+              >Cancelar</a
+            >
+
+            <button v-if="!isFile" class="btn btnDisabled ms-3">
+              Guardar
+            </button>
+            <template v-else>
+              <button
+                v-if="isImageUploads"
+                class="btn btnNaranja ms-3"
+                type="button"
+                disabled
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Trabajando...
+              </button>
+              <button v-else class="btn btnNaranja ms-3" @click="cropImage()">
+                Guardar
+              </button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="isCambios" class="piepagina">
+      <div class="text-end">
+        <a class="btn btnNaranjaClaro me-3" @click="isCambios = false">
+          Cancelar
+        </a>
+        <button v-if="ifLoad" class="btn btnNaranja" type="button" disabled>
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Enviando...
+        </button>
+        <button v-else type="submit" class="btn btnNaranja" form="pefilD">
+          Guardar
+        </button>
       </div>
     </div>
   </div>
@@ -353,6 +313,64 @@ div#bg {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+}
+
+.altural {
+  width: 1500px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  height: 100vh;
+  background: rgba(9, 30, 66, 0.54);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.piepagina {
+  background: #f5f8fa;
+  padding-left: 40px;
+  padding-top: 15px;
+  padding-bottom: 3px;
+  border-top: 1px solid rgb(234, 240, 246);
+  bottom: 0px;
+
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  z-index: 9999;
+}
+.maperr {
+  background: #fff;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.maperr:hover {
+  opacity: 0.3;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgb(81, 111, 144);
+}
+.fondot {
+  max-height: 380px !important;
+}
+.upload-example-cropper {
+  border: solid 1px #eee;
+  min-height: 300px;
+  width: 100%;
+}
+.button input {
+  display: none;
+}
+.fontImg {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(245, 248, 250);
+  border: 1px dashed rgb(81, 111, 144);
+  border-radius: 4px;
+  color: rgb(124, 152, 182);
+  position: relative;
 }
 
 </style>

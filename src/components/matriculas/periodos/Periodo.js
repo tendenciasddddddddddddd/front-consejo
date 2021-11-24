@@ -1,6 +1,6 @@
-
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
 import Spinner from '../../../shared/Spinner'
-import Navss from '../../../shared/Navss'
 //import VueTimepicker from 'vue2-timepicker'
 //import 'vue2-timepicker/dist/VueTimepicker.css'
 import DatePicker from 'vue2-datepicker';
@@ -8,10 +8,11 @@ import 'vue2-datepicker/index.css';
 export default {
     name: 'Materias',
     components: {
-        Spinner,Navss,DatePicker
+        Spinner,DatePicker
     },
     data() {
         return {
+          roles: this.$store.state.user.roles,
             tabbla: "cier",
             time1: null,
             modals1 : 'openP',
@@ -40,14 +41,21 @@ export default {
               finaliza: null,
               typo: null,
            },
-          
+           isSelecUsers: [],
+           modals: 'closed',
+           subtitulo: 'none',
+           iseliminaddo : false,
+           isCarga: false,
+
         }
     },
     methods: {
-        getAll(pag) {
+
+        getAll(pag , lim) {
             this.isLoading = true;
+            this.subtitulo = lim + ' filas por página';
             this.$proxies._matriculaProxi
-              .getAll(pag, 6) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+              .getAll(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
               .then((x) => {
                 this.info = x.data.niveles;
                 this.pagg = x.data;
@@ -61,10 +69,9 @@ export default {
                 this.isLoading = false;
               });
           },
-          showModal() {
-            this.isModalVisible = true;
-          },
+
           save() {
+            this.isSelecUsers= [];
             this.$validate().then(success => { 
               if (!success){ 
                 this.$notify({
@@ -81,7 +88,7 @@ export default {
                       
                       this.tabbla = 'cier';
                       this.ifLoad = false;
-                      this.getAll(1);
+                      this.getAll(this.pagina,6); 
                     })
                     .catch(() => {
                       console.log("Error")
@@ -99,7 +106,7 @@ export default {
                     this.ifLoad = false;
                     
                     this.tabbla = 'cier';
-                    this.getAll(1);
+                    this.getAll(this.pagina,6); 
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
                     this.ifLoad = false;
@@ -115,41 +122,77 @@ export default {
            
             });
           },
-          gets(id) { 
+          gets() { 
+            let isArray = this.isSelecUsers.length;
+            if(isArray===1){
+              this.isCarga = true; 
             this.__limpiarCampos();
-            this.$proxies._matriculaProxi.get(id)
+            this.$proxies._matriculaProxi.get(this.isSelecUsers[0])
                 .then((x) => {
                     this.model = x.data;
+                    this.isCarga = false; 
                     this.checked= this.model.typo;
                 }).catch(() => {
                     console.log("Error")
+                    this.isCarga = false; 
                 });
+            }
+            
           },
-
+          selectUser(key){
+            let longitud = this.isSelecUsers.length;
+            let isExiste = 0;
+            if(longitud>0){
+               for (let i = 0; i < this.isSelecUsers.length; i++) {
+                  if(this.isSelecUsers[i]==key){
+                   this.isSelecUsers.splice(i, 1); 
+                   isExiste = 1;
+                   break;
+                  }
+               }
+               if(isExiste===0){ 
+                 this.isSelecUsers.push(key);
+               }
+            }else{
+             this.isSelecUsers.push(key);
+            } 
+          },
+          remove() {
+            //METODO PARA ELIMINAR  ROW
+            if (
+              confirm(
+                "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
+              )
+            ) {
+              this.iseliminaddo = true;
+              let isArray = this.isSelecUsers.length;
+              if(isArray>0){
+                this.$proxies._matriculaProxi
+                  .remove(this.isSelecUsers)
+                  .then(() => {
+                    this.iseliminaddo = false;
+                    this.isSelecUsers= [];
+                    this.getAll(this.pagina,6); 
+                  })
+                  .catch(() => {
+                    console.log("Error imposible");
+                  });
+                this.$notify({
+                  group: "global",
+                  text: "Registro destruido",
+                });
+                
+             }
+            }
+          },
           openModal(ids, name){
             this.ids = ids;
             this.name = name;
             this.modals1 = 'opennn';
           },
-          __eliminar() {
-            this.isLoading = true;
-              this.$proxies._matriculaProxi
-              .remove(this.ids) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-              .then(() => {
-                this.$notify({
-                  group: "global",
-                  text: "Registro destruido",
-                  
-                });
-                this.isLoading = false;
-                this.getAll(1);
-                this.modals1 = 'closedP';
-              })
-              .catch((x) => {
-                alert("Error 401", x.response);
-                this.modals1 = 'closedP';
-              });
-          },
+
+        
+         
           __limpiarCampos() { //LIMPIAR CAMPOS DE EL MODAL
             this.model._id = "";
             this.model.nombre = "";
@@ -160,13 +203,27 @@ export default {
             this.checked= "";
             this.tabbla = 'abre';
         }, //----FIN----
+        verificarUsuario(){
+          if(!restResourceService.admin(this.roles)){
+            this.$router.push("/");
+          }
+        }
+    },
+    created() {
+      this.verificarUsuario();
+      
+    },
+    mounted () {
+     
+      
     },
     watch: {
         "$route.query.pagina": {
           immediate: true,
           handler(pagina) {
             pagina = parseInt(pagina) || 1;
-            this.getAll(pagina);
+            this.getAll(pagina,6);
+            this.isSelecUsers= [];
             this.paginaActual = pagina;
           },
         },

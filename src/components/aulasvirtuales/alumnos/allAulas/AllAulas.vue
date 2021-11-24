@@ -1,53 +1,31 @@
 <template>
   <div class="row ">
-    <div class="col-lg-9 col-12 mx-auto">
+    <Analitic v-if="isData"></Analitic>
+    <div v-else class="col-lg-11 col-12 mx-auto">
       <div class="row">
         <div class="col-sm-12">
           <h3 class="fuente" style="font-weight: 400;">Aulas Virtuales</h3>
-          <hr />
+          <hr class="horizontal dark mb-1" />
         </div>
       </div>
 
-      <Skeleton v-if="isData"></Skeleton>
-      <div v-else>
+     
+      <div >
         <div v-if="!info.length">
-          <div class="row">
-            <div class="table-responsive p-0 mt-5">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr class="cabeza">
-                    <th
-                      style="background-color: rgb(234, 240, 246);"
-                      class="text-center "
-                    >
-                      <p class="parrafo">
-                        Lista Aulas Virtuales
-                      </p>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td
-                      class="text-center"
-                      style="height: 72px; padding: 16px 24px;    "
-                    >
-                      <p class="h5 fuente">No has creado ningún curso</p>
-                      <p class="parrafo">
-                        Crea nuevas instancias o cursos para que tus estudiantes
-                        se <br />
-                        puedan matricular
-                      </p>
-                      <router-link
-                        to="/crear-aula"
-                        class="btn btnNaranja btn-sm mt-4 w-40"
-                      >
-                        Crear un curso
-                      </router-link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="row mt-5">
+            <div class="col-lg-9 col-12 mx-auto">
+              <div class="text-center">
+                <img
+                  class="w-30"
+                  src="../../../../assets/img/jira/search-error.svg"
+                  alt="fondo"
+                />
+                <div class=" mt-4 letra fuente">
+                  Hemos buscado en todas partes, pero no tenemos <br />
+                  nada que mostrarte. Espera a que <br />
+                  sus docentes agregen cursos
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -56,22 +34,22 @@
           <div class="table-responsive p-0 mt-3">
             <table class="table align-items-center mb-0">
               <thead>
-                <tr class="cabeza">
+                <tr class="cabeza text-sm">
                   <th
                     style="background-color: rgb(234, 240, 246);"
                     class="text-start "
                   >
-                    <p class="parrafo">
-                      Nombre
-                    </p>
+                   
+                      Curso
+                   
                   </th>
                   <th
-                    style="background-color: rgb(234, 240, 246);"
+                    
                     class="text-end"
                   >
-                    <p class="parrafo">
-                      Estado
-                    </p>
+                   
+                      Opción
+                   
                   </th>
                 </tr>
               </thead>
@@ -83,27 +61,25 @@
                 >
                   <td>
                     <div class="d-flex px-2 py-1">
-                      <div class="w-9">
+                      <div class="w-5">
                         <img
-                          src="../../../../assets/img/logs/bot-avatar.webp"
+                          src="../../../../assets/img/usados/nombre.png"
                           class=""
                           style="border-radius: 100%;max-width: 100%; "
                         />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="parrafo">
+                        <span class="parrafo">
                           &nbsp;&nbsp; {{ item.materia }} <br />
                           &nbsp;&nbsp; {{ item.nombre }} / {{ item.doc }}
-                        </p>
+                        </span>
                       </div>
                     </div>
                   </td>
 
                   <td class="align-middle text-end">
                     <p
-                      @click="
-                        verificarCalve(item)
-                      "
+                      @click="verificarCalve(item)"
                       class="badge  aula text-dark"
                       style="color: black"
                     >
@@ -172,35 +148,43 @@
                   <div class="col-lg-6">
                     <form @submit.prevent="save">
                       <p class="h6 fuente">Ingrese el ping de acceso</p>
-                    <input v-model="llave"
-                      class="form-control buscador fuente mt-4"
-                      type="text"
-                    />
-                    <div v-if="llave==keys">
-                           <button
-                      v-if="ifLoad"
-                      class="btn btn-sm btnNaranja mt-4 w-100"
-                      type="button"
-                      disabled
-                    >
-                      <span
-                        class="spinner-border spinner-border-sm "
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      Enviando...
-                    </button>
-                         <button v-else type="submit" class="btn btn-sm btnNaranja mt-4 w-100">
+                      <input
+                        v-model="llave"
+                        class="form-control buscador fuente mt-4"
+                        type="password"
+                      />
+                      <div v-if="llave == keys">
+                        <button
+                          v-if="ifLoad"
+                          class="btn btn-sm btnNaranja mt-4 w-100"
+                          type="button"
+                          disabled
+                        >
+                          <span
+                            class="spinner-border spinner-border-sm "
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                          Enviando...
+                        </button>
+                        <button
+                          v-else
+                          type="submit"
+                          class="btn btn-sm btnNaranja mt-4 w-100"
+                        >
                           matricular
-                            </button>
-                    </div>
-                   
+                        </button>
+                      </div>
 
-                      <button v-else type="submit" class="btn btn-sm btnNaranja disabled mt-4 w-100">
-                      matricular
-                    </button>
-                  </form>
-                   <p class="text-danger parrafo">{{isError}}</p> 
+                      <button
+                        v-else
+                        type="submit"
+                        class="btn btn-sm btnNaranja disabled mt-4 w-100"
+                      >
+                        matricular
+                      </button>
+                    </form>
+                    <p class="text-danger parrafo">{{ isError }}</p>
                   </div>
                 </div>
               </div>

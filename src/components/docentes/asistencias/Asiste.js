@@ -25,35 +25,37 @@ export default {
            isData: false,
            info: {},
            time1: null,
+           inAlumnos: [],
+           colors: ['#00875a', '#00b8d9', '#6554c0', '#ff5630', '#57d9a3'],
         }
     },
     methods: {
         getData(){
-            this.isData = true;
             if(this.$route.params.id){
                 this.isData = true;
-                if(this.name=='Intensivo'){
-                    this.modalidad = 'm1'
-                } else if (this.name=='Extraordinaria'){
-                    this.modalidad = 'm2'
-                } else{
-                    this.modalidad = ''
-                }
-                if(this.modalidad!=''){
-                    this.$proxies._notasProxi.getAsistencias(this.$route.params.id,this.para)
+                    this.$proxies._notasProxi
+                    .getAsistencias(this.$route.params.id)
                     .then((x) => {
                         let estudiantes = x.data;
-                        this.info = estudiantes.filter((x)=> x.typo ==this.modalidad);
-                        this.isData = false;
-                        console.log(this.info)
-                    }).catch(() => {
-                        console.log("Error")
+                        this.info = estudiantes.filter((x)=> x.curso ==this.para);
+                        this.empujarAlumnos();
+                    }).catch((x) => {
+                        console.log("Error",x)
                         this.isData = false;
                     });
-                }
-                
             }  
-     },
+       },
+       empujarAlumnos(){
+        this.inAlumnos= [];
+        for (let i = 0; i <this.info.length;i++) {
+            let iniciales = this.info[i].nombre;
+            var arregloDeSubCadenas = iniciales.split(" ");
+            let subcadena = arregloDeSubCadenas[0].substring(0, 1);
+            var random = this.colors[Math.floor(Math.random()*this.colors.length)]
+            this.inAlumnos.push({name:iniciales,img:subcadena,colors: random});
+       } 
+       this.isData = false; //PARA EL SNNIPER DE GARDATA
+  },
     },
     created() {
         this.getData();

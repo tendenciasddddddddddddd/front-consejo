@@ -1,25 +1,15 @@
-import Skeleton from '../../../../shared/Skeleton'
-import Navss from '../../../../shared/Navss'
+import Analitic from '../../../../shared/Analitic'
 import * as axios from "axios";
+import RestResource from '../../../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
   name: 'ListaCursos',
   components:{
-    Skeleton, Navss
+    Analitic
    },
   data() {
       return {
-        rutass: [
-            {
-              id: "0",
-              nombre: "Home",
-              url:"/",
-            },
-            {
-                id: "1",
-                nombre: "Mis Cursos",
-                url:"/opciones-curso",
-              },
-          ],
+         roles: this.$store.state.user.roles,
           info: null,
           model: {
               icono: null
@@ -35,6 +25,11 @@ export default {
       }
   },
   methods: {
+    verificarUsuario(){
+      if(!restResourceService.docente(this.roles)){
+        this.$router.push("/");
+      }
+    },
       gets() {   
         if(this.$route.params.id){
             this.isData = true;
@@ -97,6 +92,7 @@ export default {
       },
   },
   created() {
+    this.verificarUsuario();
       this.gets();
   }
 };

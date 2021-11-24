@@ -39,9 +39,7 @@ export default class MatriculaProxi {
   
   
     //------------------------------------------------------DOCENTES--------------------------------------
-    getAllMatricula(page, take) {
-        return this.axios.get(this.url + `/matriculas?page=${page}&take=${take}`);
-    }
+    
 
     createMatricula(params) {
         return this.axios.post(this.url + '/matriculas', params);
@@ -63,27 +61,24 @@ export default class MatriculaProxi {
         return this.axios.get(this.url + `/matriculas/consult?v=${modalidad}`);//
     }
 
-    getFullMatricula(modalidad, curso) {
-        return this.axios.get(this.url + `/matriculas/fullmatricula?modalidad=${modalidad}&curso=${curso}`);
+    getFullMatricula(curso) {
+        return this.axios.get(this.url + `/matriculas/fullmatricula?curso=${curso}`);
     }
 
-    getInfoMatricula(v, p) {
-        return this.axios.get(this.url + `/matriculas/info?v=${v}&p=${p}`);
-    }
-
-    getInfoListv1Matricula(h, m, c) {
-        return this.axios.get(this.url + `/matriculas/info?h=${h}&m=${m}&c=${c}`);
-    }
     getInfoListReport(m, c) {
         return this.axios.get(this.url + `/matriculas/report?m=${m}&c=${c}`);
     }
 
     getMatriculas() {
-        return this.axios.get(this.url + '/matriculas/');
+        return this.axios.get(this.url + '/matriculas/');  //RUTA PARA [REPORTES,]
     }
+
+
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
-   
+    getReporteEstud(id) {
+        return this.axios.get(this.url + `/matriculas/datas/${id}`);  //RUTA PARA [REPORTES,]
+    }
 
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 

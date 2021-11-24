@@ -1,58 +1,44 @@
 import Spinner from "../../../shared/Spinner";
 import IsSelect from "../../../shared/IsSelect";
-import Navss from '../../../shared/Navss'
+import RestResource from "../../../service/isAdmin";
+const restResourceService = new RestResource();
+import vueDropzone from "vue2-dropzone";
+import "vue2-dropzone/dist/vue2Dropzone.min.css";
+let image = require("../../../assets/img/usados/all.svg");
+//IMPORTAR SERVICIO
+import ServiceEstudiante from "./ServiceEstudiantes";
+const ResultServiceEstudiante = new ServiceEstudiante();
+//read data
+import XLSX from "xlsx";
+//IMPORTAR HIJOS
+import ChildSexo from "../../../shared/views/ChildSexo"
+import ChildEtnia from "../../../shared/views/ChildEtnia"
+import ChildNacionalidad from "../../../shared/views/ChildNacionalidad"
+//SEND MULTIPLE 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export default {
   name: "CreaUsuario",
   components: {
     Spinner,
     IsSelect,
-    Navss
+    vueDropzone,
+    ChildSexo,
+    ChildEtnia,
+    ChildNacionalidad
   },
   data() {
     return {
-      tab: "sec3",
+      roles: this.$store.state.user.roles,
+      tab: "options",
+      tabla: "ontask",
       info: null,
-      listNacionalidad: null,
-      listEtnia: null,
       listParroquia: null,
       isLoading: false,
       popular: "Crear Estudiate",
       ifLoad: false,
       mensaje: "",
       ifcarga: false,
-      isEtnia: true,
-      isNacion: true,
       isParroquia: true,
-      sexos: [
-        {
-          value: "0",
-          nombre: "Masculino",
-        },
-        {
-          value: "1",
-          nombre: "Femenino",
-        },
-        {
-          value: "2",
-          nombre: "Otros",
-        },
-        {
-          value: "3",
-          nombre: "No conforme",
-        },
-      ],
-      rutass: [
-        {
-          id: "0",
-          nombre: "Home",
-          url:"/",
-        },
-        {
-          id: "2",
-          nombre: "Lista estudiantes",
-          url:"/List-Estudiate",
-        },
-      ],
       model: {
         //-----------VARIABLES DEL MODELO A GUARDAR
         _id: null,
@@ -71,27 +57,53 @@ export default {
         role: null,
         fullname: null,
         ////////////////////////////////
-        sexo: null,
-        fketnia: null,
-        fknacionalidad: null,
+        sexo: '',
+        fketnia: '',
+        fknacionalidad: '',
         fkparroquia: null,
         modalidad: null,
-
       },
       modalidad: [
         { name: "Intensivo", id: "1" },
         { name: "Extraordinaria", id: "2" },
       ],
-    
-      checked: "",
 
+      checked: "",
+      valido: false,
+      dropOptions: {
+        url: "https://httpbin.org/post",
+        dictDefaultMessage: `
+        <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
+        <p class='text-sm fuente'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Clic o arrastra y suelta. Solo los archivos TXT son compatibles.</p>
+        `,
+        maxFilesize: 2,
+        maxFiles: 1,
+        thumbnailHeight: 140,
+      },
+      isError: "",
+      documento: null,
+      rows : '',
+      isData : [],
+      file:File,
+      objetoSexos: null,
+      objetoEtnia: null,
+      objetoNacion: null,
+      isProcesDoc : false,
+      ifDocListo: false,
+      listCorreos: [],
+      contador : 0,
+      ifOcultar: false,
+      objetosRechasados: [],
+      ifDocumentosDuplicados: 0,
+      ifmostrarRechasados : false,
+      buttonBlock: false,
     };
   },
   methods: {
     get() {
       //-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
-
       if (this.$route.params.id) {
+        this.tab = 'sec3';
         this.popular = "Editar Estudiate";
         this.ifcarga = true;
         this.$proxies._registroProxi
@@ -120,25 +132,31 @@ export default {
         if (this.model._id) {
           //-----------SI EL ID TIENE VALOR ENTONCES ES EDITAR
           this.ifLoad = true;
-          this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
-          this.model.sexo = this.model.sexo.nombre;
-          this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
-          this.model.modalidad = this.checked;
-          if (!this.model.status) {
-            this.model.status = 0;
+          this.model.fullname = this.model.apellidos + " " + this.model.nombres;
+          if (this.objetoSexos!=undefined) {
+            this.model.sexo = this.objetoSexos.nombre
           }
-          this.$proxies._registroProxi
-            .update(this.model._id, this.model) //-----------EDITAR CON AXIOS
-            .then(() => {
-              this.ifLoad = false;
-              //this.router.go('/usuarios/Usuario')
-              this.$router.push("/List-Estudiate");
-            })
-            .catch((err) => {
-              console.log("Error", err);
-              this.ifLoad = false;
+          if (this.objetoEtnia!=undefined) {
+            this.model.fketnia = this.objetoEtnia.nombre
+          }
+          if (this.objetoNacion!=undefined) {
+            this.model.fknacionalidad = this.objetoNacion.nombre
+          }
+          this.model.fkparroquia = this.model.fkparroquia.nombre;
+          this.model.modalidad = this.checked;
+           if (!this.model.status) {
+             this.model.status = 0;
+           }
+           this.$proxies._registroProxi
+             .update(this.model._id, this.model) //-----------EDITAR CON AXIOS
+             .then(() => {
+               this.ifLoad = false;
+               //this.router.go('/usuarios/Usuario')
+               this.$router.push("/List-Estudiate");
+             })
+             .catch((err) => {
+               console.log("Error", err);
+             this.ifLoad = false;
             });
         } else {
           //-----------DE LO CONTRARIO ENTRA A SER UN DOCUMENTO NUEVO
@@ -151,14 +169,21 @@ export default {
           if (!this.model.status) {
             this.model.status = 0;
           }
-          this.model.sexo = this.model.sexo.nombre;
+          if (!this.objetoSexos||!this.objetoEtnia||!this.objetoNacion) 
+          {
+            this.$notify({
+              group: "global",
+              text: "Faltan campos por completar",
+            });
+            this.ifLoad = false;
+            return;}
+          this.model.sexo = this.objetoSexos.nombre;
           this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
+          this.model.fknacionalidad = this.objetoNacion.nombre;
+          this.model.fketnia = this.objetoEtnia.nombre;
           this.model.modalidad = this.checked;
-          this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
-          //
-
+          this.model.fullname = this.model.apellidos + " " + this.model.nombres;
+         
           this.$proxies._registroProxi
             .create(this.model) //-----------GUARDAR CON AXIOS
             .then(() => {
@@ -190,35 +215,182 @@ export default {
         }
       });
     },
-    __listNacionalidad() {
-      //-----------TRAE LA LISTA DE LOS ROLES
-      this.isNacion = true;
-      this.$proxies._registroProxi
-        .getNacionalidad()
-        .then((x) => {
-          this.listNacionalidad = x.data.datas;
-          this.isNacion = false;
-        })
-        .catch((err) => {
-          console.log("Error", err);
-          this.isNacion = false;
-        });
+    afterComplete(upload) {
+      if (!/\.(txt)$/i.test(upload.name)) {
+        this.isError =
+          "El archivo que cargaste no era TXT. Solo admite cargar archivos TXT.";
+        this.removeAllFiles();
+
+        return;
+      }
+      this.isError = "";
+      this.ifDocListo = true;
+      this.documento = upload;
+      this.onChanges(upload);
+    },
+ 
+    onChanges(evento) {
+      this.file = evento;
+      if (this.file) {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          /* Parse data */
+          const bstr = e.target.result;
+          const wb = XLSX.read(bstr, { type: "binary" });
+          /* Get first worksheet */
+          const wsname = wb.SheetNames[0];
+          const ws = wb.Sheets[wsname];
+          /* Convert array of arrays */
+          const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+          this.info = data;
+          this.rows = this.info.length;
+        };
+
+        reader.readAsBinaryString(this.file);
+      }
+    },
+    removeAllFiles() {
+      this.rows ='';
+      this.isData = [];
+      this.$refs.dropzone.removeAllFiles();
+      this.ifDocListo = false;
     },
 
-    __listEtnias() {
-      //-----------TRAE LA LISTA DE LOS ROLES
-      this.isEtnia = true;
-      this.$proxies._registroProxi
-        .getEtnias()
-        .then((x) => {
-          this.listEtnia = x.data.datas;
-          this.isEtnia = false;
-        })
-        .catch((err) => {
-          console.log("Error", err);
-          this.isEtnia = false;
-        });
+    createDOC(){
+      try {
+        this.isProcesDoc = true;
+        for (let i = 0; i < this.info.length; i++) {
+           var element = this.info[i];
+           let cedula = '';
+           let email = '';
+           let apellidos = '';
+           let nombres = '';
+           let telefono = '';
+           let sexo = '';
+           let fknacionalidad = '';
+           let fkparroquia = '';
+           let modalidad = '';
+           let fketnia = 'mestizo';
+           let typo = 'ESTS';
+           let foto = 'https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png';
+           let status = 1;
+  
+           let num = element[0];
+           cedula = num.toString().trim();
+           email = element[1].trim();
+           apellidos = element[2].trim();
+           nombres = element[3].trim();
+           telefono = element[4];
+           sexo = element[5];
+           fknacionalidad = element[6];
+           fkparroquia = element[7];
+           modalidad = element[8];
+           
+           if (!cedula||!email||!nombres||!apellidos||!telefono||!sexo||!fknacionalidad||!fkparroquia||!modalidad) {
+            this.isError = "ERROR ¡No tiene todos los atributos completos!"
+            this.isProcesDoc = false;
+            this.removeAllFiles()
+            return;
+           }
+           if (!ResultServiceEstudiante.validarEmail(email)) {
+            this.isError = `ERROR, No se puede procesar el correo 😱 👉 ${email}`;
+            this.isProcesDoc = false;
+            this.removeAllFiles()
+            return;
+           }
+           let password = this.__getPasswods (apellidos, cedula);
+           let fullname = apellidos + ' ' + nombres;
+           this.isData.push({
+            cedula : cedula,
+            email : email,
+            apellidos : apellidos,
+            nombres : nombres,
+            telefono : telefono,
+            sexo : sexo,
+            fknacionalidad : fknacionalidad,
+            fkparroquia : fkparroquia,
+            modalidad : modalidad,
+            fketnia : fketnia,
+            typo : typo,
+            foto : foto,
+            status : status,
+            username : cedula,
+            password : password,
+            fullname: fullname,
+           })
+           if(i > 99){
+            this.isProcesDoc = false;
+            this.ifDocListo = true;
+            this.tab ='ViewInport';
+             return;
+           }
+  
+        }
+        this.isProcesDoc = false;
+        this.ifDocListo = true;
+        this.tab ='ViewInport';
+        //console.log(this.isData)
+      }catch(e){
+        this.isError = 'ARCHIVO DAÑADO'
+        this.removeAllFiles();
+        this.isProcesDoc = false;
+        console.log(e)
+      }
+      
     },
+
+    async sendAll2(){
+      if (confirm(`DESEA REGISTRAR ESTE ARREGLO ESTUDIANTES!!`)) {
+        if (this.isData!=null) {
+          this.contador = 0;
+          this.ifOcultar= true;
+          for (let i = 0; i < this.isData.length; i++) {
+            const element = this.isData[i];
+            this.$proxies._registroProxi
+            .create(element) //-----------GUARDAR CON AXIOS
+            .then(() => {
+              this.contador += 1 ;
+            })
+            .catch((error) => {
+              if (error.response) {
+                if (error.response.status == 400) {
+                   this.ifDocumentosDuplicados += 1;
+                   this.objetosRechasados.push(this.isData[i]);
+                }
+                
+              }  else {
+                this.$notify({
+                  group: "global",
+                  text: "ERROR del servidor por favor notificar",
+                });
+               
+              }
+            });
+            await sleep(220);
+            
+          }
+          
+          if (this.ifDocumentosDuplicados==0) {
+            
+            this.ifOcultar= false;
+           
+            this.isData = [];
+            this.buttonBlock = true;
+          }
+          else{
+            this.ifOcultar= false;
+            this.ifmostrarRechasados = true;
+            this.isData = [];
+            this.row = 0;
+            this.contador = 0;
+            this.buttonBlock = true;
+          }
+       }
+      }
+    },
+
+
     __listParroquias() {
       //-----------TRAE LA LISTA DE LOS ROLES
       this.isParroquia = true;
@@ -241,99 +413,42 @@ export default {
     },
     __validarCedula(event) {
       let ced = event.target.value;
-      if (ced.length >= 10) {
-        this.verificarCedula(ced);
-      } else {
-        this.mensaje = event.target.value;
+      if (ced.length > 8) {
+        this.mensaje = ResultServiceEstudiante.verificarCedula(ced);
       }
     },
-    verificarCedula(cedula) {
-      if (cedula.length == 10) {
-        var digito_region = cedula.substring(0, 2);
-        if (digito_region >= 1 && digito_region <= 24) {
-          var ultimo_digito = cedula.substring(9, 10);
-          var pares =
-            parseInt(cedula.substring(1, 2)) +
-            parseInt(cedula.substring(3, 4)) +
-            parseInt(cedula.substring(5, 6)) +
-            parseInt(cedula.substring(7, 8));
-          var numero1 = cedula.substring(0, 1);
-          numero1 = numero1 * 2;
-          if (numero1 > 9) {
-            numero1 = numero1 - 9;
-          }
 
-          var numero3 = cedula.substring(2, 3);
-          numero3 = numero3 * 2;
-          if (numero3 > 9) {
-            numero3 = numero3 - 9;
-          }
-
-          var numero5 = cedula.substring(4, 5);
-          numero5 = numero5 * 2;
-          if (numero5 > 9) {
-            numero5 = numero5 - 9;
-          }
-
-          var numero7 = cedula.substring(6, 7);
-          numero7 = numero7 * 2;
-          if (numero7 > 9) {
-            numero7 = numero7 - 9;
-          }
-
-          var numero9 = cedula.substring(8, 9);
-          numero9 = numero9 * 2;
-          if (numero9 > 9) {
-            numero9 = numero9 - 9;
-          }
-
-          var impares = numero1 + numero3 + numero5 + numero7 + numero9;
-
-          var suma_total = pares + impares;
-
-          var primer_digito_suma = String(suma_total).substring(0, 1);
-
-          var decena = (parseInt(primer_digito_suma) + 1) * 10;
-
-          digito_validador = decena - suma_total;
-
-          if (digito_validador == 10) var digito_validador = 0;
-          if (digito_validador == ultimo_digito) {
-            this.mensaje = "la cedula:" + cedula + " es correcta";
-          } else {
-            this.mensaje = "la cedula:" + cedula + " es incorrecta";
-          }
-        } else {
-          this.mensaje = "Esta cedula no pertenece a ninguna region";
-        }
-      } else {
-        this.mensaje = "Esta cedula tiene menos de 10 Digitos";
+    onChange(event) {
+      let email = event.target.value;
+      this.valido = ResultServiceEstudiante.validarEmail(email);
+    },
+    verificarUsuario() {
+      if (!restResourceService.admin(this.roles)) {
+        this.$router.push("/");
       }
     },
-  /*   onChange(event) {
-      let hoy = new Date();
-      let fechaNacimiento = new Date(event.target.value);
-      let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-      let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth();
-      if (
-        diferenciaMeses < 0 ||
-        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
-      ) {
-        edad--;
-      }
-      this.model.edad = edad;
-    }, */
+    openInport(){
+      this.tab ='inport';
+      this.rows ='';
+      this.isData = [];
+      this.ifDocListo = false;
+      this.contador = 0;
+      this.row = 0;
+      this.ifmostrarRechasados = false;
+      this.objetosRechasados = [];
+      this.ifDocumentosDuplicados =0;
+      this.buttonBlock = false;
+    }
   },
   created() {
+    this.verificarUsuario();
     this.get();
-    this.__listNacionalidad();
-    this.__listEtnias();
     this.__listParroquias();
   },
 
   validators: {
     //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS parentesc
-    
+
     "model.cedula"(value) {
       return this.$validator
         .value(value)
@@ -366,19 +481,9 @@ export default {
         .value(value)
         .required()
         .minLength(9)
-        .maxLength(12);
+        .maxLength(20);
     },
-    ////////////////////////////////////////////////////////////////
-
-
-
     "model.fkparroquia"(value) {
-      return this.$validator.value(value).required();
-    },
-    "model.fketnia"(value) {
-      return this.$validator.value(value).required();
-    },
-    "model.sexo"(value) {
       return this.$validator.value(value).required();
     },
   },

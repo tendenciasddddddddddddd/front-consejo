@@ -9,21 +9,28 @@ import MenuCursos from '../components/docentes/cursos/MenuCursos.vue'
 import ListaCursos from '../components/docentes/cursos/Intensivos/ListaCursos.vue'
 import MenuReportes from '../components/reportes/matriculas/MenuReportes.vue'
 import Consolidado from '../components/reportes/matriculas/consolidado/Consolidados.vue'
+import ReporteDoc from '../components/docentes/reportesdoc/ReporteDoc.vue'
 //DOCENTES-CALIFICAR
-import Calificar from '../components/docentes/calificar/Calificar.vue'
+
 import Asiste from '../components/docentes/asistencias/Asiste.vue'
+import Notas from '../components/docentes/notas/Notas.vue'
 //ESTUDIANTES
 import Profile from '../components/estudiantes/perfil/Profile.vue'
 import Nota from '../components/estudiantes/notas/Nota.vue'
+import Report1 from '../components/estudiantes/reportes/Report.vue'
+import HistoriaEst from '../components/estudiantes/historialE/HistoriaEst.vue'
 //AULAS VIRTUALES DOCENTES
 import AulasListas from '../components/aulasvirtuales/profesores/manu/AulasListas.vue'
 import AulaCreate from '../components/aulasvirtuales/profesores/aulacreate/AulaCreate.vue'
 import Report from '../components/reportes/matriculas/pdfs/Report.vue'
 import Aulaprincipal from '../components/aulasvirtuales/profesores/aulaprincipal/Aulaprincipal.vue'
+import Task from '../components/aulasvirtuales/profesores/task/Task.vue'
+import ReviewTasks from '../components/aulasvirtuales/profesores/reviewtask/ReviewTasks.vue'
 //AULAS VIRTUALES ESTUDIANTES
 import AllAulas from '../components/aulasvirtuales/alumnos/allAulas/AllAulas.vue'
 import MyAulas from '../components/aulasvirtuales/alumnos/myAulas/MyAulas.vue'
 import HomeAulas from '../components/aulasvirtuales/alumnos/homeAulas/HomeAulas.vue'
+import Tasks from '../components/aulasvirtuales/alumnos/tasks/Tasks.vue'
 
 Vue.use(VueRouter)
 
@@ -40,12 +47,12 @@ const routes = [{
   },
   {
     path: '/usuarios/creausuario',
-    name: '1',
+    name: 'crea-usuario',
     component: require('../components/administracion/usuarios/CreaUsuario.vue').default
   },
   {
     path: '/usuarios/:id/edit',
-    name: '1',
+    name: 'edita-usuario',
     component: require('../components/administracion/usuarios/CreaUsuario.vue').default
   },
   {
@@ -90,12 +97,12 @@ const routes = [{
   },
   { //-------------------------------------REGISTROS------------------------------
     path: '/Add-Estudiate',
-    name: '222',
+    name: 'addestudiante',
     component: require('../components/registros/estudiantes/AddEstudiante.vue').default
   },
   { //-------------------------------------REGISTROS------------------------------
     path: '/Estudiate/:id/edit',
-    name: '222',
+    name: 'editestudiante',
     component: require('../components/registros/estudiantes/AddEstudiante.vue').default
   },
   { //-------------------------------------REGISTROS------------------------------
@@ -105,12 +112,12 @@ const routes = [{
   },
   { //-------------------------------------REGISTROS------------------------------
     path: '/Add-Docente',
-    name: '333',
+    name: 'adddocente',
     component: require('../components/registros/docentes/AddDocentes.vue').default
   },
   { //-------------------------------------REGISTROS------------------------------
     path: '/Docente/:id/edit',
-    name: '333',
+    name: 'editdocente',
     component: require('../components/registros/docentes/AddDocentes.vue').default
   },
   { //-------------------------------------GESTION------------------------------
@@ -145,7 +152,7 @@ const routes = [{
   },
   { //-------------------------------------MATRICULA------------------------------
     path: '/Actual-Matricula',
-    name: '77',
+    name: 'actualmatricula1',
     component: require('../components/matriculas/matricula/mat1/ActualMatricula.vue').default
   },
   { //-------------------------------------MATRICULA------------------------------
@@ -155,7 +162,7 @@ const routes = [{
   },
   { //-------------------------------------MATRICULA------------------------------
     path: '/Matricula-2',
-    name: '77',
+    name: '71',
     component: require('../components/matriculas/matricula/mat2/Matriculas2.vue').default
   },
   { //-------------------------------------MATRICULA------------------------------
@@ -163,24 +170,20 @@ const routes = [{
     name: 'matri2',
     component: require('../components/matriculas/matricula/mat2/CreateMatricula2.vue').default
   },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Lista-Matricula-v1',
-    name: '77',
-    component: require('../components/matriculas/matricula/mat1/ListaMatriculas.vue').default
-  },
+
   { //-------------------------------------MATRICULA PARALELO------------------------------
     path: '/Lista-Paralelo-v1',
-    name: '77',
+    name: 'paralelos1',
     component: require('../components/matriculas/paralelos/paralelov1/EnlistarParalelo.vue').default
   },
   { //-------------------------------------MATRICULA PARALELO------------------------------
     path: '/Lista-Paralelo-v2',
-    name: '77',
+    name: 'paralelos2',
     component: require('../components/matriculas/paralelos/paralelov2/EnlistarParalelom2.vue').default
   },
   { //-------------------------------------MATRICULA------------------------------
     path: '/Actual-Matricula-m2',
-    name: '77',
+    name: 'actualmatricula3',
     component: require('../components/matriculas/matricula/mat2/ActualMatricula2.vue').default
   },
   { //-------------------------------------MATRICULA ERROR------------------------------
@@ -231,9 +234,14 @@ const routes = [{
     component: ListaCursos
   },
   {
-    path: '/calificar/:id',
-    name: 'd3',
-    component: Calificar,
+    path: '/reporte-docente',
+    name: 'dr',
+    component: ReporteDoc
+  },
+  {
+    path: '/dnotas/:id',
+    name: 'd4',
+    component: Notas,
     props: true
   },
   {
@@ -252,6 +260,16 @@ const routes = [{
     path: '/Consultar-nota',
     name: 'e2',
     component: Nota
+  },
+  {
+    path: '/Repote-estudiante',
+    name: 'e3',
+    component: Report1
+  },
+  {
+    path: '/Historia-estudiante',
+    name: 'e4',
+    component: HistoriaEst
   },
   ////------------------------------------REPORTES-----------------------------
   {
@@ -285,6 +303,16 @@ const routes = [{
     name: 'al',
     component: Aulaprincipal
   },
+  {
+    path: '/task-config/:id',
+    name: 'al',
+    component: Task
+  },
+  {
+    path: '/review-task/:id',
+    name: 'reviews',
+    component: ReviewTasks
+  },
    ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------
   {
     path: '/all-lista',
@@ -301,6 +329,12 @@ const routes = [{
     name: 'es1',
     component: HomeAulas
   },
+  {
+    path: '/task-config2/:id',
+    name: 'es1',
+    component: Tasks
+  },
+
   {
     path: '/about',
     name: 'about',

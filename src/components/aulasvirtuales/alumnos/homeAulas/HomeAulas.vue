@@ -2,213 +2,181 @@
   <div>
     <div class="row ">
       <Spinner v-if="isData"></Spinner>
-      <div v-else class="col-lg-10 col-12 mx-auto">
-        <!--  <div
-          class="mt-1"
-          style="background-color: #e5f5f8; padding:5px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;"
-        >
-          <div>
-            <p
-              class="text-dark fuente "
-              style="margin:7px;font-weight: 700; font-size: 16px "
+      <div v-else class="col-lg-11 col-12 mx-auto" style="background-image:url(https://static.hsappstatic.net/pricing-pages-unified-ui/static-1.10527/js/img/middle-blob.svg);background-color:null;min-height: 63vh; background-size: cover;border-radius: 3px;">
+         <div class=" text-start" >
+            <router-link
+              to="/my-lista"
+              class="btn btn-sm "
+              style="box-shadow: none"
             >
-              <router-link
-                to="/aulas-lista"
-                class="badge fuente regresar"
-                style=""
-              >
-                <i class="ni ni-bold-left"></i>&nbsp;Regresar</router-link
-              >
-              &nbsp;&nbsp; &nbsp;&nbsp; Gestíon de Aulas Virtuales => {{ info.nombre }} => {{ info.icono }}
-            </p>
+              <img
+                height="23px"
+                src="../../../../assets/img/usados/regresar.png"
+              />
+            </router-link>
+           
+            
+            <span class="fuente h5 links ms-3" style="font-weight: 400;">
+              {{ info.materia }} - {{ info.nombre }} 
+            </span>
+            
           </div>
-        </div> -->
-        <div>
-          <div class=" p-3 position-relative ">
-            <div class="row mt-3 bOSBYo1">
-              <div class="col-lg-5 text-start">
-                <router-link
-                  to="/my-lista"
-                  class="badge fuente regresar"
-                  style=""
-                >
-                  <i class="ni ni-bold-left"></i>&nbsp;Regresar</router-link
-                >
-                <h4 class=" fuente" style="font-weight: 400; color:#172B4D">
-                  {{ info.materia }}
-                </h4>
-                <p class="parrafo" style="color:#172B4D">
-                  {{ info.nombre }}<br />
-                  {{ info.icono }}
+          
+           <hr class="horizontal dark mb-1">
+           <div class="mt-4 h3 text-center" style="font-weight: 700;">
+          <img alt="" class="" src="../../../../assets/img/icons/mark.svg">
+          Módulos de aulas virtuales</div>
+          <section class="flex-containes mt-5" >
+          <div class="">
+            <a @click="empujarAlumnos()" href="javascript:;">
+              <div
+                class="cajas targetas1 borde1 text-center"
+                style="max-width: 200px;margin-right: 15px!important; "
+              >
+                <img
+                                class="w-50"
+                                src="../../../../assets/img/usados/your_.png"
+                                alt="fondo"
+                              />
+                <div class="p-2">
+                <p class="cardTitle fuente ">Estudiantes</p>
+                <p class="parrafo cardSubTitle">
+                  Mostrar la lista de los participantes actuales en este curso
                 </p>
+                </div>
+                
               </div>
-
-              <div class="col-lg-7 ">
-                <div
-                  class="text-end  d-md-block d-none
-                  me-n8"
-                >
-                  <img
-                    height="230px"
-                    class="w-100"
-                    src="../../../../assets/img/jira/subir-escalera.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="row mt-5">
-              <h4 class=" fuente" style="font-weight: 400;">Actividades</h4>
-              <hr />
-              <div class="col-lg-10 ">
-                <div @click="empujarAlumnos()" class="row mt-3 fwkeBY1 ">
-                  <div class="col-lg-3 esnRuO1">
-                    <div class="text-center ">
-                      <div class="">
-                        <div class="">
-                          <img
-                            class="w-50"
-                            src="../../../../assets/img/logs/sunny.svg"
-                            alt="fondo"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 ">
-                    <div class="">
-                      <p class="h6 fuente" >
-                        Compañeros de clase
-                      </p>
-                      <p class="parrafo">
-                        Se podra visualizar todos los comañeros que estas
-                        registrados
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-3 fwkeBY1 ">
-                  <div class="col-lg-3 esnRuO1">
-                    <div class="text-center ">
-                      <div class="">
-                        <div class="">
-                          <img
-                            class="w-55"
-                            src="../../../../assets/img/shapes/integrations.01fedc9b3a99ac60b83f009e759a275e.8.svg"
-                            alt="fondo"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 ">
-                    <div class="">
-                      <p class="h6 fuente" >
-                        Tareas
-                      </p>
-                      <p class="parrafo">
-                        Se podra visualizar y regsitrar todos las actividades de
-                        tareas
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-3 fwkeBY1 ">
-                  <div class="col-lg-3 esnRuO1">
-                    <div class="text-center ">
-                      <div class="">
-                        <div class="">
-                          <img
-                            class="w-55"
-                            src="../../../../assets/img/shapes/issue-navigator-feature.svg"
-                            alt="fondo"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 ">
-                    <div class="">
-                      <p class="h6 fuente" >
-                        Evaluaciones
-                      </p>
-                      <p class="parrafo">
-                        Se podra rendir todas las evaluaciones que el docente de
-                        curso
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </a>
           </div>
-        </div>
+          <div class="">
+            <router-link :to="`/task-config2/${ids}`" href="javascript:;">
+              <div
+                class="cajas targetas1 borde2 text-center"
+                style="max-width: 200px;margin-right: 15px!important;"
+              >
+                <img
+                  class="w-35 mt-1"
+                  src="../../../../assets/img/usados/focotarea.png"
+                  alt="fondo"
+                />
+                <div class="p-2">
+                  <p class="cardTitle fuente mt-1">Tareas</p>
+                  <p class="parrafo cardSubTitle">
+                    Enviar y revisar tareas pendientes en este curso, y mostrar su calificación
+                   </p>
+                </div>
+               
+              </div>
+            </router-link>
+          </div>
+          <div class="">
+            <router-link :to="`/507`" href="javascript:;">
+              <div
+                class="cajas targetas1 borde3 text-center"
+                style="max-width: 200px;margin-right: 15px!important;padding: 5px;"
+              >
+                <img
+                  class="w-50 mt-2"
+                  src="../../../../assets/img/usados/using.png"
+                  alt="fondo"
+                />
+                <div class="p-1">
+                    <p class="cardTitle fuente mt-1">Evaluaciones</p>
+                <p class="parrafo cardSubTitle">
+                  Resolver evaluaciones pendiantes asignadas por su docente o tutor
+                </p>
+                </div>
+                
+              </div>
+            </router-link>
+          </div>
+          <div class="">
+            <router-link :to="`/507`" href="javascript:;">
+              <div
+                class="cajas targetas1 borde4 text-center"
+                style="max-width: 200px;margin-right: 15px!important;padding: 5px;"
+              >
+                <img
+                  class="w-30 mt-1"
+                  src="../../../../assets/img/usados/turbo.png"
+                  alt="fondo"
+                />
+                <div class="p-1">
+                      <p class="cardTitle fuente mt-1">Foros</p>
+                <p class="parrafo cardSubTitle">
+                  Participar en todos los foros a tiempo, creados por su docente o tutor 
+                </p>
+                </div>
+               
+              </div>
+            </router-link>
+          </div>
+         
+         
+        </section>
+      
       </div>
 
       <div class="fixed-plugin" :class="{ 'show w-100': tabb === 'iniciarr' }">
         <div
-          class="card shadow-lg blur desplega"
+          class="card shadow-lg  desplega"
           :class="{ 'w-100': tabb === 'iniciarr' }"
-          style="overflow-y: auto; z-index: 9999; top:35px;"
+          style="overflow-y: auto; z-index: 9999;"
         >
-          <div class="card-header pb-0 pt-3 "  style="background-color: #f5f8fa; border-bottom: 1px solid #dfe3eb;">
+          <div
+            class=" cabesa"
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 50px;
+         padding: 4px 46px 4px 40px;"
+          >
             <div class="float-start">
-              <h5 class="mt-3 mb-0 fuente" style="font-weight: 400;">
+              <h5 class="mt-3 mb-0 fuente text-white" style="font-weight: 400;">
                 Estudiantes en este curso
               </h5>
             </div>
-            <div class="float-end mt-4">
+            <div class="float-end mt-2">
               <button
                 @click="tabb = 'cerrarr'"
                 class="btn btn-link text-dark p-0 fixed-plugin-close-button"
               >
-                <i style="font-size: 30px" class="fa fa-close"></i>
+                <i style="font-size: 30px" class="fa fa-close text-white"></i>
               </button>
             </div>
             <!-- End Toggle Button -->
           </div>
-         
+
           <div class="card-body pt-sm-3 pt-0">
             <!-- Sidebar Backgrounds -->
             <div class="row">
-                <Spinner v-if="isCargar"></Spinner>
-              <div v-else class="col-lg-6 col-12 mx-auto">
+             
+              <div class="col-lg-8 col-12 mx-auto">
                 <p class="h5 fuente">Personas</p>
-                
-                <div  class="row">
-                  <div v-for="item in inAlumnos" :key="item.id" class="col-sm-3">
-                     
+                <Spinner v-if="isCargar"></Spinner>
+                <div v-else class="row">
+                  <div
+                    v-for="item in inAlumnos"
+                    :key="item.id"
+                    class="col-sm-2"
+                  > <br>
                     <div class="text-center ">
+                      
                       <div class="targetas">
-                        <div class="avatar avatar-xl position-relative mt-3" v-bind:style="{'background-color':item.colors}" style="border-radius: 100%;">
-                          <p class="text-white h3" style="font-weight: 600;">{{item.img}}</p>
-                        </div>
-
-                        <p class="text-xs fuente mt-3">{{item.name.slice(0,20)}}</p>
-                      </div>
-                    </div>
-                     <br>
-                  </div>
-                  <!-- <div class="col-sm-3">
-                    <div class="text-center ">
-                      <div class="targetas">
-                        <div class="avatar avatar-xl position-relative mt-3">
-                          <img
-                            class=""
-                            style="border-radius: 100%;"
-                            src="https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png"
-                            alt="fondo"
-                          />
+                        <div
+                          class="avatar avatar-xl position-relative mt-3"
+                          v-bind:style="{ 'background-color': item.colors }"
+                          style="border-radius: 100%;"
+                        >
+                          <p class="text-white h3" style="font-weight: 600;">
+                            {{ item.img }}
+                          </p>
                         </div>
 
                         <p class="text-xs fuente mt-3">
-                          Esteban Wladimir Martinez Martinez
+                          {{ item.name.slice(0, 20) }}
                         </p>
                       </div>
                     </div>
-                  </div> -->
+                    <br />
+                  </div>
                 </div>
               </div>
             </div>

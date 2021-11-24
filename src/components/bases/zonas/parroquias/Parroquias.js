@@ -1,12 +1,10 @@
-const $ = require('jquery')
+
 import Spinner from '../../../../shared/Spinner';
-import Navss from '../../../../shared/Navss';
 import IsSelect from '../../../../shared/IsSelect';
-import Skeleton from '../../../../shared/Skeleton';
 export default {
     name: 'Parroquias',
     components: {
-        Spinner,Navss,IsSelect,Skeleton
+        Spinner,IsSelect
     },
     data() {
         return {
@@ -31,25 +29,19 @@ export default {
               fkCanton:null,
               cant:null,
            },
-           rutass: [
-            {
-              id: "0",
-              nombre: "Home",
-              url:"/",
-            },
-            {
-                id: "2",
-                nombre: "Menu Zonas",
-                url:"/MenuZonas",
-              },
-          ],
+           isSelecUsers: [],
+           modals: 'closed',
+           subtitulo: 'none',
+           iseliminaddo : false,
+           isCarga: false,
         }
     },
     methods: {
-        getAll(pag) {
+        getAll(pag, lim) {
             this.isLoading = true;
+            this.subtitulo = lim + ' filas por página';
             this.$proxies._zonasProxi
-              .getAllParroquia(pag, 6) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+              .getAllParroquia(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
               .then((x) => {
                 this.info = x.data.datas;
                 this.pagg = x.data;
@@ -77,6 +69,7 @@ export default {
             });
           },
           save() {
+            this.isSelecUsers= [];
             this.$validate().then(success => { 
               if (!success){ 
                 this.$notify({
@@ -86,17 +79,17 @@ export default {
                   return
               }
                 if(this.model._id){
-                 console.log("entra")
                   this.ifLoad = true;
                   this.model.cant = this.model.fkCanton._id;
                   this.model.fkCanton = this.model.fkCanton.nombre;
-                  console.log(this.model)
                   this.$proxies._zonasProxi.updateParroquia(this.model._id, this.model)
                     .then(() => {
-                      this.__limpiarCampos();
-                      $("#exampleModal #myModalClose").click()//CERRAR MODAL
+                      this.modals = 'cls';
+                      this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(1);
+                      this.getAll(this.pagina,6); 
+                      //$("#exampleModal #myModalClose").click()//CERRAR MODAL
+                     
                     })
                     .catch(() => {
                       console.log("Error")
@@ -110,13 +103,11 @@ export default {
                   }
                   this.model.cant = this.model.fkCanton._id;
                   this.model.fkCanton = this.model.fkCanton.nombre;
-                  
-                  
                   this.$proxies._zonasProxi.createParroquia(this.model) //-----------GUARDAR CON AXIOS
                   .then(() => {
                     this.ifLoad = false;
-                    $("#exampleModal #myModalClose").click();
-                    this.getAll(1);
+                    this.modals = 'cls';
+                    this.getAll(this.pagina,6); 
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
                     this.ifLoad = false;
@@ -132,38 +123,67 @@ export default {
            
             });
           },
-          gets(id) { 
+          gets() { 
+            let isArray = this.isSelecUsers.length;
+            if(isArray===1){
+              this.isCarga = true; 
             this.__limpiarCampos();
-            this.isEdit= true;
-            this.$proxies._zonasProxi.getIdParroquia(id)
+            this.$proxies._zonasProxi.getIdParroquia(this.isSelecUsers[0])
                 .then((x) => {
                     this.model = x.data;
-                    this.isEdit= false;
+                    this.isCarga = false; 
                 }).catch(() => {
                     console.log("Error")
-                    this.isEdit= false;
+                    this.isCarga = false; 
                 });
+            }
           },
-          __eliminar(idn) {
-            this.isLoading = true;
-            if (confirm('ESTA SEGURO QUE QUIERE ELIMINAR?')) {
-              this.$proxies._zonasProxi
-              .removeParroquia(idn) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-              .then(() => {
+         
+          selectUser(key){
+            let longitud = this.isSelecUsers.length;
+            let isExiste = 0;
+            if(longitud>0){
+               for (let i = 0; i < this.isSelecUsers.length; i++) {
+                  if(this.isSelecUsers[i]==key){
+                   this.isSelecUsers.splice(i, 1); 
+                   isExiste = 1;
+                   break;
+                  }
+               }
+               if(isExiste===0){ 
+                 this.isSelecUsers.push(key);
+               }
+            }else{
+             this.isSelecUsers.push(key);
+            } 
+          },
+          remove() {
+            //METODO PARA ELIMINAR  ROW
+            if (
+              confirm(
+                "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
+              )
+            ) {
+              this.iseliminaddo = true;
+              let isArray = this.isSelecUsers.length;
+              if(isArray>0){
+                this.$proxies._zonasProxi
+                  .removeParroquia(this.isSelecUsers)
+                  .then(() => {
+                    this.iseliminaddo = false;
+                    this.isSelecUsers= [];
+                    this.getAll(this.pagina,6); 
+                  })
+                  .catch(() => {
+                    console.log("Error imposible");
+                  });
                 this.$notify({
                   group: "global",
                   text: "Registro destruido",
                 });
-                this.isLoading = false;
-                this.getAll(1);
-              })
-              .catch((x) => {
-                alert("Error 401", x.response);
-              });
-            }else{
-              this.isLoading = false;
+                
+             }
             }
-        
           },
           __limpiarCampos() { //LIMPIAR CAMPOS DE EL MODAL
             this.model._id = "";
@@ -172,21 +192,22 @@ export default {
             this.MsmError ="";
             this.model.cant="";
             this.model.fkCanton="";
+            this.modals = 'openn';
         }, //----FIN----
     },
     watch: {
         "$route.query.pagina": {
           immediate: true,
           handler(pagina) {
-            this.getListProv();
+            this.isSelecUsers= [];
             pagina = parseInt(pagina) || 1;
-            this.getAll(pagina);
+            this.getAll(pagina, 6);
             this.paginaActual = pagina;
           },
         },
       },
       mounted() {
-         // this.getListProv();
+        this.getListProv();
       },
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
         'model.nombre'(value) {
@@ -195,6 +216,12 @@ export default {
             .required()
             .minLength(3)
             .maxLength(20);
+        },
+        'model.fkCanton'(value) {
+          return this.$validator
+            .value(value)
+            .required()
+            
         },
     },
 }

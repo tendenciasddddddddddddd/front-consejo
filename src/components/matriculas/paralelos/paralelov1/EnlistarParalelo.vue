@@ -4,139 +4,162 @@
       <div
         class="card shadow-lg blur desplega"
         :class="{ 'w-100': tab === 'inicio' }"
-        style="overflow-y: auto;  z-index: 9999; top:35px;"
+        style="overflow-y: auto;  z-index: 9999; "
       >
         <div
-          class="card-header pb-0 pt-3"
-          style="background-color: #f5f8fa; border-bottom: 1px solid #dfe3eb;"
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
+         padding: 4px 25px 4px 40px;background-color: #253342;"
         >
-          <div class="float-start">
-            <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente">Asignar Paralelos</h5>
+          <div class="row">
+            <div class="col-lg-10">
+              <h5
+                style="font-weight: 400"
+                class="mt-2 ms-5 mb-0 fuente text-white "
+              >
+                Asignar Paralelos 😍
+              </h5>
+            </div>
+            <div class="col-lg-2">
+              <div class="text-end mt-2">
+                <router-link
+                  to="/Matricula-1"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
+                >
+                  <i style="font-size: 32px" class="fa fa-close text-white"></i>
+                </router-link>
+              </div>
+            </div>
           </div>
-          <div class="float-end mt-4">
-            <router-link
-              to="/Matricula-1"
-              class="btn btn-link text-dark p-0 fixed-plugin-close-button "
-            >
-              <i style="font-size: 35px;" class="fa fa-close"></i>
-            </router-link>
-          </div>
+
           <!-- End Toggle Button -->
         </div>
 
-        <div class="card-body pt-sm-3 pt-0">
+        <div class="card-body pt-sm-3 pt-0" style="overflow-y: auto;height: auto;">
           <div class="row">
-             <div class="col-lg-3 
-                 
-                  d-md-block d-none
-                  me-n8" style="position:absolute;bottom:0;left:0;">
-                   <div class="top-10" style="">
-                            <img
-                class=""
-                src="../../../../assets/img/logos/fondoDerecho.svg"
-                alt="fondo"
-              />
-                  </div>
-            </div>
-            <div class="col-lg-7 col-12 mx-auto">
+            <div class="col-lg-9 col-12 mx-auto">
               <div class="row " v-if="isVisible === 'panel1'">
-                <!--  style="background-color:rgb(245, 248, 250);" -->
-                <Skeleton v-if="isLoading1"></Skeleton>
                 <div
-                  v-else
-                  v-for="item in listniveles"
-                  :key="item.id"
-                  class="col-sm-3"
+                  class="h5 mt-4 fuente text-center"
+                  style="font-weight: 400;"
                 >
-                  <br />
-
-                  <div
-                    class=" border-radius-md p-3 mole"
-                    style="  border: 1px solid #7fd1de; "
-                  >
-                    <a @click="__verLista(item._id)" href="javascript:;">
-                      <div class="text-center position-relative">
-                       
+                  Selecciona los cursos para asignar el paralelo
+                </div>
+                <Spinner v-if="isLoading1"></Spinner>
+                <section v-else class="flex-containes mt-2">
+                  <div v-for="item in listniveles" :key="item.id">
+                    <div
+                      class=" p-2  noactive cajas"
+                      :class="{ activado: index === item._id }"
+                      style="max-width: 200px;"
+                    >
+                      <a href="javascript:;" @click="clicMe(item._id)">
+                        <div class="text-center position-relative">
                           <div class="blur-shadow-image">
-                            <img
-                              
-                              class="img  move-on-hover w-100"
-                              src="../../../../assets/img/shapes/respaldo.svg"
+                            <img style="height: 130px;"
+                              class="img  move-on-hover"
+                              src="../../../../assets/img/logs/electronic-signature.svg"
                             />
                           </div>
-                      </div>
-                      <div>
-                        <p class="text-xs text-center mt-2 fuente">
-                          <b>{{ item.nombres }}</b>
-                        </p>
-                      </div>
-                    </a>
+                        </div>
+                        <div>
+                          <p class="parrafo text-center">
+                            Curso: <br />
+                            <span class="cardSubTitle">{{
+                              item.nombres.slice(0, 25)
+                            }}</span>
+                          </p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
+                </section>
               </div>
 
               <div class="row" v-if="isVisible === 'panel2'">
                 <div class="mt-4">
-                  <div class="d-flex justify-content-start">
-                    
-                    <a  @click="isVisible = 'panel1'" class="btn btn-sm btnNaranja" href="javascript:;">
-                     Regresar
-                    </a>   &nbsp; &nbsp; &nbsp;
+                  <div class="mt-3">
                     <a
-                      type="button"
-                      style="color: #0091ae;"
-                      class="fuente"
-                      @click="__mostrarConf()"
-                      v-if="check=='B'||check=='G'"
+                      @click="isVisible = 'panel1'"
+                      class="btn btn-sm"
+                      style="box-shadow: none"
                     >
-                     <i class="ni ni-ungroup"></i> Ver lista Asignados
+                      <img
+                        height="23px"
+                        src="../../../../assets/img/usados/regresar.png"
+                      />
                     </a>
-                    &nbsp; &nbsp;&nbsp;
-                    <div v-if="!isClick">
-                      <a
-                      @click="remove()"
-                      v-if="isSelecCurosos.length&&(check=='B'||check=='G') "
-                      type="button"
-                      class="fuente"
-                      style="color: #0091ae;"
-                    >
-                     <i class="ni ni-archive-2"></i> Guardar Asignación
-                    </a>
-                    </div>
+                    <span class="fuente h6 ms-3 text-center">LISTA DE ALUMNOS QUE NO TIENE O NO ESTAS ASIGNADO UN PARALELO</span>
                     
-                    &nbsp; &nbsp; &nbsp;
-                     <select
+                  </div>
+                 
+                  <div class="d-flex mt-3">
+                    
+                    <select
                       v-model="check"
-                      class="form-control form-control-sm fuente w-15"
                       
+                      class="fuente  buscador "
+                      @change="onChange($event)"
                     >
-                      <option value="N">Ninguno</option>
-                      <option value="B">B</option>
-                      <option value="G">G</option>
-                    </select> &nbsp; &nbsp; &nbsp;
-                     <div v-if="isError!=''">
-                       <p class="parrafo text-danger">{{isError}}</p>
-                     </div>
+                     <option disabled value="">Seleccione un paralelo</option>
+                      <option value="B">PARALELO B</option>
+                      <option value="G">PARALELO G</option>
+                    </select>
+                    <a
+                      
+                       v-on="isSelected ? { click: () => __mostrarConf() } : {}"
+                      role="button"
+                      class="fuente tamanio ms-2"
+                      :class="{ disabled: !isSelected }"
+                    >
+                      <i class="fa fa-archive me-2 ms-3 iconos"></i>
+                      <b class="me-4 " :class="{ links: isSelected }"
+                        >Ver asignados</b
+                      >
+                    </a>
+                    <a
+                      v-on="isSelecCurosos.length ? { click: () => remove() } : {}"
+                      role="button"
+                      class="fuente tamanio"
+                      :class="{ disabled: isSelecCurosos.length == 0 && !isSelected}"
+                    >
+                      <i class="fa fa-refresh me-2 iconos"></i>
+                      <b
+                        class="me-4 "
+                        :class="{
+                          links: isSelecCurosos.length != 0 && isSelected,
+                        }"
+                        >Guardar asignación de paralelos</b
+                      >
+                    </a>
+
+                    <span v-if="isError != ''">
+                      <p class="parrafo text-danger">{{ isError }}</p>
+                    </span>
                   </div>
                 </div>
-                <Espera v-if="isTabla"></Espera>
-                <div v-else class="table-responsive mt-3">
-                  <table class="elevation-2 table table-flush ">
-                    <div v-if="!infoMat.length" class="row mt-3">
-                      <div class="col-lg-9 col-12 mx-auto">
-                        <div class="text-center">
-                          <img
-                            class="w-30"
-                            src="../../../../assets/img/logs/lupa.svg"
-                            alt="fondo"
-                          />
-                          <div class="letra fuente">
-                            No hay datos que mostrar
-                          </div>
+                
+                <Spinner v-if="isTabla"></Spinner>
+                <div v-else class="table-responsive mt-4">
+                  <div v-if="!infoMat.length" class="row mt-3">
+                    <div class="col-lg-9 col-12 mx-auto">
+                      <div class="text-center mt-3">
+                        <img
+                          class="w-20"
+                          src="../../../../assets/img/usados/undraw_search.svg"
+                          alt="fondo"
+                        />
+                        <div class="letra fuente mt-3">
+                          No se encontraron resultados
                         </div>
                       </div>
                     </div>
-                    <thead v-else class="thead-light">
+                  </div>
+                  <table
+                    v-else
+                    class="elevation-2 table table-flush "
+                    style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
+                  >
+                    <thead class="thead-light">
                       <tr class="cabeza">
                         <th
                           style="background-color: rgb(234, 240, 246); "
@@ -149,29 +172,31 @@
                         >
                           Curso
                         </th>
-                       
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="item in infoMat" :key="item.id">
                         <td>
-                          <div class="d-flex">
-                          <div class="form-check my-auto">
-                             <input class="form-check-input" type="checkbox" @click="selectcursos(item._id)">
-                          </div> &nbsp;&nbsp;
-                           <a class="mb-0 text-sm text-dark fuente">
-                            {{ item.fkestudiante.fullname }}
-                           
-                          </a>
-                        </div>
+                          <div class="d-flex ms-3">
+                            <div class="form-check my-auto supcheka">
+                              <input
+                                class="form-check-input cheka"
+                                type="checkbox"
+                                @click="selectcursos(item._id)"
+                              />
+                            </div>
+
+                            <a class="mb-0 ms-3 text-sm colorestabla fuente">
+                              {{ item.nombre }}
+                            </a>
+                          </div>
                         </td>
-                         
+
                         <td class="text-sm text-center fuente">
                           <p class="mb-0 text-xs">
                             {{ item.fknivel.nombres }} ({{ item.curso }})
                           </p>
                         </td>
-                       
                       </tr>
                     </tbody>
                   </table>
@@ -179,45 +204,59 @@
               </div>
               <div class="row" v-if="isVisible === 'panel3'">
                 <div class="mt-4">
-                  <a
-                    @click="__volverAsignacion()"
-                    type="button"
-                    class="btn btn-sm btnNaranja"
-                    
-                  >
-                    Regresar
-                  </a>
-                   &nbsp; &nbsp;&nbsp;
-                    <div v-if="!isClick2">
-                      <a
-                      @click="remove2()"
-                      v-if="isRemoveSelecC.length"
-                      type="button"
-                      class="fuente"
-                      style="color: #0091ae;"
+                  <div >
+                     <a
+                      @click="__volverAsignacion()"
+                      class="btn btn-sm"
+                      style="box-shadow: none"
                     >
-                     <i class="ni ni-archive-2"></i> Remover Paralelos
+                      <img
+                        height="23px"
+                        src="../../../../assets/img/usados/regresar.png"
+                      />
                     </a>
-                    </div>
+                    <span class="fuente h6 ms-3">ESTUDIANTES YA ASIGNADOS</span>
+                  </div>
+                  <div class="d-flex mt-3">
+                   
+                    <a
+                      v-on="isRemoveSelecC.length ? { click: () => remove2() } : {}"
+                      role="button"
+                      class="fuente tamanio"
+                      :class="{ disabled: isRemoveSelecC.length === 0 }"
+                    >
+                      <i class="far fa-trash-alt me-2 iconos"></i>
+                      <b
+                        class="me-4 "
+                        :class="{ links: isRemoveSelecC.length != 0 }"
+                        >Remover Paralelos</b
+                      >
+                    </a>
+                  </div>
                 </div>
-                <Espera v-if="isTabla"></Espera>
-                <div v-else class="table-responsive mt-4">
-                  <table class="elevation-2 table table-flush ">
-                    <div v-if="!infoMat2.length" class="row mt-3">
-                      <div class="col-lg-9 col-12 mx-auto">
-                        <div class="text-center">
-                          <img
-                            class="w-30"
-                            src="../../../../assets/img/logs/lupa.svg"
-                            alt="fondo"
-                          />
-                          <div class="letra fuente">
-                            No hay datos que mostrar
-                          </div>
+                
+                <Spinner v-if="isTabla"></Spinner>
+                <div v-else class="table-responsive mt-3">
+                  <div v-if="!infoMat2.length" class="row mt-3">
+                    <div class="col-lg-9 col-12 mx-auto">
+                      <div class="text-center mt-5">
+                        <img
+                          class="w-20"
+                          src="../../../../assets/img/usados/undraw_search.svg"
+                          alt="fondo"
+                        />
+                        <div class="letra fuente mt-3">
+                          No se encontraron resultados
                         </div>
                       </div>
                     </div>
-                    <thead v-else class="thead-light">
+                  </div>
+                  <table
+                    v-else
+                    class="elevation-2 table table-flush "
+                    style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
+                  >
+                    <thead class="thead-light">
                       <tr class="cabeza">
                         <th
                           style="background-color: rgb(234, 240, 246); "
@@ -230,45 +269,63 @@
                         >
                           Curso
                         </th>
-                       
                       </tr>
                     </thead>
-                    <Skeleton v-if="isConfig"></Skeleton>
+                    <Spinner v-if="isConfig"></Spinner>
                     <tbody v-else>
                       <tr v-for="item in infoMat2" :key="item.id">
-                        <td class="text-sm ">
-                         <div class="d-flex">
-                          <div class="form-check my-auto">
-                             <input class="form-check-input" checked="" type="checkbox" @click="removeSelectCursos(item._id)">
-                          </div> &nbsp;&nbsp;
-                           <a class="mb-0 text-sm text-dark fuente">
-                            {{ item.fkestudiante.fullname }}
-                           
-                          </a>
-                        </div>
+                        <td>
+                          <div class="d-flex ms-3">
+                            <div class="form-check my-auto supcheka">
+                              <input
+                                class="form-check-input cheka"
+                                type="checkbox"
+                                checked=""
+                                @click="removeSelectCursos(item._id)"
+                              />
+                            </div>
+                            &nbsp;&nbsp;
+                            <a class="mb-0 text-sm colorestabla fuente">
+                              {{ item.nombre }}
+                            </a>
+                          </div>
                         </td>
                         <td class="text-sm text-center">
                           <p class="mb-0 text-xs">
                             {{ item.fknivel.nombres }} ({{ item.curso }})
                           </p>
                         </td>
-                        
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-             <div class="col-lg-3 d-md-block d-none
-                  
-                 "  style="position:absolute;bottom:0;right:0;">
-                   <div class="" style="">
-                            <img
-                class=""
-                src="../../../../assets/img/logos/fondoIzquierdo.svg"
-                alt="fondo"
-              />
-                  </div>
+          </div>
+        </div>
+        <div class=" modalFooter">
+          <div class="text-end">
+            <div v-if="isVisible === 'panel1'">
+              <a
+                v-if="index != '0'"
+                class="btn btnNaranja "
+                @click="verLista()"
+              >
+                Siguiente &nbsp; <i class="ni ni-bold-right"></i>
+              </a>
+              <a v-else class="btn btnDisabled">
+                Siguiente &nbsp; <i class="ni ni-bold-right"></i>
+              </a>
+            </div>
+            <div v-if="isVisible == 'panel2'">
+              <a class="btn btnNaranjaClaro" @click="isVisible = 'panel1'">
+                <i class="ni ni-bold-left"></i> &nbsp; Vulver
+              </a>
+            </div>
+            <div v-if="isVisible == 'panel3'">
+              <a class="btn btnNaranjaClaro" @click="isVisible = 'panel1'">
+                <i class="ni ni-bold-left"></i> &nbsp; Vulver
+              </a>
             </div>
           </div>
         </div>

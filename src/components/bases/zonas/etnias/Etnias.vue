@@ -1,40 +1,40 @@
 <template>
   <div class="row">
     <div class="col-lg-11 col-12 mx-auto">
-         <Navss
-
-            :actualText="'ETNIAS'"
-            :rutas="rutass"
-          ></Navss>
-          <div class="mt-2">
         <div
-          class=""
-          style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
+          class="mt-1"
+          style="background-color: #e5f5f8; padding:5px;  border-color: #7fd1de; border-style: solid;
               border-width: 1px; text-align: left;"
         >
           <div>
-            <p class="text-sm text-dark" style="margin:7px; ">
-              <strong>Nota:</strong> Los regitros van en cascada.
+            <p class="text-dark fuente " style="margin:7px;font-weight: 700; font-size: 16px ">
+             <router-link to="/MenuZonas" class="badge fuente regresar" style=""> 
+               <i class="ni ni-bold-left"></i>&nbsp;Regresar</router-link>
+              &nbsp;&nbsp;    &nbsp;&nbsp;  Los regitros van en cascada Etnia.
             </p>
           </div>
         </div>
-      </div>
+       <p class="parrafo mt-2">Crea nuevos registros, edita y elimina las etnias.</p>
       <div class="card">
         <!-- Card header -->
-        <div class="mt-4">
+        <div class="mt-1">
           <div class="row ">
-            <div class="col-md-6">
-               <h5 class="mb-0">Listas</h5>
-              <p class="text-sm mb-0">
-                Lista de etnias gestionando los registros.
-              </p>
+            <div class="col-md-4">
+               <div class="input-group">
+            <span class="input-group-text text-body buscador"
+              ><i class="fas fa-search" aria-hidden="true"></i
+            ></span>
+            <input 
+              type="text"
+              class="form-control buscador"
+              placeholder="Buscar"
+            />
+          </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div class="d-flex justify-content-end mb-3">
                 <a
-                  class="btn btn-sm bg-gradient-info mb-0 bott"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
+                  class="btn btn-sm btnNaranja"
                   @click="__limpiarCampos()"
                 >
                   Nueva Etnia
@@ -49,7 +49,7 @@
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
               <tr class="cabeza">
-                <th
+                <th style="background-color: rgb(234, 240, 246); "
                   class="text-uppercase text-center text-xxs font-weight-bolder"
                 >
                   Nombre
@@ -74,10 +74,10 @@
             </thead>
             <tbody>
               <tr v-for="item in info" :key="item.id">
-                <td class="text-sm text-center font-weight-normal">
+                <td class="text-sm text-center text-dark fuente">
                   {{ item.nombre }}
                 </td>
-                  <td class="text-sm text-center font-weight-normal">
+                  <td class="text-sm text-center fuente">
                   {{ item.updatedAt.substring(0,10) }}
                 </td>
                 <td class="text-sm text-center font-weight-normal">
@@ -112,7 +112,7 @@
           </table>
           <!--  <Paginacion :paging="p => getAll(p)" :page="pagina" :pages="paginas"/> -->
 
-          <ul class="pagination pagination-info justify-content-center">
+          <ul class="pagination pagination-dark justify-content-center">
             &nbsp;&nbsp;
             <li class="page-item">
               <router-link
@@ -147,7 +147,10 @@
 
           <!-- Modal -->
           <div
-            class="modal fade"
+              class="modal fade "
+            :class="{ 'show ': modals === 'openn' }"
+            :style="[modals === 'openn' ? { display: 'block' } : {}]"
+            style="overflow-y: auto;  top:35px;  z-index: 9999;"
             id="exampleModal"
             tabindex="-1"
             role="dialog"
@@ -157,14 +160,13 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
+                  <h5 class="modal-title fuente" id="exampleModalLabel">
                     {{ model._id ? "Actualizar Registro" : "Crear Registro" }}
                   </h5>
                   <button
                     type="button"
                     class="btn-close text-dark"
-                    id="myModalClose"
-                    data-bs-dismiss="modal"
+                    @click="modals = 'cier'"
                     aria-label="Close"
                   >
                     <span style="font-size: 30px" aria-hidden="true"
@@ -175,7 +177,7 @@
                 <div class="modal-body">
                   <form @submit.prevent="save" role="form text-left">
                      <h6 class="text-danger text-center">{{MsmError}}</h6>
-                    <label>Etnia</label>
+                    <p class="parroquia">Etnia</p>
                     <div class="input-group mb-3">
                       <input
                         type="text"
@@ -191,7 +193,7 @@
                         {{ validation.firstError("model.nombre") }}
                       </p>
                     <div class="form-check form-check-info text-left">
-                      <label>{{ model.estado ? "Estado" : "Active Estado" }}</label>
+                      <a class="parroquia">{{ model.estado ? "Estado" : "Active Estado" }}</a>
                       <input
                           v-model="model.estado"
                           class="form-check-input"
@@ -204,7 +206,7 @@
                     </div>
                     <div class="text-center">
                       <button v-if="ifLoad"
-                      class="btn btn-primary btn-sm mb-2"
+                      class="btn btnNaranja btn-sm mb-2"
                       type="button"
                       disabled
                     >
@@ -218,11 +220,10 @@
                     <button v-else
                       type="submit"
                       id="addRowButton"
-                      class="btn bg-gradient-info btn-sm  mt-4 mb-0 "
-                      style="border-radius: 10px;"
+                      class="btn btnNaranja btn-sm  mt-4 mb-0 "
                     >
                       {{
-                        model._id ? "Actualizar Registro " : "Guardar"
+                        model._id ? "Actualizar Registro " : "Guardar Registro"
                       }}
                     </button>
                      

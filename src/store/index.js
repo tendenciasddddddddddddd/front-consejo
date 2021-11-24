@@ -4,8 +4,15 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-    user:null
+    user : null,
+    avatar: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
 }
 export default new Vuex.Store({
-    state
+    state,
+    mutations:{
+
+        agregar2: function (state,{img}) {
+            state.avatar = img;
+        }
+    }
 });

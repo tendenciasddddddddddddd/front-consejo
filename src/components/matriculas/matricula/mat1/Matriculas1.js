@@ -1,39 +1,29 @@
 import Spinner from '../../../../shared/Spinner'
-//import Navs from '../../../../shared/Navs'
-import Navss from '../../../../shared/Navss'
+import RestResource from '../../../../service/isAdmin'
+const restResourceService = new RestResource();
+
 export default {
   name: "Matriculas1",
   components: {
-    Spinner,Navss
+    Spinner,
 },
   data() {
     return {
       tab: "init",
+      roles: this.$store.state.user.roles,
       
-        rutass: [
-          {
-            id: "0",
-            nombre: "Home",
-            url:"/",
-          },
-          {
-            id: "1",
-            nombre: "Opciones de Matricula",
-            url:"/Opciones-Matricula",
-          },
-  
-        ],
-        //
-       
     };
   },
   methods: {
-    
-    //---------------------------------MATRICULA-----
- 
+    verificarUsuario(){
+      if(!restResourceService.admin(this.roles)){
+        this.$router.push("/");
+      }
+    },
+
   },
  
-  mounted() {
-    //this.getAll();
+  created() {
+    this.verificarUsuario();
   },
 };

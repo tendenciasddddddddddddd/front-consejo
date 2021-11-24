@@ -20,6 +20,10 @@ export default class AulasProxi {
         return this.axios.get(this.url + `/aulas/${id}`); //studen
     }
 
+    getMain(id) {
+        return this.axios.get(this.url + `/aulas/mainlist/${id}`); //studen
+    }
+
     async  updateAulaEstudantes(id) {
         return await this.axios.get(this.url + `/aulas/studen?id=${id}`);
     }
@@ -27,5 +31,23 @@ export default class AulasProxi {
     update(id, params) {
         return this.axios.put(this.url + `/aulas/${id}`, params);
     }
-   
+
+    //***********************************TAREAS************************************ */
+
+    createTask(id, params) {
+        return this.axios.put(this.url + `/tasks/${id}`, params);
+    }
+
+    editTask(id, params) {
+        return this.axios.put(this.url + `/tasks/editTask/${id}`, params);
+    }
+
+    removeTask(id, params) {
+        return this.axios.put(this.url + `/tasks/removetask/${id}`, params);
+    }
+    
+    //********************************ESTUDIANTES SENDTRASK */
+    sendTask(id, params) {
+        return this.axios.put(this.url + `/tasks/send/${id}`, params); //RUTA ARBOL 2
+    }
 }

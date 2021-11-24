@@ -1,23 +1,33 @@
-//const info = JSON.parse(localStorage.getItem("Xf"));
-import Skeleton from "../../../../shared/Skeleton";
-const info = JSON.parse(localStorage.getItem("Xf"));
+import RestResource from '../../../../service/isAdmin'
+const restResourceService = new RestResource();
+import Analitic from '../../../../shared/Analitic'
 export default {
   name: "MenuCursos",
   components: {
-    Skeleton,
+    Analitic
   },
   data() {
     return {
       user: this.$store.state.user,
+      roles: this.$store.state.user.roles,
       info: [],
       isData: false,
-      modalidad: info.modalidad,
+      modalidad: '',
       my : this.$store.state.user.id,
       isResult: [],
     };
   },
   methods: {
-    //updateInfoDocentes(id)
+    verificarUsuario(){
+      if(!restResourceService.estudiante(this.roles)){
+        this.$router.push("/");
+      }
+    },
+    appInit(){
+      const info = JSON.parse(localStorage.getItem("Xf"));
+      this.modalidad = info.modalidad;
+     
+    },
     getData() {
       this.isData = true;
       if (this.modalidad) {
@@ -47,6 +57,8 @@ export default {
     }
   },
   created() {
+    this.verificarUsuario();
+    this.appInit();
     this.getData();
   },
 };

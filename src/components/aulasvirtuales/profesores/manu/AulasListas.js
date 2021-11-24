@@ -1,19 +1,25 @@
 //const info = JSON.parse(localStorage.getItem("Xf"));
-import Skeleton from '../../../../shared/Skeleton'
+import RestResource from '../../../../service/isAdmin'
+const restResourceService = new RestResource();
+let img = require('../../../../assets/img/icons/banner.jpg')
+import Analitic from '../../../../shared/Analitic'
 export default {
    
    components:{
-    Skeleton
+    Analitic
    },
    data() {
        return {
         user: this.$store.state.user,
+        roles: this.$store.state.user.roles,
+        isRole: false,
         info: {},
         isData: false,
         curso: '',
         index: '',
         name: 'MenuCursos',
         modals1: 'closedd',
+        imagen : img
        }
    },
    methods: {
@@ -56,9 +62,16 @@ export default {
       },
       __cancelar(){
         this.modals= 'closedd';
+      },
+      verificarUsuario(){
+        if(!restResourceService.docente(this.roles)){
+          this.$router.push("/");
+        }
       }
    },
    created() {
+    this.verificarUsuario();
        this.getData();
+       
    }
 };

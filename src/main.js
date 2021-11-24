@@ -7,10 +7,12 @@ import store from './store/index'
 import Notifications from 'vue-notification'
 import SimpleVueValidation from 'simple-vue-validator';
 
-import VTooltip from 'v-tooltip'
-import $ from 'jquery'
+import { VTooltip, VPopover, VClosePopover } from 'v-tooltip'
 import vSelect from "vue-select";
 import Vue2Editor from "vue2-editor";
+
+import GAuth from 'vue-google-oauth2'
+
 
 // Usa Bootstrap
 import './assets/css/nucleo-icons.css'
@@ -60,7 +62,20 @@ Vue.use({
 });
 
 Vue.use(Notifications)
-Vue.use(VTooltip)
+Vue.directive('tooltip', VTooltip)
+Vue.directive('close-popover', VClosePopover)
+Vue.component('v-popover', VPopover)
+VTooltip.options.autoHide = false
+
+const gauthOption = {
+  clientId: '653128368761-qd0t66rj1at5ajoprmh8iv89fbnvkchs.apps.googleusercontent.com',
+  scope: 'profile email',
+  prompt: 'consent',
+  fetch_basic_profile : true,
+}
+Vue.use(GAuth, gauthOption)
+
+
 Vue.use(Vue2Editor);
 
 Vue.use({
@@ -72,6 +87,7 @@ Vue.use({
 })
 
 Vue.component("v-select", vSelect);
+
 
 
 Vue.use({
@@ -94,9 +110,10 @@ Vue.use({
           );
             store.state.user ={
                  id: user.id,
-                 roles : user.role
+                 roles : user.role,
+                 name : user.name,
             };
-            console.log(user)
+            //console.log(user)
         }
       }
     })
@@ -106,6 +123,5 @@ Vue.use({
 new Vue({
   router,
   store,
-  $,
   render: h => h(App)
 }).$mount('#app')

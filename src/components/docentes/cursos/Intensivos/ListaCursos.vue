@@ -1,130 +1,168 @@
 <template>
-<div>
-  <div class="row">
-   
-      <div class="col-lg-9 col-12 mx-auto" >
-          <Navss
+  <div>
+    <div class="row ">
+      <div class="col-lg-11 col-12 mx-auto">
+        <Analitic v-if="isData"></Analitic>
+        <div v-else class="" >
+          <img
+            style="margin-top:-22px"
+            class="product-core-blobs-desktop hsg-deferred hsg-deferred-loaded"
+            data-src="https://f.hubspotusercontent00.net/hubfs/53/Desktop%20Header%20Element.svg"
+            alt="Desktop Header Element"
+            src="https://f.hubspotusercontent00.net/hubfs/53/Desktop%20Header%20Element.svg"
+            data-was-processed="true"
+          />
+          <div style="background-image:url(https://static.hsappstatic.net/pricing-pages-unified-ui/static-1.10527/js/img/middle-blob.svg);background-color:null;min-height: 58vh; background-size: cover;border-radius: 3px;">
+                  <div class="d-flex pt-4">
+            <router-link
+              to="/opciones-curso"
+              class="btn btn-sm "
+              style="box-shadow: none"
+            >
+              <img
+                height="23px"
+                src="../../../../assets/img/usados/regresar.png"
+              />
+            </router-link>
 
-            :actualText="'Gestión del curso'"
-            :rutas="rutass"
-          ></Navss>
-   
-        
-      </div>
-      
-    </div>
-  <div class="row ">
-    
-    <div class="col-lg-9 col-12 mx-auto">
-      
-      <div class="card ">
-        <Skeleton v-if="isData"></Skeleton>
-        <div v-else class="card-body p-3 position-relative " >
-            <div class="row">
-                 <div class="col-sm-12 text-start">
-                     <h3 class=" fuente" style="font-weight: 400;"> {{info.fnivel.nombres}} - {{info.paralelo}} </h3>
-                     <hr>
-                          <div style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;">
-         
-        <p class="parrafo" style="margin:7px; ">
-         <b>{{info.fmateria.nombre}}</b> <mark><b>{{info.nombre}}</b>.</mark>
-          </p>
-        </div>
-                 </div>
+            <p class="h5 fuente links ms-3" style="font-weight: 400;">
+              
+                {{ info.fmateria.nombre }} &nbsp; -&nbsp;
+                {{ info.fnivel.nombres }} ({{ info.paralelo }}) &nbsp;-&nbsp; {{ info.nombre }}
+            </p>
+            
+          </div>
+          
+              <hr />
+          <section class="flex-containes mt-5" >
+            <div class="">
+              <router-link
+                :to="{
+                  name: 'd4',
+                  params: {
+                    id: info.fnivel._id,
+                    paralelo: info.paralelo,
+                    nombre: info.nombre,
+                    materia: info.fmateria.nombre,
+                  },
+                  props: {
+                    paralelo: info.paralelo,
+                    nombre: info.nombre,
+                    materia: info.fmateria.nombre,
+                  },
+                }"
+                href="javascript:;"
+              >
+                <div
+                  class="cajas targetas1 borde1 text-center"
+                  style="max-width: 200px;margin-right: 15px!important;"
+                >
+                  <img
+                    class="w-45 "
+                    src="../../../../assets/img/usados/playbooks.svg"
+                    alt="fondo"
+                  />
+                  <div class="p-2">
+                      <p class="cardTitle fuente ">Notas</p>
+                  <p class="parrafo cardSubTitle">
+                    Registre los aportes de cada unos de sus estudiantes asignados
+                  </p>
+                  </div>
+                 
+                </div>
+              </router-link>
             </div>
-         <div class="row mt-4">
-               <div class="col-lg-12">
-
-                  <div class="row mt-3">
-                    <div class="col-md-4 col-12">
-                      <div class="card card-plain text-center w-90">
-                        <router-link :to="{
-                            name: 'd3', 
-                            params:{id:info.fnivel._id, paralelo: info.paralelo, nombre:info.nombre, materia: info.fmateria.nombre},
-                            props: { paralelo: info.paralelo, nombre:info.nombre, materia: info.fmateria.nombre }}" href="javascript:;">
-                           <div class="card-body foco">
-                             <img class="w-75" src="../../../../assets/img/shapes/diagrama.svg" alt="fondo">
-                          <h6 class="fuente mt-2">1. Notas</h6>
-                        </div>
-                        </router-link>
-                       
-                      </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                      <div class="card card-plain text-center w-90">
-                        <router-link :to="{
-                            name: 'asistencia', 
-                            params:{id:info.fnivel._id, paralelo: info.paralelo, nombre:info.nombre, materia: info.fmateria.nombre},
-                            props: { paralelo: info.paralelo, nombre:info.nombre, materia: info.fmateria.nombre }}" href="javascript:;">
-                             <div class="card-body foco" >
-                              <img class="w-50" src="../../../../assets/img/logs/events.svg" alt="fondo">
-                           <h6 class="fuente mt-2">2.  Asistencia</h6>
-                        </div>
-                        </router-link>
-                        
-                      </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                      <div class="card card-plain text-center w-90">
-                        <div class="card-body foco" >
-                          <router-link :to="`/507`">
-                               <img class="w-55" src="../../../../assets/img/logs/integrations.svg" alt="fondo">
-                            <h6 class="fuente mt-2">3.  Supletorios</h6>
-                          </router-link>
-                          
-                          
-                        </div>
-                      </div>
-                    </div>
+            <div class="">
+              <router-link
+                :to="{
+                  name: 'asistencia',
+                  params: {
+                    id: info.fnivel._id,
+                    paralelo: info.paralelo,
+                    nombre: info.nombre,
+                    materia: info.fmateria.nombre,
+                  },
+                  props: {
+                    paralelo: info.paralelo,
+                    nombre: info.nombre,
+                    materia: info.fmateria.nombre,
+                  },
+                }"
+                href="javascript:;"
+              >
+                <div
+                  class="cajas targetas1 borde2 text-center"
+                  style="max-width: 200px;margin-right: 15px!important;"
+                >
+                  <img
+                    class="w-40 mt-2"
+                    src="../../../../assets/img/logs/events.svg"
+                    alt="fondo"
+                  />
+                  <div class="p-2">
+                     <p class="cardTitle fuente ">Asistencia</p>
+                  <p class="parrafo cardSubTitle">
+                    Registre la asistencia a de sus alumnos segun el calendario académico 
+                  </p>
                   </div>
+                  
                 </div>
-                <div class="col-lg-12 mt-4">
-                   <h6 class="mb-0">Icono de Curso</h6>
-                   <br>
-                  <div class="border-dashed border-1 border-secondary border-radius-md p-3">
-                    
-                    <p class="text-xs mb-3"><span class="font-weight-bolder">(CAMBIE EL ICONO DEL CURSO PARA IDENTIFICARLO)</span></p>
-                    <div class="d-flex align-items-center">
-                     
-                           <div class="form-group w-70">
-                            <form @submit.prevent="save" id="form">
-                                <div class="input-group bg-gray-200">
-                              
-                            <input class="form-control form-control-sm" v-model="model.icono" type="text" disabled="" onfocus="focused(this)" onfocusout="defocused(this)">
-                            <span class="input-group-text bg-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Referral code expires in 24 hours" aria-label="Referral code expires in 24 hours"><i class="ni ni-key-25"></i></span>
-                        </div>
-                            </form>
-                            
-                      </div>
-                      
-                      <button v-if="isEdit && file" type="submit" form="form" class="btn btn-primary btn-sm ms-2 px-3" >Guardar</button>
-                      <a v-else @click="mostrarFormulario()" href="javascript:;" class="btn btn-sm btnNaranja w-20 ms-2 px-3">Editar</a>
-                    </div>
-                     <div v-if="isEdit">
-                       
-                            
-                             <input disabled class="form" type="file" ref="file" v-on:change="onChangeFileUpload()" accept="image/*"  id="file"/><br><br>
-                               <label for="file">Selecione una Imagen</label>
-                        
-                     </div>
-                    <p class="text-xs mb-1">Para mejor rendimiento la imagen es de 200 x 200.</p>
-                   
+              </router-link>
+            </div>
+            <div class="">
+              <router-link :to="`/507`" href="javascript:;">
+                <div
+                  class="cajas targetas1 borde3 text-center"
+                  style="max-width: 200px;margin-right: 15px!important;"
+                >
+                  <img
+                    class="w-45 mt-2"
+                    src="../../../../assets/img/logs/integrations.svg"
+                    alt="fondo"
+                  />
+                  <div class="p-2">
+                      <p class="cardTitle fuente ">Supletorios</p>
+                  <p class="parrafo cardSubTitle">
+                    Registre las notas de supleorio cuando ya confirmo las calificaciones
+                  </p>
                   </div>
+                 
                 </div>
-               
-              </div>
-
+              </router-link>
+            </div>
+            <div class="">
+              <router-link :to="`/507`" href="javascript:;">
+                <div
+                  class="cajas targetas1 borde4 text-center"
+                  style="max-width: 200px;margin-right: 15px!important;"
+                >
+                  <img
+                    class="w-35 mt-1"
+                    src="../../../../assets/img/logs/add-on-transactional-email.svg"
+                    alt="fondo"
+                  />
+                  <div class="p-2">
+                     <p class="cardTitle fuente ">Correos</p>
+                  <p class="parrafo cardSubTitle">
+                    Enviar notificaciones, msm o correos masivos a todos sus alumnos 
+                  </p>
+                  </div>
+                  
+                </div>
+              </router-link>
+            </div>
+          </section>
+          </div>
+       
+         
         </div>
       </div>
+   <!-- ⮕ -->
     </div>
   </div>
-</div>
-  
 </template>
 
-<script src="./ListaCursos.js">
-</script>
+<script src="./ListaCursos.js"></script>
 <style>
 .mole {
   background-color: white;
@@ -142,17 +180,68 @@
   border: 3px solid #eee;
 }
 
-
-.foco{
-  border: 1px solid #7fd1de;     border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-
+.foco {
+  border: 1px solid #7fd1de;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
 }
-.foco:hover{
-  border-color: #00a4bd;
-
-  background-color: #e5f5f8;
+.foco:hover {
+  box-shadow: 0 0 0 1px #7fd1de, 0 0 12px 0 rgb(0 163 189 /30%);
+}
+.foco2 {
+  box-shadow: 0 0 1rem rgb(0 0 0 / 10%);
+  min-height: 165px;
+  z-index: 2;
+  padding: 26px 20px 7px;
+  position: relative;
+  transition-property: all;
+  transition-duration: 170ms;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.foco2:hover {
+  transform: scale(1.075) rotate(0.0001deg);
+  background-color: #fff;
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 15%);
 }
 
+.hsg-deferred.hsg-deferred-loaded,
+.hsg-deferred[data-was-processed="true"] {
+  opacity: 1;
+}
+
+.product-core-blobs-desktop {
+  display: block;
+}
+
+.product-core-blobs-mobile,
+.product-core-blobs-desktop {
+  width: 100%;
+  height: auto;
+}
+.hsg-deferred {
+  transition: opacity 0.35s ease-out;
+  opacity: 0;
+  overflow: hidden;
+}
+img {
+  max-width: 100%;
+}
+
+.borde1 {
+  border-top: 5px solid #516f90;
+}
+.borde2 {
+  border-top: 5px solid #f5c26b;
+}
+.borde3 {
+  border-top: 5px solid #00bda5;
+}
+.borde4 {
+  border-top: 5px solid #00a4bd;
+}
 </style>

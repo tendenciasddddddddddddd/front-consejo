@@ -1,39 +1,30 @@
 import Spinner from '../../../shared/Spinner'
-import Navss from '../../../shared/Navss'
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
+//IMPORTAR HIJOS
+import ChildSexo from "../../../shared/views/ChildSexo"
+import ChildEtnia from "../../../shared/views/ChildEtnia"
+import ChildNacionalidad from "../../../shared/views/ChildNacionalidad"
 export default {
   name: "AddDocentes",
   components:{
-      Navss,Spinner
+      Spinner,
+      ChildSexo,
+      ChildEtnia,
+      ChildNacionalidad
   },
   data() {
     return {
+      roles: this.$store.state.user.roles,
       tab: "init",
+      tabla: "ontask",
       info: null,
-      listNacionalidad: null,
-      listEtnia: null,
       listParroquia: null,
       isLoading: false,
       popular:'Crear Docente',
       ifLoad: false,
       ifcarga: false,
-      sexos: [
-        {
-          value: "0",
-          nombre: "Masculino",
-        },
-        {
-          value: "1",
-          nombre: "Femenino",
-        },
-        {
-          value: "2",
-          nombre: "Otros",
-        },
-        {
-          value: "3",
-          nombre: "No conforme",
-        },
-      ],
+      
       model: {
         //-----------VARIABLES DEL MODELO A GUARDAR
         _id: null,
@@ -51,26 +42,16 @@ export default {
         role: null,
         fullname: null,
         ////////////////////////////////
-        sexo: null,
-        fketnia: null,
-        fknacionalidad: null,
+        sexo: '',
+        fketnia: '',
+        fknacionalidad: '',
         fkparroquia: null,
         titulo: null,
 
       },
-      rutass: [
-        {
-          id: "0",
-          nombre: "Home",
-          url:"/",
-        },
-        {
-          id: "2",
-          nombre: "Lista Docentes",
-          url:"/List-Docente",
-        },
-        
-      ],
+      objetoSexos: null,
+      objetoEtnia: null,
+      objetoNacion: null,
       
     };
   },
@@ -109,10 +90,16 @@ export default {
           if (!this.model.status) {
             this.model.status = 0;
           } 
-          this.model.sexo=this.model.sexo.nombre;
+          if (this.objetoSexos!=undefined) {
+            this.model.sexo = this.objetoSexos.nombre
+          }
+          if (this.objetoEtnia!=undefined) {
+            this.model.fketnia = this.objetoEtnia.nombre
+          }
+          if (this.objetoNacion!=undefined) {
+            this.model.fknacionalidad = this.objetoNacion.nombre
+          }
           this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
             .updateDocentes(this.model._id, this.model) //-----------EDITAR CON AXIOS
@@ -136,10 +123,18 @@ export default {
           if (!this.model.status) {
             this.model.status = 0;
           } 
-          this.model.sexo=this.model.sexo.nombre;
+          if (!this.objetoSexos||!this.objetoEtnia||!this.objetoNacion) 
+          {
+            this.$notify({
+              group: "global",
+              text: "Faltan campos por completar",
+            });
+            this.ifLoad = false;
+            return;}
+          this.model.sexo=this.objetoSexos.nombre;
           this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
+          this.model.fknacionalidad = this.objetoNacion.nombre;
+          this.model.fketnia = this.objetoEtnia.nombre;
           this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
             .createDocentes(this.model) //-----------GUARDAR CON AXIOS
@@ -166,29 +161,8 @@ export default {
         }
       });
     },
-    __listNacionalidad() {
-      //-----------TRAE LA LISTA DE LOS ROLES
-      this.$proxies._registroProxi
-        .getNacionalidad()
-        .then((x) => {
-          this.listNacionalidad = x.data.datas;
-        })
-        .catch((err) => {
-          console.log("Error", err);
-        });
-    },
 
-    __listEtnias() {
-      //-----------TRAE LA LISTA DE LOS ROLES
-      this.$proxies._registroProxi
-        .getEtnias()
-        .then((x) => {
-          this.listEtnia = x.data.datas;
-        })
-        .catch((err) => {
-          console.log("Error", err);
-        });
-    },
+
     __listParroquias() {
       //-----------TRAE LA LISTA DE LOS ROLES
       this.$proxies._registroProxi
@@ -219,11 +193,15 @@ export default {
       }
       this.model.edad = edad;
     },
+    verificarUsuario(){
+      if(!restResourceService.admin(this.roles)){
+        this.$router.push("/");
+      }
+    }
   },
   mounted() {
+    this.verificarUsuario();
     this.get();
-    this.__listNacionalidad();
-    this.__listEtnias();
     this.__listParroquias();
   },
 
@@ -270,21 +248,14 @@ export default {
       return this.$validator
         .value(value)
         .required()
-        .minLength(6)
+        .minLength(2)
         .maxLength(80);
     },
 
-    "model.fknacionalidad"(value) {
-        return this.$validator.value(value).required();
-      },
+
       "model.fkparroquia"(value) {
         return this.$validator.value(value).required();
       },
-      "model.fketnia"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.sexo"(value) {
-        return this.$validator.value(value).required();
-      },
+
   },
 };

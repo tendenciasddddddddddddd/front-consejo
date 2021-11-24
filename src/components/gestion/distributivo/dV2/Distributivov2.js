@@ -1,10 +1,9 @@
 import Spinner from "../../../../shared/Spinner";
-import Navss from '../../../../shared/Navss'
 import IsSelect from '../../../../shared/IsSelect'
 export default {
     name: 'Distrivutivov1',
     components: {
-        Spinner,Navss ,IsSelect
+        Spinner,IsSelect
       },
     data(){
       return {
@@ -54,7 +53,10 @@ export default {
                 nombre: "F",
               },
           ],
-         
+          isSelecUsers: [],
+          subtitulo: 'none',
+          iseliminaddo : false,
+          isCarga: false,
       }
     },
     methods: {
@@ -104,6 +106,7 @@ export default {
       },
       save() {
         //-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
+        this.isSelecUsers= [];
         this.$validate().then((success) => {
           //METODO PARA GUARDAR
           if (!success) {
@@ -125,7 +128,7 @@ export default {
                 this.__limpiarCampos();
                 this.tab= "init";
                 this.ifLoad = false;
-                this.getAll(1);
+                this.getAll(this.pagina,6);
               })
               .catch((x) => {
                 alert("Error"+x);
@@ -144,7 +147,7 @@ export default {
                 this.ifLoad = false;
                 this.tab= "init";
                 this.__limpiarCampos();
-                this.getAll(1);
+                this.getAll(this.pagina,6);
               })
               .catch((error) => {
                 //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
@@ -169,12 +172,12 @@ export default {
           
         });
       },
-      getAll(pag) {
+      getAll(pag, lim) {
         this.isLoading = true;
-       
+        this.subtitulo = lim + ' filas por página';
           let modalidad = 'Extraordinaria';
           this.$proxies._gestionProxi
-            .getAllDistributivo(pag, 7, modalidad) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+            .getAllDistributivo(pag, lim, modalidad) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
             .then((x) => {
               this.info = x.data.niveles;
               this.pagg = x.data;
@@ -188,36 +191,68 @@ export default {
               this.isLoading = false;
             });
       },
-      __eliminar(idn) {
-        this.isLoading = true;
-        if (confirm('ESTA SEGURO QUE QUIERE ELIMINAR?')) {
-          this.$proxies._gestionProxi
-          .removeDistributivo(idn) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-          .then(() => {
+     
+      gets() { 
+        let isArray = this.isSelecUsers.length;
+        if(isArray===1){
+          this.isCarga = true; 
+        this.__limpiarCampos();
+        this.$proxies._gestionProxi.getDistributivo(this.isSelecUsers[0])
+            .then((x) => {
+                this.model = x.data;
+                this.isCarga = false; 
+                this.tab= "init1";
+            }).catch(() => {
+                console.log("Error")
+                this.isCarga = false; 
+            });
+        }
+      },
+      selectUser(key){
+        let longitud = this.isSelecUsers.length;
+        let isExiste = 0;
+        if(longitud>0){
+           for (let i = 0; i < this.isSelecUsers.length; i++) {
+              if(this.isSelecUsers[i]==key){
+               this.isSelecUsers.splice(i, 1); 
+               isExiste = 1;
+               break;
+              }
+           }
+           if(isExiste===0){ 
+             this.isSelecUsers.push(key);
+           }
+        }else{
+         this.isSelecUsers.push(key);
+        } 
+      },
+      remove() {
+        //METODO PARA ELIMINAR  ROW
+        if (
+          confirm(
+            "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
+          )
+        ) {
+          this.iseliminaddo = true;
+          let isArray = this.isSelecUsers.length;
+          if(isArray>0){
+            this.$proxies._gestionProxi
+          .removeDistributivo(this.isSelecUsers)
+              .then(() => {
+                this.iseliminaddo = false;
+                this.isSelecUsers= [];
+                this.getAll(this.pagina,6); 
+              })
+              .catch(() => {
+                console.log("Error imposible");
+              });
             this.$notify({
               group: "global",
               text: "Registro destruido",
             });
-            this.isLoading = false;
-            this.getAll(1);
-          })
-          .catch((x) => {
-            alert("Error 401", x.response);
-          });
-        }else{
-          this.isLoading = false;
+            
+         }
         }
-    
-      },
-      gets(id) { 
-        this.__limpiarCampos();
-        this.$proxies._gestionProxi.getDistributivo(id)
-            .then((x) => {
-                this.model = x.data;
-                this.tab= "init1";
-            }).catch(() => {
-                console.log("Error")
-            });
       },
       __limpiarCampos(){
         this.model._id = "";
@@ -242,7 +277,7 @@ export default {
         immediate: true,
         handler(pagina) {
           pagina = parseInt(pagina) || 1;
-          this.getAll(pagina);
+          this.getAll(pagina,6);
           this.paginaActual = pagina;
           
         },

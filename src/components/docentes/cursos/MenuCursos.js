@@ -1,23 +1,18 @@
 //const info = JSON.parse(localStorage.getItem("Xf"));
-import Skeleton from '../../../shared/Skeleton'
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
+import Analitic from '../../../shared/Analitic'
 export default {
    name: 'MenuCursos',
    components:{
-    Skeleton
+   Analitic
    },
    data() {
        return {
+        roles: this.$store.state.user.roles,
         user: this.$store.state.user,
         info: {},
         isData: false,
-        rutass: [
-            {
-              id: "0",
-              nombre: "Home",
-              url:"/",
-            },
-    
-          ],
        }
    },
    methods: {
@@ -37,8 +32,14 @@ export default {
             });
            }
        },
+       verificarUsuario(){
+        if(!restResourceService.docente(this.roles)){
+          this.$router.push("/");
+        }
+      }
    },
    created() {
+    this.verificarUsuario();
        this.getData();
    }
 };

@@ -8,10 +8,22 @@ export default class IdentityProxy{
     register(params){
         return this.axios.post(this.url+'/identity/register',params)
     }
+    //GoogleAuthApis
 
-    login(params){
-        
+    resetPasswords(params){
+        return this.axios.post(this.url+'/auth/resetPassword',params) //SEND EMAIL WITH CODE
+    }
+
+    forgotPassword(params){
+        return this.axios.post(this.url+'/auth/forgotPassword',params) //UPDTAE PASS
+    }
+
+    login(params){ 
         return this.axios.post(this.url+'/auth/signin',params)
+    }
+
+    GoogleAuthApi(params){ 
+        return this.axios.post(this.url+'/auth/GoogleAuthApis',params)
     }
 
     cuenta(params){

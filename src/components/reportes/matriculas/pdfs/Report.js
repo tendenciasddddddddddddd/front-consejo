@@ -1,5 +1,7 @@
 import Spinner from "../../../../shared/Spinner.vue";
 import html2pdf from 'html2pdf.js'
+import RestResource from "../../../../service/isAdmin";
+const restResourceService = new RestResource();
 export default{
     name: 'Report',
     components: {Spinner},
@@ -7,6 +9,7 @@ export default{
         return {
             tab: "inicio",
             isVisible: 'pa1',
+            tabbs : '1',
             listniveles: null,
             isLoading1: false,
             filtros: null,
@@ -18,9 +21,18 @@ export default{
             isdescarga: false,
             info:null,
             isReporte: false,
+            roles: this.$store.state.user.roles,
+            index: "0",
+            modalidad: "0",
+            isprint: false,
         }
     },
     methods: {
+      verificarUsuario() {
+        if (!restResourceService.admin(this.roles)) {
+          this.$router.push("/");
+        }
+      },
         __listNivele() {
             //-----------TRAE LA LISTA DE LOS ROLES 
             this.isLoading1 = true;
@@ -40,9 +52,28 @@ export default{
               });
           },
           _cambiar(){
-            this.isVisible= 'pa2';
+            this.tabbs= '2';
+            this.index = '0';
+            this.modalidad = '0';
             this.listniveles2 = this.filtros.filter((x) => x.modalidad == 'Extraordinaria');
           },
+          _cambiar2(){
+            this.tabbs= '1';
+            this.index = '0';
+            this.modalidad = '0';
+            this.listniveles = this.filtros.filter((x) => x.modalidad == 'Intensivo');
+          },
+          clicMe(keys, mod) {
+            this.index = keys;
+            this.modalidad = mod;
+          },
+          verLista() {
+            if (this.index != "0"&&this.modalidad!=0) {
+              this.__cambios(this.index,this.modalidad);
+              this.isVisible= 'pa3';
+            }
+          },
+
           __cambios(cursos, modalidad) {
             this.isTabla = true;
             this.$proxies._matriculaProxi
@@ -56,12 +87,7 @@ export default{
                 this.isTabla = false;
               });
           },
-          __verLista(obj, modalidad){
-            if(obj && modalidad){
-                this.__cambios(obj, modalidad);
-                this.isVisible= 'pa3';
-         }
-       },
+          
        /////////////////////////////////////REPORTES////////////////////////////////
        get(ids) {
         //-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
@@ -82,23 +108,24 @@ export default{
             });
         }
       },
+
+
       test() {
-
-        var element = document.getElementById('root');
-
-        // Generate the PDF.
-        html2pdf().from(element).set({
-            margin: 0,
-            fontSize : 9,
-            filename: 'test.pdf',
-            html2canvas: { scale: 4 },
-            jsPDF: { orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true }
-        }).save();
-        
+         this.isprint = true;
+          var element = document.getElementById('root');
+          html2pdf().from(element).set({
+              margin: 0,
+              fontSize : 9,
+              filename: 'test.pdf',
+              html2canvas: { scale: 4 },
+              jsPDF: { orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true }
+          }).save();
+          setTimeout(() => this.isprint = false, 4000); 
      },
+
      __calcularfechaActual(){
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "Agosto", "September", "October", "November", "December"];
+        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
         const dateObj = new Date();
         const month = monthNames[dateObj.getMonth()];
         const day = String(dateObj.getDate()).padStart(2, '0');
@@ -118,6 +145,7 @@ export default{
       }
     },
     created() {
+      this. verificarUsuario();
         this. __listNivele();
     },
 };

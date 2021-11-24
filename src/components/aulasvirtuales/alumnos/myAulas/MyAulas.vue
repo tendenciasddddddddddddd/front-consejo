@@ -1,42 +1,41 @@
 <template>
   <div class="row " >
-    
-    <div class="col-lg-9 col-12 mx-auto">
+    <Analitic v-if="isData"></Analitic>
+    <div v-else class="col-lg-12 col-12 mx-auto">
      
     
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="fuente" style="font-weight: 400;">Mis Aulas</h3>
-           <hr>
-          <div v-if="info.length" class="mt-2" style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;">
-         
-        <p class="text-dark fuente" style="margin:7px;font-weight: 700; font-size: 16px ">
-         Esta es la lista de aulas en las que estoy matriculado.
+     <div
+        class="card " v-if="info.length"
+        style="background-image:url(https://community.hubspot.com/html/assets/grouphubpage-banner.jpg);background-color:null;min-height: 7vh; background-size: cover;border-radius: 3px;"
+      >
+        <div class="card-body text-center pt-4">
+          
+          <h3 class="text-white fuente">
+            Aulas virtuales
+          </h3>
+          <p class="text-white fuente">
+            Crear aula virtual para que sus alumnos se puedan matricular y enviar sus tareas.
           </p>
         </div>
-          
-        </div>
       </div>
-      <Skeleton v-if="isData"></Skeleton>
-      <div v-else>
+      
+      <div >
         <div v-if="!info.length">
-           <div  class="mt-2" style="background-color: rgb(222, 235, 255); padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;">
+           <div  class="mt-2 alertdanger" >
          
-        <p class="text-dark fuente" style="margin:7px;font-weight: 700; font-size: 16px ">
+        <p class="text-dark fuente" style="margin:7px;font-weight: 400; font-size: 16px ">
              Aun no te has matriculado en ningun curso, 😢😢😢
           </p>
         </div>
-          <div class="row mt-3">
+          <div class="row mt-5">
             <div class="col-lg-9 col-12 mx-auto">
               <div class="text-center">
                 <img
-                  class="w-40"
-                  src="../../../../assets/img/jira/search-error.svg"
+                  class="w-20"
+                  src="../../../../assets/img/usados/undraw_search.svg"
                   alt="fondo"
                 />
-                <div class=" mt-3 letra fuente">
+                <div class=" mt-4 letra fuente">
                   Hemos buscado en todas partes, pero no tenemos <br>
                   nada que mostrarte. Prueba registrandote<br>
                  en un curso
@@ -45,48 +44,32 @@
             </div>
           </div>
         </div>
-        <div v-else class="row mt-1" >
-          <!--  style="background-color:rgb(245, 248, 250);" -->
-
-          <div v-for="item in info" :key="item.id" class="col-sm-4">
-            <br />
-
-            <div
-              class=" border-secondary border-radius-md p-3 mole w-95"
-              style="  border-style: dashed; border-width: 1px;"
-            >
-              <div class="card card-plain card-blog">
-                    <router-link
-                    :to="`/home-aula/${item._id}`"
-                    href="javascript:;"
-                  >
-                <div class="text-center position-relative">
-                 
-                    <div class="blur-shadow-image">
-                      <img
-                        height="130px"
-                        class="img  move-on-hover"
-                        src="../../../../assets/img/shapes/project-config.svg"
-                      />
-                    </div>
-                  
+        
+            <section v-else  class="flex-containes mt-4">
+             
+          <div class="" v-for="item in info" :key="item.id">
+            <router-link :to="`/home-aula/${item._id}`" href="javascript:;">
+              <div v-tooltip.bottom="'Docente: '+item.doc +', Materia: '+item.materia"
+                class="cajas targetas1 borde1 text-center"
+                style="max-width: 200px;margin-right: 15px!important;min-height: 230px;"
+              >
+                <img
+                  class="w-65"
+                  src="../../../../assets/img/usados/docente.png"
+                  alt="fondo"
+                />
+                <div class="let" style="padding-left:8px; padding-right:8px;">
+                     <a class="fuente " style="font-size: 16px;">{{ item.materia.slice(0, 12) }}</a><br>
+                <p class="parrafo cardSubTitle">
+                   {{ item.materia.slice(12, -1) }}, {{
+                      item.doc.slice(0, 32)
+                    }}
+                </p>
                 </div>
-                <div class="card-body px-0" style="padding:2px;">
-                  <a class="mb-0">
-                    <div
-                      class="icon icon-shape icon-xs rounded-circle bg-gradient-success shadow text-center"
-                    >
-                      <i class="fas fa-check opacity-10" aria-hidden="true"></i>
-                    </div>
-                    &nbsp; <b class="fuente">{{ item.materia.slice(0, 23) }}</b> </a
-                  ><br />
-                  <label class="form-check-label text-xs fuente">{{ item.doc }}</label>
-                </div>
-               </router-link>
               </div>
-            </div>
+            </router-link>
           </div>
-        </div>
+        </section>
       </div>
 
       <!-- <div class="row">
@@ -123,5 +106,20 @@
   position: relative;
   padding: 2rem;
   border: 3px solid #eee;
+}
+
+.targetas1 {
+  border-radius: 3px;
+  min-height: 180px;
+  box-sizing: border-box;
+  transition: box-shadow 0.25s ease-in-out 0s;
+  box-shadow: rgb(9 30 66 / 25%) 0px 1px 1px, rgb(9 30 66 / 31%) 0px 0px 1px 0px;
+  overflow: hidden;
+  display: block;
+  cursor: pointer;
+}
+.targetas1:hover {
+  box-shadow: rgb(9 30 66 / 25%) 0px 8px 16px -4px,
+    rgb(9 30 66 / 31%) 0px 0px 1px;
 }
 </style>

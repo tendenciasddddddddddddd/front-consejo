@@ -5,10 +5,10 @@ export default class UsuariosProxi{
     }
 
     /* getAll(){
-        return this.axios.get(this.url+'/users')
+        return this.axios.get(this.url+'/users') buscadorusuarioss
     } */
-    getAll(page, take) {
-        return this.axios.get(this.url + `/users?page=${page}&take=${take}`);
+    async getAll(page, take) {
+        return await this.axios.get(this.url + `/users?page=${page}&take=${take}`);
     }
     create(params) {
         return this.axios.post(this.url + '/auth/signup', params);
@@ -24,8 +24,13 @@ export default class UsuariosProxi{
     remove(id) {
         return this.axios.delete(this.url + `/users/${id}`);
     }
+
     //-----APARTE SOLO TRAE LISTA DE ROLES--------
     getRoles() {
         return this.axios.get(this.url + '/users/newrol');
+    }
+
+   async buscadorUsuario() {
+        return await this.axios.get(this.url + '/users/buscadorusuarioss');
     }
 }

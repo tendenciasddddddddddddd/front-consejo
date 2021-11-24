@@ -1,67 +1,56 @@
 
-import "datatables.net-dt/js/dataTables.dataTables.min.js"
-
-import Espera from "../../../../shared/Espera";
-import Navss from "../../../../shared/Navss";
+//import Espera from "../../../../shared/Espera";
 import Spinner from "../../../../shared/Spinner.vue";
 export default {
   name: "ListaMatricula",
   components: {
-    Espera,
-    Navss, Spinner
+    //Espera,
+    Spinner,
   },
   data() {
     return {
       tab: "inicio",
-      isVisible: 'panel1',
+      isVisible: "panel1",
       isLoading1: false,
       isLoading2: false,
       isTabla: true,
-      listPeriodo: null,
       check: null,
-      select:null,
+      select: null,
       infoMat: null,
       listniveles: null,
-      
+      isSelecMatricula: [],
+      iseliminaddo: false,
+
+      index: "0",
     };
   },
   methods: {
-    __listPeriodo() {
-      //-----------TRAE LA LISTA DE LOS ROLES h
-      this.$proxies._matriculaProxi
-        .getFull()
-        .then((x) => {
-          let filtro = x.data.niveles;
-          this.listPeriodo = filtro.filter((x) => x.typo == "Extraordinaria" && x.estado == "1");
-        })
-        .catch((err) => {
-          console.log("Error", err);
-         
-        });
-    },
+
     __listNivele() {
-      //-----------TRAE LA LISTA DE LOS ROLES 
+      //-----------TRAE LA LISTA DE LOS ROLES
       this.isLoading1 = true;
 
       this.$proxies._gestionProxi
         .getNiveles()
         .then((x) => {
           let filtros = x.data;
-          this.listniveles = filtros.filter((x) => x.modalidad == 'Extraordinaria');
-         // this.isTabla = false;
-         this.isLoading1 = false;
+          this.listniveles = filtros.filter(
+            (x) => x.modalidad == "Extraordinaria"
+          );
+          // this.isTabla = false;
+          this.isLoading1 = false;
         })
         .catch((err) => {
           console.log("Error", err);
-         // this.isTabla = false;
-         this.isLoading1 = false;
+          // this.isTabla = false;
+          this.isLoading1 = false;
         });
     },
     __cambios(cursos) {
       this.isTabla = true;
-      let modalidad = "m2";
+      //let modalidad = "m2";
       this.$proxies._matriculaProxi
-        .getFullMatricula(modalidad, cursos)
+        .getFullMatricula( cursos)
         .then((x) => {
           this.infoMat = x.data.matriculados;
           this.isTabla = false;
@@ -71,60 +60,64 @@ export default {
           this.isTabla = false;
         });
     },
+    selectcursos(key) {
+      let longitud = this.isSelecMatricula.length;
+      let isExiste = 0;
+      if (longitud > 0) {
+        for (let i = 0; i < this.isSelecMatricula.length; i++) {
+          if (this.isSelecMatricula[i] == key) {
+            this.isSelecMatricula.splice(i, 1);
+            isExiste = 1;
+            break;
+          }
+        }
+        if (isExiste === 0) {
+          this.isSelecMatricula.push(key);
+        }
+      } else {
+        this.isSelecMatricula.push(key);
+      }
+    },
 
-          remove(id) { //METODO PARA ELIMINAR  ROW
-           if (confirm('ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR')) {
-            this.$proxies._matriculaProxi.removeMatricula(id)
+    remove() {
+      //METODO PARA ELIMINAR  ROW
+      if (
+        confirm(
+          "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
+        )
+      ) {
+        this.iseliminaddo = true;
+        let isArray = this.isSelecMatricula.length;
+        if(isArray>0){
+          for(let i=0; i<this.isSelecMatricula.length; i++){
+            this.$proxies._matriculaProxi
+            .removeMatricula(this.isSelecMatricula[i])
             .then(() => {
-                 this.isVisible= 'panel1';
-                this.$notify({
-                    group: "global",
-                    text: "Registro Destruido",
-                 });
-                  
+              
             })
             .catch(() => {
-             alert("Error");
-            
-           });
-           }
-        
-      },
-/*     checkExist(event) {
-
-      if (event) {
-          if(this.listPeriodo[0]._id){
-             this.__cambios(this.check._id);
+              console.log("Error imposible");
               
+            });
           }
-      }
-    }, */
-
-    checkClick(curso){
-      if(curso){
-         this.__cambios(curso);
+          this.iseliminaddo = false;
+         this.isVisible = "panel1";
+       }
       }
     },
-    onChange(event) {
-      if (event) {
-          if(this.check._id){
-              if(event.target.value!='Seleccione un curso'){
-                  let curso=event.target.value;
-                  this.__cambios(this.check._id, curso);
-              }
-              
-          }
+
+    verLista() {
+      if (this.index != "0") {
+        this.__cambios(this.index);
+        this.isVisible = "panel2";
+        this.isSelecMatricula = [];
       }
     },
-    __verLista(obj){
-         if(obj){
-         this.__cambios(obj);
-         this.isVisible= 'panel2';
-      }
+    clicMe(keys) {
+      this.index = keys;
     },
   },
   created() {
-    this.__listPeriodo();
     this.__listNivele();
   },
 };

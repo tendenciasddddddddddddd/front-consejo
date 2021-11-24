@@ -1,11 +1,9 @@
-const $ = require('jquery')
+//const $ = require('jquery')
 import Spinner from '../../../../shared/Spinner'
-import Navss from '../../../../shared/Navss'
 export default {
     name: 'Nacionalidad',
     components: {
         Spinner,
-        Navss
     },
     data() {
         return {
@@ -24,18 +22,7 @@ export default {
                 nombre: null,
                 estado: null,
             },
-            rutass: [
-                {
-                  id: "0",
-                  nombre: "Home",
-                  url:"/",
-                },
-                {
-                    id: "2",
-                    nombre: "Menu Zonas",
-                    url:"/MenuZonas",
-                  },
-              ],
+            modals: 'closed',
         }
     },
     methods: {
@@ -73,7 +60,7 @@ export default {
                     this.$proxies._zonasProxi.updateNacionalidad(this.model._id, this.model)
                         .then(() => {
                             this.__limpiarCampos();
-                            $("#exampleModal #myModalClose").click() //CERRAR MODAL
+                            this.modals = 'cls';
                             this.ifLoad = false;
                             this.getAll(1);
                         })
@@ -90,7 +77,7 @@ export default {
                     this.$proxies._zonasProxi.createNacionalidad(this.model) //-----------GUARDAR CON AXIOS
                         .then(() => {
                             this.ifLoad = false;
-                            $("#exampleModal #myModalClose").click();
+                            this.modals = 'cls'; // $("#exampleModal #myModalClose").click();
                             this.getAll(1);
                         })
                         .catch((error) => { //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
@@ -142,6 +129,7 @@ export default {
             this.model.nombre = "";
             this.model.estado = 0;
             this.MsmError = "";
+            this.modals = 'openn';
         }, //----FIN----
     },
     watch: {

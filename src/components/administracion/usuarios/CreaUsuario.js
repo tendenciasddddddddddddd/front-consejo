@@ -1,13 +1,17 @@
-import Navss from '../../../shared/Navss'
-import Skeleton from '../../../shared/Skeleton'
+import Spinner from '../../../shared/Spinner'
+
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
   name: "CreaUsuario",
   components: {
-    Navss,Skeleton
+    Spinner
   },
   data() {
     return {
+      roles: this.$store.state.user.roles,
       tab: "init",
+      tabla: "ontask",
       info: null,
       listRol:null,
       isLoading: false,  ifLoad:false,
@@ -16,7 +20,7 @@ export default {
       model: {//-----------VARIABLES DEL MODELO A GUARDAR
         _id: null, username: null,  email: null,
         password: null, nombres: null, apellidos: null,
-        cedula: null, foto: 'profile.jpg', typo: 'ADMS',
+        cedula: null, foto: 'https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png', typo: 'ADMS',
         status: null, telefono: null,
         updatedAt:null, role:null,fullname : null,
      },
@@ -36,6 +40,11 @@ export default {
     };
   },
   methods: {
+    verificarUsuario(){
+      if(!restResourceService.admin(this.roles)){
+        this.$router.push("/");
+      }
+    },
     get (){//-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
           if(this.$route.params.id){
             this.isedit = true;
@@ -53,7 +62,7 @@ export default {
     },
     save() {//-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
         this.$validate().then(success => { //METODO PARA GUARDAR 
-          if (!success){ 
+          if (!success&&this.checked==''){ 
             this.$notify({
                 group: "global",
                 text: "Por favor llena correctamente los campos solicitados",
@@ -125,6 +134,7 @@ export default {
       }
   },
   mounted() {
+    this.verificarUsuario();
     this.get ();
     this.__listRol();
   },

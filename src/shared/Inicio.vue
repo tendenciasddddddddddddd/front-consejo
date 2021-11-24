@@ -20,7 +20,7 @@
     <div class="container-fluid py-1 px-3">
      <h6 class="font-weight-bolder mb-0 fuente">Sistema Hibrido</h6> &nbsp;&nbsp;
       <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
-        <a href="javascript:;" class="nav-link text-body p-0">
+        <a href="javascript:;" onclick="navbarMinimize(this)" class="nav-link text-body p-0">
           <div class="sidenav-toggler-inner">
             <i class="sidenav-toggler-line"></i>
             <i class="sidenav-toggler-line"></i>
@@ -51,6 +51,7 @@
               href="javascript:;"
               class="nav-link text-body p-0"
               id="iconNavbarSidenav"
+              onclick="navbarMinimize(this)"
             >
               <div class="sidenav-toggler-inner">
                 <i class="sidenav-toggler-line"></i>
@@ -60,9 +61,10 @@
             </a>
           </li>
           <li class="nav-item px-3 d-flex align-items-center">
-            <a  class="nav-link text-body p-0 fuente">
+            <a  class="text-sm fuente">
             {{nombre}}
             </a>
+          <!-- <h1>{{ $store.state.numero }}</h1> -->
           </li>
           <li class="nav-item dropdown pe-2 d-flex align-items-center">
             <a
@@ -75,7 +77,7 @@
               <div class="avatar me-3 ">
                 
                 <img
-                  :src="foto"
+                  :src="$store.state.avatar"
                   alt="kal"
                   class="border-radius-lg shadow "
                 />
@@ -85,18 +87,20 @@
               class="dropdown-menu dropdown-menu-end px-2 py-3  me-sm-n4"
               aria-labelledby="dropdownMenuButton"
             >
-            
-              <li class="text-center">
+ 
+              <li class="mb-2 text-center">
+                <hr>
                 <a style="font-size: 16px"
-                  class="fuente text-dark"
+                  class="parrafo links"
                   @click="logout"
                 >
-               Salir
+               Cerrar sesión
                  
                 </a>
               </li>
             </ul>
           </li>
+          
         </ul>
       </div>
     </div>
@@ -104,15 +108,15 @@
 </template>
 
 <script>
-const info = JSON.parse(localStorage.getItem('Xf'));
+
 export default {
   name: "Inicio",
   data() {
     return {
       user: this.$store.state.user,
-      foto: info.foto,
-      
-      nombre: info.nombre,
+      foto: '', 
+      nombre: '',
+      avatar2: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
     };
   },
   methods: {
@@ -121,11 +125,20 @@ export default {
       localStorage.removeItem("datos");
       localStorage.removeItem("Xf");
       this.$parent.isLoggedIn = false;
-      this.$router.push("/")
+      this.$router.push("/").catch(()=>{});
       //window.location.reload(true);
     },
+    inforUsers(){
+      const info = JSON.parse(localStorage.getItem('Xf'));
+      const avatar = JSON.parse(localStorage.getItem('Avatar'));
+      let img= avatar;
+      this.$store.commit('agregar2',{img})
+      this.nombre= info.nombre;
+    }
   },
- 
-
+  created() {
+    this.inforUsers();
+  }
+  
 };
 </script>

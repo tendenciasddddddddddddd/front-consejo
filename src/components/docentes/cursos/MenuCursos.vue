@@ -1,107 +1,82 @@
 <template>
   <div class="row " >
-    
-    <div class="col-lg-9 col-12 mx-auto">
-     
-    
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="fuente" style="font-weight: 400;">Cursos Asignados</h3>
-           <hr>
-          <div v-if="info.length" class="mt-2" style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;">
-         
-        <p class="text-dark fuente" style="margin:7px;font-weight: 700; font-size: 16px ">
-         Esta es la lista de cursos asignados.
-          </p>
-        </div>
+     <Analitic v-if="isData"></Analitic>
+     <div v-else class="col-lg-11 col-12 mx-auto">
+
+           <img
+              style="margin-top:-22px"
+              class="product-core-blobs-desktop hsg-deferred hsg-deferred-loaded"
+              data-src="https://f.hubspotusercontent00.net/hubfs/53/Service%20Hub%20-%20Desktop%20Header%20Element.svg"
+              alt="Desktop Header Element"
+              src="https://f.hubspotusercontent00.net/hubfs/53/Service%20Hub%20-%20Desktop%20Header%20Element.svg"
+              data-was-processed="true"
+            />
+           <div v-if="!info.length">
           
-        </div>
-      </div>
-      <Skeleton v-if="isData"></Skeleton>
-      <div v-else>
-        <div v-if="!info.length">
-          <div class="freemeeting-tip mt-3">
-            <p class="text-sm text-dark fuente">
-              <strong>Nota: </strong>
-               Aun no se le ha registrado ningún curso, por favor comuníquese con secretaria..
-            </p>
-          </div>
-          <div class="row mt-3">
+          <div class="alertdanger mt-4">
+              <span class="parrafo p-2">
+                <strong>Nota: </strong>
+              Sin cursos asignados, por favor comuníquese con
+              secretaria..
+              </span>
+            </div>
+          <div class="row mt-4">
             <div class="col-lg-9 col-12 mx-auto">
               <div class="text-center">
                 <img
-                  class="w-40"
+                  class="w-30"
                   src="../../../assets/img/logs/lupa.svg"
                   alt="fondo"
                 />
-                <div class=" mt-3 letra fuente">
+                <div class=" mt-3 letra fuente mt-3">
                   No hay datos que mostrar
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div v-else class="row mt-1" >
-          <!--  style="background-color:rgb(245, 248, 250);" -->
-
-          <div v-for="item in info" :key="item.id" class="col-sm-4">
-            <br />
-
-            <div
-              class=" border-secondary border-radius-md p-3 mole w-95"
-              style="  border-style: dashed; border-width: 1px;"
-            >
-              <div class="card card-plain card-blog">
-                <div class="text-center position-relative">
-                  <router-link
-                    :to="`/lista-curso-m1/${item._id}/historia`"
-                    href="javascript:;"
-                  >
-                    <div class="blur-shadow-image">
-                      <img
-                        height="130px"
-                        class="img  move-on-hover"
-                        src="../../../assets/img/shapes/project-config.svg"
-                      />
-                    </div>
-                  </router-link>
-                </div>
-                <div class="card-body px-0" style="padding:2px;">
-                  <a class="mb-0">
-                    <div
-                      class="icon icon-shape icon-xs rounded-circle bg-gradient-success shadow text-center"
-                    >
-                      <i class="fas fa-check opacity-10" aria-hidden="true"></i>
-                    </div>
-                    &nbsp; <b class="fuente">{{ item.nombre }}</b> </a
-                  ><br />
-                  <label class="form-check-label text-xs fuente text-truncate w-90 mb-0">{{ item.fnivel.nombres }} / <b>{{ item.paralelo }} </b></label>
-                  
-                  <p class="text-xs mb-0 fuente"> {{ item.fmateria.nombre }}</p>
-                  
-                </div>
-              </div>
+           <div v-else style="background-image:url(https://static.hsappstatic.net/pricing-pages-unified-ui/static-1.10527/js/img/bottom-blob.svg);background-color:null;min-height: 60vh; background-size: cover;border-radius: 3px;">
+                 <div class="text-start pt-4">
+               
+             
+              <p class="h4 text-dark fuente" style="font-weight: 400;"> 
+             <i class="ni ni-air-baloon"></i> &nbsp; Lista de cursos asignados  </p>
+               <hr style="margin-top:-0px;border-top: 1px solid rgb(203, 214, 226); opacity: inherit;"/>
+               
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="row">
   
-  <div class="col-md-4">
-    <a href="javascript:;">
-      <div class="card card-background move-on-hover bg-cover">
-        <div class="full-background " style="background-image: url('https://image.freepik.com/vector-gratis/entrenador-negocios-que-muestra-grafico-crecimiento-empresaria-computadora-portatil-entrenamiento-estadisticas-ilustracion-plana-concepto-analisis-gestion-banner-diseno-sitios-web-o-pagina-web-destino_74855-14298.jpg')"></div>
-        <div class="card-body pt-6">
-          <h4 class="text-white">Intensivo</h4>
-          <p class="text-sm">Primero de bachillerato.</p>
-        </div>
+        <div   class="row">
+        <section class="flex-containes mt-4">
+          <div class="" v-for="item in info" :key="item.id">
+            <router-link :to="`/lista-curso-m1/${item._id}/historia`" href="javascript:;">
+              <div v-tooltip.bottom="'Curso: '+item.fnivel.nombres +', Materia: '+item.fmateria.nombre"
+                class="cajas targetas1 borde1 text-center"
+                style="max-width: 200px;margin-right: 15px!important;min-height: 225px;"
+              >
+                <img
+                  class="w-50 mt-1"
+                  src="https://static.hsappstatic.net/ui-images/static-2.322/optimized/success-quota-met.svg"
+                  alt="fondo"
+                />
+                <div style="padding: 8px;">
+                    <span class="cardTitle fuente ">{{ item.nombre }}</span>
+                <p class="parrafo cardSubTitle mt-1" >
+                  {{ item.fnivel.nombres.slice(0,20) }} ({{ item.paralelo }})  {{ item.fmateria.nombre.slice(0,22) }}
+                </p>
+                </div>
+
+              </div>
+            </router-link>
+          </div>
+         
+       
+        </section>
       </div>
-    </a>
-  </div>
-</div> -->
-    </div>
+     
+           </div>
+        
+     </div>
+ 
   </div>
 </template>
 

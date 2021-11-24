@@ -1,96 +1,94 @@
 <template>
   <div class="row ">
-    <div class="col-lg-9 col-12 mx-auto">
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="mt-1 fuente" style="font-weight: 400;">Gestión de cursos</h3>
-          <hr>
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="">
+    <div class="col-lg-11 col-12 mx-auto">
+     
+           <div class="">
           <div
             class=""
             style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
               border-width: 1px; text-align: left;"
           >
             <div>
-              <p class="text-sm text-dark fuente" >
-                <strong>Nota:</strong> Puede registrar cursos y sus
-                asignaturas..
+              <p class="text-sm text-dark fuente" style="margin:7px; ">
+               <i class="ni ni-bell-55"></i> &nbsp; <strong>Nota:</strong> Puede registrar cursos y sus
+                asignaturas para los intensivos y los extraordinarios.. 👌
               </p>
             </div>
           </div>
         </div>
-
-        <div class="col-sm-4 mt-3">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="position-relative">
-                <router-link to="/Nivel" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="150px"
-                      class="img  move-on-hover"
-                      src="../../assets/img/logs/general.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link style="font-weight: 400;"
-                    to="/Nivel"
-                    href="javascript:;"
-                    class="text-dark fuente"
-                    >Niveles del curso</router-link
-                  >
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 mt-3">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="  position-relative">
-                <router-link to="/Materias" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="150px"
-                      class="img  move-on-hover"
-                      src="../../assets/img/logs/training-crm.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body text-center px-0" style="padding:2px;">
-                <h5>
-                  <router-link style="font-weight: 400;"
-                    to="/Materias"
-                    href="javascript:;"
-                    class="text-dark fuente"
-                    >Materias del curso</router-link
-                  >
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
+        
+        <div class="text-center mt-6">
+        <span class="fuente h3 " style="font-weight: 400;"
+          >Gestión de cursos</span
+        >
       </div>
+      <div class="row">
+        <section class="flex-containes mt-4">
+          <div class="">
+            <router-link to="/Nivel" href="javascript:;">
+              <div
+                class="cajas foco2 borde1 text-center"
+                style="max-width: 200px;margin-right: 23px!important;"
+              >
+                <img
+                  class="w-55"
+                  src="../../assets/img/logs/general.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Cursos</p>
+                <p class="parrafo cardSubTitle">
+                  Crear cursos para las dos modalidades I y M 👆
+                </p>
+              </div>
+            </router-link>
+          </div>
+          <div class="">
+            <router-link to="/materias" href="javascript:;">
+              <div
+                class="cajas foco2 borde2 text-center"
+                style="max-width: 200px;margin-right: 13px!important;"
+              >
+                <img
+                  class="w-70"
+                  src="../../assets/img/logs/training-crm.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Materias</p>
+                <p class="parrafo cardSubTitle">
+                 Crear materias para las dos modalidades I y M 👆
+                </p>
+              </div>
+            </router-link>
+          </div>
+          
+          
+        </section>
+      </div>
+     
     </div>
   </div>
 </template>
 
 <script>
+import RestResource from '../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
   name: "MenuZonas",
+   data() {
+    return {
+      roles: this.$store.state.user.roles,
+    }
+  },
+  methods: {
+     verificarUsuario(){
+       if(!restResourceService.admin(this.roles)){
+         this.$router.push("/");
+       }
+     }
+  },
+  created() {
+    this.verificarUsuario();
+  },
 };
 </script>
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <template v-if="hasConfig">
       <div v-if="isLoggedIn">
 
@@ -14,8 +14,8 @@
           <div class="container-fluid py-4">
             <router-view />
             <!-- INICIO FOOTER -->
-           <!--  <Bot/> -->
-            <Footer />
+           <Help/>
+            <!-- <Footer /> -->
 
             <!-- FIN FOOTER -->
           </div>
@@ -24,7 +24,7 @@
       </div>
       <Login v-else />
       <!-- NOTIFICACIONES-->
-      <notifications group="global" position="bottom center" width="40%">
+      <notifications group="global" position="bottom center" width="40%" style="z-index: 9999;">
         >
         <template slot="body" slot-scope="props">
           <div
@@ -54,9 +54,9 @@
 <script>
 import Header from "@/shared/Header.vue";
 import Inicio from "@/shared/Inicio.vue";
-import Footer from "@/shared/Footer.vue";
-import Login from "./components/accesos/Login";
-//import Bot from "@/shared/Bot.vue"
+//import Footer from "@/shared/Footer.vue";
+import Login from "./components/accesos/Login.vue";
+import Help from "@/shared/Help.vue"
 export default {
   name: "app",
   mounted() {
@@ -66,8 +66,8 @@ export default {
     Header,
     Login,
     Inicio,
-    Footer,
-    //Bot
+    //Footer,
+    Help
   },
   data() {
     return {
@@ -76,12 +76,11 @@ export default {
     };
   },
   methods: {
-    initialize() {//https://pcei.zapto.org
+    initialize() {//https://pcei-tulcan.com http://localhost:3000/
       let self = this;
       if (!localStorage.getItem("config")) {
-        var url = "http://localhost:3000/api";
+        var url = "https://pcei-tulcan.com/api";
         localStorage.setItem("config", JSON.stringify(url));
-        console.log(url);
         self.hasConfig = true;
         window.location.reload(true);
       } else {

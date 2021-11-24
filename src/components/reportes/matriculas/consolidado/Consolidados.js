@@ -1,11 +1,12 @@
-
-import Espera from "../../../../shared/Espera";
-import Skeleton from "../../../../shared/Skeleton";
+import RestResource from "../../../../service/isAdmin";
+const restResourceService = new RestResource();
+import Analitic from "../../../../shared/Analitic";
+import Spinner from "../../../../shared/Spinner.vue";
 import XLSX from 'xlsx'
 export default {
     name : 'Consolidados',
     components : {
-        Espera,Skeleton
+      Analitic, Spinner
     },
     data() {
         return{
@@ -14,10 +15,19 @@ export default {
             isTabla: false,
             isExcel: false,
             intensivos: null,
-            infoMat: null
+            infoMat: null,
+            roles: this.$store.state.user.roles,
+            isIntensivo : false,
+            isExtraordianrio : false,
+            isTodo : false,
         }
     },
     methods: {
+        verificarUsuario() {
+            if (!restResourceService.admin(this.roles)) {
+              this.$router.push("/");
+            }
+          },
         mostrarConsolidado(){
             this.isconsolidado = false;
             this.__getData();
@@ -29,7 +39,6 @@ export default {
               .then((x) => {
                 this.infoMat = x.data;
                 this.isTabla = false;
-                console.log(this.infoMat);
               })
               .catch((err) => {
                 console.log("Error", err);
@@ -37,19 +46,25 @@ export default {
               });
           },
         __consolidadoExtra(){
-            this.intensivos = this.infoMat.filter((x) => x.typo == "m2" && x.estado == "1");
+          this.isExtraordianrio = true;
+            this.intensivos = this.infoMat.filter((x) => x.typo == "m2" );
             var contador = this.intensivos.length;
             this.ExportEcxel(contador, this.intensivos);
+            setTimeout(() => this.isExtraordianrio = false, 3000); 
         },
         __consolodadoIntensivo(){
-            this.intensivos = this.infoMat.filter((x) => x.typo == "m1" && x.estado == "1");
+           this.isIntensivo = true;
+            this.intensivos = this.infoMat.filter((x) => x.typo == "m1" );
             var contador = this.intensivos.length;
             this.ExportEcxel(contador, this.intensivos);
+            setTimeout(() => this.isIntensivo = false, 3000); 
         },
         __todo(){
-            this.intensivos = this.infoMat.filter((x) => x.estado == "1");
+          this.isTodo = true;
+            this.intensivos = this.infoMat;
             var contador = this.intensivos.length;
             this.ExportEcxel(contador, this.intensivos);
+            setTimeout(() => this.isTodo = false, 3000); 
         },
         ExportEcxel(contador, model){
             this.isExcel= true;
@@ -85,4 +100,7 @@ export default {
             this.isExcel= false;
         },
     },
+    created() {
+        this.verificarUsuario();
+      },
 }

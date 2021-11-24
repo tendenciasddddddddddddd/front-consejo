@@ -1,184 +1,361 @@
 <template>
   <div>
-    <div class="container position-sticky z-index-sticky top-0">
-      <div class="row">
-        <div class="col-12">
-          <!-- Navbar -->
-          <nav
-            class="navbar navbar-expand-lg  blur blur-rounded top-0  z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4"
-          >
-            <div class="container-fluid">
-              <a
-                class="navbar-brand font-weight-bolder ms-lg-0 ms-3 "
-                href="../../../pages/dashboards/default.html"
-              >
-                Unidad Educativa
-              </a>
-              <button
-                class="navbar-toggler shadow-none ms-2"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navigation"
-                aria-controls="navigation"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon mt-2">
-                  <span class="navbar-toggler-bar bar1"></span>
-                  <span class="navbar-toggler-bar bar2"></span>
-                  <span class="navbar-toggler-bar bar3"></span>
-                </span>
-              </button>
-              <div
-                class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0"
-                id="navigation"
-              >
-                <ul class="navbar-nav navbar-nav-hover mx-auto">
-                  <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a
-                      role="button"
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center "
-                      id="dropdownMenuPages"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Servicios
-                    </a>
-                  </li>
-                  <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a
-                      role="button"
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center "
-                      id="dropdownMenuAccount"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Desarrollo de aplicaciones
-                    </a>
-                  </li>
-                  <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a
-                      role="button"
-                      class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center "
-                      id="dropdownMenuBlocks"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Mas Información
-                    </a>
-                  </li>
-                </ul>
-                <ul class="navbar-nav d-lg-block d-none">
-                  <li class="nav-item">
-                    <a
-                      href="#"
-                      class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1"
-                      onclick="smoothToPricing('pricing-soft-ui')"
-                      >Regresar</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-          <!-- End Navbar -->
-        </div>
-      </div>
-    </div>
-    <main
-      class="main-content main-content-bg mt-0"
-      style="background-color: #f8f9fa;"
-    >
+    <main class="main-content main-content-bg mt-0">
       <section>
-        <div class="page-header min-vh-75">
+        <div class="page-header ">
           <div class="container">
             <div class="row">
-              <div
-                class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto"
-              >
-                <div class="card card-plain mt-8">
-                  <div class="card-header pb-0 text-start">
-                    <h3 class="font-weight-bolder text-info text-gradient fuente" >
-                      Bienvenido de nuevo
-                    </h3>
-                    <p class="parrafo">
-                      Ingrese su email y contraseña para iniciar sesión
-                    </p>
-                  </div>
-                  <div  class="card-body">
-                    <form @submit.prevent="authenticate" class="text-start">
-                      <p class="parrafo">Email</p>
-                      <div class="mb-3">
-                        <input
-                          v-model="login.email"
-                          id="username"
-                          type="email"
-                          class="form-control buscador fuente"
-                          placeholder="Email"
-                          aria-label="Email"
-                          required
-                          autocomplete="off"
-                        />
-                      </div>
-                      <p class="parrafo">Password</p>
-                      <div class="mb-3">
-                        <input
-                          v-model="login.password"
-                          id="password"
-                          type="password"
-                          class="form-control buscador fuente"
-                          placeholder="Password"
-                          aria-label="Password"
-                          required
-                        />
-                      </div>
-                      <div class="form-check form-switch">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="rememberMe"
-                          checked=""
-                        />
-                        <label class="form-check-label" for="rememberMe"
-                          >Remember me</label
+              <div class="col-xl-5 col-lg-5 col-md-6  mx-auto">
+                <div class="">
+                  <div
+                    v-if="isVisible == 'logins'"
+                    class="card card-plain  mt-5"
+                  >
+                    <div class="card-header pb-0 text-center">
+                      <h2 class=" fuente">
+                        Leonidas Proaño
+                        <i style="color: #ff7a59" class="ni ni-app"></i>
+                      </h2>
+                      <p class="parrafo">
+                        Ingrese su email y contraseña para iniciar sesión
+                      </p>
+                    </div>
+                    <div class="card-body">
+                      <form @submit.prevent="authenticate" class="text-start">
+                        <span class="parrafo ">Dirección de correo</span>
+                        <div class="mb-3 mt-1">
+                          <input
+                            v-model="login.email"
+                            id="username"
+                            type="email"
+                            class="form-control buscador fuente"
+                            placeholder="Email"
+                            aria-label="Email"
+                            required
+                            autocomplete="off"
+                          />
+                        </div>
+
+                        <span class="parrafo mt-2">Contraseña</span>
+                        <div class="mb-3 mt-1">
+                          <input
+                            v-model="login.password"
+                            id="password"
+                            type="password"
+                            class="form-control buscador fuente"
+                            placeholder="Password"
+                            aria-label="Password"
+                            required
+                          />
+                        </div>
+                        <a
+                          @click="isVisible = 'passw'"
+                          href="javascript:;"
+                          class="fuente tamanio links "
                         >
+                          <b>Olvidé mi contraseña</b>
+                        </a>
+                        <div class="form-check form-switch mt-2">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="rememberMe"
+                            
+                          />
+                          <label class="form-check-label" for="rememberMe"
+                            >Recordarme</label
+                          >
+                        </div>
+                        <div class="text-center">
+                          <button
+                            v-if="isLoading"
+                            class="btn btnNaranja w-100 mt-4 mb-0"
+                            type="button"
+                            disabled
+                          >
+                            <span
+                              class="spinner-border spinner-border-sm"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Cargando...
+                          </button>
+                          <button
+                            v-else
+                            class="btn btnNaranja w-100 mt-2 mb-0 fuente"
+                            style="font-size: 18px;"
+                          >
+                            Iniciar sesión
+                          </button>
+                          <br>
+                          <br>
+                          <hr class="mt-2"/>
+                          
+                          <div v-if="!isAuthGoogle" class="google-btn mt-5" @click="loginGoogleAuth()">
+                        <div class="google-icon-wrapper">
+                          <img
+                            class="google-icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                          />
+                          
+                        </div>
+                        <p class="btn-text fuente text-center">
+                          Iniciar sesión con Google
+                        </p>
                       </div>
+                      <div v-else class="google-btn mt-5">
+                        <div class="google-icon-wrapper">
+                          <span
+                              class="spinner-border spinner-border-sm"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                        </div>
+                        <p class="btn-text fuente text-center">
+                          Trabajando...
+                        </p>
+                      </div>
+                        </div>
+                      </form>
+                    </div>
+                   
+                  </div>
+
+                  <!--  REXUPERAR CONTRASEÑA  -->
+
+                  <div v-if="isVisible == 'passw'" class="card card-plain mt-4">
+                    <div class="card-header pb-0 text-center">
+                      <h2 class=" fuente ">
+                        Leonidas Proaño
+                        <i style="color: #ff7a59" class="ni ni-app"></i>
+                      </h2>
+                      <p class="h5 fuente">
+                        Restablece tu contraseña
+                      </p>
+                      <p class="parrafo">
+                        Introduce la dirección de correo electrónico en la que
+                        deseas recibir la información para restablecer la
+                        contraseña.
+                      </p>
+                    </div>
+                    <div class="card-body">
+                      <form @submit.prevent="ResetPassword" class="text-start">
+                        <p class="parrafo">Dirección de correo</p>
+                        <div class="mb-3">
+                          <input
+                            v-model="recordingPassword.email"
+                            type="email"
+                            class="form-control buscador fuente"
+                            placeholder="Email"
+                            aria-label="Email"
+                            required
+                            autocomplete="off"
+                          />
+                        </div>
+
+                        <div class="text-center">
+                          <button
+                            v-if="isPasswd"
+                            class="btn btnNaranja w-100 mt-4 mb-0"
+                            type="button"
+                            disabled
+                          >
+                            <span
+                              class="spinner-border spinner-border-sm"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Cargando...
+                          </button>
+                          <button v-else class="btn btnNaranja w-100 mt-4 mb-0">
+                            Restablece tu contraseña
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="">
+                      <a
+                        @click="rediricLogin()"
+                        href="javascript:;"
+                        class="fuente tamanio ms-4"
+                        >Volver a <b class="links ms-2">Inicio de sesión</b>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!--  VEFIFICAR CODE  -->
+
+                  <div
+                    v-if="isVisible == 'forgot'"
+                    class="card card-plain mt-3"
+                  >
+                    <div class="card-header pb-0 text-center">
+                      <h2 class=" fuente ">
+                        Leonidas Proaño
+                        <i style="color: #ff7a59" class="ni ni-app"></i>
+                      </h2>
+                      <img
+                        class="w-30"
+                        src="../../assets/img/logs/successful-send.svg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="card-body">
+                      <div class="h4 fuente text-center">
+                        La ayuda está en camino
+                      </div>
+
+                      <p class="parrafo text-center">
+                        Recibirás un correo electrónico en un momento con un
+                        codigo, verifica que hayas escrito el correo electrónico
+                        correcto y revisa tu carpeta de spam.
+                      </p>
+                      <p class="parrafo">Código</p>
+                      <div class="mb-3">
+                        <input
+                          v-model="isCode"
+                          maxlength="6"
+                          autocomplete="off"
+                          autocapitalize="off"
+                          class="form-control buscador fuente"
+                          required
+                        />
+                      </div>
+                      <span class="text-sm fuente text-danger">{{
+                        isErrorCode
+                      }}</span>
                       <div class="text-center">
                         <button
-                          v-if="isLoading"
-                          class="btn bg-gradient-info w-100 mt-4 mb-0"
+                          v-if="isCode != ''"
+                          class="btn btnNaranja w-100 mt-2 mb-0"
                           type="button"
-                          disabled
+                          @click="verificarCode()"
                         >
-                          <span
-                            class="spinner-border spinner-border-sm"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>
-                          Cargando...
+                          Verificar Code
                         </button>
-                        <button
-                          v-else
-                          class="btn bg-gradient-info w-100 mt-4 mb-0"
-                        >
-                          Ingresar
+                        <button v-else class="btn btnDisabled w-100 mt-2 mb-0">
+                          Verificar Code
                         </button>
                       </div>
-                    </form>
-                  </div>
-                  <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                    <p class="mb-4 text-sm mx-auto">
-                      Don't have an account?
+                    </div>
+                    <div class="">
                       <a
+                        @click="rediricLogin()"
                         href="javascript:;"
-                        class="text-info text-gradient font-weight-bold"
-                        >Sign up</a
-                      >
-                    </p>
+                        class="fuente tamanio ms-4"
+                        >Volver a <b class="links ms-2">Inicio de sesión</b>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!--  RESET PASS  -->
+
+                  <div
+                    v-if="isVisible == 'resett'"
+                    class="card card-plain mt-3"
+                  >
+                    <div class="card-header pb-0 text-center">
+                      <h2 class=" fuente ">
+                        Leonidas Proaño
+                        <i style="color: #ff7a59" class="ni ni-app"></i>
+                      </h2>
+                      <p class="h5 fuente" style="font-weight: 400;">
+                        Es un placer conocerte.
+                      </p>
+                      <p class="parrafo">
+                        Antes de empezar, pongamos en orden todos los detalles
+                        de tu cuenta.
+                      </p>
+                    </div>
+                    <div class="card-body">
+                      <form @submit.prevent="ResetCount" class="text-start">
+                        <p class="parrafo">Nueva Contraseña</p>
+                        <div class="mb-3">
+                          <input
+                            v-model="resetPasswords.password"
+                            id="password"
+                            type="password"
+                            class="form-control buscador fuente"
+                            placeholder="Password"
+                            aria-label="Password"
+                            required
+                            minlength="5"
+                            autocapitalize="off"
+                          />
+                        </div>
+
+                        <div class="text-center">
+                          <button
+                            v-if="isResert"
+                            class="btn btnNaranja w-100 mt-4 mb-0"
+                            type="button"
+                            disabled
+                          >
+                            <span
+                              class="spinner-border spinner-border-sm"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Trabajando...
+                          </button>
+                          <button v-else class="btn btnNaranja w-100 mt-4 mb-0">
+                            Restablece tu contraseña
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="">
+                      <a
+                        @click="rediricLogin()"
+                        href="javascript:;"
+                        class="fuente tamanio ms-4"
+                        >Volver a <b class="links ms-2">Inicio de sesión</b>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!--  ERROR DE CUENTA  -->
+
+                  <div v-if="isVisible == 'error'" class="card card-plain mt-3">
+                    <div class="card-header pb-0 text-center">
+                      <h2 class=" fuente ">
+                        Leonidas Proaño
+                        <i style="color: #ff7a59" class="ni ni-app"></i>
+                      </h2>
+                      <img
+                        class="w-30"
+                        src="../../assets/img/usados/account-security.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="alerRed">
+                        <p
+                          style="font-size: 16px;    font-weight: 700;color: black;"
+                        >
+                          <b>Esto no se ve bien.</b>
+                        </p>
+                        <p class="parrafo">
+                          Escribiste una dirección de correo no válida. Para
+                          obtener más detalles sobre por qué podría estar
+                          pasando esto, inicia el chat y pregunta por
+                          inconveniete.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="">
+                      <a
+                        @click="rediricLogin()"
+                        href="javascript:;"
+                        class="fuente tamanio ms-4"
+                        >Volver a <b class="links ms-2">Inicio de sesión</b>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div
                   class="
                   oblique
@@ -204,7 +381,7 @@
                    
                   ></div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -213,89 +390,6 @@
     <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     <footer class="footer py-5">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mb-4 mx-auto text-center">
-            <a
-              @click="__enviarUbicacion(10)"
-             
-              class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
-            >
-              Company
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
-            >
-              About Us
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
-            >
-              Team
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
-            >
-              Products
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
-            >
-              Blog
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
-            >
-              Pricing
-            </a>
-          </div>
-          <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-4 me-4"
-            >
-              <span class="text-lg fab fa-dribbble"></span>
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-4 me-4"
-            >
-              <span class="text-lg fab fa-twitter"></span>
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-4 me-4"
-            >
-              <span class="text-lg fab fa-instagram"></span>
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-4 me-4"
-            >
-              <span class="text-lg fab fa-pinterest"></span>
-            </a>
-            <a
-              href="javascript:;"
-              target="_blank"
-              class="text-secondary me-xl-4 me-4"
-            >
-              <span class="text-lg fab fa-github"></span>
-            </a>
-          </div>
-        </div>
         <div class="row">
           <div class="col-8 mx-auto text-center mt-1">
             <p class="mb-0 text-secondary">
@@ -308,180 +402,71 @@
     <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   </div>
 </template>
-<script>
-//import LoaderBotton from "../../shared/LoaderBotton";
-import axios from 'axios'
-/* import Firebase from "firebase";
-import config from "../../config";
-let app = Firebase.initializeApp(config);
-let db = app.database();
-let seccionRef = db.ref("seccions"); */
-import { usersCollection } from "../../boot/firebase";
-export default {
-  name: "Login",
- /*  firebase: {
-    secciones: seccionRef,
-  }, */
-  data() {
-    return {
-      isLoading: false,
-      login: {
-        email: null,
-        password: null,
-        loading: false,
+<script src="./Login.js"></script>
+<style>
+.google-sign-in {
+  background-color: #5886d4 !important;
+  border-color: #5886d4 !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  border-radius: 3px !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  padding: 9px 24px !important;
+}
 
-      },
-      newSeccions: {
-        Identificador: null, //id del usuario
-        fecha: null,
-        host: null,
-        nombre: null,
-      },
-      ipEthernet: null,
-      infos:{
-        foto: null,
-        nombre: null,
-        correo: null,
-        modalidad: null,
-      }
-    };
-  },
-  methods: {
-    authenticate() {
-      this.isLoading = true;
-      this.$proxies.identityProxy
-        .login(this.login)
-        .then((x) => {
-          this.infos.foto = x.data.isaccesos.foto;
-          this.infos.nombre = x.data.isaccesos.nombre;
-          this.infos.correo = x.data.isaccesos.email;
-          this.infos.modalidad = x.data.isaccesos.modalidad;
-          this. __enviarUbicacion(10);
-          localStorage.setItem("access_token", x.data.isaccesos.tokens);
-          localStorage.setItem('Xf', JSON.stringify(this.infos));
-          this.$user.initialize();
-          this.isLoading = false;
-          this.$parent.isLoggedIn = true;
-          this.$router.push("/");
-          
-          window.location.reload(true);
-        })
-        .catch((x) => {
-          if (x.response.status == 400) {
-            this.__limpiarCampos();
-            this.$notify({
-              group: "global",
-              text: "Usuario no encontrado",
-            });
-            this.isLoading = false;
-          } else if (x.response.status == 402) {
-            this.__limpiarCampos();
-            this.$notify({
-              group: "global",
-              text: "Contraseña Invalida",
-            });
-            this.isLoading = false;
-          } else {
-            this.__limpiarCampos();
-            this.$notify({
-              group: "global",
-              text: "La cuenta de correo electronico no existe",
-            });
-            this.isLoading = false;
-          }
-        });
-    },
-
-    __enviarUbicacion(id) {
-       this.newSeccions.Identificador = id;
-       this.newSeccions.fecha = this.__calcularFecha();
-       this.newSeccions.nombre = this.__navegador() + " en " + this.ubicacion();
-       this.newSeccions.host = this.ipEthernet;
-       localStorage.setItem('datos', JSON.stringify(this.newSeccions));
-    }, 
+.google-btn {
+  width: 100%;
+  height: 40px;
+  background-color: #5886d4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 38px;
+  height: 38px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.google-icon {
+  position: absolute;
+  margin-top: 11px;
+  width: 18px;
+  height: 18px;
+  left: 9px;
+}
+.btn-text {
+  margin: 11px 11px 0 0;
+  color: #fff;
+  font-size: 16px;
+  padding-top: 5px;
+}
+.btn-text:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+.btn-text:active {
+  background: #1669f2;
+}
 
 
-    __createSesions(id){
-      this.newSeccions.Identificador = id;
-       this.newSeccions.fecha = this.__calcularFecha();
-       this.newSeccions.nombre = this.__navegador() + " en " + this.ubicacion();
-       this.newSeccions.host = this.ipEthernet;
-      usersCollection.add(this.newSeccions)
-      .then(() => {
-            console.log("Document successfully written!");
-            return true
-          })
-        .catch((error) => {
-            console.log("Error writing document: ", error);
-          });
-    },
+.alerRed {
+  background-color: #fdedee;
+  border-color: #f8a9ad;
+  font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
 
-
-    async getIpClient() {
-      try {
-        const response = await axios.get("https://api.ipify.org?format=json");
-        this.ipEthernet = response.data.ip;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    __calcularFecha() {
-      let tiempoTranscurrido = Date.now();
-      let hoy = new Date(tiempoTranscurrido);
-      return hoy.toLocaleString();
-    },
-    __limpiarCampos() {
-      this.login.email = null;
-      this.login.password = null;
-    },
-    ubicacion() {
-      var OSName = "Desconocido";
-      if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
-      if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
-      if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
-      if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-      if (navigator.appVersion.indexOf("Android") != -1) OSName = "Android";
-      return OSName;
-    },
-    __navegador() {
-      if (navigator.userAgent.search("MSIE") >= 0) {
-        return "Edge";
-      } else if (navigator.userAgent.search("Chrome") >= 0) {
-        return "Chrome";
-      }
-      //Check if browser is Firefox
-      else if (navigator.userAgent.search("Firefox") >= 0) {
-        return "Firefox";
-      }
-      //Check if browser is Safari
-      else if (
-        navigator.userAgent.search("Safari") >= 0 &&
-        navigator.userAgent.search("Chrome") < 0
-      ) {
-        return "Safari";
-      }
-      //Check if browser is Opera
-      else if (navigator.userAgent.search("Opera") >= 0) {
-        return "Opera";
-      } else {
-        return "None";
-      }
-    },
-  },
-  created(){
-    this.getIpClient();
-  }
-};
-</script>
-<style >
-.alligator-show-box {
-  margin-top: 150px;
-  width: 90%;
-  
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image:
-    url('../../assets/img/shapes/jira.png');
+  border-style: solid;
+  border-width: 1px;
+  min-height: 60px;
+  padding: 8px 20px;
+  position: relative;
+  text-align: left;
 }
 </style>

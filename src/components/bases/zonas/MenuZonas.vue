@@ -1,14 +1,8 @@
 <template>
   <div class="row ">
-    <div class="col-lg-9 col-12 mx-auto">
-      <div class="row">
-        <div class="col-sm-12">
-          <h3 class="mt-1 fuente" style="font-weight: 400;">Gestión de cursos</h3>
-          <hr>
-        </div>
-      </div>
-       <div class="row  ">
-                   <div >
+    <div class="col-lg-11 col-12 mx-auto">
+     
+          <div>
           <div
             class=""
             style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
@@ -16,171 +10,136 @@
           >
             <div>
               <p class="text-sm text-dark fuente" style="margin:7px; ">
-                <strong>Nota:</strong> Puede registrar cursos y sus
-                asignaturas..
+               <i class="ni ni-bell-55"></i> &nbsp; <strong>Nota:</strong> Puede registrar zonas, nacionalidades y etnias
               </p>
             </div>
           </div>
         </div>
-        <div class="col-sm-4 ">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="position-relative">
-                <router-link to="/List-Provincias" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="140px"
-                      class="img  move-on-hover"
-                      src="../../../assets/img/logs/map.svg"
-                    />
-                  </div>
-                </router-link>
+       
+        <div class="text-center mt-5">
+        <span class="fuente h3 " style="font-weight: 400;"
+          >Zonas para complementar el registro de usuarios</span
+        >
+      </div>
+       <div class="row">
+        <section class="flex-containes mt-4">
+          <div class="">
+            <router-link to="/List-Provincias" href="javascript:;">
+              <div
+                class="cajas foco2 borde1 text-center"
+                style="max-width: 200px;margin-right: 13px!important;"
+              >
+                <img
+                  class="w-60"
+                  src="../../../assets/img/logs/map.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Provincias</p>
+                <p class="parrafo cardSubTitle">
+                 Registrar los datos segun requiera 👆
+                </p>
               </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link
-                    to="/List-Provincias"
-                    href="javascript:;"
-                    class="text-dark fuente" style="font-weight: 400;"
-                    > Provincias</router-link
-                  >
-                </h5>
+            </router-link>
+          </div>
+          <div class="">
+            <router-link to="/List-Canton" href="javascript:;">
+              <div
+                class="cajas foco2 borde2 text-center"
+                style="max-width: 200px;margin-right: 13px!important;"
+              >
+                <img
+                  class="w-60"
+                  src="../../../assets/img/logs/map.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Cantónes</p>
+                <p class="parrafo cardSubTitle">
+                 Registrar los datos segun requiera 👆
+                </p>
               </div>
+            </router-link>
+          </div>
+          <div class="">
+            <div
+              class="cajas foco2 borde3 text-center"
+              style="max-width: 200px;"
+            >
+              <router-link to="/List-Parroquia">
+                <img
+                  class="w-65"
+                  src="../../../assets/img/usados/zonas.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Parroquia</p>
+                <p class="parrafo cardSubTitle">
+                  Registrar los datos segun requiera 👆
+                </p>
+              </router-link>
             </div>
           </div>
-        </div>
-            <div class="col-sm-4 ">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="position-relative">
-                <router-link to="/List-Canton" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="140px"
-                      class="img  move-on-hover"
-                      src="../../../assets/img/logs/map.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link
-                    to="/List-Canton"
-                    href="javascript:;"
-                    class="text-dark fuente" style="font-weight: 400;"
-                    > Cantónes</router-link
-                  >
-                </h5>
-              </div>
+          <div>
+            <div
+              class="cajas foco2 borde4 text-center"
+              style="max-width: 200px;"
+            >
+              <router-link to="/List-Nacionalidad">
+                <img
+                  class="w-50"
+                  src="../../../assets/img/logs/bot-avatar.webp"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Nacionalidad</p>
+                <p class="parrafo cardSubTitle">
+                  Registrar los datos segun requiera 👆
+                </p>
+              </router-link>
             </div>
           </div>
-        </div>
-              <div class="col-sm-4 ">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="position-relative">
-                <router-link to="/List-Parroquia" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="140px"
-                      class="img  move-on-hover"
-                      src="../../../assets/img/logs/map.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link
-                    to="/List-Parroquia"
-                    href="javascript:;"
-                    class="text-dark fuente" style="font-weight: 400;"
-                    > Parroquia</router-link
-                  >
-                </h5>
-              </div>
+          <div>
+            <div
+              class="cajas foco2 borde1 text-center"
+              style="max-width: 200px;"
+            >
+              <router-link to="/List-Etnias">
+                <img
+                  class="w-55"
+                  src="../../../assets/img/logs/grupo.svg"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Etnia</p>
+                <p class="parrafo cardSubTitle">
+                  Registrar los datos segun requiera 👆
+                </p>
+              </router-link>
             </div>
           </div>
-        </div>
-                <div class="col-sm-4 ">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="position-relative">
-                <router-link to="/List-Nacionalidad" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="140px"
-                      class="img  move-on-hover"
-                      src="../../../assets/img/logs/bot-avatar.webp"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link
-                    to="/List-Nacionalidad"
-                    href="javascript:;"
-                    class="text-dark fuente" style="font-weight: 400;"
-                    > Nacionalidad</router-link
-                  >
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-                  <div class="col-sm-4 ">
-          <br />
-          <div
-            class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90"
-          >
-            <div class="card card-plain card-blog">
-              <div class="position-relative">
-                <router-link to="/List-Etnias" href="javascript:;">
-                  <div class="blur-shadow-image text-center">
-                    <img
-                      height="140px"
-                      class="img  move-on-hover"
-                      src="../../../assets/img/logs/grupo.svg"
-                    />
-                  </div>
-                </router-link>
-              </div>
-              <div class="card-body px-0 text-center" style="padding:2px;">
-                <h5>
-                  <router-link
-                    to="/List-Etnias"
-                    href="javascript:;"
-                    class="text-dark fuente" style="font-weight: 400;"
-                    > Etnia</router-link
-                  >
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-          
-          </div>
+        </section>
+      </div>
+    
     </div>
   </div>
 </template>
 
 <script>
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
   name: "MenuZonas",
+  data() {
+    return {
+      roles: this.$store.state.user.roles,
+    }
+  },
+  methods: {
+     verificarUsuario(){
+       if(!restResourceService.admin(this.roles)){
+         this.$router.push("/");
+       }
+     }
+  },
+  created() {
+    this.verificarUsuario();
+  },
 };
 </script>
 <style>

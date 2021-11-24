@@ -1,25 +1,45 @@
-const info = JSON.parse(localStorage.getItem("Xf"));
+function dataURLtoFile(dataurl, filename) {
+ 
+  var arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), 
+      n = bstr.length, 
+      u8arr = new Uint8Array(n);
+      
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  
+  return new File([u8arr], filename, {type:mime});
+}
+
 import Spinner from "../../../shared/Spinner";
-import Uploads from "../../../shared/Uploads";
-import Skeleton from "../../../shared/Skeleton";
-import { StorageRef } from "../../../boot/firebase";
 import * as axios from "axios";
+import { Cropper, Preview } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css';
+import Stencil from "../../../shared/Stencil";
+const avat = require('../../../assets/img/icons/profile.jpg');
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
   name: "Perfil",
   components: {
-    Uploads,
-    Skeleton,
-    Spinner
+    Spinner,
+    Cropper,
+    Stencil,
+    Preview
   },
   data() {
     return {
+      img: avat,
       user: this.$store.state.user,
-      foto: info.foto,
-      name: info.nombre,
+      roles: this.$store.state.user.roles,
+      foto: '',
+      name: '',
       file: "",
-      uploads: "100x100.png",
       tabla: "perfile",
       isVisible: 'pan1',
+      istabs : '1',
       isUploading: null,
       nombreimagen: null,
       imageData: null,
@@ -45,21 +65,86 @@ export default {
         titulo: null,
         role: null,
       },
+      modelFotos :{
+        foto:null,
+    },
       infos:{
         foto: null,
         nombre: null,
         correo: null,
-      }
+      },
+      isCambios: false, //FOTER
+      result: {
+				coordinates: null,
+				image: null
+			},
+      isFile: false, 
+      iscroper : false,
     };
   },
   methods: {
+    verificarUsuario(){
+      if(!restResourceService.estudiante(this.roles)){
+        this.$router.push("/");
+      }
+    },
+    change({coordinates, image}) {
+      this.result = {
+				coordinates,
+				image
+			};
+    },
+    inforUsers(){
+      const info = JSON.parse(localStorage.getItem('Xf'));
+      const avatar = JSON.parse(localStorage.getItem('Avatar'));
+      this.foto = avatar
+      this.name = info.nombre;
+    },
+
+    cropImage() {
+      const result =  this.$refs.cropper.getResult();
+      //console.log(result.canvas.toDataURL(this.img.type))
+       //  this.img = result.canvas.toDataURL();
+         let imagen = result.canvas.toDataURL();
+         this.file =  dataURLtoFile(imagen, 'hola.png');
+         //this.img =  result.canvas.toDataURL();
+         this.onChangeFileUpload(this.file)
+    },
+
+    uploadImage(event) {
+      // Reference to the DOM input element
+      var input = event.target;
+      // Ensure that you have a file before attempting to read it
+      if (input.files && input.files[0]) {
+       let format = event.target.files[0];
+       if (!window.FileReader) {
+        alert('El navegador no soporta la lectura de archivos');
+        return;
+      }
+      if (!(/\.(jpg|png)$/i).test(format.name)) {
+        alert('El archivo a adjuntar no es una imagen con formato PNG o JPG ');
+        return ;
+      }
+       this.isFile = true;
+        // create a new FileReader to read this image and convert to base64 format
+        var reader = new FileReader();
+        // Define a callback function to run, when FileReader finishes its job
+        reader.onload = (e) => {
+          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+          // Read image as base64 and set to imageData
+          this.img = e.target.result;
+        };
+        // Start the reader job - read file as a data url (base64 format)
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
     get() {
         //-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
         this.isVisile= false;
         if (this.user.id) {
           this.ifcarga = true;
-          this.tabla= 'perfiles'
-          this.isVisible= 'pan1';
+         
           this.$proxies._registroProxi
             .getDocentes(this.user.id)
             .then((x) => {
@@ -90,7 +175,12 @@ export default {
               .updateDocentes(this.model._id, this.model) //-----------EDITAR CON AXIOS
               .then(() => {
                 this.ifLoad = false;
-                this.isVisible = 'pan3';
+                this.isCambios = false;
+                this.get();
+                this.$notify({
+                  group: "global",
+                  text: "Actualización exitosa",
+                });
               })
               .catch((err) => {
                 console.log("Error", err);
@@ -100,47 +190,24 @@ export default {
         });
       },
 
-    previewImage(event) {
-      this.uploadValue = 0;
-      this.imageData = event.target.files[0];
-      if (!window.FileReader) {
-        alert('El navegador no soporta la lectura de archivos');
-        return;
-      }
-      if (!(/\.(jpg|png)$/i).test(this.imageData.name)) {
-        alert('El archivo a adjuntar no es una imagen');
-        return ;
-      }
-      var sizeByte = event.target.files[0].size;
-       var sizekiloBytes = parseInt(sizeByte / 1024);
-       if(sizekiloBytes>=50){
-        alert('La Imagen es muy pesada por favor redusca el tamaño y el peso');
-        return;
-       }
-       
-      this.onUpload();
-      
-    },
 
     //////
-    onChangeFileUpload() {
+    onChangeFileUpload(info) {
       this.isImageUploads = true;
-      this.file = this.$refs.file.files[0];
       let formData = new FormData();
-      formData.append("myFile", this.file);
+      formData.append("myFile", info);
       axios
-        .post("http://localhost:3000/api/upload", formData, {
+        .post("https://pcei-tulcan.com/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then(x => {
           this.img1 = x.data;
-          this.isImageUploads = false;
-          this.model.foto = this.img1;
-         
-        }).catch(x => {
           
+          this.uploadFoto(this.img1);
+        }).catch(x => {
+          this.isImageUploads = false;
           if (x.response.status == 500) {
               //Los formatos aceptados son .png .jpg .jpeg
               this.$notify({
@@ -152,55 +219,42 @@ export default {
             }
         })
     },
-    //////
-    __validarImagen(){
-        if (!window.FileReader) {
-            alert('El navegador no soporta la lectura de archivos');
-            return false;
-          }
-          if (!(/\.(jpg|png)$/i).test(this.imageData.name)) {
-            alert('El archivo a adjuntar no es una imagen');
-            return false;
-          }
-          else {
-          var  img = new Image();
-              img.onload = function () {
-                if (this.width.toFixed(0) != 200 && this.height.toFixed(0) != 200) {
-                    alert('Las medidas deben ser: 200 * 200');
-                    return false
-                } else{
-                    return true;
-                }  
-            };
-            img.src = URL.createObjectURL(this.imageData);
-
-        }   
-    },
-    onUpload() {
-      this.isImageUploads = true;
-      this.imageData = event.target.files[0];
-      const storageRef = StorageRef.ref(`${this.imageData.name}`).put(
-        this.imageData
-      );
-      storageRef.on(
-        `state_changed`,
-        (snapshot) => {
-          this.uploadValue =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        (error) => {
-          console.log(error.message);
-        },
-        () => {
-          this.uploadValue = 100;
-          storageRef.snapshot.ref.getDownloadURL().then((url) => {
-            this.img1 = url;
+    uploadFoto(img){
+      if (this.user.id && img != null) {
+        this.modelFotos.foto = img;
+        this.$proxies._registroProxi
+          .updateDocentes(this.user.id, this.modelFotos) //-----------EDITAR CON AXIOS
+          .then(() => {
+            this.$store.commit('agregar2',{img})
             this.isImageUploads = false;
-            this.model.foto = this.img1;
+            this.tabla = 'none';
+            localStorage.setItem('Avatar', JSON.stringify(img));
+          })
+          .catch(() => {
+            alert("Error al intentar actualizar la imagen");
+            this.isImageUploads = false;
           });
-        }
-      );
+       } 
     },
+    actuliarStores(){
+      let num = 10;
+      this.$store.commit('agregar2',{num})
+    },
+    limpiar(){
+      this.tabla= "perfiles";
+      this.file = '';
+      this.isFile = false;
+      this.isCambios = false;
+    },
+    OnEdit(){
+     
+      this.isCambios = true;
+    },
+  },
+  created() {
+    this.verificarUsuario();
+    this.get();
+    this.inforUsers();
   },
  
   validators: {
@@ -210,14 +264,14 @@ export default {
       return this.$validator
         .value(value)
         .required()
-        .minLength(5)
+        .minLength(3)
         .maxLength(50);
     },
     "model.apellidos"(value) {
       return this.$validator
         .value(value)
         .required()
-        .minLength(5)
+        .minLength(3)
         .maxLength(50);
     },
     "model.telefono"(value) {
@@ -225,7 +279,7 @@ export default {
         .value(value)
         .required()
         .minLength(9)
-        .maxLength(12);
+        .maxLength(20);
     },
     ////////////////////////////////////////////////////////////////
 

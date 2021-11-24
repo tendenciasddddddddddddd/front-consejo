@@ -1,13 +1,14 @@
-const $ = require('jquery')
+import RestResource from '../../../../service/isAdmin'
+const restResourceService = new RestResource();
 import Spinner from '../../../../shared/Spinner'
-import Navss from '../../../../shared/Navss'
 export default {
     name: 'ListProvincias',
     components: {
-        Spinner,Navss
+        Spinner
     },
     data() {
         return {
+            roles: this.$store.state.user.roles,
             totalNotas: 0,
             paginaActual: 1,
             info: null,
@@ -23,25 +24,24 @@ export default {
               nombre: null,  
               estado: null,
            },
-           rutass: [
-            {
-              id: "0",
-              nombre: "Home",
-              url:"/",
-            },
-            {
-                id: "2",
-                nombre: "Menu Zonas",
-                url:"/MenuZonas",
-              },
-          ],
+           isSelecUsers: [],
+           modals: 'closed',
+           subtitulo: 'none',
+           iseliminaddo : false,
+           isCarga: false,
         }
     },
     methods: {
-        getAll(pag) {
+      verificarUsuario(){
+        if(!restResourceService.admin(this.roles)){
+          this.$router.push("/");
+        }
+      },
+        getAll(pag, lim) {
             this.isLoading = true;
+            this.subtitulo = lim + ' filas por página';
             this.$proxies._zonasProxi
-              .getAll(pag, 6) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+              .getAll(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
               .then((x) => {
                 this.info = x.data.usuarios;
                 this.pagg = x.data;
@@ -55,10 +55,9 @@ export default {
                 this.isLoading = false;
               });
           },
-          showModal() {
-            this.isModalVisible = true;
-          },
+
           save() {
+            this.isSelecUsers= [];
             this.$validate().then(success => { 
               if (!success){ 
                 this.$notify({
@@ -71,10 +70,10 @@ export default {
                   this.ifLoad = true;
                   this.$proxies._zonasProxi.update(this.model._id, this.model)
                     .then(() => {
-                      this.__limpiarCampos();
-                      $("#exampleModal #myModalClose").click()//CERRAR MODAL
+                      this.modals = 'cls';
+                      this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(1);
+                      this.getAll(1,6);
                     })
                     .catch(() => {
                       console.log("Error")
@@ -89,8 +88,8 @@ export default {
                   this.$proxies._zonasProxi.create(this.model) //-----------GUARDAR CON AXIOS
                   .then(() => {
                     this.ifLoad = false;
-                    $("#exampleModal #myModalClose").click();
-                    this.getAll(1);
+                    this.modals = 'cls';
+                    this.getAll(1,6);
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
                     this.ifLoad = false;
@@ -106,49 +105,86 @@ export default {
            
             });
           },
-          gets(id) { 
+          gets() { 
+            let isArray = this.isSelecUsers.length;
+            if(isArray===1){
+              this.isCarga = true; 
             this.__limpiarCampos();
-            this.$proxies._zonasProxi.get(id)
+            this.$proxies._zonasProxi.get(this.isSelecUsers[0])
                 .then((x) => {
                     this.model = x.data;
+                    this.isCarga = false; 
                 }).catch(() => {
                     console.log("Error")
+                    this.isCarga = false; 
                 });
+            }
+            
           },
-          __eliminar(idn) {
-            this.isLoading = true;
-            if (confirm('ESTA SEGURO QUE QUIERE ELIMINAR?')) {
-              this.$proxies._zonasProxi
-              .remove(idn) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-              .then(() => {
+         
+          selectUser(key){
+            let longitud = this.isSelecUsers.length;
+            let isExiste = 0;
+            if(longitud>0){
+               for (let i = 0; i < this.isSelecUsers.length; i++) {
+                  if(this.isSelecUsers[i]==key){
+                   this.isSelecUsers.splice(i, 1); 
+                   isExiste = 1;
+                   break;
+                  }
+               }
+               if(isExiste===0){ 
+                 this.isSelecUsers.push(key);
+               }
+            }else{
+             this.isSelecUsers.push(key);
+            } 
+          },
+          remove() {
+            //METODO PARA ELIMINAR  ROW
+            if (
+              confirm(
+                "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
+              )
+            ) {
+              this.iseliminaddo = true;
+              let isArray = this.isSelecUsers.length;
+              if(isArray>0){
+                this.$proxies._zonasProxi
+                  .remove(this.isSelecUsers)
+                  .then(() => {
+                    this.iseliminaddo = false;
+                    this.isSelecUsers= [];
+                    this.getAll(1,6); 
+                  })
+                  .catch(() => {
+                    console.log("Error imposible");
+                  });
                 this.$notify({
                   group: "global",
                   text: "Registro destruido",
                 });
-                this.isLoading = false;
-                this.getAll(1);
-              })
-              .catch((x) => {
-                alert("Error 401", x.response);
-              });
-            }else{
-              this.isLoading = false;
+                
+             }
             }
-        
           },
           __limpiarCampos() { //LIMPIAR CAMPOS DE EL MODAL
             this.model._id = "";
             this.model.nombre = "";
             this.model.estado = 0;
             this.MsmError ="";
+            this.modals = 'openn';
         }, //----FIN----
+    },
+    created() {
+      this.verificarUsuario();
     },
     watch: {
         "$route.query.pagina": {
           immediate: true,
           handler(pagina) {
             pagina = parseInt(pagina) || 1;
-            this.getAll(pagina);
+            this.getAll(pagina,6);
             this.paginaActual = pagina;
           },
         },

@@ -1,16 +1,18 @@
-import Skeleton from '../../../../shared/Skeleton'
-const info = JSON.parse(localStorage.getItem("Xf"));
+import Analitic from '../../../../shared/Analitic'
+import RestResource from '../../../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
     name: 'MenuCursos',
     components:{
-     Skeleton
+     Analitic
     },
     data() {
         return {
          modals: 'closed',
          info: {},
          isData: false,
-         modalidad : info.modalidad,
+         modalidad : '',
+         roles: this.$store.state.user.roles,
          //Pagina 
          page: 1,
          perPage: 10,
@@ -25,8 +27,8 @@ export default {
            _id : null,
            estudiantes : {
             usuario : this.$store.state.user.id,
-            name : info.nombre,
-            email : info.correo,
+            name : '',
+            email : '',
            }
          },
          ifLoad: false,
@@ -34,7 +36,17 @@ export default {
         }
     },
     methods: {
-        //updateInfoDocentes(id)
+      verificarUsuario(){
+        if(!restResourceService.estudiante(this.roles)){
+          this.$router.push("/");
+        }
+      },
+        appInit(){
+          const info = JSON.parse(localStorage.getItem("Xf"));
+          this.modalidad = info.modalidad;
+          this.model.estudiantes.name = info.nombre;
+          this.model.estudiantes.email = info.correo;
+        },
         getData(){
             this.isData = true;
             if(this.modalidad){
@@ -70,9 +82,10 @@ export default {
               }
               this.$proxies._aulaProxi
               .update(this.model._id, this.model) //-----------EDITAR CON AXIOS
-              .then(() => {
+              .then((x) => {
                 this.ifLoad = false;
                 this.modals= 'closed';
+                this.$router.push({path: `/home-aula/${x.data}`})
               })
               .catch((err) => {
                 console.log("Error", err);
@@ -104,9 +117,12 @@ export default {
             let from = (page * perPage) - perPage;
             let to = (page * perPage);
             return articles.slice(from, to);
-          }
+        },
+       
     },
     created() {
+      this.verificarUsuario();
+        this.appInit();
         this.getData();
     },
  

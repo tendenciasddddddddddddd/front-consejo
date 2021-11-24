@@ -1,19 +1,16 @@
-
-import "datatables.net-dt/js/dataTables.dataTables.min.js";
-import Espera from "../../../../shared/Espera";
-import Navss from "../../../../shared/Navss";
-import Skeleton from "../../../../shared/Skeleton";
+import RestResource from "../../../../service/isAdmin";
+const restResourceService = new RestResource();
 import IsSelect from "../../../../shared/IsSelect";
+import Spinner from "../../../../shared/Spinner.vue";
 export default {
   name: "EslistarParalelo",
   components: {
-    Espera,
-    Navss,
-    Skeleton,
     IsSelect,
+    Spinner
   },
   data() {
     return {
+      roles: this.$store.state.user.roles,
       tab: "inicio",
       isVisible: "panel1",
       tabla: "1",
@@ -54,27 +51,22 @@ export default {
         curso: null,
         Paralelo: null,
       },
-      isSelecCurosos: [],
+      isSelecCurosos: null,
       isClick : false,
       isClick2 : false,
       isRemoveSelecC: [],
       isError: '',
+
+      index: "0",
+
+      isSelected: false,
     };
   },
   methods: {
-    __listPeriodo() {
-      //-----------TRAE LA LISTA DE LOS ROLES h
-      this.$proxies._matriculaProxi
-        .getFull()
-        .then((x) => {
-          let filtro = x.data.niveles;
-          this.listPeriodo = filtro.filter(
-            (x) => x.typo == "Intensivo" && x.estado == "1"
-          ); //este no se toca
-        })
-        .catch((err) => {
-          console.log("Error", err);
-        });
+    verificarUsuario() {
+      if (!restResourceService.admin(this.roles)) {
+        this.$router.push("/");
+      }
     },
     __listNivele() {
       //-----------TRAE LA LISTA DE LOS CURSOS
@@ -93,9 +85,9 @@ export default {
     },
     __cambios(cursos) {
       this.isTabla = true;
-      let modalidad = "m1";
+     // let modalidad = "m1";
       this.$proxies._matriculaProxi
-        .getFullMatricula(modalidad, cursos)
+        .getFullMatricula(cursos)
         .then((x) => {
           this.filtros = x.data.matriculados;
           this.infoMat = this.filtros.filter((x) => x.curso == "Undefined");
@@ -130,44 +122,57 @@ export default {
       this.isClick = true;
       let isArray = this.isSelecCurosos.length;
       this.model.curso = this.check;
-      if(isArray>0){
-          for(let i=0; i<this.isSelecCurosos.length; i++){
+      if(isArray>0&&this.isSelected){
             this.$proxies._matriculaProxi
-            .updateMatricula(this.isSelecCurosos[i], this.model)
+            .updateMatricula(this.isSelecCurosos, this.model)
             .then(() => {
-             
+              this.__cambios(this.idds);
+              this.isClick = false;
+              this.isSelecCurosos= []
+              this.isError= '';
+              this.$notify({
+                group: "global",
+                text: "Alumnos asignados",
+              });
             })
             .catch(() => {
-              console.log("Error imposible");
+              alert("Error algo salio mal!! envie un sms en el chat para que le den soporte");
+              this.isClick = false;
             });
-          }
-          this.__cambios(this.idds);
-          this.isClick = false;
-          this.isError= '';
+          
+      }else{
+        alert('TIENE QUE SELECIONAR UN PARALELO')
       }
  
     },
-    checkExist(event) {
-      if (event) {
-        if (this.listPeriodo[0]._id) {
-          this.__cambios(this.check2._id);
-        }
-      }
-    },
 
-    __verLista(obj) {
-      if (obj) {
-        this.__cambios(obj);
-        this.idds = obj;
+
+    onChange(event) {
+      this.check=event.target.value;
+      this.isSelected = true;
+  },
+
+
+
+    verLista() {
+      if (this.index != "0") {
+        this.__cambios(this.index);
+        this.idds = this.index;
         this.isVisible = "panel2";
-        this.check = 'N';
+        this.check= '';
+        this.isSelected = false;
         this.isSelecCurosos= []
       }
     },
+    clicMe(keys) {
+      this.index = keys;
+    },
+
     __volverAsignacion(){
       this.isVisible = "panel2";
       this.isSelecCurosos= [];
-      this.check = 'N';
+      this.check= '';
+      this.isSelected = false;
       this.isRemoveSelecC= [];
       this.isError= '';
     },
@@ -205,28 +210,30 @@ export default {
     let isArray = this.isRemoveSelecC.length;
     this.model.curso = "Undefined";
     if(isArray>0){
-        for(let i=0; i<this.isRemoveSelecC.length; i++){
+        
           this.$proxies._matriculaProxi
-          .updateMatricula(this.isRemoveSelecC[i], this.model)
+          .updateMatricula(this.isRemoveSelecC, this.model)
           .then(() => {
-           
+            this.isClick2 = false;
+            this.isVisible = "panel2";
+            this.isRemoveSelecC= [];
+            this.__cambios(this.idds); 
+            this.$notify({
+             group: "global",
+             text: "Alumnos removidos",
+            });
           })
           .catch(() => {
-            console.log("Error imposible");
-          });
-        }
-        this.isClick2 = false;
-        this.isVisible = "panel2";
-        this.__cambios(this.idds);
-        
-       
+            alert("Error algo salio mal!! envie un sms en el chat para que le den soporte");
+            this.isClick2 = false;
+          });  
     }
   },
     
   },
 
   created() {
-    this.__listPeriodo();
+    this.verificarUsuario();
     this.__listNivele();
   },
 };

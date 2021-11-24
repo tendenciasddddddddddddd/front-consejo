@@ -1,28 +1,47 @@
-const info = JSON.parse(localStorage.getItem("Xf"));
+ function dataURLtoFile(dataurl, filename) {
+ 
+   var arr = dataurl.split(','),
+       mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), 
+       n = bstr.length, 
+       u8arr = new Uint8Array(n);
+      
+   while(n--){
+       u8arr[n] = bstr.charCodeAt(n);
+   }
+  
+   return new File([u8arr], filename, {type:mime});
+ }
 
-import Skeleton from "../../../shared/Skeleton";
 import Spinner from "../../../shared/Spinner";
-import { StorageRef } from "../../../boot/firebase";
+import RestResource from '../../../service/isAdmin'
+const restResourceService = new RestResource();
 import * as axios from "axios";
+//-------RECORTAR IMAGEN-------
+import { Cropper, Preview } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css';
+import Stencil from "../../../shared/Stencil";
+const avat = require('../../../assets/img/icons/profile.jpg')
+
 export default {
   name: "Perfil",
   components: {
-    Skeleton,
-    Spinner
+    Spinner,
+    Cropper,
+    Stencil,
+    Preview
   },
   data() {
     return {
+      img: avat,
+      roles: this.$store.state.user.roles,
       user: this.$store.state.user,
-      foto: info.foto,
-      name: info.nombre,
+      foto: '',
+      name: '',
       file: "",
-      uploads: "100x100.png",
       tabla: "perfile",
       isVisible: 'pan1',
-      isUploading: null,
-      nombreimagen: null,
-      imageData: null,
-      uploadValue: 0,
+      istabs : '1',
       img1: null,
       isImageUploads: false,
       ifcarga: false,
@@ -36,29 +55,118 @@ export default {
         nombres: null,
         apellidos: null,
         cedula: null,
-        foto: null,
         sexo: null,
         fketnia: null,
         fknacionalidad: null,
         fkparroquia: null,
         titulo: null,
-        role: null,
+      },
+      modelFotos :{
+          foto:null,
       },
       infos:{
         foto: null,
         nombre: null,
         correo: null,
-      }
+      },
+      isCambios: false, //FOTER
+      result: {
+				coordinates: null,
+				image: null
+			},
+      isFile: false, 
+      image: {
+        src: avat,
+        type: "image/jpg",
+      },
     };
   },
   methods: {
+    cropImages() {
+      const { canvas } = this.$refs.cropper.getResult();
+			if (canvas) {
+        this.isImageUploads = true;
+				const form = new FormData();
+				canvas.toBlob(blob => {
+					form.append('myFile', blob);
+           axios
+            .post("https://pcei-tulcan.com/api/upload", form, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then(x => {
+              this.img1 = x.data;
+              this.uploadFoto(this.img1);
+              
+            }).catch(x => {
+              this.isImageUploads = false;
+              if (x.response.status == 500) {
+                  //Los formatos aceptados son .png .jpg .jpeg
+                  this.$notify({
+                      group: "global",
+                      text: "Los formatos aceptados son .png .jpg .jpeg",
+                    });
+                }else{
+                  alert("Notifique el administrador el error");
+                }
+            })
+				}, 'image/jpeg');
+			}
+     
+    },
+
+    uploadImage(event) {
+      const { files } = event.target;
+      let format = event.target.files[0];
+      if (!window.FileReader) {
+        alert('El navegador no soporta la lectura de archivos');
+        return;
+      }
+      if (!(/\.(jpg|png)$/i).test(format.name)) {
+        alert('El archivo a adjuntar no es una imagen con formato PNG o JPG ');
+        return ;
+      }
+      if (files && files[0]) {
+        // 1. Revoke the object URL, to allow the garbage collector to destroy the uploaded before file
+        if (this.image.src) {
+          URL.revokeObjectURL(this.image.src);
+        }
+        // 2. Create the blob link to the file to optimize performance:
+        const blob = URL.createObjectURL(files[0]);
+        this.isFile = true;
+        // 3. Update the image. The type will be derived from the extension and it can lead to an incorrect result:
+        this.image = {
+          src: blob,
+          type: files[0].type,
+        };
+      }
+      
+    },
+    inforUsers(){
+      const info = JSON.parse(localStorage.getItem('Xf'));
+      const avatar = JSON.parse(localStorage.getItem('Avatar'));
+      this.foto = avatar
+      this.name = info.nombre;
+    },
+
+    crop2(){ //NO FOUND
+      const result = this.$refs.cropper.getResult();
+      //console.log(result.canvas.toDataURL(this.img.type))
+       //  this.img = result.canvas.toDataURL();
+        let imagen = result.canvas.toDataURL();
+        this.file = dataURLtoFile(imagen, 'hola.png');
+        console.log(this.file)
+       this.onChangeFileUpload(this.file)
+    },
+
     get() {
         //-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
         this.isVisile= false;
         if (this.user.id) {
           this.ifcarga = true;
-          this.tabla= 'perfiles'
-          this.isVisible= 'pan1';
+         // this.tabla= 'perfiles'
+         // this.isVisible= 'pan1';
           this.$proxies._registroProxi
             .getDocentes(this.user.id)
             .then((x) => {
@@ -89,119 +197,66 @@ export default {
               .updateDocentes(this.model._id, this.model) //-----------EDITAR CON AXIOS
               .then(() => {
                 this.ifLoad = false;
-                this.isVisible = 'pan3';
+                this.isCambios = false;
+                this.get();
               })
               .catch((err) => {
                 console.log("Error", err);
                 this.ifLoad = false;
+                this.isCambios = false;
               });
            } 
         });
       },
 
-    previewImage(event) {
-      this.uploadValue = 0;
-      this.imageData = event.target.files[0];
-      if (!window.FileReader) {
-        alert('El navegador no soporta la lectura de archivos');
-        return;
-      }
-      if (!(/\.(jpg|png)$/i).test(this.imageData.name)) {
-        alert('El archivo a adjuntar no es una imagen');
-        return ;
-      }
-      var sizeByte = event.target.files[0].size;
-       var sizekiloBytes = parseInt(sizeByte / 1024);
-       if(sizekiloBytes>=50){
-        alert('La Imagen es muy pesada por favor redusca el tamaño y el peso');
-        return;
-       }
-       
-      this.onUpload();
-      
-    },
-
-    //////
-    onChangeFileUpload() {
-      this.isImageUploads = true;
-      this.file = this.$refs.file.files[0];
-      let formData = new FormData();
-      formData.append("myFile", this.file);
-      axios
-        .post("http://localhost:3000/api/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(x => {
-          this.img1 = x.data;
-          this.isImageUploads = false;
-          this.model.foto = this.img1;
-         
-        }).catch(x => {
-          
-          if (x.response.status == 500) {
-              //Los formatos aceptados son .png .jpg .jpeg
-              this.$notify({
-                  group: "global",
-                  text: "Los formatos aceptados son .png .jpg .jpeg",
-                });
-            }else{
-              alert("Notifique el administrador el error");
-            }
-        })
-    },
-    //////
-    __validarImagen(){
-        if (!window.FileReader) {
-            alert('El navegador no soporta la lectura de archivos');
-            return false;
-          }
-          if (!(/\.(jpg|png)$/i).test(this.imageData.name)) {
-            alert('El archivo a adjuntar no es una imagen');
-            return false;
-          }
-          else {
-          var  img = new Image();
-              img.onload = function () {
-                if (this.width.toFixed(0) != 200 && this.height.toFixed(0) != 200) {
-                    alert('Las medidas deben ser: 200 * 200');
-                    return false
-                } else{
-                    return true;
-                }  
-            };
-            img.src = URL.createObjectURL(this.imageData);
-
-        }   
-    },
-    onUpload() {
-      this.isImageUploads = true;
-      this.imageData = event.target.files[0];
-      const storageRef = StorageRef.ref(`${this.imageData.name}`).put(
-        this.imageData
-      );
-      storageRef.on(
-        `state_changed`,
-        (snapshot) => {
-          this.uploadValue =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        (error) => {
-          console.log(error.message);
-        },
-        () => {
-          this.uploadValue = 100;
-          storageRef.snapshot.ref.getDownloadURL().then((url) => {
-            this.img1 = url;
+    uploadFoto(img){
+      if (this.user.id && img != null) {
+        this.modelFotos.foto = img;
+        this.$proxies._registroProxi
+          .updateDocentes(this.user.id, this.modelFotos) //-----------EDITAR CON AXIOS
+          .then(() => {
+            this.$store.commit('agregar2',{img})
             this.isImageUploads = false;
-            this.model.foto = this.img1;
+            this.tabla = 'none';
+            localStorage.setItem('Avatar', JSON.stringify(img));
+          })
+          .catch(() => {
+            alert("Error al intentar actualizar la imagen");
+            this.isImageUploads = false;
           });
-        }
-      );
+       } 
     },
+    actuliarStores(){
+      let num = 10;
+      this.$store.commit('agregar2',{num})
+    },
+    limpiar(){
+      this.tabla= "perfiles";
+      this.file = '';
+      this.isFile = false;
+      this.isCambios = false;
+    },
+    OnEdit(){
+     
+      this.isCambios = true;
+    },
+    verificarUsuario(){
+      if(!restResourceService.docente(this.roles)){
+        this.$router.push("/");
+      }
+    }
   },
- 
+  destroyed() {
+    // Revoke the object URL, to allow the garbage collector to destroy the uploaded before file
+    if (this.image.src) {
+      URL.revokeObjectURL(this.image.src);
+    }
+  },
+  created() {
+    this.verificarUsuario();
+    this.get();
+    this.inforUsers();
+  },
   validators: {
     //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
 
@@ -226,6 +281,12 @@ export default {
         .minLength(9)
         .maxLength(12);
     },
+    "model.email"(value) {
+      return this.$validator
+        .value(value)
+        .required()
+        .email();
+    },
     ////////////////////////////////////////////////////////////////
 
 
@@ -233,7 +294,7 @@ export default {
       return this.$validator
         .value(value)
         .required()
-        .minLength(6)
+        .minLength(2)
         .maxLength(80);
     },
 

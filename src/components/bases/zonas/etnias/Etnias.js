@@ -1,12 +1,9 @@
-const $ = require('jquery')
+//const $ = require('jquery')
 import Spinner from '../../../../shared/Spinner'
-import Navs from '../../../../shared/Navs'
-import Navss from '../../../../shared/Navss'
 export default {
     name: 'Etnias',
     components: {
-        Spinner,
-        Navs, Navss
+        Spinner
     },
     data() {
         return {
@@ -25,18 +22,7 @@ export default {
                 nombre: null,
                 estado: null,
             },
-            rutass: [
-                {
-                  id: "0",
-                  nombre: "Home",
-                  url:"/",
-                },
-                {
-                    id: "2",
-                    nombre: "Menu Zonas",
-                    url:"/MenuZonas",
-                  },
-              ],
+            modals: 'closed',
         }
     },
     methods: {
@@ -74,7 +60,7 @@ export default {
                     this.$proxies._zonasProxi.updateEtnias(this.model._id, this.model)
                         .then(() => {
                             this.__limpiarCampos();
-                            $("#exampleModal #myModalClose").click() //CERRAR MODAL
+                            this.modals = 'cl';
                             this.ifLoad = false;
                             this.getAll(1);
                         })
@@ -91,7 +77,7 @@ export default {
                     this.$proxies._zonasProxi.createEtnias(this.model) //-----------GUARDAR CON AXIOS
                         .then(() => {
                             this.ifLoad = false;
-                            $("#exampleModal #myModalClose").click();
+                            this.modals = 'cl';//$("#exampleModal #myModalClose").click();
                             this.getAll(1);
                         })
                         .catch((error) => { //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
@@ -143,6 +129,7 @@ export default {
             this.model.nombre = "";
             this.model.estado = 0;
             this.MsmError = "";
+            this.modals = 'openn';
         }, //----FIN----
     },
     watch: {

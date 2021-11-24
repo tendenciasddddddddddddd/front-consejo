@@ -1,4 +1,4 @@
-const info = JSON.parse(localStorage.getItem("Xf"));
+
 import { VueEditor} from "vue2-editor";
 export default {
     name: 'AulaCreate',
@@ -10,7 +10,7 @@ export default {
           tab: "iniciar",
           isVisible: 'ventana1',
            user: this.$store.state.user,
-           fistname: info.nombre,
+           fistname: '',
            ifLoad: false,
             model: {
               _id: null,
@@ -33,6 +33,10 @@ export default {
         }
     },
     methods: {
+      appInit(){
+        const info = JSON.parse(localStorage.getItem("Xf"));
+        this.fistname = info.nombre;
+      },
       save() {
         //-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
         this.$validate().then((success) => {
@@ -69,6 +73,9 @@ export default {
         let hoy = new Date(tiempoTranscurrido);
         return hoy.toLocaleString();
       },
+    },
+    created() {
+      this.appInit()
     },
     validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
       'model.nombre'(value) {

@@ -1,87 +1,91 @@
 <template>
   <div class="row ">
     <div class="col-lg-9 col-12 mx-auto">
-        <div class="row">
-                 <div class="col-sm-12">
-                     <h3 class="mt-1 fuente" style="font-weight: 400;"> Opciones de Matricula</h3>
-                 </div>
-            </div>
-          <div class="row ">
-            
-             <div class="mt-2">
-          <div
+      <div class="row">
+           <div
             class=""
             style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
               border-width: 1px; text-align: left;"
           >
             <div>
               <p class="text-sm text-dark fuente" style="margin:7px; ">
-                <strong>Nota:</strong>  Ingrese matricula por cada modalidad que ofrece la institución.
+               <i class="ni ni-bell-55"></i> &nbsp; <strong>Nota:</strong> Ingrese matricula por cada modalidad que
+                ofrece la institución... 👌
               </p>
             </div>
           </div>
+        <div class="col-sm-12">
+          <h3 class="mt-4 fuente" style="font-weight: 400;">
+            Opciones de Matricula
+          </h3>
+          <hr>
         </div>
-            <div class="col-sm-4 mt-3">
-               <br>
-              <div class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90">
-                <div class="">
-                  <div class="text-center">
-                    <router-link to="/Matricula-1" href="javascript:;">
-                     <img height="160px" 
-                          class=""
-                          src="../../assets/img/jira/fondoBuscador.png"
-                        />
-                    </router-link>
-                  </div>
-                  <div class="card-body px-0 text-center" style="padding:2px;">
-                    <h5>
-                      <router-link to="/Matricula-1" href="javascript:;" class="text-dark fuente" style="font-weight: 400;"
-                        >
-                        Intensivo</router-link
-                      >
-                    </h5>
+      </div>
+     
+      <div class="row  ">
 
-
-                  </div>
-                </div>
-              </div>
+        <div class="col-md-3 col-12">
+          <br />
+          <div class="card card-plain text-center ">
+            <div class="card-body foco2">
+              <router-link to="/Matricula-1">
+                <img
+                  class="w-70"
+                  src="../../assets/img/usados/nombre.png"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Intensivo</p>
+                <p class="parrafo">
+                  Ingrese la matricula de este periodo académico 👆
+                </p>
+              </router-link>
             </div>
-            <div class="col-sm-4 mt-3">
-               <br>
-                   <div class="border-dashed border-1 border-secondary border-radius-md p-3 mole w-90">
-                <div class="card card-plain card-blog">
-                  <div class="position-relative">
-                    <router-link to="/Matricula-2" href="javascript:;">
-                      <div class="blur-shadow-image text-center">
-                       <img height="150px"
-                          class="img move-on-hover"
-                          src="../../assets/img/jira/fondoBuscador.png"
-                        />
-                      </div>
-                    </router-link>
-                  </div>
-                  <div class="card-body text-center px-0" style="padding:2px;">
-                    <h5>
-                      <router-link to="/Matricula-2" href="javascript:;" class="text-dark fuente" style="font-weight: 400;"
-                        >
-                        Extraordinaria</router-link
-                      >
-                    </h5>
- 
-                  </div>
-                </div>
-              </div>
-            </div>
-           
-          
           </div>
+        </div>
+        <div class="col-md-3 col-12">
+          <br />
+          <div class="card card-plain text-center ">
+            <div class="card-body foco2">
+              <router-link to="/Matricula-2">
+                <img
+                  class="w-70"
+                  src="../../assets/img/usados/nombre.png"
+                  alt="fondo"
+                />
+                <p class="cardTitle fuente mt-3">Extraordinaria</p>
+                <p class="parrafo">
+                  Ingrese la matricula de este periodo académico 👆
+                </p>
+              </router-link>
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import RestResource from '../../service/isAdmin'
+const restResourceService = new RestResource();
 export default {
-  name: "MenuZonas",
+  name: "Menu1Matricula",
+  data() {
+    return {
+      roles: this.$store.state.user.roles,
+    }
+  },
+  methods: {
+     verificarUsuario(){
+       if(!restResourceService.admin(this.roles)){
+         this.$router.push("/");
+       }
+     }
+  },
+  created() {
+    this.verificarUsuario();
+  },
 };
 </script>
 <style>
