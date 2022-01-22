@@ -161,11 +161,11 @@
       >
         <div
           class=" cabesa"
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 58px;
-         padding: 4px 46px 4px 40px;"
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
+         padding: 4px 25px 4px 40px;"
         >
           <div class="float-start">
-            <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente text-white">
+            <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
               Edita tu foto de perfil
             </h5>
             <!--  <p class="parrafo">{{nombre}}</p> -->
@@ -175,7 +175,7 @@
               @click="tabla = 'termina'"
               class="btn btn-link text-dark p-0 fixed-plugin-close-button"
             >
-              <i style="font-size: 32px;" class="fa fa-close text-white"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"></path></g></g></svg>
             </button>
           </div>
           <!-- End Toggle Button -->
@@ -233,20 +233,12 @@
                 <cropper
                   ref="cropper"
                   class="cropper"
-                  :src="img"
+                  :src="image.src"
                   :stencil-component="$options.components.Stencil"
-                  @change="change"
+                 
                 ></cropper>
               </div>
-              <div class="justify-content-center mt-3">
-                <preview
-                  style="border-radius: 50%;left: 40%;"
-                  :width="120"
-                  :height="120"
-                  :image="result.image"
-                  :coordinates="result.coordinates"
-                />
-              </div>
+             
             </div>
           </div>
         </div>
@@ -273,7 +265,7 @@
                 ></span>
                 Trabajando...
               </button>
-              <button v-else class="btn btnNaranja ms-3" @click="cropImage()">
+              <button v-else class="btn btnNaranja ms-3" @click="cropImages()">
                 Guardar
               </button>
             </template>
@@ -305,72 +297,4 @@
 
 <script src="./Profile.js"></script>
 
-<style>
-div#bg {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
 
-.altural {
-  width: 1500px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  height: 100vh;
-  background: rgba(9, 30, 66, 0.54);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.piepagina {
-  background: #f5f8fa;
-  padding-left: 40px;
-  padding-top: 15px;
-  padding-bottom: 3px;
-  border-top: 1px solid rgb(234, 240, 246);
-  bottom: 0px;
-
-  left: 0px;
-  position: fixed;
-  right: 0px;
-  z-index: 9999;
-}
-.maperr {
-  background: #fff;
-  height: 72px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-}
-.maperr:hover {
-  opacity: 0.3;
-  border-radius: 50%;
-  cursor: pointer;
-  background: rgb(81, 111, 144);
-}
-.fondot {
-  max-height: 380px !important;
-}
-.upload-example-cropper {
-  border: solid 1px #eee;
-  min-height: 300px;
-  width: 100%;
-}
-.button input {
-  display: none;
-}
-.fontImg {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(245, 248, 250);
-  border: 1px dashed rgb(81, 111, 144);
-  border-radius: 4px;
-  color: rgb(124, 152, 182);
-  position: relative;
-}
-
-</style>

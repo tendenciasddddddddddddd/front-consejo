@@ -26,4 +26,15 @@ animation-timing-function: linear;
 animation-play-state: running;
 
 }
+@keyframes moveleft{            
+    0% {transform: translate(100px,0)}
+    100% {transform: translate(0,0)}
+}
+
+.movimiento{
+    animation-name: moveleft;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-duration: 3s
+}
 </style>

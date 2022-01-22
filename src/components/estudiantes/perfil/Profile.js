@@ -1,17 +1,3 @@
-function dataURLtoFile(dataurl, filename) {
- 
-  var arr = dataurl.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), 
-      n = bstr.length, 
-      u8arr = new Uint8Array(n);
-      
-  while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
-  }
-  
-  return new File([u8arr], filename, {type:mime});
-}
 
 import Spinner from "../../../shared/Spinner";
 import * as axios from "axios";
@@ -79,7 +65,10 @@ export default {
 				image: null
 			},
       isFile: false, 
-      iscroper : false,
+      image: {
+        src: avat,
+        type: "image/jpg",
+      },
     };
   },
   methods: {
@@ -88,36 +77,45 @@ export default {
         this.$router.push("/");
       }
     },
-    change({coordinates, image}) {
-      this.result = {
-				coordinates,
-				image
-			};
-    },
-    inforUsers(){
-      const info = JSON.parse(localStorage.getItem('Xf'));
-      const avatar = JSON.parse(localStorage.getItem('Avatar'));
-      this.foto = avatar
-      this.name = info.nombre;
+    cropImages() {
+      const { canvas } = this.$refs.cropper.getResult();
+			if (canvas) {
+        this.isImageUploads = true;
+				const form = new FormData();
+				canvas.toBlob(blob => {
+					form.append('myFile', blob);
+           axios
+            .post("http://localhost:3000/api/upload", form, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then(x => {
+              this.img1 = x.data;
+              this.uploadFoto(this.img1);
+              
+            }).catch(x => {
+              this.isImageUploads = false;
+              if (x.response.status == 500) {
+                  //Los formatos aceptados son .png .jpg .jpeg
+                  this.$notify({
+                      group: "global",
+                      text: "Los formatos aceptados son .png .jpg .jpeg",
+                    });
+                }else{
+                  alert("Notifique el administrador el error");
+                }
+            })
+				}, 'image/jpeg');
+			}
+     
     },
 
-    cropImage() {
-      const result =  this.$refs.cropper.getResult();
-      //console.log(result.canvas.toDataURL(this.img.type))
-       //  this.img = result.canvas.toDataURL();
-         let imagen = result.canvas.toDataURL();
-         this.file =  dataURLtoFile(imagen, 'hola.png');
-         //this.img =  result.canvas.toDataURL();
-         this.onChangeFileUpload(this.file)
-    },
-
+    
     uploadImage(event) {
-      // Reference to the DOM input element
-      var input = event.target;
-      // Ensure that you have a file before attempting to read it
-      if (input.files && input.files[0]) {
-       let format = event.target.files[0];
-       if (!window.FileReader) {
+      const { files } = event.target;
+      let format = event.target.files[0];
+      if (!window.FileReader) {
         alert('El navegador no soporta la lectura de archivos');
         return;
       }
@@ -125,19 +123,32 @@ export default {
         alert('El archivo a adjuntar no es una imagen con formato PNG o JPG ');
         return ;
       }
-       this.isFile = true;
-        // create a new FileReader to read this image and convert to base64 format
-        var reader = new FileReader();
-        // Define a callback function to run, when FileReader finishes its job
-        reader.onload = (e) => {
-          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-          // Read image as base64 and set to imageData
-          this.img = e.target.result;
+      if (files && files[0]) {
+        // 1. Revoke the object URL, to allow the garbage collector to destroy the uploaded before file
+        if (this.image.src) {
+          URL.revokeObjectURL(this.image.src);
+        }
+        // 2. Create the blob link to the file to optimize performance:
+        const blob = URL.createObjectURL(files[0]);
+        this.isFile = true;
+        // 3. Update the image. The type will be derived from the extension and it can lead to an incorrect result:
+        this.image = {
+          src: blob,
+          type: files[0].type,
         };
-        // Start the reader job - read file as a data url (base64 format)
-        reader.readAsDataURL(input.files[0]);
       }
+      
     },
+
+    inforUsers(){
+      const info = JSON.parse(localStorage.getItem('Xf'));
+      const avatar = JSON.parse(localStorage.getItem('Avatar'));
+      this.foto = avatar
+      this.name = info.nombre;
+    },
+
+  
+
 
     get() {
         //-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
@@ -191,34 +202,6 @@ export default {
       },
 
 
-    //////
-    onChangeFileUpload(info) {
-      this.isImageUploads = true;
-      let formData = new FormData();
-      formData.append("myFile", info);
-      axios
-        .post("https://pcei-tulcan.com/api/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(x => {
-          this.img1 = x.data;
-          
-          this.uploadFoto(this.img1);
-        }).catch(x => {
-          this.isImageUploads = false;
-          if (x.response.status == 500) {
-              //Los formatos aceptados son .png .jpg .jpeg
-              this.$notify({
-                  group: "global",
-                  text: "Los formatos aceptados son .png .jpg .jpeg",
-                });
-            }else{
-              alert("Notifique el administrador el error");
-            }
-        })
-    },
     uploadFoto(img){
       if (this.user.id && img != null) {
         this.modelFotos.foto = img;
@@ -229,6 +212,7 @@ export default {
             this.isImageUploads = false;
             this.tabla = 'none';
             localStorage.setItem('Avatar', JSON.stringify(img));
+            this.toast('Se cargó satisfactoriamente tu avatar o imagen.')
           })
           .catch(() => {
             alert("Error al intentar actualizar la imagen");
@@ -250,6 +234,26 @@ export default {
      
       this.isCambios = true;
     },
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 1300,
+        position : 'top-center',
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action : {
+          text : 'CERRAR',
+          onClick : (e, toastObject) => {
+              toastObject.goAway(0);
+          }
+        }
+      });
+    },
+  },
+  destroyed() {
+    // Revoke the object URL, to allow the garbage collector to destroy the uploaded before file
+    if (this.image.src) {
+      URL.revokeObjectURL(this.image.src);
+    }
   },
   created() {
     this.verificarUsuario();

@@ -17,6 +17,12 @@ License - nucleoapp.com/license/
   src: URL('../fonts/Avenir.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Avenir Next W02';
+  src: URL('../fonts/AvenirNext-Regular.woff2') format('truetype');
+}
+
+
 /*------------------------
     base class definition
 -------------------------*/

@@ -25,18 +25,7 @@ export default {
         updatedAt:null, role:null,fullname : null,
      },
      isedit : false,
-     rutass: [
-      {
-        id: "0",
-        nombre: "Home",
-        url:"/",
-      },
-      {
-        id: "1",
-        nombre: "Lista Usuarios",
-        url:"/usuarios/Usuario",
-      },
-    ],
+    
     };
   },
   methods: {
@@ -103,14 +92,11 @@ export default {
                 this.ifLoad = false;
                 if(error.response){
                   if(error.response.status==400){
-                    this.$notify({
-                      group: "global",
-                      text: error.response.data.message,
-                    });
+                    this.toast(error.response.data.message);
                   }
                 }
                 else if(error.request){
-                  alert("duplicado 2")
+                  this.$dialog.alert('❌ Error en el servidor no se pudo completar la solicitud')
                 }else{
                   console.log('Error', error.message); 
                 }
@@ -131,7 +117,21 @@ export default {
          let l = apell.toLowerCase().charAt(0);
          let result = l+ced;
          return result;
-      }
+      },
+      toast(message) {
+        this.$toasted.info(message, {
+          duration: 2600,
+          position: "bottom-center",
+          icon: "check-circle",
+          theme: "toasted-primary",
+          action: {
+            text: "CERRAR",
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      },
   },
   mounted() {
     this.verificarUsuario();

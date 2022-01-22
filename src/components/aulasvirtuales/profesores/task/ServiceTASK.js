@@ -14,5 +14,5 @@ export default class ServiciosTask {
       return  "Queda " + days + " dias, " + hours + " horas, y " + minutes + " minutos";
     }
   }
-
+  
 }

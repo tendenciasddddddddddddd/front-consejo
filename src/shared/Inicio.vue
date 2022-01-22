@@ -33,16 +33,9 @@
         id="navbar"
       >
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group">
-            <span class="input-group-text text-body"
-              ><i class="fas fa-search" aria-hidden="true"></i
-            ></span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Type here..."
-            />
-          </div>
+         <i style="color: black;" class="fa fa-search me-3" aria-hidden="true"></i>
+         <i style="color: black;" class="fa fa-cog me-3" aria-hidden="true"></i>
+         <i style="color: black;" class="fa fa-bell" aria-hidden="true"></i>
         </div>
 
         <ul class="navbar-nav justify-content-end">
@@ -50,7 +43,6 @@
             <a
               href="javascript:;"
               class="nav-link text-body p-0"
-              id="iconNavbarSidenav"
               onclick="navbarMinimize(this)"
             >
               <div class="sidenav-toggler-inner">
@@ -61,18 +53,36 @@
             </a>
           </li>
           <li class="nav-item px-3 d-flex align-items-center">
-            <a  class="text-sm fuente">
+            
+            <template v-if="isOnline">
+              <a  class="text-sm fuente">
             {{nombre}}
             </a>
+            </template>
+            <template v-else>
+              <div>
+                 <div  class="loadingg" style="height: 80vh;">
+                  <div class="inn ">
+                    
+                    <img
+                              class="w-50"
+                              src="../assets/img/icons/status_offline.svg"
+                              alt="fondo"
+                            />
+                            <p class="parrafo text-dark">En este momento no tienes conexión a internet.</p>
+                  </div>
+
+                </div>
+              </div>
+            </template>
+           
           <!-- <h1>{{ $store.state.numero }}</h1> -->
           </li>
           <li class="nav-item dropdown pe-2 d-flex align-items-center">
             <a
               href="javascript:;"
               class="nav-link text-body p-0"
-              id="dropdownMenuButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+              @click="activar"
             >
               <div class="avatar me-3 ">
                 
@@ -85,16 +95,18 @@
             </a>
             <ul
               class="dropdown-menu dropdown-menu-end px-2 py-3  me-sm-n4"
-              aria-labelledby="dropdownMenuButton"
+              
+              :class="{ 'show': isActive === true }"
             >
  
               <li class="mb-2 text-center">
-                <hr>
+                
                 <a style="font-size: 16px"
-                  class="parrafo links"
+                  class="fuente text-sm "
                   @click="logout"
                 >
-               Cerrar sesión
+                <b class="links">Cerrar sesión</b>
+               
                  
                 </a>
               </li>
@@ -117,6 +129,7 @@ export default {
       foto: '', 
       nombre: '',
       avatar2: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
+      isActive: false,
     };
   },
   methods: {
@@ -134,6 +147,13 @@ export default {
       let img= avatar;
       this.$store.commit('agregar2',{img})
       this.nombre= info.nombre;
+    },
+    activar(){
+      if (this.isActive) {
+        this.isActive=false;
+      }else{
+        this.isActive=true;
+      }
     }
   },
   created() {

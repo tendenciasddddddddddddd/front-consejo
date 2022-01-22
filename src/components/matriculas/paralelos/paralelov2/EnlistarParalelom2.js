@@ -14,6 +14,7 @@ export default {
       tab: "inicio",
       isVisible: "panel1",
       tabla: "1",
+      istabs : '1',
       idds: null,
       paralelos: [
         {
@@ -71,6 +72,7 @@ export default {
       isError: "",
 
       index: "0",
+      nombre_curso: '',
       isSelected: false,
     };
   },
@@ -149,10 +151,7 @@ export default {
               this.__cambios(this.idds);
               this.isClick = false;
               this.isError = "";
-              this.$notify({
-                group: "global",
-                text: "Alumnos asignados",
-              });
+              this.toast('Se asigno a '+ isArray+' estudiantes al paralelo '+ this.model.curso)
             })
             .catch(() => {
               alert("Error algo salio mal!! envie un sms en el chat para que le den soporte");
@@ -175,16 +174,18 @@ export default {
         this.__cambios(this.index);
         this.idds = this.index;
         this.isVisible = "panel2";
+        this.istabs = '1';
         this.check= '';
         this.isSelected = false;
         this.isSelecCurosos= []
       }
     },
-    clicMe(keys) {
+    clicMe(keys, nombreCurso) {
       this.index = keys;
+      this.nombre_curso = nombreCurso;
     },
     __volverAsignacion(){
-      this.isVisible = "panel2";
+      this.istabs = '1';
       this.isSelecCurosos= [];
       this.check= '';
       this.isSelected = false;
@@ -192,14 +193,12 @@ export default {
       this.isError= '';
     },
     //------------------------------------CONFIGURAR MATRICULA---------------isConfig
-    __mostrarConf() {
-      this.isVisible = "panel3";
-      this.__configuramatricula();
-    },
-    __configuramatricula() {
-      this.infoMat2 = this.filtros.filter((x) => x.curso == this.check);
+    __mostrarConf(curse, tabb) {
+      this.istabs = tabb;
+      this.infoMat2 = this.filtros.filter((x) => x.curso == curse);
       this.isRemoveSelecC= [];
     },
+ 
     removeSelectCursos(key){
       let longitud = this.isRemoveSelecC.length;
       let isExiste = 0;
@@ -228,12 +227,10 @@ export default {
           .updateMatricula(this.isRemoveSelecC, this.model)
           .then(() => {
             this.isClick2 = false;
-            this.isVisible = "panel2";
             this.__cambios(this.idds); 
-            this.$notify({
-              group: "global",
-              text: "Alumnos removidos",
-            });
+            this.__volverAsignacion();
+            this.toast('Se removio de paralelo a  '+ isArray+' estudiantes');
+          
             this.isRemoveSelecC= [];
           })
           .catch(() => {
@@ -241,6 +238,20 @@ export default {
             this.isClick2 = false;
           });  
     }
+  },
+  toast(message) {
+    this.$toasted.info(message, {
+      duration: 2500,
+      position : 'top-center',
+      icon: "check-circle",
+      theme: "toasted-primary",
+      action : {
+        text : 'CERRAR',
+        onClick : (e, toastObject) => {
+            toastObject.goAway(0);
+        }
+      }
+    });
   },
   },
 

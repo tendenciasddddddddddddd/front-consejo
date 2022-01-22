@@ -13,7 +13,8 @@ import ReporteDoc from '../components/docentes/reportesdoc/ReporteDoc.vue'
 //DOCENTES-CALIFICAR
 
 import Asiste from '../components/docentes/asistencias/Asiste.vue'
-import Notas from '../components/docentes/notas/Notas.vue'
+//import Notas from '../components/docentes/notas/Notas.vue'
+import Qualifys from '../components/docentes/qualify/Qualifys.vue'
 //ESTUDIANTES
 import Profile from '../components/estudiantes/perfil/Profile.vue'
 import Nota from '../components/estudiantes/notas/Nota.vue'
@@ -21,16 +22,16 @@ import Report1 from '../components/estudiantes/reportes/Report.vue'
 import HistoriaEst from '../components/estudiantes/historialE/HistoriaEst.vue'
 //AULAS VIRTUALES DOCENTES
 import AulasListas from '../components/aulasvirtuales/profesores/manu/AulasListas.vue'
-import AulaCreate from '../components/aulasvirtuales/profesores/aulacreate/AulaCreate.vue'
 import Report from '../components/reportes/matriculas/pdfs/Report.vue'
-import Aulaprincipal from '../components/aulasvirtuales/profesores/aulaprincipal/Aulaprincipal.vue'
 import Task from '../components/aulasvirtuales/profesores/task/Task.vue'
-import ReviewTasks from '../components/aulasvirtuales/profesores/reviewtask/ReviewTasks.vue'
+import Calendar from '../components/aulasvirtuales/profesores/calendario/Calendar.vue'
 //AULAS VIRTUALES ESTUDIANTES
 import AllAulas from '../components/aulasvirtuales/alumnos/allAulas/AllAulas.vue'
 import MyAulas from '../components/aulasvirtuales/alumnos/myAulas/MyAulas.vue'
 import HomeAulas from '../components/aulasvirtuales/alumnos/homeAulas/HomeAulas.vue'
 import Tasks from '../components/aulasvirtuales/alumnos/tasks/Tasks.vue'
+//HELP
+import PageNotFound from '../components/help/NoFound.vue'
 
 Vue.use(VueRouter)
 
@@ -186,15 +187,11 @@ const routes = [{
     name: 'actualmatricula3',
     component: require('../components/matriculas/matricula/mat2/ActualMatricula2.vue').default
   },
-  { //-------------------------------------MATRICULA ERROR------------------------------
-    path: '/Error-reg',
-    name: '404',
-    component: require('../components/help/error.vue').default
-  },
-  { //-------------------------------------MATRICULA ERROR------------------------------
-    path: '/507',
-    name: '/500-working',
-    component: require('../components/help/working.vue').default
+
+  { //-------------------------------------ERROR PERMISO------------------------------
+    path: '/page-not-found',
+    name: '/page-not-found',
+    component: require('../components/help/NoFound.vue').default
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Menu-Distributivo',
@@ -238,12 +235,13 @@ const routes = [{
     name: 'dr',
     component: ReporteDoc
   },
+
   {
-    path: '/dnotas/:id',
+    path: '/qualifys/:id',
     name: 'd4',
-    component: Notas,
-    props: true
+    component: Qualifys,
   },
+  
   {
     path: '/asistencias/:id',
     name: 'asistencia',
@@ -293,25 +291,17 @@ const routes = [{
     name: 'al',
     component: AulasListas
   },
-  {
-    path: '/crear-aula',
-    name: 'alce',
-    component: AulaCreate
-  },
-  {
-    path: '/aula-principal/:id',
-    name: 'al',
-    component: Aulaprincipal
-  },
+
   {
     path: '/task-config/:id',
     name: 'al',
     component: Task
   },
+
   {
-    path: '/review-task/:id',
-    name: 'reviews',
-    component: ReviewTasks
+    path: '/my-calendar',
+    name: 'calendar',
+    component: Calendar
   },
    ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------
   {
@@ -334,15 +324,17 @@ const routes = [{
     name: 'es1',
     component: Tasks
   },
+  
+  { path: "*", component: PageNotFound },
 
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
+  // }
 ]
 
 function authorization(to, from, next) {

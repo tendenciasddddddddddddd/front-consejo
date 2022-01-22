@@ -27,6 +27,9 @@ export default {
       searchQuery: null,
       rows: 6,
       isActive : false,
+      selected: [],
+      allSelected: false,
+      userIds: [],
     };
   },
   computed: {
@@ -66,88 +69,52 @@ export default {
           this.isLoading = false;
         });
     },
-    __eliminar(idn) {
-      this.isLoading = true;
-      if (confirm('Estás a punto de eliminar a un estudiante de esta cuenta. Esta acción no se puede deshacer.')) {
-        this.$proxies._registroProxi
-        .remove(idn) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-        .then(() => {
-          this.$notify({
-            group: "global",
-            text: "Registro destruido",
-          });
-          this.isLoading = false;
-          this.getAll(1,6);
-        })
-        .catch((x) => {
-          if (x.response.status == 403) {
-            //ENVIA EL TOKEN SI NO TIENE EL PERMISO RETORNA UN STATUS 403 NO AUTHORIZATION
-            alert("Usted no tiene permisos");
-          }
-          console.log("Error", x);
-          this.isLoading = false;
-        });
-      }else{
-        this.isLoading = false;
-      }
-     
-    },
-
-    selectUser(key){
-      let longitud = this.isSelecUsers.length;
-      let isExiste = 0;
-      if(longitud>0){
-         for (let i = 0; i < this.isSelecUsers.length; i++) {
-            if(this.isSelecUsers[i]==key){
-             this.isSelecUsers.splice(i, 1); 
-             isExiste = 1;
-             break;
-            }
-         }
-         if(isExiste===0){ 
-           this.isSelecUsers.push(key);
-         }
-      }else{
-       this.isSelecUsers.push(key);
-      } 
-    },
-
     remove() {
-      //METODO PARA ELIMINAR  ROW
-      if (
-        confirm(
-          "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
-        )
-      ) {
-        this.iseliminaddo = true;
-        let isArray = this.isSelecUsers.length;
-        if(isArray>0){
-          this.$proxies._registroProxi
-            .remove(this.isSelecUsers)
-            .then(() => {
-              this.iseliminaddo = false;
-              this.isSelecUsers= [];
-              this.getAll(1,6); 
-            })
-            .catch(() => {
-              console.log("Error imposible");
-            });
-          this.$notify({
-            group: "global",
-            text: "Registro destruido",
-          });
-          
-       }
-      }
+      let message = {
+        title: "¿Destruir registro?",
+        body: " Esta acción no se puede deshacer",
+      };
+      let options = {
+        loader: true,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.dialogDelete();
+          setTimeout(() => {
+            dialog.close();
+            this.toast("Se elimino a usuarios de sistema con su cuenta");
+          }, 1000);
+        })
+        .catch(function() {});
+    },
+    dialogDelete() {
+      this.iseliminaddo = true;
+      let isArray = this.userIds.length;
+      if(isArray>0){
+        this.$proxies._registroProxi
+          .remove(this.userIds)
+          .then(() => {
+            this.iseliminaddo = false;
+            this.userIds= [];
+            this.getAll(this.paginaActual,6); 
+          })
+          .catch(() => {
+            console.log("Error imposible");
+          });   
+     }
     },
     editar(){
-      let isArray = this.isSelecUsers.length;
+      let isArray = this.userIds.length;
         if(isArray===1){
-          this.$router.push({path: `/Estudiate/${this.isSelecUsers[0]}/edit`})
+          this.$router.push({path: `/Estudiate/${this.userIds[0]}/edit`})
         }
     },
     buscar(){//buscadorUsuario
-      this.isSelecUsers = [];
+      this.userIds = [];
       this.contador = this.contador +1;
       this.contador2 = this.contador2 +1;
       if (this.contador===1) {
@@ -168,13 +135,47 @@ export default {
          
       }
      },
-     salirBusqueda(){
+     selectOne(ids) {
+      
+      if (!this.userIds.includes(ids)) {
+        this.userIds.push(ids);
+      } else {
+        this.userIds.splice(this.userIds.indexOf(ids), 1);
+      }
+    },
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 2600,
+        position: "bottom-center",
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: "CERRAR",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
+    },
+     selectAll: function() {
+      this.allSelected= true;
+      this.userIds = [];
+      if (this.allSelected) {
+        for (let user in this.info) {
+          this.userIds.push(this.info[user]._id);
+        }
+      } 
+    },
+    deletedSelected: function() {
+      this.allSelected= false;
+      this.userIds = [];
+    },
+     salirBusqueda: function(){
        this.viewtable = 1;
        this.contador=0;
        this.searchQuery = null;
-       this.isSelecUsers = [];
      },
-     cambiar_pagina(num){
+     cambiar_pagina: function(num){
       this.rows = num;
       this.getAll(1);
      }
@@ -188,6 +189,7 @@ export default {
       handler(pagina) {
         pagina = parseInt(pagina) || 1;
         this.getAll(pagina);
+        this.userIds = [];
         this.paginaActual = pagina;
       },
     },

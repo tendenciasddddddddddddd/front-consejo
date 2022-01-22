@@ -20,7 +20,7 @@ export default {
       listniveles: null,
       isSelecMatricula: [],
       iseliminaddo: false,
-
+       nombre_curso: '',
       index: "0",
     };
   },
@@ -113,8 +113,9 @@ export default {
         this.isSelecMatricula = [];
       }
     },
-    clicMe(keys) {
+    clicMe(keys, nombreCurso) {
       this.index = keys;
+      this.nombre_curso = nombreCurso;
     },
   },
   created() {

@@ -1,22 +1,25 @@
-import Spinner from "../../../../shared/Spinner";
+import ProgressBar from "../../../../shared/ProgressBar";
 import { VueEditor } from "vue2-editor";
 import DatePicker from 'vue2-datepicker';
 import { StorageRef } from "../../../../boot/firebase";
 import 'vue2-datepicker/index.css';
 import vueDropzone from "vue2-dropzone";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
+import TaskReview from "../../../../views/moduleAulas/grupDocente/TaskReview"
 let image = require("../../../../assets/img/usados/all.svg");
+
 //Servicios
 import serviceTask from './ServiceTASK';
 const ResultServiceTask = new  serviceTask();
 export default {
   name: "Task",
-  components: { Spinner, VueEditor, DatePicker, vueDropzone },
+  components: { ProgressBar, VueEditor, DatePicker, vueDropzone, TaskReview },
   data() {
     return {
       info: null,
       isData: false,
       isTask: "closed",
+     // image: img,
       ifLoad : false,
       ifLoad2: false,
       isPlaso: 'Sin plazo',
@@ -27,7 +30,7 @@ export default {
         <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
         <p class='text-sm fuente links'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
         `,
-        maxFilesize: 2,
+        maxFilesize: 1,
         maxFiles: 1,
         thumbnailHeight: 140,
         
@@ -46,19 +49,34 @@ export default {
       htmlForEditor: "",
       customToolbar: [
       ],
-      clickme: '0',
+      clickme: false,
       dateTask: '',
       idtask: null,
+      searchQuery: '',
        //Pagina 
        page: 1,
-       perPage: 7,
+       perPage: 8,
        pages: [],
        numPages:null,
+       //CHILD COMPONENT
+       ifChildRevision: false,
+       idAula: '',
+       idTasks: '',
     };
   },
   computed: {
     displayedArticles: function () {
-      return this.paginate(this.info.task);
+      if (this.searchQuery.length>1) {
+        return this.info.task.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.nombre.toLowerCase().includes(v));
+        });
+      }else{
+        return this.paginate(this.info.task);
+      }
+      
     }
   },
   methods: {
@@ -67,22 +85,23 @@ export default {
       let perPage = this.perPage;
       let from = (page * perPage) - perPage;
       let to = (page * perPage);
-      this.numPages = Math.ceil(articles.length/7);
-      this.isSelecUsers = [];
+      this.numPages = Math.ceil(articles.length/this.perPage);
       return articles.slice(from, to);
   },
     getData() {
       this.isData = true;
+      this.$Progress.start();
       if (this.$route.params.id) {
         this.$proxies._aulaProxi
           .get(this.$route.params.id)
           .then((x) => {
             this.info = x.data;
             this.isData = false;
+            this.$Progress.finish();
           })
-          .catch((err) => {
-            console.log("Error", err);
-            this.isData = false;
+          .catch(() => {
+            alert("En esta ruta no hay nada que mostrar");
+            this.isData = true;
           });
       }
     },
@@ -98,7 +117,6 @@ export default {
         }
         if (this.idtask) { //editTask
           this.ifLoad = true;
-          this.model.task.estado = 0;
           let keys = this.$route.params.id +','+ this.idtask
           this.$proxies._aulaProxi
               .editTask(keys, this.model) //-----------EDITAR CON AXIOS
@@ -107,9 +125,10 @@ export default {
                 this.isTask= "closed";
                 this.isSelecUsers = [];
                 this.getData();
+                this.toast('Actualizaste exitosamente una tarea');
               })
-              .catch((err) => {
-                alert("Error", err);
+              .catch(() => {
+                this.$dialog.alert("El servidor responde con un codigo de estado 413. Su solicitud no fue procesada");
                 this.ifLoad = false;
               });
         }else{
@@ -122,9 +141,10 @@ export default {
                 this.isTask= "closed";
                 this.isSelecUsers = [];
                 this.getData();
+                this.toast('Listo. Creaste una nueva tarea para tus estudiantes');
               })
-              .catch((err) => {
-                alert("Error", err);
+              .catch(() => {
+                this.$dialog.alert("El servidor responde con un codigo de estado 413. Su solicitud no fue procesada");
                 this.ifLoad = false;
               });
         }
@@ -144,34 +164,55 @@ export default {
     },
 
     __eliminar() {
-      this.isLoading = true;
-      if (confirm('ESTA SEGURO QUE QUIERE ELIMINAR?')) {
-        let isArray = this.isSelecUsers.length;
-        if (isArray > 0) {
-          this.$proxies._aulaProxi
-          .removeTask(this.$route.params.id, this.isSelecUsers) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-          .then(() => {
-            this.$notify({
-              group: "global",
-              text: "Registros destruidos",
-            });
-            this.isLoading = false;
-            this.isSelecUsers = [];
-            this.getData();
-          })
-          .catch((x) => {
-            alert("Error server not found", x.response);
-          });
-        }
-        
-      }else{
-        this.isLoading = false;
+      let message = {
+        title: "¿Esta seguro que quiere eliminar?",
+        body: " Esta acción no se puede deshacer",
+      };
+      let options = {
+        loader: true,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.dialogDelete();
+          this.numPages=1;
+            this.page=1;
+          setTimeout(() => {
+            dialog.close();
+            
+          }, 1200);
+         
+        })
+        .catch(function() {
+         
+        });
+    },
+
+    dialogDelete() {
+      
+      let isArray = this.isSelecUsers.length;
+      if (isArray > 0) {
+        this.isLoading = true;
+        this.$proxies._aulaProxi
+        .removeTask(this.$route.params.id, this.isSelecUsers) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+        .then(() => {
+          this.isLoading = false;
+          this.isSelecUsers = [];
+          this.page =1;
+          this.getData();
+          this.toast('Se eliminó '+isArray+' tareas de este curso');
+        })
+        .catch((x) => {
+          this.isLoading = false;
+          alert("Error server not found", x.response);
+        });
       }
-  
     },
 
     afterComplete(upload) {
-      
       this.ifLoad2 = true;
       var date = new Date();
       let result = date.toISOString();
@@ -211,26 +252,14 @@ export default {
        this.model.task.archivo = '';
        this.isPlaso = 'Sin plazo';
        this.img1 = '';
-       this.clickme = '0';
+       this.clickme = false;
     },
-
-    selectTask(key){
-      let longitud = this.isSelecUsers.length;
-      let isExiste = 0;
-      if(longitud>0){
-         for (let i = 0; i < this.isSelecUsers.length; i++) {
-            if(this.isSelecUsers[i]==key){
-             this.isSelecUsers.splice(i, 1); 
-             isExiste = 1;
-             break;
-            }
-         }
-         if(isExiste===0){ 
-           this.isSelecUsers.push(key);
-         }
-      }else{
-       this.isSelecUsers.push(key);
-      } 
+    selectOne(ids) {
+      if (!this.isSelecUsers.includes(ids)) {
+        this.isSelecUsers.push(ids);
+      } else {
+        this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
+      }
     },
     editTask(){
         let aux = this.isSelecUsers.length
@@ -246,6 +275,7 @@ export default {
               this.model.task.nombre = arrasTask[0].nombre;
               this.model.task.descripcion = arrasTask[0].descripcion;
               this.model.task.archivo = arrasTask[0].archivo;
+              this.model.task.estado = arrasTask[0].estado;
               this.dateTask = arrasTask[0].finicio;
              }
           }
@@ -257,7 +287,32 @@ export default {
         this.$router.push({ path: `/review-task/${idparam}` }) // -> /user/123
       }
       
-    }
+    },
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 2100,
+        position : 'bottom-center',
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action : {
+          text : 'CERRAR',
+          onClick : (e, toastObject) => {
+              toastObject.goAway(0);
+          }
+        }
+      });
+    },
+    openCont : function(){
+      this.clickme = !this.clickme
+    },
+    openChildRewiewTrask: function(key){
+      this.ifChildRevision = true;
+      this.idAula = this.$route.params.id;
+      this.idTasks= key;
+    },
+    closedChildRewiewTrask: function(){
+      this.ifChildRevision = false;
+    },
   },
   created() {
     this.getData();

@@ -1,7 +1,7 @@
 <template>
 <div >
     <p v-if="isNacion">Espere por favor...</p>
-     <v-select v-else
+     <v-select v-else class="style-chooser" 
     :options="listNacionalidad"
     v-model="modNacion" label="nombre" @input="checkExist($event)"
   >

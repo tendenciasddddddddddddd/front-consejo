@@ -352,15 +352,4 @@
 </template>
 
 <script src="./Report.js"></script>
-<style>
-.activado {
-  background-color: #e5f5f8 !important;
-  box-shadow: 0 0 0 2px #00a4bd !important;
-  border-style: none;
-}
-.noactive {
-  border-color: #7fd1de;
-  box-shadow: 0 0 0 1px #7fd1de;
-  border-radius: 3px;
-}
-</style>
+

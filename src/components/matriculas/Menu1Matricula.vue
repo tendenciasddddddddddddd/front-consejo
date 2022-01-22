@@ -88,20 +88,4 @@ export default {
   },
 };
 </script>
-<style>
-.mole {
-  background-color: white;
-  transition: background-color 0.5s;
-}
 
-.mole:hover {
-  background-color: #f5f5f5;
-  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-}
-
-.bd-example {
-  position: relative;
-  padding: 2rem;
-  border: 3px solid #eee;
-}
-</style>

@@ -53,27 +53,28 @@
                 <section v-else class="flex-containes mt-2">
                   <div v-for="item in listniveles" :key="item.id">
                     <div
-                      class=" p-2  noactive cajas"
+                      class=" p-2 borde5 noactive cajas"
                       :class="{ activado: index === item._id }"
                       style="max-width: 200px;"
                     >
-                      <a href="javascript:;" @click="clicMe(item._id)">
+                      <a href="javascript:;" @click="clicMe(item._id, item.nombres)">
                         <div class="text-center position-relative">
                           <div class="blur-shadow-image">
-                            <img style="height: 130px;"
-                              class="img  move-on-hover"
+                            <img 
+                              class="img  move-on-hover w-40"
                               src="../../../../assets/img/logs/electronic-signature.svg"
                             />
                           </div>
                         </div>
-                        <div>
-                          <p class="parrafo text-center">
-                            Curso: <br />
-                            <span class="cardSubTitle" >{{
-                              item.nombres.slice(0, 25)
-                            }}</span>
-                          </p>
-                        </div>
+                        <div class="text-center">
+                        <span class="fuente cardTitle " style="font-size: 20px;">Curso: </span><br>
+                        
+                        <span class="cardSubTitle">{{ item.nombres.slice(0, 25) }}</span> 
+                        <hr>
+                        <a class="tamanio fuente">
+                          <b class="links">Lista estudiantes <i class="fa fa-plus ms-2" aria-hidden="true"></i></b>
+                        </a>
+                      </div>
                       </a>
                     </div>
                   </div>
@@ -97,6 +98,7 @@
                   <a
                     role="button"
                     v-if="!iseliminaddo"
+                     v-tooltip.top-center="isSelecMatricula.length ? '' : 'Seleccionar una o muchas filas para eliminar'"
                     class="fuente tamanio ms-4"
                     :class="{ disabled: isSelecMatricula.length === 0 }"
                     v-on="isSelecMatricula.length ? { click: () => remove() } : {}"
@@ -141,7 +143,7 @@
                         <th
                           class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
                         >
-                          Accion
+                          Paralelo
                         </th>
                       </tr>
                     </thead>
@@ -165,7 +167,7 @@
                         <td
                           class="text-sm text-center colorestabla fuente"
                         >
-                          <p class="mb-0 text-xs">{{ item.fknivel.nombres }}</p>
+                          <p class="mb-0 text-xs">{{ nombre_curso }}</p>
                         </td>
                         <td class="text-sm text-center fuente">
                           ({{ item.curso }})
@@ -207,41 +209,4 @@
 
 <script src="./ActualMatricula2.js"></script>
 
-<style>
-div.dataTables_wrapper div.dataTables_filter {
-  width: 100%;
-  padding-left: 20px;
-}
 
-div.dataTables_wrapper div.dataTables_filter input {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.4rem;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #d2d6da;
-  appearance: none;
-  border-radius: 0.5rem;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  background: none;
-  color: black !important;
-  border-radius: 4px;
-  border: 1px solid #828282;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  z-index: 3;
-
-  color: #8392ab;
-  padding: 0;
-  margin: 0 3px;
-  border-radius: 50% !important;
-  width: 36px;
-  height: 36px;
-  font-size: 0.875rem;
-}
-</style>

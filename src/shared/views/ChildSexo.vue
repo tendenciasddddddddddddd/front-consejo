@@ -1,5 +1,5 @@
 <template>
-  <v-select :options="sexos" v-model="mod" label="nombre" @input="checkExist($event)">
+  <v-select class="style-chooser" :options="sexos" v-model="mod" label="nombre" @input="checkExist($event)"  >
     <template #option="{ nombre }">
       <h6 style="margin: 0">{{ nombre }}</h6>
     </template>
@@ -50,3 +50,4 @@ export default {
   },
 };
 </script>
+

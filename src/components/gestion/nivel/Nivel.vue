@@ -43,6 +43,7 @@
                 role="button"
                 class="fuente tamanio"
                 :class="{ disabled: isSelecUsers.length != 1 }"
+                 v-tooltip.top-center="isSelecUsers.length ? '' : 'Seleccionar un fila para poder editar'"
               >
                 <i class="fas fa-pencil-alt me-2 ms-3 iconos"></i>
                 <b class="me-4 " :class="{ links: isSelecUsers.length === 1 }"
@@ -55,6 +56,7 @@
                 class="fuente tamanio"
                 :class="{ disabled: isSelecUsers.length === 0 }"
                 v-if="!iseliminaddo"
+                v-tooltip.top-center="isSelecUsers.length ? '' : 'Seleccionar una o muchas filas para eliminar'"
               >
                 <i class="far fa-trash-alt me-2 iconos"></i>
                 <b class="me-4 " :class="{ links: isSelecUsers.length != 0 }"

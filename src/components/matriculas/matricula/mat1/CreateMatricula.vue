@@ -173,6 +173,7 @@
                         :class="{ error: validation.hasError('model.fknivel') }"
                         :options.sync="listniveles"
                         label="nombres"
+                        class="style-chooser"
                         v-model="model.fknivel"
                         required
                       >
@@ -198,6 +199,7 @@
                         :options.sync="listPeriodo"
                         @input="checkExist($event)"
                         label="nombre"
+                        class="style-chooser"
                         v-model="model.academico"
                         required
                       >

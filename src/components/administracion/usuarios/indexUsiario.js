@@ -1,11 +1,11 @@
 //import Paginacion from '../../../shared/Paginacion'
-import RestResource from '../../../service/isAdmin'
+import RestResource from "../../../service/isAdmin";
 const restResourceService = new RestResource();
-import Spinner from '../../../shared/Spinner'
+import Spinner from "../../../shared/Spinner";
 export default {
   name: "indexUsiario",
   components: {
-    Spinner
+    Spinner,
   },
   data() {
     return {
@@ -32,13 +32,16 @@ export default {
       },
       isSelecUsers: [],
       iseliminaddo: false,
-      contador : 0,
-      contador2 : 0,
-      viewtable:1,
+      contador: 0,
+      contador2: 0,
+      viewtable: 1,
       listbuscador: {},
       searchQuery: null,
-      modals: 'closed',
-      subtitulo: 'none',
+      modals: "closed",
+      subtitulo: "none",
+      selected: [],
+      allSelected: false,
+      userIds: [],
     };
   },
   computed: {
@@ -50,18 +53,19 @@ export default {
             .split(" ")
             .every((v) => item.fullname.toLowerCase().includes(v));
         });
-      } 
+      }
     },
   },
   methods: {
-    verificarUsuario(){
-      if(!restResourceService.admin(this.roles)){
+
+    verificarUsuario() {
+      if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
       }
     },
-    getAll(pag , lim) {
+    getAll(pag, lim) {
       this.isLoading = true;
-      this.subtitulo = lim + ' filas por página';
+      this.subtitulo = lim + " filas por página";
       this.$proxies._usuarioProxi
         .getAll(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
         .then((x) => {
@@ -78,65 +82,90 @@ export default {
         });
     },
 
-    selectUser(key){
-      let longitud = this.isSelecUsers.length;
-      let isExiste = 0;
-      if(longitud>0){
-         for (let i = 0; i < this.isSelecUsers.length; i++) {
-            if(this.isSelecUsers[i]==key){
-             this.isSelecUsers.splice(i, 1); 
-             isExiste = 1;
-             break;
-            }
-         }
-         if(isExiste===0){ 
-           this.isSelecUsers.push(key);
-         }
-      }else{
-       this.isSelecUsers.push(key);
-      } 
-    },
-    remove() {
-      //METODO PARA ELIMINAR  ROW
-      if (
-        confirm(
-          "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
-        )
-      ) {
-        this.iseliminaddo = true;
-        let isArray = this.isSelecUsers.length;
-        if(isArray>0){
-          this.$proxies._usuarioProxi
-            .remove(this.isSelecUsers)
-            .then(() => {
-              this.iseliminaddo = false;
-              this.isSelecUsers= [];
-              this.getAll(1,6); 
-            })
-            .catch(() => {
-              console.log("Error imposible");
-            });
-          this.$notify({
-            group: "global",
-            text: "Registro destruido",
-          });
-          
-       }
+    selectOne(ids) {
+      
+      if (!this.userIds.includes(ids)) {
+        this.userIds.push(ids);
+      } else {
+        this.userIds.splice(this.userIds.indexOf(ids), 1);
       }
     },
-    editar(){
-      let isArray = this.isSelecUsers.length;
-        if(isArray===1){
-          this.$router.push({path: `/usuarios/${this.isSelecUsers[0]}/edit`})
+    selectAll: function() {
+      this.allSelected= true;
+      this.userIds = [];
+      if (this.allSelected) {
+        for (let user in this.info) {
+          this.userIds.push(this.info[user]._id);
         }
+      } 
     },
-    buscar(){//buscadorUsuario
-     this.isSelecUsers = [];
-     this.contador = this.contador +1;
-     this.contador2 = this.contador2 +1;
-     if (this.contador===1) {
+    deletedSelected: function() {
+      this.allSelected= false;
+      this.userIds = [];
+    },
+    remove() {
+      let message = {
+        title: "¿Destruir registro?",
+        body: " Esta acción no se puede deshacer",
+      };
+      let options = {
+        loader: true,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.dialogDelete();
+          setTimeout(() => {
+            dialog.close();
+            this.toast("Se elimino a usuarios de sistema con su cuenta");
+          }, 1000);
+        })
+        .catch(function() {});
+    },
+    dialogDelete() {
+      this.iseliminaddo = true;
+      let isArray = this.userIds.length;
+      if (isArray > 0) {
+        this.$proxies._usuarioProxi
+          .remove(this.userIds)
+          .then(() => {
+            this.iseliminaddo = false;
+            this.getAll(this.paginaActual, 6);
+          })
+          .catch(() => {
+            console.log("Error imposible");
+          });
+      }
+    },
+    editar() {
+      let isArray = this.userIds.length;
+      if (isArray === 1) {
+        this.$router.push({ path: `/usuarios/${this.userIds[0]}/edit` });
+      }
+    },
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 2600,
+        position: "bottom-center",
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: "CERRAR",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
+    },
+    buscar() {
+      this.contador = this.contador + 1;
+      this.contador2 = this.contador2 + 1;
+      if (this.contador === 1) {
         this.viewtable = 2;
-        if (this.contador2===1) {
+        if (this.contador2 === 1) {
           this.isLoading = true;
           this.$proxies._usuarioProxi
             .buscadorUsuario() //EJECUTA LOS PROXIS QUE INYECTA AXIOS
@@ -149,15 +178,13 @@ export default {
               this.isLoading = false;
             });
         }
-        
-     }
+      }
     },
-    salirBusqueda(){
+    salirBusqueda: function() {
       this.viewtable = 1;
-      this.contador=0;
+      this.contador = 0;
       this.searchQuery = null;
-      this.isSelecUsers = [];
-    }
+    },
   },
   created() {
     this.verificarUsuario();
@@ -167,7 +194,8 @@ export default {
       immediate: true,
       handler(pagina) {
         pagina = parseInt(pagina) || 1;
-        this.getAll(pagina,6);
+        this.getAll(pagina, 6);
+        this.userIds = [];
         this.paginaActual = pagina;
       },
     },

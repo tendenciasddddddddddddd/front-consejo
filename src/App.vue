@@ -12,7 +12,7 @@
           <Inicio />
           <!-- End Navbar -->
           <div class="container-fluid py-4">
-            <router-view />
+           <router-view/>
             <!-- INICIO FOOTER -->
            <Help/>
             <!-- <Footer /> -->
@@ -82,7 +82,7 @@ export default {
         var url = "https://pcei-tulcan.com/api";
         localStorage.setItem("config", JSON.stringify(url));
         self.hasConfig = true;
-        window.location.reload(true);
+       // window.location.reload(true);
       } else {
         self.hasConfig = true;
         __isLogedIn();
@@ -97,3 +97,6 @@ export default {
   },
 };
 </script>
+<style>
+  @import './assets/styles/mainstyles.css';
+</style>

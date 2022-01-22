@@ -10,11 +10,11 @@
       >
         <div
           class=" cabesa"
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 58px;
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
          padding: 4px 25px 4px 40px;"
         >
           <div class="float-start">
-            <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente text-white">
+            <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
               Registro Estudiates
             </h5>
             <!--  <p class="parrafo">{{nombre}}</p> -->
@@ -24,7 +24,39 @@
               to="/List-Estudiate"
               class="btn btn-link text-dark p-0 fixed-plugin-close-button"
             >
-              <i style="font-size: 30px;" class="fa fa-close text-white"></i>
+              <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 172 172"
+                    style=" fill:#000000;"
+                  >
+                    <g
+                      fill="none"
+                      fill-rule="nonzero"
+                      stroke="none"
+                      stroke-width="1"
+                      stroke-linecap="butt"
+                      stroke-linejoin="miter"
+                      stroke-miterlimit="10"
+                      stroke-dasharray=""
+                      stroke-dashoffset="0"
+                      font-family="none"
+                      font-weight="none"
+                      font-size="none"
+                      text-anchor="none"
+                      style="mix-blend-mode: normal"
+                    >
+                      <path d="M0,172v-172h172v172z" fill="none"></path>
+                      <g fill="#ffffff">
+                        <path
+                          d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
+                        ></path>
+                      </g>
+                    </g>
+                  </svg>
             </router-link>
           </div>
           <!-- End Toggle Button -->
@@ -465,41 +497,4 @@
   </div>
 </template>
 <script src="./AddEstudiante.js"></script>
-<style>
-.scrorable {
-  max-height: 250px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: justify;
-}
-.loadingg {
-  position: fixed;
-  z-index: 9999;
-  background-color: #ffffffb3;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-}
-.inn {
-  text-align: center;
-  padding: 2rem;
-  font-weight: 600;
-}
-.alertdanger{
-  background-color: #fef8f0;
-    border-color: #fae0b5;
-    color: #33475b;    border-style: solid;
-    border-width: 1px;padding: 8px 20px;
-}
-.alertinfo{
-  background-color: rgb(234, 240, 246);
-    border-color: rgb(182, 198, 214);
-    color: #33475b;    border-style: solid;
-    border-width: 1px;padding: 8px 20px;
-}
-</style>
+

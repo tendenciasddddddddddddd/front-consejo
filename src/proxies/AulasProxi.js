@@ -32,6 +32,10 @@ export default class AulasProxi {
         return this.axios.put(this.url + `/aulas/${id}`, params);
     }
 
+    removeUsers(id, params) {
+        return this.axios.put(this.url + `/aulas/users/${id}`, params);
+    }
+
     //***********************************TAREAS************************************ */
 
     createTask(id, params) {
@@ -42,11 +46,19 @@ export default class AulasProxi {
         return this.axios.put(this.url + `/tasks/editTask/${id}`, params);
     }
 
-    removeTask(id, params) {
+    calificarTask(id, params) {
+        return this.axios.put(this.url + `/tasks/calificarTask/${id}`, params);
+    }
+
+    reviewTasks(id, params) {
+        return this.axios.put(this.url + `/tasks/reviewTask/${id}`, params);
+    }
+
+    removeTask(id, params) { 
         return this.axios.put(this.url + `/tasks/removetask/${id}`, params);
     }
     
-    //********************************ESTUDIANTES SENDTRASK */
+    //********************************ESTUDIANTES reviewTask */
     sendTask(id, params) {
         return this.axios.put(this.url + `/tasks/send/${id}`, params); //RUTA ARBOL 2
     }

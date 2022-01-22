@@ -215,7 +215,7 @@
             class="modal fade "
             :class="{ 'show ': modals === 'openn' }"
             :style="[modals === 'openn' ? { display: 'block' } : {}]"
-            style="overflow-y: auto;  top:35px;  z-index: 9999;"
+            style="overflow-y: auto;   z-index: 9999;"
             id="exampleModal"
             tabindex="-1"
             role="dialog"
@@ -225,14 +225,16 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content ">
                 <div class="modalheader">
-                  <p class="h5 fuente text-white mt-3 ms-3">
-                    {{ model._id ? "Actualizar Registro" : "Crear Registro" }}
+                  <p class="h5 fuente text-white mt-3 ms-3" style="font-weight:400;">
+                    {{ model._id ? "Actualizar nuevo registro en provincia" : "Añadir nuevo registro en provincia" }}
                   </p>
                   <button
                     @click="modals = 'cier'"
-                    class="btn btn-link text-white "
+                    class="btn btn-link text-white fuente"
+                    style="margin-top: -100px; margin-right: -20px;"
                   >
-                    <i style="font-size: 32px" class="fa fa-close"></i>
+                 
+                   CERRAR &nbsp; <i style="font-size: 12px" class="fa fa-close"></i>
                   </button>
                 </div>
                 <div class="modal-body">

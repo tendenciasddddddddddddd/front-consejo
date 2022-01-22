@@ -2,7 +2,8 @@ import Spinner from "../../../../shared/Spinner";
 import { StorageRef } from "../../../../boot/firebase";
 import vueDropzone from "vue2-dropzone";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
-let image= require('../../../../assets/img/usados/all.svg')
+let image= require('../../../../assets/img/usados/all.svg');
+
 export default {
   name: "Task",
   components: { Spinner, vueDropzone},
@@ -15,21 +16,23 @@ export default {
         url: "https://httpbin.org/post",
         dictDefaultMessage: `
         <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
-        <p class='text-default fuente'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Subir un archivo 👆 (Opcional)</p>
+        <p class='text-sm fuente links'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
         `,
-        maxFilesize: 2,
-        maxFiles: 2,
+        maxFilesize: 1,
+        maxFiles: 1,
         thumbnailHeight: 140,
       },
       //INPUT FILE
       isImageUploads: false,
       imageData: null,
       uploadValue: 0,
-      img1 : '',  
+      img1 : '', 
+       
       usuario: this.$store.state.user.id,
       //SEND TASK
       tabla: "offtask",
       ifcarga: false,
+      ifLoad2: false,
       title : '',
       descrition : '',
       recursos : '',
@@ -42,20 +45,47 @@ export default {
           _id: null,
             entrega: {
              idUser: this.$store.state.user.id,
-             nombres: '',
+             nota: '',
              link: "",
           },
         },
       },
       ifLoad: false,
       fullTask: [],
+      tarea_atrazada: false,
+      searchQuery: '',
+       //Pagina 
+       page: 1,
+       perPage: 8,
+       pages: [],
+       numPages:null,
+
     };
   },
+  computed: {
+    displayedArticles: function () {
+      if (this.searchQuery.length>1) {
+        return this.fullTask.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.nombre.toLowerCase().includes(v));
+        });
+      }else{
+        return this.paginate(this.fullTask);
+      }
+      
+    }
+  },
   methods: {
-    appInit(){
-      const infor = JSON.parse(localStorage.getItem("Xf"));
-      this.model.task.entrega.nombres = infor.nombre;
-    },
+    paginate(articles) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = (page * perPage) - perPage;
+      let to = (page * perPage);
+      this.numPages = Math.ceil(articles.length/this.perPage);
+      return articles.slice(from, to);
+  },
     getData() {
       this.isData = true;
       if (this.$route.params.id) {
@@ -85,15 +115,17 @@ export default {
            let arci = tareas[i].archivo;
            let idB = 0;
            let isSend = false;
+           let nota = '';
            let entregas = tareas[i].entrega;
            for (let j = 0; j < entregas.length; j++) {
                idB = entregas[j]._id;
                if (entregas[j].idUser == this.usuario) {
                    isSend = true;
+                   nota = entregas[j].nota;
                    break;
                }
            }
-           this.fullTask.push({id: idA, id2: idB, nombre : nameTask,fecha: fechalim, estado : isSend, desc : descrition, archivo: arci});
+           this.fullTask.push({id: idA, id2: idB, nombre : nameTask,fecha: fechalim, estado : isSend, desc : descrition, archivo: arci,nota: nota});
         }
     },
 
@@ -102,7 +134,12 @@ export default {
       },
 
     afterComplete(upload) {
-      
+      let fecha = new Date().toISOString();
+      if (this.datetimes<= fecha) {
+        this.tarea_atrazada = true;
+        return;
+      }
+      this.ifLoad2 = true;
       var date = new Date();
       let result = date.toISOString();
       const storageRef = StorageRef.ref(`archivos/${result}`).put(
@@ -116,12 +153,14 @@ export default {
         },
         (error) => {
           console.log(error.message);
+          this.ifLoad2 = false;
         },
         () => {
           this.uploadValue = 100;
           storageRef.snapshot.ref.getDownloadURL().then((url) => {
             this.img1 = url;
             this.model.task.entrega.link = this.img1;
+            this.ifLoad2 = false;
           });
         }
       );
@@ -129,17 +168,27 @@ export default {
 
     //----------------------------------------------------------ENVIAR TAREA DE ESTUDIANTE---------------------------------
     openModal(key){
-      this.__limpiarCampos();
-     console.log(key)
-     this.idSubColeccion = key.id;
-     this.title = key.nombre;
-     this.descrition = key.desc;
-     this.recursos = key.archivo;
-     this.datetimes = key.fecha;
-     this.isPlaso = this.fechas(this.datetimes);
-     this.tabla= "ontask";
+      if (key.nota!='') {
+        this.$dialog.alert('La tarea ya se encuentra calificada, no se pude actualizar')
+      } else {
+        this.__limpiarCampos();
+        this.idSubColeccion = key.id;
+        this.title = key.nombre;
+        this.descrition = key.desc;
+        this.recursos = key.archivo;
+        this.datetimes = key.fecha;
+        this.isPlaso = this.fechas(this.datetimes);
+        this.tabla= "ontask";
+        this.task_time(this.datetimes);
+      }
     },
-     
+    //----------------------------------------------------------VALIDAR FECHA DE ENTREGA RETRASO-------------------------------
+    task_time(fecha2){
+      let fecha = new Date().toISOString();
+      if (fecha2<= fecha) {
+        this.tarea_atrazada = true;
+      }
+    },
     saveArbolEntrega(){
         if(this.model.task.entrega.link!=''){
           this.ifLoad = true;
@@ -156,7 +205,8 @@ export default {
               
             });
         }else{
-           alert('CARGAR UN ARCHIVO')
+          this.$dialog.alert('❌ Por favor cargar su tarea')
+          
         }
     },
 
@@ -168,6 +218,7 @@ export default {
      this.datetimes = '';
      this.isPlaso = '';
      this.model.task.entrega.link = '';
+     this.tarea_atrazada = false;
     },
 
     //----------------------------------------------------------------CALCULO DE HORAS ----------------------------------------
@@ -187,9 +238,11 @@ export default {
      
       } 
    },
+ 
+
   },
+ 
   created() {
-    this.appInit();
     this.getData();
   },
 };

@@ -15,6 +15,7 @@ export default {
       isVisible: "panel1",
       tabla: "1",
       idds: null,
+      istabs : '1',
       paralelos: [
         {
           value: "0",
@@ -58,7 +59,7 @@ export default {
       isError: '',
 
       index: "0",
-
+      nombre_curso : "",
       isSelected: false,
     };
   },
@@ -130,10 +131,7 @@ export default {
               this.isClick = false;
               this.isSelecCurosos= []
               this.isError= '';
-              this.$notify({
-                group: "global",
-                text: "Alumnos asignados",
-              });
+              this.toast('Se asigno a '+ isArray+' estudiantes al paralelo '+ this.model.curso)
             })
             .catch(() => {
               alert("Error algo salio mal!! envie un sms en el chat para que le den soporte");
@@ -148,41 +146,45 @@ export default {
 
 
     onChange(event) {
+      this.iftable='1';
       this.check=event.target.value;
       this.isSelected = true;
   },
-
-
 
     verLista() {
       if (this.index != "0") {
         this.__cambios(this.index);
         this.idds = this.index;
         this.isVisible = "panel2";
+        this.istabs = '1';
         this.check= '';
         this.isSelected = false;
         this.isSelecCurosos= []
       }
     },
-    clicMe(keys) {
+    clicMe(keys, nombreCurso) {
       this.index = keys;
+      this.nombre_curso = nombreCurso;
     },
 
     __volverAsignacion(){
-      this.isVisible = "panel2";
+      this.istabs = '1';
       this.isSelecCurosos= [];
       this.check= '';
       this.isSelected = false;
       this.isRemoveSelecC= [];
       this.isError= '';
+      
     },
     //------------------------------------CONFIGURAR MATRICULA---------------isConfig
-    __mostrarConf() {
-      this.isVisible = "panel3";
-      this.__configuramatricula();
+    __mostrarConf(curse) {
+      this.istabs = '2';
+      this.infoMat2 = this.filtros.filter((x) => x.curso == curse);
+      this.isRemoveSelecC= [];
     },
-    __configuramatricula() {
-      this.infoMat2 = this.filtros.filter((x) => x.curso == this.check);
+    __mostrarConf2(curse) {
+      this.istabs = '3';
+      this.infoMat2 = this.filtros.filter((x) => x.curso == curse);
       this.isRemoveSelecC= [];
     },
     removeSelectCursos(key){
@@ -210,18 +212,14 @@ export default {
     let isArray = this.isRemoveSelecC.length;
     this.model.curso = "Undefined";
     if(isArray>0){
-        
           this.$proxies._matriculaProxi
           .updateMatricula(this.isRemoveSelecC, this.model)
           .then(() => {
             this.isClick2 = false;
-            this.isVisible = "panel2";
             this.isRemoveSelecC= [];
             this.__cambios(this.idds); 
-            this.$notify({
-             group: "global",
-             text: "Alumnos removidos",
-            });
+            this.__volverAsignacion()
+            this.toast('Se removio de paralelo a  '+ isArray+' estudiantes');
           })
           .catch(() => {
             alert("Error algo salio mal!! envie un sms en el chat para que le den soporte");
@@ -229,7 +227,20 @@ export default {
           });  
     }
   },
-    
+  toast(message) {
+    this.$toasted.info(message, {
+      duration: 2500,
+      position : 'top-center',
+      icon: "check-circle",
+      theme: "toasted-primary",
+      action : {
+        text : 'CERRAR',
+        onClick : (e, toastObject) => {
+            toastObject.goAway(0);
+        }
+      }
+    });
+  },
   },
 
   created() {

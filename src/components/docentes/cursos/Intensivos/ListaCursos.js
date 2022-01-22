@@ -1,16 +1,19 @@
-import Analitic from '../../../../shared/Analitic'
-import * as axios from "axios";
+
+import ProgressBar from '../../../../shared/ProgressBar'
 import RestResource from '../../../../service/isAdmin'
 const restResourceService = new RestResource();
+let img = require('../../../../assets/img/icons/Desktop.svg')
+let img2 = require('../../../../assets/img/icons/middle-blob.svg')
+
 export default {
   name: 'ListaCursos',
   components:{
-    Analitic
+     ProgressBar
    },
   data() {
       return {
          roles: this.$store.state.user.roles,
-          info: null,
+          info: {},
           model: {
               icono: null
           },
@@ -21,7 +24,9 @@ export default {
           file: "",
           uploads: "100x100.png",
           isUploading: null,
-          nombreimagen:null
+          nombreimagen:null,
+          imgs: img,
+          imgs2: img2,
       }
   },
   methods: {
@@ -33,12 +38,14 @@ export default {
       gets() {   
         if(this.$route.params.id){
             this.isData = true;
+            this.$Progress.start();
             this.$proxies._gestionProxi.getDistributivo(this.$route.params.id)
             .then((x) => {
                 this.info = x.data;
                 this.model.icono = this.info.icono;
                 this.ids = this.info._id;
                 this.isData = false;
+                this.$Progress.finish();
             }).catch(() => {
                 console.log("Error")
                 this.isData = false;
@@ -48,48 +55,22 @@ export default {
       mostrarFormulario(){
           this.isEdit = true;
       },
-      save(){
-        this.model.curso = 'Undefined';
-        this.$proxies._gestionProxi.updateDistributivo(this.ids, this.model)
-        .then(() => {
-            this.$notify({
-                group: "global",
-                text: "Actualización exitosa",
-              });
-              this.isEdit = false;
-        })
-        .catch(() => {
-         alert("Error");
-         this.isEdit = false;
-       });
+      nextPage(){
+        var myCourse = {
+        paralelo: this.info.paralelo,
+        nombre:   this.info.nombre,
+        materia:  this.info.fmateria.nombre,
+       }
+       let id= this.info.fnivel._id;
+       localStorage.removeItem('myCourse');
+       if (!localStorage.getItem("myCourse")) {
+         localStorage.setItem("myCourse", JSON.stringify(myCourse));
+         this.$router.push({ path: `/qualifys/${id}` });
+       
+       }
+      
       },
-      onChangeFileUpload() {
-        this.file = this.$refs.file.files[0];
-        let formData = new FormData();
-        formData.append("myFile", this.file);
-        axios
-          .post("http://localhost:3000/api/upload", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then(x => {
-           this.nombreimagen = x.data;
-           this.model.icono = this.nombreimagen
-           
-          }).catch(x => {
-            
-            if (x.response.status == 500) {
-                //Los formatos aceptados son .png .jpg .jpeg
-                this.$notify({
-                    group: "global",
-                    text: "Los formatos aceptados son .png .jpg .jpeg",
-                  });
-              }else{
-                alert("Notifique el administrador el error");
-              }
-          })
-      },
+     
   },
   created() {
     this.verificarUsuario();

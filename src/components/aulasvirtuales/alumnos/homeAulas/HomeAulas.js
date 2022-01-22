@@ -1,20 +1,26 @@
-import Spinner from '../../../../shared/Spinner'
+import Spinner from '../../../../shared/Spinner';
+import Refresh from "../../../../shared/Refresh.vue";
 import RestResource from '../../../../service/isAdmin'
 const restResourceService = new RestResource();
+let img = require('../../../../assets/img/icons/middle-blob.svg')
+let img2 = require('../../../../assets/img/icons/sombra1.svg')
 export default {
     name : 'Aulaprincipal',
-    components:{Spinner},
+    components:{Spinner, Refresh},
     data() {
         return {
           roles: this.$store.state.user.roles,
+          image: img,
+          image2: img2,
             info: null,
             isData: false,
-            tabb: "cerrarr",
+            tabb: true,
             isTabb: 'un',
             inAlumnos: [],
             isCargar: false,
             colors: ['#00875a', '#00b8d9', '#6554c0', '#ff5630', '#57d9a3'],
             ids: '',
+            show: false,
         }
     },
     methods: {
@@ -32,6 +38,7 @@ export default {
               this.info = x.data;
               this.isData = false;
               this.ids= this.info._id;
+              this.empujarAlumnos();
             })
             .catch((err) => {
               console.log("Error", err);
@@ -42,7 +49,7 @@ export default {
 
        empujarAlumnos(){
              this.inAlumnos= [];
-             this.tabb= "iniciarr";
+            
              this.isCargar= true;
             for (let i = 0; i <this.info.estudiantes.length;i++) {
                  let iniciales = this.info.estudiantes[i].name;
@@ -61,5 +68,7 @@ export default {
          this.getData();
          
     },
-
+    mounted() {
+      this.show = true; // might need this.$nextTick
+    }
 };

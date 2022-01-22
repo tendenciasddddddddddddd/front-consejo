@@ -23,7 +23,7 @@
     <!-- End Google Tag Manager -->
   </head>
 
-  <body class="g-sidenav-show">
+  <body class="g-sidenav-show ">
     <!-- Navbar Dark -->
     <div class="inicio">
       <div class="d-flex justify-content-end mb-3">
@@ -54,6 +54,17 @@
     <!-- End Navbar -->
     <div id="app"></div>
     <style>
+      body::-webkit-scrollbar {
+        width: 0px !important;
+      }
+    ::-webkit-scrollbar {
+     -webkit-border-radius: 5px;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: background-color .2s linear;
+    width: 4px !important;
+    background: #aaa;            /* width of the entire scrollbar */
+      }
       .mol {
         box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
       }
@@ -90,20 +101,18 @@
       }
       .btnNaranja {
         background-color: #ff7a59;
-        border-color: #ff7a59;
+        border-color: #ff7a59 !important;
         color: #fff;
         font-weight: 500;
         border-radius: 3px;
-        border-style: solid;
-        border-width: 1px;
+        border-style: solid !important;
         font-size: 14px;
         line-height: 16px;
-        font-weight: 500;
         text-transform: none;
-        padding: 11px 24px;
+        padding: 11px 22px;
       }
       .btnNaranja:hover {
-        background-color: #ff8f73;
+        background-color: #ffbcac;
         border-color: #ff8f73;
         color: #fff;
       }
@@ -121,16 +130,22 @@
         text-transform: none;
       }
       .btnTrasparente {
-        border-color: #cbd6e2;
-        color: #506e91;
+        background-color: #eaf0f6 !important;
+        border-color: #cbd6e2 !important;
+        color: #506e91 !important;
         font-weight: 500;
         border-radius: 3px;
-        border-style: solid;
-        border-width: 1px;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 500;
+        text-transform: none;
+        box-shadow:none !important;
       }
       .btnTrasparente:hover {
-        background-color: #f5f8fa;
-        color: #506e91;
+        background-color: #f5f8fa!important;
+        color: #506e91!important;
       }
       .btnDisabled{
         background-color: #eaf0f6!important;
@@ -145,7 +160,7 @@
         font-weight: 500;
         text-transform: none;
         cursor: not-allowed!important;
-        padding: 11px 24px;
+        padding: 11px 22px;
         }
 
       .btnNaranjaClaro {
@@ -158,7 +173,7 @@
         border-width: 1px!important;
         font-size: 14px;
         text-transform: none;
-        padding: 9px 24px!important;
+        padding: 8px 22px!important;
       }
 
       .btnNaranjaClaro:hover {
@@ -194,8 +209,9 @@
         color: #33475b;
         line-height: 24px;
       }
+
       .fuente {
-        font-family: AvenirNext LP Pro Regular, Helvetica, Arial, sans-serif;
+        font-family: Avenir Next W02, Helvetica, Arial, sans-serif;
       }
       .colorhs {
         color: #0091ae;
@@ -273,9 +289,9 @@
           #00afb2 56%,
           #00bda5
         ) !important;
-        border-top-left-radius: 0px !important;
-        border-top-right-radius: 0px !important;
-        min-height: 68px !important;
+        border-top-left-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        min-height: 58px !important;
       }
       .modalFooter {
         background-color: #f5f8fa;
@@ -345,6 +361,7 @@
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script
       async
@@ -355,6 +372,7 @@
       .mx-datepicker-popup {
     z-index: 99999!important;
 }
+
       .inicio2 {
         height: 23px;
         background-color: #191919;
@@ -371,7 +389,8 @@
 
       .modal-content {
         box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-        border-radius: 3px;
+        border-radius: 5px;
+        border: none;
       }
 
       .modal .modal-dialog {
@@ -425,10 +444,11 @@
         opacity:0.4 !important;
         background-color: rgba(9, 34, 66, 0.54);
       }
+      
       .modal {
-        background: rgba(9, 30, 66, 0.54);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: rgba(0, 19, 51, 0.64);
+        /* backdrop-filter: blur(10px); */
+        /* -webkit-backdrop-filter: blur(10px); */
       }
       .modal-body {
         max-height: 460px;

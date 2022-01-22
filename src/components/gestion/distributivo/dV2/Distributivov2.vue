@@ -42,6 +42,7 @@
                 role="button"
                 class="fuente tamanio"
                 :class="{ disabled: isSelecUsers.length != 1 }"
+                 v-tooltip.top-center="isSelecUsers.length ? '' : 'Seleccionar un fila para poder editar'"
               >
                 <i class="fas fa-pencil-alt me-2 ms-3 iconos"></i>
                 <b class="me-4 " :class="{ links: isSelecUsers.length === 1 }"
@@ -54,12 +55,14 @@
                 class="fuente tamanio"
                 :class="{ disabled: isSelecUsers.length === 0 }"
                 v-if="!iseliminaddo"
+                v-tooltip.top-center="isSelecUsers.length ? '' : 'Seleccionar una o muchas filas para eliminar'"
               >
                 <i class="far fa-trash-alt me-2 iconos"></i>
                 <b class="me-4 " :class="{ links: isSelecUsers.length != 0 }"
                   >Eliminar distributivo</b
                 >
               </a>
+             
             </div>
             <div class="col-lg-3">
               <div class="d-flex justify-content-end mb-3">
@@ -245,9 +248,9 @@
       >
         <div class=" cabesa"
                 style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 50px;
-         padding: 4px 40px 4px 40px;">
+         padding: 4px 25px 4px 40px;">
           <div class="float-start">
-            <h5 class="mt-3 mb-0 text-white fuente" style="font-weight: 400;">
+            <h5 class="mt-2 mb-0 text-white fuente" style="font-weight: 400;">
               Genere Distributivo
             </h5>
           </div>
@@ -269,7 +272,7 @@
           <form v-else @submit.prevent="save" id="dist1">
             <p class="mt-4 parrafo">Curso</p>
             <IsSelect v-if="isCurso"></IsSelect>
-            <v-select
+            <v-select class="style-chooser" placeholder="Selecionar curso"
               v-else
               :class="{ error: validation.hasError('model.fnivel') }"
               :options.sync="listniveles"
@@ -289,7 +292,7 @@
             </p>
 
             <p class="mt-3 parrafo">Paralelo</p>
-            <v-select
+            <v-select class="style-chooser" placeholder="Selecionar paralelo"
               :class="{ error: validation.hasError('model.paralelo') }"
               :options.sync="paralelos"
               label="nombre"
@@ -309,7 +312,7 @@
 
             <p class="mt-3 parrafo">Materia</p>
             <IsSelect v-if="isMateria"></IsSelect>
-            <v-select
+            <v-select class="style-chooser" placeholder="Selecionar materia"
               v-else
               :class="{ error: validation.hasError('model.fmateria') }"
               :options.sync="listMaterias"
@@ -331,7 +334,7 @@
             <p class="mt-3 parrafo">Docente</p>
             <IsSelect v-if="isDocente"></IsSelect>
 
-            <v-select
+            <v-select class="style-chooser" placeholder="Selecionar docente"
               v-else
               :class="{ error: validation.hasError('model.fdocente') }"
               :options.sync="listDocentes"

@@ -13,13 +13,13 @@
             >
               <div
                 class=" cabesa"
-                style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 58px;
-         padding: 4px 40px 4px 40px;"
+                style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
+         padding: 4px 25px 4px 40px;"
               >
                 <div class="float-start">
                   <h5
                     style="font-weight: 400;"
-                    class="mt-3 mb-0 fuente text-white"
+                    class="mt-2 mb-0 fuente text-white"
                   >
                     Registro Docentes
                   </h5>
@@ -53,9 +53,9 @@
                 
                 <p class="mb-0 text-sm fuente">Información obligatoria</p>
                 <div class="multisteps-form__content">
-                  <div class="row mt-3">
+                  <div class="row mt-4">
                     <div class="col-12">
-                      <p class="parrafo">Número de Cédula</p>
+                      <span class="parrafo">Número de Cédula</span>
                       <input
                         :class="{ error: validation.hasError('model.cedula') }"
                         v-model="model.cedula"
@@ -63,7 +63,7 @@
                         class="multisteps-form__input form-control buscador fuente"
                         type="text"
                       />
-                      <p class="mb-0 text-sm text-danger">
+                      <p class="mb-0 text-xs fuente text-danger">
                         {{ validation.firstError("model.cedula") }}
                       </p>
 
@@ -72,19 +72,19 @@
                   </div>
                   <div class="row mt-3">
                     <div class="col-12 ">
-                      <p class="parrafo">Nombres Completos</p>
+                      <span class="parrafo">Nombres Completos</span>
                       <input
                         :class="{ error: validation.hasError('model.nombres') }"
                         v-model="model.nombres"
                         class="multisteps-form__input form-control buscador fuente"
                         type="text"
                       />
-                      <p class="mb-0 text-sm text-danger">
+                      <p class="mb-0 text-xs fuente text-danger">
                         {{ validation.firstError("model.nombres") }}
                       </p>
                     </div>
                     <div class="col-12 mt-3">
-                      <p class="parrafo">Apellidos Completos</p>
+                      <span class="parrafo">Apellidos Completos</span>
                       <input
                         :class="{
                           error: validation.hasError('model.apellidos'),
@@ -93,36 +93,36 @@
                         class="multisteps-form__input form-control buscador fuente"
                         type="text"
                       />
-                      <p class="mb-0 text-sm text-danger">
+                      <p class="mb-0 text-xs fuente text-danger">
                         {{ validation.firstError("model.apellidos") }}
                       </p>
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="col-12 ">
-                      <p class="parrafo">Numero Teléfono</p>
+                      <span class="parrafo">Numero Teléfono</span>
                       <input
                         :class="{
                           error: validation.hasError('model.telefono buscador'),
                         }"
                         v-model="model.telefono"
                         class="multisteps-form__input form-control buscador fuente"
-                        type="number"
+                        type="text"
                       />
-                      <p class="mb-0 text-sm text-danger">
+                      <p class="mb-0 text-xs fuente text-danger">
                         {{ validation.firstError("model.telefono") }}
                       </p>
                     </div>
                      <div class="col-12 mt-3">
                       
-                      <p class="parrafo">Correo Electrónico</p>
+                      <span class="parrafo">Correo Electrónico</span>
                       <input
                         :class="{ error: validation.hasError('model.email') }"
                         v-model="model.email"
                         class="multisteps-form__input form-control buscador fuente"
                         type="email"
                       />
-                      <p class="mb-0 text-sm text-danger">
+                      <p class="mb-0 text-xs fuente text-danger">
                         {{ validation.firstError("model.email") }}
                       </p>
                     </div>
@@ -140,17 +140,17 @@
               >
 
                 <div class="multisteps-form__content">
-                   <div class="row mt-1">
+                   <div class="row mt-2">
                     <div class="col-12 ">
-                        <p class="parrafo">Nacionalidad</p>
+                        <span class="parrafo">Nacionalidad</span>
                         <ChildNacionalidad
                           :modeloNacion="model.fknacionalidad"
                           @ComponentChildNacion="objetoNacion = $event"
                         />
                       </div>
                     <div class="col-12 mt-3">
-                      <p class="parrafo">Parroquia donde nació</p>
-                         <v-select   :class="{
+                      <span class="parrafo">Parroquia donde nació</span>
+                         <v-select class="style-chooser"   :class="{
                           error: validation.hasError('model.fkparroquia'),
                         }"
                          :options="listParroquia" label="nombre" item-value="nombre" v-model="model.fkparroquia" required>
@@ -162,21 +162,21 @@
                          Lo siento, no hay opciones de coincidencia.
                       </template>
                     </v-select>
-                      <p class="mb-0 text-sm text-danger">
+                      <p class="mb-0 text-xs fuente text-danger">
                         {{ validation.firstError("model.fkparroquia") }}
                       </p>
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="col-12 ">
-                        <p class="parrafo">Etnia</p>
+                        <span class="parrafo">Etnia</span>
                         <ChildEtnia
                           :modeloEtnia="model.fketnia"
                           @ComponentChildEtnia="objetoEtnia = $event"
                         />
                       </div>
                      <div class="col-12 mt-3">
-                        <p class="parrafo">Género</p>
+                        <span class="parrafo">Género</span>
                         <ChildSexo
                           :modelo="model.sexo"
                           @ComponentChildSexo="objetoSexos = $event"
@@ -187,7 +187,7 @@
                   <div class="row mt-3">
 
                       <div class="col-12 ">
-                      <p class="parrafo">Título Actual</p>
+                      <span class="parrafo">Título Actual</span>
                         <textarea
                         v-model="model.titulo"
                         class="multisteps-form__input form-control fuente"
@@ -196,7 +196,7 @@
                       />
                     </div>
                     <div class="col-12 mt-4">
-                       <p class="parrafo">Activar estado para que se configure su cuenta</p>
+                       <span class="parrafo">Activar estado para que se configure su cuenta</span>
 
                       <div class="form-check">
                         <input
@@ -230,7 +230,9 @@
                         class="btn btnNaranja " 
                         @click="tab = 'sec'"
                       >
-                        Siguiente &nbsp; <i class="ni ni-bold-right"></i>
+                        <span class="me-2">Siguiente</span>
+              <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1.1em" height="1.2em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg>
+
                       </a>
                     </div>
                     <div v-if="tab === 'sec'">
@@ -238,7 +240,8 @@
                         class="btn btnNaranjaClaro"
                        @click="tab = 'init'"
                       >
-                      <i class="ni ni-bold-left"></i> &nbsp; Vulver
+                      <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="left" width="1.1em" height="1.2em" fill="currentColor" aria-hidden="true"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg>
+                       <span class="ms-2">Volver</span>
                       </a>
                       &nbsp; &nbsp;
                            <button v-if="ifLoad"

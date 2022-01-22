@@ -11,8 +11,8 @@
       >
         <div
           class=" cabesa"
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 58px;
-         padding: 4px 40px 4px 40px;"
+          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
+         padding: 4px 25px 4px 40px;"
         >
           <div class="float-start">
             <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente text-white">

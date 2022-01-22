@@ -28,7 +28,39 @@
                   to="/Matricula-1"
                   class="btn btn-link text-dark p-0 fixed-plugin-close-button"
                 >
-                  <i style="font-size: 32px" class="fa fa-close text-white"></i>
+                   <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 172 172"
+                    style=" fill:#000000;"
+                  >
+                    <g
+                      fill="none"
+                      fill-rule="nonzero"
+                      stroke="none"
+                      stroke-width="1"
+                      stroke-linecap="butt"
+                      stroke-linejoin="miter"
+                      stroke-miterlimit="10"
+                      stroke-dasharray=""
+                      stroke-dashoffset="0"
+                      font-family="none"
+                      font-weight="none"
+                      font-size="none"
+                      text-anchor="none"
+                      style="mix-blend-mode: normal"
+                    >
+                      <path d="M0,172v-172h172v172z" fill="none"></path>
+                      <g fill="#ffffff">
+                        <path
+                          d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
+                        ></path>
+                      </g>
+                    </g>
+                  </svg>
                 </router-link>
               </div>
             </div>
@@ -48,23 +80,30 @@
                  <div v-for="item in listniveles"
                   :key="item.id">
                      <div
-                    class=" p-2  noactive cajas"
+                    class=" p-2 borde5 noactive cajas"
                     :class="{ activado: index === item._id }"
                     style="max-width: 200px;"
                   >
-                    <a href="javascript:;" @click="clicMe(item._id)">
+                    <a href="javascript:;" @click="clicMe(item._id, item.nombres)">
                       <div class="text-center position-relative">
                         <div class="blur-shadow-image">
-                          <img  style="height: 130px;"
-                            class="img  move-on-hover"
+                          <img  
+                            class="img  move-on-hover w-40"
                             src="../../../../assets/img/logs/electronic-signature.svg"
                           />
                         </div>
                       </div>
-                      <div>
-                        <p class="parrafo text-center">Curso: <br> <span class="cardSubTitle">{{ item.nombres.slice(0, 25) }}</span> </p>
+                      
+                      <div class="text-center">
+                        <span class="fuente cardTitle " style="font-size: 20px;">Curso: </span><br>
                         
+                        <span class="cardSubTitle">{{ item.nombres.slice(0, 25) }}</span> 
+                        <hr>
+                        <a class="tamanio fuente">
+                          <b class="links">Lista estudiantes <i class="fa fa-plus ms-2" aria-hidden="true"></i></b>
+                        </a>
                       </div>
+                      
                     </a>
                   </div>
                  </div>
@@ -74,7 +113,7 @@
               </div>
 
               <div class="row"  v-if="isVisible === 'panel2'">
-                <div class="mt-4">
+                <div class="mt-3">
                   <a
                     @click="isVisible = 'panel1'"
                     class="btn btn-sm"
@@ -91,6 +130,7 @@
                     class="fuente tamanio ms-4"
                     :class="{ disabled: isSelecMatricula.length === 0 }"
                     v-on="isSelecMatricula.length ? { click: () => remove() } : {}"
+                     v-tooltip.top-center="isSelecMatricula.length ? '' : 'Seleccionar una o muchas filas para eliminar'"
                   >
                     <i class="far fa-trash-alt me-2" aria-hidden="true"> </i>
                     <b :class="{ links: isSelecMatricula.length != 0 }"
@@ -102,14 +142,14 @@
                 <div v-else class="table-responsive mt-4">
                   <div v-if="!infoMat.length" class="row mt-3">
                     <div class="col-lg-9 col-12 mx-auto">
-                      <div class="text-center mt-5">
+                      <div class="text-center mt-6">
                         <img
-                          class="w-25"
+                          class="w-15"
                           src="../../../../assets/img/usados/undraw_search.svg"
                           alt="fondo"
                         />
                         <div class="letra fuente mt-4">
-                          No hay datos que mostrar
+                         No hay datos que mostrar en esta vista
                         </div>
                       </div>
                     </div>
@@ -157,7 +197,7 @@
                           </div>
                         </td>
                         <td class="text-sm text-center colorestabla fuente">
-                          <p class="mb-0 text-xs">{{ item.fknivel.nombres }}</p>
+                          <p class="mb-0 text-xs">{{ nombre_curso }}</p>
                         </td>
                         <td class="text-sm text-center colorestabla fuente">
                           ({{ item.curso }})
@@ -229,7 +269,7 @@ export default {
       listniveles: null,
       isSelecMatricula: [],
       iseliminaddo: false,
-
+      nombre_curso: '',
       index: "0",
     };
   },
@@ -323,8 +363,9 @@ export default {
         this.isSelecMatricula = [];
       }
     },
-    clicMe(keys) {
+    clicMe(keys, nombreCurso) {
       this.index = keys;
+      this.nombre_curso= nombreCurso;
     },
   },
   created() {
@@ -333,65 +374,4 @@ export default {
 };
 </script>
 
-<style>
-.flex-containes{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: auto;
-  justify-content: center;
-}
-.cajas{
-margin-top: 12px!important;
-margin-bottom: 12px!important;
 
-    margin-left: 8px!important;
-    margin-right: 8px!important;
-
-    flex: 1 1 0%;
-    min-width: 200px;
-    background: white;
-
-}
-.cajas:hover{
-  box-shadow: 0 0 0 1px #7fd1de, 0 0 20px 0 rgb(0 163 189 /30%);
-}
-
-div.dataTables_wrapper div.dataTables_filter {
-  width: 100%;
-  padding-left: 20px;
-}
-
-div.dataTables_wrapper div.dataTables_filter input {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.4rem;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #d2d6da;
-  appearance: none;
-  border-radius: 0.5rem;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  background: none;
-  color: black !important;
-  border-radius: 4px;
-  border: 1px solid #828282;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  z-index: 3;
-
-  color: #8392ab;
-  padding: 0;
-  margin: 0 3px;
-  border-radius: 50% !important;
-  width: 36px;
-  height: 36px;
-  font-size: 0.875rem;
-}
-</style>

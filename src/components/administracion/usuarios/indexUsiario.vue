@@ -41,22 +41,24 @@
                 @click="editar()"
                 role="button"
                 class="fuente tamanio"
-                :class="{ disabled: isSelecUsers.length != 1 }"
+                :class="{ disabled: userIds.length != 1 }"
+                 v-tooltip.top-center="userIds.length ? '' : 'Seleccionar un fila para editar'"
               >
                 <i class="fas fa-pencil-alt me-2 ms-3 iconos"></i>
-                <b class="me-4 " :class="{ links: isSelecUsers.length === 1 }"
+                <b class="me-4 " :class="{ links: userIds.length === 1 }"
                   >Editar</b
                 >
               </a>
               <a
-                v-on="isSelecUsers.length ? { click: () => remove() } : {}"
+                v-on="userIds.length ? { click: () => remove() } : {}"
                role="button"
                 class="fuente tamanio"
-                :class="{ disabled: isSelecUsers.length === 0 }"
+                :class="{ disabled: userIds.length === 0 }"
                 v-if="!iseliminaddo"
+                 v-tooltip.top-center="userIds.length ? '' : 'Seleccionar una o muchas filas para eliminar'"
               >
                 <i class="far fa-trash-alt me-2 iconos"></i>
-                <b class="me-4 " :class="{ links: isSelecUsers.length != 0 }"
+                <b class="me-4 " :class="{ links: userIds.length != 0 }"
                   >Eliminar usuario</b
                 >
               </a>
@@ -95,9 +97,21 @@
                 >
                   <th
                     style="background-color: rgb(234, 240, 246); "
-                    class="text-uppercase text-center  text-xxs font-weight-bolder "
+                    class=""
                   >
-                    Nombres
+                   <div class="d-flex ">
+                      <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
+                        <input
+                          class="form-check-input cheka"
+                          type="checkbox"
+                          @click="selectAll"
+                        />
+                      </div>
+                       <i @click="deletedSelected" v-else style="border: 2px solid; color: rgb(0, 164, 189); height: 19px; width: 19px; border-radius: 3px; cursor: pointer;" class="fa fa-minus" aria-hidden="true"></i>
+                      <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                        Nombres
+                      </span>
+                    </div>
                   </th>
                   <th
                     class="text-uppercase text-center text-xxs font-weight-bolder "
@@ -130,7 +144,8 @@
                         <input
                           class="form-check-input cheka"
                           type="checkbox"
-                          @click="selectUser(item._id)"
+                          v-model="userIds" :value="item._id"
+                          @click="selectOne(item._id)"
                         />
                       </div>
 
@@ -173,8 +188,8 @@
                   :class="{ inactivo: paginaActual == 1 }"
                   :to="{ query: { pagina: paginaActual - 1 } }"
                 >
-                  <i class="fa fa-angle-left me-2" aria-hidden="true"></i> 
-                  <b >Anterior</b> 
+                   <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="left" width="1.2em" height="1.2em" fill="currentColor" aria-hidden="true"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg>
+                  <b class="ms-2">Anterior</b>
                 </router-link>
               </li>
 
@@ -189,7 +204,9 @@
                   class="fuente tamanio links ms-3"
                   :to="{ query: { pagina: paginaActual + 1 } }"
                 >
-                <b>Siguiente</b>  <i class="fa fa-angle-right ms-2"  aria-hidden="true"></i>
+              <b class="me-2">Siguiente</b>
+              <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1.2em" height="1.2em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg>
+
                 </router-link>
               </li>
                <li>
@@ -238,9 +255,10 @@
             </ul>
           </div>
           <div v-if="viewtable === 2">
-            <a @click="salirBusqueda()" type="button" class="fuente tamanio">
-              <i class="fa fa-times me-2 mt-2 iconos"></i>
-              <b class="me-4 links">Limpiar filtro</b>
+            <a @click="salirBusqueda()" type="button" class=" tamanio mt-2">
+              
+              <b class="me-2 links">Salir del filtro</b>
+              <i class="fa fa-times  mt-2 iconos"></i>
             </a>
             <div class="table-responsive mt-3" v-if="resultQuery">
               <table
@@ -285,7 +303,8 @@
                           <input
                             class="form-check-input cheka"
                             type="checkbox"
-                            @click="selectUser(item._id)"
+                             v-model="userIds" :value="item._id"
+                          @click="selectOne(item._id)"
                           />
                         </div>
 
@@ -316,16 +335,16 @@
             </div>
 
             <div v-else>
-              <div class="row mt-3">
+              <div class="row mt-5">
                 <div class="col-lg-12">
                   <div class="text-center">
                     <img
-                      class="w-20"
+                      class="w-10"
                       src="../../../assets/img/usados/vacio.svg"
                       alt="fondo"
                     />
-                    <div class="letra fuente">
-                      Buscar por el nombre o apellido
+                    <div class="letra fuente mt-3">
+                      Buscar usuario por los nombres o apellidos
                     </div>
                   </div>
                 </div>
@@ -380,3 +399,19 @@
   </div>
 </template>
 <script src="./indexUsiario.js"></script>
+<style >
+  .dash {
+    fill: rgb(0, 164, 189);
+    opacity: 1;
+}
+.hTWtpA {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    inset: 0px;
+    opacity: 0;
+    position: absolute;
+}
+</style>

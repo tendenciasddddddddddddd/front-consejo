@@ -13,6 +13,9 @@ import Vue2Editor from "vue2-editor";
 
 import GAuth from 'vue-google-oauth2'
 
+import VueOnlinePlugin from 'vue-navigator-online'
+
+import VuejsDialog from 'vuejs-dialog';
 
 // Usa Bootstrap
 import './assets/css/nucleo-icons.css'
@@ -20,6 +23,14 @@ import './assets/css/nucleo-svg.css'
 import './assets/css/soft-ui-dashboard.min.css?v=1.0.3'
 
 import "vue-select/dist/vue-select.css";
+
+import toasted from "vue-toasted";
+
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+ 
+
+import VueProgressBar from 'vue-progressbar'
+
 
 
 
@@ -75,6 +86,7 @@ const gauthOption = {
 }
 Vue.use(GAuth, gauthOption)
 
+Vue.use(VueOnlinePlugin)
 
 Vue.use(Vue2Editor);
 
@@ -88,7 +100,19 @@ Vue.use({
 
 Vue.component("v-select", vSelect);
 
+Vue.use(toasted, {
+  iconPack: "fontawesome"
+});
 
+// Tell Vue to install the plugin.
+Vue.use(VuejsDialog);
+
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(8, 8, 8)',
+  failedColor: 'red',
+  height: '3px'
+})
 
 Vue.use({
   install(Vue){

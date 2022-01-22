@@ -1,4 +1,4 @@
-
+let img = require('../../../assets/img/icons/headers.svg')
 export default {
     name: 'cuenta',
     data(){
@@ -15,6 +15,7 @@ export default {
             isLoading: false,
             MsmError : "",
             isContrasenia : true,
+            image: img,
         }
     },
     methods: {

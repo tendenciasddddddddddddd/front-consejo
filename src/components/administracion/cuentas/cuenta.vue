@@ -2,8 +2,9 @@
   <div>
     <!-- <div><section id="vulnerability" style="background-color: #E4F7EB;padding: 20px;text-align: center;font-size: 16px;line-height: 19px;color:#1C7E41;"><div style="max-width:1350px;margin-left: auto;margin-right: auto;min-height: 30px;"><div style="float: left;text-align: left;max-width: 800px;"><strong>Oferta especial:</strong>Gracias por elegir Zoom para mantenerse conectado. Haga el cambio a Pro Annual hoy y ahorre un 25% en su primer año con CONNECT25. </div><div style=""> <a href="https://zoom.us/buy?cartid=fdUxP2Sgcn&amp;couponcode=CONNECT25&amp;zcid=3779&amp;utm_source=Pardot&amp;utm_medium=email&amp;utm_content=FreeToPro&amp;utm_campaign=CONNECT25">Cambiar a anual</a></div></div><button onclick="closeNotification();" aria-label="Close Account Info Modal Box" style="border: none;background: none;float: right;top: -40px;position: relative;">×</button></section></div> -->
     
-    <div class="row gx-4 ">
-      <div class="col-lg-11 col-12 mx-auto " style="background-image:url(https://static.hsappstatic.net/pricing-pages-unified-ui/static-1.10527/js/img/middle-blob.svg);background-color:null;min-height: 7vh; background-size: cover;border-radius: 3px;">
+    <div class="row ">
+      <div class="col-lg-11 col-12 mx-auto " v-bind:style="{ backgroundImage: 'url(' + image + ')' }"
+      style="background-repeat: no-repeat;background-position: 100% 0;">
         <div class="row">
           <div class="col-md-5 col-12 mx-auto">
             <div class=" h-100">
@@ -11,7 +12,7 @@
                 <h6 class="mb-1 h3 fuente mt-2">Cambiar contraseña</h6>
                  <img
                         class="w-40 mt-2"
-                        src="../../../assets/img/usados/keys.svg"
+                        src="../../../assets/img/icons/config.png"
                         alt="fondo"
                       />
                 <div class="h4 text-danger">{{ MsmError }}</div>
@@ -97,22 +98,11 @@
                     </div>
                   </form>
                 </div>
-                <div class="card-body p-3 mt-2" style="background-color: #E4F7EB;">
-                <ul class="text-muted ps-4 mb-0 fuente">
-                  <li>
-                    <span class="text-sm">Un caracter especial</span>
-                  </li>
-                  <li>
-                    <span class="text-sm">Mínimo 6 carácteres</span>
-                  </li>
-                  <li>
-                    <span class="text-sm">Un número (se recomiendan 2)</span>
-                  </li>
-                </ul>
-              </div>
+                
               </div>
             </div>
           </div>
+          
           <!-- <div class="col-md-7 mt-md-0 mt-4">
              <h6 class="mb-3 fuente">
                   Requisitos de contraseña

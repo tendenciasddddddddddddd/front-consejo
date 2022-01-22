@@ -9,8 +9,8 @@ export default class NotasProxi {
         return this.axios.get(this.url + `/notas/list?curso=${curso}`);
     }
     
-    getAsistencias(curso, paralelo) {
-        return this.axios.get(this.url + `/notas/asistencia?curso=${curso}&paralelo=${paralelo}`);
+    getAsistencias(curso) {
+        return this.axios.get(this.url + `/notas/asistencia?curso=${curso}`);
     }
 
     update(id, params) {
@@ -26,7 +26,19 @@ export default class NotasProxi {
     }
 
     updateReforma3(id, params) {
-        return this.axios.put(this.url + `/notas/ref3/${id}`, params); //RUTA ARBOL 2
+        return this.axios.put(this.url + `/notas/ref3/${id}`, params); //RUTA ARBOL 2 createfullnote
+    }
+
+    updateFullNote(id, params) {
+        return this.axios.put(this.url + `/notas/createfullnote/${id}`, params); //deleteallnote
+    }
+
+    deleteAllNote(id, params) {
+        return this.axios.put(this.url + `/notas/deleteallnote/${id}`, params); //confirmfullnote
+    }
+
+    confirmfullnote(id, params) {
+        return this.axios.put(this.url + `/notas/confirmfullnote/${id}`, params); //
     }
 
     confirm(id, params) {

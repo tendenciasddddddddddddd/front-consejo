@@ -1,18 +1,22 @@
 <template>
   <div>
     <div class="row ">
+      
       <div class="col-lg-11 col-12 mx-auto">
-        <Analitic v-if="isData"></Analitic>
+       
+        <vue-progress-bar  style="margin-top:-23px"></vue-progress-bar>
+       
+        <ProgressBar v-if="isData"></ProgressBar>
         <div v-else class="" >
           <img
-            style="margin-top:-22px"
+            style="margin-top:-20px"
             class="product-core-blobs-desktop hsg-deferred hsg-deferred-loaded"
             data-src="https://f.hubspotusercontent00.net/hubfs/53/Desktop%20Header%20Element.svg"
             alt="Desktop Header Element"
-            src="https://f.hubspotusercontent00.net/hubfs/53/Desktop%20Header%20Element.svg"
+            :src="imgs"
             data-was-processed="true"
           />
-          <div style="background-image:url(https://static.hsappstatic.net/pricing-pages-unified-ui/static-1.10527/js/img/middle-blob.svg);background-color:null;min-height: 58vh; background-size: cover;border-radius: 3px;">
+          <div v-bind:style="{ backgroundImage: 'url(' + imgs2 + ')' }" style="background-color:null;min-height: 58vh; background-size: cover;border-radius: 3px;">
                   <div class="d-flex pt-4">
             <router-link
               to="/opciones-curso"
@@ -33,24 +37,11 @@
             
           </div>
           
-              <hr />
+             
           <section class="flex-containes mt-5" >
             <div class="">
-              <router-link
-                :to="{
-                  name: 'd4',
-                  params: {
-                    id: info.fnivel._id,
-                    paralelo: info.paralelo,
-                    nombre: info.nombre,
-                    materia: info.fmateria.nombre,
-                  },
-                  props: {
-                    paralelo: info.paralelo,
-                    nombre: info.nombre,
-                    materia: info.fmateria.nombre,
-                  },
-                }"
+              <a
+               @click="nextPage"
                 href="javascript:;"
               >
                 <div
@@ -70,7 +61,7 @@
                   </div>
                  
                 </div>
-              </router-link>
+              </a>
             </div>
             <div class="">
               <router-link
@@ -155,6 +146,8 @@
           </div>
        
          
+         
+         
         </div>
       </div>
    <!-- ⮕ -->
@@ -163,85 +156,3 @@
 </template>
 
 <script src="./ListaCursos.js"></script>
-<style>
-.mole {
-  background-color: white;
-  transition: background-color 0.5s;
-}
-
-.mole:hover {
-  background-color: #f5f5f5;
-  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-}
-
-.bd-example {
-  position: relative;
-  padding: 2rem;
-  border: 3px solid #eee;
-}
-
-.foco {
-  border: 1px solid #7fd1de;
-  border-radius: 3px;
-  border-style: solid;
-  border-width: 1px;
-}
-.foco:hover {
-  box-shadow: 0 0 0 1px #7fd1de, 0 0 12px 0 rgb(0 163 189 /30%);
-}
-.foco2 {
-  box-shadow: 0 0 1rem rgb(0 0 0 / 10%);
-  min-height: 165px;
-  z-index: 2;
-  padding: 26px 20px 7px;
-  position: relative;
-  transition-property: all;
-  transition-duration: 170ms;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-.foco2:hover {
-  transform: scale(1.075) rotate(0.0001deg);
-  background-color: #fff;
-  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 15%);
-}
-
-.hsg-deferred.hsg-deferred-loaded,
-.hsg-deferred[data-was-processed="true"] {
-  opacity: 1;
-}
-
-.product-core-blobs-desktop {
-  display: block;
-}
-
-.product-core-blobs-mobile,
-.product-core-blobs-desktop {
-  width: 100%;
-  height: auto;
-}
-.hsg-deferred {
-  transition: opacity 0.35s ease-out;
-  opacity: 0;
-  overflow: hidden;
-}
-img {
-  max-width: 100%;
-}
-
-.borde1 {
-  border-top: 5px solid #516f90;
-}
-.borde2 {
-  border-top: 5px solid #f5c26b;
-}
-.borde3 {
-  border-top: 5px solid #00bda5;
-}
-.borde4 {
-  border-top: 5px solid #00a4bd;
-}
-</style>
