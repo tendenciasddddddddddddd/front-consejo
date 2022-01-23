@@ -8,8 +8,7 @@
                 <a class="tabss fuente" @click="limpiar()">Imagen de perfil</a>
             </div>
              <hr style="margin-top:-0px;border-top: 1px solid rgb(203, 214, 226); opacity: inherit;"/>
-        <p class="parrafo mt-2"><i class="ni ni-air-baloon"></i> &nbsp;Estas preferencias solo se aplican a ti.</p>
-        <hr class="horizontal dark my-1"/>
+      
       </div>
     </div>
 

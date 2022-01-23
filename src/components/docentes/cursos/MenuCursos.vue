@@ -9,7 +9,7 @@
         <ProgressBar v-if="isData"></ProgressBar>
         <div v-else >
          
-                 <div class="row mt-2">
+                 <div class="row mt-3">
               <div class="col-md-5">
                   <span
               class="ms-2"

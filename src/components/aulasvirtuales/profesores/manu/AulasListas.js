@@ -147,12 +147,12 @@ export default {
     openModal: function(id){
       this.key= id;
       this.modals = true;
-      document.body.classList.add("modal-open");
+     // document.body.classList.add("modal-open");
     },
     cerrarModal(){
       this.key = '0';
       this.modals = false;
-      document.body.classList.remove("modal-open");
+     // document.body.classList.remove("modal-open");
     },
     //LISTA DE ESTUDIANTES
     openChildGruopen: function(){

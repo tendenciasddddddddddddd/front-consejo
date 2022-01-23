@@ -4,7 +4,7 @@
        <vue-progress-bar  ></vue-progress-bar>
        <ProgressBar v-if="isData"></ProgressBar>
       <div v-else class="col-lg-11 col-12 mx-auto">
-        <div class="row mt-2 ">
+        <div class="row mt-3 ">
         <div class="col-md-4 d-flex">
           <a
           href="javascript:;"

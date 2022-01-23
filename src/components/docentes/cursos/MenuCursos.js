@@ -69,12 +69,12 @@ export default {
        openModal: function(array){
         this.context= array;
         this.modals = true;
-        document.body.classList.add("modal-open");
+        //document.body.classList.add("modal-open");
       },
       cerrarModal(){
         this.context = {};
         this.modals = false;
-        document.body.classList.remove("modal-open");
+       // document.body.classList.remove("modal-open");
       },
       nextPage(){
         if (this.context) {
