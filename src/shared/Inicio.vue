@@ -134,9 +134,7 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("datos");
-      localStorage.removeItem("Xf");
+      localStorage.clear();
       this.$parent.isLoggedIn = false;
       this.$router.push("/").catch(()=>{});
       //window.location.reload(true);

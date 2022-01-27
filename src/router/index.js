@@ -3,33 +3,6 @@ import VueRouter from 'vue-router'
 //import Home from '../views/Home.vue'
 import Default from '../components/Default.vue'
 import store from '../store/index'
-//DOCENTES
-import Perfil from '../components/docentes/perfiles/Perfil.vue'
-import MenuCursos from '../components/docentes/cursos/MenuCursos.vue'
-import ListaCursos from '../components/docentes/cursos/Intensivos/ListaCursos.vue'
-import MenuReportes from '../components/reportes/matriculas/MenuReportes.vue'
-import Consolidado from '../components/reportes/matriculas/consolidado/Consolidados.vue'
-import ReporteDoc from '../components/docentes/reportesdoc/ReporteDoc.vue'
-//DOCENTES-CALIFICAR
-
-import Asiste from '../components/docentes/asistencias/Asiste.vue'
-//import Notas from '../components/docentes/notas/Notas.vue'
-import Qualifys from '../components/docentes/qualify/Qualifys.vue'
-//ESTUDIANTES
-import Profile from '../components/estudiantes/perfil/Profile.vue'
-import Nota from '../components/estudiantes/notas/Nota.vue'
-import Report1 from '../components/estudiantes/reportes/Report.vue'
-import HistoriaEst from '../components/estudiantes/historialE/HistoriaEst.vue'
-//AULAS VIRTUALES DOCENTES
-import AulasListas from '../components/aulasvirtuales/profesores/manu/AulasListas.vue'
-import Report from '../components/reportes/matriculas/pdfs/Report.vue'
-import Task from '../components/aulasvirtuales/profesores/task/Task.vue'
-import Calendar from '../components/aulasvirtuales/profesores/calendario/Calendar.vue'
-//AULAS VIRTUALES ESTUDIANTES
-import AllAulas from '../components/aulasvirtuales/alumnos/allAulas/AllAulas.vue'
-import MyAulas from '../components/aulasvirtuales/alumnos/myAulas/MyAulas.vue'
-import HomeAulas from '../components/aulasvirtuales/alumnos/homeAulas/HomeAulas.vue'
-import Tasks from '../components/aulasvirtuales/alumnos/tasks/Tasks.vue'
 //HELP
 import PageNotFound from '../components/help/NoFound.vue'
 
@@ -41,300 +14,199 @@ const routes = [{
     component: Default
   },
   {
-    path: '/usuarios/Usuario',
+    path: '/Users',
     name: '1',
-    component: require('../components/administracion/usuarios/indexUsiario.vue').default,
+    component: () => import( /* webpackChunkName: "Usuario" */ '../views/pagesAdmin/users/Users.vue'),
     beforeEnter: authorization
   },
+ 
   {
-    path: '/usuarios/creausuario',
-    name: 'crea-usuario',
-    component: require('../components/administracion/usuarios/CreaUsuario.vue').default
-  },
-  {
-    path: '/usuarios/:id/edit',
-    name: 'edita-usuario',
-    component: require('../components/administracion/usuarios/CreaUsuario.vue').default
-  },
-  {
-    path: '/Cuentas-Usuarios',
+    path: '/Contrasena',
     name: '2',
-    component: require('../components/administracion/cuentas/cuenta.vue').default
+    component: () => import( /* webpackChunkName: "Cuenta" */ '../views/pagesAdmin/cuenta/Cuenta.vue'),
   },
   { //-------ZONAS------
-    path: '/MenuZonas',
+    path: '/option-zonas',
     name: '000',
-    component: require('../components/bases/zonas/MenuZonas.vue').default
+    component: () => import( /* webpackChunkName: "OptionZoan" */ '../views/pagesRegister/zonas/OptionZoan.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
     path: '/List-Provincias',
     name: '000',
-    component: require('../components/bases/zonas/provincias/ListProvincias.vue').default
+    component: () => import( /* webpackChunkName: "ListProvincias" */ '../views/pagesRegister/zonas/provincias/ListProvincias.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
     path: '/List-Canton',
     name: '000',
-    component: require('../components/bases/zonas/cantones/ListCanton.vue').default
+    component: () => import( /* webpackChunkName: "ListCanton" */ '../views/pagesRegister/zonas/cantones/ListCanton.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
     path: '/List-Parroquia',
     name: '000',
-    component: require('../components/bases/zonas/parroquias/Parroquias.vue').default
+    component: () => import( /* webpackChunkName: "Parroquias" */ '../views/pagesRegister/zonas/parroquias/Parroquias.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
     path: '/List-Nacionalidad',
     name: '000',
-    component: require('../components/bases/zonas/nacionalidad/Nacionalidad.vue').default
+    component: () => import( /* webpackChunkName: "Nacionalidad" */ '../views/pagesRegister/zonas/nacionalidad/Nacionalidad.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
     path: '/List-Etnias',
     name: '000',
-    component: require('../components/bases/zonas/etnias/Etnias.vue').default
+    component: () => import( /* webpackChunkName: "Etnias" */ '../views/pagesRegister/zonas/etnias/Etnias.vue'),
   },
   { //-------------------------------------REGISTROS------------------------------
     path: '/List-Estudiate',
     name: '222',
-    component: require('../components/registros/estudiantes/Estudiante.vue').default
-  },
-  { //-------------------------------------REGISTROS------------------------------
-    path: '/Add-Estudiate',
-    name: 'addestudiante',
-    component: require('../components/registros/estudiantes/AddEstudiante.vue').default
-  },
-  { //-------------------------------------REGISTROS------------------------------
-    path: '/Estudiate/:id/edit',
-    name: 'editestudiante',
-    component: require('../components/registros/estudiantes/AddEstudiante.vue').default
+    component: () => import( /* webpackChunkName: "Estudiante" */ '../views/pagesRegister/estudiantes/Estudiante.vue'),
   },
   { //-------------------------------------REGISTROS------------------------------
     path: '/List-Docente',
     name: '333',
-    component: require('../components/registros/docentes/Docentes.vue').default
+    component: () => import( /* webpackChunkName: "Docentes" */ '../views/pagesRegister/docentes/Docentes.vue'),
   },
-  { //-------------------------------------REGISTROS------------------------------
-    path: '/Add-Docente',
-    name: 'adddocente',
-    component: require('../components/registros/docentes/AddDocentes.vue').default
-  },
-  { //-------------------------------------REGISTROS------------------------------
-    path: '/Docente/:id/edit',
-    name: 'editdocente',
-    component: require('../components/registros/docentes/AddDocentes.vue').default
-  },
-  { //-------------------------------------GESTION------------------------------
-    path: '/MenuGestion',
-    name: '1111',
-    component: require('../components/gestion/Menu1Gestion.vue').default
-  },
+
+
   { //-------------------------------------GESTION------------------------------
     path: '/Nivel',
     name: '1111',
-    component: require('../components/gestion/nivel/Nivel.vue').default
+    component: () => import( /* webpackChunkName: "Nivel" */ '../views/pagesGestionCursos/nivel/Nivel.vue'),
   },
   { //-------------------------------------GESTION------------------------------
     path: '/Materias',
-    name: '1111',
-    component: require('../components/gestion/materia/Materias.vue').default
+    name: '1234',
+    component: () => import( /* webpackChunkName: "Materias" */ '../views/pagesGestionCursos/materia/Materias.vue'),
   },
+
   { //-------------------------------------MATRICULA------------------------------
     path: '/Periodo',
     name: '11',
-    component: require('../components/matriculas/periodos/Periodo.vue').default
-  },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Opciones-Matricula',
-    name: '77',
-    component: require('../components/matriculas/Menu1Matricula.vue').default
+    component: () => import( /* webpackChunkName: "Periodo" */ '../views/pagesMatriculas/periodos/Periodo.vue'),
   },
   { //-------------------------------------MATRICULA------------------------------
     path: '/Matricula-1',
     name: '77',
-    component: require('../components/matriculas/matricula/mat1/Matriculas1.vue').default
-  },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Actual-Matricula',
-    name: 'actualmatricula1',
-    component: require('../components/matriculas/matricula/mat1/ActualMatricula.vue').default
-  },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Create-Matricula-v1',
-    name: 'matri1',
-    component: require('../components/matriculas/matricula/mat1/CreateMatricula.vue').default,
+    component: () => import( /* webpackChunkName: "Matriculas1" */ '../views/pagesMatriculas/matricula1/Matriculas1.vue'),
   },
   { //-------------------------------------MATRICULA------------------------------
     path: '/Matricula-2',
     name: '71',
-    component: require('../components/matriculas/matricula/mat2/Matriculas2.vue').default
-  },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Create-Matricula-v2',
-    name: 'matri2',
-    component: require('../components/matriculas/matricula/mat2/CreateMatricula2.vue').default
-  },
-
-  { //-------------------------------------MATRICULA PARALELO------------------------------
-    path: '/Lista-Paralelo-v1',
-    name: 'paralelos1',
-    component: require('../components/matriculas/paralelos/paralelov1/EnlistarParalelo.vue').default
-  },
-  { //-------------------------------------MATRICULA PARALELO------------------------------
-    path: '/Lista-Paralelo-v2',
-    name: 'paralelos2',
-    component: require('../components/matriculas/paralelos/paralelov2/EnlistarParalelom2.vue').default
-  },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Actual-Matricula-m2',
-    name: 'actualmatricula3',
-    component: require('../components/matriculas/matricula/mat2/ActualMatricula2.vue').default
+    component: () => import( /* webpackChunkName: "Matriculas2" */ '../views/pagesMatriculas/matricula2/Matriculas2.vue'),
   },
 
   { //-------------------------------------ERROR PERMISO------------------------------
     path: '/page-not-found',
     name: '/page-not-found',
-    component: require('../components/help/NoFound.vue').default
+    component: () => import( /* webpackChunkName: "NoFound" */ '../components/help/NoFound.vue'),
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Menu-Distributivo',
     name: '2222',
-    component: require('../components/gestion/MenuDistributivo.vue').default
+    component: () => import( /* webpackChunkName: "Nivel" */ '../views/pagesGestionCursos/MenuDistributivo.vue'),
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Distributivo-v1/:id',
     name: '2222',
-    component: require('../components/gestion/distributivo/dV1/Distributivov1.vue').default
+    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/pagesGestionCursos/distributivo/dV1/Distributivov1.vue'),
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Distributivo-v2/:id',
     name: '2222',
-    component: require('../components/gestion/distributivo/dV2/Distributivov2.vue').default
-  },
-  { //-------------------------------------REPORTES------------------------------
-    path: '/Reporte-matricula-v1/:id/report',
-    name: '3A',
-    component: require('../components/reportes/reporte1.vue').default
+    component: () => import( /* webpackChunkName: "Distributivov2" */ '../views/pagesGestionCursos/distributivo/dV2/Distributivov2.vue'),
   },
 
+
+  ////------------------------------------REPORTES-----------------------------
+  {
+    path: '/opciones-reportes',
+    name: 'r2',
+    component: () => import( /* webpackChunkName: "MenuReportes" */ '../views/pagesMatriculas/reportes/MenuReportes.vue'),
+  },
+
+ 
   ////------------------------------------DOCENTES-----------------------------
   {
     path: '/perfil-docente',
     name: 'd1',
-    component: Perfil
+    component:() => import( /* webpackChunkName: "Perfil" */ '../views/pagesDocentes/perfiles/Perfil.vue'),
   },
   {
     path: '/opciones-curso',
     name: 'd2',
-    component: MenuCursos
-  },
-  {
-    path: '/lista-curso-m1/:id/historia',
-    name: 'd2',
-    component: ListaCursos
+    component: () => import( /* webpackChunkName: "Perfil" */ '../views/pagesDocentes/cursos/MenuCursos.vue'),
   },
   {
     path: '/reporte-docente',
     name: 'dr',
-    component: ReporteDoc
+    component: () => import( /* webpackChunkName: "Perfil" */ '../views/pagesDocentes/reportesdoc/ReporteDoc.vue'),
   },
 
   {
     path: '/qualifys/:id',
     name: 'd4',
-    component: Qualifys,
+    component: () => import( /* webpackChunkName: "Qualifys" */ '../views/pagesDocentes/qualify/Qualifys.vue'),
   },
   
   {
     path: '/asistencias/:id',
     name: 'asistencia',
-    component: Asiste,
+    component: () => import( /* webpackChunkName: "Asiste" */ '../views/pagesDocentes/asistencias/Asiste.vue'),
     props: true
   },
   //--------------------------------------ESTUDIANTES-----------
   {
     path: '/perfil-estudiante',
     name: 'e1',
-    component: Profile
+    component: () => import( /* webpackChunkName: "Profile" */ '../views/pagesAlumnos/perfil/Profile.vue'),
   },
   {
     path: '/Consultar-nota',
     name: 'e2',
-    component: Nota
+    component: () => import( /* webpackChunkName: "Nota" */ '../views/pagesAlumnos/notas/Nota.vue'),
   },
   {
     path: '/Repote-estudiante',
     name: 'e3',
-    component: Report1
+    component: () => import( /* webpackChunkName: "Report" */ '../views/pagesAlumnos/reportes/Report.vue'),
   },
   {
     path: '/Historia-estudiante',
     name: 'e4',
-    component: HistoriaEst
+    component:() => import( /* webpackChunkName: "HistoriaEst" */ '../views/pagesAlumnos/historialE/HistoriaEst.vue'),
   },
-  ////------------------------------------REPORTES-----------------------------
-  {
-    path: '/opciones-reportes',
-    name: 'r2',
-    component: MenuReportes
-  },
-  {
-    path: '/consolidado',
-    name: 'r2',
-    component: Consolidado
-  },
-  {
-    path: '/list-report',
-    name: 'ListaReporte',
-    component: Report
-  },
+  
   ////------------------------------------AULAS VIRTUALES DOCENTES-----------------------------
   {
     path: '/aulas-lista',
     name: 'al',
-    component: AulasListas
+    component: () => import( /* webpackChunkName: "AulasListas" */ '../views/pagesClassroom/profesores/manu/AulasListas.vue'),
   },
-
   {
     path: '/task-config/:id',
     name: 'al',
-    component: Task
+    component: () => import( /* webpackChunkName: "Task" */ '../views/pagesClassroom/profesores/task/Task.vue'),
   },
 
-  {
-    path: '/my-calendar',
-    name: 'calendar',
-    component: Calendar
-  },
    ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------
   {
     path: '/all-lista',
     name: 'es2',
-    component: AllAulas
+    component: () => import( /* webpackChunkName: "AllAulas" */ '../views/pagesClassroom/alumnos/allAulas/AllAulas.vue'),
   },
   {
     path: '/my-lista',
     name: 'es1',
-    component: MyAulas
-  },
-  {
-    path: '/home-aula/:id',
-    name: 'es1',
-    component: HomeAulas
+    component: () => import( /* webpackChunkName: "MyAulas" */ '../views/pagesClassroom/alumnos/myAulas/MyAulas.vue'),
   },
   {
     path: '/task-config2/:id',
     name: 'es1',
-    component: Tasks
+    component: () => import( /* webpackChunkName: "Tasks" */ '../views/pagesClassroom/alumnos/tasks/Tasks.vue'),
   },
   
   { path: "*", component: PageNotFound },
 
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+ 
 ]
 
 function authorization(to, from, next) {

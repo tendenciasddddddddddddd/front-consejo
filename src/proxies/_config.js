@@ -29,7 +29,8 @@ Axios.interceptors.response.use(
     response => response,
     error => {
       if (!error.response) {
-       console.log('Por favor revise su conexion a internet')
+      
+       alert('Espere un momento 🙏🙏, los servicios no se encuentra en linea, regresa al inicio hasta que los servicios se activen')
       }
       else if(error.response.status===403||error.response.status===401||error.response.status===404) {//||error.response.status===401
         localStorage.removeItem('access_token');
