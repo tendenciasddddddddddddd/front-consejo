@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row ">
-      <div class="col-lg-11 col-12 mx-auto">
+      <div class="col-lg-12 col-12 mx-auto">
          <div class="contenidotabs">
                 <a class="tabss fuente" @click="istabs=1" :class="{ 'tabsActive links': istabs=='1' }">Perfil</a>
                 <a class="tabss fuente" @click="istabs=2" :class="{ 'tabsActive links': istabs=='2' }">Información General </a>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="row mt-2" v-if="istabs=='1'">
-      <div class="col-lg-11 col-12 mx-auto">
+      <div class="col-lg-12 col-12 mx-auto">
         <div class="row">
           <Spinner v-if="ifcarga"></Spinner>
           <div v-else class="col-lg-5">
@@ -179,7 +179,7 @@
          padding: 4px 25px 4px 40px;"
         >
           <div class="float-start">
-            <h5 style="font-weight: 400;" class="mt-3 mb-0 fuente text-white">
+            <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
               Edita tu foto de perfil
             </h5>
             <!--  <p class="parrafo">{{nombre}}</p> -->
@@ -189,7 +189,39 @@
               @click="tabla = 'termina'"
               class="btn btn-link text-dark p-0 fixed-plugin-close-button"
             >
-              <i style="font-size: 32px;" class="fa fa-close text-white"></i>
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="32"
+                height="32"
+                viewBox="0 0 172 172"
+                style=" fill:#000000;"
+              >
+                <g
+                  fill="none"
+                  fill-rule="nonzero"
+                  stroke="none"
+                  stroke-width="1"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                  stroke-miterlimit="10"
+                  stroke-dasharray=""
+                  stroke-dashoffset="0"
+                  font-family="none"
+                  font-weight="none"
+                  font-size="none"
+                  text-anchor="none"
+                  style="mix-blend-mode: normal"
+                >
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#ffffff">
+                    <path
+                      d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
             </button>
           </div>
           <!-- End Toggle Button -->

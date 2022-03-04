@@ -41,8 +41,8 @@ export default class MatriculaProxi {
     //------------------------------------------------------DOCENTES--------------------------------------
     
 
-    createMatricula(params) {
-        return this.axios.post(this.url + '/matriculas', params);
+    createMatricula(params, modalidad) {
+        return this.axios.post(this.url + `/matriculas?modalidad=${modalidad}`, params);
     }
 
     getMatricula(id) {

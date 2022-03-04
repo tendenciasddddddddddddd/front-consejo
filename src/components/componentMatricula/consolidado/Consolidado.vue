@@ -12,7 +12,7 @@
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content ">
-          <div class="modalheader">
+          <div class="modalheader2">
             <p class="h5 fuente text-white mt-3 ms-3" style="font-weight:400;">
               Puede descargar por el consolidado
             </p>
@@ -26,41 +26,42 @@
           </div>
           <div class="modal-body">
             <div class="text-center">
-              <div v-if="ifview=='1'">
-                   <button v-if="ifLoad"  class="btn btnNaranja" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+              <div v-if="ifview=='1'" class="p-5">
+                   <button v-if="ifLoad"  class="btn btnCreanaBorder w-100" >
                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" ></span>
                    Trabajando...
                    </button>
-                    <button v-else @click="getData" class="btn btnNaranja" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
-                    Cargar Data
+                    <button v-else @click="getData" class="btn btnCreanaBorder  w-100 " >
+    <b> <i class="fa fa-database me-2" aria-hidden="true" ></i>  Cargar Data</b>
+                   
                     </button>
               </div>
 
                <div v-if="ifview=='2'">
                  <p class="parrafo">Elegir el tipo de matriculas que quiere descargar, puede ser todas las matriculas del periodo vigente</p>
-                   <button v-if="isIntensivo" class="btn btnNaranja me-2" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+                   <button v-if="isIntensivo" class="btn btnCreanaBorder me-2" >
                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Trabajando...
                    </button>
-                    <button v-else @click="__consolodadoIntensivo" class="btn btnNaranja me-2" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+                    <button v-else @click="__consolodadoIntensivo" class="btn btnCreanaBorder me-2" >
                    Intensivo
                    </button>
 
 
-                    <button v-if="isExtraordianrio" class="btn btnNaranja me-2" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+                    <button v-if="isExtraordianrio" class="btn btnCreanaBorder me-2" >
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Trabajando...
                     </button>
-                      <button v-else @click="__consolidadoExtra" class="btn btnNaranja me-2" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+                      <button v-else @click="__consolidadoExtra" class="btn btnCreanaBorder me-2" >
                     Extraordinaria
                     </button>
 
 
-                     <button v-if="isTodo" class="btn btnNaranja" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+                     <button v-if="isTodo" class="btn btnCreana" >
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Trabajando...
                      </button>
-                      <button v-else @click="__todo" class="btn btnNaranja" style="background-color: #4B22F4;    color: #fff;box-shadow: 0 0 12px 0 rgb(0 0 0 / 50%);">
+                      <button v-else @click="__todo" class="btn btnCreana" >
                      Todo
                      </button>
               </div>  

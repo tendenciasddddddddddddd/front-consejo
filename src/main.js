@@ -31,8 +31,9 @@ import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
 import VueProgressBar from 'vue-progressbar'
 
+import VueTour from 'vue-tour'
 
-
+require('vue-tour/dist/vue-tour.css')
 
 Vue.config.productionTip = false
 
@@ -107,6 +108,7 @@ Vue.use(toasted, {
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog);
 
+Vue.use(VueTour)
 
 Vue.use(VueProgressBar, {
   color: 'rgb(8, 8, 8)',

@@ -1,9 +1,9 @@
 <template>
-  <nav 
+  <nav style="box-shadow: none !important;  "
     class="
       navbar navbar-main navbar-expand-lg
       position-sticky
-      mt-4
+      mt-3
       top-1
       px-0
       mx-4
@@ -12,13 +12,13 @@
       blur
       shadow-blur
       left-auto
-      mol
+      step_7
     "
     id="navbarBlur"
     data-scroll="true"
   >
-    <div class="container-fluid py-1 px-3">
-     <h6 class="font-weight-bolder mb-0 fuente">Sistema Hibrido</h6> &nbsp;&nbsp;
+    <div class="container-fluid py-1 px-1" >
+     <h6 class="font-weight-bolder mb-0 ">Plataforma</h6> &nbsp;&nbsp;
       <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
         <a href="javascript:;" onclick="navbarMinimize(this)" class="nav-link text-body p-0">
           <div class="sidenav-toggler-inner">
@@ -30,12 +30,14 @@
       </div>
       <div
         class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
-        id="navbar"
+        id="navbar" 
       >
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-         <i style="color: black;" class="fa fa-search me-3" aria-hidden="true"></i>
-         <i style="color: black;" class="fa fa-cog me-3" aria-hidden="true"></i>
-         <i style="color: black;" class="fa fa-bell" aria-hidden="true"></i>
+         
+         <i style="color: black;font-size:26px;" class="bx bx-search me-3" aria-hidden="true"></i>
+         <i style="color: black;font-size:26px;" class="bx bx-cog me-3" aria-hidden="true"></i>
+         
+           <i style="color: black;font-size:26px;" class='bx bx-bell' aria-hidden="true"></i>
         </div>
 
         <ul class="navbar-nav justify-content-end">
@@ -55,20 +57,19 @@
           <li class="nav-item px-3 d-flex align-items-center">
             
             <template v-if="isOnline">
-              <a  class="text-sm fuente">
+              <a v-if="!$store.state.isAppMobile"  class="text-sm fuente">
             {{nombre}}
+            </a>
+             <a v-else  class="text-sm fuente">
+            {{nombre.slice(0,8)}}...
             </a>
             </template>
             <template v-else>
               <div>
-                 <div  class="loadingg" style="height: 80vh;">
+                 <div  class="loadingg">
                   <div class="inn ">
-                    
-                    <img
-                              class="w-50"
-                              src="../assets/img/icons/status_offline.svg"
-                              alt="fondo"
-                            />
+                    <i class='bx bx-wifi-off' style="font-size:150px"></i>
+                
                             <p class="parrafo text-dark">En este momento no tienes conexión a internet.</p>
                   </div>
 
@@ -89,7 +90,7 @@
                 <img
                   :src="$store.state.avatar"
                   alt="kal"
-                  class="border-radius-lg shadow "
+                  class="avatar avatar-sm rounded-circle"
                 />
               </div>
             </a>
@@ -152,10 +153,22 @@ export default {
       }else{
         this.isActive=true;
       }
-    }
+    },
+     isMobile() {
+       let estado;
+                if( screen.width <= 760 ) {
+                  estado = true;
+                    this.$store.commit('updatepx',{estado})
+                }
+                else {
+                  estado = false;
+                  this.$store.commit('updatepx',{estado})
+                }
+            }
   },
   created() {
     this.inforUsers();
+    this.isMobile();
   }
   
 };

@@ -2,9 +2,9 @@
   <div>
     <div class="fixed-plugin" :class="{ 'show w-100': tab === 'inicio' }">
       <div
-        class="card shadow-lg blur desplega"
+        class="card desplega"
         :class="{ 'w-100': tab === 'inicio' }"
-        style="overflow-y: auto;  z-index: 9999; "
+        style=" z-index: 9999; "
       >
       <div
           style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
@@ -70,57 +70,35 @@
             <div class="col-lg-9 col-12 mx-auto">
               <div class="row " v-if="isVisible === 'panel1'">
                 <div
-                  class="h5 mt-4 fuente text-center"
+                  class="h5 mt-2 fuente text-start ms-3"
                   style="font-weight: 400;"
                 >
                   Selecciona los cursos para asignar el paralelo
                 </div>
                 <Spinner v-if="isLoading1"></Spinner>
-              <section v-else class="flex-containes mt-2">
-                  <div v-for="item in listniveles" :key="item.id">
-                    <div
-                      class=" p-2 borde5 noactive cajas "
-                    
-                      style="max-width: 200px;"
-                      :class="[{'activado': index === item._id}, {'isDisabled': index != item._id&& index!= '0'}]"
-                    >
-                   
-                      <a href="javascript:;" @click="clicMe(item._id,item.nombres)" >
-                        <div class="text-center position-relative">
-                          <div class="blur-shadow-image">
-                            <img
-                              class="img  move-on-hover w-40"
-                              src="../../../../assets/img/logs/electronic-signature.svg"
-                            />
-                          </div>
-                        </div>
-                        <div class="text-center">
-                          <span
-                            class="fuente cardTitle "
-                            style="font-size: 20px;"
-                            >Curso: </span
-                          ><br />
-                          <span class="cardSubTitle">{{
-                            item.nombres.slice(0, 25)
-                          }}</span>
-                          <hr />
-                          <a class="tamanio fuente">
-                            <b class="links"
-                              >Lista estudiantes
-                              <i class="fa fa-plus ms-2" aria-hidden="true"></i
-                            ></b>
-                          </a>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
+                   <section v-else class="flex-containes2 mt-2">
+                  <a
+                    v-for="(item, i) in listniveles"
+                    :key="item.id"
+                    type="button"
+                    @click="clicMe(item._id, item.nombres)"
+                    class="flex-none s-shadow s-pb-2 category-card s-center card-template s-py-3 s-px-2 s-decoration-none s-borderline-top animate__animated animate__fadeInUp"
+                    href="javascript:;"
+                    :class="[`s-borde-${i} animations-${i} `]"
+                  >
+                    <img class="img  s-mb-1 w-35" :src="arrays[i]" />
+                    <span class="s-span mt-1">Mostrar c..</span>
+                    <h6 class=" cardTitle text-start mt-1" style="font-size: 1rem;">
+                      Curso de {{ item.nombres }}
+                    </h6>
+                  </a>
                 </section>
               </div>
 
               <div class="row" v-if="isVisible === 'panel2'">
                 <div class="d-flex">
                     <a
-                    @click="isVisible = 'panel1'"
+                    @click="regresar"
                     class="btn btn-sm me-3 "
                     style="box-shadow: none;"
                   >
@@ -130,7 +108,7 @@
                     />
                   </a>
                 <span class="fuente h5 text-start" style="font-weight: 400;"
-                    >Gestionar paralelos del {{nombre_curso}}</span
+                    >Gestionar paralelos del <span class="text-azul">{{nombre_curso}}</span> </span
                   ><br /> 
                 </div>
                  <div class="mt-2">
@@ -179,20 +157,27 @@
                   />
                 </div>
                   <div v-if="istabs == '1'">
-                  <div class="d-flex justify-content-between mt-3">
-                    <select
-                      v-model="check"
-                      style="border-color: rgba(0, 208, 228, 0.5); box-shadow: 0 0 4px 1px rgb(0 208 228 / 30%), 0 0 0 2px #00d0e4; outline: 0; height: 35px;"
-                      class="fuente  buscador "
-                      @change="onChange($event)"
-                    >
-                      <option disabled value="">Seleccione un paralelo</option>
-                     <option value="A">PARALELO A</option>
-                      <option value="C">PARALELO C</option>
-                      <option value="D">PARALELO D</option>
-                      <option value="E">PARALELO E</option>
-                       <option value="F">PARALELO F</option>
-                    </select>
+                  <div class="d-flex justify-content-between mt-1">
+                  
+                     <div class="d-flex justify-content-start">
+                     
+                      <div  v-for="ite in paralelos" :key="ite.id">
+                        <div class="form-check mb-3 me-3">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="ite.id"
+                            :id="ite.id"
+                            :value="ite.id"
+                            @click="onChange(ite.nombre)"
+                          />
+                          <b class="links" for="ite._id">
+                            {{ ite.nombre}}</b
+                          >
+                        </div>
+                      </div>
+                    </div>
+
                     <a
                       v-on="
                         isSelecCurosos.length ? { click: () => remove() } : {}
@@ -209,9 +194,9 @@
                         :class="{
                           links: isSelecCurosos.length != 0,
                         }"
-                        >Guardar asignación paralelo ({{ check }})</b
+                        >Asignar</b
                       >
-                      <i class="fa fa-plus ms-2 iconos"></i>
+                      <i class="bx bx-duplicate iconos ms-2"></i>
                     </a>
                   </div>
                   <Spinner v-if="isTabla"></Spinner>
@@ -233,7 +218,7 @@
                         </div>
                       </div>
                     </div>
-                    <div v-else class="table-responsive mt-4">
+                    <div v-else class="table-responsive mt-3">
                       <table
                         class="elevation-2 table table-flush "
                         style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
@@ -396,15 +381,11 @@
               </a>
             </div>
             <div v-if="isVisible == 'panel2'">
-              <a class="btn btnNaranjaClaro" @click="isVisible = 'panel1'">
+              <a class="btn btnNaranjaClaro" @click="regresar">
                 <i class="ni ni-bold-left"></i> &nbsp; Vulver
               </a>
             </div>
-            <div v-if="isVisible == 'panel3'">
-              <a class="btn btnNaranjaClaro" @click="isVisible = 'panel1'">
-                <i class="ni ni-bold-left"></i> &nbsp; Vulver
-              </a>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -414,59 +395,3 @@
 
 <script src="./EnlistarParalelom2.js"></script>
 
-<style>
-div.dataTables_wrapper div.dataTables_filter {
-  width: 100%;
-  padding-left: 20px;
-}
-.botonimagen{
-background-image:url(../../../../assets/img/logos/logoE.png);
-background-repeat:no-repeat;
-height:50px;
-width:50px;
-background-position:center;
-}
-div.dataTables_wrapper div.dataTables_filter input {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.4rem;
-  color: #495057;
-  background-clip: padding-box;
-  border: none;
-  appearance: none;
-  border-radius: 0.5rem;
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  background: none;
-  color: black !important;
-  border-radius: 4px;
-  border: 1px solid #828282;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  z-index: 3;
-
-  color: #8392ab;
-  padding: 0;
-  margin: 0 3px;
-  border-radius: 50% !important;
-  width: 36px;
-  height: 36px;
-  font-size: 0.875rem;
-}
-.fondos {
-  border-radius: 0;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #31708f;
-  padding: 15px;
-  border: 1px solid transparent;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-}
-
-</style>

@@ -9,7 +9,7 @@
           <div class="" >
             <div class=" h-100">
               <div class="  ">
-                <h6 class="mb-1 h5 fuente mt-2" style="color:black;">Cambiar contraseña</h6>
+                <h6 class="mb-1 h5 fuente mt-2" style="color:black;" >Cambiar contraseña</h6>
                 <p class="parrafo">Cambia tu contraseña cuando lo necesites. Por seguridad, te recomendamos que esté compuesta de letras y números.</p>
                 <div class="h6 text-danger">{{ MsmError }}</div>
               </div>

@@ -1,11 +1,15 @@
-import IsSelect from "../../../../shared/IsSelect";
+
 import Spinner from "../../../../shared/Spinner.vue";
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
+
+import ServiceMatricula from '../../matricula1/ServiceMatriculas';
+const ResultServiceMatricula = new  ServiceMatricula();
+
 export default {
   name: "EslistarParalelom2",
   components: {
-    IsSelect,
+   
     Spinner
   },
   data() {
@@ -18,23 +22,23 @@ export default {
       idds: null,
       paralelos: [
         {
-          value: "0",
+          id: "0",
           nombre: "A",
         },
         {
-          value: "1",
+          id: "1",
           nombre: "C",
         },
         {
-          value: "2",
+          id: "2",
           nombre: "D",
         },
         {
-          value: "3",
+          id: "3",
           nombre: "E",
         },
         {
-          value: "4",
+          id: "4",
           nombre: "F",
         },
       ],
@@ -74,6 +78,7 @@ export default {
       index: "0",
       nombre_curso: '',
       isSelected: false,
+      arrays: [],
     };
   },
   methods: {
@@ -81,6 +86,7 @@ export default {
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
       }
+      this.arrays = ResultServiceMatricula.arrays_of_avatar();
     },
     __listNivele() {
       //-----------TRAE LA LISTA DE LOS ROLES
@@ -139,6 +145,15 @@ export default {
         this.isSelecCurosos.push(key);
       }
     },
+    regresar: function() {
+      this.isVisible = "panel1";
+      this.index = "0";
+    },
+    limpiar: function() {
+      this.isClick = false;
+      this.isSelecCurosos = [];
+      this.model.curso = '';
+    },
     remove() {
       //METODO PARA ELIMINAR  RO
       this.isClick = true;
@@ -149,8 +164,7 @@ export default {
             .updateMatricula(this.isSelecCurosos, this.model)
             .then(() => {
               this.__cambios(this.idds);
-              this.isClick = false;
-              this.isError = "";
+              this.limpiar();
               this.toast('Se asigno a '+ isArray+' estudiantes al paralelo '+ this.model.curso)
             })
             .catch(() => {
@@ -164,8 +178,8 @@ export default {
     },
 
 
-    onChange(event) {
-      this.check=event.target.value;
+    onChange(id) {
+      this.check=id;
       this.isSelected = true;
   },
 
@@ -190,7 +204,7 @@ export default {
       this.check= '';
       this.isSelected = false;
       this.isRemoveSelecC= [];
-      this.isError= '';
+
     },
     //------------------------------------CONFIGURAR MATRICULA---------------isConfig
     __mostrarConf(curse, tabb) {

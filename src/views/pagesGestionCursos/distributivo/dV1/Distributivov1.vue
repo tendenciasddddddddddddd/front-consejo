@@ -1,24 +1,17 @@
 <template>
   <div class="row">
     <div class="col-lg-11 col-12 mx-auto">
-      <div
-        class="mt-1"
-        style="background-color: #e5f5f8; padding:5px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;"
-      >
-        <div>
-          <div style="margin:3px;font-weight:700; color: #33475b;">
-            <router-link to="/Menu-Distributivo" class="badge" style="box-shadow: none">
-              <img
-                height="23px"
-                src="../../../../assets/img/usados/regresar.png"
-              />
-            </router-link>
-            &nbsp;&nbsp; &nbsp; Intensivo vincular a los docentes con paralelos cursos y materias.
-          </div>
-        </div>
-      </div>
-       <p class="parrafo mt-3">Crea nuevos registros, edita y elimina los distributivos.</p>
+      
+           <a @click="$router.go(-1)" class="btn btn-sm me-3 " style="box-shadow: none;padding: 0rem 0em !important;margin-bottom: 0px !important;">
+              <i class='bx bx-left-arrow-alt icono-regresar' ></i>
+            
+            </a>
+            <span class="titulo-principla"
+              > <span class="text-azul me-1">Intensivo</span>  Unir a docentes con paralelos cursos y materias. </span
+            >
+             
+       
+       <p class="parrafo mt-1">Crea nuevos registros, edita y elimina los distributivos.</p>
       
       <div class="mt-4">
          
@@ -26,7 +19,7 @@
             <div class="col-lg-3">
                 <div class="input-group">
             <span class="input-group-text text-body buscador"
-              ><i class="fas fa-search" aria-hidden="true"></i
+              ><i class="fas fa-search colorhs" aria-hidden="true"></i
             ></span>
             <input 
               type="text"
@@ -65,8 +58,8 @@
             </div>
             <div class="col-lg-3">
               <div class="d-flex justify-content-end mb-3">
-                <a class="btn btn-sm btnNaranja" @click="MostrarModal()">
-                  Crear distributivo
+                <a class="btn btnNaranja" @click="MostrarModal()">
+                  Nuevo
                 </a>
               </div>
             </div>
@@ -93,15 +86,27 @@
           </div>
           <div v-else>
 
-                <div  class="table-responsive mt-2">
+                <div  class="table-responsive ">
             <table class="table table-flush" style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
               <thead class="thead-light">
                 <tr class="cabeza">
                   <th
                     style="background-color: rgb(234, 240, 246); "
-                    class="text-uppercase text-center text-xxs font-weight-bolder"
+                    class=""
                   >
-                    Curso / Paralelo
+                   <div class="d-flex ">
+                      <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
+                        <input
+                          class="form-check-input cheka"
+                          type="checkbox"
+                          @click="selectAll"
+                        />
+                      </div>
+                       <i @click="deletedSelected" v-else style="border: 2px solid; color: rgb(0, 164, 189); height: 19px; width: 19px; border-radius: 3px; cursor: pointer;" class="fa fa-minus" aria-hidden="true"></i>
+                      <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                       Curso / Paralelo
+                      </span>
+                    </div>
                   </th>
 
                   <th
@@ -120,7 +125,8 @@
                       <input
                         class="form-check-input cheka"
                         type="checkbox"
-                        @click="selectUser(item._id)"
+                         v-model="isSelecUsers" :value="item._id"
+                          @click="selectOne(item._id)"
                       />
                     </div>
 
@@ -129,15 +135,13 @@
                      <span v-else class="text-danger ">Elimine este resgistro</span>
                       / {{ item.paralelo }}
                       <div>
-                     <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"
+                     <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt" style="background-color: rgb(0, 189, 165);"
                         ></span> Materia : <span v-if="item.fmateria">{{ item.fmateria.nombre }} </span>  <span v-else class="text-danger ">Elimine este resgistro</span>
                       
                     </div>
                     </div>
                   </div>
                 </td>
-                  
-
                   <td class="text-sm text-center text-dark fuente">
                     <span v-if="item.fdocente">
                       {{
@@ -405,31 +409,4 @@
 </template>
 
 <script src="./Distributivov1.js"></script>
-<style>
-#div1 {
-  overflow-y: scroll;
-  max-height: 440px;
-}
-#div1::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
 
-#div1::-webkit-scrollbar:vertical {
-  width: 10px;
-}
-
-#div1::-webkit-scrollbar-button:increment,
-.contenedor::-webkit-scrollbar-button {
-  display: none;
-}
-
-#div1::-webkit-scrollbar:horizontal {
-  height: 10px;
-}
-
-#div1::-webkit-scrollbar-thumb {
-  background-color: #bbbbbb;
-  border-radius: 20px;
-  border: 2px solid #f1f2f3;
-}
-</style>

@@ -1,90 +1,21 @@
 <template>
-  <div class="row">
-    <div class="col-lg-11 col-12 mx-auto">
-     
-       <div class=" mt-3">
-        <span style="font-weight: 700;color:#181B32; font-size: 21px;"
-          >Opciónes para generar reportes</span
-        >
-         <p class="parrafo mt-2" style="margin:7px; color: #33475b; ">
-           Podra imprimir los reportes de
-          los periodos vigentes... 
-           
-          </p>
-      </div>
-     
+    <div >
+         <AlertHeader :firsttext="'Reportes'" :lasttext="'Descargar reportes '"></AlertHeader>
       <div class="row">
-        <section class="flex-containes2 mt-3">
-          <div class="">
-            <a @click="openChildiConsolidado" href="javascript:;">
-              <div
-                class="cajas foco2 borde1 text-center fadeIn1 fadeInBottom animation-1"
-                style="max-width: 200px;margin-right: 13px!important;"
-              >
-                <img
-                  class="w-50"
-                  src="../../../assets/img/shapes/90260b20-d6c6-418f-9961-9282c5d85d78.png"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Consolidado</p>
-                <p class="parrafo cardSubTitle">
-                  Genere documento con datos de estudiantes👆
-                </p>
-              </div>
-            </a>
-          </div>
-          <div class="">
-            <a  @click="openChildReportPdf" href="javascript:;">
-              <div
-                class="cajas foco2 borde2 text-center fadeIn1 fadeInBottom animation-2"
-                style="max-width: 200px;margin-right: 13px!important;"
-              >
-                <img
-                  class="w-50"
-                  src="../../../assets/img/icons/pdf.png"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Matriculas</p>
-                <p class="parrafo cardSubTitle">
-                  Genere documento de matriculas 👆
-                </p>
-              </div>
-            </a>
-          </div>
-          <div class="">
-            <div
-              class="cajas foco2 borde3 text-center fadeIn1 fadeInBottom animation-3"
-              style="max-width: 200px;"
-            >
-              <router-link to="/consolidado">
-                <img
-                  class="w-50"
-                  src="../../../assets/img/logs/add-on-reporting.svg"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Notas</p>
-                <p class="parrafo cardSubTitle">
-                  Crear materias para las dos modalidades I y M 👆
-                </p>
-              </router-link>
+         <section class="intro_cards mt-3">
+          <div class="intro_cards_container">
+            <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
+              <CardsOptions :index="i"  :img="item.img" :nombre="item.nombre" :description="item.description" @optionsFuntions="optionsView"></CardsOptions>
             </div>
-          </div>
-          <div>
-            <div
-              class="cajas foco2 borde4 text-center fadeIn1 fadeInBottom animation-4"
-              style="max-width: 200px;"
-            >
-              <router-link to="#">
-                <img
-                  class="w-45"
-                  src="../../../assets/img/logs/documents.svg"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Permisos</p>
-                <p class="parrafo cardSubTitle">
-                  Mire los informes de permisos pedientes👆
-                </p>
-              </router-link>
+            <div class="intro_card_container" >
+               <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
+                  <i class='bx bx-folder-plus p-5' style="font-size:60px;color:black;"></i>
+              </div>
+            </div>
+            <div class="intro_card_container" >
+               <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
+                  <i class='bx bx-folder-plus p-5' style="font-size:60px;color:black;"></i>
+              </div>
             </div>
           </div>
         </section>
@@ -96,24 +27,59 @@
              <Consolidado  @myEventClosedModalConsolidado="closedChildConsolidado" ></Consolidado>
          </div>
     </div>
-  </div>
 </template>
 
 <script>
 import RestResource from "../../../service/isAdmin";
 const restResourceService = new RestResource();
+const img1 = require("../../../assets/img/shapes/90260b20-d6c6-418f-9961-9282c5d85d78.png")
+const img2 = require("../../../assets/img/icons/pdf.png")
+const img3 = require("../../../assets/img/logs/add-on-reporting.svg")
+const img4 = require("../../../assets/img/logs/documents.svg")
+import AlertHeader from "../../../shared/AlertHeader.vue";
+import CardsOptions from "../../../shared/CardsClick.vue"
 export default {
   name: "MenuZonas",
+ 
   data() {
     return {
       roles: this.$store.state.user.roles,
       ifReportPdf: false,
       ifConsolidado : false,
+      arrays_of_options: [
+        {
+          id: "0",
+          nombre: "Consolidado",
+          img: img1,
+          description: "Puedes crear nuevos registros de provincias segun sea necesario ",
+        },
+        {
+          id: "1",
+          nombre: "Matriculas",
+          img: img2,
+          description: "Puedes crear nuevos registros de Matriculas segun sea necesario ",
+        },
+        {
+          id: "2",
+          nombre: "Notas",
+          img: img3,
+          description: "Puedes crear nuevos registros de Notas segun sea necesario ",
+        },
+         {
+          id: "3",
+          nombre: "Permisos",
+          img: img4,
+          description: "Puedes crear nuevos registros de Permisos segun sea necesario ",
+        },
+       
+      ]
     };
   },
   components:{
-     ReportePdfAdmin: () => import( /* webpackChunkName: "Report" */ "../../../components/matriculasComp/pdfs/Report.vue"),
-     Consolidado: () => import( /* webpackChunkName: "Consolidado" */ "../../../components/matriculasComp/consolidado/Consolidado.vue"),
+     ReportePdfAdmin: () => import( /* webpackChunkName: "Report" */ "../../../components/componentMatricula/pdfs/Report.vue"),
+     Consolidado: () => import( /* webpackChunkName: "Consolidado" */ "../../../components/componentMatricula/consolidado/Consolidado.vue"),
+      AlertHeader ,
+      CardsOptions
   },
   methods: {
     verificarUsuario() {
@@ -121,14 +87,16 @@ export default {
         this.$router.push("/");
       }
     },
-    openChildReportPdf: function() {
-      this.ifReportPdf = true;
+    optionsView: function(num){
+      if (num===0) {
+         this.ifConsolidado = true;
+      }
+      if (num===1) {
+         this.ifReportPdf = true;
+      }
     },
     closedChildReportPdf: function() {
       this.ifReportPdf = false;
-    },
-    openChildiConsolidado: function() {
-      this.ifConsolidado = true;
     },
     closedChildConsolidado: function() {
       this.ifConsolidado = false;

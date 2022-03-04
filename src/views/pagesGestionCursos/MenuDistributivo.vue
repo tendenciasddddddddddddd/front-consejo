@@ -26,10 +26,10 @@
                   src="../../assets/img/logs/crm.svg"
                   alt="fondo"
                 />
-                <p class="cardTitle fuente mt-3">Intensivo</p>
-                <p class="parrafo">
+                <p class="cardTitle fuente mt-1">Intensivo</p>
+                <span class="parrafo cardSubTitle">
                   Vincular a los docentes con sus materias 👆
-                </p>
+                </span>
                 
               </div>
             </router-link>
@@ -45,10 +45,10 @@
                   src="../../assets/img/logs/segmented-lists.svg"
                   alt="fondo"
                 />
-                <p class="cardTitle fuente mt-3">Extraordinaria</p>
-                <p class="parrafo">
+                <p class="cardTitle fuente mt-1">Extraordinaria</p>
+                <span class="parrafo cardSubTitle">
                  Vincular a los docentes con sus materias 👆
-                </p>
+                </span>
                
               </div>
             </router-link>

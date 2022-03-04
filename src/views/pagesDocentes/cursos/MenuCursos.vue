@@ -9,16 +9,18 @@
         <ProgressBar v-if="isData"></ProgressBar>
         <div v-else >
          
-                 <div class="row mt-3">
+                 <div class="row " >
               <div class="col-md-5">
-                  <span
-              class="ms-2"
-              style="font-weight: 700;color:#181B32; font-size: 21px;"
-              >Todos los cursos asignados</span
+                  <span class="ms-2 s-title-page"
+              >  Cursos
+               <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" viewBox="0 0 20 20" class="small svg-icon fill grey-500 s-mr-2 me-1 ms-1" id="" fill="currentColor" title=""><path d="M6.52776 18.4722C6.16165 18.1061 6.16165 17.5125 6.52776 17.1464L14.3375 9.33669C14.7036 8.97057 15.2972 8.97057 15.6633 9.33669C16.0294 9.70281 16.0294 10.2964 15.6633 10.6625L7.85359 18.4722C7.48747 18.8383 6.89388 18.8383 6.52776 18.4722Z"></path><path d="M6.52776 1.52459C6.16164 1.8907 6.16164 2.4843 6.52776 2.85041L14.3397 10.6624C14.7059 11.0285 15.2995 11.0285 15.6656 10.6624C16.0317 10.2963 16.0317 9.70269 15.6656 9.33657L7.85359 1.52459C7.48747 1.15847 6.89388 1.15847 6.52776 1.52459Z"></path></svg>
+            
+               Todos los cursos asignados</span
             >
+           
               </div>
               <div class="col-md-7">
-                 <div class="d-flex justify-content-center">
+                 <div class="d-flex justify-content-end">
               <div>
                 <div class="input-group ">
                   <input style="background: white;"
@@ -38,7 +40,7 @@
                
               </div>
               <div>
-                 <ul class="pagination pagination-dark justify-content-center mt-2">
+                 <ul class="pagination pagination-dark justify-content-center mt-2 me-3">
             <li class="page-item">
               <a
                 class="fuente tamanio links paginates ms-3 me-2 isPaginateh isPaginateActive"
@@ -94,25 +96,21 @@
               </div>
             </div>
          
-
+           <!-- <hr class="horizontal dark " style="margin: 0.5rem 0;"> -->
           <div v-if="displayedArticles.length">
             <section class="flex-containes2 mt-3">
               <div
-                class="carde fadeIn1 fadeInBottom " :class="[`animation-${index}`]"
+                class="carde s-header-cards animate__animated animate__fadeInUp" :class="[`animations-${index}`]"
                 v-for="(item, index) in displayedArticles"
-                :key="item.id"
+                :key="item.id" @click="openModal(item)"
+                style="cursor: pointer;"
               >
-                <div class="card-header1">
-                    <span style="height: 130px;" class="mask bg-gradient-dark"></span>
-                   <div class="mosText text-center text-white">
-                     <a class="mt-5" @click="openModal(item)"
-                  href="javascript:;" ><b style="color:white;" class="fuente"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Ver Curso</b>
-                  </a>
+                <div class=" text-center"  v-bind:style="{'background':colorsh[index]}">
+                    <!-- <span style="height: 130px;" class="mask bg-gradient-dark"></span> -->
+
                    
-                  </div>
-                   
-                  <img
-                    src="../../../assets/img/icons/Mascot-CursosenGrupo.png"
+                  <img class="w-30 s-header-img"
+                    src="../../../assets/img/teams/0.svg"
                     alt="rover"
                   />
                 </div>
@@ -125,9 +123,9 @@
                     {{ item.fnivel.nombres }}
                   </span>
                   <p class="text-xs  fuente mt-2" style="color: #516f90 !important;">
-                     {{ item.fmateria.nombre }} / Paralelo {{ item.paralelo }}
+                    Materia de {{ item.fmateria.nombre }} / Paralelo {{ item.paralelo }}
                   </p>
-                   
+                  
                 </div>
               </div>
              
@@ -136,15 +134,15 @@
            
           </div>
           <section v-else>
-            <div class="d-flex justify-content-center mt-8">
+            <div class="d-flex justify-content-center mt-7">
               <div class="text-center">
                 <img
                   style="width: 120px;"
-                  src="../../../assets/img/icons/descarga.svg"
+                  src="../../../assets/img/icons/EDy-detective.svg"
                   alt="fondo"
                 />
                 <div class=" mt-4 letra fuente">
-                  No hay datos que mostrar, sin cursos
+                  No hay datos que mostrar para tu búsqueda
                 </div>
               </div>
             </div>
@@ -152,7 +150,7 @@
         </div>
       </div>
      
-        <div class=" fdYSBu">
+        <!-- <div class=" fdYSBu">
           <div class="itemActive w-100">
             <span class=" text-dark">
               Modalidades
@@ -194,7 +192,7 @@
           <div class="d-flex ms-3 mt-2">
             <a class="tamanio links fuente"> <b>Solicitar nuevo</b> </a>
           </div>
-        </div>
+        </div> -->
        <div
       class="modal fade "
       :class="{ 'show ': modals === true }"

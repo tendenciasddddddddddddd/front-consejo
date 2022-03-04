@@ -12,7 +12,11 @@ export default class ZonasProxi {
     }
 
     create(params) {
-        return this.axios.post(this.url + '/estudiantes', params);
+        return this.axios.post(this.url + '/estudiantes', params);//alumnosMany
+    }
+
+    createMany(params) {
+        return this.axios.post(this.url + '/estudiantes/alumnosMany', params);//
     }
 
     get(id) {

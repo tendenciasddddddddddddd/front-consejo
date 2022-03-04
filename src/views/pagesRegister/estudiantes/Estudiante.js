@@ -1,10 +1,12 @@
 import RestResource from '../../../service/isAdmin'
 const restResourceService = new RestResource();
-import Spinner from '../../../shared/Spinner'
+import Spinner from '../../../shared/Spinner';
+import AlertHeader from "../../../shared/AlertHeader.vue";
 export default {
   name: "indexUsiario",
   components: {
     Spinner,
+    AlertHeader,
     AlumnoCreateOrUpdate : () => import( /* webpackChunkName: "CreateOrUpdate" */ '../../../components/admin/registerComponent/AlumnosCreateUpdate.vue')
   },
   data() {
@@ -25,7 +27,7 @@ export default {
       contador2 : 0,
       viewtable:1,
       listbuscador: {},
-      searchQuery: null,
+      searchQuery: '',
       rows: 6,
       isActive : false,
       selected: [],
@@ -39,7 +41,7 @@ export default {
   computed: {
    
     resultQuery() {
-      if (this.searchQuery) {
+      if (this.searchQuery.length>1) {
         return this.listbuscador.filter((item) => {
           return this.searchQuery
             .toLowerCase()
@@ -70,7 +72,7 @@ export default {
     this.ifCreateUpdate = false;
 },
 refreshData : function() {
-  this.ifCreateUpdate = false;
+  
   this.getAll(this.paginaActual,6); 
 },
     getAll(pag) {
@@ -123,6 +125,7 @@ refreshData : function() {
             this.iseliminaddo = false;
             this.userIds= [];
             this.getAll(this.paginaActual,6); 
+            this.allSelected = false;
           })
           .catch(() => {
             console.log("Error imposible");

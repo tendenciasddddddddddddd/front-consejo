@@ -1,7 +1,5 @@
-
-import axios from 'axios'
-import ServiceLogins from './ServiceLogin';
-const ResultServiceLogin = new  ServiceLogins();
+import ServiceLogins from "./ServiceLogin";
+const ResultServiceLogin = new ServiceLogins();
 /* import Firebase from "firebase";
 import config from "../../config";
 let app = Firebase.initializeApp(config);
@@ -14,14 +12,13 @@ export default {
   data() {
     return {
       isLoading: false,
-      isAuthGoogle : false,
+      isAuthGoogle: false,
       isPasswd: false,
-      isResert : false,
+      isResert: false,
       login: {
         email: null,
         password: null,
         loading: false,
-
       },
       newSeccions: {
         Identificador: null, //id del usuario
@@ -30,48 +27,46 @@ export default {
         nombre: null,
       },
       ipEthernet: null,
-      infos:{
+      infos: {
         nombre: null,
         correo: null,
         modalidad: null,
       },
-      isVisible: 'logins', 
-      recordingPassword : {
-        email: ''
+      isVisible: "logins",
+      recordingPassword: {
+        email: "",
       },
-      code : '',
-      isCode: '',
-      isErrorCode: '',
+      code: "",
+      isCode: "",
+      isErrorCode: "",
       resetPasswords: {
         email: null,
-        password : null,
+        password: null,
       },
-      //AUTH LOGIN GOOGLE 
+      //AUTH LOGIN GOOGLE
       isLogin: false,
       model: {
-        email: null
-      }
+        email: null,
+      },
     };
   },
   methods: {
-
-    async logOut(){
+    async logOut() {
       try {
         const result = this.$gAuth.signOut();
-        console.log('result', result);
+        console.log("result", result);
       } catch (error) {
-        console.error(error, 'LOG OUT');
+        console.error(error, "LOG OUT");
       }
     },
 
-    async loginGoogleAuth(){
+    async loginGoogleAuth() {
       try {
-        const  googleUser = await this.$gAuth.signIn();
+        const googleUser = await this.$gAuth.signIn();
         const users = googleUser.getBasicProfile().getEmail();
         if (this.$gAuth.isAuthorized) {
           this.postGoogleAuth(users);
         }
-      
       } catch (error) {
         this.$notify({
           group: "global",
@@ -80,7 +75,7 @@ export default {
       }
     },
 
-    postGoogleAuth(users){
+    postGoogleAuth(users) {
       this.isAuthGoogle = true;
       this.model.email = users;
       this.$proxies.identityProxy
@@ -90,17 +85,17 @@ export default {
           this.infos.nombre = x.data.isaccesos.nombre;
           this.infos.correo = x.data.isaccesos.email;
           this.infos.modalidad = x.data.isaccesos.modalidad;
-          this. __enviarUbicacion(10);
+          this.__enviarUbicacion(10);
           localStorage.setItem("access_token", x.data.isaccesos.tokens);
-          localStorage.setItem('Xf', JSON.stringify(this.infos));
-          localStorage.setItem('Avatar', JSON.stringify(img));
+          localStorage.setItem("Xf", JSON.stringify(this.infos));
+          localStorage.setItem("Avatar", JSON.stringify(img));
           this.$user.initialize();
           this.isAuthGoogle = false;
           this.$parent.isLoggedIn = true;
-          this.$router.push("/").catch(()=>{});
+          this.$router.push("/").catch(() => {});
         })
         .catch((x) => {
-          if(!x.response){
+          if (!x.response) {
             this.$notify({
               group: "global",
               text: "Por favor revise su conexion a internet",
@@ -112,7 +107,7 @@ export default {
               text: "El usuario no esta registrado en el sistema",
             });
             this.isAuthGoogle = false;
-          }  else {
+          } else {
             this.$notify({
               group: "global",
               text: "La cuenta de correo electronico no existe",
@@ -131,26 +126,25 @@ export default {
           this.infos.nombre = x.data.isaccesos.nombre;
           this.infos.correo = x.data.isaccesos.email;
           this.infos.modalidad = x.data.isaccesos.modalidad;
-          this. __enviarUbicacion(10);
+          this.__enviarUbicacion(10);
           localStorage.setItem("access_token", x.data.isaccesos.tokens);
-          localStorage.setItem('Xf', JSON.stringify(this.infos));
-          localStorage.setItem('Avatar', JSON.stringify(img));
+          localStorage.setItem("Xf", JSON.stringify(this.infos));
+          localStorage.setItem("Avatar", JSON.stringify(img));
           this.$user.initialize();
           this.isLoading = false;
           this.$parent.isLoggedIn = true;
-          this.$router.push("/").catch(()=>{});
-          
+          this.$router.push("/").catch(() => {});
+
           //window.location.reload(true);
         })
         .catch((x) => {
-          if(!x.response){
+          if (!x.response) {
             this.$notify({
               group: "global",
               text: "Por favor revise su conexion a internet",
             });
             this.isLoading = false;
-          }
-         else if (x.response.status == 400) {
+          } else if (x.response.status == 400) {
             this.__limpiarCampos();
             this.$notify({
               group: "global",
@@ -175,108 +169,89 @@ export default {
         });
     },
 
-    ResetPassword(){
+    ResetPassword() {
       this.isPasswd = true;
       this.$proxies.identityProxy
         .resetPasswords(this.recordingPassword)
         .then((x) => {
           this.code = x.data.code;
           this.isPasswd = false;
-          if (this.code!='') {
-            this.isVisible= 'forgot';
+          if (this.code != "") {
+            this.isVisible = "forgot";
           }
           //window.location.reload(true);
         })
         .catch(() => {
-          
-          this.isVisible= 'error';
+          this.isVisible = "error";
           this.isPasswd = false;
-         
         });
     },
 
-    verificarCode(){
-      if (this.isCode==this.code) {
-        this.isVisible= 'resett';
+    verificarCode() {
+      if (this.isCode == this.code) {
+        this.isVisible = "resett";
         this.resetPasswords.email = this.recordingPassword.email;
-        this.code = '';
-        this.isCode = '';
-        this.recordingPassword.email='';
-      }else{
-        this.isErrorCode = 'El Código es incorrecto'
+        this.code = "";
+        this.isCode = "";
+        this.recordingPassword.email = "";
+      } else {
+        this.isErrorCode = "El Código es incorrecto";
       }
     },
 
-    ResetCount(){
+    ResetCount() {
       this.isResert = true;
       this.$proxies.identityProxy
         .forgotPassword(this.resetPasswords)
         .then(() => {
-          this.isVisible= 'logins';
+          this.isVisible = "logins";
           this.isResert = false;
-          this.resetPasswords.email='';
-          this.resetPasswords.password = '';
+          this.resetPasswords.email = "";
+          this.resetPasswords.password = "";
         })
         .catch(() => {
-          this.recordingPassword.email='';
-          this.resetPasswords.password = '';
-          this.isVisible= 'logins';
+          this.recordingPassword.email = "";
+          this.resetPasswords.password = "";
+          this.isVisible = "logins";
           this.isResert = false;
-         
         });
     },
-    rediricLogin(){
-      this.isVisible= 'logins';
-      this.resetPasswords.email='';
-      this.resetPasswords.password = '';
+    rediricLogin() {
+      this.isVisible = "logins";
+      this.resetPasswords.email = "";
+      this.resetPasswords.password = "";
 
       //this.recordingPassword = '';
-      this.code = '';
-      this.isCode = '';
-      this.isErrorCode = '';
+      this.code = "";
+      this.isCode = "";
+      this.isErrorCode = "";
     },
 
     __enviarUbicacion(id) {
-       this.newSeccions.Identificador = id;
-       this.newSeccions.fecha = ResultServiceLogin.__calcularFecha();
-       this.newSeccions.nombre = ResultServiceLogin.__navegador() + " en " + ResultServiceLogin.ubicacion();
-       this.newSeccions.host = this.ipEthernet;
-       localStorage.setItem('datos', JSON.stringify(this.newSeccions));
-    }, 
-
-    async getIpClient() {
-      try {
-        const response = await axios.get("https://api.ipify.org?format=json");
-        this.ipEthernet = response.data.ip;
-      } catch (error) {
-        console.log(error);
-      }
+      this.newSeccions.Identificador = id;
+      this.newSeccions.fecha = ResultServiceLogin.__calcularFecha();
+      this.newSeccions.nombre =
+        ResultServiceLogin.__navegador() +
+        " en " +
+        ResultServiceLogin.ubicacion();
+      this.newSeccions.host = this.ipEthernet;
+      localStorage.setItem("datos", JSON.stringify(this.newSeccions));
     },
 
-  
+    getIpClient() {
+      // const url = "https://api.ipify.org/?format=json";
+      // fetch(url)
+      //   .then((response) => response.json())
+      //   .then((data) => this.ipEthernet = data.ip);
+      this.ipEthernet = '127.0.0.1: noIp'
+    },
+
     __limpiarCampos() {
       this.login.email = null;
       this.login.password = null;
     },
-    
-    // __createSesions(id){
-    //   this.newSeccions.Identificador = id;
-    //    this.newSeccions.fecha = this.__calcularFecha();
-    //    this.newSeccions.nombre = this.__navegador() + " en " + this.ubicacion();
-    //    this.newSeccions.host = this.ipEthernet;
-    //   usersCollection.add(this.newSeccions)
-    //   .then(() => {
-    //         console.log("Document successfully written!");
-    //         return true
-    //       })
-    //     .catch((error) => {
-    //         console.log("Error writing document: ", error);
-    //       });
-    // },
-
-
   },
-  created(){
+  created() {
     this.getIpClient();
-  }
+  },
 };

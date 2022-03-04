@@ -173,7 +173,7 @@
                 
                 <div v-if="ifOcultar" class="loadingg">
                   <div class="inn fuente h5">
-                    Aceptados  {{contador}} de {{rows}}   <span class="text-danger ">Rechazados {{ifDocumentosDuplicados}}</span>
+                   Trabajando...
                   </div>
 
                 </div>
@@ -199,7 +199,7 @@
                   </v-select>
                   </div>
                   <br>
-                 <a  @click="$emit('clickAlumnos')" class="btn btnNegro ">Finalizar Registro</a>
+                
                 </template>
               </div>
               <!-- --------------------------------------------------------FORMULARIO ESTUDIANTE--------------->

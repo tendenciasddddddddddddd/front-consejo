@@ -19,11 +19,11 @@
       src="https://kit.fontawesome.com/42d5adcbca.js"
       crossorigin="anonymous"
     ></script>
-
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <!-- End Google Tag Manager -->
   </head>
 
-  <body class="g-sidenav-show ">
+  <body class="g-sidenav-show " >
     <!-- Navbar Dark -->
     <div class="inicio">
       <div class="d-flex justify-content-end mb-3">
@@ -63,11 +63,24 @@
     border-radius: 5px;
     transition: background-color .2s linear;
     width: 4px !important;
-    background: #aaa;            /* width of the entire scrollbar */
+    background: #dfdfe8;            /* width of the entire scrollbar */
+    --thumb-color-hover: #c1c1d3;
       }
-      .mol {
-        box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-      }
+      .navbar {
+    box-shadow: 0 2px 18px 0 rgb(195 203 214)!important;
+     }
+     .hTtqzM {
+      position: fixed;
+      z-index: 9999;
+       background-color: rgba(0, 19, 51, 0.64);
+       top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+    
+  
+}
+     
 
       .bott {
         font-weight: 500;
@@ -87,7 +100,6 @@
         border-radius: 3px;
         font-size: 15px;
         transition: all 0.15s ease-out;
-        background-color: #f5f8fa;
         color: #33475b;
         display: block;
         height: 39px;
@@ -278,6 +290,28 @@
         height: 1.25em !important;
         width: 1.25em !important;
       }
+      .btnCreanaBorder{
+  border-width: 2px !important;
+    border-style: solid !important;
+    border-color: #4b22f4 !important;
+    border-radius: 10px !important;
+     background-color: white !important;
+    color: #4b22f4 !important;
+}
+ .btnCreanaBorder:hover {
+    border-color: #9c86f9 !important;
+    border-color: var(--color-primary-lighter, #9C86F9) !important;
+    color: #9c86f9 !important;
+    color: var(--color-primary-lighter, #9C86F9) !important;
+}
+.btnCreana{
+ background-color: #4B22F4 !important;   
+  color: #fff !important;
+}
+.btnCreana:hover{
+ background-color: #9c86f9 !important;   
+  color: #fff !important;
+}
       .modalheader {
         justify-content: space-between;
         display: flex !important;
@@ -289,6 +323,14 @@
           #00afb2 56%,
           #00bda5
         ) !important;
+        border-top-left-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+        min-height: 58px !important;
+      }
+      .modalheader2 {
+        justify-content: space-between;
+        display: flex !important;
+       background-color: rgb(37, 51, 66);
         border-top-left-radius: 5px !important;
         border-top-right-radius: 5px !important;
         min-height: 58px !important;
@@ -446,9 +488,9 @@
       }
       
       .modal {
-        background: rgba(0, 19, 51, 0.64);
-        /* backdrop-filter: blur(10px); */
-        /* -webkit-backdrop-filter: blur(10px); */
+        backdrop-filter: blur(5px);
+        background-color: rgba(45, 62, 80, 0.79);
+        
       }
       .modal-body {
         max-height: 460px;

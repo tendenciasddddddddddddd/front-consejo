@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="main-content main-content-bg mt-0">
+    <main class="main-content main-content-bg mt-0" style="background: white;">
       <section>
         <div class="page-header ">
           <div class="container">
@@ -89,9 +89,9 @@
                           </button>
                           <br>
                           <br>
-                          <hr class="mt-2"/>
+                          <hr class="mt-1"/>
                           
-                          <div v-if="!isAuthGoogle" class="google-btn mt-5" @click="loginGoogleAuth()">
+                          <div v-if="!isAuthGoogle" class="google-btn mt-4" @click="loginGoogleAuth()">
                         <div class="google-icon-wrapper">
                           <img
                             class="google-icon"
@@ -103,7 +103,7 @@
                           Iniciar sesión con Google
                         </p>
                       </div>
-                      <div v-else class="google-btn mt-5">
+                      <div v-else class="google-btn mt-4">
                         <div class="google-icon-wrapper">
                           <span
                               class="spinner-border spinner-border-sm"

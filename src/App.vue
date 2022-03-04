@@ -5,13 +5,13 @@
 
         <Header></Header>
         <main
-          class="main-content position-relative max-height-vh-100 h-10 border-radius-lg "
+          class="main-content position-relative  h-10 border-radius-lg "
           
         >
           <!-- Navbar -->
           <Inicio />
           <!-- End Navbar -->
-          <div class="container-fluid py-4">
+          <div class="container-fluid  py-2" >
            <router-view/>
             <!-- INICIO FOOTER -->
            <Help/>

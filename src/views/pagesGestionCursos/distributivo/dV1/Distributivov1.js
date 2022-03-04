@@ -45,9 +45,33 @@ export default {
           subtitulo: 'none',
           iseliminaddo : false,
           isCarga: false,
+          selected: [],
+          allSelected: false,
+          userIds: [],
       }
     },
     methods: {
+
+      selectOne(ids) {
+        if (!this.isSelecUsers.includes(ids)) {
+          this.isSelecUsers.push(ids);
+        } else {
+          this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
+        }
+      },
+      selectAll: function() {
+        this.allSelected= true;
+        this.isSelecUsers = [];
+        if (this.allSelected) {
+          for (let user in this.info) {
+            this.isSelecUsers.push(this.info[user]._id);
+          }
+        } 
+      },
+      deletedSelected: function() {
+        this.allSelected= false;
+        this.isSelecUsers = [];
+      },
 
        __listNivele() {
         //-----------TRAE LA LISTA DE LOS ROLES
@@ -197,31 +221,29 @@ export default {
             });
         }
       },
-      selectUser(key){
-        let longitud = this.isSelecUsers.length;
-        let isExiste = 0;
-        if(longitud>0){
-           for (let i = 0; i < this.isSelecUsers.length; i++) {
-              if(this.isSelecUsers[i]==key){
-               this.isSelecUsers.splice(i, 1); 
-               isExiste = 1;
-               break;
-              }
-           }
-           if(isExiste===0){ 
-             this.isSelecUsers.push(key);
-           }
-        }else{
-         this.isSelecUsers.push(key);
-        } 
-      },
       remove() {
-        //METODO PARA ELIMINAR  ROW
-        if (
-          confirm(
-            "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
-          )
-        ) {
+        let message = {
+          title: "¿Destruir registro?",
+          body: " Esta acción no se puede deshacer",
+        };
+        let options = {
+          loader: true,
+          okText: "Continuar",
+          cancelText: "Cancelar",
+          animation: "bounce",
+        };
+        this.$dialog
+          .confirm(message, options)
+          .then((dialog) => {
+            this.dialogDelete();
+            setTimeout(() => {
+              dialog.close();
+              this.toast("Se elimino a usuarios de sistema con su cuenta");
+            }, 1000);
+          })
+          .catch(function() {});
+      },
+      dialogDelete() {
           this.iseliminaddo = true;
           let isArray = this.isSelecUsers.length;
           if(isArray>0){
@@ -231,17 +253,12 @@ export default {
                 this.iseliminaddo = false;
                 this.isSelecUsers= [];
                 this.getAll(this.pagina,6); 
+                this.allSelected = false;
               })
               .catch(() => {
                 console.log("Error imposible");
               });
-            this.$notify({
-              group: "global",
-              text: "Registro destruido",
-            });
-            
          }
-        }
       },
       __limpiarCampos(){
         this.model._id = "";
@@ -254,7 +271,21 @@ export default {
       MostrarModal(){
         this.__limpiarCampos();
         this.tab= "init1";
-      }
+      },
+      toast(message) {
+        this.$toasted.info(message, {
+          duration: 2600,
+          position: "bottom-center",
+          icon: "check-circle",
+          theme: "toasted-primary",
+          action: {
+            text: "CERRAR",
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      },
     },
     created() {
         this. __listNivele();

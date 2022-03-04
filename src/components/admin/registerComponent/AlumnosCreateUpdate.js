@@ -15,7 +15,7 @@ import ChildSexo from "../../../shared/views/ChildSexo"
 import ChildEtnia from "../../../shared/views/ChildEtnia"
 import ChildNacionalidad from "../../../shared/views/ChildNacionalidad"
 //SEND MULTIPLE 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+//const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export default {
   name: "CreaUsuario",
   components: {
@@ -79,7 +79,7 @@ export default {
       dropOptions: {
         url: "https://httpbin.org/post",
         dictDefaultMessage: `
-        <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
+        <img alt='Image placeholder' style='padding-top:-16px;' height='120px;' class='mx-4 mt-n6' src='${image}'>
         <p class='text-sm fuente'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Clic o arrastra y suelta. Solo los archivos TXT son compatibles.</p>
         `,
         maxFilesize: 2,
@@ -97,12 +97,10 @@ export default {
       isProcesDoc : false,
       ifDocListo: false,
       listCorreos: [],
-      contador : 0,
       ifOcultar: false,
       objetosRechasados: [],
       ifDocumentosDuplicados: 0,
       ifmostrarRechasados : false,
-      buttonBlock: false,
     };
   },
   methods: {
@@ -324,8 +322,9 @@ export default {
             username : cedula,
             password : password,
             fullname: fullname,
+            roles: ''
            })
-           if(i > 99){
+           if(i > 300){
             this.isProcesDoc = false;
             this.ifDocListo = true;
             this.tab ='ViewInport';
@@ -346,23 +345,22 @@ export default {
       
     },
 
-    async sendAll2(){
-      if (confirm(`DESEA REGISTRAR ESTE ARREGLO ESTUDIANTES!!`)) {
+    createUserMany(){
         if (this.isData!=null) {
-          this.contador = 0;
           this.ifOcultar= true;
-          for (let i = 0; i < this.isData.length; i++) {
-            const element = this.isData[i];
             this.$proxies._registroProxi
-            .create(element) //-----------GUARDAR CON AXIOS
-            .then(() => {
-              this.contador += 1 ;
+            .createMany(this.isData) //-----------GUARDAR CON AXIOS
+            .then((res) => {
+              this.ifOcultar= false;
+              this.objetosRechasados = res.data.duplicados;
+              this.$emit('clickAlumnos');
+              this.isData = [];
+              this.ifmostrarRechasados= true;
             })
             .catch((error) => {
               if (error.response) {
-                if (error.response.status == 400) {
-                   this.ifDocumentosDuplicados += 1;
-                   this.objetosRechasados.push(this.isData[i]);
+                if (error.response.status == 500) {
+                   alert('error.response.message')
                 }
                 
               }  else {
@@ -373,29 +371,29 @@ export default {
                
               }
             });
-            await sleep(220);
-            
-          }
-          
-          if (this.ifDocumentosDuplicados==0) {
-            
-            this.ifOcultar= false;
-           
-            this.isData = [];
-            this.buttonBlock = true;
-          }
-          else{
-            this.ifOcultar= false;
-            this.ifmostrarRechasados = true;
-            this.isData = [];
-            this.row = 0;
-            this.contador = 0;
-            this.buttonBlock = true;
-          }
-       }
-      }
-    },
 
+       }
+    },
+    sendAll2() {
+      let message = {
+        title: "Ingreso masivo de usuarios",
+        body: " Puede ingresar hasta 300 usuarios",
+      };
+      let options = {
+        loader: false,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.createUserMany();
+          dialog.close();
+          
+        })
+        .catch(function() {});
+    },
 
     __listParroquias() {
       //-----------TRAE LA LISTA DE LOS ROLES

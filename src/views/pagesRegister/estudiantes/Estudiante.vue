@@ -1,21 +1,8 @@
 <template>
-  <div class="row">
-    <div class="col-lg-11 col-12 mx-auto">
-      <div class="mt-2">
-        <div
-          class=""
-          style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;"
-        >
-          <div>
-            <p  style="margin:3px;font-weight:700; color: #33475b;">
-              <i class="ni ni-air-baloon"></i> &nbsp; Puede registrar a los estudiantes por grupo o uno a la vez.
-             
-            </p>
-          </div>
-        </div>
-      </div>
-      <p class="parrafo mt-3">
+  <div >
+     <AlertHeader :firsttext="'Registros'" :lasttext="'Ingresar alumnos'"></AlertHeader>
+    
+      <p class="parrafo mt-3 ms-1">
         Crea nuevos estudiantes, edita y elimina Alumnos.
       </p>
 
@@ -96,7 +83,7 @@
                     class=""
                   >
                    <div class="d-flex ">
-                      <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
+                      <div v-if="!allSelected " class="form-check " style="min-height: 0rem;">
                         <input
                           class="form-check-input cheka"
                           type="checkbox"
@@ -370,7 +357,7 @@
           </div>
         </div>
       </div>
-    </div>
+   
     <div
       class="modal fade "
       :class="{ 'show ': modals === 'openn' }"

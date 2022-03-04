@@ -9,13 +9,18 @@ export default {
   components: {
     Spinner,IsSelect
   },
-
+  props:{
+    modalidad:{
+      type: String,
+    }
+  },
   data() {
     return {
       tab: "init1",
       visible: 'uno',
+      isModalidad: this.modalidad,
       roles: this.$store.state.user.roles,
-      searchQuery: null,
+      searchQuery: '',
       isDuplicado : false,
       listniveles: null,
       listPeriodo: null,
@@ -27,34 +32,39 @@ export default {
       infoMat: null,
       info : {},
       model: {
-        _id: null,
-        fecha: null,
-        fkestudiante: null,
-        fknivel: null,
         nmatricula: null,
         folio: null,
-        curso: null,
-        estado: null,
-        typo: null,
+        fknivel: null,
         academico: null,
-        nombre: null
       },
       foto: null,
       isSelecUsers: [],
+      arraysMatricula: [],
       fecha: '',
+      objetosRechasados: [],
+      isOptionsModalidad: ''
     };
   },
   methods: {
     verificarUsuario() {
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
+      } else {
+         if (this.isModalidad=='m1') {
+           this.isOptionsModalidad = 'Intensivo';
+         } 
+         if (this.isModalidad=='m2'){
+          this.isOptionsModalidad = 'Extraordinaria';
+         }
+         this.__listPeriodo();
+         this.__listNivele();
+         this.getAll();
       }
     },
     getAll() {
       this.isLoading = true;
-      let modalidad = 'Intensivo';
       this.$proxies._matriculaProxi
-        .getAllEstudiantes(modalidad) //LISTA DE ESTUDIANTES
+        .getAllEstudiantes(this.isOptionsModalidad) //LISTA DE ESTUDIANTES
         .then((x) => {
           this.info = x.data;
           this.isLoading = false;
@@ -74,7 +84,7 @@ export default {
         .then((x) => {
           let filtrosNiveles = x.data;
 
-          this.listniveles = filtrosNiveles.filter((x) => x.modalidad == 'Intensivo');
+          this.listniveles = filtrosNiveles.filter((x) => x.modalidad == this.isOptionsModalidad);
           this.isLoading2 = false;
         })
         .catch((err) => {
@@ -95,7 +105,7 @@ export default {
         .then((x) => {
           let filtro = x.data.niveles;
           this.listPeriodo = filtro.filter(
-            (x) => x.typo == "Intensivo" && x.estado == "1"
+            (x) => x.typo == this.isOptionsModalidad && x.estado == "1"
           );
           this.isLoading1 = false;
         })
@@ -104,87 +114,7 @@ export default {
           this.isLoading1 = false;
         });
     },
-    save() {
-      //-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
-      this.$validate().then((success) => {
-        //METODO PARA GUARDAR
-        if (!success) {
-          this.$notify({
-            group: "global",
-            text: "Por favor llena correctamente los campos solicitados",
-          });
-          return;
-        }
-        //-----------DE LO CONTRARIO ENTRA A SER UN DOCUMENTO NUEVO
-        this.model.estado = 1;
-        this.model.fecha = this.fecha;
-        this.model.academico = this.model.academico._id;
-        this.model.fknivel = this.model.fknivel._id;
-        this.model.typo = "m1";
-        this.model.curso = "Undefined";
-        this.ifLoad = true;
-         this.$proxies._matriculaProxi
-           .createMatricula(this.model) //-----------GUARDAR CON AXIOS
-           .then(() => {
-             this.ifLoad = false;
-             this.regresar();
-             this.$notify({
-              group: "global",
-              text: "Registro exitoso!!!!",
-            });
-           })
-           .catch((error) => {
-             //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
-             this.ifLoad = false;
-             if (error.response) {
-               if (error.response.status == 400) {
-                
-                 this.$notify({
-                   group: "global",
-                   text: error.response.data.message,
-                 });
-                 this. __limpiarCampos();
-                 this.isDuplicado = true;
-               }
-             } else if (error.request) {
-               alert("duplicado 2");
-             } else {
-               console.log("Error", error.message);
-            }
-           });
-      });
-    },
-
-    getNumberMatricula() {
-      let v = "m1";
-      this.ifLoad1 = true;
-      this.$proxies._matriculaProxi
-        .getMatriculaFolio(v)
-        .then((x) => {
-          this.infoMat = x.data.infor;
-          if (this.infoMat) {
-            this.model.nmatricula = parseInt(this.infoMat.nmatricula) + 1;
-            this.model.folio = Math.ceil(this.model.nmatricula / 2);
-          } else {
-            this.model.nmatricula = 1;
-            this.model.folio = 1;
-          }
-          this.ifLoad1 = false;
-        })
-        .catch((err) => {
-          this.ifLoad1 = false;
-          console.log("Error", err);
-        });
-    },
-
-    checkExist(event){
-      if (event) {
-        this.getNumberMatricula();
-       
-      }
-      
-    },
-
+ 
     fechaActual(){
       this.fecha = ResultServiceMatricula.calcular_fecha();
     },
@@ -194,21 +124,60 @@ export default {
       this.model.academico = null;
       this.model.nmatricula = null;
       this.model.folio = null;
-    },
-
-    regresar(){
-      this.visible= "uno";
       this.isSelecUsers = [];
     },
-    
-    nextO(){
-      this.__limpiarCampos()
-      this.model.fkestudiante = this.isSelecUsers[0].id;
-      this.model.nombre = this.isSelecUsers[0].name;
-      this.foto = this.isSelecUsers[0].img;
-      this.visible= "dos";
+
+    quitar(){
+      this.isSelecUsers = [];
       this.isDuplicado = false;
+      this.objetosRechasados = [];
     },
+    
+    sendArraysMatricula(){
+      this.$validate().then((success) => {
+        //METODO PARA GUARDAR
+        if (!success) {
+          this.$notify({
+            group: "global",
+            text: "Por favor llena correctamente los campos solicitados",
+          });
+          return;
+        }
+        if (this.isSelecUsers.length>0) {
+          this.ifLoad = true;
+          this.arraysMatricula = [];
+          let fkestudiante, nombre, academico,fknivel;
+          for (let i = 0; i < this.isSelecUsers.length; i++) {
+            fkestudiante = this.isSelecUsers[i].id;
+            nombre = this.isSelecUsers[i].name;
+            academico = this.model.academico._id;
+            fknivel = this.model.fknivel._id;
+            this.arraysMatricula.push({fkestudiante:fkestudiante, nombre: nombre, estado: 1, fecha:this.fecha,
+              academico: academico, fknivel: fknivel, typo: this.isModalidad, curso: "Undefined", nmatricula:'1', folio: '1'})
+         }
+
+         
+         this.$proxies._matriculaProxi
+           .createMatricula(this.arraysMatricula, this.isModalidad) //-----------GUARDAR CON AXIOS
+           .then((res) => {
+             this.ifLoad = false;
+             this.toast('Se matriculo correctamente a '+ this.arraysMatricula.length + ' estudiantes')
+             this.objetosRechasados = res.data.duplicados;
+             if (this.objetosRechasados.length!=0) {
+              this.isDuplicado = true;
+             }
+             this. __limpiarCampos();
+           
+           })
+           .catch((error) => {
+               console.log("Error", error);
+               this.ifLoad = false;
+           });
+        }
+      })
+     
+    },
+
 
     selectUser(objeto){
       let longitud = this.isSelecUsers.length;
@@ -236,22 +205,36 @@ export default {
        });
       } 
     },
+
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 2600,
+        position: "bottom-center",
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: "CERRAR",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
+    },
   },
   computed: {
     resultQuery(){
-      if(this.searchQuery){
+      if(this.searchQuery.length>1){
       return this.info.filter((item, )=>{
         return this.searchQuery.toLowerCase().split(' ').every(v => item.fullname.toLowerCase().includes(v))
       })
       }
-      
+    },
+    isComplete () {
+      return this.model.academico && this.model.fknivel;
     }
   },
   created() {
     this.verificarUsuario()
-    this.__listPeriodo();
-    this.__listNivele();
-    this.getAll();
     this.fechaActual();
   },
 
@@ -264,17 +247,6 @@ export default {
     "model.fknivel"(value) {
       return this.$validator.value(value).required();
     },
-    "model.nmatricula"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .maxLength(6);
-    },
-    "model.folio"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .maxLength(6);
-    },
+  
   },
 };

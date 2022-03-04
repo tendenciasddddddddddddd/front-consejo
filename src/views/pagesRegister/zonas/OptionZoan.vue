@@ -1,133 +1,77 @@
 <template>
-  <div class="row">
-    <div class="col-lg-11 col-12 mx-auto">
-     
-          <div>
-          <div
-            class=""
-            style="background-color: #e5f5f8; padding:7px;  border-color: #7fd1de; border-style: solid;
-              border-width: 1px; text-align: left;"
-          >
-            <div>
-              <p class="text-sm text-dark fuente" style="margin:7px; ">
-               <i class="ni ni-bell-55"></i> &nbsp; <strong>Nota:</strong> Puede registrar zonas, nacionalidades y etnias
-              </p>
-            </div>
-          </div>
-        </div>
-       
-        <div class=" mt-5">
-        <span class="" style="font-weight: 700;color:#181B32; font-size: 21px;"
-          >Zonas para complementar el registro de usuarios</span
-        >
-      </div>
+    <div >
+       <AlertHeader :firsttext="'Zonas'" :lasttext="'Registros básicos de usuarios'"></AlertHeader>
        <div class="row">
-        <section class="flex-containes2 mt-4">
-          <div class="">
-            <router-link to="/List-Provincias" href="javascript:;">
-              <div
-                class="cajas foco2 borde1 text-center  fadeIn1 fadeInBottom animation-1"
-                style="max-width: 200px;margin-right: 13px!important;"
-              >
-                <img
-                  class="w-60"
-                  src="../../../assets/img/logs/map.svg"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Provincias</p>
-                <p class="parrafo cardSubTitle">
-                 Registrar los datos segun requiera 👆
-                </p>
-              </div>
-            </router-link>
-          </div>
-          <div class="">
-            <router-link to="/List-Canton" href="javascript:;">
-              <div
-                class="cajas foco2 borde2 text-center fadeIn1 fadeInBottom animation-2"
-                style="max-width: 200px;margin-right: 13px!important;"
-              >
-                <img
-                  class="w-60"
-                  src="../../../assets/img/logs/map.svg"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Cantónes</p>
-                <p class="parrafo cardSubTitle">
-                 Registrar los datos segun requiera 👆
-                </p>
-              </div>
-            </router-link>
-          </div>
-          <div class="">
-            <div
-              class="cajas foco2 borde3 text-center fadeIn1 fadeInBottom animation-3"
-              style="max-width: 200px;"
-            >
-              <router-link to="/List-Parroquia">
-                <img
-                  class="w-65"
-                  src="../../../assets/img/usados/zonas.svg"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Parroquia</p>
-                <p class="parrafo cardSubTitle">
-                  Registrar los datos segun requiera 👆
-                </p>
-              </router-link>
+         <section class="intro_cards mt-3">
+          <div class="intro_cards_container">
+            <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
+              <CardsOptions :index="i" :ruta="item.ruta" :img="item.img" :nombre="item.nombre" :description="item.description"></CardsOptions>
             </div>
-          </div>
-          <div>
-            <div
-              class="cajas foco2 borde4 text-center fadeIn1 fadeInBottom animation-4"
-              style="max-width: 200px;"
-            >
-              <router-link to="/List-Nacionalidad">
-                <img
-                  class="w-50"
-                  src="../../../assets/img/logs/bot-avatar.webp"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Nacionalidad</p>
-                <p class="parrafo cardSubTitle">
-                  Registrar los datos segun requiera 👆
-                </p>
-              </router-link>
-            </div>
-          </div>
-          <div>
-            <div
-              class="cajas foco2 borde1 text-center fadeIn1 fadeInBottom animation-5"
-              style="max-width: 200px;"
-            >
-              <router-link to="/List-Etnias">
-                <img
-                  class="w-55"
-                  src="../../../assets/img/logs/grupo.svg"
-                  alt="fondo"
-                />
-                <p class="cardTitle fuente mt-3">Etnia</p>
-                <p class="parrafo cardSubTitle">
-                  Registrar los datos segun requiera 👆
-                </p>
-              </router-link>
+            <div class="intro_card_container" >
+               <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
+                  <i class='bx bx-folder-plus p-5' style="font-size:60px;color:black;"></i>
+              </div>
             </div>
           </div>
         </section>
       </div>
-    
     </div>
-  </div>
 </template>
-
 <script>
-import RestResource from '../../../service/isAdmin'
+import RestResource from '../../../service/isAdmin';
 const restResourceService = new RestResource();
+const img1 = require("../../../assets/img/logs/map.svg")
+const img2 = require("../../../assets/img/usados/zonas.svg")
+const img3 = require("../../../assets/img/logs/bot-avatar.webp")
+const img4 = require("../../../assets/img/logs/grupo.svg")
+import AlertHeader from "../../../shared/AlertHeader.vue";
+import CardsOptions from "../../../shared/CardsOptions.vue"
 export default {
   name: "MenuZonas",
+   components: {
+    AlertHeader ,
+    CardsOptions
+  },
   data() {
     return {
       roles: this.$store.state.user.roles,
+      arrays_of_options: [
+        {
+          id: "0",
+          nombre: "Provincias",
+          ruta: '/List-Provincias',
+          img: img1,
+          description: "Puedes crear nuevos registros de provincias segun sea necesario ",
+        },
+        {
+          id: "1",
+          nombre: "Cantones",
+          ruta: '/List-Canton',
+          img: img1,
+          description: "Puedes crear nuevos registros de cantones segun sea necesario ",
+        },
+        {
+          id: "2",
+          nombre: "Parroquia",
+          ruta: '/List-Parroquia',
+          img: img2,
+          description: "Puedes crear nuevos registros de parroquias segun sea necesario ",
+        },
+         {
+          id: "3",
+          nombre: "Nacionalidad",
+          ruta: '/List-Nacionalidad',
+          img: img3,
+          description: "Puedes crear nuevos registros de nacionalidad segun sea necesario ",
+        },
+        {
+          id: "4",
+          nombre: "Etnia",
+          ruta: '/List-Etnias',
+          img: img4,
+          description: "Puedes crear nuevos registros de etnias segun sea necesario ",
+        },
+      ]
     }
   },
   methods: {
@@ -142,4 +86,3 @@ export default {
   },
 };
 </script>
-

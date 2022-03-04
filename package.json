@@ -36,6 +36,7 @@
     "vue-router": "^3.2.0",
     "vue-select": "^3.12.2",
     "vue-toasted": "^1.1.28",
+    "vue-tour": "^2.0.0",
     "vue2-datepicker": "^3.10.1",
     "vue2-dropzone": "^3.6.0",
     "vue2-editor": "^2.10.3",

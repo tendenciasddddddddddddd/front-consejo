@@ -26,7 +26,7 @@ export default {
       contador2 : 0,
       viewtable:1,
       listbuscador: {},
-      searchQuery: null,
+      searchQuery: '',
       rows: 6,
       selected: [],
       allSelected: false,
@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     resultQuery() {
-      if (this.searchQuery) {
+      if (this.searchQuery.length>1) {
         return this.listbuscador.filter((item) => {
           return this.searchQuery
             .toLowerCase()
@@ -165,6 +165,7 @@ refreshData : function() {
             this.iseliminaddo = false;
             this.userIds= [];
             this.getAll(this.paginaActual,6); 
+            this.allSelected = false;
           })
           .catch(() => {
             console.log("Error imposible");
@@ -202,7 +203,21 @@ refreshData : function() {
      cambiar_pagina(num){
       this.rows = num;
       this.getAll(1);
-     }
+     },
+     toast(message) {
+      this.$toasted.info(message, {
+        duration: 2600,
+        position: "bottom-center",
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: "CERRAR",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
+    },
   },
   created() {
     this.verificarUsuario();

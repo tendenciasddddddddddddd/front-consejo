@@ -3,7 +3,7 @@
     <div class="col-lg-8 col-12 mx-auto">
       <div class="mt-2">
         
-         <h1 style="font-weight: 400;" class="remix fuente ">Bienvenidos al sistema.<span>&#160;</span></h1>
+         <h1 style="font-weight: 400;" class="remix fuente " >Bienvenidos al sistema.<span>&#160;</span></h1>
       </div>
       
     </div>
@@ -73,9 +73,9 @@
 
     <div class="col-lg-6  mt-1 text-center">
       <img
-        class="w-75"
+        class="w-100"
         
-        src="../assets/img/logs/guidelines.svg"
+        src="../assets/img/logs/people.svg"
         alt=""
       />
     </div>

@@ -23,6 +23,7 @@ export default {
        modals: false,
        key: '',
        context: {},
+       colorsh:['#0f71ae', '#1466c9', '#303d9d', '#53ab79', '#ba4d8e', '#1976d3', '#874197', '#00b6d3']
        }
    },
    computed: {
