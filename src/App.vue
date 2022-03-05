@@ -3,7 +3,8 @@
     <template v-if="hasConfig">
       <div v-if="isLoggedIn">
 
-        <Header></Header>
+        <Header v-if="!$store.state.isAppMobile"></Header>
+         <AppMovile v-else/>
         <main
           class="main-content position-relative  h-10 border-radius-lg "
           
@@ -14,9 +15,9 @@
           <div class="container-fluid  py-2" >
            <router-view/>
             <!-- INICIO FOOTER -->
-           <Help/>
+           <!-- <Help/> -->
             <!-- <Footer /> -->
-
+           
             <!-- FIN FOOTER -->
           </div>
         </main>
@@ -56,7 +57,7 @@ import Header from "@/shared/Header.vue";
 import Inicio from "@/shared/Inicio.vue";
 //import Footer from "@/shared/Footer.vue";
 import Login from "./components/accesos/Login.vue";
-import Help from "@/shared/Help.vue"
+//import Help from "@/shared/Help.vue"
 export default {
   name: "app",
   mounted() {
@@ -67,7 +68,8 @@ export default {
     Login,
     Inicio,
     //Footer,
-    Help
+   // Help,
+    AppMovile : () => import( /* webpackChunkName: "AppMovile" */ '../src/shared/AppMovile.vue')
   },
   data() {
     return {

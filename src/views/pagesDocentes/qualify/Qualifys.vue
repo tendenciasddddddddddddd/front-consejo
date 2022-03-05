@@ -4,7 +4,7 @@
        <vue-progress-bar  ></vue-progress-bar>
        <ProgressBar v-if="isData"></ProgressBar>
       <div v-else class="col-lg-11 col-12 mx-auto">
-        <div class="row mt-3 ">
+        <div class="row mt-1 ">
         <div class="col-md-4 d-flex">
           <a
           href="javascript:;"
@@ -18,7 +18,7 @@
           </a>
           <span
             class="col-11 text-truncate d-block"
-            style="font-weight: 700;color:#181B32; font-size: 21px;margin-top: -3px;"
+            style="font-weight: 700;color:#181B32; font-size: 17px;margin-top: -3px;"
           >
             {{ mate }}
           </span>
@@ -86,7 +86,7 @@
             </div>
              </div>
            
-            <div class="ms-3">
+            <div class="ms-3" v-if="!$store.state.isAppMobile">
              <div class="dropdown">
                     <a
                       href="javascript:;"

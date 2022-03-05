@@ -3,7 +3,7 @@
     class="
       navbar navbar-main navbar-expand-lg
       position-sticky
-      mt-3
+      mt-1
       top-1
       px-0
       mx-4
@@ -18,16 +18,13 @@
     data-scroll="true"
   >
     <div class="container-fluid py-1 px-1" >
-     <h6 class="font-weight-bolder mb-0 ">Plataforma</h6> &nbsp;&nbsp;
-      <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
-        <a href="javascript:;" onclick="navbarMinimize(this)" class="nav-link text-body p-0">
-          <div class="sidenav-toggler-inner">
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
-          </div>
-        </a>
-      </div>
+     <h6 class="font-weight-bolder mb-0 "> <b style="color: #ff7a59;font-size: 32px;"><i class='bx bxs-cube'></i></b> <span></span>  </h6> 
+     <div >
+        
+            
+       <h6 class="ms-3" style="color:#273b49" v-if="!$store.state.isAppMobile"> Hola, {{nombre}}</h6>
+       <h6 class="ms-3 me-3" style="color:#273b49" v-else>  {{nombre.slice(0,11)}}...</h6>
+     </div>
       <div
         class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
         id="navbar" 
@@ -41,29 +38,10 @@
         </div>
 
         <ul class="navbar-nav justify-content-end">
-          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-            <a
-              href="javascript:;"
-              class="nav-link text-body p-0"
-              onclick="navbarMinimize(this)"
-            >
-              <div class="sidenav-toggler-inner">
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item px-3 d-flex align-items-center">
+         
+          <!-- <li class="nav-item px-3 d-flex align-items-center">
             
-            <template v-if="isOnline">
-              <a v-if="!$store.state.isAppMobile"  class="text-sm fuente">
-            {{nombre}}
-            </a>
-             <a v-else  class="text-sm fuente">
-            {{nombre.slice(0,8)}}...
-            </a>
-            </template>
+            <template v-if="isOnline"></template>
             <template v-else>
               <div>
                  <div  class="loadingg">
@@ -77,9 +55,8 @@
               </div>
             </template>
            
-          <!-- <h1>{{ $store.state.numero }}</h1> -->
-          </li>
-          <li class="nav-item dropdown pe-2 d-flex align-items-center">
+          </li> -->
+          <li class="nav-item dropdown pe-2 d-flex align-items-end">
             <a
               href="javascript:;"
               class="nav-link text-body p-0"

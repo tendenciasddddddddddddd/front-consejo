@@ -1,15 +1,15 @@
 <template>
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  fixed-start " id="sidenav-main" style="background-color: white !important; margin-top: 2.2rem!important;overflow-x: hidden;overflow-y: auto;" >
     <div class="sidenav-header">
-      <a v-if="$store.state.isAppMobile" href="javascript:;" onclick="navbarMinimize(this)">
-          <i class="fas fa-times p-3 cursor-pointer text-secondary position-absolute end-0 top-0 " aria-hidden="true" id="iconSidenav"></i>
-      </a>
+     
       
       <a class="navbar-brand m-0" href="javascript:;"  >
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24px" height="24px" class="burger-icon opacity-transition s-absolute s-right-24px s-cursor-pointer s-flex-none s-to-right" fill="var(--text-color)"><path d="M2 8C2 6.89543 2.89543 6 4 6H28C29.1046 6 30 6.89543 30 8C30 9.10457 29.1046 10 28 10H4C2.89543 10 2 9.10457 2 8Z"></path><path d="M2 24C2 22.8954 2.89543 22 4 22H28C29.1046 22 30 22.8954 30 24C30 25.1046 29.1046 26 28 26H4C2.89543 26 2 25.1046 2 24Z"></path><path d="M2 16C2 14.8954 2.89543 14 4 14H28C29.1046 14 30 14.8954 30 16C30 17.1046 29.1046 18 28 18H4C2.89543 18 2 17.1046 2 16Z"></path></svg>
         
-         <h3 class="mb-0 fuente text-negro" style="letter-spacing: 2.2px;"> <i style="color: #ff7a59" class='bx bxs-customize' ></i> PCEI</h3>
+         <span class="sidenav-mini-icon" style="font-size:20px"> &nbsp; PCEI Tulcán </span>
       </a>
+      
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto h-auto max-height-vh-100 h-100" id="sidenav-collapse-main" style="overflow-x: hidden;overflow-y: hidden;">
@@ -350,15 +350,17 @@
          <li class="nav-item mt-3">
           <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPCIONES</h6>
         </li>
-        <div id="step_6">
-             <li v-if="!$store.state.isAppMobile">
+        <div class="nav-item" id="step_6">
+             <li >
             <a 
            @click="toursMain()" class="nav-link "  role="button" aria-expanded="false" >
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
               <i class='bx bx-help-circle icons' ></i>
               
             </div>
+             <span class="sidenav-mini-icon" > </span>
             <span  class="nav-link-text ms-1 mt-1 selectOption">¿Cómo funciona?</span>
+            
           </a>
          
         </li>
@@ -369,7 +371,11 @@
             
               <i class='bx bx-window-close icons' ></i>
             </div>
-            <span  class="nav-link-text ms-1 mt-1 selectOption">Cerrar sesión</span>
+            <span  class="nav-link-text ms-1 mt-1 selectOption">
+              <span class="sidenav-mini-icon">  </span>
+                    
+              Cerrar sesión
+              </span>
           </a>
          
         </li>

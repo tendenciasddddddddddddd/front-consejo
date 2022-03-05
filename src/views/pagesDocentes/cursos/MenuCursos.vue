@@ -11,13 +11,13 @@
          
                  <div class="row " >
               <div class="col-md-5">
-                  <span class="ms-2 s-title-page"
+                  <span v-if="!$store.state.isAppMobile" class="ms-2 s-title-page"
               >  Cursos
                <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" viewBox="0 0 20 20" class="small svg-icon fill grey-500 s-mr-2 me-1 ms-1" id="" fill="currentColor" title=""><path d="M6.52776 18.4722C6.16165 18.1061 6.16165 17.5125 6.52776 17.1464L14.3375 9.33669C14.7036 8.97057 15.2972 8.97057 15.6633 9.33669C16.0294 9.70281 16.0294 10.2964 15.6633 10.6625L7.85359 18.4722C7.48747 18.8383 6.89388 18.8383 6.52776 18.4722Z"></path><path d="M6.52776 1.52459C6.16164 1.8907 6.16164 2.4843 6.52776 2.85041L14.3397 10.6624C14.7059 11.0285 15.2995 11.0285 15.6656 10.6624C16.0317 10.2963 16.0317 9.70269 15.6656 9.33657L7.85359 1.52459C7.48747 1.15847 6.89388 1.15847 6.52776 1.52459Z"></path></svg>
             
-               Todos los cursos asignados</span
+               Cursos asignados</span
             >
-           
+             
               </div>
               <div class="col-md-7">
                  <div class="d-flex justify-content-end">
@@ -35,7 +35,7 @@
                 </div>
               </div>
              
-              <div class="mt-2">
+              <div class="mt-2" v-if="!$store.state.isAppMobile">
                 <span class="ms-4" style="color:#181B32; font-size: 18px;"><b style="font-weight: 700;">0{{ page }}</b>/ 0{{ numPages }}</span>
                
               </div>
@@ -108,11 +108,15 @@
                 <div class=" text-center"  v-bind:style="{'background':colorsh[index]}">
                     <!-- <span style="height: 130px;" class="mask bg-gradient-dark"></span> -->
 
-                   
-                  <img class="w-30 s-header-img"
+                   <div class="d-flex justify-content-center">
+                       <img class="w-30 s-header-img"
                     src="../../../assets/img/teams/0.svg"
                     alt="rover"
                   />
+                  <span class="text-white mt-4 ms-3 fuente s-texo-description" > {{ item.fnivel.nombres.split(' ')[0] }} {{ item.fnivel.nombres.split(' ')[1] }}
+                    <br/> {{ item.fnivel.nombres.split(' ')[2] }}</span>
+                   </div>
+                 
                 </div>
                 <!-- socialmedia.svg -->
                 <div class="card-bodys ">
