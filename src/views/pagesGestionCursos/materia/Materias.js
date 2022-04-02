@@ -1,17 +1,26 @@
-
-import Spinner from '../../../shared/Spinner'
+import AlertHeader from "../../../shared/AlertHeader.vue";
+import Spinner from "../../../shared/Spinner";
+import CustomInput from "../../../shared/CustomInput.vue";
+import ButtonLoading from "../../../shared/ButtonLoading.vue";
+import Paginate2 from "../../../shared/Paginate2.vue";
 export default {
     name: 'Materias',
     components: {
-        Spinner
+      Spinner,
+      AlertHeader,
+      CustomInput,
+      ButtonLoading,
+      Paginate2,
+      Modal: () =>
+        import(/* webpackChunkName: "Modal" */ "../../../shared/Modal.vue"),
     },
     data() {
         return {
             totalNotas: 0,
             paginaActual: 1,
-            info: null,
+            info: {},
             ifLoad:false,
-            pagg: null,
+            pagg: {},
             MsmError : "",
             pagina: 0,
             paginas: 0,
@@ -20,15 +29,13 @@ export default {
             model: {//-----------VARIABLES DEL MODELO A GUARDAR
               _id: null, 
               nombre: null,  
-              estado: null,
               descripcion: null,
-              icono: 'IconoMateria',
            },
            isSelecUsers: [],
-           modals: 'closed',
            subtitulo: 'none',
            iseliminaddo : false,
            isCarga: false,
+           visible: false,
         }
     },
     methods: {
@@ -50,22 +57,21 @@ export default {
                 this.isLoading = false;
               });
           },
-
+          onPageChange(page) {
+            this.getAll(page, 6);
+          },
           save() {
             this.isSelecUsers= [];
             this.$validate().then(success => { 
               if (!success){ 
-                this.$notify({
-                    group: "global",
-                    text: "Por favor llena correctamente los campos solicitados",
-                  });
+                this.toast("Por favor llena correctamente los campos solicitados");
                   return
               }
                 if(this.model._id){
                   this.ifLoad = true;
                   this.$proxies._gestionProxi.updateMaterias(this.model._id, this.model)
                     .then(() => {
-                      this.modals = 'cls';
+                      this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
                       this.getAll(this.pagina,6);
@@ -75,17 +81,11 @@ export default {
                     });    
                 }else{
                   this.ifLoad = true;
-                  if(this.model.estado==true){
-                    this.model.estado=1
-                  }else{
-                    this.model.estado =0
-                  }
                   this.$proxies._gestionProxi.createMaterias(this.model) //-----------GUARDAR CON AXIOS
                   .then(() => {
                     this.ifLoad = false;
-                    this.modals = 'cls';
+                    this.close();
                     this.getAll(this.pagina,6);
-                    
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
                     this.ifLoad = false;
@@ -102,12 +102,10 @@ export default {
             });
           },
           gets() { 
-
-            let isArray = this.isSelecUsers.length;
-            if(isArray===1){
+            if(this.isSelecUsers.length===1){
               this.isCarga = true; 
-            this.__limpiarCampos();
-            this.$proxies._gestionProxi.getMaterias(this.isSelecUsers[0])
+              this.openModal();
+              this.$proxies._gestionProxi.getMaterias(this.isSelecUsers[0])
                 .then((x) => {
                     this.model = x.data;
                     this.isCarga = false; 
@@ -117,73 +115,117 @@ export default {
                 });
             }           
           },
-          selectUser(key){
-            let longitud = this.isSelecUsers.length;
-            let isExiste = 0;
-            if(longitud>0){
-               for (let i = 0; i < this.isSelecUsers.length; i++) {
-                  if(this.isSelecUsers[i]==key){
-                   this.isSelecUsers.splice(i, 1); 
-                   isExiste = 1;
-                   break;
-                  }
-               }
-               if(isExiste===0){ 
-                 this.isSelecUsers.push(key);
-               }
-            }else{
-             this.isSelecUsers.push(key);
-            } 
-          },
-          remove() {
-            //METODO PARA ELIMINAR  ROW
-            if (
-              confirm(
-                "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
-              )
-            ) {
-              this.iseliminaddo = true;
-              let isArray = this.isSelecUsers.length;
-              if(isArray>0){
-                this.$proxies._gestionProxi
-                  .removeMaterias(this.isSelecUsers)
-                  .then(() => {
-                    this.iseliminaddo = false;
-                    this.isSelecUsers= [];
-                    this.getAll(this.pagina,6); 
-                  })
-                  .catch(() => {
-                    console.log("Error imposible");
-                  });
-                this.$notify({
-                  group: "global",
-                  text: "Registro destruido",
-                });
-                
-             }
+          selectUser(ids) {
+            if (!this.isSelecUsers.includes(ids)) {
+              this.isSelecUsers.push(ids);
+            } else {
+              this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
             }
           },
-
-          __limpiarCampos() { //LIMPIAR CAMPOS DE EL MODAL
+          remove() {
+            let message = {
+              title: "¿Destruir registro?",
+              body: " Esta acción no se puede deshacer",
+            };
+            let options = {
+              loader: true,
+              okText: "Continuar",
+              cancelText: "Cancelar",
+              animation: "bounce",
+            };
+            this.$dialog
+              .confirm(message, options)
+              .then((dialog) => {
+                this.dialogDelete();
+                setTimeout(() => {
+                  dialog.close();
+                  this.toast("Se elimino registro exitosamente");
+                }, 600);
+              })
+              .catch(function() {});
+          },
+          dialogDelete() {
+            this.iseliminaddo = true;
+            if (this.isSelecUsers.length > 0) {
+              this.$proxies._gestionProxi
+                .removeMaterias(this.isSelecUsers)
+                .then(() => {
+                  this.iseliminaddo = false;
+                  this.isSelecUsers = [];
+                  this.getAll(this.pagina, 6);
+                })
+                .catch(() => {
+                  console.log("Error imposible");
+                });
+            }
+          },
+          desactiveState(){//activateNivel
+            let message = {
+              title: "¿Cambiar el estado?",
+              body: " Esta acción cambiara el estado de los registros",
+            };
+            let options = {
+              loader: true,
+              okText: "Continuar",
+              cancelText: "Cancelar",
+              animation: "bounce",
+            };
+            this.$dialog
+              .confirm(message, options)
+              .then((dialog) => {
+                this.dialogState();
+                setTimeout(() => {
+                  dialog.close();
+                  this.toast("Se cambio el estado del registro");
+                }, 600);
+              })
+              .catch(function() {});
+          },
+          dialogState() {
+            if (this.isSelecUsers.length > 0) {
+              let reg = this.info.filter((x)=> x._id == this.isSelecUsers[0]);
+              let state = reg[0].estado == 1 ? 0 : 1;
+              this.$proxies._gestionProxi
+               .activateMaterial(this.isSelecUsers, state)
+                .then(() => {
+                  this.iseliminaddo = false;
+                 this.isSelecUsers = [];
+                  this.getAll(this.pagina, 6);
+                })
+                 .catch(() => {
+                   console.log("Error imposible");
+                 });
+            }
+          },
+          toast(message) {
+            this.$toasted.info(message, {
+              duration: 2600,
+              position: "top-right",
+              icon: "check-circle",
+              theme: "toasted-primary",
+              action: {
+                text: "CERRAR",
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
+              },
+            });
+          },
+          openModal() {
+            this.visible = true;
             this.model._id = "";
             this.model.nombre = "";
-            this.model.estado = 0;
-            this.MsmError ="";
-            this.descripcion=null;
-            this.modals = 'openn';
-        }, //----FIN----
-    },
-    watch: {
-        "$route.query.pagina": {
-          immediate: true,
-          handler(pagina) {
-            pagina = parseInt(pagina) || 1;
-            this.getAll(pagina,6);
-            this.isSelecUsers= [];
-            this.paginaActual = pagina;
+            //this.model.descripcion = "";
+            this.MsmError = "";
           },
-        },
-      },
+          close() {
+            this.visible = false;
+          },
+  
+    },
+    created() {
+      this.getAll(1, 6);
+    },
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
         'model.nombre'(value) {
           return this.$validator

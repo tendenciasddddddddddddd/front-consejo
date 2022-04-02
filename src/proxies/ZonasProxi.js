@@ -27,6 +27,14 @@ export default class ZonasProxi{
         return this.axios.delete(this.url + `/provincias/${id}`);
     }
 
+    activateProvincia(id, state) {
+        return this.axios.put(this.url + `/provincias/activate/${id}?state=${state}`);
+    }
+
+    async queryProvincia(querys) {
+        return await this.axios.get(this.url + `/provincias/query?querys=${querys}`);
+    }
+
 //------------------------------------------------------GESTION DE CANTONES--------------------------------------
 
     getListProvicnias() {
@@ -53,10 +61,18 @@ export default class ZonasProxi{
         return this.axios.delete(this.url + `/cantones/${id}`);
     }
 
+    activateCanton(id, state) {
+        return this.axios.put(this.url + `/cantones/activate/${id}?state=${state}`);
+    }
+
+    async queryCanton(querys) {
+        return await this.axios.get(this.url + `/cantones/query?querys=${querys}`);
+    }
+
 //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
-    getListCantones() {
-        return this.axios.get(this.url + '/parroquias/newcant');
+    async getListCantones() {
+        return await this.axios.get(this.url + '/parroquias/newcant');
     }
 
     getAllParroquia(page, take) {
@@ -79,6 +95,13 @@ export default class ZonasProxi{
         return this.axios.delete(this.url + `/parroquias/${id}`);
     }
 
+    activateParroquia(id, state) {
+        return this.axios.put(this.url + `/parroquias/activate/${id}?state=${state}`);
+    }
+
+    async queryParroquia(querys) {
+        return await this.axios.get(this.url + `/parroquias/query?querys=${querys}`);
+    }
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
 
@@ -102,6 +125,10 @@ export default class ZonasProxi{
         return this.axios.delete(this.url + `/nacionalidad/${id}`);
     }
 
+    activateNacionalidad(id, state) {
+        return this.axios.put(this.url + `/nacionalidad/activate/${id}?state=${state}`);
+    }
+
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
 
@@ -123,5 +150,9 @@ export default class ZonasProxi{
 
     removeEtnias(id) {
         return this.axios.delete(this.url + `/etnias/${id}`);
+    }
+
+    activateEtnias(id, state) {
+        return this.axios.put(this.url + `/etnias/activate/${id}?state=${state}`);
     }
 }

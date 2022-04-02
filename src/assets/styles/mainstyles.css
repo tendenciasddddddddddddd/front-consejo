@@ -508,9 +508,9 @@ align-content: center;align-items: center;
     border-width: 1px;padding: 8px 20px;
 }
 .alertinfo{
-  background-color: rgb(234, 240, 246);
-    border-color: rgb(182, 198, 214);
-    color: #33475b;    border-style: solid;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;    border-style: solid;
     border-width: 1px;padding: 8px 20px;
 }
 .flex-containes{
@@ -827,7 +827,7 @@ box-shadow: 0 1px 3px 0 rgb(0 0 0 / 30%), 0 0 0 1px rgb(0 0 0 / 4%);
   text-transform: uppercase;
 }
 .dg-backdrop {
-    background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgb(0 19 51 / 64%) !important;
     z-index: 11111 !important;
 }
 .dg-container {
@@ -869,7 +869,6 @@ box-shadow: 0 1px 3px 0 rgb(0 0 0 / 30%), 0 0 0 1px rgb(0 0 0 / 4%);
 .form-switch .form-check-input:after {
  top: 0 !important;
  transition: transform .25s ease-in-out,background-color .25s ease-in-out;
- content: "\f046" !important;
  width: 26px !important;
  height: 26px !important;
  border-radius: 3px !important;
@@ -1322,13 +1321,9 @@ body.modal-open {
   color: #fff;
 }
 .base-lista {
-  width: 500px;
+  width: 50%;
 }
-.base-matriculados {
-  border-radius: 8px;
-  padding: 5px;
-  background-image: linear-gradient(310deg, #141727, #3a416f);
-}
+
 .list-decoration {
   background: #f4f5f8;
   border-radius: 5px;

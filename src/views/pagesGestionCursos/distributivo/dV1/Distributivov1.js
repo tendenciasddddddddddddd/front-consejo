@@ -1,35 +1,42 @@
 import Spinner from "../../../../shared/Spinner";
-import IsSelect from '../../../../shared/IsSelect'
+import IsSelect from '../../../../shared/IsSelect';
+import CustomInput from "../../../../shared/CustomInput.vue";
+import ButtonLoading from "../../../../shared/ButtonLoading.vue";
+import Paginate2 from "../../../../shared/Paginate2.vue";
+import AlertHeader from "../../../../shared/AlertHeader.vue";
+import ActionsRow from "../../../../shared/ActionsRow.vue";
 export default {
     name: 'Distrivutivov1',
     components: {
-        Spinner,IsSelect
+        Spinner,IsSelect, CustomInput,
+        ButtonLoading,
+        Paginate2,
+        AlertHeader,
+        Modal: () => import(/* webpackChunkName: "Modal" */ "../../../../shared/Modal.vue"),
+        Dropdown: () => import(/* webpackChunkName: "Dropdown" */ "../../../../shared/Dropdown.vue"),
+        ActionsRow
       },
     data(){
       return {
-          tab: "init",
           isPeriodo: false,
           isCurso: false,
           isMateria: false,
           isDocente: false,
           ifLoad: false,
-          namePeriodoActual: '',
-          isperiodoActual: null,
           isLoading: false,
-          info: null,
+          info: {},
           model:{
             nombre: 'Intensivo',
-            icono : 'mensaje.svg',
             fnivel: null,
             fdocente: null,
             fmateria: null,
             facademicos: null,
             paralelo: null,
           },
-          listPeriodo: null,
-          listniveles: null,
-          listDocentes: null,
-          listMaterias: null,
+          listPeriodo: {},
+          listniveles: {},
+          listDocentes: {},
+          listMaterias: {},
           paralelos: [
             {
               value: "0",
@@ -48,10 +55,39 @@ export default {
           selected: [],
           allSelected: false,
           userIds: [],
+          visible: false,
+          selecDocente: '',
+          selecParalelos: '',
+          idperiodoActualIntensivo: null,
+          rows: 6,
       }
     },
     methods: {
-
+      __getPeriodo() {
+        this.isPeriodo = true;
+        this.$proxies._matriculaProxi
+          .getFull()
+          .then((x) => {
+            const filtro = x.data.niveles;
+            if (!filtro.length) {
+              this.$dialog.alert('NO HAY REGISTROS EN PERIODOS ACADÉMICOS !!');
+              this.$router.push("/").catch(() => {});
+              return;
+            }
+            let listPeriodoIntensivo = filtro.filter((x) => x.typo == "Intensivo" && x.estado == '1');
+            if (listPeriodoIntensivo.length==0) {
+              this.$dialog.alert('¡¡¡--NO EXISTE UN PERIODO ACADÉMICO ACTIVO PARA ESTA MODALIDAD.. REGISTRE O ACTIVE UN PERIODO ACADÉMICO--!!!')
+              this.$router.push("/").catch(() => {});
+              return;
+            }
+            this.idperiodoActualIntensivo = listPeriodoIntensivo[0]._id;
+            this.isPeriodo = false;
+          })
+          .catch((err) => {
+            console.log("Error", err);
+            this.isPeriodo = false;
+          });
+      },
       selectOne(ids) {
         if (!this.isSelecUsers.includes(ids)) {
           this.isSelecUsers.push(ids);
@@ -72,7 +108,13 @@ export default {
         this.allSelected= false;
         this.isSelecUsers = [];
       },
-
+      changedQuery(num) {
+        this.rows = num;
+        this.getAll(1, num);
+      },
+      onPageChange(page) {
+        this.getAll(page, this.rows);
+      },
        __listNivele() {
         //-----------TRAE LA LISTA DE LOS ROLES
         this.isCurso = true;
@@ -122,23 +164,20 @@ export default {
         this.$validate().then((success) => {
           //METODO PARA GUARDAR
           if (!success) {
-            this.$notify({
-              group: "global",
-              text: "Por favor llena correctamente los campos solicitados",
-            });
+            this.toast("Por favor llena correctamente los campos solicitados");
             return;
           }
           if(this.model._id){
             this.ifLoad = true;
             this.model.fnivel = this.model.fnivel._id;
-            this.model.fdocente = this.model.fdocente._id;
+            this.model.fdocente = this.selecDocente._id;
             this.model.fmateria = this.model.fmateria._id;
-            this.model.facademicos = this.model.paralelo.nombre;
-            this.model.paralelo = this.model.paralelo.nombre;
+            this.model.facademicos = this.idperiodoActualIntensivo;
+            this.model.paralelo = this.selecParalelos.nombre;
             this.$proxies._gestionProxi.updateDistributivo(this.model._id, this.model)
               .then(() => {
-                this.__limpiarCampos();
-                this.tab= "init";
+                this.toast("REGISTRO EXITOSO!");
+                this.__clear();
                 this.ifLoad = false;
                 this.getAll(this.pagina,6);
               })
@@ -149,39 +188,23 @@ export default {
           }else{
             this.ifLoad = true;
             this.model.fnivel = this.model.fnivel._id;
-            this.model.fdocente = this.model.fdocente._id;
+            this.model.fdocente = this.selecDocente._id;
             this.model.fmateria = this.model.fmateria._id;
-            this.model.facademicos = this.$route.params.id;
-            this.model.paralelo = this.model.paralelo.nombre;
+            this.model.facademicos = this.idperiodoActualIntensivo;
+            this.model.paralelo = this.selecParalelos.nombre;
             this.$proxies._gestionProxi
               .createDistributivo(this.model) //-----------GUARDAR CON AXIOS
               .then(() => {
                 this.ifLoad = false;
-                this.__limpiarCampos();
-                this.tab= "init";
+                this.toast("REGISTRO EXITOSO!");
+                this.__clear();
                 this.getAll(this.pagina,6);
               })
-              .catch((error) => {
-                //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
+              .catch(() => {
                 this.ifLoad = false;
-                if (error.response) {
-                  if (error.response.status == 400) {
-                    
-                    this.$notify({
-                      group: "global",
-                      text: error.response.data.message,
-                    });
-                    this.$router.push('/Error-reg')
-                  }
-                } else if (error.request) {
-                  alert("duplicado 2");
-                } else {
-                  console.log("Error", error.message);
-                }
+                this.$dialog.alert('ERROR SERVER NOT FOUND')
               });
-          }     
-          //-----------DE LO CONTRARIO ENTRA A SER UN DOCUMENTO NUEVO
-          
+          }      
         });
       },
       getAll(pag, lim) {
@@ -196,8 +219,7 @@ export default {
               this.pagina = this.pagg.pagina;
               this.paginas = this.pagg.paginas;
               this.totalNotas = this.pagg.total;
-              this.isLoading = false;
-             
+              this.isLoading = false; 
             })
             .catch(() => {
               console.log("Error imposible");
@@ -209,12 +231,11 @@ export default {
         let isArray = this.isSelecUsers.length;
         if(isArray===1){
           this.isCarga = true; 
-        this.__limpiarCampos();
+        this.openModal();
         this.$proxies._gestionProxi.getDistributivo(this.isSelecUsers[0])
             .then((x) => {
                 this.model = x.data;
                 this.isCarga = false; 
-                this.tab= "init1";
             }).catch(() => {
                 console.log("Error")
                 this.isCarga = false; 
@@ -238,8 +259,8 @@ export default {
             this.dialogDelete();
             setTimeout(() => {
               dialog.close();
-              this.toast("Se elimino a usuarios de sistema con su cuenta");
-            }, 1000);
+              this.toast("Se elimino registros de esta tabla!");
+            }, 600);
           })
           .catch(function() {});
       },
@@ -260,22 +281,26 @@ export default {
               });
          }
       },
-      __limpiarCampos(){
+      openModal() {
+        this.visible = true;
         this.model._id = "";
-        this.model.facademicos = null;
         this.model.fnivel = null;
         this.model.paralelo = null;
         this.model.fdocente = null;
         this.model.fmateria = null;
       },
-      MostrarModal(){
-        this.__limpiarCampos();
-        this.tab= "init1";
+      close() {
+        this.visible = false;
+      },
+      __clear(){
+        this.model._id = "";
+        this.model.fnivel = null;
+        this.model.fmateria = null;
       },
       toast(message) {
         this.$toasted.info(message, {
           duration: 2600,
-          position: "bottom-center",
+          position: "top-center",
           icon: "check-circle",
           theme: "toasted-primary",
           action: {
@@ -288,32 +313,21 @@ export default {
       },
     },
     created() {
+        this.__getPeriodo();
+        this.getAll(1,6);
         this. __listNivele();
-        this.__listdocentes();
-        this. __listmaterias();
+            this.__listdocentes();
+            this. __listmaterias();
     },
-    watch: {
-      "$route.query.pagina": {
-        immediate: true,
-        handler(pagina) {
-          pagina = parseInt(pagina) || 1;
-          this.getAll(pagina,6);
-          this.paginaActual = pagina;
-          
-        },
-      },
-    },
+  
     validators: {
-        //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS fmateria
-    
-
         "model.fnivel"(value) {
             return this.$validator.value(value).required();
           },
-          "model.paralelo"(value) {
+          "selecParalelos"(value) {
             return this.$validator.value(value).required();
           },
-          "model.fdocente"(value) {
+          "selecDocente"(value) {
             return this.$validator.value(value).required();
           },
           "model.fmateria"(value) {

@@ -16,14 +16,14 @@
       <ul class="navbar-nav">
         <li class="nav-item" id="step_1">
           <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link" 
-          :class="{'actived': $route.name === 'default'||$route.name === '1'||$route.name === '2'||$route.name === 'd1'||$route.name === 'e1'}" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+          :class="{'actived': $route.name === 'default'||$route.name === '1'||$route.name === 'd1'||$route.name === 'e1'}" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
              
               <i class='bx bx-home-alt icons'></i>
             </div>
             <span class="nav-link-text ms-1 mt-1">Área personal</span>
           </a>
-          <div  class="collapse " id="dashboardsExamples" :class="{'show': $route.name === 'default'||$route.name === '1'||$route.name === '2'||$route.name === 'd1'||$route.name === 'e1'}">
+          <div  class="collapse " id="dashboardsExamples" :class="{'show': $route.name === 'default'||$route.name === '1'||$route.name === 'd1'||$route.name === 'e1'}">
             <ul class="nav ms-4 ps-3">
                 <li :class="{'active': $route.name === 'default'}" class="nav-item">
                  <router-link  to="/" :class="{'active': $route.name === 'default'}" class="nav-link ">
@@ -38,11 +38,11 @@
                     <span class="sidenav-normal letras fuente">Usuarios </span>
                 </router-link>
               </li>
-                <li :class="{'active': $route.name === '2'}" class="nav-item ">
-                 <router-link  to="/contrasena" :class="{'active': $route.name === '2'}" class="nav-link ">
+                <li  class="nav-item ">
+                 <a  @click="openCuenta" href="javascript:;"  class="nav-link ">
                     <span class="sidenav-mini-icon"> C </span>
-                    <span class="sidenav-normal letras fuente">Cuenta </span>
-                </router-link>
+                    <span class="sidenav-normal letras fuente">Contraseña </span>
+                </a>
               </li>
                  <li :class="{'active': $route.name === 'd1'}" class="nav-item " v-if="user.roles.includes('Docente')">
                  <router-link  to="/perfil-docente" :class="{'active': $route.name === 'd1'}" class="nav-link ">
@@ -102,7 +102,7 @@
         </li>
         <li class="nav-item" v-if="user.roles.includes('Admin')"  id="step_3">
           <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
-           :class="{'actived': $route.name === '1111'||$route.name === '2222'}" 
+           :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '2223'}" 
            aria-controls="applicationsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
                 
@@ -113,7 +113,7 @@
           <div class="collapse " 
            :class="{'show':
           $route.name === '1111'||$route.name === '1234'||
-          $route.name === '2222'}"
+          $route.name === '2222'||$route.name === '2223'}"
           id="applicationsExamples">
             <ul class="nav ms-4 ps-3">
              <li :class="{'active': $route.name === '1111'}" class="nav-item ">
@@ -128,13 +128,29 @@
                     <span class="sidenav-normal letras fuente">Materias </span>
                 </router-link>
               </li>
-               <li :class="{'active': $route.name === '2222'}" class="nav-item ">
-                 <router-link  to="/Menu-Distributivo" :class="{'active': $route.name === '2222'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> D </span>
-                    <span class="sidenav-normal letras fuente">Distributivo </span>
-                </router-link>
+              
+               <li class="nav-item ">
+                <a class="nav-link " :class="{'active': $route.name === '2222'|| $route.name === '2223'}"  data-bs-toggle="collapse" aria-expanded="false" href="#profileExample">
+                  <span class="sidenav-mini-icon"> D </span>
+                  <span class="sidenav-normal"> Distributivo <b class="caret"></b></span>
+                </a>
+                <div class="collapse " :class="{'show': $route.name === '2222' || $route.name === '2223'}"  id="profileExample">
+                  <ul class="nav nav-sm flex-column">
+                    <li :class="{'active': $route.name === '2222'}" class="nav-item ">
+                      <router-link  to="/Distributivo-v1" :class="{'active': $route.name === '2222'}" class="nav-link ">
+                        <span class="sidenav-mini-icon text-xs"> I </span>
+                        <span class="sidenav-normal letras fuente"> Intensivo </span>
+                      </router-link >
+                    </li>
+                    <li :class="{'active': $route.name === '2223'}" class="nav-item">
+                       <router-link  to="/Distributivo-v2" :class="{'active': $route.name === '2223'}" class="nav-link ">
+                        <span class="sidenav-mini-icon text-xs"> E </span>
+                        <span class="sidenav-normal letras fuente"> Extraordinario </span>
+                      </router-link >
+                    </li>
+                  </ul>
+                </div>
               </li>
-
               
             </ul>
           </div>
@@ -144,7 +160,7 @@
            :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'||$route.name === '71'}" aria-controls="ecommerceExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
               
-               <i class='bx bxs-book-content icons' ></i>
+               <i class='bx bxs-copy-alt icons' ></i>
             </div>
             <span  class="nav-link-text ms-1 mt-1">Matriculas</span>
           </a>
@@ -164,14 +180,14 @@
               </li>
                <li :class="{'active': $route.name === '77'}" class="nav-item ">
                  <router-link  to="/Matricula-1" :class="{'active ': $route.name === '77'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> M </span>
+                    <span class="sidenav-mini-icon"> I </span>
                     <span class="sidenav-normal letras fuente">Intensivo </span>
                 </router-link>
               </li>
 
                  <li :class="{'active': $route.name === '71'}" class="nav-item ">
                  <router-link  to="/Matricula-2" :class="{'active ': $route.name === '71'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> M </span>
+                    <span class="sidenav-mini-icon"> E </span>
                     <span class="sidenav-normal letras fuente">Extraordinario </span>
                 </router-link>
               </li>
@@ -348,7 +364,7 @@
           </div>
         </li>
          <li class="nav-item mt-3">
-          <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPCIONES</h6>
+          <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPCION</h6>
         </li>
         <div class="nav-item" id="step_6">
              <li >
@@ -381,6 +397,9 @@
         </li>
         </div>
         <v-tour name="myTour" :steps="steps" :options="myOptions"></v-tour>
+        <div v-if="visibl">
+           <Cuenta @cerrarCuenta="close"/>
+        </div>
       </ul>
     </div>
     
@@ -390,10 +409,14 @@
 <script>
  export default {
      name: 'Header',
+     components: {//../views/pagesAdmin/cuenta/Cuenta.vue
+       Cuenta : () => import( /* webpackChunkName: "Cuenta" */ '../views/pagesAdmin/cuenta/Cuenta.vue'),
+     },
      data() {
        return {
          user: this.$store.state.user,
          isMobile: false,
+         visibl: false,
           myOptions: {
         useKeyboardNavigation: false,
         labels: {
@@ -507,7 +530,13 @@
     },
     toursMain(){
        this.$tours["myTour"].start();
-    }
+    },
+    openCuenta() {
+      this.visibl = true;
+    },
+    close() {
+      this.visibl = false;
+    },
     },
  }
 </script>

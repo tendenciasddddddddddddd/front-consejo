@@ -20,11 +20,6 @@ const routes = [{
     beforeEnter: authorization
   },
  
-  {
-    path: '/Contrasena',
-    name: '2',
-    component: () => import( /* webpackChunkName: "Cuenta" */ '../views/pagesAdmin/cuenta/Cuenta.vue'),
-  },
   { //-------ZONAS------
     path: '/option-zonas',
     name: '000',
@@ -100,18 +95,13 @@ const routes = [{
     component: () => import( /* webpackChunkName: "NoFound" */ '../components/help/NoFound.vue'),
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
-    path: '/Menu-Distributivo',
-    name: '2222',
-    component: () => import( /* webpackChunkName: "Nivel" */ '../views/pagesGestionCursos/MenuDistributivo.vue'),
-  },
-  { //-------------------------------------DISTRIBUTIVO------------------------------
-    path: '/Distributivo-v1/:id',
+    path: '/Distributivo-v1',
     name: '2222',
     component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/pagesGestionCursos/distributivo/dV1/Distributivov1.vue'),
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
-    path: '/Distributivo-v2/:id',
-    name: '2222',
+    path: '/Distributivo-v2',
+    name: '2223',
     component: () => import( /* webpackChunkName: "Distributivov2" */ '../views/pagesGestionCursos/distributivo/dV2/Distributivov2.vue'),
   },
 

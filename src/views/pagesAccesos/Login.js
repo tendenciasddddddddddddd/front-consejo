@@ -1,14 +1,13 @@
 import ServiceLogins from "./ServiceLogin";
 const ResultServiceLogin = new ServiceLogins();
-/* import Firebase from "firebase";
-import config from "../../config";
-let app = Firebase.initializeApp(config);
-let db = app.database();
-let seccionRef = db.ref("seccions"); */
-//import { usersCollection } from "../../boot/firebase";
 export default {
   name: "Login",
-
+  components: {
+    ResetPassword : () => import( /* webpackChunkName: "ResetPassword" */ '../../components/ComponentAccesos/ResetPassword.vue'),
+    UserError : () => import( /* webpackChunkName: "UserError" */ '../../components/ComponentAccesos/UserError.vue'),//UserError.vue
+    VerifiedCode : () => import( /* webpackChunkName: "VerifiedCode" */ '../../components/ComponentAccesos/VerifiedCode.vue'),//UpdatePassword.vue
+    UpdatePassword : () => import( /* webpackChunkName: "UpdatePassword" */ '../../components/ComponentAccesos/UpdatePassword.vue'),
+  },
   data() {
     return {
       isLoading: false,
@@ -33,16 +32,8 @@ export default {
         modalidad: null,
       },
       isVisible: "logins",
-      recordingPassword: {
-        email: "",
-      },
       code: "",
-      isCode: "",
-      isErrorCode: "",
-      resetPasswords: {
-        email: null,
-        password: null,
-      },
+      emailss:'',
       //AUTH LOGIN GOOGLE
       isLogin: false,
       model: {
@@ -68,10 +59,7 @@ export default {
           this.postGoogleAuth(users);
         }
       } catch (error) {
-        this.$notify({
-          group: "global",
-          text: "Si tienes problemas en iniciar sesión, consulta en el chat.",
-        });
+        this.toast("No se puede conectar con el API.");
       }
     },
 
@@ -96,22 +84,13 @@ export default {
         })
         .catch((x) => {
           if (!x.response) {
-            this.$notify({
-              group: "global",
-              text: "Por favor revise su conexion a internet",
-            });
+            this.toast("Por favor revise su conexion a internet");
           }
           if (x.response.status == 400) {
-            this.$notify({
-              group: "global",
-              text: "El usuario no esta registrado en el sistema",
-            });
+            this.toast("El usuario no esta registrado en el sistema");
             this.isAuthGoogle = false;
           } else {
-            this.$notify({
-              group: "global",
-              text: "La cuenta de correo electronico no existe",
-            });
+            this.toast("La cuenta de correo electronico no existe");
             this.isAuthGoogle = false;
           }
         });
@@ -146,86 +125,22 @@ export default {
             this.isLoading = false;
           } else if (x.response.status == 400) {
             this.__limpiarCampos();
-            this.$notify({
-              group: "global",
-              text: "El usuario no esta registrado en el sistema",
-            });
+            this.toast("El usuario no esta registrado en el sistema");
             this.isLoading = false;
           } else if (x.response.status == 402) {
             this.__limpiarCampos();
-            this.$notify({
-              group: "global",
-              text: "Contraseña Invalida",
-            });
+            this.toast("Contraseña Invalida");
             this.isLoading = false;
           } else {
             this.__limpiarCampos();
-            this.$notify({
-              group: "global",
-              text: "La cuenta de correo electronico no existe",
-            });
+           
+            this.toast("La cuenta de correo electronico no existe");
             this.isLoading = false;
           }
         });
     },
 
-    ResetPassword() {
-      this.isPasswd = true;
-      this.$proxies.identityProxy
-        .resetPasswords(this.recordingPassword)
-        .then((x) => {
-          this.code = x.data.code;
-          this.isPasswd = false;
-          if (this.code != "") {
-            this.isVisible = "forgot";
-          }
-          //window.location.reload(true);
-        })
-        .catch(() => {
-          this.isVisible = "error";
-          this.isPasswd = false;
-        });
-    },
-
-    verificarCode() {
-      if (this.isCode == this.code) {
-        this.isVisible = "resett";
-        this.resetPasswords.email = this.recordingPassword.email;
-        this.code = "";
-        this.isCode = "";
-        this.recordingPassword.email = "";
-      } else {
-        this.isErrorCode = "El Código es incorrecto";
-      }
-    },
-
-    ResetCount() {
-      this.isResert = true;
-      this.$proxies.identityProxy
-        .forgotPassword(this.resetPasswords)
-        .then(() => {
-          this.isVisible = "logins";
-          this.isResert = false;
-          this.resetPasswords.email = "";
-          this.resetPasswords.password = "";
-        })
-        .catch(() => {
-          this.recordingPassword.email = "";
-          this.resetPasswords.password = "";
-          this.isVisible = "logins";
-          this.isResert = false;
-        });
-    },
-    rediricLogin() {
-      this.isVisible = "logins";
-      this.resetPasswords.email = "";
-      this.resetPasswords.password = "";
-
-      //this.recordingPassword = '';
-      this.code = "";
-      this.isCode = "";
-      this.isErrorCode = "";
-    },
+   
 
     __enviarUbicacion(id) {
       this.newSeccions.Identificador = id;
@@ -246,10 +161,38 @@ export default {
       this.ipEthernet = '127.0.0.1: noIp'
     },
 
+    goBackLogin: function() {
+    this.isVisible = "logins";
+   },
+   goRessetPassword: function(codex, emin){
+    this.isVisible = "forgot";
+    this.code = codex;
+    this.emailss = emin;
+   },
+   goUpdatePassword: function(){
+    this.isVisible = "resett";
+   },
+   goUserError: function(){
+    this.isVisible = "error";
+   },
     __limpiarCampos() {
       this.login.email = null;
       this.login.password = null;
     },
+    toast(message) {
+        this.$toasted.info(message, {
+          duration: 3000,
+          position: "top-right",
+          icon: "check-circle",
+          theme: "toasted-primary",
+          action: {
+            text: "CERRAR",
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      },
   },
   created() {
     this.getIpClient();

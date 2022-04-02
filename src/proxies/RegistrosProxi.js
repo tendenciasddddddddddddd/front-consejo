@@ -31,8 +31,8 @@ export default class ZonasProxi {
         return this.axios.delete(this.url + `/estudiantes/${id}`);
     }
 
-    async buscadorAlumno() {
-        return await this.axios.get(this.url + '/estudiantes/buscadorestudiantes');
+    async queryEstudiantes(querys) {
+        return await this.axios.get(this.url + `/estudiantes/query?querys=${querys}`);
     }
 
     //----------------------------------GLOBAL SET ------------------childEtnia
@@ -68,18 +68,14 @@ export default class ZonasProxi {
         return this.axios.delete(this.url + `/docentes/${id}`);
     }
     //coleccion con solo nombre apellido foto id cedula  del
-    getListDocentes() {
-        return this.axios.get(this.url + '/docentes/newdoc');
+    async getListDocentes() {
+        return await this.axios.get(this.url + '/docentes/newdoc');
     }
 
-    async buscadorDocente() {
-        return await this.axios.get(this.url + '/docentes/buscadordocentes');
+    async queryDocente(querys) {
+        return await this.axios.get(this.url + `/docentes/query?querys=${querys}`);
     }
-    //------------------------------------------------------GESTION DE Parroquia--------------------------------------
-
-
-
-    //------------------------------------------------------GESTION DE Parroquia--------------------------------------
+ 
 
 
 

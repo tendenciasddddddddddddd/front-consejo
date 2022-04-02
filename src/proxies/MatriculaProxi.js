@@ -30,13 +30,15 @@ export default class MatriculaProxi {
         return this.axios.delete(this.url + `/periodos/${id}`);
     }
 
+    activatePeriodo(id, state) {
+        return this.axios.put(this.url + `/periodos/activate/${id}?state=${state}`);
+    }
+
     //----------------------------------GLOBAL SET MATRICULA ESTUDIANTE ------------------
 
     getAllEstudiantes(mod) {
         return this.axios.get(this.url + `/estudiantes/newstud?mod=${mod}`);
     }
-
-  
   
     //------------------------------------------------------DOCENTES--------------------------------------
     

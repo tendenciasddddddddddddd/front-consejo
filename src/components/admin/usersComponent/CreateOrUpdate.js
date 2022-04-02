@@ -1,11 +1,13 @@
 import Spinner from '../../../shared/Spinner'
-
-import RestResource from '../../../service/isAdmin'
+import CustomInput from "../../../shared/CustomInput.vue";
+import RestResource from '../../../service/isAdmin';
+import ButtonLoading from "../../../shared/ButtonLoading.vue";
+import FullModal from "../../../shared/FullModal.vue";
 const restResourceService = new RestResource();
 export default {
   name: "CreaUsuario",
   components: {
-    Spinner
+    Spinner, CustomInput, ButtonLoading, FullModal
   },
   props: {
     idGet: {
@@ -16,8 +18,7 @@ export default {
     return {
       roles: this.$store.state.user.roles,
       idKey: this.idGet,
-      tab: "init",
-      tabla: "ontask",
+      tabla: true,
       info: null,
       listRol:null,
       isLoading: false,  ifLoad:false,
@@ -27,7 +28,7 @@ export default {
         _id: null, username: null,  email: null,
         password: null, nombres: null, apellidos: null,
         cedula: null, foto: 'https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png', typo: 'ADMS',
-        status: null, telefono: null,
+        telefono: null,
         updatedAt:null, role:null,fullname : null,
      },
      isedit : false,
@@ -58,10 +59,7 @@ export default {
     save() {//-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
         this.$validate().then(success => { //METODO PARA GUARDAR 
           if (!success&&this.checked==''){ 
-            this.$notify({
-                group: "global",
-                text: "Por favor llena correctamente los campos solicitados",
-              });
+              this.toast('Por favor llena correctamente los campos solicitados')
               return
             }
           if (this.model._id) { //-----------SI EL ID TIENE VALOR ENTONCES ES EDITAR
@@ -83,11 +81,6 @@ export default {
             this.model.password =this.__getPasswods(this.model.apellidos,this.model.cedula);
             this.model.role = this.checked;
             this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
-            if(this.model.status==true){
-              this.model.status=1
-            }else{
-              this.model.status =0
-            }
             this.$proxies._usuarioProxi.create(this.model) //-----------GUARDAR CON AXIOS
               .then(() => {
                 this.ifLoad = false;
@@ -126,7 +119,7 @@ export default {
       toast(message) {
         this.$toasted.info(message, {
           duration: 2600,
-          position: "bottom-center",
+          position: "top-right",
           icon: "check-circle",
           theme: "toasted-primary",
           action: {
@@ -137,6 +130,9 @@ export default {
           },
         });
       },
+      close(){
+        this.$emit('myEventClosedMOdalUser');
+      }
   },
   mounted() {
     this.verificarUsuario();

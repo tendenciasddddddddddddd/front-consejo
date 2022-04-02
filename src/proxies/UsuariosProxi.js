@@ -30,7 +30,14 @@ export default class UsuariosProxi{
         return this.axios.get(this.url + '/users/newrol');
     }
 
+    activateUsers(id, state) {
+        return this.axios.put(this.url + `/users/activate/${id}?state=${state}`);
+    }
+
    async buscadorUsuario() {
         return await this.axios.get(this.url + '/users/buscadorusuarioss');
+    }
+    async queryUsuario(querys) {
+        return await this.axios.get(this.url + `/users/query?querys=${querys}`);
     }
 }

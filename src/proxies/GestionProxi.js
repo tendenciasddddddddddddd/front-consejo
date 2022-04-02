@@ -30,7 +30,13 @@ export default class GestionProxi {
     getNiveles() {
         return this.axios.get(this.url + '/niveles/level');
     }
-    //------------------------------------------------------DOCENTES--------------------------------------
+
+    activateNivel(id, state) {
+        return this.axios.put(this.url + `/niveles/activate/${id}?state=${state}`);
+    }
+
+
+    //------------------------------------------------------materias--------------------------------------
     getAllMaterias(page, take) {
         return this.axios.get(this.url + `/materias?page=${page}&take=${take}`);
     }
@@ -54,6 +60,11 @@ export default class GestionProxi {
     getListMaterias() {
         return this.axios.get(this.url + '/materias/newmat');
     }
+
+    activateMaterial(id, state) {
+        return this.axios.put(this.url + `/materias/activate/${id}?state=${state}`);
+    }
+
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
     createDistributivo(params) {

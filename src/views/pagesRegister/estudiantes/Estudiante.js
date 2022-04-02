@@ -2,84 +2,71 @@ import RestResource from '../../../service/isAdmin'
 const restResourceService = new RestResource();
 import Spinner from '../../../shared/Spinner';
 import AlertHeader from "../../../shared/AlertHeader.vue";
+import Paginate2 from "../../../shared/Paginate2.vue";
+import ActionsRow from "../../../shared/ActionsRow.vue";
 export default {
   name: "indexUsiario",
   components: {
     Spinner,
     AlertHeader,
-    AlumnoCreateOrUpdate : () => import( /* webpackChunkName: "CreateOrUpdate" */ '../../../components/admin/registerComponent/AlumnosCreateUpdate.vue')
+    AlumnoCreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ '../../../components/admin/registerComponent/AlumnosCreateUpdate.vue'),
+    Modal: () => import( /* webpackChunkName: "Modal" */ "../../../shared/Modal.vue"),
+    Paginate2,
+    ActionsRow
   },
   data() {
     return {
       roles: this.$store.state.user.roles,
       totalNotas: 0,
       paginaActual: 1,
-      info: null,
+      info: {},
       pagg: null,
       pagina: 0,
       paginas: 0,
       isLoading: false, //EL SNIPPER CARGA EN FALSO
       isSelecUsers: [],
-      modals: 'closed',
       subtitulo: 'none',
-      iseliminaddo : false,
-      contador : 0,
-      contador2 : 0,
-      viewtable:1,
-      listbuscador: {},
-      searchQuery: '',
       rows: 6,
-      isActive : false,
+      iseliminaddo: false,
+      isSearch: false,
+      isActive: false,
       selected: [],
       allSelected: false,
       userIds: [],
-       //CHILD COMPONENT
-       ifCreateUpdate: false,
-       idUser: null,
+      //CHILD COMPONENT
+      ifCreateUpdate: false,
+      idUser: null,
+      visible: false,
     };
   },
-  computed: {
-   
-    resultQuery() {
-      if (this.searchQuery.length>1) {
-        return this.listbuscador.filter((item) => {
-          return this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every((v) => item.fullname.toLowerCase().includes(v));
-        });
-      } 
-    },
-  },
   methods: {
-    verificarUsuario(){
-      if(!restResourceService.admin(this.roles)){
+    verificarUsuario() {
+      if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
       }
     },
-    openChildAlumno: function() {
+    openChildAlumno: function () {
       let aux = this.userIds.length;
-      if (aux===1) {
-          this.idUser = this.userIds[0];
-          this.ifCreateUpdate = true;
+      if (aux === 1) {
+        this.idUser = this.userIds[0];
+        this.ifCreateUpdate = true;
       }
-  },
-  openChildUser2: function() {
+    },
+    openChildUser2: function () {
       this.idUser = null;
       this.ifCreateUpdate = true;
-  },
-  closedChildAlumno: function() {
-    this.ifCreateUpdate = false;
-},
-refreshData : function() {
-  
-  this.getAll(this.paginaActual,6); 
-},
-    getAll(pag) {
+    },
+    closedChildAlumno: function () {
+      this.ifCreateUpdate = false;
+    },
+    refreshData: function () {
+      this.getAll(this.paginaActual, 6);
+    },
+    getAll(pag, lim) {
       this.isLoading = true;
       this.subtitulo = this.rows + ' filas por página';
       this.$proxies._registroProxi
-        .getAll(pag, this.rows) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+        .getAll(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
         .then((x) => {
           this.info = x.data.usuarios;
           this.pagg = x.data;
@@ -113,55 +100,80 @@ refreshData : function() {
             this.toast("Se elimino a usuarios de sistema con su cuenta");
           }, 1000);
         })
-        .catch(function() {});
+        .catch(function () {});
     },
     dialogDelete() {
       this.iseliminaddo = true;
       let isArray = this.userIds.length;
-      if(isArray>0){
+      if (isArray > 0) {
         this.$proxies._registroProxi
           .remove(this.userIds)
           .then(() => {
             this.iseliminaddo = false;
-            this.userIds= [];
-            this.getAll(this.paginaActual,6); 
+            this.userIds = [];
+            this.getAll(this.paginaActual, 6);
             this.allSelected = false;
           })
           .catch(() => {
             console.log("Error imposible");
-          });   
-     }
-    },
-    editar(){
-      let isArray = this.userIds.length;
-        if(isArray===1){
-          this.$router.push({path: `/Estudiate/${this.userIds[0]}/edit`})
-        }
-    },
-    buscar(){//buscadorUsuario
-      this.userIds = [];
-      this.contador = this.contador +1;
-      this.contador2 = this.contador2 +1;
-      if (this.contador===1) {
-         this.viewtable = 2;
-         if (this.contador2===1) {
-           this.isLoading = true;
-           this.$proxies._registroProxi
-             .buscadorAlumno() //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-             .then((x) => {
-               this.listbuscador = x.data.usuarios;
-               this.isLoading = false;
-             })
-             .catch(() => {
-               console.log("Error imposible");
-               this.isLoading = false;
-             });
-         }
-         
+          });
       }
-     },
-     selectOne(ids) {
-      
+    },
+    desactiveState() { //activateNivel
+      let message = {
+        title: "¿Cambiar el estado?",
+        body: " Esta acción cambiara el estado del usuario",
+      };
+      let options = {
+        loader: true,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.dialogState();
+          setTimeout(() => {
+            dialog.close();
+            this.toast("Se cambio el estado del registro");
+          }, 600);
+        })
+        .catch(function () {});
+    },
+    dialogState() {
+      if (this.userIds.length > 0) {
+        let reg = this.info.filter((x) => x._id == this.userIds[0]);
+        let state = reg[0].status == 1 ? 0 : 1;
+        this.$proxies._usuarioProxi
+          .activateUsers(this.userIds, state)
+          .then(() => {
+            this.iseliminaddo = false;
+            this.userIds = [];
+            this.getAll(this.paginaActual, 6);
+          })
+          .catch(() => {
+            console.log("Error imposible");
+          });
+      }
+    },
+    changeSearch(textSearch) { //queryUsuario
+      if (textSearch.length > 3) {
+        this.isSearch = true;
+        this.isLoading = true;
+        this.$proxies._registroProxi
+          .queryEstudiantes(textSearch) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+          .then((x) => {
+            this.info = x.data;
+            this.isLoading = false;
+          })
+          .catch(() => {
+            console.log("Error imposible");
+            this.isLoading = false;
+          });
+      }
+    },
+    selectOne(ids) {
       if (!this.userIds.includes(ids)) {
         this.userIds.push(ids);
       } else {
@@ -171,7 +183,7 @@ refreshData : function() {
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "bottom-center",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {
@@ -182,50 +194,40 @@ refreshData : function() {
         },
       });
     },
-     selectAll: function() {
-      this.allSelected= true;
+    selectAll: function () {
+      this.allSelected = true;
       this.userIds = [];
       if (this.allSelected) {
         for (let user in this.info) {
           this.userIds.push(this.info[user]._id);
         }
-      } 
+      }
     },
-    deletedSelected: function() {
-      this.allSelected= false;
+    deletedSelected: function () {
+      this.allSelected = false;
       this.userIds = [];
     },
-     salirBusqueda: function(){
-       this.viewtable = 1;
-       this.contador=0;
-       this.searchQuery = null;
-     },
-     cambiar_pagina: function(num){
+    salirBusqueda: function () {
+      this.getAll(1, 6);
+      this.isSearch = false;
+    },
+
+    changedQuery(num) {
       this.rows = num;
-      this.getAll(1);
-     }
+      this.getAll(1, num);
+    },
+    onPageChange(page) {
+      this.getAll(page, this.rows);
+    },
+    openModal() {
+      this.visible = true;
+    },
+    close() {
+      this.visible = false;
+    },
   },
   created() {
     this.verificarUsuario();
-  },
-  watch: {
-    "$route.query.pagina": {
-      immediate: true,
-      handler(pagina) {
-        pagina = parseInt(pagina) || 1;
-        this.getAll(pagina);
-        this.userIds = [];
-        this.paginaActual = pagina;
-      },
-    },
-    // 'isSelecUsers' : function () {
-    //   if(this.isSelecUsers.length!=1){
-    //     this.isActive = true;
-    //     console.log(this.isActive)
-    //   }else{
-    //     this.isActive = false;
-    //     console.log(this.isActive)
-    //   }
-    // }
+    this.getAll(1, 6);
   },
 };

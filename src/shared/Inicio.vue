@@ -22,7 +22,7 @@
      <div >
         
             
-       <h6 class="ms-3" style="color:#273b49" v-if="!$store.state.isAppMobile"> Hola, {{nombre}}</h6>
+       <h6 class="ms-3" style="color:#273b49" v-if="!$store.state.isAppMobile"> Hola, {{nombre.split(' ')[0]}} {{nombre.split(' ')[2]}}</h6>
        <h6 class="ms-3 me-3" style="color:#273b49" v-else>  {{nombre.slice(0,11)}}...</h6>
      </div>
       <div

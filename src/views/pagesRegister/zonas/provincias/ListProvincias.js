@@ -1,17 +1,27 @@
 import RestResource from '../../../../service/isAdmin'
 const restResourceService = new RestResource();
-import Spinner from '../../../../shared/Spinner'
+import Spinner from '../../../../shared/Spinner';
+import CustomInput from "../../../../shared/CustomInput.vue";
+import ButtonLoading from "../../../../shared/ButtonLoading.vue";
+import Paginate2 from "../../../../shared/Paginate2.vue";
+import AlertHeader from "../../../../shared/AlertHeader.vue";
+import ActionsRow from "../../../../shared/ActionsRow.vue";
 export default {
     name: 'ListProvincias',
     components: {
-        Spinner
+        Spinner, CustomInput,
+        ButtonLoading,
+        Paginate2,
+        AlertHeader,
+        ActionsRow,
+        Modal: () => import(/* webpackChunkName: "Modal" */ "../../../../shared/Modal.vue"),
     },
     data() {
         return {
             roles: this.$store.state.user.roles,
             totalNotas: 0,
             paginaActual: 1,
-            info: null,
+            info: {},
             ifLoad:false,
             pagg: null,
             MsmError : "",
@@ -22,13 +32,16 @@ export default {
             model: {//-----------VARIABLES DEL MODELO A GUARDAR
               _id: null, 
               nombre: null,  
-              estado: null,
            },
            isSelecUsers: [],
            modals: 'closed',
            subtitulo: 'none',
            iseliminaddo : false,
            isCarga: false,
+           visible: false,
+           allSelected: false,
+           rows: 6,
+           isSearch: false,
         }
     },
     methods: {
@@ -60,17 +73,14 @@ export default {
             this.isSelecUsers= [];
             this.$validate().then(success => { 
               if (!success){ 
-                this.$notify({
-                    group: "global",
-                    text: "Por favor llena correctamente los campos solicitados",
-                  });
-                  return
+                this.toast('Por favor llena correctamente los campos solicitados');
+                return
               }
                 if(this.model._id){
                   this.ifLoad = true;
                   this.$proxies._zonasProxi.update(this.model._id, this.model)
                     .then(() => {
-                      this.modals = 'cls';
+                      this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
                       this.getAll(1,6);
@@ -80,15 +90,10 @@ export default {
                     });    
                 }else{
                   this.ifLoad = true;
-                  if(this.model.estado==true){
-                    this.model.estado=1
-                  }else{
-                    this.model.estado =0
-                  }
                   this.$proxies._zonasProxi.create(this.model) //-----------GUARDAR CON AXIOS
                   .then(() => {
                     this.ifLoad = false;
-                    this.modals = 'cls';
+                    this.close();
                     this.getAll(1,6);
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
@@ -109,7 +114,7 @@ export default {
             let isArray = this.isSelecUsers.length;
             if(isArray===1){
               this.isCarga = true; 
-            this.__limpiarCampos();
+            this.openModal();
             this.$proxies._zonasProxi.get(this.isSelecUsers[0])
                 .then((x) => {
                     this.model = x.data;
@@ -119,76 +124,160 @@ export default {
                     this.isCarga = false; 
                 });
             }
-            
           },
-         
-          selectUser(key){
-            let longitud = this.isSelecUsers.length;
-            let isExiste = 0;
-            if(longitud>0){
-               for (let i = 0; i < this.isSelecUsers.length; i++) {
-                  if(this.isSelecUsers[i]==key){
-                   this.isSelecUsers.splice(i, 1); 
-                   isExiste = 1;
-                   break;
-                  }
-               }
-               if(isExiste===0){ 
-                 this.isSelecUsers.push(key);
-               }
-            }else{
-             this.isSelecUsers.push(key);
-            } 
-          },
-          remove() {
-            //METODO PARA ELIMINAR  ROW
-            if (
-              confirm(
-                "ESTA SEGURO QUE QUIERE ELIMINAR? YA QUE ESOS CAMBIOS NO SE PUEDE REVERTIR"
-              )
-            ) {
-              this.iseliminaddo = true;
-              let isArray = this.isSelecUsers.length;
-              if(isArray>0){
-                this.$proxies._zonasProxi
-                  .remove(this.isSelecUsers)
-                  .then(() => {
-                    this.iseliminaddo = false;
-                    this.isSelecUsers= [];
-                    this.getAll(1,6); 
-                  })
-                  .catch(() => {
-                    console.log("Error imposible");
-                  });
-                this.$notify({
-                  group: "global",
-                  text: "Registro destruido",
+          changeSearch(textSearch) { //queryUsuario
+            if (textSearch.length > 3) {
+              this.isSearch = true;
+              this.isLoading = true;
+              this.$proxies._zonasProxi
+                .queryProvincia(textSearch) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+                .then((x) => {
+                  this.info = x.data;
+                  this.isLoading = false;
+                })
+                .catch(() => {
+                  console.log("Error imposible");
+                  this.isLoading = false;
                 });
-                
-             }
             }
           },
-          __limpiarCampos() { //LIMPIAR CAMPOS DE EL MODAL
+          salirBusqueda: function() {
+            this.getAll(1, 6);
+            this.isSearch = false;
+          },
+          changedQuery(num) {
+            this.rows = num;
+            this.getAll(1, num);
+          },
+          onPageChange(page) {
+            this.getAll(page, this.rows);
+          },
+          selectUser(ids) {
+            if (!this.isSelecUsers.includes(ids)) {
+              this.isSelecUsers.push(ids);
+            } else {
+              this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
+            }
+          },
+          selectAll: function() {
+            this.allSelected= true;
+            this.isSelecUsers = [];
+            if (this.allSelected) {
+              for (let user in this.info) {
+                this.isSelecUsers.push(this.info[user]._id);
+              }
+            } 
+          },
+          deletedSelected: function() {
+            this.allSelected= false;
+            this.isSelecUsers = [];
+          },
+          remove() {
+            let message = {
+              title: "¿Destruir registro?",
+              body: " Esta acción no se puede deshacer",
+            };
+            let options = {
+              loader: true,
+              okText: "Continuar",
+              cancelText: "Cancelar",
+              animation: "bounce",
+            };
+            this.$dialog
+              .confirm(message, options)
+              .then((dialog) => {
+                this.dialogDelete();
+                setTimeout(() => {
+                  dialog.close();
+                  this.toast("Se elimino registro de sistema con su cuenta");
+                }, 600);
+              })
+              .catch(function() {});
+          },
+          dialogDelete() {
+            this.iseliminaddo = true;
+            if (this.isSelecUsers.length > 0) {
+              this.$proxies._zonasProxi
+                .remove(this.isSelecUsers)
+                .then(() => {
+                  this.iseliminaddo = false;
+                  this.isSelecUsers = [];
+                  this.getAll(this.pagina, 6);
+                  this.allSelected= false;
+                })
+                .catch(() => {
+                  console.log("Error imposible");
+                });
+            }
+          },
+          desactiveState(){//activateNivel
+            let message = {
+              title: "¿Cambiar el estado?",
+              body: " Esta acción cambiara el estado de los registros",
+            };
+            let options = {
+              loader: true,
+              okText: "Continuar",
+              cancelText: "Cancelar",
+              animation: "bounce",
+            };
+            this.$dialog
+              .confirm(message, options)
+              .then((dialog) => {
+                this.dialogState();
+                setTimeout(() => {
+                  dialog.close();
+                  this.toast("Se cambio el estado del registro");
+                }, 600);
+              })
+              .catch(function() {});
+          },
+          dialogState() {
+            if (this.isSelecUsers.length > 0) {
+              let reg = this.info.filter((x)=> x._id == this.isSelecUsers[0]);
+              let state = reg[0].estado == 1 ? 0 : 1;
+              this.$proxies._zonasProxi
+               .activateProvincia(this.isSelecUsers, state)
+                .then(() => {
+                  this.iseliminaddo = false;
+                 this.isSelecUsers = [];
+                  this.getAll(this.pagina, 6);
+                })
+                 .catch(() => {
+                   console.log("Error imposible");
+                 });
+            }
+          },
+          openModal() {
+            this.visible = true;
             this.model._id = "";
             this.model.nombre = "";
             this.model.estado = 0;
-            this.MsmError ="";
-            this.modals = 'openn';
-        }, //----FIN----
+            this.MsmError="";
+          },
+          close() {
+            this.visible = false;
+          }, 
+        toast(message) {
+          this.$toasted.info(message, {
+            duration: 2600,
+            position: "top-center",
+            icon: "check-circle",
+            theme: "toasted-primary",
+            action: {
+              text: "CERRAR",
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        },
     },
     created() {
       this.verificarUsuario();
+      this.getAll(1,6);
     },
-    watch: {
-        "$route.query.pagina": {
-          immediate: true,
-          handler(pagina) {
-            pagina = parseInt(pagina) || 1;
-            this.getAll(pagina,6);
-            this.paginaActual = pagina;
-          },
-        },
-      },
+    
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
         'model.nombre'(value) {
           return this.$validator

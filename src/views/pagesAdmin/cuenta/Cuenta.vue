@@ -1,20 +1,11 @@
 <template>
   <div>
-    <!-- <div><section id="vulnerability" style="background-color: #E4F7EB;padding: 20px;text-align: center;font-size: 16px;line-height: 19px;color:#1C7E41;"><div style="max-width:1350px;margin-left: auto;margin-right: auto;min-height: 30px;"><div style="float: left;text-align: left;max-width: 800px;"><strong>Oferta especial:</strong>Gracias por elegir Zoom para mantenerse conectado. Haga el cambio a Pro Annual hoy y ahorre un 25% en su primer año con CONNECT25. </div><div style=""> <a href="https://zoom.us/buy?cartid=fdUxP2Sgcn&amp;couponcode=CONNECT25&amp;zcid=3779&amp;utm_source=Pardot&amp;utm_medium=email&amp;utm_content=FreeToPro&amp;utm_campaign=CONNECT25">Cambiar a anual</a></div></div><button onclick="closeNotification();" aria-label="Close Account Info Modal Box" style="border: none;background: none;float: right;top: -40px;position: relative;">×</button></section></div> -->
-    
-    <div class="row ">
-      <div class="col-lg-11  " 
-     >
-       
-          <div class="" >
-            <div class=" h-100">
-              <div class="  ">
-                <h6 class="mb-1 h5 fuente mt-2" style="color:black;" >Cambiar contraseña</h6>
-                <p class="parrafo">Cambia tu contraseña cuando lo necesites. Por seguridad, te recomendamos que esté compuesta de letras y números.</p>
-                <div class="h6 text-danger">{{ MsmError }}</div>
-              </div>
-              <div class="card-body p-3" style="width: 400px">
-                <div v-if="isContrasenia">
+     <Modal v-show="visible" @close="close">
+          <template v-slot:header> Cambiar contraseña</template>
+          <template v-slot:body>
+             <p class="parrafo">Cambia tu contraseña cuando lo necesites. Por seguridad, te recomendamos que esté compuesta de letras y números.</p>
+              <div class="h6 text-danger fuente">{{ MsmError }}</div>
+               <div v-if="isContrasenia">
                   <form @submit.prevent="authenticate">
                     <p class="parrafo">Contraseña actual</p>
                     <div class="form-group">
@@ -53,9 +44,7 @@
                      <span class="parrafo">Nueva Contraseña</span>
                     <div class="form-group">
                       <input
-                        :class="{
-                          error: validation.hasError('newContraseña.password'),
-                        }"
+
                         class="form-control buscador"
                         type="password"
                         v-model="newContraseña.password"
@@ -97,18 +86,9 @@
                     </div>
                   </form>
                 </div>
-                
-              </div>
-            </div>
-          </div>
-          
-         
-        
-      </div>
-    </div>
+          </template>
+        </Modal>
   </div>
 </template>
-
 <script src="./Cuenta.js"></script>
 
-<style></style>

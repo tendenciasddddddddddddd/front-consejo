@@ -2,18 +2,25 @@
 import RestResource from "../../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../../shared/Spinner";
+import AlertHeader from "../../../shared/AlertHeader.vue";
+import Paginate2 from "../../../shared/Paginate2.vue";
+import ActionsRow from "../../../shared/ActionsRow.vue";
 export default {
   name: "Users",
   components: {
     Spinner,
-    CreateOrUpdate : () => import( /* webpackChunkName: "CreateOrUpdate" */ '../../../components/admin/usersComponent/CreateOrUpdate.vue')
+    CreateOrUpdate : () => import( /* webpackChunkName: "CreateOrUpdate" */ '../../../components/admin/usersComponent/CreateOrUpdate.vue'),
+    AlertHeader,
+    Modal: () => import(/* webpackChunkName: "Modal" */ "../../../shared/Modal.vue"),
+    Paginate2,
+    ActionsRow
   },
   data() {
     return {
       roles: this.$store.state.user.roles,
       totalNotas: 0,
       paginaActual: 1,
-      info: null,
+      info: {},
       pagg: null,
       pagina: 0,
       paginas: 0,
@@ -36,9 +43,8 @@ export default {
       contador: 0,
       contador2: 0,
       viewtable: 1,
-      listbuscador: {},
-      searchQuery: null,
-      modals: "closed",
+      isSearch: false,
+      searchQuery: '',
       subtitulo: "none",
       selected: [],
       allSelected: false,
@@ -46,12 +52,12 @@ export default {
       //CHILD COMPONENT
       ifCreateUpdate: false,
       idUser: null,
-
+      visible: false,
     };
   },
   computed: {
     resultQuery() {
-      if (this.searchQuery) {
+      if (this.searchQuery.length>1) {
         return this.listbuscador.filter((item) => {
           return this.searchQuery
             .toLowerCase()
@@ -108,6 +114,12 @@ export default {
       this.allSelected= false;
       this.userIds = [];
     },
+    changedQuery(num) {
+      this.getAll(1, num);
+    },
+    onPageChange(page) {
+      this.getAll(page, 6);
+    },
     remove() {
       let message = {
         title: "¿Destruir registro?",
@@ -145,16 +157,10 @@ export default {
           });
       }
     },
-    editar() {
-      let isArray = this.userIds.length;
-      if (isArray === 1) {
-        this.$router.push({ path: `/usuarios/${this.userIds[0]}/edit` });
-      }
-    },
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "bottom-center",
+        position: "top-right",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {
@@ -165,17 +171,14 @@ export default {
         },
       });
     },
-    buscar() {
-      this.contador = this.contador + 1;
-      this.contador2 = this.contador2 + 1;
-      if (this.contador === 1) {
-        this.viewtable = 2;
-        if (this.contador2 === 1) {
+    changeSearch(textSearch) {//queryUsuario
+        if (textSearch.length > 3) {
+          this.isSearch = true;
           this.isLoading = true;
           this.$proxies._usuarioProxi
-            .buscadorUsuario() //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+            .queryUsuario(textSearch) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
             .then((x) => {
-              this.listbuscador = x.data.usuarios;
+              this.info = x.data;
               this.isLoading = false;
             })
             .catch(() => {
@@ -183,12 +186,49 @@ export default {
               this.isLoading = false;
             });
         }
+    },
+    
+    desactiveState(){//activateNivel
+      let message = {
+        title: "¿Cambiar el estado?",
+        body: " Esta acción cambiara el estado del usuario",
+      };
+      let options = {
+        loader: true,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.dialogState();
+          setTimeout(() => {
+            dialog.close();
+            this.toast("Se cambio el estado del registro");
+          }, 600);
+        })
+        .catch(function() {});
+    },
+    dialogState() {
+      if (this.userIds.length > 0) {
+        let reg = this.info.filter((x)=> x._id == this.userIds[0]);
+        let state = reg[0].status == 1 ? 0 : 1;
+        this.$proxies._usuarioProxi
+         .activateUsers(this.userIds, state)
+          .then(() => {
+            this.iseliminaddo = false;
+           this.userIds = [];
+            this.getAll(this.paginaActual, 6);
+          })
+           .catch(() => {
+             console.log("Error imposible");
+           });
       }
     },
     salirBusqueda: function() {
-      this.viewtable = 1;
-      this.contador = 0;
-      this.searchQuery = null;
+      this.getAll(1, 6);
+      this.isSearch = false;
     },
     openChildUser: function() {
         let aux = this.userIds.length;
@@ -208,19 +248,15 @@ export default {
         this.ifCreateUpdate = false;
         this.getAll(this.paginaActual, 6);
     },
+    openModal() {
+      this.visible = true;
+    },
+    close() {
+      this.visible = false;
+    },
   },
   created() {
     this.verificarUsuario();
-  },
-  watch: {
-    "$route.query.pagina": {
-      immediate: true,
-      handler(pagina) {
-        pagina = parseInt(pagina) || 1;
-        this.getAll(pagina, 6);
-        this.userIds = [];
-        this.paginaActual = pagina;
-      },
-    },
+    this.getAll(1, 6);
   },
 };
