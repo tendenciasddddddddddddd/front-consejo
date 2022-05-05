@@ -1,81 +1,15 @@
 <template>
-  <div>
-    <div class="fixed-plugin" :class="{ 'show w-100': tab === 'inicio' }">
-      <div
-        class="card desplega"
-        :class="{ 'w-100': tab === 'inicio' }"
-        style="overflow-y: auto;  z-index: 9999; "
-      >
-        <div
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
-         padding: 4px 25px 4px 40px;background-color: #253342;"
-        >
-          <div class="d-flex justify-content-between">
-            <div class="h5 text-white">
-              ...
-            </div>
-            <div>
-              <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
-                Configurar alunmos con sus paralelos
-              </h5>
-            </div>
-            <div class="mt-2">
-              <button
-                @click="$emit('myEventClosedModalParalelo1')"
-                class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 172 172"
-                  style=" fill:#000000;"
-                >
-                  <g
-                    fill="none"
-                    fill-rule="nonzero"
-                    stroke="none"
-                    stroke-width="1"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                    stroke-miterlimit="10"
-                    stroke-dasharray=""
-                    stroke-dashoffset="0"
-                    font-family="none"
-                    font-weight="none"
-                    font-size="none"
-                    text-anchor="none"
-                    style="mix-blend-mode: normal"
-                  >
-                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                    <g fill="#ffffff">
-                      <path
-                        d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- End Toggle Button -->
-        </div>
-
-        <div
-          class="card-body pt-sm-3 pt-0"
-          style="overflow-y: auto;height: auto;"
-        >
-          <div class="row">
-            <div class="col-lg-9 col-12 mx-auto">
+     <ScrimModal @close="close">
+         <template v-slot:header> Asignar paralelos a Intensivo</template>
+        <template v-slot:body>
+             <div class="row">
+            <div class="col-lg-11 col-12 mx-auto">
               <div class="row " v-if="isVisible === 'panel1'">
                 <div
                   class="h5 mt-2 fuente text-start ms-3" 
                   style="font-weight: 400;"
                 >
-                  Selecciona los cursos para asignar el paralelo
+                 Selecciona los cursos
                 </div>
                  <vue-progress-bar ></vue-progress-bar>
                 <Spinner v-if="isLoading1"></Spinner>
@@ -85,15 +19,15 @@
                     v-for="(item, i) in listniveles"
                     :key="item.id"
                     type="button"
-                    @click="clicMe(item._id, item.nombres)"
+                    @click="clicMe(item._id, item.nombre)"
                     class="flex-none s-shadow s-pb-2 category-card s-center card-template s-py-3 s-px-2 s-decoration-none s-borderline-top animate__animated animate__fadeInUp"
                     href="javascript:;"
                     :class="[`s-borde-${i} animations-${i} `]"
                   >
                     <img class="img  s-mb-1 w-35" :src="arrays[i]" />
-                    <span class="s-span mt-1">Mostrar c..</span>
-                    <h6 class=" cardTitle text-start mt-1" style="font-size: 1rem;">
-                      Curso de {{ item.nombres }}
+                    <span class="s-span mt-1">Curso de...</span>
+                    <h6 class=" cardTitle text-start mt-1" style="font-size: 0.9rem;">
+                       {{ item.nombre }}
                     </h6>
                   </a>
                 </section>
@@ -104,7 +38,7 @@
                   <a
                     @click="regresar"
                     class="btn btn-sm me-3 "
-                    style="box-shadow: none;"
+                    style="box-shadow: none;padding: 0.5rem 0.5em !important;"
                   >
                     <img
                       height="18px"
@@ -208,17 +142,14 @@
                       </div>
                     </div>
                     <div v-else class="table-responsive mt-3">
-                      <table
-                        class="elevation-2 table table-flush "
-                        style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
-                      >
+                      <table class="dataTable-table table s-table-flush">
                         <thead class="thead-light">
                           <tr class="cabeza">
                             <th
                               style="background-color: rgb(234, 240, 246); "
                               class=""
                             >
-                              <div class="d-flex ">
+                              <div class="d-flex ms-3">
                                 <div
                                   v-if="!allSelected"
                                   class="form-check my-auto"
@@ -232,9 +163,7 @@
                                 </div>
                                 <i
                                   @click="deletedSelected"
-                                  v-else
-                                  style="border: 2px solid; color: rgb(0, 164, 189); height: 19px; width: 19px; border-radius: 3px; cursor: pointer;"
-                                  class="fa fa-minus"
+                                  v-else class="fa fa-minus s-icon-all"
                                   aria-hidden="true"
                                 ></i>
                                 <span
@@ -260,13 +189,9 @@
                                     class="form-check-input cheka"
                                     type="checkbox"
                                      v-model="isSelecCurosos" :value="item._id"
-                                   
                                   />
                                 </div>
-
-                                <a
-                                  class="mb-0 ms-3 text-sm colorestabla fuente"
-                                >
+                                <a class="mb-0 ms-3 text-sm colorestabla fuente">
                                   {{ item.nombre }}
                                 </a>
                               </div>
@@ -281,7 +206,6 @@
                         </tbody>
                       </table>
                        <Paginate :numPages="numPages"  :page="page" :total="infoMat.length" @pagechanged="onPageChange"></Paginate>
-                    
                     </div>
                   </div>
                 </div>
@@ -480,10 +404,9 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class=" modalFooter">
-          <div class="text-end">
-            <div v-if="isVisible === 'panel1'">
+        </template>
+        <template v-slot:footer>
+          <div v-if="isVisible === 'panel1'">
               <a
                 v-if="index != '0'"
                 class="btn btnNaranja "
@@ -500,12 +423,8 @@
                 <i class="ni ni-bold-left"></i> &nbsp; Vulver
               </a>
             </div>
-          
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </template>
+     </ScrimModal>
 </template>
 
 <script src="./EnlistarParalelo.js"></script>

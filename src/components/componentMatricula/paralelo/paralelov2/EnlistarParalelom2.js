@@ -1,4 +1,4 @@
-
+import ScrimModal from "../../../../shared/ScrimModal"
 import Spinner from "../../../../shared/Spinner.vue";
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
@@ -9,7 +9,7 @@ const ResultServiceMatricula = new  ServiceMatricula();
 export default {
   name: "EslistarParalelom2",
   components: {
-   
+    ScrimModal,
     Spinner
   },
   data() {
@@ -153,6 +153,9 @@ export default {
       this.isClick = false;
       this.isSelecCurosos = [];
       this.model.curso = '';
+    },
+    close(){
+      this.$emit('myEventClosedModalParalelo2');
     },
     remove() {
       //METODO PARA ELIMINAR  RO

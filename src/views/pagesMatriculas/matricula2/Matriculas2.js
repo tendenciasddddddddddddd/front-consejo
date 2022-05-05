@@ -39,7 +39,7 @@ export default {
           id: "0",
           nombre: "Matricular",
           img: images[0],
-          description: "Puedes crear nueva matricula cuando actives un nuevo, periodo la matricula es unica por cada estudiante",
+          description: "Puedes crear nueva matricula, la matricula es unica por cada estudiante",
         },
         {
           id: "1",

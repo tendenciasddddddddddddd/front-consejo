@@ -9,18 +9,12 @@
         <Spinner v-if="isLoading"></Spinner>
         <div v-else>
           <div class="table-responsive mt-1" v-if="viewtable === 1">
-            <table
-              class="table table-flush "
-              id="datatable-basic"
-              style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
-            >
+            <table class="dataTable-table table s-table-flush" >
               <thead class="thead-light">
-                <tr
-                  style="background-color: rgb(245, 248, 250); border-color: rgb(223, 227, 235);border-style: solid;border-width: 1px 0px 0px;"
-                >
+                <tr class="cabeza">
                   <th
                     style="background-color: rgb(234, 240, 246); ">
-                   <div v-if="!isSearch" class="d-flex ">
+                   <div v-if="!isSearch" class="d-flex ms-3">
                       <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
                         <input
                           class="form-check-input cheka"
@@ -28,7 +22,7 @@
                           @click="selectAll"
                         />
                       </div>
-                       <i @click="deletedSelected" v-else style="border: 2px solid; color: rgb(0, 164, 189); height: 19px; width: 19px; border-radius: 3px; cursor: pointer;" class="fa fa-minus" aria-hidden="true"></i>
+                       <i @click="deletedSelected" v-else  class="fa fa-minus s-icon-all" aria-hidden="true"></i>
                       <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
                         Nombres
                       </span>

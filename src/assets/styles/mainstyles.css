@@ -423,7 +423,7 @@ div#bg {
 }
 .marco:hover{
     box-shadow: 0 10px 50px -5px rgb(51 71 91 / 12%)!important;
-    transform: scale(1.014)i !important;
+    transform: scale(1.014) !important;
 }
 .fondoazul{
   border-radius: 20%;
@@ -1235,7 +1235,7 @@ body.modal-open {
       transform:  scale(1.075, 1.02);
   }
   .intro_cards .intro_cards_container {
-    max-width: 1024px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   @media screen and (max-width: 845px){
@@ -1259,6 +1259,9 @@ body.modal-open {
     /* transition effect. not necessary */
     transition: opacity .2s, visibility .2s;
   }
+  .s-centers{
+    margin-top: 31% !important;
+  }
   .intro_cards .intro_card_container {
     padding-left: 10px;
     padding-right: 10px;
@@ -1276,8 +1279,8 @@ body.modal-open {
   }
   .intro_cards .carmen {
     z-index: 2;
-     min-height: 270px;
-    padding: 30px 18px 0;
+     min-height: 230px;
+     padding: 25px 10px 0;
     position: relative;
     transition-property: all;
     transition-duration: 170ms;
@@ -1293,7 +1296,7 @@ body.modal-open {
   .intro_cards .card_image {
       width: auto;
       height: 70px;
-      margin: 0 auto 10px;
+      margin: 0 auto 7px;
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center center;
@@ -1355,9 +1358,9 @@ body.modal-open {
 .card-template {
   position: relative;
   background: white;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   border: 1px solid #ecf0f3;
-  width: 205px;
+  width: 200px;
   margin-left: 15px !important;
   max-height: 250px;
    margin-bottom: 20px;
@@ -1410,8 +1413,8 @@ body.modal-open {
   text-align: center;
 }
 .s-py-3 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .s-px-2 {
   padding-left: 1rem;
@@ -1422,4 +1425,17 @@ body.modal-open {
 }
 .s-title-page {
   font-weight: 700;color:#181B32; font-size: 16px;
+}
+.s-table-flush {
+  border-color: rgb(223, 227, 235) !important;
+  border-style: solid;
+  border-width: 0px 1px 1px; 
+  border-top: 1px solid rgb(223, 227, 235);
+}
+.s-icon-all{
+  border: 2px solid; 
+  color: rgb(0, 164, 189); 
+  height: 19px; width: 19px; 
+  border-radius: 3px; 
+  cursor: pointer;
 }

@@ -6,85 +6,8 @@
     ></AlertHeader>
       <p class="parrafo mt-3"> Crea nuevos periodos, uno por cada modalidad y elimina periodos del periodo.
       </p>
-        <div class="mt-2">
-          <div class="row ">
-            <div class="col-lg-3">
-              <div class="input-group">
-                <span class="input-group-text text-body buscador"
-                  ><i class="fas fa-search" aria-hidden="true"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control buscador text-sm"
-                  placeholder="Buscar"
-                />
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <a
-                @click="gets()"
-                role="button"
-                class="fuente tamanio"
-                :class="{ disabled: isSelecUsers.length != 1 }"
-                 v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar un fila para poder editar'
-              "
-              >
-                <i class="fas fa-pencil-alt me-2 ms-3 iconos"></i>
-                <b class="me-4 " :class="{ links: isSelecUsers.length === 1 }"
-                  >Editar</b
-                >
-              </a>
-              <a
-               v-on="isSelecUsers.length ? { click: () => remove() } : {}"
-                role="button"
-                class="fuente tamanio"
-                :class="{ disabled: isSelecUsers.length === 0 }"
-                v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar una o muchas filas para eliminar'
-              "
-              >
-                <i class="far fa-trash-alt me-2 iconos"></i>
-                <b class="me-4 fuente" :class="{ links: isSelecUsers.length != 0 }"
-                  >Eliminar periodos</b
-                >
-              </a>
-               <a
-              @click="desactiveState"
-              role="button"
-              class="fuente tamanio"
-              :class="{ disabled: isSelecUsers.length != 1 }"
-              v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar un fila para poder desactivar'
-              "
-            >
-              <i class="fas fa-sync me-2  iconos"></i>
-             
-              <b :class="{ links: isSelecUsers.length === 1 }"
-                >Cambiar estado</b
-              >
-            </a>
-            </div>
-            <div class="col-lg-3">
-              <div class="d-flex justify-content-end mb-3">
-                <button
-                  class="btn btn-sm btnNaranja"
-                  @click="openModal"
-                
-                >
-                  Crear periodo
-                </button>
-               
-              </div>
-            </div>
-          </div>
-        </div>
+        <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets" @desactiveState="desactiveState" />
+       
         <Spinner v-if="isLoading"></Spinner>
         <div v-else class="table-responsive mt-1">
           <table

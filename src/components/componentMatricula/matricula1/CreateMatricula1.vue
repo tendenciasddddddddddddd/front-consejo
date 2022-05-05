@@ -1,91 +1,11 @@
 <template>
-  <div>
-    <div
-      class="fixed-plugin"
-      :class="{ 'show w-100': tab === 'init1' }"
-      style="   
-   "
-    >
-      <a
-        @click="tab = 'init1'"
-        class="fixed-plugin-button text-dark position-fixed px-3 py-2"
-        style="background-color: rgb(14, 114, 237);"
-      >
-        <i class="fa fa-cog py-2 text-white"> </i>
-      </a>
-      <div
-        class="card shadow-lg  desplega "
-        :class="{ 'w-100': tab === 'init1' }"
-        style="overflow-y: auto; z-index: 9999;
-    "
-      >
-        <div
-          class=""
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
-         padding: 4px 25px 4px 40px;background-color: #253342;"
-        >
-          <div class="d-flex justify-content-between">
-            <div class="h5 text-white">
-              ...
-            </div>
-            <div>
-              <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
-                Registrar matriculas
-              </h5>
-            </div>
-            <div class="mt-2">
-              <button
-                @click="$emit('myEventClosedModalMatricula')"
-                class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 172 172"
-                  style=" fill:#000000;"
-                >
-                  <g
-                    fill="none"
-                    fill-rule="nonzero"
-                    stroke="none"
-                    stroke-width="1"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                    stroke-miterlimit="10"
-                    stroke-dasharray=""
-                    stroke-dashoffset="0"
-                    font-family="none"
-                    font-weight="none"
-                    font-size="none"
-                    text-anchor="none"
-                    style="mix-blend-mode: normal"
-                  >
-                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                    <g fill="#ffffff">
-                      <path
-                        d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <!-- End Toggle Button -->
-        </div>
-
-        <div
-          class="card-body pt-sm-3 pt-0"
-          style="overflow-y: auto;height: auto;"
-        >
-          <!-- Sidebar Backgrounds -->
-          <div class="row">
+    <ScrimModal @close="close">
+        <template v-slot:header> Registrar matriculas en las modalidades disponibles</template>
+         <template v-slot:body>
+            <div class="row">
             <div class="col-lg-11 col-12 mx-auto">
               <div
-                v-if="visible == 'uno'"
+              
                 class="d-flex justify-content-center"
                 style="border: 1px solid #ecf0f3;"
               >
@@ -130,7 +50,7 @@
                         :key="item._id"
                       >
                         <div
-                          class="d-flex ms-1 mt-3 animate__animated animate__fadeInUp list-decoration"
+                          class="d-flex ms-1 mb-3 animate__animated animate__fadeInUp list-decoration"
                           :class="[`animations-${index}`]"
                           @click="selectUser(item)"
                           style="cursor: pointer;"
@@ -197,23 +117,7 @@
                         <Spinner v-if="isLoading2"></Spinner>
                         <div v-else class="col-12 ">
                           <a class="parrafo mt-4">A que cursos</a>
-                          <v-select
-                            :class="{
-                              error: validation.hasError('model.fknivel'),
-                            }"
-                            :options.sync="listniveles"
-                            label="nombres"
-                            class="style-chooser"
-                            v-model="model.fknivel"
-                            required
-                          >
-                            <template #option="{ nombres }">
-                              <h6 style="margin: 0">{{ nombres }}</h6>
-                            </template>
-                            <template #no-options="{ }">
-                              Lo siento, no hay opciones de coincidencia.
-                            </template>
-                          </v-select>
+                           <Dropdown  v-model="model.fknivel"  :options="listniveles"/>
                           <p class="mb-0 text-sm text-danger">
                             {{ validation.firstError("model.fknivel") }}
                           </p>
@@ -221,23 +125,7 @@
                           <Spinner v-if="isLoading1"></Spinner>
                         <div v-else class="col-12 mt-2">
                           <span class="parrafo">A que período</span>
-                          <v-select
-                            :class="{
-                              error: validation.hasError('model.academico'),
-                            }"
-                            :options.sync="listPeriodo"
-                            label="nombre"
-                            class="style-chooser"
-                            v-model="model.academico"
-                            required
-                          >
-                            <template #option="{ nombre }">
-                              <h6 style="margin: 0">{{ nombre }}</h6>
-                            </template>
-                            <template #no-options="{ }">
-                              Lo siento, no hay opciones de coincidencia.
-                            </template>
-                          </v-select>
+                            <Dropdown  v-model="model.academico"  :options="listPeriodo"/>
                           <p class="mb-0 text-sm text-danger">
                             {{ validation.firstError("model.academico") }}
                           </p>
@@ -249,13 +137,10 @@
                       </div>
                      
                     </div>
-                    <div
-                      v-if="isSelecUsers.length"
-                      class="  p-3 "
-                    >
+                    <div v-if="isSelecUsers.length || isDuplicado" class=" p-3 ">
                      <div class="mola">
-                          <div
-                        v-if="isDuplicado"
+                      <div
+                        v-if="isDuplicado "
                         class="mt-4 alerta"
                         style=" padding:7px;  border-color: #7fd1de; border-style: solid; border-width: 1px; text-align: left;"
                       >
@@ -308,7 +193,6 @@
                               </svg>
                             </button>
                           </div>
-
                           <v-select
                             class="mt-3"
                             v-model="objetosRechasados"
@@ -363,26 +247,11 @@
               </div>
             </div>
           </div>
-
-          <!-- Navbar Fixed -->
-        </div>
-        <div class="modalFooter">
-          <div class="text-end">
-            <a v-if="!isComplete" class="btn btnDisabled">Guardar</a>
+         </template>
+        <template v-slot:footer>
+               <a v-if="!isComplete" class="btn btnDisabled">Guardar</a>
             <template v-else>
-              <button
-                v-if="ifLoad"
-                class="btn btn-sm btnNaranja"
-                type="button"
-                disabled
-              >
-                <span
-                  class="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Enviando...
-              </button>
+               <ButtonLoading v-if="ifLoad"/>
               <button
                 v-else
                 type="submit"
@@ -392,11 +261,8 @@
                 Guardar
               </button>
             </template>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+         </template>
+    </ScrimModal>
 </template>
 
 <script src="./CreateMatricula1.js"></script>

@@ -1,10 +1,11 @@
 import Spinner from "../../../shared/Spinner.vue";
+import ScrimModal from "../../../shared/ScrimModal"
 import html2pdf from 'html2pdf.js'
 import RestResource from "../../../service/isAdmin";
 const restResourceService = new RestResource();
 export default{
     name: 'Report',
-    components: {Spinner},
+    components: {Spinner, ScrimModal},
     data() {
         return {
             tab: "inicio",
@@ -86,6 +87,9 @@ export default{
                 console.log("Error", err);
                 this.isTabla = false;
               });
+          },
+          close(){
+            this.$emit('myEventClosedModalReporte');
           },
           
        /////////////////////////////////////REPORTES////////////////////////////////

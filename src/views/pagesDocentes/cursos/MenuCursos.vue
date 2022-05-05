@@ -95,8 +95,7 @@
             </div>
               </div>
             </div>
-         
-           <!-- <hr class="horizontal dark " style="margin: 0.5rem 0;"> -->
+
           <div v-if="displayedArticles.length">
             <section class="flex-containes2 mt-3">
               <div
@@ -106,15 +105,14 @@
                 style="cursor: pointer;"
               >
                 <div class=" text-center"  v-bind:style="{'background':colorsh[index]}">
-                    <!-- <span style="height: 130px;" class="mask bg-gradient-dark"></span> -->
 
                    <div class="d-flex justify-content-center">
                        <img class="w-30 s-header-img"
                     src="../../../assets/img/teams/0.svg"
                     alt="rover"
                   />
-                  <span class="text-white mt-4 ms-3 fuente s-texo-description" > {{ item.fnivel.nombres.split(' ')[0] }} {{ item.fnivel.nombres.split(' ')[1] }}
-                    <br/> {{ item.fnivel.nombres.split(' ')[2] }}</span>
+                  <span class="text-white mt-4 ms-3 fuente s-texo-description" > {{ item.fmateria.nombre.split(' ')[0] }} {{ item.fmateria.nombre.split(' ')[1] }}
+                    <br/> {{ item.fmateria.nombre.split(' ')[2] }}</span>
                    </div>
                  
                 </div>
@@ -123,11 +121,11 @@
                 
                   <span class="tag fuente" v-bind:class="[item.nombre == 'Extraordinaria'? 'tag-purple' : '', 'tag-teal']"> {{ item.nombre }}</span>
                  
-                  <span class="cardTitle fuente" style="font-size: 17px;">
-                    {{ item.fnivel.nombres }}
+                  <span class="cardTitle fuente mt-2" style="font-size: 17px;">
+                    {{ item.fnivel.nombre }}
                   </span>
                   <p class="text-xs  fuente mt-2" style="color: #516f90 !important;">
-                    Materia de {{ item.fmateria.nombre }} / Paralelo {{ item.paralelo }}
+                     {{ item.fmateria.nombre }} / Paralelo {{ item.paralelo }}
                   </p>
                   
                 </div>
@@ -154,49 +152,6 @@
         </div>
       </div>
      
-        <!-- <div class=" fdYSBu">
-          <div class="itemActive w-100">
-            <span class=" text-dark">
-              Modalidades
-            </span>
-          </div>
-
-          <div class="d-flex ms-3 mt-4">
-            <div class="form-check my-auto supcheka">
-              <input class="form-check-input cheka" checked type="checkbox" />
-            </div>
-
-            <a class="mb-0 ms-3 text-sm colorestabla fuente">
-              Todo
-            </a>
-          </div>
-          <div class="d-flex ms-3 mt-3">
-            <div class="form-check my-auto supcheka">
-              <input class="form-check-input cheka" type="checkbox" />
-            </div>
-
-            <a class="mb-0 ms-3 text-sm colorestabla fuente">
-              Intensivo
-            </a>
-          </div>
-          <div class="d-flex ms-3 mt-3">
-            <div class="form-check my-auto supcheka">
-              <input class="form-check-input cheka" type="checkbox" />
-            </div>
-
-            <a class="mb-0 ms-3 text-sm colorestabla fuente">
-              Extraordinario
-            </a>
-          </div>
-          <div class="itemActive w-100 mt-5">
-            <span class=" text-dark">
-              Otros
-            </span>
-          </div>
-          <div class="d-flex ms-3 mt-2">
-            <a class="tamanio links fuente"> <b>Solicitar nuevo</b> </a>
-          </div>
-        </div> -->
        <div
       class="modal fade "
       :class="{ 'show ': modals === true }"
@@ -290,20 +245,6 @@
               </div>
             </section>
           </div>
-           <!-- :to="{
-                  name: 'asistencia',
-                  params: {
-                    id: info.fnivel._id,
-                    paralelo: info.paralelo,
-                    nombre: info.nombre,
-                    materia: info.fmateria.nombre,
-                  },
-                  props: {
-                    paralelo: info.paralelo,
-                    nombre: info.nombre,
-                    materia: info.fmateria.nombre,
-                  },
-                }" -->
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ import AlertHeader from "../../../shared/AlertHeader.vue";
 import CustomInput from "../../../shared/CustomInput.vue";
 import ButtonLoading from "../../../shared/ButtonLoading.vue";
 import Paginate2 from "../../../shared/Paginate2.vue";
+import ActionsRow from "../../../shared/ActionsRow.vue";
 export default {
   name: "Materias",
   components: {
@@ -15,7 +16,7 @@ export default {
     AlertHeader,
     CustomInput,
     ButtonLoading,
-    Paginate2,
+    Paginate2,ActionsRow,
     Modal: () =>
       import(/* webpackChunkName: "Modal" */ "../../../shared/Modal.vue"),
   },
@@ -69,9 +70,7 @@ export default {
           this.isLoading = false;
         });
     },
-    onPageChange(page) {
-      this.getAll(page, 6);
-    },
+  
     save() {
       this.isSelecUsers = [];
       this.$validate().then((success) => {
@@ -135,6 +134,12 @@ export default {
       } else {
         this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
       }
+    },
+    changedQuery(num) {
+      this.getAll(1, num);
+    },
+    onPageChange(page) {
+      this.getAll(page, 6);
     },
     remove() {
       let message = {
@@ -214,7 +219,7 @@ export default {
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "top-right",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {
@@ -237,7 +242,7 @@ export default {
     close() {
       this.visible = false;
     },
-
+  
     
     verificarUsuario() {
       if (!restResourceService.admin(this.roles)) {

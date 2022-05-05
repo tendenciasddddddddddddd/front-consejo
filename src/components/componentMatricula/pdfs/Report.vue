@@ -1,78 +1,8 @@
 <template>
-  <div>
-    <!--  @input="checkExist($event)" -->
-
-    <div class="fixed-plugin" :class="{ 'show w-100': tab === 'inicio' }">
-      <div
-        class="card shadow-lg blur desplega"
-        :class="{ 'w-100': tab === 'inicio' }"
-        style="overflow-y: auto;  z-index: 9999; "
-      >
-        <div
-          class=""
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
-         padding: 4px 25px 4px 40px;background-color: #253342;"
-        >
-          <div class="row">
-            <div class="col-lg-10">
-              <h5
-                style="font-weight: 400"
-                class="mt-2 ms-5 mb-0 fuente text-white "
-              >
-                Imprimir reporte de la matricula
-              </h5>
-            </div>
-            <div class="col-lg-2">
-              <div class="text-end mt-2">
-                  <button
-                @click="$emit('myEventClosedModalReporte')"
-                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-                >
-                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    x="0px"
-                    y="0px"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 172 172"
-                    style=" fill:#000000;"
-                  >
-                    <g
-                      fill="none"
-                      fill-rule="nonzero"
-                      stroke="none"
-                      stroke-width="1"
-                      stroke-linecap="butt"
-                      stroke-linejoin="miter"
-                      stroke-miterlimit="10"
-                      stroke-dasharray=""
-                      stroke-dashoffset="0"
-                      font-family="none"
-                      font-weight="none"
-                      font-size="none"
-                      text-anchor="none"
-                      style="mix-blend-mode: normal"
-                    >
-                      <path d="M0,172v-172h172v172z" fill="none"></path>
-                      <g fill="#ffffff">
-                        <path
-                          d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
-                        ></path>
-                      </g>
-                    </g>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- End Toggle Button -->
-        </div>
-
-        <div
-          class="card-body pt-sm-3 pt-0"
-          style="overflow-y: auto;height: auto;"
-        >
-          <div class="row">
+      <ScrimModal @close="close">
+         <template v-slot:header>   Imprimir reporte de la matricula</template>
+          <template v-slot:body>
+             <div class="row">
          
             <Spinner v-if="isLoading1"></Spinner>
             <div v-else class="col-lg-9 col-12 mx-auto">
@@ -114,7 +44,7 @@
                         </div>
                       </div>
                       <div>
-                        <p class="parrafo text-center mt-2">Nivel / Curso <br> <span class="cardSubTitle">{{ item.nombres.slice(0, 23) }}</span> </p>
+                        <p class="parrafo text-center mt-2">Nivel / Curso <br> <span class="cardSubTitle">{{ item.nombre.slice(0, 23) }}</span> </p>
                         
                       </div>
                     </a>
@@ -122,7 +52,7 @@
                  </div>
                </section>
                    
-                 
+                
                 </div>
                 <div class="row " v-if="tabbs === '2'">
                   <section  class="flex-containes mt-2">
@@ -143,7 +73,7 @@
                         </div>
                       </div>
                       <div>
-                        <p class="parrafo text-center mt-2">Nivel / Curso <br> <span class="cardSubTitle">{{ item.nombres.slice(0, 23) }}</span> </p>
+                        <p class="parrafo text-center mt-2">Nivel / Curso <br> <span class="cardSubTitle">{{ item.nombre.slice(0, 23) }}</span> </p>
                         
                       </div>
                     </a>
@@ -155,21 +85,22 @@
               </div>
 
               <div class="row" v-if="isVisible === 'pa3'">
-                <div class="mt-4">
+                <div class="mt-2">
                    <a
                     @click="isVisible = 'pa1'"
                     class="btn btn-sm"
-                    style="box-shadow: none"
+                     style="box-shadow: none; padding: 0.5rem 0em !important;"
                   >
                     <img
                       height="23px"
                       src="../../../assets/img/usados/regresar.png"
                     />
+                   &nbsp;&nbsp; Regresar
                   </a>
 
                 </div>
                 <Spinner v-if="isTabla"></Spinner>
-                <div v-else class="table-responsive mt-4">
+                <div v-else class="table-responsive mt-2">
                    <div v-if="!infoMat.length" class="row mt-5">
                       <div class="col-lg-9 col-12 mx-auto">
                         <div class="text-center">
@@ -223,24 +154,29 @@
                               aria-hidden="true"
                             ></i>
                           </a>
-                          <!-- <a
-                            class="text-primary link text-gradient px-3 mb-0 "
-                            style="cursor: pointer;"
-                            @click="remove(item._id)"
-                            title="Eliminar"
-                          >
-                            <i class="far fa-trash-alt me-2" aria-hidden="true">
-                            </i>
-                          </a> -->
+                       
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                  <!--  <Paginacion :paging="p => getAll(p)" :page="pagina" :pages="paginas"/> -->
+               
                 </div>
               </div>
               <div class="row" v-if="isVisible === 'pa4'">
-               
+                    <div class="mt-2">
+                   <a
+                    @click="isVisible = 'pa3'"
+                    class="btn btn-sm"
+                    style="box-shadow: none; padding: 0.5rem 0em !important;"
+                  >
+                    <img
+                      height="23px"
+                      src="../../../assets/img/usados/regresar.png"
+                    />
+                   &nbsp;&nbsp; Regresar
+                  </a>
+
+                </div>
                 <Spinner v-if="isdescarga"></Spinner>
                 <div v-else style="border: 1px solid black;">
                   <div id="root" class="my-sm-5">
@@ -311,7 +247,7 @@
                           <br />
                           <p class="h6 text-dark text-center">
                             Previo los requisitos legales se matriculó en
-                            {{ info.fknivel.nombres }}
+                            {{ info.fknivel.nombre }}
                           </p>
                           <p style="margin-top:-10px" class="h6 text-center">
                             &nbsp;&nbsp;&nbsp;&nbsp; SUPERIOR con Matricula No.
@@ -345,10 +281,9 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class=" modalFooter">
-          <div class="text-end">
-            <div v-if="isVisible === 'pa1'">
+          </template>
+           <template v-slot:footer>
+                <div v-if="isVisible === 'pa1'">
               <a class="btn btnNaranja " v-if="index != '0'" @click="verLista()">
                 Siguiente &nbsp; <i class="ni ni-bold-right"></i>
               </a>
@@ -376,11 +311,8 @@
                 Descargar
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+           </template>
+      </ScrimModal>
 </template>
 
 <script src="./Report.js"></script>

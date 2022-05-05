@@ -80,7 +80,7 @@ Vue.component('v-popover', VPopover)
 VTooltip.options.autoHide = false
 
 const gauthOption = {
-  clientId: '653128368761-qd0t66rj1at5ajoprmh8iv89fbnvkchs.apps.googleusercontent.com',
+  clientId: '776329604046-ftt9eq502a2soskkg2geecdrnspmenl3.apps.googleusercontent.com',
   scope: 'profile email',
   prompt: 'consent',
   fetch_basic_profile : true,

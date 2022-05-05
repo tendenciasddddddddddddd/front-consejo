@@ -1,5 +1,8 @@
 import Spinner from "../../../shared/Spinner";
 import IsSelect from '../../../shared/IsSelect'
+import ScrimModal from "../../../shared/ScrimModal"
+import ButtonLoading from "../../../shared/ButtonLoading.vue";
+import Dropdown from "../../../shared/Dropdown.vue";
 import ServiceMatricula from './ServiceMatriculas';
 const ResultServiceMatricula = new  ServiceMatricula();
 import RestResource from "../../../service/isAdmin";
@@ -7,7 +10,7 @@ const restResourceService = new RestResource();
 export default {
   name: "CreateMatricula",
   components: {
-    Spinner,IsSelect
+    Spinner,IsSelect, ScrimModal, ButtonLoading, Dropdown
   },
   props:{
     modalidad:{
@@ -16,14 +19,12 @@ export default {
   },
   data() {
     return {
-      tab: "init1",
-      visible: 'uno',
       isModalidad: this.modalidad,
       roles: this.$store.state.user.roles,
       searchQuery: '',
       isDuplicado : false,
-      listniveles: null,
-      listPeriodo: null,
+      listniveles: {},
+      listPeriodo: {},
       isLoading: false,
       isLoading1: false,
       isLoading2: false,
@@ -118,7 +119,9 @@ export default {
     fechaActual(){
       this.fecha = ResultServiceMatricula.calcular_fecha();
     },
-    
+    close(){
+      this.$emit('myEventClosedModalMatricula');
+    },
     __limpiarCampos(){
       this.model.fknivel = null;
       this.model.academico = null;
@@ -163,9 +166,7 @@ export default {
              this.ifLoad = false;
              this.toast('Se matriculo correctamente a '+ this.arraysMatricula.length + ' estudiantes')
              this.objetosRechasados = res.data.duplicados;
-             if (this.objetosRechasados.length!=0) {
-              this.isDuplicado = true;
-             }
+             if (this.objetosRechasados.length!=0) this.isDuplicado = true;
              this. __limpiarCampos();
            
            })
@@ -182,6 +183,11 @@ export default {
     selectUser(objeto){
       let longitud = this.isSelecUsers.length;
       let isExiste = 0;
+      if (this.isDuplicado) {
+        this.isDuplicado = false;
+        this.isSelecUsers = [];
+        this.objetosRechasados = []
+      }
       if(longitud>0){
          for (let i = 0; i < this.isSelecUsers.length; i++) {
             if(this.isSelecUsers[i].id==objeto._id){
@@ -209,7 +215,7 @@ export default {
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "bottom-center",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {

@@ -3,6 +3,7 @@ import Spinner from "../../../shared/Spinner";
 import CustomInput from "../../../shared/CustomInput.vue";
 import ButtonLoading from "../../../shared/ButtonLoading.vue";
 import Paginate2 from "../../../shared/Paginate2.vue";
+import ActionsRow from "../../../shared/ActionsRow.vue";
 export default {
     name: 'Materias',
     components: {
@@ -10,7 +11,7 @@ export default {
       AlertHeader,
       CustomInput,
       ButtonLoading,
-      Paginate2,
+      Paginate2,ActionsRow,
       Modal: () =>
         import(/* webpackChunkName: "Modal" */ "../../../shared/Modal.vue"),
     },
@@ -36,6 +37,7 @@ export default {
            iseliminaddo : false,
            isCarga: false,
            visible: false,
+           allSelected: false,
         }
     },
     methods: {
@@ -56,6 +58,9 @@ export default {
                 console.log("Error imposible");
                 this.isLoading = false;
               });
+          },
+          changedQuery(num) {
+            this.getAll(1, num);
           },
           onPageChange(page) {
             this.getAll(page, 6);
@@ -122,6 +127,19 @@ export default {
               this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
             }
           },
+          selectAll: function() {
+            this.allSelected= true;
+            this.userIds = [];
+            if (this.allSelected) {
+              for (let user in this.info) {
+                this.isSelecUsers.push(this.info[user]._id);
+              }
+            } 
+          },
+          deletedSelected: function() {
+            this.allSelected= false;
+            this.isSelecUsers = [];
+          },
           remove() {
             let message = {
               title: "¿Destruir registro?",
@@ -151,7 +169,7 @@ export default {
                 .removeMaterias(this.isSelecUsers)
                 .then(() => {
                   this.iseliminaddo = false;
-                  this.isSelecUsers = [];
+                  this.deletedSelected();
                   this.getAll(this.pagina, 6);
                 })
                 .catch(() => {

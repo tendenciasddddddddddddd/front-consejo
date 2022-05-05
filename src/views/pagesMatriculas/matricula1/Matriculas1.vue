@@ -22,11 +22,7 @@
             <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
               <CardsOptions :index="i"  :img="item.img" :nombre="item.nombre" :description="item.description" @optionsFuntions="optionsView"></CardsOptions>
             </div>
-            <div class="intro_card_container" >
-               <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
-                  <i class='bx bx-folder-plus p-5' style="font-size:60px;color:black;"></i>
-              </div>
-            </div>
+           
             <div class="intro_card_container" >
                <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
                   <i class='bx bx-folder-plus p-5' style="font-size:60px;color:black;"></i>
@@ -54,6 +50,11 @@
             @myEventClosedModalMigracion1="closedChildMigracion"
             :idGet="mod"
           ></MigracionMatricula>
+        </div>
+          <div v-if="ifMigracion2">
+          <MigrationnList
+            @myEventClosedModalMigracion2="closedChildMigracionList"
+          ></MigrationnList>
         </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  fixed-start " id="sidenav-main" style="background-color: white !important; margin-top: 2.2rem!important;overflow-x: hidden;overflow-y: auto;" >
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  fixed-start croll" id="sidenav-main" style="background-color: white !important; margin-top: 2.2rem!important;overflow-x: hidden;overflow-y: auto;" >
     <div class="sidenav-header">
      
       

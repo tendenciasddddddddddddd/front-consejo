@@ -76,10 +76,14 @@ export default class MatriculaProxi {
     }
 
 
-    //------------------------------------------------------GESTION DE Parroquia--------------------------------------
+    //------------------------------------------------------GESTION DE Reporte--------------------------------------
 
     getReporteEstud(id) {
-        return this.axios.get(this.url + `/matriculas/datas/${id}`);  //RUTA PARA [REPORTES,]
+        return this.axios.get(this.url + `/matriculas/datas/${id}`);  //RUTA PARA [REPORTES,] queryMatricula
+    }
+
+    async getQueryMatricula() {
+        return await this.axios.get(this.url + '/matriculas/queryMatricula');  
     }
 
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------

@@ -12,4 +12,8 @@ export default class MigracionProxi {
         return this.axios.delete(this.url + `/migracion/matricula?modalidad=${mod}`);
     }
 
+    getAll(page, take) {
+        return this.axios.get(this.url + `/migracion?page=${page}&take=${take}`);
+    }
+
 }

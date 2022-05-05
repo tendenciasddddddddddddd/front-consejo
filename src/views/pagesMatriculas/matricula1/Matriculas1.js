@@ -23,6 +23,10 @@ export default {
       import(
         /* webpackChunkName: "MigracionMatricula" */ "../../../components/componentMatricula/migracionMatricula/MigracionMatricula.vue"
       ),
+      MigrationnList: () =>
+      import(
+        /* webpackChunkName: "MigrationnList" */ "../../../components/componentMatricula/migracion/MigrationnList.vue"
+      ),
       CardsOptions
   },
   data() {
@@ -34,13 +38,14 @@ export default {
       ifRemoveMatricula: false,
       ifParalelo1: false,
       ifMigracion: false,
+      ifMigracion2: false,
       mod : 'm1',
       arrays_of_options: [
         {
           id: "0",
           nombre: "Matricular",
           img: images[0],
-          description: "Puedes crear nueva matricula cuando actives un nuevo, periodo la matricula es unica por cada estudiante",
+          description: "Puedes crear nueva matricula, la matricula es unica por cada estudiante",
         },
         {
           id: "1",
@@ -60,7 +65,12 @@ export default {
           img: images[3],
           description: "Le permite generar copias de las matriculas y tambien limpiar la data",
         },
-       
+        {
+          id: "4",
+          nombre: "Historial Matricula",
+          img: images[4],
+          description: "Le permite generar copias de las matriculas y tambien limpiar la data",
+        },
       ]
     };
   },
@@ -84,6 +94,9 @@ export default {
         case 3:
           this.ifMigracion = true;
           break;
+        case 4:
+          this.ifMigracion2 = true;
+          break;
         default:
           console.log("I don't own a pet");
           break;
@@ -100,6 +113,9 @@ export default {
     },
     closedChildMigracion: function() {
       this.ifMigracion = false;
+    },
+    closedChildMigracionList: function() {
+      this.ifMigracion2 = false;
     },
   },
   mounted() {

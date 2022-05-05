@@ -54,7 +54,74 @@
     <!-- End Navbar -->
     <div id="app"></div>
     <style>
-        body::-webkit-scrollbar {
+  body::-webkit-scrollbar {
+  width: 10px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #dfdfe8;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(255, 255, 255);  /* creates padding around scroll thumb */
+}
+
+
+.croll::-webkit-scrollbar {
+  width: 10px;   
+         /* width of the entire scrollbar */
+}
+
+.croll::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);        /* color of the tracking area */
+}
+
+.croll::-webkit-scrollbar-thumb {
+  background-color: #dfdfe8;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(255, 255, 255);  /* creates padding around scroll thumb */
+  visibility: hidden; 
+}
+.croll:hover::-webkit-scrollbar-thumb {
+  background-color: #dfdfe8;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(255, 255, 255);  /* creates padding around scroll thumb */
+  visibility: visible;    
+}
+/* body::-webkit-scrollbar {
+    width: 8px;    
+    height: 8px;   
+    display: none;  
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+body::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+body::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+}
+
+
+body::-webkit-scrollbar-track:hover,
+body::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+} */
+
+
+        /* body::-webkit-scrollbar {
         width: 0px !important;
       }
     ::-webkit-scrollbar {
@@ -63,9 +130,9 @@
     border-radius: 5px;
     transition: background-color .2s linear;
     width: 4px !important;
-    background: #dfdfe8;            /* width of the entire scrollbar */
+    background: #dfdfe8;            
     --thumb-color-hover: #c1c1d3;
-      }
+      } */
       .navbar {
     box-shadow: 0 2px 18px 0 rgb(195 203 214)!important;
      }
@@ -102,7 +169,7 @@
         transition: all 0.15s ease-out;
         color: #33475b;
         display: block;
-        height: 37px;
+        height: 36px;
         line-height: 22px;
         text-align: left;
         /* box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 7%), 0px 1px 1.5px 0px rgb(0 0 0 / 5%); */
@@ -339,7 +406,7 @@
       .modalFooter {
         background-color: #f5f8fa;
                    border-top: 1px solid #cbd6e2;
-                   padding: 13px
+                   padding: 8px
       }
       .selector {
         padding: 9px 10px !important;

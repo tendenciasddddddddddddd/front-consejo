@@ -1,79 +1,17 @@
 <template>
   <div>
-    <div class="fixed-plugin" :class="{ 'show w-100': tab === 'inicio' }">
-      <div
-        class="card desplega"
-        :class="{ 'w-100': tab === 'inicio' }"
-        style=" z-index: 9999; "
-      >
-      <div
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
-         padding: 4px 25px 4px 40px;background-color: #253342;"
-        >
-         <div class="d-flex justify-content-between">
-            <div class="h5 text-white">
-              ...
-            </div>
-            <div>
-              <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
-                Configurar alunmos con sus paralelos
-              </h5>
-            </div>
-            <div class="mt-2">
-             <button
-                @click="$emit('myEventClosedModalParalelo2')"
-                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-                >
-                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    x="0px"
-                    y="0px"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 172 172"
-                    style=" fill:#000000;"
-                  >
-                    <g
-                      fill="none"
-                      fill-rule="nonzero"
-                      stroke="none"
-                      stroke-width="1"
-                      stroke-linecap="butt"
-                      stroke-linejoin="miter"
-                      stroke-miterlimit="10"
-                      stroke-dasharray=""
-                      stroke-dashoffset="0"
-                      font-family="none"
-                      font-weight="none"
-                      font-size="none"
-                      text-anchor="none"
-                      style="mix-blend-mode: normal"
-                    >
-                      <path d="M0,172v-172h172v172z" fill="none"></path>
-                      <g fill="#ffffff">
-                        <path
-                          d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
-                        ></path>
-                      </g>
-                    </g>
-                  </svg>
-                </button>
-            </div>
-          </div>
-
-          <!-- End Toggle Button -->
-        </div>
-
-        <div class="card-body pt-sm-3 pt-0" style="overflow-y: auto;height: auto;">
-          <div class="row">
+     <ScrimModal @close="close">
+         <template v-slot:header> Asignar paralelos a Extraordinaria</template>
+        <template v-slot:body>
+             <div class="row">
               
-            <div class="col-lg-9 col-12 mx-auto">
+            <div class="col-lg-11 col-12 mx-auto">
               <div class="row " v-if="isVisible === 'panel1'">
                 <div
                   class="h5 mt-2 fuente text-start ms-3"
                   style="font-weight: 400;"
                 >
-                  Selecciona los cursos para asignar el paralelo
+                  Selecciona los cursos 
                 </div>
                 <Spinner v-if="isLoading1"></Spinner>
                    <section v-else class="flex-containes2 mt-2">
@@ -81,15 +19,15 @@
                     v-for="(item, i) in listniveles"
                     :key="item.id"
                     type="button"
-                    @click="clicMe(item._id, item.nombres)"
+                    @click="clicMe(item._id, item.nombre)"
                     class="flex-none s-shadow s-pb-2 category-card s-center card-template s-py-3 s-px-2 s-decoration-none s-borderline-top animate__animated animate__fadeInUp"
                     href="javascript:;"
                     :class="[`s-borde-${i} animations-${i} `]"
                   >
                     <img class="img  s-mb-1 w-35" :src="arrays[i]" />
-                    <span class="s-span mt-1">Mostrar c..</span>
-                    <h6 class=" cardTitle text-start mt-1" style="font-size: 1rem;">
-                      Curso de {{ item.nombres }}
+                    <span class="s-span mt-1">Curso de...</span>
+                    <h6 class=" cardTitle text-start mt-1" style="font-size: 0.9rem;">
+                       {{ item.nombre }}
                     </h6>
                   </a>
                 </section>
@@ -100,7 +38,7 @@
                     <a
                     @click="regresar"
                     class="btn btn-sm me-3 "
-                    style="box-shadow: none;"
+                    style="box-shadow: none;padding: 0.5rem 0.5em !important;"
                   >
                     <img
                       height="18px"
@@ -119,7 +57,7 @@
                       class="tabss "
                       @click="__volverAsignacion()"
                       :class="{ 'tabsActive links': istabs == '1' }"
-                      >  E sin paralelo  </a
+                      >  No Pararlelo  </a
                     >
                     <a
                       class="tabss "
@@ -365,9 +303,8 @@
             </div>
            
           </div>
-        </div>
-         <div class=" modalFooter">
-          <div class="text-end">
+        </template>
+        <template v-slot:footer>
             <div v-if="isVisible === 'panel1'">
               <a
                 v-if="index != '0'"
@@ -385,11 +322,8 @@
                 <i class="ni ni-bold-left"></i> &nbsp; Vulver
               </a>
             </div>
-           
-          </div>
-        </div>
-      </div>
-    </div>
+        </template>
+     </ScrimModal>
   </div>
 </template>
 

@@ -2,82 +2,30 @@
     <div>
        <AlertHeader :firsttext="'Gestión'" :lasttext="'Ingresar materias'" ></AlertHeader>  
          <p class="parrafo mt-2">Crea nuevas asignaturas, edita y elimina segun sea necesario.</p>
-          <div class="row ">
-            <div class="col-lg-3">
-             <div class="input-group">
-            <span class="input-group-text text-body buscador"
-              ><i class="fas fa-search colorhs" aria-hidden="true"></i
-            ></span>
-            <input 
-              type="text"
-              class="form-control buscador"
-              placeholder="Buscar"
-            />
-          </div>
-            </div>
-             <div class="col-lg-7">
-              <a
-                @click="gets()"
-                role="button"
-                class="fuente tamanio"
-                :class="{ disabled: isSelecUsers.length != 1 }"
-                 v-tooltip.top-center="isSelecUsers.length ? '' : 'Seleccionar un fila para poder editar'"
-              >
-                <i class="fas fa-pencil-alt me-2 ms-3 iconos"></i>
-                <b class="me-4 " :class="{ links: isSelecUsers.length === 1 }"
-                  >Editar</b
-                >
-              </a>
-              <a
-                v-on="isSelecUsers.length ? { click: () => remove() } : {}"
-                role="button"
-                class="fuente tamanio"
-                :class="{ disabled: isSelecUsers.length === 0 }"
-                v-if="!iseliminaddo"
-                v-tooltip.top-center="isSelecUsers.length ? '' : 'Seleccionar una o muchas filas para eliminar'"
-              >
-                <i class="far fa-trash-alt me-2 iconos"></i>
-                <b class="me-2" :class="{ links: isSelecUsers.length != 0 }"
-                  >Eliminar materias</b
-                >
-              </a>
-               <a
-              @click="desactiveState"
-              role="button"
-              class="fuente tamanio"
-              :class="{ disabled: isSelecUsers.length != 1 }"
-              v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar un fila para poder desactivar'
-              "
-            >
-              <i class="fas fa-sync me-2 ms-3 iconos"></i>
-             
-              <b :class="{ links: isSelecUsers.length === 1 }"
-                >Cambiar estado</b
-              >
-            </a>
-            </div>
-            <div class="col-lg-2">
-              <div class="d-flex justify-content-end mb-3">
-               <a class="btn btn-sm btnNaranja" @click="openModal">
-                  Crear materia
-               </a>
-              </div>
-            </div>
-          </div>
+          <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets" @desactiveState="desactiveState" />
         <Spinner v-if="isLoading"></Spinner>
-        <div v-else class="table-responsive mt-2">
+        <div v-else class="table-responsive mt-1">
           <table class="table table-flush" 
           style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
             <thead class="thead-light">
               <tr class="cabeza">
-                <th style="background-color: rgb(234, 240, 246); "
-                  class="text-uppercase text-center text-xxs font-weight-bolder"
-                >
-                  Nombre
-                </th>
+                  <th
+                    style="background-color: rgb(234, 240, 246); ">
+                   <div  class="d-flex ">
+                      <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
+                        <input
+                          class="form-check-input cheka"
+                          type="checkbox"
+                          @click="selectAll"
+                        />
+                      </div>
+                       <i @click="deletedSelected" v-else style="border: 2px solid; color: rgb(0, 164, 189); height: 19px; width: 19px; border-radius: 3px; cursor: pointer;" class="fa fa-minus" aria-hidden="true"></i>
+                      <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                        Nombres
+                      </span>
+                    </div>
+                   
+                  </th>
                   <th
                   class="text-uppercase text-center text-xxs font-weight-bolder"
                 >
@@ -109,7 +57,6 @@
                         @click="selectUser(item._id)"
                       />
                     </div>
-
                     <a class="mb-0 ms-3 text-sm colorestabla fuente">
                       {{ item.nombre }}
                     </a>
@@ -127,12 +74,10 @@
                 <i v-else class="fa fa-times"></i>
               </span>
                 </td>
-
-                
               </tr>
             </tbody>
           </table>
-          <Paginate2 :numPages="paginas"  :page="pagina" :total="totalNotas" :subtitulo="subtitulo" @pagechanged="onPageChange"></Paginate2>
+          <Paginate2 :numPages="paginas"  :page="pagina" :total="totalNotas" :subtitulo="subtitulo" @pagechanged="onPageChange" @setChangedQuery="changedQuery"></Paginate2>
              <Modal v-show="visible" @close="close">
           <template v-slot:header> {{model._id ? "Editar materia" : "Añadir nueva materia"}}</template>
           <template v-slot:body>
@@ -167,5 +112,4 @@
         </div>
     </div>
 </template>
-
 <script src="./Materias.js"></script>

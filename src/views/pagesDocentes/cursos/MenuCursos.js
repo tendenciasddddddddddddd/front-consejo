@@ -1,6 +1,7 @@
 import RestResource from '../../../service/isAdmin'
 const restResourceService = new RestResource();
 import ProgressBar from '../../../shared/ProgressBar'
+const arrayColors = ['#0f71ae', '#1466c9', '#303d9d', '#53ab79', '#ba4d8e', '#1976d3', '#874197', '#00b6d3'];
 export default {
    name: 'MenuCursos',
    components:{
@@ -12,10 +13,7 @@ export default {
         user: this.$store.state.user,
         info: {},
         isData: false,
-       // imgs: img,
-        //imgs2: img2,
         searchQuery: '',
-         //Pagina 
        page: 1,
        perPage: 8,
        pages: [],
@@ -23,7 +21,7 @@ export default {
        modals: false,
        key: '',
        context: {},
-       colorsh:['#0f71ae', '#1466c9', '#303d9d', '#53ab79', '#ba4d8e', '#1976d3', '#874197', '#00b6d3'],
+       colorsh:[],
       imgs:[
         ''
       ]
@@ -51,7 +49,11 @@ export default {
       let from = (page * perPage) - perPage;
       let to = (page * perPage);
       this.numPages = Math.ceil(articles.length/8);
+      this.arrayShorthand();
       return articles.slice(from, to);
+  },
+  arrayShorthand: function(){
+    this.colorsh = arrayColors.sort(function() {return (Math.random()-0.5)});
   },
        getData(){
            this.isData = true;
@@ -95,8 +97,6 @@ export default {
            
            }
         }
-       
-      
       },
        verificarUsuario(){
         if(!restResourceService.docente(this.roles)){

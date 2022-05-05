@@ -150,6 +150,7 @@ export default {
           .remove(this.userIds)
           .then(() => {
             this.iseliminaddo = false;
+            this.allSelected = false;
             this.getAll(this.paginaActual, 6);
           })
           .catch(() => {
@@ -160,7 +161,7 @@ export default {
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "top-right",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {

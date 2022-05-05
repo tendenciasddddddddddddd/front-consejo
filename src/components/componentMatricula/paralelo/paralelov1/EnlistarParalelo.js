@@ -2,7 +2,7 @@ import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../../../shared/ProgressBar.vue";
 import Paginate from "../../../../shared/Paginate.vue";
-
+import ScrimModal from "../../../../shared/ScrimModal"
 import ServiceMatricula from "../../matricula1/ServiceMatriculas";
 const ResultServiceMatricula = new ServiceMatricula();
 
@@ -10,12 +10,11 @@ export default {
   name: "EslistarParalelo",
   components: {
     Spinner,
-    Paginate,
+    Paginate,ScrimModal
   },
   data() {
     return {
       roles: this.$store.state.user.roles,
-      tab: "inicio",
       isVisible: "panel1",
       tabla: "1",
       idds: null,
@@ -233,6 +232,7 @@ export default {
     regresar: function() {
       this.isVisible = "panel1";
       this.index = "0";
+      this.allSelected = false;
     },
     remove2() {
       //METODO PARA ELIMINAR  ROW
@@ -257,10 +257,13 @@ export default {
           });
       }
     },
+    close(){
+      this.$emit('myEventClosedModalParalelo1');
+    },
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "top-right",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {
