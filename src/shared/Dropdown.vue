@@ -1,6 +1,6 @@
 <template>
   <v-select
-    class="style-chooser"
+    class="style-chooser croll"
     placeholder="--Seleccionar items--"
     :options.sync="options"
     label="nombre"

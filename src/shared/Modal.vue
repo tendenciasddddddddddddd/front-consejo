@@ -15,7 +15,7 @@
                    CERRAR &nbsp; <i style="font-size: 12px" class="fa fa-close"></i>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body croll">
                    <slot name="body">  </slot>
                    <!-- BODY OF MODAL -->
                 </div>

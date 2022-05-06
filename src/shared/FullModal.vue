@@ -53,7 +53,7 @@
             </a>
           </div>
         </div>
-        <div class="card-body pt-sm-3 pt-0" style="overflow-y: auto;height: auto;">
+        <div class="card-body pt-sm-3 pt-0 croll" style="overflow-y: auto;height: auto;">
             <slot name="body">  </slot>
         </div>
         <div class="cord-footer modalFooter" >
