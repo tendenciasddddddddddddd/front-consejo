@@ -23,6 +23,10 @@ export default {
       import(
         /* webpackChunkName: "MigracionMatricula" */ "../../../components/componentMatricula/migracionMatricula/MigracionMatricula.vue"
       ),
+      MigrationnList: () =>
+      import(
+        /* webpackChunkName: "MigrationnList" */ "../../../components/componentMatricula/migracion/MigrationnList.vue"
+      ),
       CardsOptions
 },
   data() {
@@ -33,6 +37,7 @@ export default {
       ifRemoveMatricula: false,
       ifParalelo2: false,
       ifMigracion: false,
+      ifMigracion2: false,
       mod : 'm2',
       arrays_of_options: [
         {
@@ -59,7 +64,12 @@ export default {
           img: images[3],
           description: "Le permite generar copias de las matriculas y tambien limpiar la data",
         },
-       
+        {
+          id: "4",
+          nombre: "Historial Matricula",
+          img: images[4],
+          description: "Le permite revisar matriculas anteriores",
+        },
       ]
     };
   },
@@ -83,6 +93,9 @@ export default {
         case 3:
           this.ifMigracion = true;
           break;
+        case 4:
+            this.ifMigracion2 = true;
+            break;
         default:
           console.log("I don't own a pet");
           break;
@@ -100,6 +113,9 @@ export default {
     },
     closedChildMigracion: function() {
       this.ifMigracion = false;
+    },
+    closedChildMigracionList: function() {
+      this.ifMigracion2 = false;
     },
   },
   created() {

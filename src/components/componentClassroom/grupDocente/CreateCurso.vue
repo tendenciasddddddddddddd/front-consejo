@@ -82,12 +82,12 @@
                   v-else
                   :class="{ error: validation.hasError('model.nombre') }"
                   :options.sync="listniveles"
-                  label="nombres"
+                  label="nombre"
                   v-model="model.nombre"
                   required
                 >
-                  <template #option="{ nombres }">
-                    <h6 style="margin: 0">{{ nombres }}</h6>
+                  <template #option="{ nombre }">
+                    <h6 style="margin: 0">{{ nombre }}</h6>
                   </template>
                   <template #no-options="{ }">
                     Lo siento, no hay opciones de coincidencia.
@@ -281,7 +281,7 @@ export default {
             this.model.fecha = this.__calcularFecha();
             this.ifLoad = true;
             this.model.doc = this.fistname;
-            this.model.nombre = this.model.nombre.nombres
+            this.model.nombre = this.model.nombre.nombre
              this.$proxies._aulaProxi
               .create(this.model) //-----------EDITAR CON AXIOS
                .then(() => {

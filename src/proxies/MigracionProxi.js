@@ -15,5 +15,12 @@ export default class MigracionProxi {
     getAll(page, take) {
         return this.axios.get(this.url + `/migracion?page=${page}&take=${take}`);
     }
+    
+    async queryMatriculas(querys) {
+        return await this.axios.get(this.url + `/migracion/query?querys=${querys}`);
+    }
 
+    async getByIdOfCourseAndPeriod(periodoId, courseId) {
+        return await this.axios.get(this.url + `/migracion/search?periodoId=${periodoId}&courseId=${courseId}`);
+    }
 }

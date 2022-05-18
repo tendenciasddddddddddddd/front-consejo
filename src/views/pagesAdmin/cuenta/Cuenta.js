@@ -64,11 +64,13 @@ export default {
             this.MsmError = ""
             this.__limpiarCampos2();
             this.isContrasenia = false;
-            this.$router.push("/");
+            this.$emit('cerrarCuenta');
+            this.toast('Cambio de contraseñas exitoso');
           })
           .catch((x) => {
-            alert(x);
+            console.log(x);
             this.__limpiarCampos2();
+            this.$emit('cerrarCuenta')
             this.isLoading1 = false;
           });
       })
@@ -76,7 +78,7 @@ export default {
     toast(message) {
       this.$toasted.info(message, {
         duration: 2600,
-        position: "top-right",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {

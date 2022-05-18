@@ -1,11 +1,22 @@
-//const info = JSON.parse(localStorage.getItem("Xf"));
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 import ProgressBar from "../../../../shared/ProgressBar"; //
-
+import Modal from "../../../../shared/Modal";
+import ActionRowHeader from "../../../../shared/ActionRowHeader"
+import NoFound from "../../../../shared/NoFound"
+const arrayColors = [
+  "#0f71ae",
+  "#1466c9",
+  "#303d9d",
+  "#53ab79",
+  "#ba4d8e",
+  "#1976d3",
+  "#874197",
+  "#00b6d3",
+];
 export default {
   components: {
-    ProgressBar,
+    ProgressBar,  Modal, ActionRowHeader, NoFound,
     ListAllEstudiantes: () => import( /* webpackChunkName: "ListAllEstudiantes" */ "../../../../components/componentClassroom/grupDocente/ListAllEstudiantes"),
     CreateCurso: () => import( /* webpackChunkName: "CreateCurso" */ "../../../../components/componentClassroom/grupDocente/CreateCurso"),
   },
@@ -28,11 +39,12 @@ export default {
       page: 1,
       perPage: 8,
       pages: [],
-      numPages: null,
+      numPages: 0,
       active: false,
       //CHILD
       ifChildGroup: false,
       ifChildNew: false,
+      colorsh: [],
     };
   },
   computed: {
@@ -61,9 +73,20 @@ export default {
       let to = page * perPage;
       this.numPages = Math.ceil(articles.length / 8);
       this.isSelecUsers = [];
+      this.arrayShorthand();
       return articles.slice(from, to);
     },
-    //updateInfoDocentes(id)
+    onPageChange: function(page) {
+      this.page = page;
+    },
+    changeSearch : function(spech){
+      this.searchQuery = spech
+    },
+    arrayShorthand: function() {
+      this.colorsh = arrayColors.sort(function() {
+        return Math.random() - 0.5;
+      });
+    },
     getData() {
       this.isData = true;
       this.$Progress.start();
@@ -142,10 +165,9 @@ export default {
          
         });
     },
-    openModal: function(id){
+    openTask: function(id){
       this.key= id;
-      this.modals = true;
-     // document.body.classList.add("modal-open");
+      this.$router.push(`/task-config/${this.key}`)
     },
     cerrarModal(){
       this.key = '0';
@@ -153,7 +175,8 @@ export default {
      // document.body.classList.remove("modal-open");
     },
     //LISTA DE ESTUDIANTES
-    openChildGruopen: function(){
+    openChildGruopen: function(id){
+      this.key= id;
       this.ifChildGroup= true;
     },
     closedChildGruopen: function(){

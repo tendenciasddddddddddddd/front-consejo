@@ -136,7 +136,7 @@ export default {
   },
   methods: {
     afterComplete(upload) {
-      if (!/\.(csv)$/i.test(upload.name)) {
+      if (!/\.(txt)$/i.test(upload.name)) {
         this.isError =
           "Este archivo no es TXT. Solo admite cargar archivos TXT.";
         this.removeAllFiles();
@@ -277,6 +277,10 @@ export default {
             this.ifmostrarRechasados = true;
           })
           .catch((error) => {
+            this.ifOcultar = false;
+              this.isData = [];
+            this.ifmostrarRechasados = true;
+            this.$emit("clickAlumnos");
             if (error.response) {
               if (error.response.status == 500) {
                 alert("error.response.message");
