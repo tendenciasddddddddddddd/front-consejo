@@ -51,7 +51,7 @@
             </div>
             <div class="col-lg-3">
               <div class="d-flex justify-content-end mb-3">             
-               <a
+               <a 
                @click="$emit('openModalh')"
                 type="button"
                 class="fuente tamanio me-3 pt-1"

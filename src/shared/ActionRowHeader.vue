@@ -1,46 +1,16 @@
 <template>
   <div class="row ">
-    <div class="col-md-5">
-      <span v-if="!$store.state.isAppMobile" class="ms-2 s-title-page">
-        {{FirstText}}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="1.25em"
-          height="1.25em"
-          viewBox="0 0 20 20"
-          class="small svg-icon fill grey-500 s-mr-2 me-1 ms-1"
-          id=""
-          fill="currentColor"
-          title=""
-        >
-          <path
-            d="M6.52776 18.4722C6.16165 18.1061 6.16165 17.5125 6.52776 17.1464L14.3375 9.33669C14.7036 8.97057 15.2972 8.97057 15.6633 9.33669C16.0294 9.70281 16.0294 10.2964 15.6633 10.6625L7.85359 18.4722C7.48747 18.8383 6.89388 18.8383 6.52776 18.4722Z"
-          ></path>
-          <path
-            d="M6.52776 1.52459C6.16164 1.8907 6.16164 2.4843 6.52776 2.85041L14.3397 10.6624C14.7059 11.0285 15.2995 11.0285 15.6656 10.6624C16.0317 10.2963 16.0317 9.70269 15.6656 9.33657L7.85359 1.52459C7.48747 1.15847 6.89388 1.15847 6.52776 1.52459Z"
-          ></path>
-        </svg>
-        {{LastText}}</span
-      >
-    </div>
     <div class="col-md-7">
-      <div class="d-flex justify-content-end">
-        <div>
-          <div class="input-group ">
-            <input
-              style="background: white;"
-              type="text"  v-model="search"
-              class="form-control buscador"
-              placeholder="Buscar por materia"
+      <div class="input-group ">
+            <input style="background: white;" type="text"  v-model="search" class="form-control buscador" placeholder="Buscar..."
             />
-            <span
-              class="input-group-text text-body buscador"
-              style="background: white;"
-              ><i class="fas fa-search colorhs" aria-hidden="true"></i
+            <span class="input-group-text text-body buscador" style="background: white;">
+              <i class="fas fa-search colorhs" aria-hidden="true"></i
             ></span>
           </div>
-        </div>
-
+    </div>
+    <div class="col-md-5">
+         <div class="d-flex justify-content-end">
         <div class="mt-2" v-if="!$store.state.isAppMobile">
           <span class="ms-4" style="color:#181B32; font-size: 18px;"
             ><b style="font-weight: 700;">0{{ pageh }}</b
@@ -49,8 +19,7 @@
         </div>
         <div>
           <ul
-            class="pagination pagination-dark justify-content-center mt-2 me-3"
-          >
+            class="pagination pagination-dark justify-content-center mt-2 me-3" >
             <li class="page-item">
               <a
                 class="fuente tamanio links paginates ms-3 me-2 isPaginateh isPaginateActive"
@@ -100,9 +69,10 @@
           </ul>
         </div>
         <div class="mt-2" v-if="IfAdd==1">
-          <a role="button" style="padding-top: 7px; padding-left: 4px; padding-right: 4px;" @click="$emit('openCreateCourse')" class="fuente tamanio isPaginateActive ">
-             &nbsp; <i class="fa fa-plus links" style="font-size: 17px;"></i>&nbsp;  
-          </a>
+          <a href="javascript:;" style="margin-top: -3px;" @click="$emit('openCreateCourse')"  class="btn btn-vercel ">
+            <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: currentcolor;"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+             <span class="me-2">Agregar</span> 
+            </a>
         </div>
       </div>
     </div>

@@ -7,6 +7,8 @@ const state = {
     user : null,
     avatar: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
     isAppMobile: false,
+    first_text: 'Pages',
+    last_text: 'Inicio',
 }
 export default new Vuex.Store({
     state,
@@ -16,6 +18,10 @@ export default new Vuex.Store({
         },
         updatepx: function (state,{estado}){
            state.isAppMobile = estado;
-        }
+        },
+        updateHeader : function (state,{text_1, text_2}){
+           state.first_text = text_1;
+           state.last_text = text_2;
+        },
     }
 });

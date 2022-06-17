@@ -46,6 +46,10 @@ export default class AulasProxi {
         return this.axios.put(this.url + `/tasks/editTask/${id}`, params);
     }
 
+    editCode(id, params) {
+        return this.axios.put(this.url + `/tasks/editCode/${id}`, params);
+    }
+
     calificarTask(id, params) {
         return this.axios.put(this.url + `/tasks/calificarTask/${id}`, params);
     }
@@ -61,5 +65,9 @@ export default class AulasProxi {
     //********************************ESTUDIANTES reviewTask */
     sendTask(id, params) {
         return this.axios.put(this.url + `/tasks/send/${id}`, params); //RUTA ARBOL 2
+    }
+
+    updateTask(id, params) {
+        return this.axios.put(this.url + `/tasks/update/${id}`, params); //RUTA ARBOL 2
     }
 }

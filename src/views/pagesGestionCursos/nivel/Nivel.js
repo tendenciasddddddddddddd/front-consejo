@@ -73,6 +73,7 @@ export default {
         }
         this.ifLoad = true;
         if (this.model._id) {
+          this.model.nombre = this.model.nombre.trim();
           this.model.modalidad = this.checked;
           this.$proxies._gestionProxi
             .update(this.model._id, this.model)
@@ -91,6 +92,7 @@ export default {
             this.ifLoad = false;
             return;
           }
+          this.model.nombre = this.model.nombre.trim();
           this.model.modalidad = this.checked;
           this.$proxies._gestionProxi
             .create(this.model) //-----------GUARDAR CON AXIOS

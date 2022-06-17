@@ -1,10 +1,23 @@
 import ProgressBar from "../../../../shared/ProgressBar"; //
 import RestResource from "../../../../service/isAdmin";
+import ActionRowHeader from "../../../../shared/ActionRowHeader"
+import NoFound from "../../../../shared/NoFound"
 const restResourceService = new RestResource();
+import Cards from "../../../../shared/Cards"
+const arrayColors = [
+  "#0f71ae",
+  "#1466c9",
+  "#303d9d",
+  "#53ab79",
+  "#ba4d8e",
+  "#1976d3",
+  "#874197",
+  "#00b6d3",
+];
 export default {
   name: "MenuCursos",
   components: {
-    ProgressBar,
+    ProgressBar,ActionRowHeader, NoFound, Cards
   },
   data() {
     return {
@@ -17,7 +30,7 @@ export default {
       page: 1,
       perPage: 8,
       pages: [],
-      numPages: null,
+      numPages: 0,
       nomMateria: "None",
       keys: "",
       llave: null,
@@ -32,20 +45,23 @@ export default {
         },
       },
       ifLoad: false,
-      
+      colorsh: []
     };
   },
   methods: {
     verificarUsuario() {
+      let text_1 = 'Aulas Virtales'
+      let text_2 = 'Todos los cursos'
+      this.$store.commit('updateHeader',{text_1, text_2})
       if (!restResourceService.estudiante(this.roles)) {
         this.$router.push("/");
       }
     },
     appInit() {
-      const info = JSON.parse(localStorage.getItem("Xf"));
-      this.modalidad = info.modalidad;
-      this.model.estudiantes.name = info.nombre;
-      this.model.estudiantes.email = info.correo;
+      const infos = JSON.parse(localStorage.getItem("Xf"));
+      this.modalidad = infos.modalidad;
+      this.model.estudiantes.name = infos.nombre;
+      this.model.estudiantes.email = infos.correo;
     },
     getData() {
       this.isData = true;
@@ -65,12 +81,25 @@ export default {
           });
       }
     },
+    onPageChange: function(page) {
+      this.page = page;
+    },
+    changeSearch : function(spech){
+      this.searchQuery = spech
+    },
+    arrayShorthand: function() {
+      this.colorsh = arrayColors.sort(function() {
+        return Math.random() - 0.5;
+      });
+    },
+
     verificarCalve(obj, clave) {
       this.__limpiarCampos();
-      this.keys = obj.codigo;
-      this.nomMateria = obj.materia;
-      this.model._id = obj._id;
-      this.isSelect = obj;
+      const daas = this.info.filter((x) => x._id == obj.id );
+      this.keys = daas[0].codigo;
+      this.nomMateria = daas[0].materia;
+      this.model._id = daas[0]._id;
+      this.isSelect = daas[0];
       if (clave== this.keys) {
         return true;
       }else{
@@ -81,11 +110,11 @@ export default {
       this.$dialog
         .prompt(
           {
-            title: "Matricula",
-            body: "¿Quiere inscribirse a "+obj.materia + "?",
+            title: "¿Quiere inscribirse a este curso?",
+            body: "Ingrese el código de acceso a este curso",
           },
           {
-            promptHelp: 'Ingrese el ping de acceso y "[+:okText]"',
+            promptHelp: 'Código',
             loader: true,
             okText: "Matricular",
             cancelText: "Cancelar",
@@ -97,7 +126,6 @@ export default {
             this.save();
             setTimeout(() => {
               dialog.close();
-              //this.toast("Se elimino  cursos de su cuenta");
             }, 1200);
           }else{
             this.$dialog.alert('La clave que ingreso no es invalida, intenta otra vez ❌')
@@ -118,7 +146,7 @@ export default {
           .update(this.model._id, this.model) //-----------EDITAR CON AXIOS
           .then((x) => {
             this.ifLoad = false;
-            this.$router.push({ path: `/task-config2/${x.data}` });
+            this.$router.push({ path: `/module-aulas/${x.data}` });
           })
           .catch((err) => {
             console.log("Error", err);
@@ -147,7 +175,7 @@ export default {
     toast(message) {
       this.$toasted.info(message, {
         duration: 3100,
-        position: "bottom-center",
+        position: "top-center",
         icon: "check-circle",
         theme: "toasted-primary",
         action: {
@@ -163,7 +191,9 @@ export default {
       let perPage = this.perPage;
       let from = page * perPage - perPage;
       let to = page * perPage;
-      this.numPages = Math.ceil(articles.length/this.perPage);
+      this.numPages = Math.ceil(articles.length / 8);
+      this.isSelecUsers = [];
+      this.arrayShorthand();
       return articles.slice(from, to);
     },
   },

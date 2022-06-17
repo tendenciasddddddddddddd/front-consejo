@@ -172,11 +172,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "AulasListas" */ '../views/pagesClassroom/profesores/manu/AulasListas.vue'),
   },
   {
-    path: '/task-config/:id',
+    path: '/modulo-aula/:id',
     name: 'al',
-    component: () => import( /* webpackChunkName: "Task" */ '../views/pagesClassroom/profesores/task/Task.vue'),
+    component: () => import( /* webpackChunkName: "ModuloAula" */ '../views/pagesClassroom/profesores/Modulos/ModuloAula.vue'),
   },
-
+ 
    ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------
   {
     path: '/all-lista',
@@ -189,9 +189,9 @@ const routes = [{
     component: () => import( /* webpackChunkName: "MyAulas" */ '../views/pagesClassroom/alumnos/myAulas/MyAulas.vue'),
   },
   {
-    path: '/task-config2/:id',
+    path: '/module-aulas/:id',
     name: 'es1',
-    component: () => import( /* webpackChunkName: "Tasks" */ '../views/pagesClassroom/alumnos/tasks/Tasks.vue'),
+    component: () => import( /* webpackChunkName: "ModuleAulas" */ '../views/pagesClassroom/alumnos/Modulo/ModuleAulas.vue'),
   },
   
   { path: "*", component: PageNotFound },

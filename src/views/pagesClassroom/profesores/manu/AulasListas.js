@@ -4,6 +4,7 @@ import ProgressBar from "../../../../shared/ProgressBar"; //
 import Modal from "../../../../shared/Modal";
 import ActionRowHeader from "../../../../shared/ActionRowHeader"
 import NoFound from "../../../../shared/NoFound"
+import Cards from "../../../../shared/Cards"
 const arrayColors = [
   "#0f71ae",
   "#1466c9",
@@ -16,23 +17,16 @@ const arrayColors = [
 ];
 export default {
   components: {
-    ProgressBar,  Modal, ActionRowHeader, NoFound,
-    ListAllEstudiantes: () => import( /* webpackChunkName: "ListAllEstudiantes" */ "../../../../components/componentClassroom/grupDocente/ListAllEstudiantes"),
+    ProgressBar,  Modal, ActionRowHeader, NoFound,Cards,
     CreateCurso: () => import( /* webpackChunkName: "CreateCurso" */ "../../../../components/componentClassroom/grupDocente/CreateCurso"),
   },
   data() {
     return {
       user: this.$store.state.user,
       roles: this.$store.state.user.roles,
-      isRole: false,
       info: {},
       isData: false,
-      curso: "",
-      index: "",
-      name: "MenuCursos",
-      modals1: false,
       isSelecTask: [],
-      modals: 'closed',
       searchQuery: '',
       key: '0',
       //Pagina
@@ -40,11 +34,10 @@ export default {
       perPage: 8,
       pages: [],
       numPages: 0,
-      active: false,
       //CHILD
       ifChildGroup: false,
       ifChildNew: false,
-      colorsh: [],
+      colorsh: []
     };
   },
   computed: {
@@ -62,10 +55,6 @@ export default {
     },
   },
   methods: {
-    mouseOver: function(){
-      console.log('mouseOver')
-      this.active = !this.active;   
-   },
     paginate(articles) {
       let page = this.page;
       let perPage = this.perPage;
@@ -87,6 +76,9 @@ export default {
         return Math.random() - 0.5;
       });
     },
+    openModules(id) {
+      this.$router.push(`/modulo-aula/${id.id}`)
+    },
     getData() {
       this.isData = true;
       this.$Progress.start();
@@ -105,75 +97,8 @@ export default {
           });
       }
     },
-    dialogDelete() {
-      this.$proxies._aulaProxi
-        .remove(this.isSelecTask) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-        .then(() => {
-          this.getData();
-          this.isSelecTask = [];
-        })
-        .catch((x) => {
-          console.log("Error 401", x.response);
-        });
-    },
-    toast(message) {
-      this.$toasted.info(message, {
-        duration: 2300,
-        position: "bottom-center",
-        icon: "check-circle",
-        theme: "toasted-primary",
-        action: {
-          text: "CERRAR",
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
-          },
-        },
-      });
-    },
-    selectOne(ids) {
-      if (!this.isSelecTask.includes(ids)) {
-        this.isSelecTask.push(ids);
-      } else {
-        this.isSelecTask.splice(this.isSelecTask.indexOf(ids), 1);
-      }
-    },
-    __eliminar() {
-      let message = {
-        title: "¿Esta seguro que quiere eliminar?",
-        body: " Esta acción no se puede deshacer",
-      };
-      let options = {
-        loader: true,
-        okText: "Continuar",
-        cancelText: "Cancelar",
-        animation: "bounce",
-      };
-      this.$dialog
-        .confirm(message, options)
-        .then((dialog) => {
-          this.dialogDelete();
-          this.numPages=1;
-            this.page=1;
-          setTimeout(() => {
-            dialog.close();
-            this.toast("Se elimino  cursos de su cuenta");
-            
-          }, 1200);
-         
-        })
-        .catch(function() {
-         
-        });
-    },
-    openTask: function(id){
-      this.key= id;
-      this.$router.push(`/task-config/${this.key}`)
-    },
-    cerrarModal(){
-      this.key = '0';
-      this.modals = false;
-     // document.body.classList.remove("modal-open");
-    },
+
+
     //LISTA DE ESTUDIANTES
     openChildGruopen: function(id){
       this.key= id;
@@ -194,6 +119,9 @@ export default {
       this.getData();
     },
     verificarUsuario() {
+      let text_1 = 'Gestión'
+      let text_2 = 'Aulas Virtales'
+      this.$store.commit('updateHeader',{text_1, text_2})
       if (!restResourceService.docente(this.roles)) {
         this.$router.push("/");
       }

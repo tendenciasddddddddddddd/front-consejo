@@ -74,6 +74,7 @@ export default {
               }
                 if(this.model._id){
                   this.ifLoad = true;
+                  this.model.nombre = this.model.nombre.trim();
                   this.$proxies._gestionProxi.updateMaterias(this.model._id, this.model)
                     .then(() => {
                       this.close();
@@ -86,6 +87,7 @@ export default {
                     });    
                 }else{
                   this.ifLoad = true;
+                  this.model.nombre = this.model.nombre.trim();
                   this.$proxies._gestionProxi.createMaterias(this.model) //-----------GUARDAR CON AXIOS
                   .then(() => {
                     this.ifLoad = false;

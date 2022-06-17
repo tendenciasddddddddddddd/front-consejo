@@ -1,11 +1,23 @@
 import RestResource from '../../../../service/isAdmin'
+import ProgressBar from "../../../../shared/ProgressBar"; //
+import ActionRowHeader from "../../../../shared/ActionRowHeader"
+import NoFound from "../../../../shared/NoFound"
 const restResourceService = new RestResource();
-import ProgressBar from '../../../../shared/ProgressBar'
+import Cards from "../../../../shared/Cards"
+const arrayColors = [
+  "#0f71ae",
+  "#1466c9",
+  "#303d9d",
+  "#53ab79",
+  "#ba4d8e",
+  "#1976d3",
+  "#874197",
+  "#00b6d3",
+];
 export default {
   name: "MyAulas",
   components: {
-    ProgressBar,
-    AllClassmates: () => import( /* webpackChunkName: "AllClassmates" */ "../../../../components/componentClassroom/grupAlumn/AllClassmates"),
+    ProgressBar,ActionRowHeader, NoFound, Cards,
   },
   data() {
     return {
@@ -20,12 +32,10 @@ export default {
        page: 1,
        perPage: 8,
        pages: [],
-       numPages:null,
-       show: false,
-       modals:false,
-       key: '',
+       numPages:0,
         //CHILD
       ifChildAllClassmate: false,
+      colorsh: [],
     };
   },
  
@@ -47,18 +57,21 @@ export default {
     
   },
   methods: {
-
     paginate(articles) {
       let page = this.page;
       let perPage = this.perPage;
-      let from = (page * perPage) - perPage;
-      let to = (page * perPage);
-      this.numPages = Math.ceil(articles.length/8);
+      let from = page * perPage - perPage;
+      let to = page * perPage;
+      this.numPages = Math.ceil(articles.length / 8);
       this.isSelecUsers = [];
+      this.arrayShorthand();
       return articles.slice(from, to);
   },
     verificarUsuario(){
-      if(!restResourceService.estudiante(this.roles)){
+      let text_1 = 'Aulas Virtales'
+      let text_2 = 'Mis cursos'
+      this.$store.commit('updateHeader',{text_1, text_2})
+      if (!restResourceService.estudiante(this.roles)) {
         this.$router.push("/");
       }
     },
@@ -66,11 +79,16 @@ export default {
       const info = JSON.parse(localStorage.getItem("Xf"));
       this.modalidad = info.modalidad;
     },
-    openChildAllClass: function(){
-      this.ifChildAllClassmate= true;
+    onPageChange: function(page) {
+      this.page = page;
     },
-    closedChildAllClass: function(){
-      this.ifChildAllClassmate= false;
+    changeSearch : function(spech){
+      this.searchQuery = spech
+    },
+    arrayShorthand: function() {
+      this.colorsh = arrayColors.sort(function() {
+        return Math.random() - 0.5;
+      });
     },
     getData() {
       this.isData = true;
@@ -102,15 +120,9 @@ export default {
          this.$Progress.finish();
          return this.info
     },
-    openModal: function(id){
-      this.key= id;
-      this.modals = true;
-      //document.body.classList.add("modal-open");
-    },
-    cerrarModal: function(){
-      this.key = '0';
-      this.modals = false;
-     // document.body.classList.remove("modal-open");
+
+    dialog(id){
+      this.$router.push(`/module-aulas/${id.id}`)
     },
   },
   created() {
@@ -118,7 +130,5 @@ export default {
     this.appInit();
     this.getData();
   },
-  mounted() {
-    this.show = true; // might need this.$nextTick
-  }
+
 };

@@ -1,120 +1,25 @@
 <template>
-  <div>
-    <div v-if="tab === 'iniciar'" class="altural"></div>
-    <div class="fixed-plugin" :class="{ 'show reponv1': tab === 'iniciar' }">
-      <a
-        @click="tab = 'init1'"
-        class="fixed-plugin-button text-dark position-fixed px-3 py-2"
-        style="background-color: rgb(14, 114, 237);"
-      >
-        <i class="fa fa-cog py-2 text-white"> </i>
-      </a>
-      <div
-        class="card shadow-lg desplega"
-        :class="{ reponv1: tab === 'iniciar' }"
-        style="overflow-y: auto; z-index: 9999;"
-      >
-        <div
-          class=" cabesa"
-          style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px;
-         padding: 4px 25px 4px 40px;"
-        >
-          <div class="float-start">
-            <h4 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
-              Aulas virtuales
-            </h4>
-          </div>
-          <div class="float-end mt-2">
-            <button
-              @click="$emit('myEvent2')"
-              class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="32"
-                height="32"
-                viewBox="0 0 172 172"
-                style=" fill:#000000;"
-              >
-                <g
-                  fill="none"
-                  fill-rule="nonzero"
-                  stroke="none"
-                  stroke-width="1"
-                  stroke-linecap="butt"
-                  stroke-linejoin="miter"
-                  stroke-miterlimit="10"
-                  stroke-dasharray=""
-                  stroke-dashoffset="0"
-                  font-family="none"
-                  font-weight="none"
-                  font-size="none"
-                  text-anchor="none"
-                  style="mix-blend-mode: normal"
-                >
-                  <path d="M0,172v-172h172v172z" fill="none"></path>
-                  <g fill="#ffffff">
-                    <path
-                      d="M26.5525,21.6075l-4.945,4.945l59.4475,59.4475l-59.4475,59.4475l4.945,4.945l59.4475,-59.4475l59.4475,59.4475l4.945,-4.945l-59.4475,-59.4475l59.4475,-59.4475l-4.945,-4.945l-59.4475,59.4475z"
-                    ></path>
-                  </g>
-                </g>
-              </svg>
-            </button>
-          </div>
-          <!-- End Toggle Button -->
-        </div>
-
-        <div
-          class="card-body pt-sm-3 pt-0"
-          style="overflow-y: auto;height: auto;"
-        >
-          <form @submit.prevent="save" id="aulas">
-            
+     <FullModal @close="close">
+        <template v-slot:header> Aulas virtuales</template>
+         <template v-slot:body>
+            <form @submit.prevent="save" id="aulas">
               <div class="mt-2">
                 <span class="parrafo">Curso</span>
                 <IsSelect v-if="isCurso"></IsSelect>
-                <v-select
-                  class="style-chooser"
-                  placeholder="Selecionar curso"
-                  v-else
-                  :class="{ error: validation.hasError('model.nombre') }"
-                  :options.sync="listniveles"
-                  label="nombre"
-                  v-model="model.nombre"
-                  required
-                >
-                  <template #option="{ nombre }">
-                    <h6 style="margin: 0">{{ nombre }}</h6>
-                  </template>
-                  <template #no-options="{ }">
-                    Lo siento, no hay opciones de coincidencia.
-                  </template>
-                </v-select>
+                  <Dropdown v-model="model.nombre"  v-else :options="listniveles"/>
                 <p class="mb-0 text-xs fuente text-danger">
                   {{ validation.firstError("model.nombre") }}
                 </p>
               </div>
               <div class="mt-3 ">
                 <span class="parrafo">Materia</span>
-                <input
-                  :class="{ error: validation.hasError('model.materia') }"
-                  v-model="model.materia"
-                  class="form-control buscador fuente"
-                  type="text"
-                />
+                 <CustomInput v-model="model.materia" />
                 <p class="mb-0 text-xs fuente text-danger">
                   {{ validation.firstError("model.materia") }}
                 </p>
               </div>
-            
-           
               <div class="mt-3">
                 <span class="parrafo ">A que modalidad pertenece?</span>
-               
-               
                 <div  v-for="item in modalidades" :key="item.id">
                    <div class="form-check mb-2 mt-2">
                             <input
@@ -139,18 +44,11 @@
               </div>
               <div class="mt-3">
                 <span class="parrafo">Código de acceso</span>
-                <input
-                  :class="{ error: validation.hasError('model.codigo') }"
-                  v-model="model.codigo"
-                  class="form-control buscador fuente"
-                  type="text"
-                />
+                <CustomInput v-model="model.codigo" />
                 <p class="mb-0 text-xs fuente text-danger">
                   {{ validation.firstError("model.codigo") }}
                 </p>
               </div>
-           
-
             <div class="mt-3">
               <span class="parrafo">Que aprenderán en este Curso?</span>
               <vue-editor
@@ -166,53 +64,35 @@
               </p>
             </div>
           </form>
-        </div>
-        <div class="modalFooter">
-          <div class="text-end">
-            <a class="btn btnNaranjaClaro"  @click="$emit('myEvent2')">
+         </template>
+          <template v-slot:footer>
+             <a class="btn btnNaranjaClaro"  @click="$emit('myEvent2')">
               <i class="ni ni-bold-left"></i> &nbsp; Volver
             </a>
             &nbsp; &nbsp;
              <a v-if="!isComplete" class="btn btnDisabled">Guardar</a>
              <template v-else>
-              <button
-              v-if="ifLoad"
-              class="btn btn-sm btnNaranja"
-              type="button"
-              disabled
-            >
-              <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              Enviando...
-            </button>
-
-            <button
-              v-else
-              type="submit"
-              id="addRowButton"
+              <ButtonLoading v-if="ifLoad"/>
+            <button v-else type="submit"
               class="btn btnNaranja"
-              form="aulas"
-            >
+              form="aulas">
               Guardar
             </button>
              </template>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          </template>
+     </FullModal>
 </template>
 <script>
 import IsSelect from '../../../shared/IsSelect'
+import FullModal from "../../../shared/FullModal.vue";
+import ButtonLoading from "../../../shared/ButtonLoading.vue";
+import CustomInput from "../../../shared/CustomInput.vue";
+import Dropdown from "../../../shared/Dropdown.vue";
 import { VueEditor} from "vue2-editor";
 export default {
     name: 'AulaCreate',
     components:{
-         VueEditor, IsSelect
+         VueEditor, IsSelect, FullModal,CustomInput, ButtonLoading, Dropdown
        },
     data() {
         return {
@@ -251,6 +131,9 @@ export default {
       appInit(){
         const info = JSON.parse(localStorage.getItem("Xf"));
         this.fistname = info.nombre;
+      },
+       close(){
+        this.$emit('myEvent2');
       },
       __listNivele() {
         //-----------TRAE LA LISTA DE LOS ROLES

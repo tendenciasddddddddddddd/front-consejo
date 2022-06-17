@@ -53,7 +53,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in info" :key="item.id">
+              <tr v-for="item in info" :key="item.id" :class="{ 's-ifactive': userIds.includes(item._id) }">
                 
                 <td>
                     <div class="d-flex ms-3">

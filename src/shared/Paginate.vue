@@ -3,7 +3,7 @@
     <li class="page-item">
       <a
         class="fuente tamanio links paginates me-3"
-        :class="{ inactivo: pageh == 1 }"
+        :class="{ inactivo: pages == 1 }"
         @click="onClickPreviousPage"
       >
         <svg
@@ -26,14 +26,14 @@
 
     <li class="page-item active">
       <a class="paginaA">
-        <b> {{ pageh }}</b></a
+        <b> {{ pages }}</b></a
       >
     </li>
 
     <li class="page-item">
       <a
         :class="{
-          inactivo: pageh == numPagesh || numPagesh == 0,
+          inactivo: pages == numPages || numPages == 0,
         }"
         class="fuente tamanio links paginates ms-3"
         @click="onClickNextPage"
@@ -75,28 +75,26 @@ export default {
 
     page: {
       type: Number,
-      required: true
     },
     total: {
         type: Number,
     }
   },
-  data() {
-      return {
-          numPagesh: this.numPages,
-          pageh: this.page,
-      }
+  data(){
+    return{
+       pages : this.page 
+    }
   },
    methods: {
 
     onClickPreviousPage() {
-        this.pageh--;
-      this.$emit('pagechanged', this.pageh);
+      this.pages--
+      this.$emit('pagechanged', this.pages);
     },
 
     onClickNextPage() {
-        this.pageh++;
-      this.$emit('pagechanged', this.pageh );
+      this.pages++
+      this.$emit('pagechanged', this.pages);
     },
 
   }
