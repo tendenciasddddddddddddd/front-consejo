@@ -3,152 +3,99 @@
         <template v-slot:header> {{ collects.nombre }}</template>
         <template v-slot:body>
             <div class="row">
-                <div v-if="panel == '1'" class="col-lg-10 col-12 mx-auto">
-                    <ActionsCheck @_taskload="_taskload" :estado="collects.estado" @changeSearch="changeSearchs"
-                        @openModal="getData" />
+                <div class="col-lg-6  panel1">
+                    <ActionsCheck @changeSearch="changeSearchs" />
                     <NoFound v-if="!displayedArticles.length" />
-
-                    <div v-else class="table-responsive mt-3">
-                        <table class="dataTable-table table s-table-flush">
-                            <thead class="thead-light">
-                                <tr class="cabeza">
-                                    <th style="background-color: rgb(234, 240, 246); "
-                                        class="text-uppercase text-center text-xxs font-weight-bolder">
-                                        Estudiante
-                                    </th>
-                                    <th class="text-uppercase text-center text-xxs font-weight-bolder">
-                                        Estado tarea
-                                    </th>
-                                    <th class="text-uppercase text-center text-xxs font-weight-bolder">
-                                        Estado nota
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="item in displayedArticles" :key="item.id"
-                                    :class="{ 's-ifactive': isSelecTask.includes(item.id) }">
-                                    <td>
-                                        <div class="d-flex ms-3">
-                                            <div class="form-check my-auto">
-                                                <input class="form-check-input cheka" type="checkbox"
-                                                    @click="selectOne(item.id)" />
-                                            </div>
-
-                                            <span class="mb-0 ms-3 text-sm colorestabla fuente">
-                                                <i class="fa fa-user me-2" style="color: rgb(124, 152, 182);"
-                                                    aria-hidden="true"></i>
-                                                {{ item.nombre }}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div v-if="item.tarea === ''" class="fuente  text-sm">
-                                            <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>Sin enviar
-                                        </div>
-                                        <div v-else class="fuente  text-sm">
-                                            <span style="background-color: rgb(0, 189, 165);"
-                                                class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                                            Enviado
-                                        </div>
-                                    </td>
-                                    <td class="text-sm text-center colorestabla fuente">
-                                        <div v-if="item.nota">
+                    <section v-else>
+                        <div v-for="item in displayedArticles" :key="item.id" class="mt-3">
+                            <div class="s-iems mb-2">
+                                <div @click="changeNote(item)" style="cursor: pointer;">
+                                    <span class="s-text-items fuente ">
+                                        <i class="fa fa-user me-2" style="color: rgb(124, 152, 182);"
+                                            aria-hidden="true"></i>
+                                        {{ item.nombre }}
+                                    </span> <br>
+                                    <div class="ms-2">
+                                        <span v-if="item.tarea === ''" class="text-dark text-xs fuente"> <span
+                                                class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>Sin enviar</span>
+                                        <span v-else class="text-dark text-xs fuente"><span
+                                                style="background-color: rgb(0, 189, 165);"
+                                                class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span> Enviado</span>
+                                        <span class="text-dark text-xs fuente ms-2" v-if="item.nota">
                                             <span style="background-color: rgb(0, 189, 165);"
                                                 class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
                                             {{ item.nota }}
-                                        </div>
-                                        <div v-else>
+                                        </span>
+                                        <span class="text-dark text-xs fuente ms-2" v-else>
                                             <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
                                             Sin calificación
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <Paginate :numPages="numPages" :page="page" :total="dataUser.length"
-                            @pagechanged="onPageChange">
-                        </Paginate>
-                    </div>
-                </div>
-                <div v-if="panel == '2'" class="col-lg-9 col-12 mx-auto">
-                    <div>
-                        <a href="javascript:;" @click="_regresar()" class="s-regresar me-2 ms-2 mb-3">
-                            <svg data-testid="geist-icon" fill="none" height="15" shape-rendering="geometricPrecision"
-                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                viewBox="0 0 24 24" width="15" style="color: black;">
-                                <path d="M19 12H5"></path>
-                                <path d="M12 19l-7-7 7-7"></path>
-                            </svg>
-                            Atrás
-                        </a>
-                    </div>
-                    <div class="p-3 ">
-                        <div style="padding: 30px 60px; border: 2px dashed rgb(166, 182, 198);color: rgb(51, 71, 91);">
-                            <p class="parrafo">
-                                Estudiante: <b class="ms-4">{{ detalleTask[0].nombre }}</b>
-                            </p>
-                            <div v-if="subpanel">
-                                <div class="text-center ">
-                                    <img class="w-20 mt-2" src="../../../assets/img/logs/descanso.svg" alt="fondo" />
-                                    <div class="letra fuente mt-2">
-                                        Tarea sin entregar
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                            <p v-else class="parrafo">
+                        </div>
+                    </section>
+                    <Paginate :numPages="numPages" :page="page" :total="dataUser.length" @pagechanged="onPageChange">
+                    </Paginate>
+                </div>
+                <div class="col-lg-6">
+                    <NoFound v-if="!detalleTask.id" />
+                    <section v-else class="ms-2">
+                        <div>
+                            <p class="parrafo">
+                                Estudiante: <u class="ms-4 fuente">{{ detalleTask.nombre }}</u>
+                            </p>
+                            <p v-if="subpanel" class="parrafo">
                                 Link trabajo:
-                                <a :href="detalleTask[0].tarea" target="_blank" class="ms-2 btn btn-sm btn-vercel">
-                                    <span>Click para revisar el trabajo</span>
+                                <a href="javascript:;" class="ms-2  tamanio ">
+                                    <b class="links"> <del>Tarea sin entregar</del> </b>
                                 </a>
                             </p>
 
-                            <form @submit.prevent="save" role="form" id="notas" class="w-50 text-start">
+                            <p v-else class="parrafo">
+                                Link trabajo:
+                                <a :href="detalleTask.tarea" target="_blank" class="ms-2  tamanio ">
+                                    <b class="links">Click para revisar el trabajo</b>
+                                </a>
+                            </p>
+                            <span @click="openCont" class="links text-sm fuente ">
+                                <b> Mostrar comentario 👆 (Opcional)</b>
+                            </span>
+
+
+                            <form @submit.prevent="save" role="form" class=" text-start">
                                 <span class="parrafo ">Ingrese la calificación</span>
 
                                 <CustomInput v-model="model.nota" />
-                                <p class="mb-0 text-xs fuente text-danger">
+                                <p class="mb-2 text-xs fuente text-danger">
                                     {{ validation.firstError("model.nota") }}
                                 </p>
                                 <span class="parrafo">Observaciones (Opcional)</span>
-
-                                <div class="input-group mb-3 ">
-                                    <textarea style="height: 87px;" type="text"
-                                        :class="{ error: validation.hasError('model.observar') }"
-                                        v-model="model.observar" class="form-control buscador"></textarea>
-                                </div>
+                                <Editor v-model="model.observar" />
+                                <ButtonLoading v-if="ifLoad" />
+                                <button v-else role="button" type="submit" class="btn btnNaranja mt-3">Guardar
+                                    Nota</button>
                             </form>
+                            <p v-if="clickme" class="parrafo">
+                                Comentario:
+                                <span v-html="detalleTask.comentario"> </span>
+
+                            </p>
                         </div>
-                    </div>
+                    </section>
+
                 </div>
+
             </div>
         </template>
         <template v-slot:footer>
-            <div v-if="panel == '1'">
-                <a @click="$emit('myEventTask')" style="text-decoration: underline;" href="javascript:;"
-                    class="fuente tamanio">
-                    <b>Cancelar</b>
-                </a>
-                <a v-if="isSelecTask.length == 1" type="submit" id="addRowButton" class="btn btnNaranja ms-4"
-                    @click="nextO">
-                    Siguiente &nbsp; <i class="ni ni-bold-right"></i>
-                </a>
-                <a v-else type="submit" class="btn btnDisabled ms-4">
-                    Siguiente &nbsp; <i class="ni ni-bold-right"></i>
-                </a>
-            </div>
-            <div v-if="panel == '2'">
-
-                <a @click="_regresar" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio"
-                    to="/aulas-lista">
-                    <b>Regresar</b>
-                </a>
-                <a v-if="!model.nota" type="submit" class="btn btnDisabled ms-4">
-                    Guardar
-                </a>
-                <button v-else type="submit" id="addRowButton" class="btn btnNaranja ms-4" form="notas">
-                    Guardar
-                </button>
-            </div>
+            <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio">
+                <b>Regresar</b>
+            </a>
+            <ButtonLoading v-if="ifLoad" />
+            <a v-else type="submit" @click="getData" class="btn btn-vercel ms-4">
+                Guardar todo y salir
+            </a>
         </template>
     </ScrimModal>
 </template>
@@ -159,6 +106,8 @@ import CustomInput from "../../../shared/CustomInput.vue";
 import ActionsCheck from "../../../shared/ActionsCheck.vue";
 import Paginate from "../../../shared/Paginate"
 import NoFound from "../../../shared/NoFound"
+import ButtonLoading from "../../../shared/ButtonLoading.vue"
+import Editor from "../../../shared/Editor.vue";
 export default {
     name: "CheckTask",
     props: {
@@ -166,7 +115,7 @@ export default {
         objectUser: Array
     },
     components: {
-        ScrimModal, CustomInput, ActionsCheck, Paginate, NoFound
+        ScrimModal, CustomInput, ActionsCheck, Paginate, NoFound, ButtonLoading, Editor
     },
     data() {
         return {
@@ -175,29 +124,24 @@ export default {
                 nota: '',
                 observar: ''
             },
-            panel: '1',
             subpanel: false,
             user: this.$store.state.user,
             ifLoad: false,
             isView: false,
             isSelecTask: [],
-            detalleTask: [],
+            detalleTask: {},
+            clickme: false,
             //Pagina 
             page: 1,
-            perPage: 7,
+            perPage: 5,
             pages: [],
             numPages: 0,
             searchQuery: '',
             model2: {
-                _id: null,
-                task: {
-                    _id: null,
-                    entrega: {
-                        idUser: '',
-                        nota: '',
-                        link: "",
-                    },
-                },
+                idUser: '',
+                nota: '',
+                link: "",
+                observar: ''
             },
         }
     },
@@ -238,52 +182,52 @@ export default {
                 let nombre = '';
                 let tarea = '';
                 let nota = '';
+                let observar = '';
+                let comentario = '';
                 for (let i = 0; i < this.objectUser.length; i++) {
                     id = this.objectUser[i].usuario;
                     idTask = '0';
                     nombre = this.objectUser[i].name;
                     tarea = '';
                     nota = '';
+                    observar = '';
+                    comentario = '';
                     for (let j = 0; j < this.collects.entrega.length; j++) {
                         if (this.collects.entrega[j].idUser == id) {
                             idTask = this.collects.entrega[j]._id
                             tarea = this.collects.entrega[j].link;
                             nota = this.collects.entrega[j].nota;
+                            observar = this.collects.entrega[j].observar
+                            comentario = this.collects.entrega[j].comentario
                             break;
                         }
                     }
-                    this.dataUser.push({ id: id, tarea: tarea, idTask: idTask, nombre: nombre, nota: nota })
+                    this.dataUser.push({ id: id, tarea: tarea, idTask: idTask, nombre: nombre, nota: nota, observar: observar, comentario: comentario })
                 }
-            }
-        },
-        selectOne(ids) {
-            if (!this.isSelecTask.includes(ids)) {
-                this.isSelecTask.push(ids);
-            } else {
-                this.isSelecTask.splice(this.isSelecTask.indexOf(ids), 1);
             }
         },
         changeSearchs(value) {
             this.searchQuery = value;
         },
-        nextO() {
-            let longitud = this.isSelecTask.length;
-            if (longitud == 1) {
-                this.detalleTask = this.dataUser.filter(x => x.id == this.isSelecTask[0]);
-                this.model.nota = this.detalleTask[0].nota;
-                this.panel = '2';
-                if (this.detalleTask[0].tarea == '') {
-                    this.subpanel = true
-                }
+        changeNote(item) {
+            this.subpanel = false;
+            this.detalleTask = item;
+            this.model.nota = item.nota;
+            this.model.observar = item.observar;
+            if (item.tarea == '') {
+                this.subpanel = true
             }
+        },
+        openCont: function () {
+            this.clickme = !this.clickme
         },
         _regresar() {
             this.isSelecTask = [];
-            this.detalleTask = []
-            this.panel = '1';
+            this.detalleTask = {}
             this.model.nota = '';
             this.model.observar = '';
             this.subpanel = false;
+            this.clickme = false;
         },
         save() {
             this.$validate().then((success) => {
@@ -292,18 +236,18 @@ export default {
                     return;
                 }
                 if (this.$route.params.id) {
-                    if (this.detalleTask[0].idTask&& this.detalleTask[0].nota==''&& this.detalleTask[0].tarea=='') {
+                    if (this.detalleTask.idTask && this.detalleTask.nota == '' && this.detalleTask.tarea == '') {
                         this.optionUpdate()
                     } else {
                         this.ifLoad = true;
-                        let keys = this.$route.params.id + ',' + this.collects._id + ',' + this.detalleTask[0].idTask;
+                        let keys = this.$route.params.id + ',' + this.collects._id + ',' + this.detalleTask.idTask;
                         this.$proxies._aulaProxi
                             .calificarTask(keys, this.model)
                             .then(() => {
                                 this.ifLoad = false;
                                 this.toast('Tarea calificada exitosamente');
                                 for (let i = 0; i < this.dataUser.length; i++) {
-                                    if (this.dataUser[i].id == this.detalleTask[0].id) {
+                                    if (this.dataUser[i].id == this.detalleTask.id) {
                                         this.dataUser[i].nota = this.model.nota
                                     }
                                 }
@@ -342,48 +286,32 @@ export default {
                 });
         },
         dialogUpdate() {
-            this.ifLoad = true;
-            this.model2.task.entrega.nota = this.model.nota;
-            this.model2.task.entrega.idUser = this.detalleTask[0].id;
-            this.$proxies._aulaProxi
-                .sendTask(this.collects._id, this.model2) //-----------EDITAR CON AXIOS
-                .then(() => {
-                    this.ifLoad = false;
-                    this.toast('Tarea calificada exitosamente');
-                    for (let i = 0; i < this.dataUser.length; i++) {
-                        if (this.dataUser[i].id == this.detalleTask[0].id) {
-                            this.dataUser[i].nota = this.model.nota
-                        }
-                    }
-                    this.model2.task.entrega.nota = ''
-                    this.model2.task.entrega.idUser = ''
-                    this._regresar();
-                })
-                .catch((err) => {
-                    console.log("Error", err);
-                    this.ifLoad = false;
-                });
+                    this.ifLoad = true;
+                    this.model2.nota = this.model.nota;
+                    this.model2.idUser = this.detalleTask.id;
+                    this.model2.observar = this.model.observar;
+                    this.$proxies._aulaProxi
+                        .sendTask(this.collects._id, this.model2) //-----------EDITAR CON AXIOS
+                        .then(() => {
+                            this.ifLoad = false;
+                            this.toast('Tarea calificada exitosamente');
+                            for (let i = 0; i < this.dataUser.length; i++) {
+                                if (this.dataUser[i].id == this.detalleTask.id) {
+                                    this.dataUser[i].nota = this.model.nota
+                                }
+                            }
+                            this.model2.nota = ''
+                            this.model2.idUser = ''
+                            this._regresar();
+                        })
+                        .catch((err) => {
+                            console.log("Error", err);
+                            this.ifLoad = false;
+                        });
         },
         getData() {
             this.$emit('getData');
             this.$emit('myEventTask')
-        },
-        _taskload() {
-            let keys = this.$route.params.id + ',' + this.collects._id;
-            if (keys) {
-                this.isView = true;
-                this.$proxies._aulaProxi
-                    .reviewTasks(keys, '1') //-----------EDITAR CON AXIOS
-                    .then(() => {
-                        this.isView = false;
-                        this.toast('Esta tarea esta marcada como revisada')
-                    })
-                    .catch(() => {
-                        this.toast('Error en el servidor por favor notificar le problema')
-
-                        this.isView = false;
-                    });
-            }
         },
         toast(message) {
             this.$toasted.info(message, {
@@ -415,3 +343,28 @@ export default {
     },
 }
 </script>
+<style >
+.panel1 {
+    border-right: 1px solid rgb(203, 214, 226);
+    width: 420px;
+    max-width: 100%;
+    min-width: 420px;
+    height: calc(90vh - 126px);
+    top: 126px;
+    overflow-y: auto;
+}
+
+.s-iems {
+    background: #ecf0f3;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 5px;
+}
+
+.s-text-items {
+    color: #1192ee;
+    cursor: pointer;
+}
+</style>

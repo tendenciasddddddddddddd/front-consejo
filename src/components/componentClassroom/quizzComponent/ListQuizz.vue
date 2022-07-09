@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
-    <div v-if="displayedArticles.length">
+    <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @deletedSelected="deletedSelect" @remove="remove" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
+     <div v-if="displayedArticles.length">
       <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
         <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
             <div class="d-flex py-1">
@@ -15,35 +15,31 @@
                   {{ item.nombre }}
                 </h6>
                 <div class="text-sm colorestabla fuente">
-                  <div v-if="item.estado.includes('1')">
+                  <div >
                     <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
                     Tarea Revisada
                   </div>
-                  <div v-else>
-                    <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Revision Pendiente
-                  </div>
+                 
                 </div>
               </div>
-              <div class="mt-3 ms-5"><span class="text-xs ">{{ item.entrega.length }} entregas</span></div>
+              <div class="mt-3 ms-5"><span class="text-xs ">{{ item.surveys.length }} entregas</span></div>
             </div>
           <div class="dropstart ms-auto">
             <div class="d-flex  mt-2">
-              <TimeEgo :fecha="item.fechad" />
+              <TimeEgo :fecha="item.createQuizz" />
               <!--v-tooltip.top-center="{content: item.descripcion, html: true}"-->
             </div>
           </div>
         </div>
       </div>
        <Paginate :numPages="numPages"  :page="page" :total="object.length" @pagechanged="onPageChange"></Paginate>
-     
     </div>
-    <NoFound v-else />
-    <div v-if="iftask">
-      <CreateOrUpdate :collects="collectionsEdit" @EventClose="closed" @getData="getDataAll" />
+    <NoFound v-else/>
+     <div v-if="isQuestion">
+      <CreateQuestion :collects="collestQuizz" @EventClose="closed" @getData="getDataAll" />
     </div>
-    <div v-if="ifChildRevision">
-      <CheckTask  :collects="checkTasks" :objectUser="objectUser" @myEventTask="closedChildRewiewTrask" @getData="getDataAll"></CheckTask>
+     <div v-if="isQuizz">
+      <CreateQuizz :id="idQuizz"  @EventClose="closed"  @getData="getDataAll"/>
     </div>
   </div>
 </template>
@@ -54,43 +50,34 @@ import TimeEgo from "../../../shared/TimeEgo";
 import Paginate from "../../../shared/Paginate"
 import ActionRowDocente from "../../../shared/ActionRowDocente.vue";
 export default {
-  name: 'ListTask',
+  name: 'ListQuizz',
   props: {
     object: Array,
     objectUser : Array,
   },
   components: {
-    NoFound, TimeEgo,Paginate,ActionRowDocente,
-    CreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ "./CreateOrUpdate.vue"),
-    CheckTask: () => import( /* webpackChunkName: "CheckTask" */ "./CheckTask"),
+    NoFound, ActionRowDocente, TimeEgo,Paginate,
+    CreateQuizz: () => import( /* webpackChunkName: "CreateQuizz" */ "./CreateQuizz.vue"),
+    CreateQuestion: () => import( /* webpackChunkName: "CreateQuestion" */ "./CreateQuestion.vue"),
   },
   data() {
     return {
       userIds: [],
-      iftask: false,
+      isQuizz: false,
+      isQuestion: false,
       isSelecUsers: [],
-      collectionsEdit: {
-        _id: '',
-        nombre: '',
-        finicio: '',
-        archivo: '',
-        descripcion: '',
-        entrega: '',
-        estado: '',
-      },
-      checkTasks : [],
-      checkUser: [],
       allSelected : false,
-      searchQuery: '',
-        //Pagina 
+      collestQuizz: [],
+       //Pagina 
        page: 1,
        perPage: 4,
        pages: [],
        numPages:0,
-       ifChildRevision: false
+       searchQuery: '',
+       idQuizz: '',
     }
   },
-    computed: {
+  computed: {
     displayedArticles: function () {
       if (this.searchQuery.length>1) {
         return this.object.filter((item) => {
@@ -106,7 +93,33 @@ export default {
     }
   },
   methods: {
-     paginate(articles) {
+    vueInit(){
+      if (this.object.length > 0) {
+        for (var i = 0; i < this.object.length; i++) {
+           console.log('es',this.object[i])
+           if (this.object[i].surveys.length === 0) {
+            this.idQuizz = this.object[i]._id;
+            console.log(this.idQuizz)
+            this.openCuestions()
+           }
+        }
+        
+      }
+    },
+    openModal: function () {
+      this.collestQuizz = {}
+      this.isQuestion= true;
+    },
+    closed: function () {
+      this.isQuestion = false
+    },
+    openCuestions: function (){
+      this.isQuizz= true;
+    },
+    closeCuestions: function (){
+       this.isQuizz= false;
+    },
+    paginate(articles) {
       let page = this.page;
       let perPage = this.perPage;
       let from = (page * perPage) - perPage;
@@ -117,8 +130,7 @@ export default {
   onPageChange(page) {
       this.page = page;
     },
-  remove() {
-    if (this.isSelecUsers.length > 0) return;
+    remove() {
       let message = {
         title: "¿Esta seguro que quiere eliminar?",
         body: " Esta acción no se puede deshacer",
@@ -146,7 +158,7 @@ export default {
     dialogDelete() {
       if (this.isSelecUsers.length > 0) {
         this.$proxies._aulaProxi
-          .removeTask(this.$route.params.id, this.isSelecUsers)
+          .removeQuizz(this.$route.params.id, this.isSelecUsers)
           .then(() => {
             this.isSelecUsers = [];
             this.allSelected = false;
@@ -161,27 +173,7 @@ export default {
     changeSearchs(value){
       this.searchQuery = value;
     },
-    openModal: function () {
-      this.iftask = true;
-      this.collectionsEdit = {}
-    },
-    closed: function () {
-      this.iftask = false
-    },
-    openChildRewiewTrask: function(obj){
-      
-      this.checkTasks = {
-        descripcion: obj.descripcion,
-        entrega: obj.entrega,
-        estado: obj.estado,
-        nombre: obj.nombre,
-        _id : obj._id
-      }
-      this.ifChildRevision = true;
-    },
-    closedChildRewiewTrask: function(){
-      this.ifChildRevision = false;
-    },
+
     getDataAll() {
       this.$emit('getDataTask');
     },
@@ -209,10 +201,10 @@ export default {
       if (this.isSelecUsers.length == 1) {
         for (let index = 0; index < this.object.length; index++) {
           if (this.object[index]._id == this.isSelecUsers[0]) {
-            this.collectionsEdit = this.object[index]
+            this.collestQuizz = this.object[index]
           }
         }
-        this.iftask = true; //ABRIR MIDAL
+        this.isQuestion = true; 
       }
     },
     toast(message) {
@@ -229,9 +221,9 @@ export default {
         }
       });
     },
+  },
+  created (){
+    this.vueInit();
   }
 }
 </script>
-
-<style>
-</style>

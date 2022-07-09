@@ -3,7 +3,6 @@
     class="
       navbar navbar-main navbar-expand-lg
       position-sticky
-      mt-1
       top-1
       px-0
       mx-4
@@ -18,7 +17,8 @@
     data-scroll="true"
   >
     <div class="container-fluid py-1 px-1" >
-     <h6 class="font-weight-bolder mb-0 "> <b style="color: #ff7a59;font-size: 32px;"><i class='bx bxs-cube'></i></b> <span></span>  </h6> 
+     
+     <svg aria-label="Vercel Logo" fill="#000" viewBox="0 0 75 65" width="20"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
      <div >
         
          <span class="ms-3 s-title-page">
@@ -76,7 +76,7 @@
             </template>
            
           </li> -->
-          <li class="nav-item dropdown pe-2 d-flex align-items-end">
+          <li class="nav-item dropdown  d-flex align-items-end">
             <a
               href="javascript:;"
               class="nav-link text-body p-0"

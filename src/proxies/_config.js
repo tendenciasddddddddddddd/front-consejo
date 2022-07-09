@@ -32,8 +32,8 @@ Axios.interceptors.response.use(
       if (!error.response) {
       
        alert('Espere un momento 🙏🙏, los servicios no se encuentra en linea, regresa al inicio hasta que los servicios se activen')
-       localStorage.removeItem('access_token');
-       window.location.reload(true);
+       //localStorage.removeItem('access_token');
+       //window.location.reload(true);
       }
       else if(error.response.status===403||error.response.status===401||error.response.status===404) {//||error.response.status===401
         localStorage.removeItem('access_token');

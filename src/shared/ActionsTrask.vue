@@ -9,7 +9,7 @@
     <div class="col-lg-6">
       <div class="d-flex justify-content-start">
         <div class="isPaginateActive">
-           <div v-if="!allSelecteds" class="form-check " style="min-height: 0rem;margin-bottom: 0rem;">
+           <div v-if="!allSelecteds" class="form-check " style="min-height: 0rem;margin-bottom: 0rem; margin-right: -5px;margin-left: 3px;">
           <input @click="$emit('selectAll')" class="form-check-input cheka" type="checkbox" />
         </div>
         <i @click="$emit('deletedSelected')" v-else  class="fa fa-minus s-icon-all" aria-hidden="true"></i>
@@ -46,7 +46,7 @@
 
         <a class="btn btn btn-vercel" @click="$emit('openModal')">
         <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: currentcolor;"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
-          Crear tarea
+          Añaidir
         </a>
       </div>
     </div>

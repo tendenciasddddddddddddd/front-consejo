@@ -39,7 +39,13 @@ export default {
       model: {
         email: null,
       },
+      showPassword: false,
     };
+  },
+  computed: {
+    buttonLabel() {
+      return (this.showPassword) ? "Hide" : "Show";
+    }
   },
   methods: {
     async logOut() {
@@ -193,6 +199,9 @@ export default {
           },
         });
       },
+      toggleShow() {
+        this.showPassword = !this.showPassword;
+      }
   },
   created() {
     this.getIpClient();

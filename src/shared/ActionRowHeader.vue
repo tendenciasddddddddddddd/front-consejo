@@ -1,28 +1,28 @@
 <template>
-  <div class="row ">
-    <div class="col-md-7">
-      <div class="input-group ">
+    <div class="stack_stack__A16oG1">
+      <div class="input_container__GHJdJ">
+         <div class="input-group ">
             <input style="background: white;" type="text"  v-model="search" class="form-control buscador" placeholder="Buscar..."
             />
             <span class="input-group-text text-body buscador" style="background: white;">
               <i class="fas fa-search colorhs" aria-hidden="true"></i
             ></span>
           </div>
-    </div>
-    <div class="col-md-5">
-         <div class="d-flex justify-content-end">
+      </div>
+       <div class="ewgrtr">
+            <div class="d-flex justify-content-end">
         <div class="mt-2" v-if="!$store.state.isAppMobile">
-          <span class="ms-4" style="color:#181B32; font-size: 18px;"
+          <span  style="color:#181B32; font-size: 18px;"
             ><b style="font-weight: 700;">0{{ pageh }}</b
             >/ 0{{ numPages }}</span
           >
         </div>
         <div>
           <ul
-            class="pagination pagination-dark justify-content-center mt-2 me-3" >
+            class="pagination pagination-dark justify-content-center mt-1 me-1" >
             <li class="page-item">
               <a
-                class="fuente tamanio links paginates ms-3 me-2 isPaginateh isPaginateActive"
+                class="fuente tamanio links paginates ms-1 me-1 isPaginateh isPaginateActive"
                 :class="{ 'inactivo isNoActive': pageh == 1 }"
                 @click="onClickPreviousPage"
               >
@@ -75,8 +75,9 @@
             </a>
         </div>
       </div>
+       </div>
+       
     </div>
-  </div>
 </template>
 
 <script>
@@ -119,3 +120,22 @@ export default {
   },
 };
 </script>
+<style>
+.stack_stack__A16oG1 {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex: initial;
+}
+.input_container__GHJdJ {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+.ewgrtr{
+      min-width: 245px;
+    max-width: 300px;
+    margin-left: 8px;
+}</style>

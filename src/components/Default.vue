@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    
     <div class="col-lg-8 col-12 mx-auto">
       <div class="mt-2">
         
@@ -7,6 +8,7 @@
       </div>
       
     </div>
+  
     <div class="col-lg-6 mt-5">
       <div class="" id="sessions">
         <div class="card-header pb-3">
@@ -75,7 +77,7 @@
       <img
         class="w-100"
         
-        src="../assets/img/logs/people.svg"
+        src="https://assets.vercel.com/image/upload/q_auto/front/assets/design/components/triangle.gif"
         alt=""
       />
     </div>
@@ -136,5 +138,4 @@ export default {
   },
 };
 </script>
-
 

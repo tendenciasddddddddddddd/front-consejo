@@ -7,6 +7,7 @@ export default {
   components: {
     ProgressBar,ListComp,
     ListUser: () => import( /* webpackChunkName: "ListUser" */ '../../../../components/componentClassroom/grupAlumn/ListUser'),
+    ListExamen: () => import( /* webpackChunkName: "ListExamen" */ '../../../../components/componentClassroom/quizzComponent/ListExamen'),
   },
   data(){
     return {
@@ -14,12 +15,10 @@ export default {
       usuario: this.$store.state.user.id,
       tabs:'tarea',
       isData: false,
-      collection: {},
-      idCourse: '',
-      CourseClave: '',
       collectionTasks: [],
       fullTask: [],
       collectionUser: [],
+      collectionQuizz: [],
     }
   },
   methods: {
@@ -31,8 +30,9 @@ export default {
             .then((x) => {
               this.info = x.data;
               console.log(this.info)
-              this.runTask();
+              this.fullTask = this.info.task.reverse();
               this.collectionUser = this.info.estudiantes;
+              this.collectionQuizz = this.info.examen.reverse();
               this.isData = false;
             })
             .catch((err) => {
@@ -41,35 +41,7 @@ export default {
             });
         }
       },
-  
-      runTask(){
-          this.fullTask= [];
-          let tareas = this.info.task
-          for (let i = 0; i < tareas.length; i++){
-             let  idA = tareas[i]._id;
-             let nameTask = tareas[i].nombre;
-             let fechalim = tareas[i].finicio;
-             let descrition = tareas[i].descripcion;
-             let arci = tareas[i].archivo;
-             let tiempoTranscurrido = tareas[i].fechad;
-             let idB = 0;
-             let isSend = false;
-             let nota = '';
-             let link = '';
-             let entregas = tareas[i].entrega;
-             for (let j = 0; j < entregas.length; j++) {
-                 idB = entregas[j]._id;
-                 if (entregas[j].idUser == this.usuario) {
-                     isSend = true;
-                     nota = entregas[j].nota;
-                     link = entregas[j].link;
-                     break;
-                 }
-             }
-             this.fullTask.push({_id: idA, id2: idB, nombre : nameTask,finicio: fechalim, estado : isSend, fechad: tiempoTranscurrido, descripcion : descrition, archivo: arci,nota: nota, link: link});
-          }
-          this.fullTask.reverse();
-      },
+
     verificarUsuario() {
       let text_1 = 'Aulas Virtales'
       let text_2 = 'Materia'

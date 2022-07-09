@@ -36,9 +36,13 @@
                           />
                         </div>
 
-                        <span class="parrafo mt-2">Contraseña</span>
+                        <span class="parrafo mt-2">Contraseña
+                          <span class="ms-2" style="cursor: pointer;"><i @click="toggleShow" class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
+                            
+                        </span>
                         <div class="mb-3 mt-1">
-                          <input
+                           <input v-if="showPassword" type="text" class="form-control buscador fuente" v-model="login.password" />
+                          <input v-else
                             v-model="login.password"
                             id="password"
                             type="password"

@@ -6,7 +6,15 @@
     border-left: 3px solid #000;
     animation: escribir 5s steps(30) infinite alternate;
 }
-
+.sidenav .navbar-brand {
+  padding: 1rem 2rem !important; 
+}
+.sidenav-header {
+  height: 3.7rem !important;
+}
+.quillWrapper .ql-snow.ql-toolbar {
+  background-color: #fff;
+}
 @keyframes escribir {
     from { width: 70% }
     to { width:24% }
@@ -449,7 +457,7 @@ div#bg {
   text-align: justify;
 }
 .loadingg {
-  background: radial-gradient(#fff,hsla(0,0%,100%,.9215686274509803));
+  background: rgba(9, 30, 66, 0.54);
   background-repeat: no-repeat;
   height: 100vh;
   position: fixed;
@@ -463,6 +471,7 @@ div#bg {
   align-items: center;
 }
 .inn {
+  margin-top: 20%;
   text-align: center;
   padding: 2rem;
   font-weight: 600;
@@ -705,6 +714,10 @@ margin-bottom: 12px!important;
 }
 .liTask{
     padding-bottom: 12px;
+}
+
+.dg-content {
+  font-family: Avenir Next W02, Helvetica, Arial, sans-serif !important;
 }
 
 .targetas1 {
@@ -1468,15 +1481,13 @@ body.modal-open {
   border-radius: 5px !important;
   color: #666 !important;
   background: white !important;
-  border: 1px solid #eaeaea !important;
+  border: 1px solid #c7c6c6 !important;
   font-weight: 500 !important;
-  padding: 5px 16px 6px 16px !important; 
+  padding: 8px 16px 8px 16px !important; 
   font-size: 0.875rem !important;
   line-height: 1.25rem !important;
   text-transform: none !important;
-  box-shadow: none !important;
-  min-height: 40% !important;
-    width: 40% !important;
+
 }
 .btn-vercel-white:hover{
   color: #000 !important;
@@ -1580,10 +1591,16 @@ body.modal-open {
   padding: 5px 8px 6px 6px;
   color: white;
 }
+.ql-editor {
+  min-height: 80px !important;
+  font-family: AvenirNext LP Pro Regular, Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  background: #fff;
+}
 
 
 .s-active{
-  background: #e9ecef; 
+  background: rgb(211 229 255);
 }
 
 .s-container {
@@ -1630,7 +1647,7 @@ body.modal-open {
 .s-ifactive{
   background: #c2dbff;
 }
-/* .button-less {
+.button-less {
   border: 0;
   padding: 5px 15px;
   -webkit-border-radius: 100px;
@@ -1643,10 +1660,10 @@ body.modal-open {
   cursor: pointer;
   font-size: 12px;
   text-transform: uppercase;
-  color: #666;
+  color: rgb(15, 15, 15);
   height: 28px;
   background-color: #fff;
-} */
+} 
 .s-regresar{
   font-size: .875rem;
   color: #444;

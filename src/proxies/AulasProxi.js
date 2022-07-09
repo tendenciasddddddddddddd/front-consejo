@@ -70,4 +70,25 @@ export default class AulasProxi {
     updateTask(id, params) {
         return this.axios.put(this.url + `/tasks/update/${id}`, params); //RUTA ARBOL 2
     }
+    
+    //********************************DOCENTES QUIZZ */
+    createQuizz(id, params) {
+        return this.axios.put(this.url + `/quizz/${id}`, params);
+    }
+
+    removeQuizz(id, params) { 
+        return this.axios.put(this.url + `/quizz/remove/${id}`, params);
+    }
+
+    sendQuestions(id, params) {
+        return this.axios.put(this.url + `/quizz/send/${id}`, params); //editQuizz
+    }
+
+    editQuizz(id, params) {
+        return this.axios.put(this.url + `/quizz/editQuizz/${id}`, params);
+    }
+
+    solveQuiz(id, params) {
+        return this.axios.put(this.url + `/quizz/solve/${id}`, params); // Resolver examne
+    }
 }

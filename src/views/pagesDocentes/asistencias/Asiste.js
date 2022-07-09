@@ -1,4 +1,4 @@
-import Refresh from "../../../shared/Refresh";
+import Refresh from "../../../shared/Spinner";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 export default {

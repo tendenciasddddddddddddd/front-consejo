@@ -1,49 +1,15 @@
 <template>
   <div>
-
-    <ActionsTrask :isRoles="0" :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @getDataAlls="getDataAll" @deletedSelected="deletedSelect"  @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
+    <ActionRowUser :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @examDetail="examDetail"
+      @gets="editTask" @openModal="openModal" @getDataAlls="getDataAll" />
     <div v-if="displayedArticles.length">
-      <div class=" liTask mt-1" v-for="(item, index) in displayedArticles" :key="item.id">
-        <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
-          
-            <div class="d-flex py-1">
-              <div class="form-check my-auto">
-                <input class="form-check-input cheka" type="checkbox" v-model="isSelecUsers" :value="item._id"
-                  @click="selectOne(item._id)" />
-              </div>
+      <Items v-for="(item, index) in displayedArticles" :key="item.id" :item="item" :index="index" @nextPage="openModal"
+        @selectOne="selectOne" />
+      <Paginate :numPages="numPages" :page="page" :total="object.length" @pagechanged="onPageChange"></Paginate>
 
-              <div @click="openModal(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" style="color: #007dbc;">
-                  {{ item.nombre }}
-                </h6>
-                <div class="text-sm colorestabla fuente">
-                  <div v-if="item.estado">
-                    <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Tarea Entregada
-                  </div>
-                  <div v-else>
-                    <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Pendiente Entrega
-                  </div>
-                </div>
-              </div>
-              <div class="mt-3 ms-5">
-                <span v-if="item.nota!=''" class="text-xs "> Nota {{item.nota}}</span>
-                <span v-else class="text-xs "><del>Sin calificar</del></span>
-              </div>
-            </div>
-          <div class="dropstart ms-auto">
-            <div class="d-flex  mt-2">
-              <TimeEgo :fecha="item.fechad" />
-              <!--v-tooltip.top-center="{content: item.descripcion, html: true}"-->
-            </div>
-          </div>
-        </div>
-      </div>
-       <Paginate :numPages="numPages"  :page="page" :total="object.length" @pagechanged="onPageChange"></Paginate>
-     
     </div>
     <NoFound v-else />
+
     <div v-if="iftask">
       <UpTrask :collects="collectionsEdit" @EventClose="closed" @getData="getDataAll" />
     </div>
@@ -52,83 +18,75 @@
 
 <script>
 import NoFound from "../../../shared/NoFound"
-import ActionsTrask from "../../../shared/ActionsTrask.vue";
-import TimeEgo from "../../../shared/TimeEgo";
+import ActionRowUser from "../../../shared/ActionRowUser.vue";
 import Paginate from "../../../shared/Paginate"
+import Items from "../../../shared/Items"
 export default {
   name: 'ListComp',
   props: {
     object: Array
   },
   components: {
-    NoFound, ActionsTrask, TimeEgo,Paginate,
+    NoFound, ActionRowUser, Paginate, Items,
     UpTrask: () => import( /* webpackChunkName: "UpTrask" */ "./UpTrask.vue"),
   },
   data() {
     return {
+      usuario: this.$store.state.user.id,
+      collections: [],
       userIds: [],
       iftask: false,
       isSelecUsers: [],
       collectionsEdit: {},
-      allSelected : false,
+      allSelected: false,
       searchQuery: '',
-        //Pagina 
-       page: 1,
-       perPage: 4,
-       pages: [],
-       numPages:null,
-       tarea_atrazada: false,
+      //Pagina 
+      page: 1,
+      perPage: 4,
+      pages: [],
+      numPages: null,
+      tarea_atrazada: false,
     }
   },
-    computed: {
+  computed: {
     displayedArticles: function () {
-      if (this.searchQuery.length>1) {
-        return this.object.filter((item) => {
+      if (this.searchQuery.length > 1) {
+        return this.collections.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
             .every((v) => item.nombre.toLowerCase().includes(v));
         });
-      }else{
-        return this.paginate(this.object);
+      } else {
+        return this.paginate(this.collections);
       }
-      
+
     }
   },
   methods: {
-     paginate(articles) {
+    paginate(articles) {
       let page = this.page;
       let perPage = this.perPage;
       let from = (page * perPage) - perPage;
       let to = (page * perPage);
-      this.numPages = Math.ceil(articles.length/this.perPage);
+      this.numPages = Math.ceil(articles.length / this.perPage);
       return articles.slice(from, to);
-  },
-  onPageChange(page) {
+    },
+    onPageChange(page) {
       this.page = page;
     },
-    changeSearchs(value){
+    changeSearchs(value) {
       this.searchQuery = value;
     },
     openModal: function (obj) {
-       if (obj.nota!='') {
-        this.$dialog.alert('Esta tarea ya se encuentra calificada')
-      } else {
-        this.collectionsEdit = {
-          id: obj._id,
-          title : obj.nombre,
-          descrition : obj.descripcion,
-          recursos : obj.archivo,
-          datetimes : obj.finicio,
-          link : obj.link,
-          id2 : obj.id2,
-        }
-        this.iftask = true;
-      }
+      let array = this.object.filter((x) => x._id == obj)
+      this.collectionsEdit = array[0]
+      this.iftask = true
     },
     closed: function () {
       this.iftask = false
     },
+    examDetail() { },
     getDataAll() {
       this.$emit('getDataTask');
     },
@@ -154,21 +112,36 @@ export default {
     },
     editTask() {
       if (this.isSelecUsers.length == 1) {
-        for (let index = 0; index < this.object.length; index++) {
-          if (this.object[index]._id == this.isSelecUsers[0]) {
-            this.collectionsEdit = {
-             id: this.object[index]._id,
-             title : this.object[index].nombre,
-             descrition : this.object[index].descripcion,
-             recursos : this.object[index].archivo,
-             datetimes : this.object[index].finicio,
-             link : this.object[index].link,
-           }
-          }
-        }
-        this.iftask = true; //ABRIR MIDAL
+        let array = this.object.filter((x) => x._id == this.isSelecUsers[0])
+        this.collectionsEdit = array[0]
+        this.iftask = true
       }
     },
+    vueInit() {
+      this.collections = [];
+      
+      for (let i = 0; i < this.object.length; i++) {
+        let nota = ''; let estado = false;
+        let array = this.object[i].entrega;
+        for (let j = 0; j < array.length; j++) {
+          if (array[j].idUser == this.usuario) {
+            estado = true;
+            nota = array[j].nota;
+            break;
+          }
+        }
+        this.collections.push({
+          _id: this.object[i]._id,
+          nombre: this.object[i].nombre,
+          fecha: this.object[i].fechad,
+          nota: nota,
+          estado: estado
+        })
+      } 
+    }
+  },
+  created() {
+    this.vueInit()
   }
 }
 </script>
