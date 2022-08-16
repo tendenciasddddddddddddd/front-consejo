@@ -118,25 +118,7 @@
           </div>
         </div>
       </div>
-        <!-- <div
-          class="notificacionHeader"
-          
-        >
-          <a
-            @click="$router.go(-1)"
-            class="badge"
-            href="javascript:;"
-            style="box-shadow: none"
-          >
-            <img height="21px" src="../../../assets/img/usados/regresar.png" />
-          </a>
-          <span class="ms-3 h6" style="font-weight: 700;color: black;">
-            Despues de registrar los dos semestres confirme la notas.
-          </span>
-        </div> -->
 
-       
-        
         <div  class="mt-4">
          
 

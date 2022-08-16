@@ -56,7 +56,7 @@
 import Header from "@/shared/Header.vue";
 import Inicio from "@/shared/Inicio.vue";
 //import Footer from "@/shared/Footer.vue";
-import Login from "./views/pagesAccesos/Login.vue";
+import Login from "./views/auth/Login.vue";
 //import Help from "@/shared/Help.vue"
 export default {
   name: "app",

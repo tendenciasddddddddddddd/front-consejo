@@ -43,18 +43,12 @@
                     <span class="sidenav-normal letras fuente">Contraseña </span>
                 </a>
               </li>
-                 <li :class="{'active': $route.name === 'd1'}" class="nav-item " v-if="user.roles.includes('Docente')">
-                 <router-link  to="/perfil-docente" :class="{'active': $route.name === 'd1'}" class="nav-link ">
+                 <li :class="{'active': $route.name === 'd1'}" class="nav-item " v-if="user.roles.includes('Docente')||user.roles.includes('Estudiante')">
+                 <router-link  to="/perfil" :class="{'active': $route.name === 'd1'}" class="nav-link ">
                     <span class="sidenav-mini-icon"> P </span>
                     <span class="sidenav-normal letras fuente">Perfil </span>
                 </router-link>
               </li> 
-               <li :class="{'active': $route.name === 'e1'}" class="nav-item " v-if="user.roles.includes('Estudiante')">
-                 <router-link  to="/perfil-estudiante" :class="{'active': $route.name === 'e1'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> P </span>
-                    <span class="sidenav-normal letras fuente">Perfil </span>
-                </router-link>
-              </li>
               
             </ul>
           </div>
@@ -84,13 +78,13 @@
                 </router-link>
               </li>
               <li :class="{'active': $route.name === '222'}" class="nav-item ">
-                 <router-link  to="/List-Estudiate" :class="{'active': $route.name === '222'}" class="nav-link ">
+                 <router-link  to="/Estudiate" :class="{'active': $route.name === '222'}" class="nav-link ">
                     <span class="sidenav-mini-icon"> E </span>
                     <span class="sidenav-normal letras fuente">Estudiates </span>
                 </router-link>
               </li>
                 <li :class="{'active': $route.name === '333'}" class="nav-item ">
-                 <router-link  to="/List-Docente" :class="{'active': $route.name === '333'}" class="nav-link ">
+                 <router-link  to="/Docente" :class="{'active': $route.name === '333'}" class="nav-link ">
                     <span class="sidenav-mini-icon"> D </span>
                     <span class="sidenav-normal letras fuente">Docentes </span>
                 </router-link>
@@ -116,7 +110,7 @@
           id="applicationsExamples">
             <ul class="nav ms-4 ps-3">
              <li :class="{'active': $route.name === '1111'}" class="nav-item ">
-                 <router-link  to="/Nivel" :class="{'active': $route.name === '1111'}" class="nav-link ">
+                 <router-link  to="/Cursos" :class="{'active': $route.name === '1111'}" class="nav-link ">
                     <span class="sidenav-mini-icon"> C </span>
                     <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
@@ -178,14 +172,14 @@
                 </router-link>
               </li>
                <li :class="{'active': $route.name === '77'}" class="nav-item ">
-                 <router-link  to="/Matricula-1" :class="{'active ': $route.name === '77'}" class="nav-link ">
+                 <router-link  to="/Intensivo" :class="{'active ': $route.name === '77'}" class="nav-link ">
                     <span class="sidenav-mini-icon"> I </span>
                     <span class="sidenav-normal letras fuente">Intensivo </span>
                 </router-link>
               </li>
 
                  <li :class="{'active': $route.name === '71'}" class="nav-item ">
-                 <router-link  to="/Matricula-2" :class="{'active ': $route.name === '71'}" class="nav-link ">
+                 <router-link  to="/Extraordinario" :class="{'active ': $route.name === '71'}" class="nav-link ">
                     <span class="sidenav-mini-icon"> E </span>
                     <span class="sidenav-normal letras fuente">Extraordinario </span>
                 </router-link>
@@ -226,9 +220,9 @@
            
 
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">
-                 <router-link  to="/reporte-docente" :class="{'active': $route.name === 'dr'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> R </span>
-                    <span class="sidenav-normal letras fuente">Reportes </span>
+                 <router-link  to="/zoom" :class="{'active': $route.name === 'dr'}" class="nav-link ">
+                    <span class="sidenav-mini-icon"> Z </span>
+                    <span class="sidenav-normal letras fuente">Zoom </span>
                 </router-link>
               </li>
             </ul>
@@ -397,7 +391,7 @@
         </div>
         <v-tour name="myTour" :steps="steps" :options="myOptions"></v-tour>
         <div v-if="visibl">
-           <Cuenta @cerrarCuenta="close"/>
+           <Password @cerrarCuenta="close"/>
         </div>
       </ul>
     </div>
@@ -409,7 +403,7 @@
  export default {
      name: 'Header',
      components: {//../views/pagesAdmin/cuenta/Cuenta.vue
-       Cuenta : () => import( /* webpackChunkName: "Cuenta" */ '../views/pagesAdmin/cuenta/Cuenta.vue'),
+      Password : () => import( /* webpackChunkName: "Password" */ '../views/password/Password.vue'),
      },
      data() {
        return {

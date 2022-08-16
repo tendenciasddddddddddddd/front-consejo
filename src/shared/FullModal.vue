@@ -8,11 +8,11 @@
       >
         <div class="cabesa modal-header">
           <div class="float-start">
-            <h5 style="font-weight: 400;" class="mt-2 mb-0 fuente text-white">
+            <h5 style="font-weight: 400;" class=" mb-0 fuente text-white">
               <slot name="header">  </slot>
             </h5>
           </div>
-          <div class="float-end mt-2">
+          <div class="float-end mt-1">
             <a
               @click="close"
               class="btn btn-link text-dark p-0 fixed-plugin-close-button"

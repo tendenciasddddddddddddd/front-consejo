@@ -16,77 +16,77 @@ const routes = [{
   {
     path: '/Users',
     name: '1',
-    component: () => import( /* webpackChunkName: "Usuario" */ '../views/pagesAdmin/users/Users.vue'),
+    component: () => import( /* webpackChunkName: "Usuario" */ '../views/users/Users.vue'),
     beforeEnter: authorization
   },
  
   { //-------ZONAS------
     path: '/option-zonas',
     name: '000',
-    component: () => import( /* webpackChunkName: "OptionZoan" */ '../views/pagesRegister/zonas/OptionZoan.vue'),
+    component: () => import( /* webpackChunkName: "Zone" */ '../views/zone/Zone.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
-    path: '/List-Provincias',
+    path: '/Provincias',
     name: '000',
-    component: () => import( /* webpackChunkName: "ListProvincias" */ '../views/pagesRegister/zonas/provincias/ListProvincias.vue'),
+    component: () => import( /* webpackChunkName: "Provincias" */ '../views/zone/pages/provincias/Provincias.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
-    path: '/List-Canton',
+    path: '/Canton',
     name: '000',
-    component: () => import( /* webpackChunkName: "ListCanton" */ '../views/pagesRegister/zonas/cantones/ListCanton.vue'),
+    component: () => import( /* webpackChunkName: "Canton" */ '../views/zone/pages/cantones/Canton.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
-    path: '/List-Parroquia',
+    path: '/Parroquia',
     name: '000',
-    component: () => import( /* webpackChunkName: "Parroquias" */ '../views/pagesRegister/zonas/parroquias/Parroquias.vue'),
+    component: () => import( /* webpackChunkName: "Parroquias" */ '../views/zone/pages/parroquias/Parroquias.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
-    path: '/List-Nacionalidad',
+    path: '/Nacionalidad',
     name: '000',
-    component: () => import( /* webpackChunkName: "Nacionalidad" */ '../views/pagesRegister/zonas/nacionalidad/Nacionalidad.vue'),
+    component: () => import( /* webpackChunkName: "Nacionalidad" */ '../views/zone/pages/nacionalidad/Nacionalidad.vue'),
   },
   { //-------------------------------------ZONAS------------------------------
-    path: '/List-Etnias',
+    path: '/Etnias',
     name: '000',
-    component: () => import( /* webpackChunkName: "Etnias" */ '../views/pagesRegister/zonas/etnias/Etnias.vue'),
+    component: () => import( /* webpackChunkName: "Etnias" */ '../views/zone/pages/etnias/Etnias.vue'),
   },
   { //-------------------------------------REGISTROS------------------------------
-    path: '/List-Estudiate',
+    path: '/Estudiate',
     name: '222',
-    component: () => import( /* webpackChunkName: "Estudiante" */ '../views/pagesRegister/estudiantes/Estudiante.vue'),
+    component: () => import( /* webpackChunkName: "Estudiante" */ '../views/estudiante/Estudiante.vue'),
   },
   { //-------------------------------------REGISTROS------------------------------
-    path: '/List-Docente',
+    path: '/Docente',
     name: '333',
-    component: () => import( /* webpackChunkName: "Docentes" */ '../views/pagesRegister/docentes/Docentes.vue'),
+    component: () => import( /* webpackChunkName: "Docentes" */ '../views/docente/Docentes.vue'),
   },
 
 
   { //-------------------------------------GESTION------------------------------
-    path: '/Nivel',
+    path: '/Cursos',
     name: '1111',
-    component: () => import( /* webpackChunkName: "Nivel" */ '../views/pagesGestionCursos/nivel/Nivel.vue'),
+    component: () => import( /* webpackChunkName: "Cursos" */ '../views/cursos/Cursos.vue'),
   },
   { //-------------------------------------GESTION------------------------------
     path: '/Materias',
     name: '1234',
-    component: () => import( /* webpackChunkName: "Materias" */ '../views/pagesGestionCursos/materia/Materias.vue'),
+    component: () => import( /* webpackChunkName: "Materias" */ '../views/materia/Materias.vue'),
   },
 
   { //-------------------------------------MATRICULA------------------------------
     path: '/Periodo',
     name: '11',
-    component: () => import( /* webpackChunkName: "Periodo" */ '../views/pagesMatriculas/periodos/Periodo.vue'),
+    component: () => import( /* webpackChunkName: "Periodo" */ '../views/periodo/Periodo.vue'),
   },
   { //-------------------------------------MATRICULA------------------------------
-    path: '/Matricula-1',
+    path: '/Intensivo',
     name: '77',
-    component: () => import( /* webpackChunkName: "Matriculas1" */ '../views/pagesMatriculas/matricula1/Matriculas1.vue'),
+    component: () => import( /* webpackChunkName: "Intensivo" */ '../views/matricula/Intensivo.vue'),
   },
   { //-------------------------------------MATRICULA------------------------------
-    path: '/Matricula-2',
+    path: '/Extraordinario',
     name: '71',
-    component: () => import( /* webpackChunkName: "Matriculas2" */ '../views/pagesMatriculas/matricula2/Matriculas2.vue'),
+    component: () => import( /* webpackChunkName: "Extraordinario" */ '../views/matricula/Extraordinario.vue'),
   },
 
   { //-------------------------------------ERROR PERMISO------------------------------
@@ -97,12 +97,12 @@ const routes = [{
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Distributivo-v1',
     name: '2222',
-    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/pagesGestionCursos/distributivo/dV1/Distributivov1.vue'),
+    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/dis1/Distributivov1.vue'),
   },
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Distributivo-v2',
     name: '2223',
-    component: () => import( /* webpackChunkName: "Distributivov2" */ '../views/pagesGestionCursos/distributivo/dV2/Distributivov2.vue'),
+    component: () => import( /* webpackChunkName: "Distributivov2" */ '../views/distributivo/dis2/Distributivov2.vue'),
   },
 
 
@@ -110,25 +110,30 @@ const routes = [{
   {
     path: '/opciones-reportes',
     name: 'r2',
-    component: () => import( /* webpackChunkName: "MenuReportes" */ '../views/pagesMatriculas/reportes/MenuReportes.vue'),
+    component: () => import( /* webpackChunkName: "MenuReportes" */ '../views/reporte/Reporte.vue'),
   },
 
  
   ////------------------------------------DOCENTES-----------------------------
   {
-    path: '/perfil-docente',
+    path: '/perfil',
     name: 'd1',
-    component:() => import( /* webpackChunkName: "Perfil" */ '../views/pagesDocentes/perfiles/Perfil.vue'),
+    component:() => import( /* webpackChunkName: "Perfil" */ '../views/profile/Perfil.vue'),
   },
   {
     path: '/opciones-curso',
     name: 'd2',
-    component: () => import( /* webpackChunkName: "Perfil" */ '../views/pagesDocentes/cursos/MenuCursos.vue'),
+    component: () => import( /* webpackChunkName: "Cursos" */ '../modules/cursos/Cursos.vue'),
   },
   {
-    path: '/reporte-docente',
+    path: '/zoom',
     name: 'dr',
-    component: () => import( /* webpackChunkName: "Perfil" */ '../views/pagesDocentes/reportesdoc/ReporteDoc.vue'),
+    component: () => import( /* webpackChunkName: "Perfil" */ '../modules/zoom/Zoom.vue'),
+  },
+  {
+    path: '/menuCurso/:id',
+    name: 'd4',
+    component: () => import( /* webpackChunkName: "MenuCurso" */ '../modules/cursos/MenuCurso.vue'),
   },
 
   {
@@ -144,11 +149,7 @@ const routes = [{
     props: true
   },
   //--------------------------------------ESTUDIANTES-----------
-  {
-    path: '/perfil-estudiante',
-    name: 'e1',
-    component: () => import( /* webpackChunkName: "Profile" */ '../views/pagesAlumnos/perfil/Profile.vue'),
-  },
+
   {
     path: '/Consultar-nota',
     name: 'e2',

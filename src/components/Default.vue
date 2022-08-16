@@ -29,8 +29,8 @@
               </div>
               <div class="my-auto ms-3">
                 <div class="h-100">
-                  <p class="text-sm mb-1 fuente">Su Host es {{ host }}</p>
-                  <p class="mb-0 text-xs fuente">{{ nombre }}</p>
+                  <p class="text-sm mb-1 fuente">Su Host es 192.168.1.100</p>
+                  <p class="mb-0 text-xs fuente">Mac</p>
                 </div>
               </div>
               <span class="badge badge-success badge-sm my-auto ms-auto me-3 fuente"
@@ -40,7 +40,7 @@
               <a
                 href="javascript:;"
                 class="text-primary text-sm icon-move-right my-auto"
-                >{{ fecha }}
+                >10-10-2020
               </a>
             </div>
           </div>
@@ -86,56 +86,10 @@
   </div>
 </template>
 <script>
-import { usersCollection } from "../boot/firebase";
 
 export default {
   name: "Default",
-  data() {
-    return {
-      tab: "init",
-      userss: null,
-      nombre: '',
-      host: '',
-      fecha: '',
-      tasks: [
-        {
-          id: "idTask",
-          texto: "Aquí irá el texto de la nota",
-          estado: false,
-        },
-      ],
-      info: null,
-      name: '',
-      //EFECTO MAQUINAL
-     msg: 'This is a button.'
-    };
-  },
 
-  methods: {
-    imprinit() {
-      var users = [];
-      usersCollection.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-          users.push({
-            id: doc.id,
-            texto: doc.data().texto,
-            estado: doc.data().estado,
-          });
-        });
-        this.userss = users;
-        console.log(this.userss);
-      });
-    },
-    welcom(){
-       const seccio = JSON.parse(localStorage.getItem("datos"));
-       this.nombre= seccio.nombre;
-      this.host= seccio.host;
-      this.fecha= seccio.fecha;
-    }
-  },
-  created() {
-   this.welcom();
-  },
 };
 </script>
 

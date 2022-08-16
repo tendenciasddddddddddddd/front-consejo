@@ -6,6 +6,7 @@ import proxyConfig from './proxies/_config'
 import store from './store/index'
 import Notifications from 'vue-notification'
 import SimpleVueValidation from 'simple-vue-validator';
+import WebRTC from 'vue-webrtc'
 
 import { VTooltip, VPopover, VClosePopover } from 'v-tooltip'
 import vSelect from "vue-select";
@@ -36,6 +37,7 @@ import VueTour from 'vue-tour'
 require('vue-tour/dist/vue-tour.css')
 
 Vue.config.productionTip = false
+
 
 Vue.use(SimpleVueValidation, {
   mode: 'manual',
@@ -73,6 +75,7 @@ Vue.use({
   }
 });
 
+Vue.use(WebRTC)
 Vue.use(Notifications)
 Vue.directive('tooltip', VTooltip)
 Vue.directive('close-popover', VClosePopover)

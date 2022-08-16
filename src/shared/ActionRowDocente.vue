@@ -52,9 +52,9 @@
                     </svg>
                 </a>
                 <a @click="$emit('remove')" role="button" class="fuente tamanio me-2 btnOption"
-                    :class="{ disabled: longitude != 1 }"
+                    :class="{ disabled: longitude === 0 }"
                     v-tooltip.top-center="longitude ? '' : 'Seleccionar uno o varios items para eiminar'">
-                    <svg class="center-icon" :class="{ links: longitude === 1 }" data-testid="geist-icon" fill="none"
+                    <svg class="center-icon" :class="{ links: longitude != 0 }" data-testid="geist-icon" fill="none"
                         height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22">
                         <path d="M3 6h18"></path>
