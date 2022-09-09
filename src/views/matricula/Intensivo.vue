@@ -134,7 +134,7 @@ export default {
   methods: {
     verificarUsuario() {
         let text_1 = 'Matriculas'
-      let text_2 = 'Modalidad intensivo'
+      let text_2 = 'Lista de opciones'
       this.$store.commit('updateHeader',{text_1, text_2})
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");

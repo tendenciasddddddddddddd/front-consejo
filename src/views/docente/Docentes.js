@@ -10,7 +10,7 @@ export default {
     Spinner,
     DocenteCreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ './components/Add.vue'),
     AlertHeader,
-    Modal: () => import( /* webpackChunkName: "Modal" */ "../../shared/Modal.vue"),
+    GridUser : () => import( /* webpackChunkName: "GridUser" */ '../../components/agGrid/GridUser.vue'),
     Paginate2,
     ActionsRow
   },
@@ -35,7 +35,7 @@ export default {
       //CHILD COMPONENT
       ifCreateUpdate: false,
       idUser: null,
-      visible: false,
+      ifGrid : false,
     };
   },
   methods: {
@@ -60,6 +60,12 @@ export default {
     },
     closedChildDocente: function () {
       this.ifCreateUpdate = false;
+    },
+    openAgGrid: function () {
+      this.ifGrid = true;
+    },
+    closeAgGrid: function () {
+      this.ifGrid = false;
     },
     refreshData: function () {
       this.ifCreateUpdate = false;
@@ -203,12 +209,6 @@ export default {
     salirBusqueda: function() {
       this.getAll(1, 6);
       this.isSearch = false;
-    },
-    openModal() {
-      this.visible = true;
-    },
-    close() {
-      this.visible = false;
     },
     changedQuery(num) {
       this.rows = num;

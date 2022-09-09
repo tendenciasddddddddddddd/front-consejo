@@ -33,6 +33,10 @@ export default class NotasProxi {
         return this.axios.put(this.url + `/notas/createfullnote/${id}`, params); //deleteallnote
     }
 
+    updateSupletorios(id, params) {
+        return this.axios.put(this.url + `/notas/createSupletorios/${id}`, params); //deleteallnote
+    }
+
     deleteAllNote(id, params) {
         return this.axios.put(this.url + `/notas/deleteallnote/${id}`, params); //confirmfullnote
     }

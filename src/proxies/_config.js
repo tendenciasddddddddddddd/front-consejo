@@ -8,6 +8,7 @@ import MatriculaProxi from './MatriculaProxi'
 import NotasProxi from './NotasProxi'
 import AulasProxi from './AulasProxi'
 import MigracionProxi from './MigracionProxi'
+import SettingProxi from './SettingProxi'
 
 //axios
 Axios.defaults.headers.common.Accept='application/json'
@@ -59,5 +60,6 @@ export default{
     _matriculaProxi : new MatriculaProxi(Axios, url), 
     _notasProxi : new NotasProxi(Axios, url),
     _aulaProxi : new AulasProxi(Axios, url),
-    _migracionProxi : new MigracionProxi(Axios, url)
+    _migracionProxi : new MigracionProxi(Axios, url),
+    _settingProxi : new SettingProxi(Axios, url),
 }

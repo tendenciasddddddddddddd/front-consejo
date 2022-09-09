@@ -13,9 +13,6 @@
               Periodo
             </th>
             <th class="text-uppercase text-center text-xxs font-weight-bolder">
-              Modalidad
-            </th>
-            <th class="text-uppercase text-center text-xxs font-weight-bolder">
               Fecha modicado
             </th>
 
@@ -36,9 +33,6 @@
                   {{ item.nombre }}
                 </a>
               </div>
-            </td>
-            <td class="text-sm text-center text-dark fuente">
-              {{ item.typo }}
             </td>
             <td class="text-sm text-center text-dark fuente">
               {{ item.updatedAt.substring(0, 10) }}
@@ -71,14 +65,6 @@
           <span class="parrafo mt-2">Fin de Periodo</span>
           <date-picker v-model="model.finaliza" valueType="format" class="w-100 fuente"></date-picker>
           <p class="mb-2 text-xs fuente text-danger">{{ validation.firstError("model.finaliza") }}</p>
-          <span class="parrafo mt-2">Modalidad</span>
-          <div class="" v-for="ite in modalidad" :key="ite.id">
-            <div class="form-check mb-1">
-              <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="ite.id"
-                :value="ite.name" />
-              <a class="parrafo" :for="ite.name"> {{ ite.name }}</a>
-            </div>
-          </div>
           <hr class="horizontal dark mb-1 d-xl-block d-none">
           <div class="text-center">
             <ButtonLoading v-if="ifLoad" />

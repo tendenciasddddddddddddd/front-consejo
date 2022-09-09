@@ -4,9 +4,8 @@ import './registerServiceWorker'
 import router from './router'
 import proxyConfig from './proxies/_config'
 import store from './store/index'
-import Notifications from 'vue-notification'
 import SimpleVueValidation from 'simple-vue-validator';
-import WebRTC from 'vue-webrtc'
+import 'ag-grid-enterprise';
 
 import { VTooltip, VPopover, VClosePopover } from 'v-tooltip'
 import vSelect from "vue-select";
@@ -14,7 +13,6 @@ import Vue2Editor from "vue2-editor";
 
 import GAuth from 'vue-google-oauth2'
 
-import VueOnlinePlugin from 'vue-navigator-online'
 
 import VuejsDialog from 'vuejs-dialog';
 
@@ -32,9 +30,6 @@ import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
 import VueProgressBar from 'vue-progressbar'
 
-import VueTour from 'vue-tour'
-
-require('vue-tour/dist/vue-tour.css')
 
 Vue.config.productionTip = false
 
@@ -75,8 +70,6 @@ Vue.use({
   }
 });
 
-Vue.use(WebRTC)
-Vue.use(Notifications)
 Vue.directive('tooltip', VTooltip)
 Vue.directive('close-popover', VClosePopover)
 Vue.component('v-popover', VPopover)
@@ -90,7 +83,6 @@ const gauthOption = {
 }
 Vue.use(GAuth, gauthOption)
 
-Vue.use(VueOnlinePlugin)
 
 Vue.use(Vue2Editor);
 
@@ -110,8 +102,6 @@ Vue.use(toasted, {
 
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog);
-
-Vue.use(VueTour)
 
 Vue.use(VueProgressBar, {
   color: 'rgb(8, 8, 8)',

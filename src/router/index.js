@@ -83,11 +83,7 @@ const routes = [{
     name: '77',
     component: () => import( /* webpackChunkName: "Intensivo" */ '../views/matricula/Intensivo.vue'),
   },
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Extraordinario',
-    name: '71',
-    component: () => import( /* webpackChunkName: "Extraordinario" */ '../views/matricula/Extraordinario.vue'),
-  },
+
 
   { //-------------------------------------ERROR PERMISO------------------------------
     path: '/page-not-found',
@@ -113,7 +109,12 @@ const routes = [{
     component: () => import( /* webpackChunkName: "MenuReportes" */ '../views/reporte/Reporte.vue'),
   },
 
- 
+   ////------------------------------------SETTING-----------------------------
+   {
+    path: '/settings',
+    name: 's1',
+    component: () => import( /* webpackChunkName: "Setting" */ '../views/settings/Setting.vue'),
+  },
   ////------------------------------------DOCENTES-----------------------------
   {
     path: '/perfil',
@@ -136,18 +137,7 @@ const routes = [{
     component: () => import( /* webpackChunkName: "MenuCurso" */ '../modules/cursos/MenuCurso.vue'),
   },
 
-  {
-    path: '/qualifys/:id',
-    name: 'd4',
-    component: () => import( /* webpackChunkName: "Qualifys" */ '../views/pagesDocentes/qualify/Qualifys.vue'),
-  },
-  
-  {
-    path: '/asistencias/:id',
-    name: 'asistencia',
-    component: () => import( /* webpackChunkName: "Asiste" */ '../views/pagesDocentes/asistencias/Asiste.vue'),
-    props: true
-  },
+
   //--------------------------------------ESTUDIANTES-----------
 
   {

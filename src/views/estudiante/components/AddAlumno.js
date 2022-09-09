@@ -18,6 +18,7 @@ export default {
     IsSelect,
     FullModal, CustomInput, Dropdown, ButtonLoading,
     AllUsersCsv : () => import( /* webpackChunkName: "AllUsersCsv" */ './AllUsersCsv.vue'),
+    
   },
   props: {
     idGet: {
@@ -59,12 +60,8 @@ export default {
         fketnia: '',
         fknacionalidad: '',
         fkparroquia: null,
-        modalidad: null,
       },
-      modalidad: [
-        { name: "Intensivo", id: "1" },
-        { name: "Extraordinaria", id: "2" },
-      ],
+  
 
       checked: "",
       valido: false,
@@ -131,7 +128,6 @@ export default {
           .then((x) => {
             this.model = x.data;
             this.ifcarga = false;
-            this.checked = this.model.modalidad;
           })
           .catch(() => {
             console.log("Error");
@@ -153,7 +149,6 @@ export default {
           this.model.fkparroquia = this.model.fkparroquia.nombre;
           this.model.fknacionalidad = this.model.fknacionalidad.nombre;
           this.model.fketnia = this.model.fketnia.nombre;
-          this.model.modalidad = this.checked;
           this.model.fullname = this.model.apellidos + " " + this.model.nombres;
            this.$proxies._registroProxi
              .update(this.model._id, this.model) //-----------EDITAR CON AXIOS
@@ -178,7 +173,6 @@ export default {
           this.model.fkparroquia = this.model.fkparroquia.nombre;
           this.model.fknacionalidad = this.model.fknacionalidad.nombre;
           this.model.fketnia = this.model.fketnia.nombre;
-          this.model.modalidad = this.checked;
           this.model.fullname = this.model.apellidos + " " + this.model.nombres;
          
           this.$proxies._registroProxi

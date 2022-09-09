@@ -6,7 +6,7 @@
       <a class="navbar-brand m-0" href="javascript:;"  >
         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="burger-icon opacity-transition s-absolute s-right-24px s-cursor-pointer s-flex-none s-to-right" style="width: 28px; height: 28px;"><g class="style-scope yt-icon"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z" class="style-scope yt-icon"></path></g></svg>
         
-         <span class="sidenav-mini-icon" style="font-size:20px"> &nbsp; Pcei Tulcán </span>
+         <span class="sidenav-mini-icon negros" style="font-size:20px"> &nbsp; Sistema</span>
       </a>
       
     </div>
@@ -95,7 +95,7 @@
         </li>
         <li class="nav-item" v-if="user.roles.includes('Admin')"  id="step_3">
           <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
-           :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '2223'}" 
+           :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '1234'}" 
            aria-controls="applicationsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
                 
@@ -106,7 +106,7 @@
           <div class="collapse " 
            :class="{'show':
           $route.name === '1111'||$route.name === '1234'||
-          $route.name === '2222'||$route.name === '2223'}"
+          $route.name === '2222'}"
           id="applicationsExamples">
             <ul class="nav ms-4 ps-3">
              <li :class="{'active': $route.name === '1111'}" class="nav-item ">
@@ -121,36 +121,21 @@
                     <span class="sidenav-normal letras fuente">Materias </span>
                 </router-link>
               </li>
-              
-               <li class="nav-item ">
-                <a class="nav-link " :class="{'active': $route.name === '2222'|| $route.name === '2223'}"  data-bs-toggle="collapse" aria-expanded="false" href="#profileExample">
-                  <span class="sidenav-mini-icon"> D </span>
-                  <span class="sidenav-normal"> Distributivo <b class="caret"></b></span>
-                </a>
-                <div class="collapse " :class="{'show': $route.name === '2222' || $route.name === '2223'}"  id="profileExample">
-                  <ul class="nav nav-sm flex-column">
-                    <li :class="{'active': $route.name === '2222'}" class="nav-item ">
-                      <router-link  to="/Distributivo-v1" :class="{'active': $route.name === '2222'}" class="nav-link ">
-                        <span class="sidenav-mini-icon text-xs"> I </span>
-                        <span class="sidenav-normal letras fuente"> Intensivo </span>
-                      </router-link >
-                    </li>
-                    <li :class="{'active': $route.name === '2223'}" class="nav-item">
-                       <router-link  to="/Distributivo-v2" :class="{'active': $route.name === '2223'}" class="nav-link ">
-                        <span class="sidenav-mini-icon text-xs"> E </span>
-                        <span class="sidenav-normal letras fuente"> Extraordinario </span>
-                      </router-link >
-                    </li>
-                  </ul>
-                </div>
+               <li :class="{'active': $route.name === '2222'}" class="nav-item ">
+                 <router-link  to="/Distributivo-v1" :class="{'active': $route.name === '2222'}" class="nav-link ">
+                    <span class="sidenav-mini-icon"> D </span>
+                    <span class="sidenav-normal letras fuente">Distributivo </span>
+                </router-link>
               </li>
+              
+              
               
             </ul>
           </div>
         </li>
         <li class="nav-item" v-if="user.roles.includes('Admin')" id="step_4">
           <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link " 
-           :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'||$route.name === '71'}" aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+           :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'}" aria-controls="ecommerceExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
               
                <i class='bx bxs-copy-alt icons' ></i>
@@ -161,7 +146,6 @@
            :class="{'show':
           $route.name === '11'||
           $route.name === '77'||
-          $route.name === '71'||
            $route.name === 'r2'}"
           >
             <ul class="nav ms-4 ps-3">
@@ -173,17 +157,11 @@
               </li>
                <li :class="{'active': $route.name === '77'}" class="nav-item ">
                  <router-link  to="/Intensivo" :class="{'active ': $route.name === '77'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> I </span>
-                    <span class="sidenav-normal letras fuente">Intensivo </span>
+                    <span class="sidenav-mini-icon"> M </span>
+                    <span class="sidenav-normal letras fuente">Matricula </span>
                 </router-link>
               </li>
 
-                 <li :class="{'active': $route.name === '71'}" class="nav-item ">
-                 <router-link  to="/Extraordinario" :class="{'active ': $route.name === '71'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> E </span>
-                    <span class="sidenav-normal letras fuente">Extraordinario </span>
-                </router-link>
-              </li>
            
                <li :class="{'active': $route.name === 'r2'}" class="nav-item ">
                  <router-link  to="/opciones-reportes" :class="{'active': $route.name === 'r2'}" class="nav-link ">
@@ -255,7 +233,7 @@
 
               <li :class="{'active': $route.name === 'a2'}" class="nav-item ">
                  <router-link  to="/" :class="{'active': $route.name === 'a2'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> R </span>
+                    <span class="sidenav-mini-icon"> C </span>
                     <span class="sidenav-normal letras fuente">Chat </span>
                 </router-link>
               </li>
@@ -317,14 +295,14 @@
             <ul class="nav ms-4 ps-3">
                <li :class="{'active': $route.name === 'es1'}" class="nav-item ">
                  <router-link  to="/my-lista" :class="{'active': $route.name === 'es1'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-mini-icon"> M </span>
                     <span class="sidenav-normal letras fuente">Mi Aula </span>
                 </router-link>
               </li>
                
               <li :class="{'active': $route.name === 'es2'}" class="nav-item ">
                  <router-link  to="/all-lista" :class="{'active': $route.name === 'es2'}" class="nav-link ">
-                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-mini-icon"> T </span>
                     <span class="sidenav-normal letras fuente">Todos Los cursos </span>
                 </router-link>
               </li>
@@ -332,27 +310,24 @@
             </ul>
           </div>
         </li>
-           <li class="nav-item" id="step_5">
-          <a 
+        <li v-if="user.roles.includes('Admin')" class="nav-item" id="step_5">
+          <a :class="{'actived': $route.name === 's1'}"
           data-bs-toggle="collapse" href="#pagePublic" class="nav-link " aria-controls="pagePublic" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
-          
-               <i class='bx bx-dialpad-alt icons' ></i>
+               <i class='bx bxs-cog icons'></i>
+              
             </div>
-            <span  class="nav-link-text ms-1 mt-1">Otros</span>
+            <span  class="nav-link-text ms-1 mt-1">Configuración</span>
           </a>
           <div  
           class="collapse " id="pagePublic">
             <ul class="nav ms-4 ps-3">
-             <li  class="nav-item " >
-                 <a target="_blank" href="https://pcei-tulcan.com/" class="nav-link ">
-                    <span class="sidenav-mini-icon"> P </span>
-                    <span class="sidenav-normal letras fuente">Página pública </span>
-                </a>
-              </li>
-               
-        
-              
+             <li :class="{'active': $route.name === 's1'}" class="nav-item " >
+                  <router-link  to="/settings" :class="{'active': $route.name === 's1'}" class="nav-link ">
+                    <span class="sidenav-mini-icon"> S </span>
+                    <span class="sidenav-normal letras fuente">Setting </span>
+                </router-link>
+              </li> 
             </ul>
           </div>
         </li>
@@ -361,8 +336,7 @@
         </li>
         <div class="nav-item" id="step_6">
              <li >
-            <a 
-           @click="toursMain()" class="nav-link "  role="button" aria-expanded="false" >
+            <a  class="nav-link "  role="button" aria-expanded="false" >
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
               <i class='bx bx-help-circle icons' ></i>
               
@@ -389,7 +363,6 @@
          
         </li>
         </div>
-        <v-tour name="myTour" :steps="steps" :options="myOptions"></v-tour>
         <div v-if="visibl">
            <Password @cerrarCuenta="close"/>
         </div>
@@ -410,93 +383,7 @@
          user: this.$store.state.user,
          isMobile: false,
          visibl: false,
-          myOptions: {
-        useKeyboardNavigation: false,
-        labels: {
-          buttonSkip: "Salir",
-          buttonPrevious: "Anterior",
-          buttonNext: "Siguiente",
-          buttonStop: "¡Entendido!",
-        },
-      },
-      steps: [
-        {
-          target: "#step_1", // We're using document.querySelector() under the hood
-          header: {
-            title: "Área personal",
-          },
-          content: `Aquí no solo encontrarás el home, sino tambien opción para cambiar contraseña y perfil.`,
-          params: {
-           highlight: true,
-           placement: 'right'
-          }
-        },
-        {
-          target: "#step_2",
-          header: {
-            title: "Registros",
-          },
-          content: "Puedes registrar las zonas, estudiantes y docentes",
-          params: {
-           highlight: true,
-           placement: 'right'
-          }
-        },
-        {
-          target: "#step_3",
-           header: {
-            title: "Gestión de los cursos",
-          },
-          content: "Puedes crear cursos, asignaturas y registrar el distributivo",
-          params: {
-           highlight: true,
-           placement: 'right'
-          }
-        },
-        {
-          target: "#step_4", header: {
-            title: "Matriculas",
-          },
-          content: "Encuentra en esta sección todas la matriculas de lad 2 modalidades y imprimir un reporte.",
-           params: {
-           highlight: true,
-           placement: 'right'
-          }
-        },
-        {
-          target: "#step_5",
-           header: {
-            title: "Otros",
-          },
-          content: "Ubica aquí la página pública de la PCEI",
-           params: {
-           highlight: true,
-           placement: 'right'
-          }
-        },
-         {
-          target: "#step_6",
-           header: {
-            title: "Mas Opciones",
-          },
-          content: "Si aún tienes dudas sobre como funciona la plataforma, con mucho gusto te podemos ayudar",
-           params: {
-           highlight: true,
-           placement: 'right'
-          }
-        },
-        {
-          target: ".step_7",
-           header: {
-            title: "Herramientas",
-          },
-          content: "Puedes configurar esta pagina y recivir las notificaciones en tiempo real de la plataforma",
-           params: {
-           highlight: true,
-           placement: 'bottom'
-          }
-        },
-      ],
+
        }
      },
       beforeDestroy () {
@@ -521,9 +408,6 @@
     onResize () {
       this.isMobile = window.innerWidth < 600
     },
-    toursMain(){
-       this.$tours["myTour"].start();
-    },
     openCuenta() {
       this.visibl = true;
     },
@@ -533,39 +417,3 @@
     },
  }
 </script>
-<style >
-.v-tour__target--highlighted {
-  box-shadow: 0 0 0 3px #7fd1de,  0 0 42px 0 rgb(0 163 189/ 70%) !important;
-   z-index: 99999 !important;
-   background: white !important;
-}
-.v-step[data-v-54f9a632]{
-  position: fixed !important;
-   box-shadow: 0 0 0 99999px rgba(0, 19, 51, 0.64) !important;
-   background: white !important;
-  color: black !important;
-  padding: 0.75em;
-  font-size: 13px;
-    line-height: 20px;
-      
-}
-.v-step__header[data-v-54f9a632] {
-
-    background-color: #ffffff !important;
-    font-weight: 700;
-  font-size: 11px;
-  line-height: 16px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-.v-step__button[data-v-54f9a632] {
- color: #4b22f4 !important;
-  font-weight: 700;
-  font-size: 16px !important;
-}
-.v-step__arrow--dark[data-v-54f9a632]:before {
-    background: #ffffff !important;
-}
-
-
-</style>

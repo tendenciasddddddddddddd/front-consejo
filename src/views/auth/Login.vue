@@ -9,10 +9,9 @@
                 <div class="">
                   <div v-if="isVisible == 'logins'" class="card card-plain  mt-4">
                     <div class="card-header pb-0 text-center">
-                      <h2 class=" fuente">
-                        Leonidas Proaño
-                        <i style="color: #ff7a59" class="ni ni-app"></i>
-                      </h2>
+                      <h3 class="negros fuente">
+                        PLATAFORMA
+                      </h3>
                       <p class="parrafo">
                         Ingrese su email y contraseña para iniciar sesión
                       </p>

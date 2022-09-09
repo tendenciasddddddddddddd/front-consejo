@@ -88,11 +88,6 @@
               <th
                 class="text-uppercase text-center text-xxs font-weight-bolder"
               >
-                Modalidad
-              </th>
-              <th
-                class="text-uppercase text-center text-xxs font-weight-bolder"
-              >
                 Fecha M
               </th>
 
@@ -121,10 +116,6 @@
                   </a>
                 </div>
               </td>
-
-              <td class="text-sm text-center text-dark fuente">
-                {{ item.modalidad }}
-              </td>
               <td class="text-xs text-center font-weight-normal fuente">
                 {{ item.updatedAt.substring(0, 10) }}
               </td>
@@ -151,21 +142,7 @@
                   <p class="mb-0 text-xs fuente text-danger">
                     {{ validation.firstError("model.nombre") }}
                   </p>
-                  <br>
-                  <span class="parrafo ">Modalidad</span>
-                  <div class="" v-for="ite in modalidad" :key="ite.id">
-                    <div class="form-check mb-1">
-                      <input
-                        class="form-check-input"
-                        v-model="checked"
-                        type="radio"
-                        name="ite.id"
-                        :id="ite.id"
-                        :value="ite.name"
-                      />
-                      <a class="parrafo" :for="ite.name"> {{ ite.name }}</a>
-                    </div>
-                  </div>
+
                    <hr class="horizontal dark mb-1 d-xl-block d-none">
                   <div class="text-center">
                     <ButtonLoading v-if="ifLoad"/>

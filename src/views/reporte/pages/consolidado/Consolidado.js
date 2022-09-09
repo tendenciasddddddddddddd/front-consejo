@@ -65,7 +65,7 @@ export default {
                   email:  model[i].fkestudiante.email,
                   parroquia:  model[i].fkestudiante.fkparroquia,
                   sexo:  model[i].fkestudiante.sexo,
-                  curso : model[i].fknivel.nombres,
+                  curso : model[i].fknivel.nombre,
                   paralelo: model[i].curso,
                   }
                   anArray.push(objeto);

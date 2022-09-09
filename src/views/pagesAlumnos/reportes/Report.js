@@ -1,7 +1,6 @@
 import RestResource from '../../../service/isAdmin'
 const restResourceService = new RestResource();
 import Spinner from "../../../shared/Spinner.vue";
-import html2pdf from 'html2pdf.js'
 export default {
   name: 'Report',
   components :{Spinner},
@@ -54,16 +53,7 @@ export default {
         }
       },
       test() {
-        this.isprint = true;
-        var element = document.getElementById('root');
-        html2pdf().from(element).set({
-            margin: 0,
-            fontSize : 9,
-            filename: 'test.pdf',
-            html2canvas: { scale: 4 },
-            jsPDF: { orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true }
-        }).save();
-        setTimeout(() => this.isprint = false, 4000); 
+       console.log("Testing");
      },
      __calcularfechaActual(){
         const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

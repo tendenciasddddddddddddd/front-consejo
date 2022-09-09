@@ -36,7 +36,7 @@
             <li class="nav-item pt-1">
               <a class="nav-link  " :class="{ 's-active': tabs == 4 }" data-scroll="" href="javascript:;"
                 @click="vueInit(4)">
-                <span :class="{ 's-active2': tabs == 4 }" class="text-sm s-text-versel2">Configuración</span>
+                <span :class="{ 's-active2': tabs == 4 }" class="text-sm s-text-versel2">Planificaciónes</span>
               </a>
             </li>
           </ul>
@@ -44,17 +44,17 @@
       </div>
       <div class="col-lg-10 ">
         <section v-if="tabs == 0">
-          <Notas :object="inAlumnos"  @getDataTask="getDataActualizada" />
+          <Calificaciones :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 1">
-          suple
+          <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 2">
-          3
+          hola
         </section>
 
         <section v-if="tabs == 4">
-          congif
+          <Planificacion :id="idDistributivo" :planificacion="planificacion" />
         </section>
       </div>
     </div>
@@ -67,11 +67,13 @@ const restResourceService = new RestResource();
 import quialifyservice from "./pages/services";
 const ResultServiceNota = new quialifyservice();
 import ProgressBar from "../../shared/ProgressBar";
-import Notas from "./pages/Notas.vue";
+import Calificaciones from "./pages/Calificaciones.vue";
 export default {
   name: 'ModuloAula',
   components: {
-    ProgressBar, Notas,
+    ProgressBar, Calificaciones,
+    Planificacion: () => import( /* webpackChunkName: "Planificacion" */ './pages/Planificacion.vue'),
+    Supletorios: () => import( /* webpackChunkName: "Supletorios" */ './pages/Supletorios.vue'),
   },
   data() {
     return {
@@ -88,9 +90,17 @@ export default {
         calificaciones: {
           docente: "",
           materia: "",
+          promediof: '0',
+          suple: '0',
+          reme: '0',
+          gracia: '0',
+          pfinal: '0',
+          notas: [{ }]
         },
       },
       collectionTasks: [],
+      idDistributivo: '',
+      planificacion: '',
     }
   },
   methods: {
@@ -100,6 +110,8 @@ export default {
       this.para = seccio.paralelo;
       this.name = seccio.nombre;
       this.mate = seccio.materia;
+      this.idDistributivo = seccio.idDistributivo;
+      this.planificacion = seccio.planificacion;
       this.docentes = info.nombre;
       this.getData();
     },
@@ -111,20 +123,28 @@ export default {
           .getAll(this.$route.params.id)
           .then((x) => {
             this.isVerific = x.data.filter((x) => x.curso == this.para);
-            const isExiste = this.isVerific[0].calificaciones.filter( (x) => x.materia == this.mate ); 
+            const isExiste = this.isVerific[0].calificaciones.filter((x) => x.materia == this.mate);
+            console.log(this.isVerific);
             if (isExiste == 0) {
               this.confirmarMateria();
             } else {
-              this.inAlumnos = ResultServiceNota.llenar_tabla_notas(
+              const arrays = ResultServiceNota.llenar_tabla_notas(
                 this.isVerific,
                 this.mate
               );
+              this.inAlumnos = arrays.sort(function (a, b) {
+                var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+                if (nameA < nameB) //sort string ascending
+                  return -1;
+                if (nameA > nameB)
+                  return 1;
+                return 0; //default return value (no sorting)
+              });
               this.isData = false;
               this.$Progress.finish();
             }
-            console.log(this.inAlumnos)
-            const text_1 = this.mate + ' '+this.para 
-            const text_2 = 'Tareas'
+            const text_1 = this.mate + ' ' + this.para
+            const text_2 = 'Notas'
             this.$store.commit('updateHeader', { text_1, text_2 })
           })
           .catch((x) => {
@@ -134,7 +154,7 @@ export default {
           });
       }
     },
-        confirmarMateria() {
+    confirmarMateria() {
       let message = {
         title: "¿Registro de calificaciones?",
         body:
@@ -166,10 +186,16 @@ export default {
         for (let i = 0; i < this.isVerific.length; i++) {
           arrays.push(this.isVerific[i]._id);
         }
+        const notass = [
+          { quimestre: 'p1', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',},
+          { quimestre: 'p2', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',}
+        ]
         this.model2.calificaciones.docente = this.docentes;
         this.model2.calificaciones.materia = this.mate;
+        this.model2.calificaciones.notas = notass;
+        console.log(this.model2)
         this.$proxies._notasProxi
-          .updateReforma(arrays, this.model2) //-----------EDITAR CON AXIOS
+          .updateReforma(arrays, this.model2) 
           .then(() => {
             this.getDataActualizada();
             arrays = [];
@@ -188,10 +214,18 @@ export default {
           .getAll(this.$route.params.id)
           .then((x) => {
             this.isVerific = x.data.filter((x) => x.curso == this.para);
-            this.inAlumnos = ResultServiceNota.llenar_tabla_notas(
+            const arrays = ResultServiceNota.llenar_tabla_notas(
               this.isVerific,
               this.mate
             );
+            this.inAlumnos = arrays.sort(function (a, b) {
+                var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+                if (nameA < nameB) //sort string ascending
+                  return -1;
+                if (nameA > nameB)
+                  return 1;
+                return 0; //default return value (no sorting)
+              });
             this.isData = false;
             this.$Progress.finish();
           })
@@ -204,7 +238,7 @@ export default {
     },
     vueInit(num) {
       this.tabs = num;
-      let text_1 = this.mate + ' '+this.para
+      let text_1 = this.mate + ' - ' + this.para
       let text_2 = ''
       switch (num) {
         case 0:
@@ -220,7 +254,7 @@ export default {
           this.$store.commit('updateHeader', { text_1, text_2 })
           break;
         case 4:
-          text_2 = 'Configuración';
+          text_2 = 'Planificación';
           this.$store.commit('updateHeader', { text_1, text_2 })
           break;
         default:
@@ -230,6 +264,20 @@ export default {
     verificarUsuario() {
       if (!restResourceService.docente(this.roles)) this.$router.push("/");
       this.LoadCourse();
+    },
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 2300,
+        position: 'bottom-center',
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: 'CERRAR',
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          }
+        }
+      });
     },
   },
   created() {
@@ -248,7 +296,8 @@ export default {
 .s-text-versel2 {
   color: #444;
 }
+
 a[data-scroll] {
-    border-radius: 0.1rem !important;
+  border-radius: 0.1rem !important;
 }
 </style>

@@ -193,118 +193,96 @@
                   <div v-else>
                     <div class="mt-4"></div>
                     <div style="border: 1px solid black;">
-                      <div id="root" class="my-sm-5">
-                        <div class="card-header text-center ">
-                          <div class="row justify-content-between">
-                            <div class="col-md-2 text-start">
-                              <img
-                                class="mb-2 w-80 "
-                                src="../../../assets/img/escudo.png"
-                                alt="Logo"
-                              />
-                            </div>
-                            <div class="col-md-8">
-                              <p class="h6 fuente">
-                                Subsistema de Educación Fiscomisional del
-                                Ecuador
-                              </p>
-                              <p
-                                style="margin-top:-10px"
-                                class="h6 text-center fuente"
-                              >
-                                "Mons. Leonidas Proaño"
-                              </p>
+                        <div id="root" class="my-sm-5">
+                    <div class="card-header text-center ">
+                      <div class="row justify-content-between">
+                        <div class="col-md-2 text-start">
+                          <img
+                            class="mb-2 w-70 "
+                            src="../../../assets/img/alfonso.jpg"
+                            alt="Logo"
+                          />
+                        </div>
+                        <div class="col-md-8">
+                          <p class="h6 fuente">
+                            Subsistema de Educación básica del Ecuador
+                          </p>
+                          <p
+                            style="margin-top:-10px"
+                            class="h6 text-center fuente"
+                          >
+                            "Alfonso Herrera"
+                          </p>
 
-                              <p
-                                style="margin-top:20px"
-                                class="h6 text-center fuente"
-                              >
-                                UNIDAD EDUCATIVA FISCOMISIONAL DEL CARCHI PCEI
-                              </p>
-                            </div>
-                            <div class="col-lg-2  text-md-end ">
-                              <img
-                                class="mb-2 w-100 h-80"
-                                src="../../../assets/img/aaaa.png"
-                                alt="Logo"
-                              />
-                            </div>
-                          </div>
-                          <br />
-                          <div class="row justify-content">
-                            <br />
-                            <br />
-                            <div class="col-12">
-                              <p class="h6 fuente">
-                                <b>UNIDAD EDUCATIVA FISCOMISIONAL</b>
-                              </p>
-                              <p style="margin-top:-10px" class="h6 fuente">
-                                <b>"MONSEÑOR LEONIDAS PROAÑO" PCEI</b>
-                              </p>
-                              <p
-                                style="margin-top:-10px"
-                                class="h6 pb-0 fuente"
-                              >
-                                <b>Tulcán - Ecuador</b>
-                              </p>
-                              <br />
-                              <br />
-                              <p class="text-xs fuente"><b>COPIA DE:</b></p>
-                              <p class="h4 fuente"><b>MATRICULA</b></p>
-                              <p
-                                style="margin-top:-10px"
-                                class="h6 pb-0 fuente"
-                              >
-                                <b
-                                  >AÑO ELECTIVO: &nbsp;&nbsp;{{
-                                    info.academico.nombre
-                                  }}</b
-                                >
-                              </p>
-                              <br />
-                              <p class="h6 pb-0 fuente">
-                                <b>CERTIFICO: &nbsp;&nbsp; {{ info.nombre }}</b>
-                              </p>
-                              <br />
-                              <p class="h6 text-dark text-center">
-                                Previo los requisitos legales se matriculó en
-                                {{ info.fknivel.nombres }}
-                              </p>
-                              <p
-                                style="margin-top:-10px"
-                                class="h6 text-center fuente"
-                              >
-                                &nbsp;&nbsp;&nbsp;&nbsp; SUPERIOR con Matricula
-                                No.
-                                {{ info.nmatricula }} y Folio No.
-                                {{ info.folio }} DEL
-                                {{ info.fecha }}
-                              </p>
-                              <p
-                                style="margin-top:-10px"
-                                class="h6 text-center fuente"
-                              >
-                                &nbsp;&nbsp;&nbsp;&nbsp; Así consta en el libro
-                                respectivo del Departamento de Secretaría
-                              </p>
-                              <br />
-                              <br />
-                              <br />
-                              <br />
-                              <p class="h6 pb-0">
-                                <b>__________________________________</b>
-                              </p>
-                              <p class="h6 pb-0"><b>Msc. Marino Arellano</b></p>
-                              <p class="h6 pb-0"><b>RECTOR-UNEF.C</b></p>
-                              <br />
-                              <br />
-                              <p class="text-start">
-                                <b>Tulcán, {{ fechasActual }} </b>
-                              </p>
-                            </div>
-                          </div>
+                       
+                        </div>
+                        <div class="col-lg-2  text-md-end ">
+                          <img
+                            class="mb-2 w-70 h-80"
+                            src="../../../assets/img/alfonso.jpg"
+                            alt="Logo"
+                          />
                         </div>
                       </div>
+                      <br />
+                      <div class="row justify-content">
+                        <br />
+                        <br />
+                        <div class="col-12">
+                          <p style="margin-top:-10px" class="h6 fuente">
+                            <b>UNIDAD EDUCATIVA ALFONSO HERRERA</b>
+                          </p>
+                          <p style="margin-top:-10px" class="h6 pb-0 fuente">
+                            <b>El Angel - Ecuador</b>
+                          </p>
+                          <br />
+                          <br />
+                          <p class="text-xs fuente"><b>COPIA DE:</b></p>
+                          <p class="h4 fuente"><b>MATRICULA</b></p>
+                          <p style="margin-top:-10px" class="h6 pb-0 fuente">
+                            <b
+                              >AÑO ELECTIVO: &nbsp;&nbsp;{{
+                                info.academico.nombre
+                              }}</b
+                            >
+                          </p>
+                          <br />
+                          <p class="h6 pb-0 fuente">
+                            <b>CERTIFICO: {{ info.nombre }}</b>
+                          </p>
+                          <br />
+                          <p class="h6 text-dark text-center">
+                            Previo los requisitos legales se matriculó en
+                            {{ info.fknivel.nombre }}
+                          </p>
+                          <p style="margin-top:-10px" class="h6 text-center">
+                            &nbsp;&nbsp;&nbsp;&nbsp; SUPERIOR con Matricula No.
+                            {{ info.nmatricula }} y Folio No.
+                            {{ info.folio }} DEL
+                            {{ info.fecha }}
+                          </p>
+                          <p style="margin-top:-10px" class="h6 text-center">
+                            &nbsp;&nbsp;&nbsp;&nbsp; Así consta en el libro
+                            respectivo del Departamento de Secretaría
+                          </p>
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <p class="h6 pb-0">
+                            <b>__________________________________</b>
+                          </p>
+                          <p class="h6 pb-0"><b>Msc. XXXX XXXX XXXX</b></p>
+                          <p class="h6 pb-0"><b>RECTOR</b></p>
+                          <br />
+                          <br />
+                          <p class="text-start">
+                            <b>EL ANGEL, {{ fechasActual }} </b>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                     </div>
                   </div>
                 </div>
@@ -346,15 +324,14 @@
                             <div class="col-12">
                               <p class="h6 " style="font-weight: 700;">
                                 <b
-                                  >UNIDAD EDUCATIVA FISCOMISIONAL MONSEÑOR
-                                  LEONIDAS PROAÑO</b
+                                  >UNIDAD EDUCATIVA CESAR ANTONIO MOSQUERA</b
                                 >
                               </p>
                               <p
                                 style="margin-top:-10px;font-weight: 700;"
                                 class="h6 "
                               >
-                                <b> (PCEI)</b>
+                                <b> (UETCCAM)</b>
                               </p>
                               <p
                                 style="margin-top:-10px;font-weight: 500;"
@@ -416,12 +393,12 @@
                               <p class="h6 pb-0">
                                 <b>__________________________________</b>
                               </p>
-                              <p class="h6 pb-0"><b>Msc. Marino Arellano</b></p>
-                              <p class="h6 pb-0"><b>RECTOR-UNEF.C</b></p>
+                              <p class="h6 pb-0"><b>Msc. XXXX XXXX XXXX</b></p>
+                              <p class="h6 pb-0"><b>RECTOR-UETCCAM</b></p>
                               <br />
                               <br />
                               <p class="text-start">
-                                <b>Tulcán, {{ fechasActual }} </b>
+                                <b>JULIO ANDRADE, {{ fechasActual }} </b>
                               </p>
                             </div>
                           </div>

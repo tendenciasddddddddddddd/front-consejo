@@ -51,12 +51,6 @@ export default {
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
       } else {
-         if (this.isModalidad=='m1') {
-           this.isOptionsModalidad = 'Intensivo';
-         } 
-         if (this.isModalidad=='m2'){
-          this.isOptionsModalidad = 'Extraordinaria';
-         }
          this.__listPeriodo();
          this.__listNivele();
          this.getAll();
@@ -65,7 +59,7 @@ export default {
     getAll() {
       this.isLoading = true;
       this.$proxies._matriculaProxi
-        .getAllEstudiantes(this.isOptionsModalidad) //LISTA DE ESTUDIANTES
+        .getAllEstudiantes() //LISTA DE ESTUDIANTES
         .then((x) => {
           this.info = x.data;
           this.isLoading = false;
@@ -83,9 +77,7 @@ export default {
       this.$proxies._gestionProxi
         .getNiveles()
         .then((x) => {
-          let filtrosNiveles = x.data;
-
-          this.listniveles = filtrosNiveles.filter((x) => x.modalidad == this.isOptionsModalidad);
+          this.listniveles = x.data;
           this.isLoading2 = false;
         })
         .catch((err) => {
@@ -106,7 +98,7 @@ export default {
         .then((x) => {
           let filtro = x.data.niveles;
           this.listPeriodo = filtro.filter(
-            (x) => x.typo == this.isOptionsModalidad && x.estado == "1"
+            (x) => x.estado == "1"
           );
           this.isLoading1 = false;
         })

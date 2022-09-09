@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="card-header pb-0 text-center">
-      <h2 class=" fuente ">
-        Leonidas Proaño
-        <i style="color: #ff7a59" class="ni ni-app"></i>
-      </h2>
+      <h3 class="negros fuente ">
+        PLATAFORMA
+       
+      </h3>
       <img
         class="w-30"
         src="../../../assets/img/logs/successful-send.svg"

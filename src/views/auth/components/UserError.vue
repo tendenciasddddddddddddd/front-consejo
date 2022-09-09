@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="card-header pb-0 text-center">
-      <h2 class=" fuente ">
-        Leonidas Proaño
+      <h2 class="negros fuente ">
+        PLATAFORMA
         <i style="color: #ff7a59" class="ni ni-app"></i>
       </h2>
       <img

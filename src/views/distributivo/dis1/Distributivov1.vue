@@ -49,6 +49,10 @@
                     class="text-uppercase text-center text-xxs font-weight-bolder">
                     Docente
                   </th>
+                   <th
+                    class="text-uppercase text-center text-xxs font-weight-bolder">
+                    Planificación
+                  </th>
                 </tr>
               </thead>
 
@@ -82,6 +86,16 @@
                   <td class="text-sm text-center text-dark fuente">
                     <span v-if="item.fdocente"> {{ item.fdocente.fullname }} </span>
                     <span v-else class="text-danger ">Elimine este resgistro</span>
+                </td>
+                 <td class="text-sm text-center text-dark fuente">
+                  <div v-if="item.planificacion!==''">
+                    <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
+                   <a :href="item.planificacion" target="_blank">Entregado</a> 
+                  </div>
+                  <div v-else>
+                    <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
+                   Sin entrega
+                  </div>
                 </td>
                 </tr>
               </tbody>

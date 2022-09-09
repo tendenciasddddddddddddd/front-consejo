@@ -26,7 +26,6 @@ export default {
           isLoading: false,
           info: {},
           model:{
-            nombre: 'Intensivo',
             fnivel: null,
             fdocente: null,
             fmateria: null,
@@ -40,13 +39,16 @@ export default {
           paralelos: [
             {
               value: "0",
-              nombre: "B",
+              nombre: "A",
             },
             {
               value: "1",
-              nombre: "G",
+              nombre: "B",
             },
-
+            {
+              value: "2",
+              nombre: "C",
+            },
           ],
           isSelecUsers: [],
           subtitulo: 'none',
@@ -79,7 +81,7 @@ export default {
               this.$router.push("/").catch(() => {});
               return;
             }
-            let listPeriodoIntensivo = filtro.filter((x) => x.typo == "Intensivo" && x.estado == '1');
+            let listPeriodoIntensivo = filtro.filter((x) =>  x.estado == '1');
             if (listPeriodoIntensivo.length==0) {
               this.$dialog.alert('¡¡¡--NO EXISTE UN PERIODO ACADÉMICO ACTIVO PARA ESTA MODALIDAD.. REGISTRE O ACTIVE UN PERIODO ACADÉMICO--!!!')
               this.$router.push("/").catch(() => {});
@@ -126,8 +128,7 @@ export default {
         this.$proxies._gestionProxi
           .getNiveles()
           .then((x) => {
-            let filtrosNiveles = x.data;
-            this.listniveles = filtrosNiveles.filter((x) => x.modalidad == 'Intensivo');
+            this.listniveles = x.data;
             this.isCurso = false;
           })
           .catch((err) => {
@@ -215,11 +216,11 @@ export default {
       getAll(pag, lim) {
         this.isLoading = true;
         this.subtitulo = lim + ' filas por página';
-          let modalidad = 'Intensivo';
           this.$proxies._gestionProxi
-            .getAllDistributivo(pag, lim, modalidad) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+            .getAllDistributivo(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
             .then((x) => {
               this.info = x.data.niveles;
+              console.log(this.info);
               this.pagg = x.data;
               this.pagina = this.pagg.pagina;
               this.paginas = this.pagg.paginas;
@@ -293,6 +294,7 @@ export default {
         this.model.paralelo = null;
         this.model.fdocente = null;
         this.model.fmateria = null;
+        this.model.planificacion = ''
       },
       close() {
         this.visible = false;

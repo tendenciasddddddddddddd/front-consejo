@@ -63,10 +63,12 @@
                    <a @click="sendAll2" v-if="isData.length" class="btn btnCreana mt-3"> Procesar</a>
                 </div>
                 <div v-if="ifOcultar" class="loadingg">
-                  <div class="inn fuente h5">
+                  <div class="inn text-white">
                     Trabajando en este evento loops...
+                    <img src="../../../assets/img/icons/astronaut2.svg" style="height:100px;" alt="avatar image"
+                    class="refresh-start" />
                   </div>
-
+              
                 </div>
                 <template v-if="objetosRechasados.length" > 
                   <div class="alertdanger scrorable mt-2">
@@ -188,7 +190,6 @@ export default {
           let sexo = "";
           let fknacionalidad = "";
           let fkparroquia = "";
-          let modalidad = "";
           let fketnia = "Mestizo";
           let typo = "ESTS";
           let foto =
@@ -203,7 +204,6 @@ export default {
           sexo = element[5];
           fknacionalidad = element[6];
           fkparroquia = element[7];
-          modalidad = element[8];
 
           if (
             !cedula ||
@@ -213,8 +213,7 @@ export default {
             !telefono ||
             !sexo ||
             !fknacionalidad ||
-            !fkparroquia ||
-            !modalidad
+            !fkparroquia 
           ) {
             this.isError = "ERROR ¡No tiene todos los atributos completos!";
             this.isProcesDoc = false;
@@ -238,7 +237,6 @@ export default {
             sexo: sexo,
             fknacionalidad: fknacionalidad,
             fkparroquia: fkparroquia,
-            modalidad: modalidad,
             fketnia: fketnia,
             typo: typo,
             foto: foto,
@@ -283,13 +281,11 @@ export default {
             this.$emit("clickAlumnos");
             if (error.response) {
               if (error.response.status == 500) {
-                alert("error.response.message");
+                this.toast("error.response.message");
               }
             } else {
-              this.$notify({
-                group: "global",
-                text: "ERROR del servidor por favor notificar",
-              });
+              this.toast("ERROR del servidor por favor notificar")
+             
             }
           });
       }
@@ -318,6 +314,20 @@ export default {
       let l = apell.toLowerCase().charAt(0);
       let result = l + ced;
       return result;
+    },
+     toast(message) {
+      this.$toasted.info(message, {
+        duration: 2600,
+        position: "top-center",
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: "CERRAR",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
     },
   },
 };

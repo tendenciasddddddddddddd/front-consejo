@@ -29,12 +29,7 @@ export default {
       model: {
         _id: null,
         nombre: null,
-        modalidad: null,
       },
-      modalidad: [
-        { name: "Intensivo", id: "1" },
-        { name: "Extraordinaria", id: "2" },
-      ],
       isSelecUsers: [],
       subtitulo: "none",
       iseliminaddo: false,
@@ -79,7 +74,6 @@ export default {
         this.ifLoad = true;
         if (this.model._id) {
           this.model.nombre = this.model.nombre.trim();
-          this.model.modalidad = this.checked;
           this.$proxies._gestionProxi
             .update(this.model._id, this.model)
             .then(() => {
@@ -92,13 +86,7 @@ export default {
               console.log("Error");
             });
         } else {
-          if (!this.checked) {
-            this.MsmError = "Elegir la modalidad";
-            this.ifLoad = false;
-            return;
-          }
           this.model.nombre = this.model.nombre.trim();
-          this.model.modalidad = this.checked;
           this.$proxies._gestionProxi
             .create(this.model) //-----------GUARDAR CON AXIOS
             .then(() => {
@@ -239,7 +227,6 @@ export default {
       this.model._id = "";
       this.model.nombre = "";
       this.MsmError = "";
-      this.checked = "";
     },
     close() {
       this.visible = false;

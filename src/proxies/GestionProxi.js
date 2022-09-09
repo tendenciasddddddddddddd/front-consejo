@@ -71,8 +71,8 @@ export default class GestionProxi {
         return this.axios.post(this.url + '/distributivo', params);
     }
 
-    getAllDistributivo(page, take, mol) {
-        return this.axios.get(this.url + `/distributivo?page=${page}&take=${take}&modal=${mol}`);
+    getAllDistributivo(page, take) {
+        return this.axios.get(this.url + `/distributivo?page=${page}&take=${take}`);
     }
 
     removeDistributivo(id) {
@@ -83,8 +83,16 @@ export default class GestionProxi {
         return this.axios.get(this.url + `/distributivo/${id}`);
     }
 
+    getPlanificacion(id) {
+        return this.axios.get(this.url + `/distributivo/planificacio/${id}`);
+    }
+
     updateDistributivo(id, params) {
         return this.axios.put(this.url + `/distributivo/${id}`, params);
+    }
+
+    updatePlanificacion(id, params) {
+        return this.axios.put(this.url + `/distributivo/planificacion/${id}`, params);
     }
 
     updateInfoDocentes(id) {

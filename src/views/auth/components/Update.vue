@@ -2,7 +2,7 @@
   <div>
     <div class="card-header pb-0 text-center">
       <h2 class=" fuente ">
-        Leonidas Proaño
+       Plataforma
         <i style="color: #ff7a59" class="ni ni-app"></i>
       </h2>
       <p class="h5 fuente" style="font-weight: 400;">

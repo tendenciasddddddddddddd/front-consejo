@@ -12,7 +12,7 @@
                     <Cards :object="{
                         id: item._id,
                         text1: item.fmateria.nombre,
-                        text2: item.nombre,
+                        text2: 'Curso activo',
                         text3: item.fnivel.nombre,
                         text4: 'PARALELO: ' + item.paralelo,
                         color: colorsh[index]
@@ -110,6 +110,9 @@ export default {
                         paralelo: res.paralelo,
                         nombre: res.nombre,
                         materia: res.fmateria.nombre,
+                        idDistributivo : res._id,
+                        planificacion : res.planificacion,
+                        nivel : res.fnivel.nombre
                     };
                     let id = res.fnivel._id;
                     localStorage.removeItem("myCourse");
@@ -130,7 +133,6 @@ export default {
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
                         this.info = x.data;
-                        console.log(this.info);
                         this.isData = false;
                         this.$Progress.finish();
                     })

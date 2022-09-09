@@ -1,45 +1,52 @@
-import RestResource from "../../../../service/isAdmin";
-const restResourceService = new RestResource();
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { AgGridVue } from "ag-grid-vue";
 import Spinner from "../../../../shared/ProgressBar.vue";
 import Paginate from "../../../../shared/Paginate.vue";
 import ScrimModal from "../../../../shared/ScrimModal"
-import ServiceMatricula from "../../../../service/funcions";
-const ResultServiceMatricula = new ServiceMatricula();
+import Dropdown from "../../../../shared/Dropdown.vue";
+import NoFound from "../../../../shared/NoFound"
 
 export default {
   name: "EslistarParalelo",
   components: {
     Spinner,
-    Paginate,ScrimModal
+    Paginate,ScrimModal, Dropdown, NoFound, AgGridVue
   },
   data() {
     return {
       roles: this.$store.state.user.roles,
-      isVisible: "panel1",
-      tabla: "1",
       idds: null,
-      istabs: "1",
       paralelos: [
         {
           id: "0",
-          nombre: "B",
+          nombre: "A",
         },
         {
           id: "1",
-          nombre: "G",
+          nombre: "B",
+        },
+        {
+          id: "2",
+          nombre: "C",
+        },
+        {
+          id: "3",
+          nombre: "D",
+        },
+        {
+          id: "4",
+          nombre: "E",
         },
       ],
-      check: {
-        id: null,
-        nombre: null,
-      },
+      check: null,
       listPeriodo: null,
       isLoading1: false,
       listniveles: null,
-      isTabla: null,
+      isTabla: false,
       isConfig: null,
-      filtros: null,
-      infoMat: null,
+      filtros: {},
+      infoMat: {},
       infoMat2: null,
       model: {
         curso: null,
@@ -48,53 +55,182 @@ export default {
       isClick: false,
       isClick2: false,
       isRemoveSelecC: [],
-      checked: "",
-      index: "0",
-      nombre_curso: "",
       isSelected: false,
       arrays: [],
-      //PAGINATE
-      searchQuery: "",
-      //Pagina
-      page: 1,
-      perPage: 8,
-      pages: [],
-      numPages: 0,
-      totalNotas: 0,
       allSelected: false,
+      curso: '',
+      idCurso: '',
+      //tablas
+      leftRowData: [],
+      rightRowData: [],
+      topRowData: [],
+      leftApi: null,
+      leftColumnApi: null,
+      rightApi: null,
+      topApi: null,
+      defaultColDef: {
+        flex: 1,
+        minWidth: 50,
+        sortable: true,
+        filter: true,
+        resizable: true,
+      },
+      leftColumns: [
+        {
+          rowDrag: true,
+          maxWidth: 50,
+          suppressMenu: true,
+          rowDragText: (params, dragItemCount) => {
+            if (dragItemCount > 1) {
+              return dragItemCount + ' Estudiates';
+            }
+            return params.rowNode.data.nombre;
+          },
+        },
+        { field: 'nombre', headerName: 'ESTUDIANTES SIN ASIGNAR',
+        colId: 'checkbox',
+        checkboxSelection: true,
+        suppressMenu: true,
+        headerCheckboxSelection: true,},
+      ],
+      rightColumns: [
+        {
+          rowDrag: true,
+          maxWidth: 50,
+          suppressMenu: true,
+          rowDragText: (params, dragItemCount) => {
+            if (dragItemCount > 1) {
+              return dragItemCount + ' Estudiates';
+            }
+            return params.rowNode.data.nombre;
+          },
+        },
+        { field: 'nombre', headerName: 'ESTUDIANTES PARA ASIGANAR' ,
+        colId: 'checkbox',
+        headerCheckboxSelection: true,
+        checkboxSelection: true,
+        suppressMenu: true,
+        showDisabledCheckboxes: true,},
+       
+      ],
+      topColumns: [
+        { field: 'curso',  rowGroup: true, hide: true,},
+        {
+          field: 'nombre', headerName: 'ESTUDIANTES CON PARALELO ASIGNADO',
+          headerCheckboxSelection: true,
+        checkboxSelection: true,
+        suppressMenu: true,
+        showDisabledCheckboxes: true,
+        },
+       
+      ],
+      rowSelection: null,
+      groupDisplayType: 'groupRows',
     };
   },
-  computed: {
-    displayedArticles: function() {
-      return this.paginate(this.infoMat);
-    },
+  watch: {
+    curso: function (value) {
+      this.idCurso = value._id
+      this.__cambios(this.idCurso);
+    }
   },
   methods: {
-    paginate(articles) {
-      let page = this.page;
-      let perPage = this.perPage;
-      let from = page * perPage - perPage;
-      let to = page * perPage;
-      this.numPages = Math.ceil(articles.length / 8);
-      return articles.slice(from, to);
+    onQuickFilterChanged() {
+      this.leftApi.setQuickFilter(document.getElementById('quickFilter').value);
     },
-    onPageChange(page) {
-      this.page = page;
+    onRemoveSelected() {
+      var selectedRowData = this.rightApi.getSelectedRows();
+      this.rightApi.applyTransaction({ remove: selectedRowData });
+      this.leftApi.applyTransaction({ add: selectedRowData });
     },
-    verificarUsuario() {
-      if (!restResourceService.admin(this.roles)) {
-        this.$router.push("/");
+    onRemoveSelected2() {
+      var selectedRowData = this.topApi.getSelectedRows();
+      this.topApi.applyTransaction({ remove: selectedRowData });
+      var idArrays = []
+      for (let i = 0; i < selectedRowData.length; i++) {
+        const element = selectedRowData[i]._id;
+        idArrays.push(element)
       }
-      this.arrays = ResultServiceMatricula.arrays_of_avatar();
+      if (idArrays.length > 0) {
+        this.model.curso =  "Undefined";
+        this.$proxies._matriculaProxi
+        .updateMatricula(idArrays, this.model)
+        .then(() => {
+          this.__cambios(this.idCurso);
+          this.toast("Cambio exitoso"  );
+        })
+        .catch(() => {
+          this.$dialog.alert('Error en ng server')
+        });
+      }
     },
+    getRowId(params) {
+      return params.data.nombre;
+    },
+    loadGrids() {
+      this.leftRowData = [...this.rawData];
+      this.rightRowData = [];
+    },
+    onGridReady(params, side) {
+      this.gridApi = params.api;
+      if (side === 0) {
+        this.leftApi = params.api;
+        this.leftColumnApi = params.columnApi;
+      }
+
+      if (side === 1) {
+        this.rightApi = params.api;
+        this.addGridDropZone();
+      }
+      if (side === 2) {
+        this.topApi = params.api;
+      }
+    },
+    addGridDropZone() {
+      const dropZoneParams = this.rightApi.getRowDropZoneParams({
+        onDragStop: (params) => {
+          var nodes = params.nodes;
+          this.leftApi.applyTransaction({
+            remove: nodes.map(function (node) {
+              return node.data;
+            }),
+          });
+        },
+      });
+
+      this.leftApi.addRowDropZone(dropZoneParams);
+    },
+    onChange(id) {
+      this.check=id;
+  },
+  save(){
+    if (this.check !=null) {
+      const idArrays = []
+      this.rightApi.forEachNode(function (node) {
+        idArrays.push(node.data._id);
+      });
+      this.model.curso = this.check;
+      this.$proxies._matriculaProxi
+      .updateMatricula(idArrays, this.model)
+      .then(() => {
+        this.__cambios(this.idCurso);
+        this.toast("Registro exitoso "  );
+      })
+      .catch(() => {
+        this.$dialog.alert('Error en ng server')
+      });
+    } else {
+      this.$dialog.alert('SELECIONE UN PARALELO PARA CONTINUAR')
+    }
+  },
+
     __listNivele() {
       this.isLoading1 = true;
       this.$Progress.start();
       this.$proxies._gestionProxi
         .getNiveles()
         .then((x) => {
-          let filtross = x.data;
-          this.listniveles = filtross.filter((x) => x.modalidad == "Intensivo");
+          this.listniveles = x.data;
           this.isLoading1 = false;
           this.$Progress.finish();
         })
@@ -111,7 +247,11 @@ export default {
         .then((x) => {
           this.filtros = x.data.matriculados;
           this.infoMat = this.filtros.filter((x) => x.curso == "Undefined");
-          this.isTabla = false;
+          this.leftRowData = this.infoMat
+          const filterSave = this.filtros.filter((x) => x.curso != "Undefined");
+          this.topRowData = filterSave
+          console.log(filterSave);
+          this.isTabla = false; 
         })
         .catch((err) => {
           console.log("Error", err);
@@ -119,144 +259,7 @@ export default {
         });
     },
 
-    selectcursos(ids) {
-      if (!this.isSelecCurosos.includes(ids)) {
-        this.isSelecCurosos.push(ids);
-      } else {
-        this.isSelecCurosos.splice(this.isSelecCurosos.indexOf(ids), 1);
-      }
-    },
-    selectAll: function() {
-      this.allSelected = true;
-      this.isSelecCurosos = [];
-      if (this.allSelected) {
-        for (let user in this.infoMat) {
-          this.isSelecCurosos.push(this.infoMat[user]._id);
-        }
-      }
-    },
-    deletedSelected: function() {
-      this.allSelected = false;
-      this.isSelecCurosos = [];
-    },
-    limpiar: function() {
-      this.isClick = false;
-      this.isSelecCurosos = [];
-      this.model.curso = "";
-      this.allSelected = false;
-    },
-    remove() {
-      //METODO PARA ELIMINAR  ROW
-      this.isClick = true;
-      let isArray = this.isSelecCurosos.length;
-      this.model.curso = this.check;
-      if (isArray > 0 && this.isSelected) {
-        this.$proxies._matriculaProxi
-          .updateMatricula(this.isSelecCurosos, this.model)
-          .then(() => {
-            this.__cambios(this.idds);
-            this.limpiar();
-            this.toast(
-              "Se asigno a " +
-                isArray +
-                " estudiantes al paralelo " +
-                this.model.curso
-            );
-          })
-          .catch(() => {
-            this.$dialog.alert('Error en ng server')
-            this.isClick = false;
-          });
-      } else {
-        
-        this.$dialog.alert('SELECIONE UN PARALELO PARA PODER ASIGNAR ESTA LISTA DE ESTUDIANTES')
-      }
-    },
 
-    onChange(id) {
-      this.check = id;
-      this.isSelected = true;
-    },
-
-    verLista() {
-      if (this.index != "0") {
-        this.__cambios(this.index);
-        this.idds = this.index;
-        this.isVisible = "panel2";
-        this.istabs = "1";
-        this.check = "";
-        this.isSelected = false;
-        this.isSelecCurosos = [];
-      }
-    },
-    clicMe(keys, nombreCurso) {
-      this.index = keys;
-      this.nombre_curso = nombreCurso;
-    },
-
-    __volverAsignacion: function() {
-      this.istabs = "1";
-      this.check = "";
-      this.isSelected = false;
-      this.isRemoveSelecC = [];
-    },
-    //------------------------------------CONFIGURAR MATRICULA---------------isConfig
-    __mostrarConf(curse) {
-      this.istabs = "2";
-      this.infoMat2 = this.filtros.filter((x) => x.curso == curse);
-      this.isRemoveSelecC = [];
-    },
-    __mostrarConf2(curse) {
-      this.istabs = "3";
-      this.infoMat2 = this.filtros.filter((x) => x.curso == curse);
-      this.isRemoveSelecC = [];
-    },
-    removeSelectCursos(key) {
-      let longitud = this.isRemoveSelecC.length;
-      let isExiste = 0;
-      if (longitud > 0) {
-        for (let i = 0; i < this.isRemoveSelecC.length; i++) {
-          if (this.isRemoveSelecC[i] == key) {
-            this.isRemoveSelecC.splice(i, 1);
-            isExiste = 1;
-            break;
-          }
-        }
-        if (isExiste === 0) {
-          this.isRemoveSelecC.push(key);
-        }
-      } else {
-        this.isRemoveSelecC.push(key);
-      }
-    },
-    regresar: function() {
-      this.isVisible = "panel1";
-      this.index = "0";
-      this.allSelected = false;
-    },
-    remove2() {
-      //METODO PARA ELIMINAR  ROW
-      this.isClick2 = true;
-      let isArray = this.isRemoveSelecC.length;
-      this.model.curso = "Undefined";
-      if (isArray > 0) {
-        this.$proxies._matriculaProxi
-          .updateMatricula(this.isRemoveSelecC, this.model)
-          .then(() => {
-            this.isClick2 = false;
-            this.isRemoveSelecC = [];
-            this.__cambios(this.idds);
-            this.__volverAsignacion();
-            this.toast("Se removio de paralelo a  " + isArray + " estudiantes");
-          })
-          .catch(() => {
-            alert(
-              "Error algo salio mal!! envie un sms en el chat para que le den soporte"
-            );
-            this.isClick2 = false;
-          });
-      }
-    },
     close(){
       this.$emit('myEventClosedModalParalelo1');
     },
@@ -277,7 +280,6 @@ export default {
   },
 
   created() {
-    this.verificarUsuario();
     this.__listNivele();
   },
 };

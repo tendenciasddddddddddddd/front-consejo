@@ -1,430 +1,113 @@
 <template>
-     <ScrimModal @close="close">
-         <template v-slot:header> Asignar paralelos a Intensivo</template>
-        <template v-slot:body>
-             <div class="row">
-            <div class="col-lg-11 col-12 mx-auto">
-              <div class="row " v-if="isVisible === 'panel1'">
-                <div
-                  class="h5 mt-2 fuente text-start ms-3" 
-                  style="font-weight: 400;"
-                >
-                 Selecciona los cursos
-                </div>
-                 <vue-progress-bar ></vue-progress-bar>
-                <Spinner v-if="isLoading1"></Spinner>
-
-                <section v-else class="flex-containes2 mt-2">
-                  <a
-                    v-for="(item, i) in listniveles"
-                    :key="item.id"
-                    type="button"
-                    @click="clicMe(item._id, item.nombre)"
-                    class="flex-none s-shadow s-pb-2 category-card s-center card-template s-py-3 s-px-2 s-decoration-none s-borderline-top animate__animated animate__fadeInUp"
-                    href="javascript:;"
-                    :class="[`s-borde-${i} animations-${i} `]"
-                  >
-                    <img class="img  s-mb-1 w-35" :src="arrays[i]" />
-                    <span class="s-span mt-1">Curso de...</span>
-                    <h6 class=" cardTitle text-start mt-1" style="font-size: 0.9rem;">
-                       {{ item.nombre }}
-                    </h6>
-                  </a>
-                </section>
-              </div>
-
-              <div class="row" v-if="isVisible === 'panel2'">
-                <div class="d-flex">
-                  <a
-                    @click="regresar"
-                    class="btn btn-sm me-3 "
-                    style="box-shadow: none;padding: 0.5rem 0.5em !important;"
-                  >
-                    <img
-                      height="18px"
-                      src="../../../../assets/img/usados/regresar.png"
-                    />
-                  </a>
-                  <span class="fuente h5 text-start" style="font-weight: 400;"
-                    >Gestionar paralelos del {{ nombre_curso }}</span
-                  ><br />
-                </div>
-
-                <div class="mt-4">
-                  <div class="contenidotabs">
-                    <a
-                      class="tabss "
-                      @click="__volverAsignacion()"
-                      :class="{ 'tabsActive links': istabs == '1' }"
-                    >
-                      Estudiantes sin paralelo
-                    </a>
-                    <a
-                      class="tabss "
-                      @click="__mostrarConf('B')"
-                      :class="{ 'tabsActive links': istabs == '2' }"
-                      >Paralelo B
-                    </a>
-                    <a
-                      class="tabss "
-                      @click="__mostrarConf2('G')"
-                      :class="{ 'tabsActive links': istabs == '3' }"
-                      >Paralelo G</a
-                    >
-                  </div>
-                  <hr
-                    style="margin-top:-0px;border-top: 1px solid rgb(203, 214, 226); opacity: inherit;"
-                  />
-                </div>
-                <div v-if="istabs == '1'">
-                  <div class="d-flex justify-content-between mt-1">
-                    <div class="d-flex justify-content-start">
-                     
-                      <div  v-for="ite in paralelos" :key="ite.id">
-                        <div class="form-check mb-3 me-3">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="ite.id"
-                            :id="ite.id"
-                            :value="ite.id"
-                            @click="onChange(ite.nombre)"
-                          />
-                          <b class="links" for="ite._id">
-                            {{ ite.nombre}}</b
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <a
-                      v-on="
-                        isSelecCurosos.length ? { click: () => remove() } : {}
-                      "
-                      v-tooltip.top-center="
-                        isSelecCurosos.length
-                          ? ''
-                          : 'Seleccionar una o más filas para asignar a los estudiantes a los diferentes paralelos'
-                      "
-                      role="button"
-                      class="fuente tamanio ms-3"
-                      :class="{
-                        disabled: isSelecCurosos.length == 0,
-                      }"
-                    >
-                      <b
-                        class=""
-                        :class="{
-                          links: isSelecCurosos.length != 0,
-                        }"
-                        >Asignar</b
-                      >
-                      <i
-                        class="bx bx-duplicate iconos ms-2"
-                        style="font-size:20px"
-                      ></i>
-                    </a>
-                  </div>
-                  <Spinner v-if="isTabla"></Spinner>
-                  <div v-else class="">
-                    <div v-if="!infoMat.length" class="row mt-3">
-                      <div class="col-lg-9 col-12 mx-auto ">
-                        <div class="text-center mt-5 ">
-                          <img
-                            class="w-15"
-                            src="../../../../assets/img/usados/undraw_search.svg"
-                            alt="fondo"
-                          />
-                          <div class="letra fuente mt-3">
-                            No se encontraron resultados
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div v-else class="table-responsive mt-3">
-                      <table class="dataTable-table table s-table-flush">
-                        <thead class="thead-light">
-                          <tr class="cabeza">
-                            <th
-                              style="background-color: rgb(234, 240, 246); "
-                              class=""
-                            >
-                              <div class="d-flex ms-3">
-                                <div
-                                  v-if="!allSelected"
-                                  class="form-check my-auto"
-                                  style="min-height: 0rem;"
-                                >
-                                  <input
-                                    class="form-check-input cheka"
-                                    type="checkbox"
-                                    @click="selectAll"
-                                  />
-                                </div>
-                                <i
-                                  @click="deletedSelected"
-                                  v-else class="fa fa-minus s-icon-all"
-                                  aria-hidden="true"
-                                ></i>
-                                <span
-                                  class="ms-3 text-uppercase text-center text-xxs font-weight-bolder"
-                                >
-                                  Nombres
-                                </span>
-                              </div>
-                            </th>
-                            <th
-                              class="text-uppercase text-center text-secondary text-xxs "
-                            >
-                              Paralelo
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="item in displayedArticles" :key="item.id">
-                            <td  @click="selectcursos(item._id)" style="cursor: pointer;">
-                              <div class="d-flex ms-3">
-                                <div class="form-check my-auto supcheka">
-                                  <input
-                                    class="form-check-input cheka"
-                                    type="checkbox"
-                                     v-model="isSelecCurosos" :value="item._id"
-                                  />
-                                </div>
-                                <a class="mb-0 ms-3 text-sm colorestabla fuente">
-                                  {{ item.nombre }}
-                                </a>
-                              </div>
-                            </td>
-
-                            <td class="text-sm text-center fuente">
-                              <p class="mb-0 text-xs">
-                                {{ item.curso }}
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                       <Paginate :numPages="numPages"  :page="page" :total="infoMat.length" @pagechanged="onPageChange"></Paginate>
-                    </div>
-                  </div>
-                </div>
-
-                <div v-if="istabs == '2'">
-                  <div class="mt-2">
-                    <div class="d-flex ">
-                      <a
-                        v-on="
-                          isRemoveSelecC.length
-                            ? { click: () => remove2() }
-                            : {}
-                        "
-                        v-tooltip.top-center="
-                          isRemoveSelecC.length
-                            ? ''
-                            : 'Seleccionar una o muchas filas para eliminar'
-                        "
-                        role="button"
-                        class="fuente tamanio"
-                        :class="{ disabled: isRemoveSelecC.length === 0 }"
-                      >
-                        <i class="far fa-trash-alt me-2 iconos"></i>
-                        <b
-                          class="me-4 "
-                          :class="{ links: isRemoveSelecC.length != 0 }"
-                          >Remover Paralelos</b
-                        >
-                      </a>
-                    </div>
-                  </div>
-
-                  <Spinner v-if="isTabla"></Spinner>
-                  <div v-else class="mt-2">
-                    <div v-if="!infoMat2.length" class="row mt-3">
-                      <div class="col-lg-9 col-12 mx-auto">
-                        <div class="text-center mt-5">
-                          <img
-                            class="w-15"
-                            src="../../../../assets/img/usados/undraw_search.svg"
-                            alt="fondo"
-                          />
-                          <div class="letra fuente mt-3">
-                            No se encontraron resultados
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div v-else class="table-responsive">
-                      <table
-                        class="elevation-2 table table-flush "
-                        style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
-                      >
-                        <thead class="thead-light">
-                          <tr class="cabeza">
-                            <th
-                              style="background-color: rgb(234, 240, 246); "
-                              class="text-uppercase text-secondary text-xxs"
-                            >
-                              # Nombres
-                            </th>
-                            <th
-                              class="text-uppercase text-center text-secondary text-xxs"
-                            >
-                              Paralelo
-                            </th>
-                          </tr>
-                        </thead>
-                        <Spinner v-if="isConfig"></Spinner>
-                        <tbody v-else>
-                          <tr v-for="item in infoMat2" :key="item.id">
-                            <td>
-                              <div class="d-flex ms-3">
-                                <div class="form-check my-auto supcheka">
-                                  <input
-                                    class="form-check-input cheka"
-                                    type="checkbox"
-                                    checked=""
-                                    @click="removeSelectCursos(item._id)"
-                                  />
-                                </div>
-                                &nbsp;&nbsp;
-                                <a class="mb-0 text-sm colorestabla fuente">
-                                  {{ item.nombre }}
-                                </a>
-                              </div>
-                            </td>
-                            <td class="text-sm text-center">
-                              <p class="mb-0 text-xs">
-                                {{ item.curso }}
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="istabs == '3'">
-                  <div class="mt-2">
-                    <div class="d-flex">
-                      <a
-                        v-on="
-                          isRemoveSelecC.length
-                            ? { click: () => remove2() }
-                            : {}
-                        "
-                        v-tooltip.top-center="
-                          isRemoveSelecC.length
-                            ? ''
-                            : 'Seleccionar una o muchas filas para eliminar'
-                        "
-                        role="button"
-                        class="fuente tamanio"
-                        :class="{ disabled: isRemoveSelecC.length === 0 }"
-                      >
-                        <i class="far fa-trash-alt me-2 iconos"></i>
-                        <b
-                          class="me-4 "
-                          :class="{ links: isRemoveSelecC.length != 0 }"
-                          >Remover Paralelos</b
-                        >
-                      </a>
-                    </div>
-                  </div>
-
-                  <Spinner v-if="isTabla"></Spinner>
-                  <div v-else class=" mt-3">
-                    <div v-if="!infoMat2.length" class="row mt-3">
-                      <div class="col-lg-9 col-12 mx-auto">
-                        <div class="text-center mt-5">
-                          <img
-                            class="w-15"
-                            src="../../../../assets/img/usados/undraw_search.svg"
-                            alt="fondo"
-                          />
-                          <div class="letra fuente mt-3">
-                            No se encontraron resultados
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div v-else class="table-responsive">
-                      <table
-                        class="elevation-2 table table-flush "
-                        style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;"
-                      >
-                        <thead class="thead-light">
-                          <tr class="cabeza">
-                            <th
-                              style="background-color: rgb(234, 240, 246); "
-                              class="text-uppercase text-secondary text-xxs"
-                            >
-                              # Nombres
-                            </th>
-                            <th
-                              class="text-uppercase text-center text-secondary text-xxs"
-                            >
-                              Paralelo
-                            </th>
-                          </tr>
-                        </thead>
-                        <Spinner v-if="isConfig"></Spinner>
-                        <tbody v-else>
-                          <tr v-for="item in infoMat2" :key="item.id">
-                            <td>
-                              <div class="d-flex ms-3">
-                                <div class="form-check my-auto supcheka">
-                                  <input
-                                    class="form-check-input cheka"
-                                    type="checkbox"
-                                    checked=""
-                                    @click="removeSelectCursos(item._id)"
-                                  />
-                                </div>
-                                &nbsp;&nbsp;
-                                <a class="mb-0 text-sm colorestabla fuente">
-                                  {{ item.nombre }}
-                                </a>
-                              </div>
-                            </td>
-                            <td class="text-sm text-center">
-                              <p class="mb-0 text-xs">
-                                {{ item.curso }}
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="mt-3">
-                  <div class=""></div>
-                </div>
-              </div>
-            </div>
+  <ScrimModal @close="close">
+    <template v-slot:header> Asignar paralelos </template>
+    <template v-slot:body>
+      <div>
+        <Spinner v-if="isLoading1"></Spinner>
+        <section v-else>
+          <div class="text-center">
+            <Dropdown v-model="curso" :options="listniveles" />
           </div>
-        </template>
-        <template v-slot:footer>
-          <div v-if="isVisible === 'panel1'">
-              <a
-                v-if="index != '0'"
-                class="btn btnNaranja "
-                @click="verLista()"
-              >
-                Siguiente &nbsp; <i class="ni ni-bold-right"></i>
-              </a>
-              <a v-else class="btn btnDisabled">
-                Siguiente &nbsp; <i class="ni ni-bold-right"></i>
-              </a>
+          <Spinner v-if="isTabla"></Spinner>
+          <section v-else>
+            <div v-if="filtros.length">
+              <div class="row mt-3">
+                <div class="col-lg-6 ">
+                  <div class="input-group" style="margin-bottom: 7px;">
+                    <span class="input-group-text text-body buscador"><i class="fas fa-search links"
+                        aria-hidden="true"></i></span>
+                    <input class="form-control buscador" type="text" v-on:input="onQuickFilterChanged()"
+                      style="background: white;" id="quickFilter" placeholder="Buscar">
+                  </div>
+                  <ag-grid-vue style="width: 100%; height: 300px" class="ag-theme-alpine" :defaultColDef="defaultColDef"
+                    rowSelection="multiple" :rowDragMultiRow="true" :suppressRowClickSelection="true"
+                    :getRowId="getRowId" :rowDragManaged="true" :suppressMoveWhenRowDragging="true" :animateRows="true"
+                    :rowData="leftRowData" :columnDefs="leftColumns" @grid-ready="onGridReady($event, 0)">
+                  </ag-grid-vue>
+                </div>
+                <div class="col-lg-6 ">
+                  <div class="d-flex justify-content-start">
+                    <div v-for="ite in paralelos" :key="ite.id">
+                      <div class="form-check  me-2">
+                        <input class="form-check-input" type="radio" name="ite.id" :id="ite.id" :value="ite.id"
+                          @click="onChange(ite.nombre)" />
+                        <span class="negros" for="ite._id">
+                          {{ ite.nombre }}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <a v-on:click="save()" role="button" class="fuente tamanio me-2 ms-5 btnOption"
+                        v-tooltip.top-center="'Guardar paralelos'">
+
+                        <svg class="center-icon" style="color: #000" data-testid="geist-icon" fill="none" height="24"
+                          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                          <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
+                          <path d="M17 21v-8H7v8"></path>
+                          <path d="M7 3v5h8"></path>
+                        </svg>
+                      </a>
+                      <a v-on:click="onRemoveSelected()" role="button" class="fuente tamanio me-2 btnOption"
+                        v-tooltip.top-center="'Elimine estudiantes selecionados'">
+                        <svg class="center-icon" data-testid="geist-icon" fill="none" height="24"
+                          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color: #000">
+                          <path d="M3 6h18"></path>
+                          <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                          <path d="M10 11v6"></path>
+                          <path d="M14 11v6"></path>
+                        </svg>
+
+                      </a>
+                    </div>
+                  </div>
+                  <ag-grid-vue style="width: 100%; height: 300px;" class="ag-theme-alpine mt-3"
+                    :defaultColDef="defaultColDef" rowSelection="multiple" :getRowId="getRowId" :rowDragManaged="true"
+                    :animateRows="true" :rowDragMultiRow="true" :suppressRowClickSelection="true"
+                    :rowData="rightRowData" :columnDefs="rightColumns" @grid-ready="onGridReady($event, 1)">
+                  </ag-grid-vue>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <ag-grid-vue style="width: 100%; height: 250px;" class="ag-theme-alpine mt-3"
+                    :defaultColDef="defaultColDef" rowSelection="multiple" :getRowId="getRowId" :rowDragManaged="true"
+                    :animateRows="true" :rowDragMultiRow="true" :suppressRowClickSelection="true"
+                    :groupDisplayType="groupDisplayType" :rowData="topRowData" :columnDefs="topColumns"
+                    @grid-ready="onGridReady($event, 2)">
+                  </ag-grid-vue>
+                </div>
+                <div class="col-lg-6 mt-2">
+                  <a v-on:click="onRemoveSelected2()" role="button" class="fuente tamanio me-2 btnOption"
+                    v-tooltip.top-center="'Elimine estudiantes selecionados'">
+                    <svg class="center-icon" data-testid="geist-icon" fill="none" height="24"
+                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color: #000">
+                      <path d="M3 6h18"></path>
+                      <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                      <path d="M10 11v6"></path>
+                      <path d="M14 11v6"></path>
+                    </svg>
+
+                  </a>
+                </div>
+              </div>
+
             </div>
-            <div v-if="isVisible == 'panel2'">
-              <a class="btn btnNaranjaClaro" @click="regresar">
-                <i class="ni ni-bold-left"></i> &nbsp; Vulver
-              </a>
-            </div>
-        </template>
-     </ScrimModal>
+            <section v-else>
+              <NoFound />
+            </section>
+          </section>
+        </section>
+      </div>
+    </template>
+    <template v-slot:footer>
+      <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio links me-3">
+        <b>Salir de aqui</b>
+      </a>
+
+    </template>
+  </ScrimModal>
 </template>
 
 <script src="./Paralelo.js"></script>

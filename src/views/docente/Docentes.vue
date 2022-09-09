@@ -1,10 +1,10 @@
 <template>
   <div >
  <AlertHeader :firsttext="'Gestionar docentes'" :lasttext="'Crea, edita, elimina y filtrar'"></AlertHeader>
-        <ActionsRow :longitude="userIds.length" @openModal="openChildDocente2" @remove="remove" @gets="openChildDocente" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openModal"/>
+        <ActionsRow :longitude="userIds.length" @openModal="openChildDocente2" @remove="remove" @gets="openChildDocente" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid"/>
       
         <Spinner v-if="isLoading"></Spinner>
-            <div v-else class="table-responsive mt-1">
+            <div v-else class="table-responsive ">
           <table class="dataTable-table table s-table-flush">
             <thead class="thead-light">
               <tr class="cabeza">
@@ -87,29 +87,11 @@
           </table>
         <Paginate2 :numPages="paginas"  :page="pagina" :total="totalNotas" :subtitulo="subtitulo" @pagechanged="onPageChange" @setChangedQuery="changedQuery"></Paginate2>
         </div>
-      <Modal v-show="visible" @close="close">
-          <template v-slot:header> Exportar lista</template>
-          <template v-slot:body>
-               <div class="p-3">
-              <p class="fuente">
-                El archivo exportado se mostrara en una hoja de calculo
-              </p>
-              <div class="form-group">
-                <p class="parrafo mt-2" for="exampleFormControlSelect1">
-                  Formato de archivo
-                </p>
-                <select class="form-control selector">
-                  <option>CSV</option>
-                  <option>XLS</option>
-                  <option>XLSX</option>
-                </select>
-                <button class="btn btnNaranja mt-4">Exportar</button>
-              </div>
-            </div>
-          </template>
-        </Modal>
       <div v-if="ifCreateUpdate">
       <DocenteCreateOrUpdate :idGet="idUser" @myEventClosedMOdalDocente="closedChildDocente" @clickDocente="refreshData"></DocenteCreateOrUpdate>
+    </div>
+    <div v-if="ifGrid">
+      <GridUser :typo="'DOCS'" :role="'Docente'" @myEventClosedAgGrid="closeAgGrid" @clickAlumnos="refreshData"/>
     </div>
   </div>
 </template>

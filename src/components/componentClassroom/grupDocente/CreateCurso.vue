@@ -18,30 +18,7 @@
                   {{ validation.firstError("model.materia") }}
                 </p>
               </div>
-              <div class="mt-3">
-                <span class="parrafo ">A que modalidad pertenece?</span>
-                <div  v-for="item in modalidades" :key="item.id">
-                   <div class="form-check mb-2 mt-2">
-                            <input
-                              :class="{
-                               error: validation.hasError('model.icono'),
-                             }"
-                              class="form-check-input"
-                              v-model="model.icono"
-                              type="radio"
-                              name="ite.id"
-                              :value="item.nombre"
-                              required
-                            />
-                            <a class="parrafo" :for="item.nombre">
-                              {{ item.nombre }}</a
-                            >
-                          </div>
-                 <p class="mb-0 text-xs fuente text-danger">
-                  {{ validation.firstError("model.icono") }}
-                </p>
-              </div>
-              </div>
+              
               <div class="mt-3">
                 <span class="parrafo">Código de acceso</span>
                 <CustomInput v-model="model.codigo" />
@@ -109,7 +86,7 @@ export default {
               materia: null, 
               codigo: null, 
               descripcion: null,
-              icono: null,
+              icono: 'Curso activo',
               doc: null,
             },
             htmlForEditor: "",
@@ -141,8 +118,7 @@ export default {
         this.$proxies._gestionProxi
           .getNiveles()
           .then((x) => {
-            let filtrosNiveles = x.data;
-            this.listniveles = filtrosNiveles.filter((x) => x.modalidad == 'Extraordinaria' );
+            this.listniveles = x.data;
             this.isCurso = false;
           })
           .catch((err) => {

@@ -24,30 +24,10 @@
         
       </div>
       <Login v-else />
-      <!-- NOTIFICACIONES-->
-      <notifications group="global" position="bottom center" width="40%" style="z-index: 9999;">
-        >
-        <template slot="body" slot-scope="props">
-          <div
-            :class="'alert alert-dark alert-dismissible fade show text-white'"
-          >
-            <span class="alert-icon"><i class="ni ni-like-2"></i></span> &nbsp;&nbsp;
-            <span class="alert-text" v-html="props.item.text"></span>
-            &nbsp;&nbsp;
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </template>
-      </notifications>
+      
     </template>
     <div v-else class="text-center" style="margin-top:300px; font-size:25px;">
-      <p>Estamos cargando...</p>
+      <p>Cargando pagina...</p>
     </div>
   </div>
 </template>

@@ -31,10 +31,6 @@ export default {
       pagg: null,
       pagina: 0,
       paginas: 0,
-      modalidad: [
-        { name: "Intensivo", id: "1" },
-        { name: "Extraordinaria", id: "2" },
-      ],
       isLoading: false, //EL SNIPPER CARGA EN FALSO
       model: {
         //-----------VARIABLES DEL MODELO A GUARDAR
@@ -42,7 +38,6 @@ export default {
         nombre: null,
         inicia: null,
         finaliza: null,
-        typo: null,
       },
       isSelecUsers: [],
       subtitulo: "none",
@@ -80,7 +75,6 @@ export default {
         }
         if (this.model._id) {
           this.ifLoad = true;
-          this.model.typo = this.checked;
           this.$proxies._matriculaProxi
             .update(this.model._id, this.model)
             .then(() => {
@@ -93,7 +87,6 @@ export default {
             });
         } else {
           this.ifLoad = true;
-          this.model.typo = this.checked;
           this.$proxies._matriculaProxi
             .create(this.model) //-----------GUARDAR CON AXIOS
             .then(() => {
@@ -119,7 +112,6 @@ export default {
           .then((x) => {
             this.model = x.data;
             this.isCarga = false;
-            this.checked = this.model.typo;
           })
           .catch(() => {
             console.log("Error");

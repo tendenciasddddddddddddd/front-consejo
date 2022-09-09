@@ -4,14 +4,15 @@ import Spinner from '../../shared/Spinner';
 import AlertHeader from "../../shared/AlertHeader.vue";
 import Paginate2 from "../../shared/Paginate2.vue";
 import ActionsRow from "../../shared/ActionsRow.vue";
+import ScrimModal from "../../shared/ScrimModal"
 export default {
   name: "indexUsiario",
   components: {
     Spinner,
     AlertHeader,
     AlumnoCreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ './components/AddAlumno.vue'),
-    Modal: () => import( /* webpackChunkName: "Modal" */ "../../shared/Modal.vue"),
-    Paginate2,
+    GridUser : () => import( /* webpackChunkName: "GridUser" */ '../../components/agGrid/GridUser.vue'),
+    Paginate2,ScrimModal,
     ActionsRow
   },
   data() {
@@ -37,6 +38,7 @@ export default {
       ifCreateUpdate: false,
       idUser: null,
       visible: false,
+      ifGrid : false,
     };
   },
   methods: {
@@ -61,6 +63,12 @@ export default {
     },
     closedChildAlumno: function () {
       this.ifCreateUpdate = false;
+    },
+    openAgGrid: function () {
+      this.ifGrid = true;
+    },
+    closeAgGrid: function () {
+      this.ifGrid = false;
     },
     refreshData: function () {
       this.getAll(this.paginaActual, 6);
@@ -221,12 +229,6 @@ export default {
     },
     onPageChange(page) {
       this.getAll(page, this.rows);
-    },
-    openModal() {
-      this.visible = true;
-    },
-    close() {
-      this.visible = false;
     },
   },
   created() {

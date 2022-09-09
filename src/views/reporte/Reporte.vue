@@ -66,7 +66,7 @@ export default {
         },
         {
           id: "1",
-          nombre: "Matriculas",
+          nombre: "Matriculas y Promociones",
           img: img2,
           description: "Puedes crear nuevos registros de Matriculas segun sea necesario ",
         },

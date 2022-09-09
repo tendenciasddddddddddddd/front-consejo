@@ -36,8 +36,8 @@ export default class MatriculaProxi {
 
     //----------------------------------GLOBAL SET MATRICULA ESTUDIANTE ------------------
 
-    getAllEstudiantes(mod) {
-        return this.axios.get(this.url + `/estudiantes/newstud?mod=${mod}`);
+    getAllEstudiantes() {
+        return this.axios.get(this.url + `/estudiantes/newstud`);
     }
   
     //------------------------------------------------------DOCENTES--------------------------------------
@@ -47,8 +47,12 @@ export default class MatriculaProxi {
         return this.axios.post(this.url + `/matriculas?modalidad=${modalidad}`, params);
     }
 
-    getMatricula(id) {
-        return this.axios.get(this.url + `/matriculas/${id}`);
+    async getMatricula(id) {
+        return await this.axios.get(this.url + `/matriculas/${id}`);
+    }
+
+    async getMatriculaReporte(id) {
+        return await this.axios.get(this.url + `/matriculas/repo/${id}`);
     }
 
     updateMatricula(id, params) {
@@ -67,8 +71,8 @@ export default class MatriculaProxi {
         return this.axios.get(this.url + `/matriculas/fullmatricula?curso=${curso}`);
     }
 
-    getInfoListReport(m, c) {
-        return this.axios.get(this.url + `/matriculas/report?m=${m}&c=${c}`);
+    getInfoListReport(c) {
+        return this.axios.get(this.url + `/matriculas/report?c=${c}`);
     }
 
     getMatriculas() {

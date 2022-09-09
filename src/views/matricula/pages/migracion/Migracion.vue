@@ -74,7 +74,6 @@ export default {
         return {
             modals: true,
             ifview: '1',
-            mod : this.idGet,
             ifLoad: false,
         }
     },
@@ -82,7 +81,7 @@ export default {
         cloneData() { 
             this.ifLoad = true;
             this.$proxies._migracionProxi
-              .create(this.mod)
+              .create()
               .then(() => {
                 this.ifview = '2';
                 this.ifLoad = false;
@@ -96,7 +95,7 @@ export default {
         removeData(){
             this.ifLoad = true;
             this.$proxies._migracionProxi
-              .remove(this.mod)
+              .remove()
               .then(() => {
                 this.ifLoad = false;
                 this.toast('La base de datos esta limpia en esta modalidad')

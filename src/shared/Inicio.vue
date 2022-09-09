@@ -18,8 +18,8 @@
   >
     <div class="container-fluid py-1 px-1" >
      
-     <svg aria-label="Vercel Logo" fill="#000" viewBox="0 0 75 65" width="20"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
-     <div >
+     <svg  v-if="!$store.state.isAppMobile" aria-label="Vercel Logo" fill="#000" viewBox="0 0 75 65" width="20"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
+     <div  v-if="!$store.state.isAppMobile">
         
          <span class="ms-3 s-title-page">
         {{$store.state.first_text}}
@@ -59,23 +59,6 @@
 
         <ul class="navbar-nav justify-content-end">
          
-          <!-- <li class="nav-item px-3 d-flex align-items-center">
-            
-            <template v-if="isOnline"></template>
-            <template v-else>
-              <div>
-                 <div  class="loadingg">
-                  <div class="inn ">
-                    <i class='bx bx-wifi-off' style="font-size:150px"></i>
-                
-                            <p class="parrafo text-dark">En este momento no tienes conexión a internet.</p>
-                  </div>
-
-                </div>
-              </div>
-            </template>
-           
-          </li> -->
           <li class="nav-item dropdown  d-flex align-items-end">
             <a
               href="javascript:;"

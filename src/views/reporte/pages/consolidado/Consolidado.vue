@@ -39,30 +39,13 @@
 
                <div v-if="ifview=='2'">
                  <p class="parrafo">Elegir el tipo de matriculas que quiere descargar, puede ser todas las matriculas del periodo vigente</p>
-                   <button v-if="isIntensivo" class="btn btnCreanaBorder me-2" >
-                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Trabajando...
-                   </button>
-                    <button v-else @click="__consolodadoIntensivo" class="btn btnCreanaBorder me-2" >
-                   Intensivo
-                   </button>
-
-
-                    <button v-if="isExtraordianrio" class="btn btnCreanaBorder me-2" >
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Trabajando...
-                    </button>
-                      <button v-else @click="__consolidadoExtra" class="btn btnCreanaBorder me-2" >
-                    Extraordinaria
-                    </button>
-
 
                      <button v-if="isTodo" class="btn btnCreana" >
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Trabajando...
                      </button>
                       <button v-else @click="__todo" class="btn btnCreana" >
-                     Todo
+                     Descargar archivo
                      </button>
               </div>  
             </div>
