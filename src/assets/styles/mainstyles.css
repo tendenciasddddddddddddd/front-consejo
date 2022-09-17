@@ -374,7 +374,6 @@ margin-top: -5px;
 }
 
 .icons{
-  min-width: 60px;
   border-radius: 6px;
   height: 100%;
   display: flex;
@@ -1355,7 +1354,7 @@ body.modal-open {
     margin-bottom: 0.5rem;
 }
 .s-title-page {
-  font-weight: 700;color:#181B32; font-size: 16px;
+  font-weight: 600;color:#000; font-size: 16px;
 }
 .s-table-flush {
   border-color: rgb(223, 227, 235) !important;
@@ -1418,7 +1417,7 @@ body.modal-open {
   background: white !important;
   border: 1px solid #c7c6c6 !important;
   font-weight: 500 !important;
-  padding: 7px 16px 1px 10px !important; 
+  padding: 7px 16px 7px 10px !important; 
   font-size: 0.875rem !important;
   line-height: 1.25rem !important;
   text-transform: none !important;

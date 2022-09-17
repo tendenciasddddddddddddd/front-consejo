@@ -17,8 +17,8 @@
           <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link" 
           :class="{'actived': $route.name === 'default'||$route.name === '1'||$route.name === 'd1'||$route.name === 'e1'}" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
-             
-              <i class='bx bx-home-alt icons'></i>
+              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><path d="M9 22V12h6v10"></path></svg>
+            
             </div>
             <span class="nav-link-text ms-1 mt-1">Área personal</span>
           </a>
@@ -60,8 +60,8 @@
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link " 
           :class="{'actived': $route.name === '000'||$route.name === '222' ||$route.name === '333'}"  aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center  me-2">
-
-               <i class='bx bx-edit-alt icons'></i>
+              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              
             </div>
             <span class="nav-link-text ms-1 mt-1">Registros</span>
           </a>
@@ -98,8 +98,8 @@
            :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '1234'}" 
            aria-controls="applicationsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
+              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000;"><path d="M6 3v12"></path><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 01-9 9"></path></svg>
                 
-                <i class='bx bx-git-repo-forked icons' ></i>
             </div>
             <span class="nav-link-text ms-1 mt-1">Gestión Curso</span>
           </a>
@@ -137,8 +137,8 @@
           <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link " 
            :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'}" aria-controls="ecommerceExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
-              
-               <i class='bx bxs-copy-alt icons' ></i>
+              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path></svg>
+               
             </div>
             <span  class="nav-link-text ms-1 mt-1">Matriculas</span>
           </a>
@@ -176,8 +176,8 @@
           <a :class="{'actived': $route.name === 'd2'||$route.name === 'd4'||$route.name === 'dr'}"
            data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
-          
-              <i class='bx bxs-group icons'></i>
+              
+              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M7 7h3v9H7z"></path><path d="M14 7h3v5h-3z"></path></svg>
             </div>
             <span class="nav-link-text ms-1 mt-1">Cursos</span>
           </a>
@@ -212,8 +212,8 @@
           <a :class="{'actived': $route.name === 'al'}"
            data-bs-toggle="collapse" href="#authExamples1" class="nav-link " aria-controls="authExamples1" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
-             
-              <i class='bx bxs-school icons' ></i>
+              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+              
             </div>
             <span class="nav-link-text ms-1 mt-1">Aulas Virtuales</span>
           </a>
@@ -314,8 +314,8 @@
           <a :class="{'actived': $route.name === 's1'}"
           data-bs-toggle="collapse" href="#pagePublic" class="nav-link " aria-controls="pagePublic" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
-               <i class='bx bxs-cog icons'></i>
-              
+               
+               <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: #000;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
             </div>
             <span  class="nav-link-text ms-1 mt-1">Configuración</span>
           </a>

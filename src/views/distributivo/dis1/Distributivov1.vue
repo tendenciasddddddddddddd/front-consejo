@@ -1,7 +1,7 @@
 <template>
     <div>
       <AlertHeader :firsttext="'Gestionar distributivo'" :lasttext="'Crea, edita, elimina y filtra'"></AlertHeader> 
-       <ActionsRow :longitude="isSelecUsers.length"  @remove="remove" @gets="gets" @openModal="openModal"/>
+       <ActionsRow :longitude="isSelecUsers.length"  @remove="remove" @gets="gets" @openModal="openModal" @openModalh="openAgGrid"/>
         <Spinner v-if="isLoading"></Spinner>
         <div v-else >
           <div v-if="!info.length" >
@@ -84,8 +84,8 @@
                         ></span> <span v-if="item.fmateria">{{ item.fmateria.nombre }} </span>  <span v-else class="text-danger ">Elimine este resgistro</span>
                 </td>
                   <td class="text-sm text-center text-dark fuente">
-                    <span v-if="item.fdocente"> {{ item.fdocente.fullname }} </span>
-                    <span v-else class="text-danger ">Elimine este resgistro</span>
+                    <span > {{ item.fdocente ? item.fdocente.fullname:'Undefined' }} </span>
+                   
                 </td>
                  <td class="text-sm text-center text-dark fuente">
                   <div v-if="item.planificacion!==''">
@@ -161,6 +161,9 @@
                 </form>
           </template>
         </Modal>
+        <div v-if="ifGrid">
+      <GridDistributivo :docentes="listDocentes" :cursos="listniveles" :materias="listMaterias" @myEventClosedAgGrid="closeAgGrid" @getData="refreshData"/>
+    </div>
     </div>
 </template>
 <script src="./Distributivov1.js"></script>

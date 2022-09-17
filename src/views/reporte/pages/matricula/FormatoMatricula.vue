@@ -3,7 +3,7 @@
     <div v-if="ifload">Trabajando...</div>
     <section v-else>
       <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-        :paginate-elements-by-height="1400" :filename="'hola'" :pdf-quality="2" :manual-pagination="false"
+        :paginate-elements-by-height="1400" :filename="'matricula'" :pdf-quality="2" :manual-pagination="false"
         pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait" pdf-content-width="800px"
         @progress="onProgress($event)" ref="html2Pdf">
         <section slot="pdf-content">
@@ -32,7 +32,7 @@
               <span class="h5 negros ">CERTIFICADO DE MATRICULA</span>
               <div class="d-flex justify-content-around mt-7">
                 <div class="text-sm negros">Matrícula No. <b>{{ item.nmatricula }}</b> </div>
-                <div class="text-sm negros">Año Lectivo: <b>{{ item.fecha }}</b> </div>
+                <div class="text-sm negros">Año Lectivo: <b>{{ item.academico.nombre }}</b> </div>
               </div>
               <div class="row">
                 <div class="col-lg-9 col-12 mx-auto">

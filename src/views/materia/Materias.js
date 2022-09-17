@@ -30,7 +30,6 @@ export default {
             model: {//-----------VARIABLES DEL MODELO A GUARDAR
               _id: null, 
               nombre: null,  
-              descripcion: null,
            },
            isSelecUsers: [],
            subtitulo: 'none',
@@ -241,7 +240,6 @@ export default {
             this.visible = true;
             this.model._id = "";
             this.model.nombre = "";
-            //this.model.descripcion = "";
             this.MsmError = "";
           },
           close() {
@@ -253,20 +251,13 @@ export default {
       this.verificarUsuario();
       this.getAll(1, 6);
     },
-      validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
+      validators: { 
         'model.nombre'(value) {
           return this.$validator
             .value(value)
             .required()
             .minLength(3)
-            .maxLength(40);
+            .maxLength(50);
         },
-        'model.descripcion'(value) {
-            return this.$validator
-              .value(value)
-              .required()
-              .minLength(3)
-              .maxLength(30);
-          },
     },
 }

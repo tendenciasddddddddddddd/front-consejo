@@ -28,7 +28,8 @@ export default {
       isLoading: false,
       model: {
         _id: null,
-        nombre: null,
+        nombre: '',
+        num: ''
       },
       isSelecUsers: [],
       subtitulo: "none",
@@ -226,6 +227,7 @@ export default {
       this.visible = true;
       this.model._id = "";
       this.model.nombre = "";
+      this.model.num= '';
       this.MsmError = "";
     },
     close() {
@@ -244,6 +246,12 @@ export default {
         .required()
         .minLength(3)
         .maxLength(50);
+    },
+    "model.num"(value) {
+      return this.$validator
+        .value(value)
+        .required()
+        .integer();
     },
   },
 };

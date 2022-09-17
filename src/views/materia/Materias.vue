@@ -22,25 +22,13 @@
                         Nombres
                       </span>
                     </div>
-                   
                   </th>
-                  <th
-                  class="text-uppercase text-center text-xxs font-weight-bolder"
-                >
-                  Descripción
-                </th>
-                <th
-                  class="text-uppercase text-center text-xxs font-weight-bolder"
-                >
+                <th class="text-uppercase text-center text-xxs font-weight-bolder">
                   Fecha modicado
                 </th>
-
-                <th
-                  class="text-uppercase text-center text-xxs font-weight-bolder"
-                >
+                <th class="text-uppercase text-center text-xxs font-weight-bolder">
                   Estado
                 </th>
-                
               </tr>
             </thead>
             <tbody>
@@ -59,9 +47,6 @@
                       {{ item.nombre }}
                     </a>
                   </div>
-                </td>
-                 <td class="text-xs text-center text-dark fuente">
-                  {{ item.descripcion }}
                 </td>
                   <td class="mb-0 ms-3 text-sm colorestabla fuente text-center">
                   {{ item.updatedAt.substring(0,10) }}
@@ -87,19 +72,12 @@
                   <p class=" text-xs fuente text-danger">
                     {{ validation.firstError("model.nombre") }}
                   </p>
-                 
-                  <span class="parrafo mt-2">Descripción</span>
-                  <CustomInput v-model="model.descripcion" />
-                  <p class="mb-0 text-xs fuente text-danger">
-                    {{ validation.firstError("model.descripcion") }}
-                  </p>
-                   <hr class="horizontal dark mb-1 d-xl-block d-none">
-                  <div class="text-center">
+                  <div class="text-center mt-2">
                     <ButtonLoading v-if="ifLoad"/>
                     <button
                       v-else
                       type="submit"
-                      class="btn btnNaranja  mt-1 mb-0 "
+                      class="btn btnNaranja  mb-0 "
                     >
                       {{ model._id ? "Actualizar" : "Guardar" }}
                     </button>

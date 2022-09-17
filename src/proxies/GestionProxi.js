@@ -71,6 +71,10 @@ export default class GestionProxi {
         return this.axios.post(this.url + '/distributivo', params);
     }
 
+    createArrayDistributivo(params) {
+        return this.axios.post(this.url + '/distributivo/many/', params);
+    }
+
     getAllDistributivo(page, take) {
         return this.axios.get(this.url + `/distributivo?page=${page}&take=${take}`);
     }

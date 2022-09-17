@@ -1,5 +1,4 @@
 <template>
-  <div>
     <ScrimModal @close="close">
       <template v-slot:header>Copiar y pegar</template>
       <template v-slot:body>
@@ -61,9 +60,7 @@
         </a>
       </template>
     </ScrimModal>
-  </div>
 </template>
-
 <script>
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";

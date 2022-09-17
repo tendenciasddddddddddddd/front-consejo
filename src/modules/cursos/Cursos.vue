@@ -133,6 +133,7 @@ export default {
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
                         this.info = x.data;
+                        console.log(this.info);
                         this.isData = false;
                         this.$Progress.finish();
                     })

@@ -5,20 +5,20 @@
       <Spinner v-if="isLoading1"></Spinner>
       <div v-else>
         <div class="row">
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <Dropdown v-model="curso" :options="listniveles" />
           </div>
-          <div class="col-lg-9 text-end">
-            <a href="javascript:;" class="btn-vercel-white me-2">
+          <div class="col-lg-8 text-end">
+            <button @click="get2('all')" class="btn btn-vercel-white me-2">
               <svg class="me-2" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 viewBox="0 0 24 24" width="20" style="color: currentcolor;margin-top: -3px;">
                 <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
                 <path d="M13 2v7h7"></path>
               </svg>
-             
+
               Promoción
-            </a>
+            </button>
             <a class="btn btn-vercel" @click="get('all')">
               <svg class="me-2" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -56,8 +56,9 @@
                     Fecha
                   </th>
                   <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                    Accion
+                    Opciones
                   </th>
+
                 </tr>
               </thead>
               <tbody>
@@ -75,21 +76,30 @@
                   <td class="text-xs text-center text-dark fuente">
                     {{ item.fecha }}
                   </td>
-                  <td class="text-sm text-center font-weight-normal">
-                    <a @click="get(item._id)" href="javascript:;" class="px-3 text-dark mb-0">
-                      <svg data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision"
+                  <td class="text-sm text-end font-weight-normal">
+                    <a @click="get2(item._id)" v-tooltip.top-center="'Reporte de promoción'" href="javascript:;" class="px-3 text-dark mb-0">
+                      <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        viewBox="0 0 24 24" width="22" style="color:#000">
+                        viewBox="0 0 24 24" width="20" style="color: #000;">
+                        <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
+                        <path d="M13 2v7h7"></path>
+                      </svg>
+                    </a>
+                    <a @click="get(item._id)" v-tooltip.top-center="'Reporte de matricula'" href="javascript:;" class="px-3 text-dark mb-0">
+                      <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        viewBox="0 0 24 24" width="20" style="color:#000">
                         <path d="M6 9V2h12v7"></path>
                         <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
                         <path d="M6 14h12v8H6z"></path>
                       </svg>
                     </a>
                   </td>
+
                 </tr>
               </tbody>
             </table>
-            <Paginate :numPages="numPages"  :page="page" :total="infoMat.length" @pagechanged="onPageChange"></Paginate>
+            <Paginate :numPages="numPages" :page="page" :total="infoMat.length" @pagechanged="onPageChange"></Paginate>
           </div>
           <section v-else>
             <NoFound />
@@ -97,6 +107,9 @@
         </section>
         <section v-if="ifmatricula">
           <FormatoMatricula :rowData="rowData" @changeStatus="changeStatus" />
+        </section>
+        <section v-if="ifpromocion">
+          <FormatoPromocion :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"/>
         </section>
       </div>
     </template>

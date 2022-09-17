@@ -88,6 +88,11 @@
               <th
                 class="text-uppercase text-center text-xxs font-weight-bolder"
               >
+                Num
+              </th>
+              <th
+                class="text-uppercase text-center text-xxs font-weight-bolder"
+              >
                 Fecha M
               </th>
 
@@ -112,9 +117,12 @@
                   </div>
 
                   <a class="mb-0 ms-3 text-sm colorestabla fuente">
-                    {{ item.nombre }}
+                    {{ item.num }}
                   </a>
                 </div>
+              </td>
+              <td class="text-sm text-center font-weight-normal fuente">
+                {{ item.nombre}}
               </td>
               <td class="text-xs text-center font-weight-normal fuente">
                 {{ item.updatedAt.substring(0, 10) }}
@@ -137,19 +145,24 @@
              <Spinner v-if="isCarga"></Spinner>
                 <form @submit.prevent="save" role="form">
                   <h6 class="text-danger text-center" v-if="MsmError!=''">{{ MsmError }}</h6>
+                  <span class="parrafo">Número</span>
+                  <CustomInput v-model="model.num" />
+                  <p class="mb-2 text-xs fuente text-danger">
+                    {{ validation.firstError("model.num") }}
+                  </p>
+
                   <span class="parrafo">Nombre de Curso</span>
                   <CustomInput v-model="model.nombre" />
-                  <p class="mb-0 text-xs fuente text-danger">
+                  <p class="mb-2 text-xs fuente text-danger">
                     {{ validation.firstError("model.nombre") }}
                   </p>
 
-                   <hr class="horizontal dark mb-1 d-xl-block d-none">
-                  <div class="text-center">
+                  <div class="text-center mt-2">
                     <ButtonLoading v-if="ifLoad"/>
                     <button
                       v-else
                       type="submit"
-                      class="btn btnNaranja  mt-1 mb-0 "
+                      class="btn btnNaranja   mb-0 "
                     >
                       {{ model._id ? "Actualizar" : "Guardar" }}
                     </button>

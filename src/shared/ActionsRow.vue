@@ -41,7 +41,7 @@
         <a class="btn btn-vercel " @click="$emit('openModalh')">
         <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" ><path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25"></path><path d="M8 16h.01"></path><path d="M8 20h.01"></path><path d="M12 18h.01"></path><path d="M12 22h.01"></path><path d="M16 16h.01"></path><path d="M16 20h.01"></path></svg>
        
-        Import
+        Facilitar proceso
         </a>
       </div>
     </div>

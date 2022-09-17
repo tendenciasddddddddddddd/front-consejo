@@ -1,7 +1,6 @@
 <template>
    <div>
-     <a target="_blank" href="https://brie.fi/ng">proyecto</a>
-    <vue-webrtc ref="webrtc" width="100%" roomId="sample-room"/>
+      <iframe allow="fullscreen;camera *;microphone;display-capture;"  width="100%" height="600px" src="https://brie.fi/ng"></iframe>
    </div>
 </template>
 

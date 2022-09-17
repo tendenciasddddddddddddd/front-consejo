@@ -1,10 +1,15 @@
 <template>
     <div class="fixed-plugin show w-100"  style=" z-index: 9999;  ">
-      <a class="fixed-plugin-button text-dark position-fixed px-3 py-2" style="background-color: rgb(14, 114, 237);">
+      <a class="fixed-plugin-button text-dark position-fixed px-3 py-2" style="background-color: #000;">
         <i class="fa fa-cog py-2 text-white"> </i>
       </a>
       <div class="card shadow-lg  desplega w-100" style="z-index: 9999;">
-        <div style="margin-left:-20px; margin-right: -10px; border-radius: 0; min-height: 54px; padding: 4px 25px 4px 40px;background-color: #253342;">
+        <div style="    margin-left: -20px;
+    margin-right: -10px;
+    border-radius: 0px;
+    min-height: 44px;
+    padding: 1px 13px 1px 20px;
+    background-color: #000;">
           <div class="d-flex justify-content-between">
             <div class="h5 text-white">
               ...

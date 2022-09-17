@@ -95,12 +95,6 @@ const routes = [{
     name: '2222',
     component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/dis1/Distributivov1.vue'),
   },
-  { //-------------------------------------DISTRIBUTIVO------------------------------
-    path: '/Distributivo-v2',
-    name: '2223',
-    component: () => import( /* webpackChunkName: "Distributivov2" */ '../views/distributivo/dis2/Distributivov2.vue'),
-  },
-
 
   ////------------------------------------REPORTES-----------------------------
   {

@@ -6,7 +6,7 @@
     </div>
     <ag-grid-vue style="width: 100%; height: 485px" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
-      :pagination="true" :paginationPageSize="paginationPageSize" :cacheBlockSize="cacheBlockSize" @grid-ready="onGridReady">
+      :pagination="true" :paginationPageSize="paginationPageSize" :cacheBlockSize="cacheBlockSize" :enableFillHandle="true" @grid-ready="onGridReady">
     </ag-grid-vue>
    
     <div v-if="iftask">

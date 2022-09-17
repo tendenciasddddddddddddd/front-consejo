@@ -73,11 +73,7 @@
                         >
                          Periodo
                         </th>
-                        <th
-                          class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
-                        >
-                         Modalidad
-                        </th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -93,24 +89,17 @@
                             </div>
                             &nbsp;&nbsp;
                             <a class="mb-0 text-sm colorestabla fuente">
-                              {{ item.nombre }}
-                            </a>
+                              {{ item.nombre? item.nombre:'Undefined' }}
+                            </a> 
                           </div>
                         </td>
                          <td class="text-sm text-center colorestabla fuente">
-                          <p class="mb-0 text-xs">{{ item.fknivel.nombre }}</p>
+                          <p class="mb-0 text-xs"> {{ item.fknivel ? item.fknivel.nombre:'Undefined' }}</p>
                         </td>
                         <td class="text-sm text-center colorestabla fuente">
-                          <p class="mb-0 text-xs">{{ item.academico.nombre }}</p>
+                          <p class="mb-0 text-xs">{{ item.academico ? item.academico.nombre:'Undefined' }}</p>
                         </td>
-                        <td class="text-sm text-center colorestabla fuente">
-                          <span v-if="item.typo=='m1'">
-                              Intensivos
-                          </span>
-                         <span v-else>
-                               Extraordinaria
-                         </span>
-                        </td>
+                        
                       </tr>
                     </tbody>
                   </table>
