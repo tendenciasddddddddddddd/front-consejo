@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="d-flex justify-content-around s-bg-white bottom-navigation-bar s-border-top-grey-300 s-row s-nowrap s-fixed s-bottom-0 s-z-fixed s-w-full"
+      class="d-flex justify-content-around s-bg-white bottom-navigation-bar r-top-grey-300 s-row s-nowrap s-fixed s-bottom-0 s-z-fixed s-w-full"
     >
       <router-link
         class="bottom-navigation-item s-decoration-none text-center s-column s-cross-center s-main-center s-nowrap s-flex-none s-color-grey-600 undefined"

@@ -58,7 +58,7 @@
 
     <li>
       <strong class="fuente text-sm ms-3">
-        Total registros: {{total}}
+        Total : {{total}}
       </strong>
     </li>
   </ul>

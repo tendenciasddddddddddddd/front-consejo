@@ -4,7 +4,7 @@
          <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets" @desactiveState="desactiveState"/>
         <Spinner v-if="isLoading"></Spinner>
         <div v-else class="table-responsive mt-1">
-          <table class="table table-flush"  style="  border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+          <table class="dataTable-table table s-table-flush">
             <thead class="thead-light">
               <tr class="cabeza">
                  <th style="background-color: rgb(234, 240, 246); ">
@@ -80,8 +80,7 @@
                     <p class="mb-2 text-sm text-danger">
                       {{ validation.firstError("model.nombre") }}
                     </p>
-                    <hr class="horizontal dark mb-1 d-xl-block d-none">
-                    <div class="text-center ">
+                    <div class="text-center mt-2">
                        <ButtonLoading v-if="ifLoad"/>
                       <button v-else type="submit" class="btn btnNaranja  mt-1 ">
                         {{ model._id ? "Actualizar" : "Guardar" }}

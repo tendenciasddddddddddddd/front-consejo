@@ -40,10 +40,10 @@ export default {
             let text_1 = this.collection.materia;
             let text_2 = 'Tareas'
             this.$store.commit('updateHeader',{text_1, text_2})
-            console.log(this.collectionTasks);
-            console.log(this.collection);
-            console.log(this.collectionUser);
-            console.log(this.collectionQuizz);
+           // console.log(this.collectionTasks);
+           // console.log(this.collection);
+           // console.log(this.collectionUser);
+           // console.log(this.collectionQuizz);
             this.isData = false;
             this.$Progress.finish();
           })

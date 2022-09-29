@@ -61,7 +61,7 @@
                           @click="selectOne(item._id)"
                         />
                       </div>
-                      <span class="mb-0 ms-3 text-sm colorestabla fuente">
+                      <span class="mb-0 ms-3 text-xs colorestabla fuente">
                         {{ item.fullname }}
                       </span>
                     </div>

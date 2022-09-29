@@ -3,16 +3,15 @@
         <template v-slot:header> {{ collects.nombre }}</template>
         <template v-slot:body>
             <div class="row">
-                <div class="col-lg-6  panel1">
+                <div class="col-lg-4  panel1">
                     <ActionsCheck @changeSearch="changeSearchs" />
-                    <NoFound v-if="!displayedArticles.length" />
+                    <NoFound2 v-if="!displayedArticles.length" />
                     <section v-else>
                         <div v-for="item in displayedArticles" :key="item.id" class="mt-3">
                             <div class="s-iems mb-2">
                                 <div @click="changeNote(item)" style="cursor: pointer;">
-                                    <span class="s-text-items fuente ">
-                                        <i class="fa fa-user me-2" style="color: rgb(124, 152, 182);"
-                                            aria-hidden="true"></i>
+                                    <span class="text-xs negros text-media">
+                                        <i class="fa fa-user me-2" style="color: rgb(124, 152, 182);" aria-hidden="true"></i>
                                         {{ item.nombre }}
                                     </span> <br>
                                     <div class="ms-2">
@@ -34,36 +33,41 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <Paginate :numPages="numPages" :page="page" :total="dataUser.length" @pagechanged="onPageChange">
+                        <Paginate :numPages="numPages" :page="page" :total="dataUser.length" @pagechanged="onPageChange">
                     </Paginate>
+                    </section>
+                   
                 </div>
-                <div class="col-lg-6">
-                    <NoFound v-if="!detalleTask.id" />
-                    <section v-else class="ms-2">
+                <div class="col-lg-8">
+                    <NoFound2 v-if="!detalleTask.id" />
+                    <section v-else >
                         <div>
-                            <p class="parrafo">
-                                Estudiante: <u class="ms-4 fuente">{{ detalleTask.nombre }}</u>
-                            </p>
-                            <p v-if="subpanel" class="parrafo">
+                            <div class="row">
+                               <div class="col-lg-6">
+                                <span class="text-sm negros ">
+                                Estudiante: <u class="ms-4 text-media">{{ detalleTask.nombre }}</u>
+                            </span>
+                               </div>
+                               <div class="col-lg-6">
+                                <span v-if="subpanel" class="text-sm negros">
                                 Link trabajo:
                                 <a href="javascript:;" class="ms-2  tamanio ">
-                                    <b class="links"> <del>Tarea sin entregar</del> </b>
+                                    <b class="links text-media"> <del>Tarea sin entregar</del> </b>
                                 </a>
-                            </p>
+                            </span> 
 
-                            <p v-else class="parrafo">
+                            <span v-else class="text-sm negros">
                                 Link trabajo:
                                 <a :href="detalleTask.tarea" target="_blank" class="ms-2  tamanio ">
-                                    <b class="links">Click para revisar el trabajo</b>
+                                    <b class="links text-media">Click para revisar el trabajo</b>
                                 </a>
-                            </p>
-                            <span @click="openCont" class="links text-sm fuente ">
-                                <b> Mostrar comentario 👆 (Opcional)</b>
                             </span>
+                               </div>
+                            </div>
+                            
+                           
 
-
-                            <form @submit.prevent="save" role="form" class=" text-start">
+                            <form @submit.prevent="save" role="form" class="mt-3 text-start">
                                 <span class="parrafo ">Ingrese la calificación</span>
 
                                 <CustomInput v-model="model.nota" />
@@ -73,11 +77,11 @@
                                 <span class="parrafo">Observaciones (Opcional)</span>
                                 <Editor v-model="model.observar" />
                                 <ButtonLoading v-if="ifLoad" />
-                                <button v-else role="button" type="submit" class="btn btnNaranja mt-3">Guardar
+                                <button v-else role="button" type="submit" class="btn-vercel-white mt-3">Guardar
                                     Nota</button>
                             </form>
-                            <p v-if="clickme" class="parrafo">
-                                Comentario:
+                            <p  class="parrafo mt-2">
+                                Comentarios:
                                 <span v-html="detalleTask.comentario"> </span>
 
                             </p>
@@ -105,7 +109,7 @@ import ScrimModal from "../../../shared/ScrimModal"
 import CustomInput from "../../../shared/CustomInput.vue";
 import ActionsCheck from "../../../shared/ActionsCheck.vue";
 import Paginate from "../../../shared/Paginate"
-import NoFound from "../../../shared/NoFound"
+import NoFound2 from "../../../shared/NoFound2"
 import ButtonLoading from "../../../shared/ButtonLoading.vue"
 import Editor from "../../../shared/Editor.vue";
 export default {
@@ -115,7 +119,7 @@ export default {
         objectUser: Array
     },
     components: {
-        ScrimModal, CustomInput, ActionsCheck, Paginate, NoFound, ButtonLoading, Editor
+        ScrimModal, CustomInput, ActionsCheck, Paginate, NoFound2, ButtonLoading, Editor
     },
     data() {
         return {
@@ -346,11 +350,7 @@ export default {
 <style >
 .panel1 {
     border-right: 1px solid rgb(203, 214, 226);
-    width: 420px;
-    max-width: 100%;
-    min-width: 420px;
-    height: calc(90vh - 126px);
-    top: 126px;
+    height: calc(85vh - 2rem);
     overflow-y: auto;
 }
 

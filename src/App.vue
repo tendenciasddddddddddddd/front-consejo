@@ -15,10 +15,7 @@
           <div class="container-fluid  py-2" >
            <router-view/>
             <!-- INICIO FOOTER -->
-           <!-- <Help/> -->
-            <!-- <Footer /> -->
-           
-            <!-- FIN FOOTER -->
+           <Help/>
           </div>
         </main>
         
@@ -26,7 +23,7 @@
       <Login v-else />
       
     </template>
-    <div v-else class="text-center" style="margin-top:300px; font-size:25px;">
+    <div v-else class="text-center text-sm negros" style="margin-top:300px; font-size:25px;">
       <p>Cargando pagina...</p>
     </div>
   </div>
@@ -35,9 +32,8 @@
 <script>
 import Header from "@/shared/Header.vue";
 import Inicio from "@/shared/Inicio.vue";
-//import Footer from "@/shared/Footer.vue";
 import Login from "./views/auth/Login.vue";
-//import Help from "@/shared/Help.vue"
+import Help from "@/shared/Help.vue"
 export default {
   name: "app",
   mounted() {
@@ -47,8 +43,7 @@ export default {
     Header,
     Login,
     Inicio,
-    //Footer,
-   // Help,
+   Help,
     AppMovile : () => import( /* webpackChunkName: "AppMovile" */ '../src/shared/AppMovile.vue')
   },
   data() {

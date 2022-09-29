@@ -37,6 +37,10 @@ export default class NotasProxi {
         return this.axios.put(this.url + `/notas/createSupletorios/${id}`, params); //deleteallnote
     }
 
+    updateComportamiento(id, params) {
+        return this.axios.put(this.url + `/notas/createComportamiento/${id}`, params); //GUARADRA NOTA DE COMPORTAMIENTO
+    }
+
     deleteAllNote(id, params) {
         return this.axios.put(this.url + `/notas/deleteallnote/${id}`, params); //confirmfullnote
     }

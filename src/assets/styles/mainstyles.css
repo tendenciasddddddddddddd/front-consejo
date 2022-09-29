@@ -1263,19 +1263,6 @@ body.modal-open {
   padding: 8px;
 }
 
-.s-span{
-  background: #dadada;
-    padding: 0.1rem 0.25rem;
-    width: -webkit-max-content;
-    width: max-content;
-    border-radius: 0.15rem;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    font-weight: 500;
-    color: black;
-    font-size: 13px!important;
-}
 .s-decoration-none {
   text-decoration: none !important;
 }
@@ -1284,60 +1271,6 @@ body.modal-open {
 }
 .flex-none {
   flex: none;
-}
-.card-template {
-  position: relative;
-  background: white;
-  border-radius: 0.4rem;
-  border: 1px solid #ecf0f3;
-  width: 200px;
-  margin-left: 15px !important;
-  max-height: 250px;
-   margin-bottom: 20px;
-   box-shadow: 0 4px 6px rgb(174 190 205 / 40%);
-}
- .category-card:hover img {
-    transform: scale(1.1);
-}
-.s-borde-0 {
-    border-top: 4px solid rgb(98 183 244) !important;  
-}
-.s-borde-1 {
-    border-top: 4px solid rgb(164 137 241) !important;  
-}
-.s-borde-2 {
-    border-top: 4px solid rgb(68 213 167) !important;  
-}
-.s-borde-3 {
-    border-top: 4px solid rgb(237 94 118) !important;  
-}
-.s-borde-4 {
-    border-top: 4px solid rgb(255 206 122) !important;  
-}
-.s-borde-5 {
-    border-top: 4px solid black !important;  
-}
-
-.s-borde-6 {
-  border-top: 4px solid rgb(98 183 244) !important;  
-}
-.s-borde-7 {
-  border-top: 4px solid rgb(164 137 241) !important;  
-}
-.s-borde-8 {
-  border-top: 4px solid rgb(68 213 167) !important;  
-}
-.s-borde-9 {
-  border-top: 4px solid rgb(237 94 118) !important;  
-}
-.s-borde-10 {
-  border-top: 4px solid rgb(255 206 122) !important;  
-}
-.s-borde-11 {
-  border-top: 4px solid black !important;  
-}
-.s-borde-12 {
-  border-top: 4px solid rgb(98 183 244) !important;  
 }
 .s-center {
   text-align: center;
@@ -1604,5 +1537,39 @@ body.modal-open {
 .s-regresar{
   font-size: .875rem;
   color: #444;
+}
+@keyframes rotate {
+  from {
+      transform: rotate(0deg)
+  }
+
+  to {
+      transform: rotate(360deg)
+  }
+}
+
+.refresh-start {
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-play-state: running;
+}
+
+@keyframes moveleft {
+  0% {
+      transform: translate(100px, 0)
+  }
+
+  100% {
+      transform: translate(0, 0)
+  }
+}
+
+.movimiento {
+  animation-name: moveleft;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-duration: 3s
 }
 

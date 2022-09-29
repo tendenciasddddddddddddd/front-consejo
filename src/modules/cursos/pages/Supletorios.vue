@@ -1,9 +1,7 @@
 <template>
   <div>
-    <ProgressBar v-if="isPrint"></ProgressBar>
-    <div v-else>
-      <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" />
-    </div>
+    <Astronauta v-if="isPrint"/>
+    <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" />
     <ag-grid-vue style="width: 100%; height: 455px" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
       :pagination="true" :paginationPageSize="paginationPageSize" :cacheBlockSize="cacheBlockSize"
@@ -21,8 +19,8 @@
   import "ag-grid-community/styles/ag-theme-alpine.css";
   import { AgGridVue } from "ag-grid-vue";
   import ActionRowNotas from "../../../shared/ActionRowNotas.vue";
-  import ProgressBar from "../../../shared/ProgressBar";
   import quialifyservice from "./services";
+  import Astronauta from "../../../shared/Astronauta"
   const ResultServiceNota = new quialifyservice();
   export default {
     name: "App",
@@ -92,12 +90,11 @@
       };
     },
     components: {
-      AgGridVue, ActionRowNotas, ProgressBar,
+      AgGridVue, ActionRowNotas, Astronauta,
       ReporteSupletorio: () => import( /* webpackChunkName: "ReporteSupletorio" */ "./ReporteSupletorio.vue"),
     },
     created() {
       this.rowSelection = 'multiple';
-      console.log(this.object);
       this.onGridReadys();
       this.paginationPageSize = 8;
       this.cacheBlockSize = 8;
@@ -145,7 +142,6 @@
         this.iftask = false;
         setTimeout(() => this.iftask = true, 100);
         this.isPrint = true;
-        this.$Progress.start();
       },
       closed: function () {
         this.iftask = false
@@ -153,13 +149,13 @@
       changeStatus(ev) {
         if (ev == '100') {
           this.isPrint = false;
-          this.$Progress.finish();
         }
       },
       validateNumber(num) {
-        if (num >= 0 && num <= 10) return true;
-        return false;
-      },
+            let res = num.toString().replace(",", ".")
+            if (res >= 0 && res <= 10) return true;
+            return false;
+        },
       pushPromedioFinal(suple, reme, gracia) {
         var result = 0;
         if (gracia > 0 && gracia <= 10) {
@@ -196,17 +192,29 @@
               .then(() => {
                this.ifsaved = false;
                 this.getDataAll();
+                this.toast("Se guardo las notas de supletorios con exito");
              })
              .catch(() => {
                this.$dialog.alert("No se puede completar la operación");
                this.ifsaved = false;
              });
       },
-  
+      toast(message) {
+      this.$toasted.info(message, {
+        duration: 1600,
+        position: 'top-center',
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: 'CERRAR',
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          }
+        }
+      });
+    },
     }
   };
-
-  
   var saleValueFormatter = function (params) {
     var formatted = params.value.toString().replace(',', '.');
     var result = formatted

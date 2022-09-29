@@ -1,6 +1,6 @@
 <template>
     <div>
-      <AlertHeader :firsttext="'Gestionar distributivo'" :lasttext="'Crea, edita, elimina y filtra'"></AlertHeader> 
+      <AlertHeader :firsttext="'Gestionar distributivo'" :lasttext="'Crea, edita, elimina, filtra y procesa datos'"></AlertHeader> 
        <ActionsRow :longitude="isSelecUsers.length"  @remove="remove" @gets="gets" @openModal="openModal" @openModalh="openAgGrid"/>
         <Spinner v-if="isLoading"></Spinner>
         <div v-else >
@@ -10,7 +10,7 @@
                 <div class="text-center">
                   <img
                     class="w-15"
-                    src="../../../assets/img/logs/lupa.svg"
+                    src="../../assets/img/logs/lupa.svg"
                     alt="fondo"
                   />
                   <div class="letra fuente mt-3">
@@ -79,11 +79,11 @@
                     </div>
                   </div>
                 </td>
-                 <td class="text-sm  text-dark fuente">
+                 <td class="text-xs  text-dark fuente">
                    <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt" style="background-color: rgb(0, 189, 165);"
                         ></span> <span v-if="item.fmateria">{{ item.fmateria.nombre }} </span>  <span v-else class="text-danger ">Elimine este resgistro</span>
                 </td>
-                  <td class="text-sm text-center text-dark fuente">
+                  <td class="text-xs text-center text-dark fuente">
                     <span > {{ item.fdocente ? item.fdocente.fullname:'Undefined' }} </span>
                    
                 </td>
@@ -166,5 +166,5 @@
     </div>
     </div>
 </template>
-<script src="./Distributivov1.js"></script>
+<script src="./Distributivo.js"></script>
 

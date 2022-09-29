@@ -87,7 +87,7 @@ export default {
             return params.rowNode.data.nombre;
           },
         },
-        { field: 'nombre', headerName: 'ESTUDIANTES SIN ASIGNAR',
+        { field: 'nombre', headerName: 'ESTUDIANTES SIN ASIGNAR PARALELO',
         colId: 'checkbox',
         checkboxSelection: true,
         suppressMenu: true,
@@ -105,7 +105,7 @@ export default {
             return params.rowNode.data.nombre;
           },
         },
-        { field: 'nombre', headerName: 'ESTUDIANTES PARA ASIGANAR' ,
+        { field: 'nombre', headerName: 'ESTUDIANTES PARA ASIGANAR PARALELO' ,
         colId: 'checkbox',
         headerCheckboxSelection: true,
         checkboxSelection: true,
@@ -117,7 +117,6 @@ export default {
         { field: 'curso',  rowGroup: true, hide: true,},
         {
           field: 'nombre', headerName: 'ESTUDIANTES CON PARALELO ASIGNADO',
-          headerCheckboxSelection: true,
         checkboxSelection: true,
         suppressMenu: true,
         showDisabledCheckboxes: true,
@@ -137,6 +136,11 @@ export default {
   methods: {
     onQuickFilterChanged() {
       this.leftApi.setQuickFilter(document.getElementById('quickFilter').value);
+    },
+    onAddSelected(){
+      var selectedRowData = this.leftApi.getSelectedRows();
+      this.leftApi.applyTransaction({ remove: selectedRowData });
+      this.rightApi.applyTransaction({ add: selectedRowData });
     },
     onRemoveSelected() {
       var selectedRowData = this.rightApi.getSelectedRows();
@@ -209,6 +213,7 @@ export default {
       this.rightApi.forEachNode(function (node) {
         idArrays.push(node.data._id);
       });
+      if (idArrays.length==0) return; 
       this.model.curso = this.check;
       this.$proxies._matriculaProxi
       .updateMatricula(idArrays, this.model)

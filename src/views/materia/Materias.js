@@ -30,6 +30,7 @@ export default {
             model: {//-----------VARIABLES DEL MODELO A GUARDAR
               _id: null, 
               nombre: null,  
+              area: ''
            },
            isSelecUsers: [],
            subtitulo: 'none',
@@ -80,6 +81,7 @@ export default {
                 if(this.model._id){
                   this.ifLoad = true;
                   this.model.nombre = this.model.nombre.trim();
+                  this.model.area = this.model.area.trim();
                   this.$proxies._gestionProxi.updateMaterias(this.model._id, this.model)
                     .then(() => {
                       this.close();
@@ -93,6 +95,7 @@ export default {
                 }else{
                   this.ifLoad = true;
                   this.model.nombre = this.model.nombre.trim();
+                  this.model.area = this.model.area.trim();
                   this.$proxies._gestionProxi.createMaterias(this.model) //-----------GUARDAR CON AXIOS
                   .then(() => {
                     this.ifLoad = false;
@@ -240,6 +243,7 @@ export default {
             this.visible = true;
             this.model._id = "";
             this.model.nombre = "";
+            this.model.area = "";
             this.MsmError = "";
           },
           close() {
@@ -251,8 +255,15 @@ export default {
       this.verificarUsuario();
       this.getAll(1, 6);
     },
-      validators: { 
+      validators: { //area
         'model.nombre'(value) {
+          return this.$validator
+            .value(value)
+            .required()
+            .minLength(3)
+            .maxLength(50);
+        },
+        'model.area'(value) {
           return this.$validator
             .value(value)
             .required()

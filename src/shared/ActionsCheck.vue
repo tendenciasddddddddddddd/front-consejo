@@ -1,5 +1,5 @@
 <template>
-   <div class="input-group w-90">
+   <div class="input-group">
         <span class="input-group-text text-body buscador"><i class="fas fa-search links" aria-hidden="true"></i></span>
         <input type="text" v-model="search" class="form-control buscador" placeholder="Buscar" />
     </div>

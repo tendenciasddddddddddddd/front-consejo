@@ -12,7 +12,7 @@
           <section v-else>
             <div v-if="filtros.length">
               <div class="row mt-3">
-                <div class="col-lg-6 ">
+                <div class="col-lg-5 ">
                   <div class="input-group" style="margin-bottom: 7px;">
                     <span class="input-group-text text-body buscador"><i class="fas fa-search links"
                         aria-hidden="true"></i></span>
@@ -25,7 +25,37 @@
                     :rowData="leftRowData" :columnDefs="leftColumns" @grid-ready="onGridReady($event, 0)">
                   </ag-grid-vue>
                 </div>
-                <div class="col-lg-6 ">
+                <div class="col-lg-2 text-center"><br><br><br>
+                  <a v-on:click="onAddSelected()" role="button" class="fuente tamanio  "
+                    v-tooltip.top-center="'Agregar paralelos'">
+                    <svg class="center-icon" style="color: #000" data-testid="geist-icon" fill="none" height="28"
+                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="28">
+                      <path d="M13 17l5-5-5-5"></path>
+                      <path d="M6 17l5-5-5-5"></path>
+                    </svg>
+                  </a><br><br>
+                  <a v-on:click="onRemoveSelected()" role="button" class="fuente tamanio mt-3"
+                    v-tooltip.top-center="'Quitar paralelos'">
+                    <svg class="center-icon" style="color: #000" data-testid="geist-icon" fill="none" height="28"
+                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="28">
+                      <path d="M11 17l-5-5 5-5"></path>
+                      <path d="M18 17l-5-5 5-5"></path>
+                    </svg>
+                  </a><br><br>
+                  <a v-on:click="save()" role="button" class="fuente tamanio "
+                    v-tooltip.top-center="'Guardar paralelos'">
+                    <svg class="center-icon" style="color: #000" data-testid="geist-icon" fill="none" height="24"
+                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                      <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
+                      <path d="M17 21v-8H7v8"></path>
+                      <path d="M7 3v5h8"></path>
+                    </svg>
+                  </a>
+                </div>
+                <div class="col-lg-5 ">
                   <div class="d-flex justify-content-start">
                     <div v-for="ite in paralelos" :key="ite.id">
                       <div class="form-check  me-2">
@@ -36,29 +66,6 @@
                       </div>
                     </div>
                     <div>
-                      <a v-on:click="save()" role="button" class="fuente tamanio me-2 ms-5 btnOption"
-                        v-tooltip.top-center="'Guardar paralelos'">
-
-                        <svg class="center-icon" style="color: #000" data-testid="geist-icon" fill="none" height="24"
-                          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                          stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
-                          <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
-                          <path d="M17 21v-8H7v8"></path>
-                          <path d="M7 3v5h8"></path>
-                        </svg>
-                      </a>
-                      <a v-on:click="onRemoveSelected()" role="button" class="fuente tamanio me-2 btnOption"
-                        v-tooltip.top-center="'Elimine estudiantes selecionados'">
-                        <svg class="center-icon" data-testid="geist-icon" fill="none" height="24"
-                          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                          stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color: #000">
-                          <path d="M3 6h18"></path>
-                          <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
-                          <path d="M10 11v6"></path>
-                          <path d="M14 11v6"></path>
-                        </svg>
-
-                      </a>
                     </div>
                   </div>
                   <ag-grid-vue style="width: 100%; height: 300px;" class="ag-theme-alpine mt-3"
@@ -69,7 +76,8 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
                   <ag-grid-vue style="width: 100%; height: 250px;" class="ag-theme-alpine mt-3"
                     :defaultColDef="defaultColDef" rowSelection="multiple" :getRowId="getRowId" :rowDragManaged="true"
                     :animateRows="true" :rowDragMultiRow="true" :suppressRowClickSelection="true"
@@ -77,9 +85,9 @@
                     @grid-ready="onGridReady($event, 2)">
                   </ag-grid-vue>
                 </div>
-                <div class="col-lg-6 mt-2">
-                  <a v-on:click="onRemoveSelected2()" role="button" class="fuente tamanio me-2 btnOption"
-                    v-tooltip.top-center="'Elimine estudiantes selecionados'">
+                <div class="col-lg-2 mt-2"><br>
+                  <a v-on:click="onRemoveSelected2()" role="button" class="fuente tamanio ms-4 btnOption"
+                    v-tooltip.top-center="'Elimine estudiantes selecionados'"> &nbsp;&nbsp; 
                     <svg class="center-icon" data-testid="geist-icon" fill="none" height="24"
                       shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                       stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color: #000">
@@ -88,7 +96,7 @@
                       <path d="M10 11v6"></path>
                       <path d="M14 11v6"></path>
                     </svg>
-
+                   
                   </a>
                 </div>
               </div>

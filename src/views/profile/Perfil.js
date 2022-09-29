@@ -122,7 +122,7 @@ export default {
         alert('El navegador no soporta la lectura de archivos');
         return;
       }
-      if (!(/\.(jpg|png)$/i).test(format.name)) {
+      if (!(/\.(jpg|png|jpeg)$/i).test(format.name)) {
         alert('El archivo a adjuntar no es una imagen con formato PNG o JPG ');
         return ;
       }
@@ -241,7 +241,7 @@ export default {
     },
     verificarUsuario(){
       let text_1 = 'Cuenta'
-      let text_2 = 'Infromación de perfil'
+      let text_2 = 'Información de perfil'
       this.$store.commit('updateHeader',{text_1, text_2})
       if(!restResourceService.docente(this.roles)&&!restResourceService.estudiante(this.roles)){
         this.$router.push("/");

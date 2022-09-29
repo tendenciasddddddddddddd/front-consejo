@@ -32,7 +32,7 @@ Axios.interceptors.response.use(
     error => {
       if (!error.response) {
       
-       alert('Espere un momento 🙏🙏, los servicios no se encuentra en linea, regresa al inicio hasta que los servicios se activen')
+       alert('Los servicios no se encuentra en linea, regresa al inicio hasta que los servicios se activen')
        //localStorage.removeItem('access_token');
        //window.location.reload(true);
       }

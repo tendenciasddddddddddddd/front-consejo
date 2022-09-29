@@ -26,13 +26,19 @@
                 <span :class="{ 's-active2': tabs == 1 }" class="text-sm s-text-versel2">Supletorios</span>
               </a>
             </li>
+           
+            <li class="nav-item pt-1">
+              <a class="nav-link  " :class="{ 's-active': tabs == 3 }" data-scroll="" href="javascript:;"
+                @click="vueInit(3)">
+                <span :class="{ 's-active2': tabs == 3 }" class="text-sm s-text-versel2">Comportamiento</span>
+              </a>
+            </li>
             <li class="nav-item pt-1">
               <a class="nav-link " :class="{ 's-active': tabs == 2 }" data-scroll="" href="javascript:;"
                 @click="vueInit(2)">
                 <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2">Asitencias</span>
               </a>
             </li>
-
             <li class="nav-item pt-1">
               <a class="nav-link  " :class="{ 's-active': tabs == 4 }" data-scroll="" href="javascript:;"
                 @click="vueInit(4)">
@@ -52,7 +58,9 @@
         <section v-if="tabs == 2">
           hola
         </section>
-
+        <section v-if="tabs == 3">
+          <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
+        </section>
         <section v-if="tabs == 4">
           <Planificacion :id="idDistributivo" :planificacion="planificacion" />
         </section>
@@ -74,6 +82,7 @@ export default {
     ProgressBar, Calificaciones,
     Planificacion: () => import( /* webpackChunkName: "Planificacion" */ './pages/Planificacion.vue'),
     Supletorios: () => import( /* webpackChunkName: "Supletorios" */ './pages/Supletorios.vue'),
+    Comportamiento: () => import( /* webpackChunkName: "Comportamiento" */ './pages/Comportamiento.vue'),
   },
   data() {
     return {
@@ -95,7 +104,8 @@ export default {
           reme: '0',
           gracia: '0',
           pfinal: '0',
-          notas: [{ }]
+          notas: [{ }],
+          comportamiento : [{}]
         },
       },
       collectionTasks: [],
@@ -124,7 +134,6 @@ export default {
           .then((x) => {
             this.isVerific = x.data.filter((x) => x.curso == this.para);
             const isExiste = this.isVerific[0].calificaciones.filter((x) => x.materia == this.mate);
-            console.log(this.isVerific);
             if (isExiste == 0) {
               this.confirmarMateria();
             } else {
@@ -187,13 +196,14 @@ export default {
           arrays.push(this.isVerific[i]._id);
         }
         const notass = [
-          { quimestre: 'p1', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',},
+          {  quimestre: 'p1', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',},
           { quimestre: 'p2', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',}
         ]
+        const comportamiento = [{p1:'1',p2:'1'}, {p1:'1',p2:'1'}]
         this.model2.calificaciones.docente = this.docentes;
         this.model2.calificaciones.materia = this.mate;
         this.model2.calificaciones.notas = notass;
-        console.log(this.model2)
+        this.model2.calificaciones.comportamiento = comportamiento;
         this.$proxies._notasProxi
           .updateReforma(arrays, this.model2) 
           .then(() => {
@@ -253,6 +263,10 @@ export default {
           text_2 = 'Asitencias';
           this.$store.commit('updateHeader', { text_1, text_2 })
           break;
+        case 3:
+          text_2 = 'Comportamiento';
+          this.$store.commit('updateHeader', { text_1, text_2 })
+          break;
         case 4:
           text_2 = 'Planificación';
           this.$store.commit('updateHeader', { text_1, text_2 })
@@ -297,7 +311,5 @@ export default {
   color: #444;
 }
 
-a[data-scroll] {
-  border-radius: 0.1rem !important;
-}
+
 </style>

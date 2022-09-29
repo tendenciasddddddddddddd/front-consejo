@@ -1,31 +1,37 @@
 <template>
     <div>
+        <div class="text-end">
+            <a @click="removeAllFiles" class="fuente tamanio" href="javascript:;" >
+               
+                <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    viewBox="0 0 24 24" width="18" style="color: #000;margin-top: -3px;">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
+                </svg>
+                <b class=" me-2 links">Limpiar</b>
+            </a>
+        </div>
         <vue-dropzone class="mt-1"
             style="height:180px;background-color: rgb(245, 248, 250);border: 1px dashed rgb(81, 111, 144);border-radius: 4px;color: rgb(124, 152, 182);"
-            ref="dropzone" @vdropzone-success="afterComplete" id="drop1" :options="dropOptions">
+            ref="dropzone" @vdropzone-success="afterComplete" @vdropzone-upload-progress="dropzoneUploadProgress" id="drop1" :options="dropOptions">
         </vue-dropzone>
-        <a v-if="link!==''" @click="removeAllFiles" class="fuente tamanio" href="javascript:;"><i
-                class="far fa-trash-alt me-2 iconos"></i>
-            <b class=" me-2 links">Eliminar documento</b>
-        </a>
-        <div v-if="ifLoad" class="loadingg">
-            <div class="inn ">
-                <img src="../assets/img/icons/astronaut2.svg" style="height:100px;" alt="avatar image"
-                    class="refresh-start" />
-            </div>
-        </div>
+        <Astronauta v-if="ifLoad"/>
     </div>
 
 </template>
 
 <script>
 import { StorageRef } from "../boot/firebase";
+import Astronauta from "./Astronauta.vue";
 import vueDropzone from "vue2-dropzone";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
 let image = require("../assets/img/usados/all.svg");
 export default {
     props: {},
-    components: { vueDropzone },
+    components: { vueDropzone, Astronauta },
     data() {
         return {
             dropOptions: {
@@ -34,15 +40,22 @@ export default {
         <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
         <p class='text-sm fuente links'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
         `,
-                maxFilesize: 1,
+                maxFilesize: 2,
                 maxFiles: 1,
                 thumbnailHeight: 140,
             },
             ifLoad: false,
-            link: ''
+            link: '',
+            datt: ''
         }
     },
     methods: {
+        dropzoneUploadProgress(file, progress){
+            if (progress   <=100) {
+                this.ifLoad = true;
+            }
+            this.datt = file;
+        },
         afterComplete(upload) {
             this.ifLoad = true;
             var date = new Date();
@@ -81,39 +94,4 @@ export default {
     },
 }
 </script>
-<style>
-@keyframes rotate {
-    from {
-        transform: rotate(0deg)
-    }
 
-    to {
-        transform: rotate(360deg)
-    }
-}
-
-.refresh-start {
-    animation-name: rotate;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    animation-play-state: running;
-}
-
-@keyframes moveleft {
-    0% {
-        transform: translate(100px, 0)
-    }
-
-    100% {
-        transform: translate(0, 0)
-    }
-}
-
-.movimiento {
-    animation-name: moveleft;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    animation-duration: 3s
-}
-</style>

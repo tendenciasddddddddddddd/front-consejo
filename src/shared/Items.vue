@@ -3,15 +3,11 @@
     <div class="geist-container editor_live__CSUnb .editor_preview__VbJBs fadeIn1 animate__animated animate__fadeInUp"
       :class="[`animations-${index}`]">
       <div class="entity_entity__QwXps cajasTask">
-        <div class="geist-container lg-row">
+        <div @click="$emit('nextPage', item._id)" class="geist-container lg-row">
           <div class="jsx-4057886370 geist-container md-row lg-row">
             <div class="d-flex py-1">
-              <div class="form-check my-auto">
-                <input class="form-check-input cheka" type="checkbox" v-model="isSelecUsers" :value="item._id"
-                  @click="$emit('selectOne', item._id)" />
-              </div>
-              <div @click="$emit('nextPage', item._id)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" style="color: #007dbc;">
+              <div  class="d-flex flex-column justify-content-center ms-3">
+                <h6 class="mb-0 text-sm negros">
                   {{ item.nombre }}
                 </h6>
                 <div class="text-sm colorestabla fuente">

@@ -1,48 +1,63 @@
 <template>
     <div>
-        <ActionsTrask :isRoles="1" :isbtn="1" :allSelecteds="allSelected" :longitude="isSelecUsers.length"
-            @changeSearch="changeSearchs" @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove"
-            @selectAll="selectAlls" />
+        <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs"
+            @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @selectAll="selectAlls" />
         <NoFound v-if="displayedArticles.length == 0" />
-        <section v-else class="flex-containes2 ">
-            <div v-for="(item, index) in displayedArticles" :key="item.id" class="text-center">
-                <br />
-                <div class="targetas1 cajas "
-                    style="min-width:170px; width: 170px!important;margin-top: 0px!important;">
-                    <div class="form-check my-auto">
-                        <input class="form-check-input cheka" type="checkbox" v-model="isSelecUsers" :value="item._id"
-                            style="float: right; right: 10px; top: 10px;" @click="selectOne(item._id)" />
+        <section v-else>
+            <div v-for="(item, index) in displayedArticles" :key="item.id" class="liTask mt-2">
+                <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp "
+                    :class="[`animations-${index}`]">
+                    <div class="d-flex py-1">
+                        <div class="form-check my-auto">
+                            <input class="form-check-input cheka" type="checkbox" v-model="isSelecUsers"
+                                :value="item._id" @click="selectOne(item._id)" />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center ms-3">
+                            <h6 class="mb-0 text-sm negros">
+                                {{ item.name }}
+                            </h6>
+                            <div class="text-sm colorestabla fuente">
+                                <div>
+                                    <span style="background-color: rgb(0, 189, 165);"
+                                        class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
+                                    Usuario activo
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="avatar avatar-lg position-relative mt-2"
-                        v-bind:style="{ 'background-color': colors[index] }" style="border-radius: 100%;">
-                        <span class="text-white h4" style="font-weight: 600;">
+                    <div class="dropstart ms-auto">
+                        <div class="d-flex  mt-2">
                             {{ item.name.slice(0, 2).toUpperCase() }}
-                        </span>
+                        </div>
                     </div>
-                    <p class="text-xs fuente mt-3">
-                        {{ item.name }}
-                    </p>
                 </div>
             </div>
+            <Paginate :numPages="numPages" :page="page" :total="objectUser.length" @pagechanged="onPageChange">
+            </Paginate>
         </section>
     </div>
 </template>
 
 <script>
-import ActionsTrask from "../../../shared/ActionsTrask.vue";
 import NoFound from "../../../shared/NoFound"
+import ActionRowDocente from "../../../shared/ActionRowDocente.vue";
+import Paginate from "../../../shared/Paginate"
 export default {
     name: 'ListUsers',
     props: {
         objectUser: Array,
     },
-    components: { ActionsTrask, NoFound },
+    components: { NoFound, ActionRowDocente, Paginate },
     data() {
         return {
             colors: ["#00875a", "#00b8d9", "#6554c0", "#ff5630", "#57d9a3,#00875a", "#00b8d9", "#6554c0", "#ff5630", "#57d9a3,#00875a", "#00b8d9", "#6554c0", "#ff5630", "#57d9a3"],
             isSelecUsers: [],
             allSelected: false,
             searchQuery: '',
+            page: 1,
+            perPage: 4,
+            pages: [],
+            numPages: 0,
         }
     },
     computed: {
@@ -55,11 +70,22 @@ export default {
                         .every((v) => item.name.toLowerCase().includes(v));
                 });
             } else {
-                return this.objectUser;
+                return this.paginate(this.objectUser);
             }
         }
     },
     methods: {
+        paginate(articles) {
+            let page = this.page;
+            let perPage = this.perPage;
+            let from = (page * perPage) - perPage;
+            let to = (page * perPage);
+            this.numPages = Math.ceil(articles.length / this.perPage);
+            return articles.slice(from, to);
+        },
+        onPageChange(page) {
+            this.page = page;
+        },
         getDataAll() {
             this.$emit('getDataTask');
         },

@@ -11,17 +11,13 @@
               </div>
 
               <div @click="openChildRewiewTrask(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" style="color: #007dbc;">
+                <h6 class="mb-0 text-sm negros" style="text-decoration: underline;">
                   {{ item.nombre }}
                 </h6>
                 <div class="text-sm colorestabla fuente">
-                  <div v-if="item.estado.includes('1')">
+                  <div >
                     <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Tarea Revisada
-                  </div>
-                  <div v-else>
-                    <span class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Revision Pendiente
+                    Tarea Enviada
                   </div>
                 </div>
               </div>
@@ -118,7 +114,7 @@ export default {
       this.page = page;
     },
   remove() {
-    if (this.isSelecUsers.length > 0) return;
+    if (this.isSelecUsers.length == 0) return;
       let message = {
         title: "¿Esta seguro que quiere eliminar?",
         body: " Esta acción no se puede deshacer",
@@ -232,6 +228,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

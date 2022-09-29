@@ -4,13 +4,16 @@ import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
 import RestResource from "../../../../service/isAdmin";
 import Paginate from "../../../../shared/Paginate.vue";
+import Astronauta from "../../../../shared/Astronauta"
 const restResourceService = new RestResource();
 export default {
   name: 'Report',
   components: {
-    Spinner, ScrimModal, Dropdown, NoFound,Paginate,
+    Spinner, ScrimModal, Dropdown, NoFound,Paginate,Astronauta,
     FormatoMatricula: () => import( /* webpackChunkName: "FormatoMatricula" */ "./FormatoMatricula.vue"),
     FormatoPromocion: () => import( /* webpackChunkName: "FormatoPromocion" */ "./FormatoPromocion.vue"),
+    FormatoLibretas: () => import( /* webpackChunkName: "FormatoLibretas" */ "./FormatoLibretas.vue"),
+    LibretasConducta: () => import( /* webpackChunkName: "LibretasConducta" */ "./LibretasConducta.vue"),
   },
   data() {
     return {
@@ -25,19 +28,26 @@ export default {
       rowData: [],
       ifmatricula: false,
       ifpromocion: false,
+      iflibretas: false,
+      ifconducta: false,
       isPrint: false,
       searchQuery: '',
       //Pagina 
     page: 1,
-    perPage: 8,
+    perPage: 9,
     pages: [],
     numPages:0,
     totalNotas: 0,
-    nextCourse: ''
+    nextCourse: '',
+    isSelecMatricula: [],
+    allSelected: false,
+    isActive:false,
+    numQuimestre: 0,
     }
   },
   watch: {
     curso: function (value) {
+      this.isSelecMatricula = [];
       this.__cambios(value._id, value.num);
     }
   },
@@ -57,6 +67,33 @@ export default {
     }
   },
   methods: {
+    activar(){
+      if (this.isActive) {
+        this.isActive=false;
+      }else{
+        this.isActive=true;
+      }
+    },
+    selectcursos(ids) {
+      if (!this.isSelecMatricula.includes(ids)) {
+        this.isSelecMatricula.push(ids);
+      } else {
+        this.isSelecMatricula.splice(this.isSelecMatricula.indexOf(ids), 1);
+      }
+    },
+    selectAll: function () {
+      this.allSelected = true;
+      this.isSelecMatricula = [];
+      if (this.allSelected) {
+        for (let user in this.infoMat) {
+          this.isSelecMatricula.push(this.infoMat[user]._id);
+        }
+      }
+    },
+    deletedSelected: function () {
+      this.allSelected = false;
+      this.isSelecMatricula = [];
+    },
     paginate(articles) {
       let page = this.page;
       let perPage = this.perPage;
@@ -68,6 +105,7 @@ export default {
   },
   onPageChange: function(page) {
     this.page = page;
+
   },
     verificarUsuario() {
       if (!restResourceService.admin(this.roles)) {
@@ -119,34 +157,62 @@ export default {
     close() {
       this.$emit('myEventClosedModalReporte');
     },
-    get: function (ids) {
-      if (this.infoMat.length > 0) {
+    get: function () {
+      if (this.isSelecMatricula.length > 0) {
         this.ifmatricula = false
-      this.isPrint = true;
-      this.rowData = []
-      if (ids == 'all') {
-        for (let i = 0; i < this.infoMat.length; i++) {
-          this.rowData.push(this.infoMat[i]._id);
-        }
+        this.ifpromocion = false
+        this.iflibretas = false
+        this.ifconducta = false
+        this.isPrint = true;
+        this.rowData = this.isSelecMatricula
+        setTimeout(() => this.callReport(), 150);
       } else {
-        this.rowData.push(ids);
-      }
-      setTimeout(() => this.callReport(), 150);
+        this.$dialog.alert("Selecione un estudiante por lo menos");
       }
     },
-    get2: function (ids) {
-      if (this.infoMat.length > 0) {
+    get2: function () {
+      if (this.isSelecMatricula.length > 0) {
+        this.ifmatricula = false
         this.ifpromocion = false
+        this.iflibretas = false
+        this.ifconducta = false
         this.isPrint = true;
-        this.rowData = []
-        if (ids == 'all') {
-          for (let i = 0; i < this.infoMat.length; i++) {
-            this.rowData.push(this.infoMat[i]._id);
-          }
-        } else {
-          this.rowData.push(ids);
-        }
+        this.rowData = this.isSelecMatricula
         setTimeout(() => this.callReport2(), 150);
+      } else {
+        this.$dialog.alert("Selecione un estudiante por lo menos");
+      }
+    },
+    libretas_pdf: function (row) {
+      if (this.isSelecMatricula.length > 0) {
+        if (row == '0') {
+          this.numQuimestre = 0;
+        }
+        if (row == '1') {
+          this.numQuimestre = 1;
+        }
+        this.ifmatricula = false
+        this.ifpromocion = false
+        this.iflibretas = false
+        this.ifconducta = false
+        this.isPrint = true;
+        this.rowData = this.isSelecMatricula
+        setTimeout(() => this.callLibretas(), 150);
+      }else {
+        this.$dialog.alert("Selecione un estudiante por lo menos");
+      }
+    },
+    conducta_pdf: function () {
+      if (this.isSelecMatricula.length > 0) {
+        this.ifmatricula = false
+        this.ifpromocion = false
+        this.iflibretas = false
+        this.ifconducta = false
+        this.isPrint = true;
+        this.rowData = this.isSelecMatricula
+        setTimeout(() => this.callConducta(), 150);
+      }else {
+        this.$dialog.alert("Selecione un estudiante por lo menos");
       }
     },
     callReport() {
@@ -155,6 +221,14 @@ export default {
     },
     callReport2() {
       if (this.rowData.length > 0) this.ifpromocion = true
+      if (this.rowData.length == 0)  this.isPrint = false;
+    },
+    callLibretas() {
+      if (this.rowData.length > 0) this.iflibretas = true
+      if (this.rowData.length == 0)  this.isPrint = false;
+    },
+    callConducta() {
+      if (this.rowData.length > 0) this.ifconducta = true
       if (this.rowData.length == 0)  this.isPrint = false;
     },
   },

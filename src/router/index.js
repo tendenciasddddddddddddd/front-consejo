@@ -93,7 +93,7 @@ const routes = [{
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Distributivo-v1',
     name: '2222',
-    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/dis1/Distributivov1.vue'),
+    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/Distributivo.vue'),
   },
 
   ////------------------------------------REPORTES-----------------------------
@@ -138,11 +138,6 @@ const routes = [{
     path: '/Consultar-nota',
     name: 'e2',
     component: () => import( /* webpackChunkName: "Nota" */ '../views/pagesAlumnos/notas/Nota.vue'),
-  },
-  {
-    path: '/Repote-estudiante',
-    name: 'e3',
-    component: () => import( /* webpackChunkName: "Report" */ '../views/pagesAlumnos/reportes/Report.vue'),
   },
   {
     path: '/Historia-estudiante',

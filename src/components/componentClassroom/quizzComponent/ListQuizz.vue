@@ -11,13 +11,13 @@
               </div>
 
               <div @click="openChildRewiewTrask(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" style="color: #007dbc;">
+                <h6 class="mb-0 text-sm negros" style="color: #007dbc;text-decoration: underline;">
                   {{ item.nombre }}
                 </h6>
                 <div class="text-sm colorestabla fuente">
                   <div >
                     <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Tarea Revisada
+                    Examen enviado
                   </div>
                  
                 </div>

@@ -1,7 +1,6 @@
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 import ProgressBar from "../../../../shared/ProgressBar"; //
-import Modal from "../../../../shared/Modal";
 import ActionRowHeader from "../../../../shared/ActionRowHeader"
 import NoFound from "../../../../shared/NoFound"
 import Cards from "../../../../shared/Cards"
@@ -17,7 +16,7 @@ const arrayColors = [
 ];
 export default {
   components: {
-    ProgressBar,  Modal, ActionRowHeader, NoFound,Cards,
+    ProgressBar, ActionRowHeader, NoFound,Cards,
     CreateCurso: () => import( /* webpackChunkName: "CreateCurso" */ "../../../../components/componentClassroom/grupDocente/CreateCurso"),
   },
   data() {

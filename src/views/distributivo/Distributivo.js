@@ -1,10 +1,10 @@
-import Spinner from "../../../shared/Spinner";
-import IsSelect from '../../../shared/IsSelect';
-import CustomInput from "../../../shared/CustomInput.vue";
-import ButtonLoading from "../../../shared/ButtonLoading.vue";
-import Paginate2 from "../../../shared/Paginate2.vue";
-import AlertHeader from "../../../shared/AlertHeader.vue";
-import ActionsRow from "../../../shared/ActionsRow.vue";
+import Spinner from "../../shared/Spinner";
+import IsSelect from '../../shared/IsSelect';
+import CustomInput from "../../shared/CustomInput.vue";
+import ButtonLoading from "../../shared/ButtonLoading.vue";
+import Paginate2 from "../../shared/Paginate2.vue";
+import AlertHeader from "../../shared/AlertHeader.vue";
+import ActionsRow from "../../shared/ActionsRow.vue";
 export default {
     name: 'Distrivutivov1',
     components: {
@@ -12,9 +12,9 @@ export default {
         ButtonLoading,
         Paginate2,
         AlertHeader,
-        Modal: () => import(/* webpackChunkName: "Modal" */ "../../../shared/Modal.vue"),
-        Dropdown: () => import(/* webpackChunkName: "Dropdown" */ "../../../shared/Dropdown.vue"),
-        GridDistributivo : () => import( /* webpackChunkName: "GridDistributivo" */ '../../../components/agGrid/GridDistributivo.vue'),
+        Modal: () => import(/* webpackChunkName: "Modal" */ "../../shared/Modal.vue"),
+        Dropdown: () => import(/* webpackChunkName: "Dropdown" */ "../../shared/Dropdown.vue"),
+        GridDistributivo : () => import( /* webpackChunkName: "GridDistributivo" */ '../../components/agGrid/GridDistributivo.vue'),
         ActionsRow
       },
     data(){

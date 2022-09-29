@@ -3,12 +3,18 @@
         <template v-slot:header> Aulas virtuales</template>
          <template v-slot:body>
             <form @submit.prevent="save" id="aulas">
-              <div class="mt-2">
+              <div >
                 <span class="parrafo">Curso</span>
-                <IsSelect v-if="isCurso"></IsSelect>
-                  <Dropdown v-model="model.nombre"  v-else :options="listniveles"/>
+                <CustomInput v-model="model.nombre" />
                 <p class="mb-0 text-xs fuente text-danger">
                   {{ validation.firstError("model.nombre") }}
+                </p>
+              </div>
+              <div class="mt-3 ">
+                <span class="parrafo">Paralelo</span>
+                 <CustomInput v-model="paralelo" />
+                <p class="mb-0 text-xs fuente text-danger">
+                  {{ validation.firstError("paralelo") }}
                 </p>
               </div>
               <div class="mt-3 ">
@@ -36,9 +42,6 @@
                 class="fuente"
               >
               </vue-editor>
-              <p class="mb-0 text-sm text-danger">
-                {{ validation.firstError("model.descripcion") }}
-              </p>
             </div>
           </form>
          </template>
@@ -60,16 +63,14 @@
      </FullModal>
 </template>
 <script>
-import IsSelect from '../../../shared/IsSelect'
 import FullModal from "../../../shared/FullModal.vue";
 import ButtonLoading from "../../../shared/ButtonLoading.vue";
 import CustomInput from "../../../shared/CustomInput.vue";
-import Dropdown from "../../../shared/Dropdown.vue";
 import { VueEditor} from "vue2-editor";
 export default {
     name: 'AulaCreate',
     components:{
-         VueEditor, IsSelect, FullModal,CustomInput, ButtonLoading, Dropdown
+         VueEditor,  FullModal,CustomInput, ButtonLoading
        },
     data() {
         return {
@@ -85,23 +86,17 @@ export default {
               nombre: null,
               materia: null, 
               codigo: null, 
-              descripcion: null,
+              descripcion: '',
               icono: 'Curso activo',
               doc: null,
             },
             htmlForEditor: "",
-            
               customToolbar: [
                 ["bold", "italic", "underline"],
                 [{ list: "ordered" }, { list: "bullet" }],
                 
               ],
-              isCurso: false, 
-              listniveles : [],
-              modalidades:[
-                {id:1, nombre: 'Intensivo'},
-                {id:2, nombre: 'Extraordinaria'},
-              ],
+              paralelo: ''
         }
     },
     methods: {
@@ -112,27 +107,10 @@ export default {
        close(){
         this.$emit('myEvent2');
       },
-      __listNivele() {
-        //-----------TRAE LA LISTA DE LOS ROLES
-        this.isCurso = true;
-        this.$proxies._gestionProxi
-          .getNiveles()
-          .then((x) => {
-            this.listniveles = x.data;
-            this.isCurso = false;
-          })
-          .catch((err) => {
-            console.log("Error", err);
-            this.isCurso = false;
-          });
-      },
       save() {
-        //-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
         this.$validate().then((success) => {
-          //METODO PARA GUARDAR
           if (!success) {
             this.toast('Por favor llena correctamente los campos solicitados')
-           
             return;
           }
           if (this.user.id) {
@@ -140,7 +118,7 @@ export default {
             this.model.fecha = this.__calcularFecha();
             this.ifLoad = true;
             this.model.doc = this.fistname;
-            this.model.nombre = this.model.nombre.nombre
+            this.model.nombre = this.model.nombre + '-'+ this.paralelo
              this.$proxies._aulaProxi
               .create(this.model) //-----------EDITAR CON AXIOS
                .then(() => {
@@ -179,11 +157,10 @@ export default {
     },
     created() {
       this.appInit();
-      this.__listNivele();
     },
     computed: {
       isComplete () {
-        return this.model.nombre && this.model.materia && this.model.codigo && this.model.descripcion && this.model.icono;
+        return this.model.nombre && this.model.materia && this.model.codigo && this.paralelo && this.model.icono;
       }
     },
     validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
@@ -203,19 +180,13 @@ export default {
         return this.$validator
           .value(value)
           .required()
-          .minLength(5)
+          .minLength(3)
           .maxLength(50);
     },
-    'model.descripcion'(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(10)
-    },
-    'model.icono'(value) {
-      return this.$validator
-        .value(value)
-        .required()
+    'paralelo'(value) {//
+        return this.$validator
+          .value(value)
+          .required()
     },
     },
 };

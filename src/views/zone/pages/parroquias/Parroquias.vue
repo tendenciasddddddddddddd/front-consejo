@@ -94,8 +94,7 @@
                     <p class="mb-2 text-sm text-danger">
                       {{ validation.firstError("model.nombre") }}
                     </p>
-                    <hr class="horizontal dark mb-1 d-xl-block d-none">
-                    <div class="text-center ">
+                    <div class="text-center mt-2">
                        <ButtonLoading v-if="ifLoad"/>
                       <button v-else type="submit" class="btn btnNaranja  mt-1 ">
                         {{ model._id ? "Actualizar" : "Guardar" }}

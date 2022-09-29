@@ -38,6 +38,9 @@
          <div v-if="ifConsolidado">
              <Consolidado  @myEventClosedModalConsolidado="closedChildConsolidado" ></Consolidado>
          </div>
+         <div v-if="ifnotas">
+             <ReporteNotas  @myEventClosedModalNotas="closedNotas" />
+         </div>
     </div>
 </template>
 
@@ -57,6 +60,7 @@ export default {
       roles: this.$store.state.user.roles,
       ifReportPdf: false,
       ifConsolidado : false,
+      ifnotas: false,
       arrays_of_options: [
         {
           id: "0",
@@ -89,6 +93,7 @@ export default {
   components:{
      ReportePdfAdmin: () => import( /* webpackChunkName: "Report" */ "./pages/matricula/Reportes.vue"),
      Consolidado: () => import( /* webpackChunkName: "Consolidado" */ "./pages/consolidado/Consolidado.vue"),
+     ReporteNotas: () => import( /* webpackChunkName: "ReporteNotas" */ "./pages/notas/ReporteNotas.vue"),
       CardsOptions
   },
   methods: {
@@ -107,12 +112,18 @@ export default {
       if (num===1) {
          this.ifReportPdf = true;
       }
+      if (num===2) {
+         this.ifnotas = true;
+      }
     },
     closedChildReportPdf: function() {
       this.ifReportPdf = false;
     },
     closedChildConsolidado: function() {
       this.ifConsolidado = false;
+    },
+    closedNotas: function() {
+      this.ifnotas = false;
     },
   },
   created() {

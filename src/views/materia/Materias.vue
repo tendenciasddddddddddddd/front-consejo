@@ -23,6 +23,9 @@
                       </span>
                     </div>
                   </th>
+                  <th class="text-uppercase text-center text-xxs font-weight-bolder">
+                  Materia
+                </th>
                 <th class="text-uppercase text-center text-xxs font-weight-bolder">
                   Fecha modicado
                 </th>
@@ -43,12 +46,15 @@
                         @click="selectUser(item._id)"
                       />
                     </div>
-                    <a class="mb-0 ms-3 text-sm colorestabla fuente">
-                      {{ item.nombre }}
+                    <a class="mb-0 ms-3 text-xs colorestabla fuente">
+                      {{ item.area }}
                     </a>
                   </div>
                 </td>
-                  <td class="mb-0 ms-3 text-sm colorestabla fuente text-center">
+                <td class="mb-0 ms-3 text-xs colorestabla fuente text-center">
+                  {{ item.nombre }}
+                </td>
+                  <td class="mb-0 ms-3 text-xs colorestabla fuente text-center">
                   {{ item.updatedAt.substring(0,10) }}
                 </td>
                 <td class="text-sm text-center font-weight-normal fuente">
@@ -67,7 +73,12 @@
              <Spinner v-if="isCarga"></Spinner>
                 <form @submit.prevent="save" role="form">
                   <h6 class="text-danger text-center" v-if="MsmError!=''">{{ MsmError }}</h6>
-                  <span class="parrafo">Nombre de Materia</span>
+                  <span class="parrafo">Area</span>
+                  <CustomInput v-model="model.area" />
+                  <p class=" text-xs fuente text-danger">
+                    {{ validation.firstError("model.nombre") }}
+                  </p>
+                  <span class="parrafo">Materia</span>
                   <CustomInput v-model="model.nombre" />
                   <p class=" text-xs fuente text-danger">
                     {{ validation.firstError("model.nombre") }}

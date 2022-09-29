@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ProgressBar v-if="isPrint"></ProgressBar>
+    <Astronauta v-if="isPrint"/>
     <div v-else>
-      <ActionRowNotas  @remove="remove" @save="save" @openModal="onBtExport" @open="open"/>
+      <ActionRowNotas  @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
     </div>
     <ag-grid-vue style="width: 100%; height: 485px" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
@@ -20,8 +20,8 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue";
 import ActionRowNotas from "../../../shared/ActionRowNotas.vue";
-import ProgressBar from "../../../shared/ProgressBar";
 import quialifyservice from "./services";
+import Astronauta from "../../../shared/Astronauta"
 const ResultServiceNota = new quialifyservice();
 export default {
   name: "App",
@@ -47,7 +47,7 @@ export default {
         headerName: 'QUIMESTRE 1',
         children: [
           
-          { field: "a1", headerName: 'A1', valueFormatter: formatNumber, editable: true },
+          { field: "a1", headerName: 'A1', editable: true },
           { field: "a2", headerName: 'A2', editable: true },
           { field: "a3", headerName: 'A3', editable: true },
           { field: "a4", headerName: 'A4', editable: true },
@@ -197,7 +197,7 @@ export default {
     };
   },
   components: {
-    AgGridVue, ActionRowNotas,ProgressBar,
+    AgGridVue, ActionRowNotas,Astronauta,
     Report: () => import( /* webpackChunkName: "Reporth" */ "./Report.vue"),
   },
   created() {
@@ -236,6 +236,9 @@ export default {
     remove() {
       console.log("remove");
     },
+    changeSearch(value) {
+      this.gridApi.setQuickFilter(value);
+    },
     getDataAll() {
       this.$emit('getDataTask');
     },
@@ -243,7 +246,6 @@ export default {
       this.iftask = false;
       setTimeout(() => this.iftask = true, 100);
       this.isPrint = true;
-      this.$Progress.start();
     },
     closed: function () {
         this.iftask = false
@@ -251,7 +253,6 @@ export default {
     changeStatus(ev){
       if (ev=='100') {
         this.isPrint = false;
-        this.$Progress.finish();
       }
     },
     save() {
@@ -297,24 +298,30 @@ export default {
              .then(() => {
               this.ifsaved = false;
                this.getDataAll();
+               this.toast("Se guardo las notas con exito");
             })
             .catch(() => {
               this.$dialog.alert("No se puede completar la operación");
               this.ifsaved = false;
-            });
+           });
     },
-    
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 1600,
+        position: 'top-center',
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: 'CERRAR',
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          }
+        }
+      });
+    },
   }
 };
 
-var formatNumber = function (params) {
-  var number = params.value;
-
-  return Math.floor(number)
-    .toString()
-    .replace("^[0-9.]*$", '0');
-};
-5
 var totalValueGetter = function (params) {
   var q1 = params.getValue('promedio1');
   var q2 = params.getValue('promedio2');

@@ -12,12 +12,12 @@
                         </span>
                       </span>
                       <div class="stack_stack__A16oG ms-3">
-                        <span class="cardTitle fuente"  style="font-size: 17px;margin-top: -5px;">{{object.text1}}</span>
+                        <span class="cardTitle fuente"  style="font-size: 16px;margin-top: -5px;">{{object.text1}}</span>
                           <span class="tag fuente tag-purple">{{object.text2}}</span>
                       </div>
                    </div>
                    <div>
-                     <p class="cardTitle fuente mt-2" style="font-size: .875rem;"> {{object.text3}}</p>
+                     <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{object.text3}}</p>
                    </div>
                    <div>
                      <span class="text-xs  fuente mt-2" style="color: #516f90 !important;">

@@ -7,6 +7,7 @@ export default class quialifyservice {
       let promedio = 0;
       let foranea = "";
       let quim = [];
+      let comp = [];
       let suple= 0;
       let reme= 0;
       let gracia= 0;
@@ -15,6 +16,7 @@ export default class quialifyservice {
       for (let j = 0; j < notas.length; j++) {
         if (notas[j].materia == materia) {
           let calificar = notas[j].notas;
+          let comport = notas[j].comportamiento
           promedio = notas[j].promediof;
           suple= notas[j].suple;
           reme= notas[j].reme;
@@ -23,6 +25,9 @@ export default class quialifyservice {
           foranea = notas[j]._id;
           for (let k = 0; k < calificar.length; k++) {
             quim.push(calificar[k]);
+          }
+          for (let h = 0; h < comport.length; h++) {
+            comp.push(comport[h]); 
           }
           break;
         }
@@ -37,6 +42,7 @@ export default class quialifyservice {
         reme: reme,
         gracia: gracia,
         pfinal: pfinal,
+        comportamiento: comp
       });
     }
     return inAlumnos;

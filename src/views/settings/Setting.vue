@@ -124,7 +124,5 @@ export default {
 .s-text-versel2 {
   color: #444;
 }
-a[data-scroll] {
-    border-radius: 0.1rem !important;
-}
+
 </style>

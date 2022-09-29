@@ -1,206 +1,166 @@
 <template>
     <div>
-       
         <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-            :paginate-elements-by-height="1400" :filename="data.nivel+'-'+data.paralelo+'-'+data.materia" :pdf-quality="2"
-            :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
+            :paginate-elements-by-height="1400" :filename="data.nivel+'-'+data.paralelo+'-'+data.materia"
+            :pdf-quality="2" :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
             pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
             <section slot="pdf-content">
-                <section style="background: white; width: 100%;height:calc(100vh - 2rem)">
+                <section class="p-3" >
                     <div class="d-flex justify-content-between">
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
-                            <span style="font-size: 20px;" class="negros mt-1"><b>ALFONSO HERRERA</b> </span> <br>
-                            <span class="negros text-sm">Educación General Básica</span><br>
-                            <span class="negros text-sm">REPORTE DE NOTAS</span> <br>
-                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} - {{data.paralelo}} &nbsp; &nbsp; {{data.materia}}</span>
+                            <span class="h6 negros">
+                                UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                            </span><br>
+                            <p class="text-xs text-center negros">
+                                REPORTE DE NOTAS
+                            </p>
+                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
+                                {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg" alt="Logo" /></div>
+                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                                alt="Logo" /></div>
                     </div>
-                    <ag-grid-vue :rowHeight="rowHeight" style="width: 100%; height:70%;"
-                        class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
-                        :defaultColDef="defaultColDef">
-                    </ag-grid-vue>
-                    <div class="d-flex justify-content-around mt-3">
+                    <table class="dataTable-table table s-table-flush "
+                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                        <thead>
+                            <tr>
+                                <th
+                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                </th>
+                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                <th class="text-uppercase text-start negros text-xxs font-weight-bolder"
+                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;">
+                                    {{data.materia}}
+                                </th>
+                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                            </tr>
+
+                            <tr>
+                                <th style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    LISTADO DE ESTUDIANTES
+                                </th>
+                                <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
+                                    style="padding: 4px 5px;">PRIMER QUIMESTRE</th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    SEGUNDO QUIMESTRE
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    TOTAL
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);"></th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">p1</div>
+                                        <div class="col">p2</div>
+                                        <div class="col">pro</div>
+                                        <div class="col">pro(80%)</div>
+                                        <div class="col">exa</div>
+                                        <div class="col">exa(20%)</div>
+                                        <div class="col">qui</div>
+                                    </div>
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">p1</div>
+                                        <div class="col">p2</div>
+                                        <div class="col">pro</div>
+                                        <div class="col">pro(80%)</div>
+                                        <div class="col">exa</div>
+                                        <div class="col">exa(20%)</div>
+                                        <div class="col">qui</div>
+                                    </div>
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">pa</div>
+                                        <div class="col">eq</div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in info" :key="item.id">
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 text-start ms-3 text-xs negros fuente">{{item.nombres}}</td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 ms-3 text-start text-xs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col">{{item.p1}}</div>
+                                        <div class="col">{{item.p2}}</div>
+                                        <div class="col">{{item.prom1}}</div>
+                                        <div class="col">{{item.prom1_80}}</div>
+                                        <div class="col">{{item.exam1}}</div>
+                                        <div class="col">{{item.exam1_20}}</div>
+                                        <div class="col font-weight-bolder">{{item.promedio_final1}}</div>
+                                    </div>
+                                </td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 ms-3 text-start text-xs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col">{{item.p3}}</div>
+                                        <div class="col">{{item.p4}}</div>
+                                        <div class="col">{{item.prom2}}</div>
+                                        <div class="col">{{item.prom2_80}}</div>
+                                        <div class="col">{{item.exam2}}</div>
+                                        <div class="col">{{item.exam2_20}}</div>
+                                        <div class="col font-weight-bolder">{{item.promedio_final2}}</div>
+                                    </div>
+                                </td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;"
+                                    class="mb-0 ms-3 text-start text-xs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
+                                        <div class="col">{{item.eq}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-around mt-6">
                         <div class="text-center">
                             <span class="h6 pb-0">
-                            <b>__________________________________</b>
+                                <b>__________________________________</b>
                             </span> <br>
-                          <span class="negros text-sm"><b>RECTOR/A</b></span>
+                            <span class="negros text-sm"><b>RECTOR/A</b></span>
                         </div>
                         <div>
                             <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
-                        </div>
+                                <span class="h6 pb-0">
+                                    <b>__________________________________</b>
+                                </span> <br>
+                                <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                            </div>
                         </div>
                     </div>
                 </section>
-
-
             </section>
         </vue-html2pdf>
     </div>
 </template>
 
 <script>
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-alpine.css";
-import { AgGridVue } from "ag-grid-vue";
 import VueHtml2pdf from "vue-html2pdf";
 export default {
     name: 'AddNota',
-    components: { AgGridVue, VueHtml2pdf },
+    components: { VueHtml2pdf },
     props: {
         rowData: Array
     },
     data() {
         return {
-            rowHeight: 32,
-            defaultColDef: {
-
-                flex: 1,
-                minWidth: 40,
-                resizable: true,
-            },
-            rowSelection: null,
-            columnDefs: [{
-                headerName: '',
-                children: [
-                    { field: "nombres", headerName: 'Nombre', minWidth: 225, },
-                ]
-            }, {
-                headerName: 'QUIMESTRE 1',
-                children: [
-                    {
-                        field: "promedio1", headerName: 'P1', minWidth: 60,
-                        valueGetter: params => {
-                            let p1 = params.data.a1.toString().replace(",", ".")
-                            let a1 = parseFloat(p1)
-                            let p2 = params.data.a2.toString().replace(",", ".")
-                            let a2 = parseFloat(p2)
-                            let p3 = params.data.a3.toString().replace(",", ".")
-                            let a3 = parseFloat(p3)
-                            let p4 = params.data.a4.toString().replace(",", ".")
-                            let a4 = parseFloat(p4)
-                            let p5 = params.data.a5.toString().replace(",", ".")
-                            let a5 = parseFloat(p5)
-                            let suma = a1 + a2 + a3 + a4 + a5
-                            let promedio = (suma / 5).toFixed(2);
-                            return `${promedio}`;
-                        }
-                    },
-                    {
-                        field: "promedio2", headerName: 'P2', minWidth: 60,
-                        valueGetter: params => {
-                            let p1 = params.data.b1.toString().replace(",", ".")
-                            let a1 = parseFloat(p1)
-                            let p2 = params.data.b2.toString().replace(",", ".")
-                            let a2 = parseFloat(p2)
-                            let p3 = params.data.b3.toString().replace(",", ".")
-                            let a3 = parseFloat(p3)
-                            let p4 = params.data.b4.toString().replace(",", ".")
-                            let a4 = parseFloat(p4)
-                            let p5 = params.data.b5.toString().replace(",", ".")
-                            let a5 = parseFloat(p5)
-                            let suma = a1 + a2 + a3 + a4 + a5
-                            let promedio = (suma / 5).toFixed(2);
-                            return `${promedio}`;
-                        },
-
-                    },
-                    {
-                        field: "promedio3", headerName: 'PRO', minWidth: 60,
-                        valueGetter: totalValueGetter,
-                    },
-                    {
-                        field: "promedio4", headerName: '80%', minWidth: 60,
-                        valueGetter: totalPromedioAportes,
-                    },
-                    { field: "examenfinal", headerName: 'EX', },
-                    {
-                        field: "promedio5", headerName: '20%', minWidth: 60,
-                        valueGetter: totalParcialExamen,
-                    },
-                    {
-                        field: "qfinal", headerName: 'QUI', minWidth: 60, cellStyle: cellStyle,
-                        valueGetter: totalFinalQuim,
-                    },
-                ]
-            }, //########################################SEGUNDO PARCIAL########################################
-            {
-                headerName: 'QUIMESTRE 2',
-                children: [
-
-                    {
-                        field: "promedio11", headerName: 'P1', minWidth: 60,
-                        valueGetter: params => {
-                            let p1 = params.data.x1.toString().replace(",", ".")
-                            let a1 = parseFloat(p1)
-                            let p2 = params.data.x2.toString().replace(",", ".")
-                            let a2 = parseFloat(p2)
-                            let p3 = params.data.x3.toString().replace(",", ".")
-                            let a3 = parseFloat(p3)
-                            let p4 = params.data.x4.toString().replace(",", ".")
-                            let a4 = parseFloat(p4)
-                            let p5 = params.data.x5.toString().replace(",", ".")
-                            let a5 = parseFloat(p5)
-                            let suma = a1 + a2 + a3 + a4 + a5
-                            let promedio = (suma / 5).toFixed(2);
-                            return `${promedio}`;
-                        }
-                    },
-
-                    {
-                        field: "promedio22", headerName: 'P2', minWidth: 60,
-                        valueGetter: params => {
-                            let p1 = params.data.y1.toString().replace(",", ".")
-                            let a1 = parseFloat(p1)
-                            let p2 = params.data.y2.toString().replace(",", ".")
-                            let a2 = parseFloat(p2)
-                            let p3 = params.data.y3.toString().replace(",", ".")
-                            let a3 = parseFloat(p3)
-                            let p4 = params.data.y4.toString().replace(",", ".")
-                            let a4 = parseFloat(p4)
-                            let p5 = params.data.y5.toString().replace(",", ".")
-                            let a5 = parseFloat(p5)
-                            let suma = a1 + a2 + a3 + a4 + a5
-                            let promedio = (suma / 5).toFixed(2);
-                            return `${promedio}`;
-                        }
-                    },
-                    {
-                        field: "promedio33", headerName: 'PRO', minWidth: 60,
-                        valueGetter: totalValueGetter2,
-                    },
-                    {
-                        field: "promedio44", headerName: '80%', minWidth: 60,
-                        valueGetter: totalPromedioAportes2,
-                    },
-                    { field: "examenfinal2", headerName: 'EX', },
-                    {
-                        field: "promedio55", headerName: '20%', minWidth: 60,
-                        valueGetter: totalParcialExamen2,
-                    },
-                    {
-                        field: "qfinal2", headerName: 'QUI', minWidth: 60, cellStyle: cellStyle,
-                        valueGetter: totalFinalQuim2,
-                    },
-                ]
-            },
-            {
-                headerName: 'P ANUAL',
-                children: [
-                    { field: "nombres", headerName: 'PA', minWidth: 100, cellStyle: cellStyle, valueGetter: totalPromedioAnual },
-
-                ]
-            }
-            ],
             isprint: false,
             statusbar: "",
-            data : ''
+            data: '',
+            info: [],
         }
     },
     watch: {
@@ -209,8 +169,89 @@ export default {
         }
     },
     methods: {
-        initiaSetap(){
-            this.data = JSON.parse(localStorage.getItem("myCourse"));
+        initiaSetap() {
+            try {
+                this.data = JSON.parse(localStorage.getItem("myCourse"));
+                if (this.rowData.length > 0) {
+                    for (let i = 0; i < this.rowData.length; i++) {
+                        const element = this.rowData[i];
+                        let p1 = this.promedioP1(element);
+                        let p2 = this.promedioP2(element);
+                        let prom1 = ((parseFloat(p1) + parseFloat(p2)) / 2).toFixed(2);
+                        let prom1_80 = ((prom1 * 8) / 10).toFixed(2);
+                        let exam1 = element.examenfinal;
+                        let exam1_20 = ((parseFloat(exam1) * 2) / 10).toFixed(2);
+                        let promedio_final1 = (parseFloat(prom1_80) + parseFloat(exam1_20)).toFixed(2);
+                        let p3 = this.promedioP3(element);
+                        let p4 = this.promedioP4(element);
+                        let prom2 = ((parseFloat(p3) + parseFloat(p4)) / 2).toFixed(2);
+                        let prom2_80 = ((prom2 * 8) / 10).toFixed(2);
+                        let exam2 = element.examenfinal2;
+                        let exam2_20 = ((parseFloat(exam2) * 2) / 10).toFixed(2);
+                        let promedio_final2 = (parseFloat(prom2_80) + parseFloat(exam2_20)).toFixed(2);
+                        let promedioAnual = ((parseFloat(promedio_final1) + parseFloat(promedio_final2)) / 2).toFixed(2);
+                        let eq = this.parcilaValue1(promedioAnual)
+                        this.info.push({
+                            nombres: element.nombres,
+                            p1: p1,
+                            p2: p2,
+                            prom1: prom1,
+                            prom1_80: prom1_80,
+                            exam1: exam1,
+                            exam1_20: exam1_20,
+                            promedio_final1: promedio_final1,
+                            p3: p3,
+                            p4: p4,
+                            prom2: prom2,
+                            prom2_80: prom2_80,
+                            exam2: exam2,
+                            exam2_20: exam2_20,
+                            promedio_final2: promedio_final2,
+                            promedioAnual: promedioAnual,
+                            eq: eq,
+                        })
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+
+        },
+        promedioP1(array) {
+            let sum = parseFloat(array.a1) + parseFloat(array.a2) + parseFloat(array.a3) + parseFloat(array.a4) + parseFloat(array.a5)
+            let prom = (sum / 5).toFixed(2);
+            return prom;
+        },
+        promedioP2(array) {
+            let sum = parseFloat(array.b1) + parseFloat(array.b2) + parseFloat(array.b3) + parseFloat(array.b4) + parseFloat(array.b5)
+            let prom = (sum / 5).toFixed(2);
+            return prom;
+        },
+        promedioP3(array) {
+            let sum = parseFloat(array.x1) + parseFloat(array.x2) + parseFloat(array.x3) + parseFloat(array.x4) + parseFloat(array.x5)
+            let prom = (sum / 5).toFixed(2);
+            return prom;
+        },
+        promedioP4(array) {
+            let sum = parseFloat(array.y1) + parseFloat(array.y2) + parseFloat(array.y3) + parseFloat(array.y4) + parseFloat(array.y5)
+            let prom = (sum / 5).toFixed(2);
+            return prom;
+        },
+        parcilaValue1(params) {
+            let num = parseFloat(params)
+            var result = ''
+            if (num <= 10 && num >= 9) {
+                result = 'DA'
+            } else if (num <= 8.99 && num >= 7) {
+                result = 'AA'
+            } else if (num <= 6.99 && num >= 4.01) {
+                result = 'PA'
+            } else if (num <= 4 && num >= 1) {
+                result = 'NA'
+            } else {
+                result = 'NN'
+            }
+            return result;
         },
         close() {
             this.$emit('EventClosed')
@@ -233,92 +274,5 @@ export default {
         this.initiaSetap()
         setTimeout(() => this.generatePDF(), 1000);
     },
-
 }
-
-
-var totalValueGetter = function (params) {
-    var q1 = params.getValue('promedio1');
-    var q2 = params.getValue('promedio2');
-    var suma = parseFloat(q1) + parseFloat(q2)
-    let promedio = (suma / 2).toFixed(2);
-    return promedio;
-};
-var totalValueGetter2 = function (params) {
-    var q1 = params.getValue('promedio11');
-    var q2 = params.getValue('promedio22');
-    var suma = parseFloat(q1) + parseFloat(q2)
-    let promedio = (suma / 2).toFixed(2);
-    return promedio;
-};
-var totalPromedioAportes = function (params) {
-    var rest = params.getValue('promedio3');
-    var test = rest.toString().replace(",", ".")
-    let aux = parseFloat(test)
-    let promedio = ((aux * 8) / 10).toFixed(2);
-    return promedio;
-};
-var totalPromedioAportes2 = function (params) {
-    var rest = params.getValue('promedio33');
-    var test = rest.toString().replace(",", ".")
-    let aux = parseFloat(test)
-    let promedio = ((aux * 8) / 10).toFixed(2);
-    return promedio;
-};
-var totalParcialExamen = function (params) {
-    var rest = params.getValue('examenfinal');
-    var test = rest.toString().replace(",", ".")
-    let aux = parseFloat(test)
-    let promedio = ((aux * 2) / 10).toFixed(2);
-    return promedio;
-};
-var totalParcialExamen2 = function (params) {
-    var rest = params.getValue('examenfinal2');
-    var test = rest.toString().replace(",", ".")
-    let aux = parseFloat(test)
-    let promedio = ((aux * 2) / 10).toFixed(2);
-    return promedio;
-};
-var totalFinalQuim = function (params) {
-    var pro1 = params.getValue('promedio4');
-    var test1 = pro1.toString().replace(",", ".")
-    let aux1 = parseFloat(test1)
-    var pro2 = params.getValue('promedio5');
-    var test2 = pro2.toString().replace(",", ".")
-    let aux2 = parseFloat(test2)
-    return (aux2 + aux1).toFixed(2);
-};
-var totalFinalQuim2 = function (params) {
-    var pro1 = params.getValue('promedio44');
-    var test1 = pro1.toString().replace(",", ".")
-    let aux1 = parseFloat(test1)
-    var pro2 = params.getValue('promedio55');
-    var test2 = pro2.toString().replace(",", ".")
-    let aux2 = parseFloat(test2)
-    return (aux2 + aux1).toFixed(2);
-};
-var totalPromedioAnual = function (params) {
-    var pro1 = params.getValue('qfinal');
-    var test1 = pro1.toString().replace(",", ".")
-    let aux1 = parseFloat(test1)
-    var pro2 = params.getValue('qfinal2');
-    var test2 = pro2.toString().replace(",", ".")
-    let aux2 = parseFloat(test2)
-    return ((aux2 + aux1) / 2).toFixed(2);
-};
-var cellStyle = function (params) {
-    const color = numberToColor(params.value);
-    return {
-        backgroundColor: color,
-    };
-};
-var numberToColor = function (val) {
-    if (val < 7) {
-        return '#ffaaaa';
-    } else if (val >= 7 && val <= 10) {
-        return '#aaffaa';
-    } else {
-        return '#aaaaff';
-    }
-};
 </script>

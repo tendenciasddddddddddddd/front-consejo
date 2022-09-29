@@ -1,90 +1,29 @@
 <template>
   <div>
-     <AlertHeader :firsttext="'Gestionar cursos'" :lasttext="'Crea, edita, elimina y filtra'"></AlertHeader>
-        <div class="row mt-3">
-          <div class="col-lg-3">
-            <div class="input-group">
-              <span class="input-group-text text-body buscador"
-                ><i class="fas fa-search colorhs" aria-hidden="true"></i
-              ></span>
-              <input
-                type="text"
-                class="form-control buscador"
-                placeholder="Buscar"
-              />
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <a
-              @click="gets()"
-              role="button"
-              class="fuente tamanio"
-              :class="{ disabled: isSelecUsers.length != 1 }"
-              v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar un fila para poder editar'
-              "
-            >
-              <i class="fas fa-pencil-alt me-2 ms-3 iconos"></i>
-              <b class="me-4 " :class="{ links: isSelecUsers.length === 1 }"
-                >Editar</b
-              >
-            </a>
-            <a
-              v-on="isSelecUsers.length ? { click: () => remove() } : {}"
-              role="button"
-              class="fuente tamanio"
-              :class="{ disabled: isSelecUsers.length === 0 }"
-              v-if="!iseliminaddo"
-              v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar una o muchas filas para eliminar'
-              "
-            >
-              <i class="far fa-trash-alt me-2 iconos"></i>
-              <b class="me-1" :class="{ links: isSelecUsers.length != 0 }"
-                >Eliminar curso</b
-              >
-            </a>
-               <a
-              @click="desactiveState"
-              role="button"
-              class="fuente tamanio"
-              :class="{ disabled: isSelecUsers.length != 1 }"
-              v-tooltip.top-center="
-                isSelecUsers.length
-                  ? ''
-                  : 'Seleccionar un fila para poder desactivar'
-              "
-            >
-              <i class="fas fa-sync me-2 ms-3 iconos"></i>
-             
-              <b :class="{ links: isSelecUsers.length === 1 }"
-                >Cambiar estado</b
-              >
-            </a>
-          </div>
-          <div class="col-lg-3">
-            <div class="d-flex justify-content-end mb-3">
-              <a class="btn btn-sm btnNaranja" @click="openModal">
-                Crear curso
-              </a>
-            </div>
-          </div>
-        </div>
+    <AlertHeader :firsttext="'Gestionar cursos'" :lasttext="'Crea, edita, elimina, filtra y procesa datos'"></AlertHeader>
+      <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets" @desactiveState="desactiveState" />
+  
       <Spinner v-if="isLoading"></Spinner>
       <div v-else class="table-responsive mt-1">
         <table class="dataTable-table table s-table-flush">
           <thead class="thead-light">
             <tr class="cabeza">
               <th
-                style="background-color: rgb(234, 240, 246); "
-                class="text-uppercase text-center text-xxs font-weight-bolder"
-              >
-                Curso
-              </th>
+                    style="background-color: rgb(234, 240, 246); ">
+                   <div  class="d-flex ms-3">
+                      <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
+                        <input
+                          class="form-check-input cheka"
+                          type="checkbox"
+                          @click="selectAll"
+                        />
+                      </div>
+                       <i @click="deletedSelected" v-else  class="fa fa-minus s-icon-all" aria-hidden="true"></i>
+                      <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                       Curso
+                      </span>
+                    </div>
+                  </th>
               <th
                 class="text-uppercase text-center text-xxs font-weight-bolder"
               >

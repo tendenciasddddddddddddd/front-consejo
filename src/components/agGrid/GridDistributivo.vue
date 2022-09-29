@@ -4,7 +4,7 @@
     <template v-slot:body>
       <div class="row mb-3">
 
-        <div class="col-md-9">
+        <div class="col-md-8">
           <a v-on:click="onBtAdd()" class="fuente tamanio negros " href="javascript:;">
             <svg style=" margin-top: -3px;" class="me-2 ms-1 text-dark"  data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
               stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -27,16 +27,7 @@
             </svg>
             <b class="me-4 links" >Recortar fila</b>
           </a>
-          <a v-on:click="onBtExport()" role="button" class="fuente tamanio negros">
-            <svg style=" margin-top: -3px;" class="me-2 ms-1 text-dark" data-testid="geist-icon" fill="none" height="20"
-              shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-              stroke-width="1.5" viewBox="0 0 24 24" width="20">
-              <path d="M8 17l4 4 4-4"></path>
-              <path d="M12 12v9"></path>
-              <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
-            </svg>
-            <b class="me-4 links" >Descargar</b>
-          </a>
+
           <a v-on:click="onBtRefresh()" role="button" class="fuente tamanio negros">
             <svg style=" margin-top: -3px;" class="me-2 ms-1 text-dark" data-testid="geist-icon" fill="none" height="20"
               shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -48,18 +39,31 @@
             </svg>
             <b class="me-4 links" >Restablecer</b>
           </a>
-          <a v-on:click="getRowData()" role="button" class="fuente tamanio negros">
-            <svg style=" margin-top: -3px;" class="me-2 ms-1 text-dark" data-testid="geist-icon" fill="none" height="20"
+          
+        </div>
+        <div class="col-md-4 text-end">
+          <button v-on:click="onBtExport()" class="btn btn-vercel-white me-2">
+              <svg style=" margin-top: -3px;" class="me-2 " data-testid="geist-icon" fill="none" height="20"
+              shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="1.5" viewBox="0 0 24 24" width="20">
+              <path d="M8 17l4 4 4-4"></path>
+              <path d="M12 12v9"></path>
+              <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
+            </svg>
+             Descargar
+            </button>
+            <a class="btn btn-vercel"  v-on:click="getRowData()">
+              <svg style=" margin-top: -3px;" class="me-2" data-testid="geist-icon" fill="none" height="20"
               shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
               stroke-width="1.5" viewBox="0 0 24 24" width="20">
               <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
               <path d="M17 21v-8H7v8"></path>
               <path d="M7 3v5h8"></path>
             </svg>
-            <b class="me-4 links" >Guardar</b>
-          </a>
+              
+              Matriculas
+            </a>
         </div>
-
       </div>
       <section style="height: calc(100% - 50px);">
         <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
@@ -73,7 +77,7 @@
       </section>
       <div v-if="ifload" class="loadingg">
         <div class="inn ">
-          <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando cuenta a los usuarios
+          <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando distributivo
             ...</h4>
         </div>
       </div>
