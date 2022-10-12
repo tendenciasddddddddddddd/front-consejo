@@ -49,7 +49,7 @@ export default {
         apellidos: null,
         cedula: null,
         foto:
-          "https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png",
+          "https://res.cloudinary.com/dvpp07pji/image/upload/v1665121545/profile_p23jj9.png",
         typo: "ESTS",
         telefono: null,
         updatedAt: null,

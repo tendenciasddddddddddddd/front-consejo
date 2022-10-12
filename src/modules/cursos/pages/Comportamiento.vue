@@ -1,15 +1,19 @@
 <template>
     <div>
-        <Astronauta v-if="isPrint"/>
+        <fullscreen v-model="fullscreen" style="background: #fff;">
+            <Astronauta v-if="isPrint"/>
         <div >
-            <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" />
+            <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" @toggle="toggle"/>
         </div>
-        <ag-grid-vue style="width: 100%; height: 455px" class="ag-theme-alpine" :columnDefs="columnDefs"
+        <section style="height: calc(100vh - 180px);">
+            <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
             :rowData="rowData" :defaultColDef="defaultColDef" :enableRangeSelection="true"
-            :suppressCopySingleCellRanges="true" :pagination="true" :paginationPageSize="paginationPageSize"
-            :cacheBlockSize="cacheBlockSize" @grid-ready="onGridReady">
+            :suppressCopySingleCellRanges="true"  @grid-ready="onGridReady">
         </ag-grid-vue>
+        </section> 
 
+        </fullscreen>
+       
         <div v-if="iftask">
             <ReportConducta @EventClosed="closed" @getData="getDataAll" :rowData="rowData"
                 @changeStatus="changeStatus" />
@@ -113,11 +117,10 @@ export default {
                     ]
                 },
             ],
-            paginationPageSize: 0,
-            cacheBlockSize: 0,
             quimestre: 'p1',
             gridApi: null,
             iftask: false,
+            fullscreen: false,
         };
     },
     components: {
@@ -127,10 +130,11 @@ export default {
     created() {
         this.rowSelection = 'multiple';
         this.onGridReadys();
-        this.paginationPageSize = 8;
-        this.cacheBlockSize = 8;
     },
     methods: {
+        toggle () {
+        this.fullscreen = !this.fullscreen
+      },
         onBtExport() {
             this.gridApi.exportDataAsExcel();
         },
@@ -143,8 +147,6 @@ export default {
             var anArray = [];
             for (let i = 0; i < this.object.length; i++) {
                 const quim = this.object[i].comportamiento;
-                let promedio = parseFloat(this.object[i].promed)
-                if (promedio >= 0 && promedio < 7) {
                     var objeto = {
                         id: this.object[i].id,
                         fora: this.object[i].fora,
@@ -155,7 +157,6 @@ export default {
                         p4: quim[1].p2,
                     }
                     anArray.push(objeto);
-                }
             }
             this.rowData = anArray;
         },
@@ -383,7 +384,7 @@ var quimestreValue2 = function (params) {
      };
      var numberToColor = function (val) {
        if (val < 7) {
-         return '#ffaaaa';
+         return '#FEB6C4';
        } else if (val >= 7 && val <= 10) {
          return '#aaffaa';
        } else {

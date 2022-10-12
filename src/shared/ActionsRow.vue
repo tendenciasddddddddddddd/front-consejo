@@ -39,9 +39,9 @@
           Nuevo
         </a>
         <a class="btn btn-vercel " @click="$emit('openModalh')">
-       
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" ><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><path d="M6 1v3"></path><path d="M10 1v3"></path><path d="M14 1v3"></path></svg>
-        &nbsp; Muy fácil
+         
+          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" ><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 012 2v7"></path><path d="M6 9v12"></path></svg>
+        &nbsp; Fácil
         </a>
       </div>
     </div>

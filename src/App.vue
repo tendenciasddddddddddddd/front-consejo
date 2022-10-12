@@ -15,7 +15,7 @@
           <div class="container-fluid  py-2" >
            <router-view/>
             <!-- INICIO FOOTER -->
-           <Help/>
+           <!-- <Help/> -->
           </div>
         </main>
         
@@ -33,7 +33,7 @@
 import Header from "@/shared/Header.vue";
 import Inicio from "@/shared/Inicio.vue";
 import Login from "./views/auth/Login.vue";
-import Help from "@/shared/Help.vue"
+//import Help from "@/shared/Help.vue"
 export default {
   name: "app",
   mounted() {
@@ -43,7 +43,7 @@ export default {
     Header,
     Login,
     Inicio,
-   Help,
+   //Help,
     AppMovile : () => import( /* webpackChunkName: "AppMovile" */ '../src/shared/AppMovile.vue')
   },
   data() {

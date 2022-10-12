@@ -3,42 +3,26 @@
      <Modal v-show="visible" @close="close">
           <template v-slot:header> Cambiar contraseña</template>
           <template v-slot:body>
-             <p class="parrafo">Cambia tu contraseña cuando lo necesites. Por seguridad, te recomendamos que esté compuesta de letras y números.</p>
-              <div class="h6 text-danger fuente">{{ MsmError }}</div>
-               <div v-if="isContrasenia">
-                  <form @submit.prevent="authenticate">
-                    <p class="parrafo">Contraseña actual</p>
+             <p class="parrafo">Cambia tu contraseña cuando lo necesites. Por seguridad</p>
+             <div class="text-center">
+        <img width="220" src="../../assets/img/consolidado.svg" alt="">
+      </div>
+             <div class="text-sm text-danger">{{ MsmError }}</div>
+               <div v-if="isContrasenia" class="p-2">
+                  <form @submit.prevent="authenticate" id="res1">
+                    <span class="parrafo">Contraseña actual</span>
                     <div class="form-group">
                       <input
                         v-model="contraseñaActual.password"
                         class="form-control buscador fuente"
                         type="password"
                         required
-                        placeholder="Ingresa tu contraseña actual"
                       />
-                    </div>
-                    <div class="text-center" v-if="isLoading">
-                      <button disabled class="btn mt-3 btnNaranjaClaro">
-                        Enviando
-                      </button>
-                    </div>
-
-                    <div class="text-center" v-else>
-                      <button v-if="contraseñaActual.password" type="submit" class="btn w-100 btnNaranja mt-3">
-                        Verificar Contraseña
-                      </button>
-                      <button
-                        v-else
-                        class="btn btnDisabled w-100 mt-3"
-                       
-                      >
-                        Verificar Contraseña
-                      </button>
                     </div>
                   </form>
                 </div>
-                <div v-else>
-                  <form @submit.prevent="actualizar">
+                <div v-else class="p-2">
+                  <form @submit.prevent="actualizar" id="res2">
                   
                      <span class="parrafo">Nueva Contraseña</span>
                     <div class="form-group">
@@ -47,7 +31,6 @@
                         class="form-control buscador"
                         type="password"
                         v-model="newContraseña.password"
-                        placeholder="Ingresa tu nueva contraseña"
                       />
                       <p class="mb-0 text-sm text-danger">
                         {{ validation.firstError("newContraseña.password") }}
@@ -61,31 +44,31 @@
                         class="form-control buscador"
                         type="password"
                         v-model="confpass"
-                        placeholder="Confirma tu nueva contraseña"
                       />
                       <p class="mb-0 text-sm text-danger">
                         {{ validation.firstError("confpass") }}
                       </p>
                     </div>
-                    <div class="text-center mt-4">
-                      <button
-                        v-if="(newContraseña.password == confpass)&&newContraseña.password"
-                        type="submit"
-                        class="btn  btnNaranja w-100"
-                      >
-                        Guardar
-                      </button>
-                      <button
-                        v-else
-                        class="btn btnDisabled w-100"
-                       
-                      >
-                        Guardar
-                      </button>
-                    </div>
+                   
                   </form>
                 </div>
           </template>
+          <template v-slot:acccion>
+      <div v-if="isContrasenia">
+        <ButtonLoading v-if="isLoading" />
+        <button form="res1" v-else type="submit" class="btn btnNaranja mt-2"
+          style="background-color: #0c2ccc !important;">
+          Verificar Contraseña
+        </button>
+      </div>
+      <div v-else>
+        <ButtonLoading v-if="isLoading1" />
+        <button form="res2" v-else :disabled="isDisabled" class="btn btnNaranja mt-2"
+          style="background-color: #0c2ccc !important;">
+          Guardar contraseña
+        </button>
+      </div>
+    </template>
         </Modal>
   </div>
 </template>

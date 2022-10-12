@@ -7,7 +7,7 @@
           <table class="dataTable-table table s-table-flush" >
             <thead class="thead-light">
               <tr class="cabeza">
-                 <th style="background-color: rgb(234, 240, 246); ">
+                 <th style="background-color: rgb(234, 240, 246); " class="d-flex ms-3">
                    <div class="d-flex ">
                       <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
                         <input
@@ -67,21 +67,22 @@
           <template v-slot:header> {{ model._id ? "Actualizar etnia" : "Añadir etnia" }}</template>
           <template v-slot:body>
                 <Spinner v-if="isCarga" />
-                  <form v-else @submit.prevent="save" role="form text-left">
+                  <form v-else @submit.prevent="save" id="prov">
                     <h6 v-if="MsmError!=''" class="text-danger text-center fuente">{{ MsmError }}</h6>
-                    <span class="parrafo mt-2">Nombre de etnia</span>
+                    <p class="parrafo mt-2">Etnia</p>
                     <CustomInput v-model="model.nombre" />
-                    <p class="mb-2 text-sm text-danger">
+                    <p class="mb-2 text-xs text-danger">
                       {{ validation.firstError("model.nombre") }}
                     </p>
-                    <div class="text-center mt-2">
-                       <ButtonLoading v-if="ifLoad"/>
-                      <button v-else type="submit" class="btn btnNaranja  mt-1 ">
-                        {{ model._id ? "Actualizar" : "Guardar" }}
-                      </button>
-                    </div>
+                    
                   </form>
           </template>
+          <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+            <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+               {{ model._id ? "Actualizar" : "Guardar" }}
+            </button>
+         </template>
         </Modal>
     </div>
 </template>

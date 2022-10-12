@@ -76,43 +76,13 @@ export default {
         resizable: true,
       },
       leftColumns: [
-        {
-          rowDrag: true,
-          maxWidth: 50,
-          suppressMenu: true,
-          rowDragText: (params, dragItemCount) => {
-            if (dragItemCount > 1) {
-              return dragItemCount + ' Estudiates';
-            }
-            return params.rowNode.data.nombre;
-          },
-        },
         { field: 'nombre', headerName: 'ESTUDIANTES SIN ASIGNAR PARALELO',
         colId: 'checkbox',
         checkboxSelection: true,
         suppressMenu: true,
         headerCheckboxSelection: true,},
       ],
-      rightColumns: [
-        {
-          rowDrag: true,
-          maxWidth: 50,
-          suppressMenu: true,
-          rowDragText: (params, dragItemCount) => {
-            if (dragItemCount > 1) {
-              return dragItemCount + ' Estudiates';
-            }
-            return params.rowNode.data.nombre;
-          },
-        },
-        { field: 'nombre', headerName: 'ESTUDIANTES PARA ASIGANAR PARALELO' ,
-        colId: 'checkbox',
-        headerCheckboxSelection: true,
-        checkboxSelection: true,
-        suppressMenu: true,
-        showDisabledCheckboxes: true,},
-       
-      ],
+  
       topColumns: [
         { field: 'curso',  rowGroup: true, hide: true,},
         {
@@ -137,16 +107,6 @@ export default {
     onQuickFilterChanged() {
       this.leftApi.setQuickFilter(document.getElementById('quickFilter').value);
     },
-    onAddSelected(){
-      var selectedRowData = this.leftApi.getSelectedRows();
-      this.leftApi.applyTransaction({ remove: selectedRowData });
-      this.rightApi.applyTransaction({ add: selectedRowData });
-    },
-    onRemoveSelected() {
-      var selectedRowData = this.rightApi.getSelectedRows();
-      this.rightApi.applyTransaction({ remove: selectedRowData });
-      this.leftApi.applyTransaction({ add: selectedRowData });
-    },
     onRemoveSelected2() {
       var selectedRowData = this.topApi.getSelectedRows();
       this.topApi.applyTransaction({ remove: selectedRowData });
@@ -166,10 +126,16 @@ export default {
         .catch(() => {
           this.$dialog.alert('Error en ng server')
         });
+      }else  {
+        this.$dialog.alert('SELECIONE UN ESTUDIANTE')
       }
     },
     getRowId(params) {
       return params.data.nombre;
+    },
+    onChange(id) {
+      this.check = id;
+      this.isSelected = true;
     },
     loadGrids() {
       this.leftRowData = [...this.rawData];
@@ -190,40 +156,26 @@ export default {
         this.topApi = params.api;
       }
     },
-    addGridDropZone() {
-      const dropZoneParams = this.rightApi.getRowDropZoneParams({
-        onDragStop: (params) => {
-          var nodes = params.nodes;
-          this.leftApi.applyTransaction({
-            remove: nodes.map(function (node) {
-              return node.data;
-            }),
-          });
-        },
-      });
 
-      this.leftApi.addRowDropZone(dropZoneParams);
-    },
-    onChange(id) {
-      this.check=id;
-  },
   save(){
     if (this.check !=null) {
+      var selectedRowData = this.leftApi.getSelectedRows();
       const idArrays = []
-      this.rightApi.forEachNode(function (node) {
-        idArrays.push(node.data._id);
-      });
-      if (idArrays.length==0) return; 
-      this.model.curso = this.check;
-      this.$proxies._matriculaProxi
-      .updateMatricula(idArrays, this.model)
-      .then(() => {
-        this.__cambios(this.idCurso);
-        this.toast("Registro exitoso "  );
+      selectedRowData.forEach(function (node) {
+        idArrays.push(node._id);
       })
-      .catch(() => {
-        this.$dialog.alert('Error en ng server')
-      });
+       if (idArrays.length==0) return; 
+       this.model.curso = this.check;
+       this.$proxies._matriculaProxi
+       .updateMatricula(idArrays, this.model)
+       .then(() => {
+         this.__cambios(this.idCurso);
+         this.toast("Registro exitoso "  );
+         this.check = null;
+       })
+       .catch(() => {
+         this.$dialog.alert('Error en ng server')
+       });
     } else {
       this.$dialog.alert('SELECIONE UN PARALELO PARA CONTINUAR')
     }
@@ -255,7 +207,6 @@ export default {
           this.leftRowData = this.infoMat
           const filterSave = this.filtros.filter((x) => x.curso != "Undefined");
           this.topRowData = filterSave
-          console.log(filterSave);
           this.isTabla = false; 
         })
         .catch((err) => {

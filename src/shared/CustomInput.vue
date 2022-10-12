@@ -1,6 +1,6 @@
 <template>
   <input 
-   class="form-control buscador"
+   class="form-control buscador" 
     type="text" 
     :value="value" 
     @input="$emit('update', $event.target.value)"

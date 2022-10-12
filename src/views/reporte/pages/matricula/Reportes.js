@@ -2,14 +2,13 @@ import Spinner from "../../../../shared/Spinner.vue";
 import ScrimModal from "../../../../shared/ScrimModal"
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
-import RestResource from "../../../../service/isAdmin";
 import Paginate from "../../../../shared/Paginate.vue";
 import Astronauta from "../../../../shared/Astronauta"
-const restResourceService = new RestResource();
+import Modal from "../../../../shared/Modal"
 export default {
   name: 'Report',
   components: {
-    Spinner, ScrimModal, Dropdown, NoFound,Paginate,Astronauta,
+    Spinner, ScrimModal, Dropdown, NoFound,Paginate,Astronauta,Modal,
     FormatoMatricula: () => import( /* webpackChunkName: "FormatoMatricula" */ "./FormatoMatricula.vue"),
     FormatoPromocion: () => import( /* webpackChunkName: "FormatoPromocion" */ "./FormatoPromocion.vue"),
     FormatoLibretas: () => import( /* webpackChunkName: "FormatoLibretas" */ "./FormatoLibretas.vue"),
@@ -23,7 +22,6 @@ export default {
       infoMat: {},
       info: null,
       isReporte: false,
-      roles: this.$store.state.user.roles,
       curso: "",
       rowData: [],
       ifmatricula: false,
@@ -43,6 +41,10 @@ export default {
     allSelected: false,
     isActive:false,
     numQuimestre: 0,
+    settings : {},
+    checked : 1,
+    parcial: false,
+    parcial2: false,
     }
   },
   watch: {
@@ -53,12 +55,12 @@ export default {
   },
   computed: {
     displayedArticles: function () {
-      if (this.searchQuery.length>1) {
+      if (this.searchQuery.length>0) {
         return this.infoMat.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.nombre.toLowerCase().includes(v));
+            .every((v) => item.curso.toLowerCase().includes(v));
         });
       }else{
         return this.paginate(this.infoMat);
@@ -68,11 +70,7 @@ export default {
   },
   methods: {
     activar(){
-      if (this.isActive) {
-        this.isActive=false;
-      }else{
-        this.isActive=true;
-      }
+      this.isActive=true;
     },
     selectcursos(ids) {
       if (!this.isSelecMatricula.includes(ids)) {
@@ -85,8 +83,8 @@ export default {
       this.allSelected = true;
       this.isSelecMatricula = [];
       if (this.allSelected) {
-        for (let user in this.infoMat) {
-          this.isSelecMatricula.push(this.infoMat[user]._id);
+        for (let user in this.displayedArticles) {
+          this.isSelecMatricula.push(this.displayedArticles[user]._id);
         }
       }
     },
@@ -108,9 +106,16 @@ export default {
 
   },
     verificarUsuario() {
-      if (!restResourceService.admin(this.roles)) {
-        this.$router.push("/");
-      }
+      this.$proxies._settingProxi.getConfigure()
+          .then((x) => {
+              const {rector, secretario,} = x.data[0];
+              this.settings = {
+                secretario : secretario,
+                rector : rector,
+              }  
+          }).catch(() => {
+              console.log("Error")
+          });
     },
     changeStatus(ev){
       if (ev=='100') {
@@ -127,7 +132,6 @@ export default {
         })
         .catch((err) => {
           console.log("Error", err);
-          // this.isTabla = false;
           this.isLoading1 = false;
         });
     },
@@ -157,6 +161,9 @@ export default {
     close() {
       this.$emit('myEventClosedModalReporte');
     },
+    closeModal(){
+      this.isActive = false;
+    },
     get: function () {
       if (this.isSelecMatricula.length > 0) {
         this.ifmatricula = false
@@ -167,7 +174,7 @@ export default {
         this.rowData = this.isSelecMatricula
         setTimeout(() => this.callReport(), 150);
       } else {
-        this.$dialog.alert("Selecione un estudiante por lo menos");
+        this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
     get2: function () {
@@ -180,37 +187,37 @@ export default {
         this.rowData = this.isSelecMatricula
         setTimeout(() => this.callReport2(), 150);
       } else {
-        this.$dialog.alert("Selecione un estudiante por lo menos");
+        this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
-    libretas_pdf: function (row) {
+    libretas_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
-        if (row == '0') {
-          this.numQuimestre = 0;
+        if (this.parcial !='' || this.parcial2 !='') {
+          this.numQuimestre = this.checked;
+          this.ifmatricula = false
+          this.ifpromocion = false
+          this.iflibretas = false
+          this.ifconducta = false
+          this.closeModal();
+          this.isPrint = true;
+          this.rowData = this.isSelecMatricula
+          setTimeout(() => this.callLibretas(), 150);
+        }else {
+          this.$dialog.alert("Seleccionar un parcial");
         }
-        if (row == '1') {
-          this.numQuimestre = 1;
-        }
-        this.ifmatricula = false
-        this.ifpromocion = false
-        this.iflibretas = false
-        this.ifconducta = false
-        this.isPrint = true;
-        this.rowData = this.isSelecMatricula
-        setTimeout(() => this.callLibretas(), 150);
       }else {
-        this.$dialog.alert("Selecione un estudiante por lo menos");
+        this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
     conducta_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
-        this.ifmatricula = false
-        this.ifpromocion = false
-        this.iflibretas = false
-        this.ifconducta = false
-        this.isPrint = true;
-        this.rowData = this.isSelecMatricula
-        setTimeout(() => this.callConducta(), 150);
+          this.ifmatricula = false
+          this.ifpromocion = false
+          this.iflibretas = false
+          this.ifconducta = false
+          this.isPrint = true;
+          this.rowData = this.isSelecMatricula
+          setTimeout(() => this.callConducta(), 150);
       }else {
         this.$dialog.alert("Selecione un estudiante por lo menos");
       }
@@ -231,6 +238,7 @@ export default {
       if (this.rowData.length > 0) this.ifconducta = true
       if (this.rowData.length == 0)  this.isPrint = false;
     },
+    
   },
   created() {
     this.verificarUsuario();

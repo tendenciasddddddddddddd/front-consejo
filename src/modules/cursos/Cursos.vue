@@ -9,14 +9,55 @@
                 <div v-for="(item, index) in displayedArticles" :key="item.id"
                     class="styles_projectCardWrapper__zSMNk s-mopa animate__animated animate__fadeInUp"
                     :class="[`animations-${index}`]">
-                    <Cards :object="{
-                        id: item._id,
-                        text1: item.fmateria.nombre,
-                        text2: 'Curso activo',
-                        text3: item.fnivel.nombre,
-                        text4: 'PARALELO: ' + item.paralelo,
-                        color: colorsh[index]
-                    }" @openModules="openModules" />
+                    <a href="javascript:;" @click="openModules(item._id)" class="link_link__LTNaQ styles_projectCard__2QnBU ">
+                        <div class="styles_projectCardDetails__vcWBi stack_stack__A16oG">
+                            <div class="stack_stack__A16oG">
+                                <div class=" d-flex justify-content-start">
+                                    <span class="avatar_avatar__OLijw stack_stack__A16oG"
+                                        v-bind:style="{'background':colorsh[index]}">
+                                        <span class="in-avatar text-center">
+
+                                            <b>{{item.fmateria.nombre.slice(0,2).toUpperCase()}}</b>
+                                          
+                                        </span>
+                                    </span>
+                                    <div class="stack_stack__A16oG ms-3">
+                                        <span class="cardTitle fuente"
+                                            style="font-size: 16px;margin-top: -5px;">{{item.fmateria.nombre}}</span>
+                                        <span class="tag fuente tag-purple">Curso activo</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{item.fnivel.nombre}}</p>
+                                </div>
+                                <div>
+                                    <span class="text-xs  fuente mt-2" style="color: #516f90 !important;">
+                                        {{'PARALELO: ' + item.paralelo}}
+                                    </span>
+                                    <span style="color:black">
+                                        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            class="css-i6dzq1">
+                                            <circle cx="18" cy="18" r="3"></circle>
+                                            <circle cx="6" cy="6" r="3"></circle>
+                                            <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+                                            <line x1="6" y1="9" x2="6" y2="21"></line>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:;" @click="openModules(item._id)" class="styles_visitButton__Nc7Vp ">
+                        <span class="s-btn-redondo">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </span>
+                    </a>
                 </div>
             </section>
             <section v-else>
@@ -31,7 +72,6 @@ const restResourceService = new RestResource();
 import ProgressBar from "../../shared/ProgressBar"; //
 import ActionRowHeader from "../../shared/ActionRowHeader"
 import NoFound from "../../shared/NoFound"
-import Cards from "../../shared/Cards"
 const arrayColors = [
     "#0f71ae",
     "#1466c9",
@@ -44,7 +84,7 @@ const arrayColors = [
 ];
 export default {
     components: {
-        ProgressBar, ActionRowHeader, NoFound, Cards,
+        ProgressBar, ActionRowHeader, NoFound, 
     },
     data() {
         return {
@@ -105,14 +145,15 @@ export default {
         openModules(id) {
             for (let i = 0; i < this.info.length; i++) {
                 const res = this.info[i];
-                if (res._id == id.id) {
+                if (res._id == id) {
                     var myCourse = {
                         paralelo: res.paralelo,
                         nombre: res.nombre,
                         materia: res.fmateria.nombre,
-                        idDistributivo : res._id,
-                        planificacion : res.planificacion,
-                        nivel : res.fnivel.nombre
+                        area: res.fmateria.area,
+                        idDistributivo: res._id,
+                        planificacion: res.planificacion,
+                        nivel: res.fnivel.nombre
                     };
                     let id = res.fnivel._id;
                     localStorage.removeItem("myCourse");
@@ -132,7 +173,7 @@ export default {
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
                         this.info = x.data;
-                       // console.log(this.info);
+                        // console.log(this.info);
                         this.isData = false;
                         this.$Progress.finish();
                     })

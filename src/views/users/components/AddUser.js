@@ -20,19 +20,19 @@ export default {
       idKey: this.idGet,
       tabla: true,
       info: null,
-      listRol:null,
+      listRol:[],
       isLoading: false,  ifLoad:false,
       checked:"",
       isRol:"",
       model: {//-----------VARIABLES DEL MODELO A GUARDAR
         _id: null, username: null,  email: null,
         password: null, nombres: null, apellidos: null,
-        cedula: null, foto: 'https://res.cloudinary.com/stebann/image/upload/v1631310792/profile_b9t64l.png', typo: 'ADMS',
+        cedula: null, foto: 'https://res.cloudinary.com/dvpp07pji/image/upload/v1665121545/profile_p23jj9.png', typo: 'ADMS',
         telefono: null,
         updatedAt:null, role:null,fullname : null,
      },
      isedit : false,
-    
+     isRole : false
     };
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
         this.$router.push("/");
       }
     },
-    get (){//-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
+    get (){
           if(this.idKey){
             this.isedit = true;
             this.$proxies._usuarioProxi.get(this.idKey)
@@ -56,7 +56,7 @@ export default {
             });
           }
     },
-    save() {//-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
+    save() {
         this.$validate().then(success => { //METODO PARA GUARDAR 
           if (!success&&this.checked==''){ 
               this.toast('Por favor llena correctamente los campos solicitados')
@@ -102,13 +102,16 @@ export default {
           }
         });
       },
-      __listRol(){//-----------TRAE LA LISTA DE LOS ROLES 
+      __listRol(){
+        this.isRole = true;
         this.$proxies._usuarioProxi.getRoles()
         .then((x) => {
           this.listRol = x.data;
+          this.isRole = false;
         })
         .catch((err) => {
           console.log("Error", err)
+          this.isRole = false;
         });
       },
       __getPasswods(apell, ced){//-----------CREA LA CONTRASEÑAS PARA LOS USUARIOS EJMPLO {M1004095632}

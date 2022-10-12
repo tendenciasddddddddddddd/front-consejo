@@ -7,9 +7,8 @@
           <table class="dataTable-table table s-table-flush">
             <thead class="thead-light">
               <tr class="cabeza">
-                 <th style="background-color: rgb(234, 240, 246); ">
-                   <div class="d-flex ">
-                      <div v-if="!allSelected " class="form-check my-auto" style="min-height: 0rem;">
+                <th style="background-color: rgb(234, 240, 246); " class="d-flex ms-3">
+                      <div v-if="!allSelected " class="form-check " style="min-height: 0rem;">
                         <input
                           class="form-check-input cheka"
                           type="checkbox"
@@ -18,9 +17,9 @@
                       </div>
                        <i @click="deletedSelected" v-else style="border: 2px solid; color: rgb(0, 164, 189); height: 19px; width: 19px; border-radius: 3px; cursor: pointer;" class="fa fa-minus" aria-hidden="true"></i>
                       <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
-                       Nacionalidad
+                        Nombres
                       </span>
-                    </div>
+                     
                   </th>
                 <th
                   class="text-uppercase text-center text-xxs font-weight-bolder"
@@ -70,24 +69,25 @@
             <Paginate2 :numPages="paginas"  :page="pagina" :total="info.length" :subtitulo="subtitulo" @pagechanged="onPageChange" @setChangedQuery="changedQuery"></Paginate2>
         </div>
         <Modal v-if="visible" @close="close">
-          <template v-slot:header> {{ model._id ? "Actualizar cantón" : "Añadir cantón" }}</template>
+          <template v-slot:header> {{ model._id ? "Actualizar nacionalidad" : "Añadir nacionalidad" }}</template>
           <template v-slot:body>
                 <Spinner v-if="isCarga" />
-                  <form v-else @submit.prevent="save" role="form text-left">
+                  <form v-else @submit.prevent="save" id="prov">
                     <h6 v-if="MsmError!=''" class="text-danger text-center fuente">{{ MsmError }}</h6>
-                    <span class="parrafo mt-2">Nombre de nacionalidad</span>
+                    <p class="parrafo ">Nacionalidad</p>
                     <CustomInput v-model="model.nombre" />
-                    <p class="mb-2 text-sm text-danger">
+                    <p class="mb-2 text-xs text-danger">
                       {{ validation.firstError("model.nombre") }}
                     </p>
-                    <div class="text-center mt-2">
-                       <ButtonLoading v-if="ifLoad"/>
-                      <button v-else type="submit" class="btn btnNaranja  mt-1 ">
-                        {{ model._id ? "Actualizar" : "Guardar" }}
-                      </button>
-                    </div>
+                   
                   </form>
           </template>
+          <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                        {{ model._id ? "Actualizar" : "Guardar" }}
+                      </button>
+         </template>
         </Modal>
     </div>
 </template>

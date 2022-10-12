@@ -23,4 +23,8 @@ export default class MigracionProxi {
     async getByIdOfCourseAndPeriod(periodoId, courseId) {
         return await this.axios.get(this.url + `/migracion/search?periodoId=${periodoId}&courseId=${courseId}`);
     }
+
+    async getByIdOfPeriodo(periodoId) {
+        return await this.axios.get(this.url + `/migracion/clon?periodoId=${periodoId}`);
+    }
 }

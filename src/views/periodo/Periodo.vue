@@ -53,7 +53,7 @@
       <template v-slot:header> Periodo Escolar</template>
       <template v-slot:body>
         <Spinner v-if="isCarga"></Spinner>
-        <form @submit.prevent="save" role="form">
+        <form @submit.prevent="save" role="form" id="prov">
           <span class="parrafo">Nombre de Periodo</span>
           <CustomInput v-model="model.nombre" />
           <p class="mb-2 text-xs fuente text-danger">
@@ -65,15 +65,14 @@
           <span class="parrafo mt-2">Fin de Periodo</span>
           <date-picker v-model="model.finaliza" valueType="format" class="w-100 fuente"></date-picker>
           <p class="mb-2 text-xs fuente text-danger">{{ validation.firstError("model.finaliza") }}</p>
-          <hr class="horizontal dark mb-1 d-xl-block d-none">
-          <div class="text-center">
-            <ButtonLoading v-if="ifLoad" />
-            <button v-else type="submit" class="btn btnNaranja  mt-1 mb-0 ">
-              {{ model._id ? "Actualizar" : "Guardar" }}
-            </button>
-          </div>
         </form>
       </template>
+      <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                        {{ model._id ? "Actualizar" : "Guardar" }}
+                      </button>
+         </template>
     </Modal>
   </div>
 </template>

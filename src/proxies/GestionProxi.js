@@ -79,6 +79,10 @@ export default class GestionProxi {
         return this.axios.get(this.url + `/distributivo?page=${page}&take=${take}`);
     }
 
+    getAllGrid() {
+        return this.axios.get(this.url + `/distributivo/fulldistributivo`);
+    }
+
     removeDistributivo(id) {
         return this.axios.delete(this.url + `/distributivo/${id}`);
     }

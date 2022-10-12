@@ -32,13 +32,14 @@ Axios.interceptors.response.use(
     error => {
       if (!error.response) {
       
-       alert('Los servicios no se encuentra en linea, regresa al inicio hasta que los servicios se activen')
+       alert('Los servicios no se encuentra en linea')
        //localStorage.removeItem('access_token');
        //window.location.reload(true);
       }
       else if(error.response.status===403||error.response.status===401||error.response.status===404) {//||error.response.status===401
-        localStorage.removeItem('access_token');
+        localStorage.clear();
         window.location.reload(true);
+        console.log(error.response.status)
       }
       
       return Promise.reject(error);

@@ -15,64 +15,55 @@
                   <span class="input-group-text text-body buscador"><i class="fas fa-search links"
                       aria-hidden="true"></i></span>
                   <input class="form-control buscador" type="text" v-model="searchQuery" style="background: white;"
-                    placeholder="Buscar">
+                    placeholder="Buscar por paralelo">
                 </div>
               </div>
-              <div class="col-lg-8 text-end">
+              <div class="col-lg-8 text-start">
                 <div class="btn-group dropup">
                   <a class="fuente tamanio  negros me-3" role="button" @click="conducta_pdf">
-                    <svg class=" me-1" data-testid="geist-icon" fill="none" height="20"
-                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20"
-                      style="color:#000;margin-top: -3px;">
+                    <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      viewBox="0 0 24 24" width="20" style="color:#000;margin-top: -3px;">
                       <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
                       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
                     </svg>
-                    Libretas conducta
+                    Conducta
                   </a>
                 </div>
                 <div class="btn-group dropup">
                   <a class="fuente tamanio  negros me-3" role="button" @click="activar">
-                    <svg class=" me-1" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                    <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                       stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                       viewBox="0 0 24 24" width="20" style="color:#000;margin-top: -3px;">
-                      <path d="M6 9l6 6 6-6"></path>
+                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                      <path d="M14 2v6h6"></path>
+                      <path d="M16 13H8"></path>
+                      <path d="M16 17H8"></path>
+                      <path d="M10 9H8"></path>
                     </svg>
-                    Libretas notas
+                    Libretas
                   </a>
-                  <ul
-                    style="min-width: 7rem;transform: perspective(999px) rotateX(-10deg) translateZ(0) translate3d(0,120px,0)!important;"
-                    :class="{ 'show': isActive === true }" class="dropdown-menu">
-                    <li>
-                      <a @click="libretas_pdf(0)" class="dropdown-item text-sm " href="javascript:;">Quimestre 1</a>
-                    </li>
-                    <li>
-                      <a @click="libretas_pdf(1)" class="dropdown-item text-sm " href="javascript:;">Quimestre 2</a>
-                    </li>
 
-                  </ul>
                 </div>
 
                 <a class="fuente tamanio negros me-3" role="button" @click="get2()">
-                  <svg class=" me-1" data-testid="geist-icon" fill="none" height="20"
-                    shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20"
-                    style="color:#000;margin-top: -3px;">
-                    <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path>
-                    <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path>
+                  <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    viewBox="0 0 24 24" width="20" style="color:#000;margin-top: -3px;">
+                    <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
+                    <path d="M13 2v7h7"></path>
                   </svg>
                   Promoción
                 </a>
                 <a class="fuente tamanio negros" role="button" @click="get()">
-                  <svg class=" me-1" data-testid="geist-icon" fill="none" height="20"
-                    shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20"
-                    style="color:#000;margin-top: -3px;">
+                  <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    viewBox="0 0 24 24" width="20" style="color:#000;margin-top: -3px;">
                     <path d="M6 9V2h12v7"></path>
                     <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
                     <path d="M6 14h12v8H6z"></path>
                   </svg>
-                  Matriculas
+                  Matricula
                 </a>
               </div>
             </div>
@@ -134,18 +125,70 @@
           </section>
         </section>
         <section v-if="ifmatricula">
-          <FormatoMatricula :rowData="rowData" @changeStatus="changeStatus" />
+          <FormatoMatricula :rowData="rowData" @changeStatus="changeStatus" :settings="settings" />
         </section>
         <section v-if="ifpromocion">
-          <FormatoPromocion :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" />
+          <FormatoPromocion :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
+            :settings="settings" />
         </section>
         <section v-if="iflibretas">
-          <FormatoLibretas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
-            :numQuimestre="numQuimestre" />
+          <FormatoLibretas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
+            :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
         </section>
         <section v-if="ifconducta">
           <LibretasConducta :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
-            :numQuimestre="numQuimestre" />
+            :settings="settings" :numQuimestre="numQuimestre" />
+        </section>
+        <section v-if="isActive">
+          <Modal @close="closeModal">
+            <template v-slot:header> Libretas escolares</template>
+            <template v-slot:body>
+              <div>
+                <p class="h6 fuente negros" style="font-weight:400;">
+                  Seleccionar uno de los dos quimestres
+                </p>
+                <div>
+                  <section>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="1"
+                          :value="1" />
+                        <span class="parrafo"> Primer quimestre</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="2"
+                          :value="2" />
+                        <span class="parrafo"> Segundo quimestre</span>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="mt-3 ">
+                    <p class="h6 fuente negros" style="font-weight:400;">
+                      Seleccionar uno o varios parciales para generar el reporte
+                    </p>
+                    <div>
+                      <div class="form-check my-auto supcheka">
+                        <input class="form-check-input cheka" type="checkbox" value="1" v-model="parcial" />
+                      </div> <span class="ms-4 text-sm negros">Primer parcial</span>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check my-auto supcheka">
+                        <input class="form-check-input cheka" type="checkbox" value="2" v-model="parcial2" />
+                      </div><span class="ms-4 text-sm negros">Segundo parcial</span>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </template>
+            <template v-slot:acccion>
+              <button @click="libretas_pdf" type="submit" class="btn btnNaranja mt-2"
+                style="background-color: #0c2ccc !important;">
+                Generar Reporte
+              </button>
+            </template>
+          </Modal>
         </section>
       </div>
     </template>

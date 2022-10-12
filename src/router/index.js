@@ -93,7 +93,7 @@ const routes = [{
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/Distributivo-v1',
     name: '2222',
-    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/Distributivo.vue'),
+    component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/GridCargaOraria.vue'),
   },
 
   ////------------------------------------REPORTES-----------------------------
@@ -109,6 +109,7 @@ const routes = [{
     name: 's1',
     component: () => import( /* webpackChunkName: "Setting" */ '../views/settings/Setting.vue'),
   },
+
   ////------------------------------------DOCENTES-----------------------------
   {
     path: '/perfil',

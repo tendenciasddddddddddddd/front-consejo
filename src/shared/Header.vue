@@ -114,7 +114,7 @@
             </ul>
           </div>
         </li>
-        <li class="nav-item" v-if="user.roles.includes('Admin')" id="step_3">
+        <li class="nav-item" v-if="user.roles.includes('Admin')||user.roles.includes('Vicerrector')" id="step_3">
           <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
             :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '1234'}"
             aria-controls="applicationsExamples" role="button" aria-expanded="false">
@@ -135,13 +135,13 @@
           $route.name === '1111'||$route.name === '1234'||
           $route.name === '2222'}" id="applicationsExamples">
             <ul class="nav ms-4 ps-3">
-              <li :class="{'active': $route.name === '1111'}" class="nav-item ">
+              <li :class="{'active': $route.name === '1111'}" class="nav-item " v-if="user.roles.includes('Admin')">
                 <router-link to="/Cursos" :class="{'active': $route.name === '1111'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> C </span>
                   <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
               </li>
-              <li :class="{'active': $route.name === '1234'}" class="nav-item ">
+              <li :class="{'active': $route.name === '1234'}" class="nav-item " v-if="user.roles.includes('Admin')">
                 <router-link to="/Materias" :class="{'active': $route.name === '1234'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> M </span>
                   <span class="sidenav-normal letras fuente">Materias </span>

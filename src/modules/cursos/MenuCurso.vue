@@ -1,8 +1,7 @@
 <template>
   <div>
-    <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
-    <div v-else class="row">
+    <div v-else class="row" >
       <div class="col-lg-2">
         <div class=" position-sticky top-1">
           <ul class="nav flex-column bg-white border-radius-lg p-1">
@@ -49,14 +48,14 @@
         </div>
       </div>
       <div class="col-lg-10 ">
-        <section v-if="tabs == 0">
+        <section v-if="tabs == 0" >
           <Calificaciones :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 1">
           <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 2">
-          hola
+          asistencia
         </section>
         <section v-if="tabs == 3">
           <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
@@ -92,6 +91,7 @@ export default {
       para: "",
       name: "",
       mate: "",
+      area : "",
       isVerific: {},
       inAlumnos: [],
       model2: {
@@ -99,6 +99,7 @@ export default {
         calificaciones: {
           docente: "",
           materia: "",
+          area: "",
           promediof: '0',
           suple: '0',
           reme: '0',
@@ -114,12 +115,16 @@ export default {
     }
   },
   methods: {
+    close(){
+      this.$router.go(-1);
+    },
     LoadCourse: function () {
       const seccio = JSON.parse(localStorage.getItem("myCourse")); //quimestre
       const info = JSON.parse(localStorage.getItem("Xf"));
       this.para = seccio.paralelo;
       this.name = seccio.nombre;
       this.mate = seccio.materia;
+      this.area = seccio.area;
       this.idDistributivo = seccio.idDistributivo;
       this.planificacion = seccio.planificacion;
       this.docentes = info.nombre;
@@ -196,12 +201,13 @@ export default {
           arrays.push(this.isVerific[i]._id);
         }
         const notass = [
-          {  quimestre: 'p1', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',},
-          { quimestre: 'p2', promedio: '1', examen: '1', a1: '1', a2: '1', a3: '1', a4: '1', a5: '1', b1: '1', b2: '1', b3: '1', b4: '1', b5: '1',}
+          {  quimestre: 'p1', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',},
+          { quimestre: 'p2', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',}
         ]
         const comportamiento = [{p1:'1',p2:'1'}, {p1:'1',p2:'1'}]
         this.model2.calificaciones.docente = this.docentes;
         this.model2.calificaciones.materia = this.mate;
+        this.model2.calificaciones.area = this.area;
         this.model2.calificaciones.notas = notass;
         this.model2.calificaciones.comportamiento = comportamiento;
         this.$proxies._notasProxi
@@ -246,34 +252,8 @@ export default {
           });
       }
     },
-    vueInit(num) {
+    vueInit: function(num) {
       this.tabs = num;
-      let text_1 = this.mate + ' - ' + this.para
-      let text_2 = ''
-      switch (num) {
-        case 0:
-          text_2 = 'Notas';
-          this.$store.commit('updateHeader', { text_1, text_2 })
-          break;
-        case 1:
-          text_2 = 'Supletorios';
-          this.$store.commit('updateHeader', { text_1, text_2 })
-          break;
-        case 2:
-          text_2 = 'Asitencias';
-          this.$store.commit('updateHeader', { text_1, text_2 })
-          break;
-        case 3:
-          text_2 = 'Comportamiento';
-          this.$store.commit('updateHeader', { text_1, text_2 })
-          break;
-        case 4:
-          text_2 = 'Planificación';
-          this.$store.commit('updateHeader', { text_1, text_2 })
-          break;
-        default:
-          break;
-      }
     },
     verificarUsuario() {
       if (!restResourceService.docente(this.roles)) this.$router.push("/");

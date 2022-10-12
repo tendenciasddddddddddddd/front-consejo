@@ -71,7 +71,7 @@
           <template v-slot:header> {{model._id ? "Editar materia" : "Añadir nueva materia"}}</template>
           <template v-slot:body>
              <Spinner v-if="isCarga"></Spinner>
-                <form @submit.prevent="save" role="form">
+                <form @submit.prevent="save" id="prov">
                   <h6 class="text-danger text-center" v-if="MsmError!=''">{{ MsmError }}</h6>
                   <span class="parrafo">Area</span>
                   <CustomInput v-model="model.area" />
@@ -83,18 +83,15 @@
                   <p class=" text-xs fuente text-danger">
                     {{ validation.firstError("model.nombre") }}
                   </p>
-                  <div class="text-center mt-2">
-                    <ButtonLoading v-if="ifLoad"/>
-                    <button
-                      v-else
-                      type="submit"
-                      class="btn btnNaranja  mb-0 "
-                    >
-                      {{ model._id ? "Actualizar" : "Guardar" }}
-                    </button>
-                  </div>
+                 
                 </form>
           </template>
+          <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                        {{ model._id ? "Actualizar" : "Guardar" }}
+                      </button>
+         </template>
         </Modal>
         </div>
     </div>

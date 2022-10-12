@@ -1,74 +1,43 @@
 <template>
-     <div
-      class="modal fade "
-      :class="{ 'show ': modals === true }"
-      :style="[modals === true ? { display: 'block' } : {}]"
-      style="overflow-y: auto;   z-index: 9999;"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content ">
-          <div class="modalheader2">
-            <p class="h5 fuente text-white mt-3 ms-3" style="font-weight:400;">
-             Clonar matriculas de esta modalidad
-            </p>
-            <button
-              @click="$emit('myEventClosedModalMigracion1')"
-              class="btn btn-link text-white fuente"
-              style="margin-top: -100px; margin-right: -20px;"
-            >
-              CERRAR &nbsp; <i style="font-size: 12px" class="fa fa-close"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="text-start">
-              <div v-if="ifview=='1'" >
-                <span class="parrafo">Migrar datos antes de limpiar la base de datos</span>
-                <div class="p-7">
-                      <button v-if="ifLoad"  class="btn btnCreanaBorder w-100" >
-                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" ></span>
-                   Trabajando...
-                   </button>
-                    <button v-else @click="cloneData" class="btn btnCreanaBorder  w-100 " >
-                     <b> <i class='bx bx-cloud-light-rain' style="font-size:22px"></i> Clonar Data</b>
-                   
-                    </button>
-                </div>
-                  
-              </div>
+  <section>
+    <Modal @close="close">
+    <template v-slot:header> Respaldo de matriculas</template>
+    <template v-slot:body>
+          <p v-if="ifview=='1'" style="font-weight:400;" class="h6 fuente negros">Guardar matriculas en la base de datos de respaldo</p>
 
-               <div v-if="ifview=='2'">
-                  <span class="parrafo">Limpiar los datos que fueron migrados</span>
-                   <div class="p-7">
-                      <button v-if="ifLoad"  class="btn btnCreanaBorder w-100" >
-                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" ></span>
-                   Trabajando...
-                   </button>
-                    <button v-else @click="removeData" class="btn btnCreana  w-100 " >
-                     <b> <i class='bx bx-task-x me-2' style="font-size:22px"></i> Limpiar Data</b>
-                  
-                    </button>
-                </div>
-              </div>  
-            </div>
-           
-          </div>
-        </div>
+          <p v-if="ifview=='2'" style="font-weight:400;" class="h6 fuente negros">Mantenimiento de la base de datos actual</p>
+ 
+      <div class="text-center">
+        <img width="220" src="../../../../assets/img/shapes/issue-navigator-feature.svg" alt="">
       </div>
-    </div>
+    </template>
+    <template v-slot:acccion>
+      <div v-if="ifview=='1'">
+        <ButtonLoading v-if="ifLoad" />
+        <button @click="cloneData" v-else type="submit" class="btn btnNaranja mt-2"
+          style="background-color: #0c2ccc !important;">
+          Clonar Data
+        </button>
+      </div>
+      <div v-if="ifview=='2'">
+        <ButtonLoading v-if="ifLoad" />
+        <button @click="removeData" v-else type="submit" class="btn btnNaranja mt-2"
+          style="background-color: #0c2ccc !important;">
+         Limpiar base de datos actual
+        </button>
+      </div>
+    </template>
+  </Modal>
+  </section>
+    
 </template>
 <script >
+import Modal from "../../../../shared/Modal.vue";
+import ButtonLoading from "../../../../shared/ButtonLoading.vue";
 export default {
     name: 'MigracionMatricula',
-    props: {
-        idGet: {
-          type: String,
-          required: true
-        },
+    components : {
+        Modal, ButtonLoading
     },
     data() {
         return {
@@ -78,6 +47,9 @@ export default {
         }
     },
     methods: {
+      close(){
+        this.$emit('myEventClosedModalMigracion1')
+      },
         cloneData() { 
             this.ifLoad = true;
             this.$proxies._migracionProxi

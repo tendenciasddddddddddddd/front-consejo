@@ -1,7 +1,7 @@
 <template>
     <div >
         <div class="text-start">
-         <p class="parrafo mt-2 ms-3">
+         <p class="parrafo ms-3">
            (Cómo entender el servicio de matricula)
             <a
               type="button"
@@ -17,40 +17,25 @@
             <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
               <CardsOptions :index="i"  :img="item.img" :nombre="item.nombre" :description="item.description" @optionsFuntions="optionsView"></CardsOptions>
             </div>
-           
-            <div class="intro_card_container" >
-               <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
-                  <i class='bx bx-folder-plus p-5' style="font-size:60px;color:black;"></i>
-              </div>
-            </div>
           </div>
         </section>
-         
          <div v-if="ifCreateUpdate">
-          <CreateMatricula1 :modalidad="mod"
-            @myEventClosedModalMatricula="closedChildMatricula"
-          ></CreateMatricula1>
+          <CreateMatricula1 :modalidad="mod" @myEventClosedModalMatricula="closedChildMatricula"/>
         </div>
         <div v-if="ifRemoveMatricula">
-          <ListRemoveMatricula1 :modalidad="mod"
-            @myEventClosedModalRemove="closedChildRemoveMa1"
-          ></ListRemoveMatricula1>
+          <ListRemoveMatricula1 :modalidad="mod" @myEventClosedModalRemove="closedChildRemoveMa1"/>
         </div>
         <div v-if="ifParalelo1">
-          <ParaleloMatricula1
-            @myEventClosedModalParalelo1="closedChildParalelo1"
-          ></ParaleloMatricula1>
+          <ParaleloMatricula1 @myEventClosedModalParalelo1="closedChildParalelo1"/>
         </div>
         <div v-if="ifMigracion">
-          <MigracionMatricula
-            @myEventClosedModalMigracion1="closedChildMigracion"
-            :idGet="mod"
-          ></MigracionMatricula>
+          <MigracionMatricula @myEventClosedModalMigracion1="closedChildMigracion" :idGet="mod"/>
         </div>
           <div v-if="ifMigracion2">
-          <MigrationnList
-            @myEventClosedModalMigracion2="closedChildMigracionList"
-          ></MigrationnList>
+          <MigrationnList @myEventClosedModalMigracion2="closedChildMigracionList"/>
+        </div>
+        <div v-if="ifclon">
+          <Clon @myEventClosedModalclon="closedChildclon"/>
         </div>
     </div>
 </template>
@@ -84,6 +69,10 @@ export default {
       import(
         /* webpackChunkName: "MigrationnList" */ "./pages/history/History.vue"
       ),
+      Clon: () =>
+      import(
+        /* webpackChunkName: "Clon" */ "./pages/clon/Clon.vue"
+      ),
       CardsOptions
   },
   data() {
@@ -96,6 +85,7 @@ export default {
       ifParalelo1: false,
       ifMigracion: false,
       ifMigracion2: false,
+      ifclon : false,
       mod : 'm1',
       arrays_of_options: [
         {
@@ -105,17 +95,18 @@ export default {
           description: "Puedes crear nueva matricula, la matricula es unica por cada estudiante",
         },
         {
-          id: "1",
-          nombre: "Lista Matricula",
-          img: images[1],
-          description: "Puede ver o eliminar la lista de los matriculados en el periodo",
-        },
-        {
           id: "2",
           nombre: "Paralelos",
           img: images[2],
           description: " Puede asignar, listar y remover paralelos en cada uno de los cursos",
         },
+        {
+          id: "1",
+          nombre: "Lista Matricula",
+          img: images[1],
+          description: "Puede ver o eliminar la lista de los matriculados en el periodo",
+        },
+        
          {
           id: "3",
           nombre: "Respaldo",
@@ -124,7 +115,13 @@ export default {
         },
         {
           id: "4",
-          nombre: "Historial Matricula",
+          nombre: "Migraciones",
+          img: images[5],
+          description: "Le permite migrar las matriculas de un periodo a otro periodo",
+        },
+        {
+          id: "5",
+          nombre: "Historial Matriculas",
           img: images[4],
           description: "Le permite generar copias de las matriculas y tambien limpiar la data",
         },
@@ -146,15 +143,18 @@ export default {
           this.ifCreateUpdate = true;
           break;
         case 1:
-          this.ifRemoveMatricula = true;
+        this.ifParalelo1 = true;
           break;
         case 2:
-          this.ifParalelo1 = true;
+        this.ifRemoveMatricula = true;
           break;
         case 3:
           this.ifMigracion = true;
           break;
         case 4:
+          this.ifclon = true;
+          break;
+        case 5:
           this.ifMigracion2 = true;
           break;
         default:
@@ -176,6 +176,9 @@ export default {
     },
     closedChildMigracionList: function() {
       this.ifMigracion2 = false;
+    },
+    closedChildclon: function() {
+      this.ifclon = false;
     },
   },
   mounted() {

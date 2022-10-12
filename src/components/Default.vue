@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-lg-4 col-12 mx-auto">
-        <h1 style="font-weight: 400;" class="remix fuente negros text-center">Bienvenidos<span>&#160;</span></h1>
+       
       </div>
       <h1 aria-label="Develop. Preview. Ship." class="hero_title__HaAVy"><span
           class="animated-gradient-text_background__OCnk0 animated-gradient-text_background-1__c2kfC"
@@ -11,8 +11,8 @@
           style="--content:'Educativo';--padding:0.05em;--start-color:#7928CA;--end-color:#FF0080"><span
             class="animated-gradient-text_foreground__kb6tN animated-gradient-text_foreground-2__B4oIZ">Educativo</span></span><span
           class="animated-gradient-text_background__OCnk0 animated-gradient-text_background-3__iyrbU"
-          style="--content:'Slip.';--padding:0.05em;--start-color:#FF4D4D;--end-color:#F9CB28"><span
-            class="animated-gradient-text_foreground__kb6tN animated-gradient-text_foreground-3__kum5b">Slip.</span></span>
+          style="--content:'UEMAH';--padding:0.05em;--start-color:#FF4D4D;--end-color:#F9CB28"><span
+            class="animated-gradient-text_foreground__kb6tN animated-gradient-text_foreground-3__kum5b">UEMAH</span></span>
       </h1>
       
       

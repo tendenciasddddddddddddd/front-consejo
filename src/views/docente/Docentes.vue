@@ -65,7 +65,7 @@
                         />
                       </div>
 
-                      <a class="mb-0 ms-3 text-sm colorestabla fuente">
+                      <a class="mb-0 ms-3 text-xs colorestabla fuente">
                         {{ item.fullname }}
                       </a>
                     </div>

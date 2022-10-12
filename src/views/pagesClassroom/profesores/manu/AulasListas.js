@@ -76,7 +76,7 @@ export default {
       });
     },
     openModules(id) {
-      this.$router.push(`/modulo-aula/${id.id}`)
+      this.$router.push(`/modulo-aula/${id}`)
     },
     getData() {
       this.isData = true;

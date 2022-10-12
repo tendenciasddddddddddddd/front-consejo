@@ -55,12 +55,12 @@
                     />
                   </div>
 
-                  <a class="mb-0 ms-3 text-sm colorestabla fuente">
+                  <a class="mb-0 ms-3 text-sm negros fuente">
                     {{ item.num }}
                   </a>
                 </div>
               </td>
-              <td class="text-sm text-center font-weight-normal fuente">
+              <td class="text-xs text-center font-weight-normal fuente negros">
                 {{ item.nombre}}
               </td>
               <td class="text-xs text-center font-weight-normal fuente">
@@ -82,32 +82,26 @@
           <template v-slot:header> {{model._id ? "Editar ente curso" : "Añadir nuevo curso"}}</template>
           <template v-slot:body>
              <Spinner v-if="isCarga"></Spinner>
-                <form @submit.prevent="save" role="form">
+                <form @submit.prevent="save" role="form" id="prov">
                   <h6 class="text-danger text-center" v-if="MsmError!=''">{{ MsmError }}</h6>
-                  <span class="parrafo">Número</span>
+                    <span class="parrafo">Número</span>
                   <CustomInput v-model="model.num" />
                   <p class="mb-2 text-xs fuente text-danger">
                     {{ validation.firstError("model.num") }}
                   </p>
-
                   <span class="parrafo">Nombre de Curso</span>
                   <CustomInput v-model="model.nombre" />
-                  <p class="mb-2 text-xs fuente text-danger">
+                  <p class="mb-0 text-xs fuente text-danger">
                     {{ validation.firstError("model.nombre") }}
                   </p>
-
-                  <div class="text-center mt-2">
-                    <ButtonLoading v-if="ifLoad"/>
-                    <button
-                      v-else
-                      type="submit"
-                      class="btn btnNaranja   mb-0 "
-                    >
-                      {{ model._id ? "Actualizar" : "Guardar" }}
-                    </button>
-                  </div>
                 </form>
           </template>
+          <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                        {{ model._id ? "Actualizar" : "Guardar" }}
+                      </button>
+         </template>
         </Modal>
       </div>
   </div>

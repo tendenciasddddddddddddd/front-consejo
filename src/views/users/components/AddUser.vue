@@ -32,7 +32,8 @@
                           {{ validation.firstError("model.telefono") }}
                         </p>                     
                        <span class="parrafo">Rol</span>
-                        <div  v-for="ite in listRol" :key="ite._id">
+                        <p class="parrafo" v-if="isRole">Cargando</p>
+                        <div v-else v-for="ite in listRol" :key="ite._id">
                         <div class="form-check mb-1">
                           <input
                             class="form-check-input"

@@ -6,7 +6,9 @@
             pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
             <section slot="pdf-content">
                 <section class="p-3" >
-                    <div class="d-flex justify-content-between">
+                    <div class="row">
+                       <div class="col-lg-11 col-12 mx-auto">
+                        <div class="d-flex justify-content-between">
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
@@ -90,9 +92,9 @@
                         <tbody>
                             <tr v-for="item in info" :key="item.id">
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xs negros fuente">{{item.nombres}}</td>
+                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xs negros fuente">
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
                                     <div class="row negros">
                                         <div class="col">{{item.p1}}</div>
                                         <div class="col">{{item.p2}}</div>
@@ -104,7 +106,7 @@
                                     </div>
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xs negros fuente">
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
                                     <div class="row negros">
                                         <div class="col">{{item.p3}}</div>
                                         <div class="col">{{item.p4}}</div>
@@ -116,7 +118,7 @@
                                     </div>
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                    class="mb-0 ms-3 text-start text-xs negros fuente">
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
                                     <div class="row negros">
                                         <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
                                         <div class="col">{{item.eq}}</div>
@@ -141,6 +143,9 @@
                             </div>
                         </div>
                     </div>
+                       </div>
+                    </div>
+                    
                 </section>
             </section>
         </vue-html2pdf>
@@ -218,23 +223,79 @@ export default {
 
         },
         promedioP1(array) {
-            let sum = parseFloat(array.a1) + parseFloat(array.a2) + parseFloat(array.a3) + parseFloat(array.a4) + parseFloat(array.a5)
-            let prom = (sum / 5).toFixed(2);
+            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
+            let suma = 0;
+              let prom = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP2(array) {
-            let sum = parseFloat(array.b1) + parseFloat(array.b2) + parseFloat(array.b3) + parseFloat(array.b4) + parseFloat(array.b5)
-            let prom = (sum / 5).toFixed(2);
+            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3), a4 = parseFloat(array.b4), a5 = parseFloat(array.b5)
+            let suma = 0;
+              let prom = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP3(array) {
-            let sum = parseFloat(array.x1) + parseFloat(array.x2) + parseFloat(array.x3) + parseFloat(array.x4) + parseFloat(array.x5)
-            let prom = (sum / 5).toFixed(2);
+            let a1 = parseFloat(array.x1), a2 = parseFloat(array.x2), a3 = parseFloat(array.x3), a4 = parseFloat(array.x4), a5 = parseFloat(array.x5)
+            let suma = 0;
+              let prom = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP4(array) {
-            let sum = parseFloat(array.y1) + parseFloat(array.y2) + parseFloat(array.y3) + parseFloat(array.y4) + parseFloat(array.y5)
-            let prom = (sum / 5).toFixed(2);
+            let a1 = parseFloat(array.y1), a2 = parseFloat(array.y2), a3 = parseFloat(array.y3), a4 = parseFloat(array.y4), a5 = parseFloat(array.y5)
+            let suma = 0;
+              let prom = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              prom = (suma / aux).toFixed(2);
             return prom;
         },
         parcilaValue1(params) {

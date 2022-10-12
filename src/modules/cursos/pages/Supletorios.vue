@@ -1,13 +1,17 @@
 <template>
   <div>
-    <Astronauta v-if="isPrint"/>
-    <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" />
-    <ag-grid-vue style="width: 100%; height: 455px" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
+    <fullscreen v-model="fullscreen" style="background: #fff;">
+      <Astronauta v-if="isPrint"/>
+    <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" @toggle="toggle"/>
+    <section style="height: calc(100vh - 180px);">
+      <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
       :pagination="true" :paginationPageSize="paginationPageSize" :cacheBlockSize="cacheBlockSize"
       @grid-ready="onGridReady">
     </ag-grid-vue>
-
+    </section>
+    </fullscreen>
+    
     <div v-if="iftask">
       <ReporteSupletorio @EventClosed="closed" @getData="getDataAll" :rowData="rowData" @changeStatus="changeStatus" />
     </div>
@@ -87,6 +91,7 @@
         quimestre: 'p1',
         gridApi: null,
         iftask: false,
+        fullscreen: false,
       };
     },
     components: {
@@ -100,6 +105,9 @@
       this.cacheBlockSize = 8;
     },
     methods: {
+      toggle () {
+        this.fullscreen = !this.fullscreen
+      },
       onBtExport() {
         this.gridApi.exportDataAsExcel();
       },
@@ -232,7 +240,7 @@
   };
   var numberToColor = function (val) {
     if (val < 7) {
-      return '#ffaaaa';
+      return '#FEB6C4';
     } else if (val >= 7 && val <= 10) {
       return '#aaffaa';
     } else {

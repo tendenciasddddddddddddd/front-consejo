@@ -11,7 +11,7 @@
               </div>
 
               <div @click="openChildRewiewTrask(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" style="text-decoration: underline;">
+                <h6 class="mb-0 text-sm negros" >
                   {{ item.nombre }}
                 </h6>
                 <div class="text-sm colorestabla fuente">

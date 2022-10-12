@@ -4,25 +4,18 @@
     <template v-slot:body>
           <Spinner v-if="isLoading1"></Spinner>
           <section v-else >
-            <div class="row">
-              <div class="col-lg-4">
-              <Dropdown v-model="curso" :options="listniveles" />
-            </div>
-            <div class="col-lg-8">
-              <a role="button" v-if="!iseliminaddo" class="fuente tamanio ms-4"
+            <Dropdown v-model="curso" :options="listniveles" class="mb-2"/>
+            <Spinner v-if="isTabla"></Spinner>
+            <section v-else>
+              <div v-if="infoMat.length" >
+                <a role="button" v-if="!iseliminaddo" class="fuente tamanio"
               :class="{ disabled: isSelecMatricula.length === 0 }" v-on="
                 isSelecMatricula.length ? { click: () => remove() } : {}
               " v-tooltip.top-center="isSelecMatricula.length? '': 'Seleccionar una o muchas filas para eliminar'">
               <i class="far fa-trash-alt me-2" aria-hidden="true"> </i>
               <b :class="{ links: isSelecMatricula.length != 0 }">Eliminar matriculas</b>
             </a>
-            </div>
-            </div>
-            
-            <Spinner v-if="isTabla"></Spinner>
-            <section v-else>
-              <div v-if="infoMat.length">
-                <div  class="table-responsive mt-4">
+                <div  class="table-responsive mt-3">
                 <table class="dataTable-table table s-table-flush">
                   <thead class="thead-light">
                     <tr class="cabeza">
@@ -55,7 +48,7 @@
                             :value="item._id" @click="selectcursos(item._id)" />
                         </div>
                         &nbsp;&nbsp;
-                        <a class="mb-0 text-sm colorestabla fuente">
+                        <a class="mb-0 text-xs mt-1 colorestabla fuente">
                           {{ item.nombre }}
                         </a>
                       </div>
@@ -81,9 +74,10 @@
           </section>
     </template>
     <template v-slot:footer>
-        <a  class="btn btnNaranja " @click="verLista()">
-          Salir
-        </a>
+
+        <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio links me-3">
+        <b>Salir de aqui</b>
+      </a>
     </template>
   </ScrimModal>
 </template>

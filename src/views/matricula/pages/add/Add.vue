@@ -2,10 +2,7 @@
     <ScrimModal @close="close">
         <template v-slot:header> Registrar matriculas en las modalidades disponibles</template>
          <template v-slot:body>
-            <div class="row">
-            <div class="col-lg-11 col-12 mx-auto">
               <div
-              
                 class="d-flex justify-content-center"
                 style="border: 1px solid #ecf0f3;"
               >
@@ -67,8 +64,8 @@
                               class="d-flex flex-column justify-content-center"
                             >
                               <b
-                                class="mb-0 text-sm  fuente"
-                                style="color: #0091ae;"
+                                class="mb-0 text-sm  fuente negros"
+                                style="font-weight: 600;"
                                 >{{ item.fullname }}</b
                               >
 
@@ -88,20 +85,7 @@
                       </div>
                     </div>
                     <div v-else>
-                      <div class="row mt-3">
-                        <div class="col-lg-12">
-                          <div class="text-center">
-                            <img
-                              class="w-20 mt-2"
-                              src="../../../../assets/img/usados/vacio.svg"
-                              alt="fondo"
-                            />
-                            <div class="letra fuente mt-3">
-                              Buscar por el nombre o apellido
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <NoFound2/>
                     </div>
                   </div>
                 </div>
@@ -113,7 +97,7 @@
                         id="matricula"
                         class="p-3"
                       >
-                       <h6 style="color:#273b49">Llenar los datos</h6>
+                       <h6 class="negros" style=" font-weight: 600;">Llenar los datos</h6>
                         <Spinner v-if="isLoading2"></Spinner>
                         <div v-else class="col-12 ">
                           <a class="parrafo mt-4">A que cursos</a>
@@ -133,7 +117,7 @@
                       </form>
                       <div class="text-end me-3">
                         <span style="color:#8e9ba4" class="me-2 text-sm">{{fecha}}</span>
-                         <span style="color:#16ca91" class="text-sm text-end">Lista de estudiantes</span>
+                         <span style="color:#16ca91" class="text-sm text-end">Estudiantes seleccionados ({{isSelecUsers.length}})</span>
                       </div>
                      
                     </div>
@@ -245,8 +229,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
          </template>
         <template v-slot:footer>
                <a v-if="!isComplete" class="btn btnDisabled">Guardar</a>

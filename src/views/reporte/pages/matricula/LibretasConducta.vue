@@ -12,20 +12,20 @@
                         <div class="card-header text-center ">
                             <div class="row justify-content-between">
                                 <div class="col-md-2 text-start">
-                                    <img class=" w-70 " src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
+                                    <img class=" w-70  ms-3" src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
                                 </div>
                                 <div class="col-md-9">
                                     <span class="h6 negros">
                                         UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
                                     </span><br>
                                     <p class="text-xs text-center negros">
-                                        Dirección: Panamericana y Avenida Espejo Teléf: 063731060 - 062977118/119 <br>
+                                        Dirección: Panamericana y Avenida Espejo Teléf: 063731060 <br>
                                         El Ángel - Carchi - Ecuador
                                     </p>
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row mt-2  ms-3  me-4">
                                 <div class="col-lg-7 text-xs negros text-start">
                                     <div class="row">
                                        <div class="col-lg-3">
@@ -56,7 +56,7 @@
                             <span class="h6 negros mt-2 mb-2" style="font-weight: 400;">LIBRO QUIMESTRAL DE APRENDIZAJES Y
                                 COMPORTAMIENTO</span>
                             <div class="row">
-                                <div class="col-lg-12 col-12 mx-auto">
+                                <div class="col-lg-11 col-12 mx-auto">
 
                                     <div class="">
                                         <table class="dataTable-table table s-table-flush "
@@ -116,10 +116,10 @@
                                             <tbody>
                                                 <tr v-for="ite in item.calificaciones" :key="ite.id">
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 text-start ms-3 text-xs negros fuente">
+                                                        class="mb-0 text-start ms-3 text-xxs negros fuente">
                                                         {{ite.materia}}</td>
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xs negros fuente">
+                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div class="row negros">
                                                             <div class="col">{{ite.comportamiento[0].p1}}</div>
                                                             <div class="col">{{ite.comportamiento[0].p2}}</div>
@@ -133,7 +133,7 @@
                                                         </div>
                                                     </td>
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xs negros fuente">
+                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div class="row negros">
                                                             <div class="col">{{ite.comportamiento[1].p1}}</div>
                                                             <div class="col">{{ite.comportamiento[1].p2}}</div>
@@ -146,7 +146,7 @@
                                                         </div>
                                                     </td>
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                                        class="mb-0 ms-3 text-start text-xs negros fuente">
+                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div class="row negros">
                                                             <div class="col font-weight-bolder">
                                                                 {{calcularPromedio80(
@@ -169,9 +169,9 @@
                                                     <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
                                                         class="mb-0 ms-3 "> </td>
                                                     <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xs negros ">PROMEDIOS </td>
+                                                        class="mb-0 ms-3 text-start text-xxs negros ">PROMEDIOS </td>
                                                     <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xs negros fuente">
+                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         {{total(item.calificaciones)}}
                                                     </td>
                                                 </tr>
@@ -206,14 +206,20 @@
                                     <span class="h6 pb-0">
                                         <b>__________________________________</b>
                                     </span> <br>
-                                    <span class="negros text-sm"><b>RECTOR(A)</b></span>
+                                    <p class="negros text-sm">
+                                                <b>{{settings.rector}}</b><br>
+                                                RECTOR/A
+                                            </p>
                                 </div>
                                 <div>
                                     <div class="text-center">
                                         <span class="h6 pb-0">
                                             <b>__________________________________</b>
                                         </span> <br>
-                                        <span class="negros text-sm"><b>SECRETARIO(A)</b></span>
+                                        <p class="negros text-sm">
+                                                    <b>{{settings.secretario}}</b><br>
+                                                    SECRETARIO/A
+                                                </p>
                                     </div>
 
                                 </div>
@@ -238,7 +244,8 @@ export default {
     props: {
         rowData: Array,
         nextCourse: String,
-        numQuimestre: Number
+        numQuimestre: Number,
+        settings: Object,
     },
     data() {
         return {

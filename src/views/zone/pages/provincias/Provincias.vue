@@ -71,21 +71,21 @@
           <template v-slot:header> {{ model._id ? "Actualizar provincia" : "Añadir provincia" }}</template>
           <template v-slot:body>
                 <Spinner v-if="isCarga" />
-                  <form v-else @submit.prevent="save" role="form text-left">
-                    <h6 class="text-danger text-center fuente">{{ MsmError }}</h6>
-                    <span class="parrafo">Nombre de Provincia</span>
+                  <form v-else @submit.prevent="save" class="form text-left" id="prov">
+                    <h6 class="text-danger text-center fuente ">{{ MsmError }}</h6>
+                    <p class="parrafo mb-1">Provincia</p>
                     <CustomInput v-model="model.nombre" />
-                    <p class=" text-sm text-danger">
+                    <p class=" text-xs text-danger">
                       {{ validation.firstError("model.nombre") }}
                     </p>
-                    <div class="text-center mt-2">
-                       <ButtonLoading v-if="ifLoad"/>
-                      <button v-else type="submit" class="btn btnNaranja  mt-1 ">
-                        {{ model._id ? "Actualizar" : "Guardar" }}
-                      </button>
-                    </div>
                   </form>
           </template>
+          <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+                      <button  form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                        {{ model._id ? "Actualizar" : "Guardar" }}
+                      </button>
+         </template>
         </Modal>
     </div>
 </template>

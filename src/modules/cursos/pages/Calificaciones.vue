@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <Astronauta v-if="isPrint"/>
+  <div >
+    <fullscreen v-model="fullscreen" style="background: #fff;">
+      <Astronauta v-if="isPrint"/>
     <div v-else>
-      <ActionRowNotas  @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
+      <ActionRowNotas  @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch" @toggle="toggle"/>
     </div>
-    <ag-grid-vue style="width: 100%; height: 485px" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
+    <section style="height: calc(100vh - 180px);">
+      <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
-      :pagination="true" :paginationPageSize="paginationPageSize" :cacheBlockSize="cacheBlockSize" :enableFillHandle="true" @grid-ready="onGridReady">
+        :enableFillHandle="true" @grid-ready="onGridReady">
     </ag-grid-vue>
-   
+    </section>
+    </fullscreen>
+
     <div v-if="iftask">
          <Report  @EventClosed="closed" @getData="getDataAll" :rowData="rowData" @changeStatus="changeStatus"/>
     </div>
@@ -36,6 +40,8 @@ export default {
         flex: 1,
         minWidth: 50,
         resizable: true,
+        sortable: true,
+        filter: true,
       },
       rowSelection: null,
       columnDefs: [{
@@ -47,68 +53,82 @@ export default {
         headerName: 'QUIMESTRE 1',
         children: [
           
-          { field: "a1", headerName: 'A1', editable: true },
-          { field: "a2", headerName: 'A2', editable: true },
-          { field: "a3", headerName: 'A3', editable: true },
-          { field: "a4", headerName: 'A4', editable: true },
-          { field: "a5", headerName: 'A5', editable: true },
+          { field: "a1", headerName: 'A1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio1", headerName: 'P1', minWidth: 60, cellStyle: cellStyle,
+            field: "promedio1", headerName: 'P1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
-              let p1 = params.data.a1.toString().replace(",", ".")
-              let a1 = parseFloat(p1)
-              let p2 = params.data.a2.toString().replace(",", ".")
-              let a2 = parseFloat(p2)
-              let p3 = params.data.a3.toString().replace(",", ".")
-              let a3 = parseFloat(p3)
-              let p4 = params.data.a4.toString().replace(",", ".")
-              let a4 = parseFloat(p4)
-              let p5 = params.data.a5.toString().replace(",", ".")
-              let a5 = parseFloat(p5)
-              let suma = a1 + a2 + a3 + a4 + a5
-              let promedio = (suma / 5).toFixed(2);
-              return `${promedio}`;
+              let p1 = params.data.a1.toString().replace(",", "."),p2 = params.data.a2.toString().replace(",", "."),
+               p3 = params.data.a3.toString().replace(",", "."),p4 = params.data.a4.toString().replace(",", "."),
+               p5 = params.data.a5.toString().replace(",", ".")
+              let a1 = parseFloat(p1), a2 = parseFloat(p2), a3 = parseFloat(p3), a4 = parseFloat(p4), a5 = parseFloat(p5)
+              let suma = 0;
+              let promedio = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              promedio = (suma / aux).toFixed(2);
+              return promedio;
             }
           },
-          { field: "b1", headerName: 'A1', editable: true },
-          { field: "b2", headerName: 'A2', editable: true },
-          { field: "b3", headerName: 'A3', editable: true },
-          { field: "b4", headerName: 'A4', editable: true },
-          { field: "b5", headerName: 'A5', editable: true },
+          { field: "b1", headerName: 'A1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio2", headerName: 'P2', minWidth: 60, cellStyle: cellStyle,
+            field: "promedio2", headerName: 'P2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
-              let p1 = params.data.b1.toString().replace(",", ".")
-              let a1 = parseFloat(p1)
-              let p2 = params.data.b2.toString().replace(",", ".")
-              let a2 = parseFloat(p2)
-              let p3 = params.data.b3.toString().replace(",", ".")
-              let a3 = parseFloat(p3)
-              let p4 = params.data.b4.toString().replace(",", ".")
-              let a4 = parseFloat(p4)
-              let p5 = params.data.b5.toString().replace(",", ".")
-              let a5 = parseFloat(p5)
-              let suma = a1 + a2 + a3 + a4 + a5
-              let promedio = (suma / 5).toFixed(2);
-              return `${promedio}`;
+              let p1 = params.data.b1.toString().replace(",", "."), p2 = params.data.b2.toString().replace(",", "."),
+                  p3 = params.data.b3.toString().replace(",", "."), p4 = params.data.b4.toString().replace(",", "."),
+                  p5 = params.data.b5.toString().replace(",", ".")
+              let a1 = parseFloat(p1), a2 = parseFloat(p2), a3 = parseFloat(p3), a4 = parseFloat(p4), a5 = parseFloat(p5)
+              let suma = 0;
+              let promedio = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              promedio = (suma / aux).toFixed(2);
+              return promedio;
             },
 
           },
           {
-            field: "promedio3", headerName: 'PRO', minWidth: 60,
+            field: "promedio3", headerName: 'PRO', minWidth: 60, 
             valueGetter: totalValueGetter,
           },
           {
             field: "promedio4", headerName: '80%', minWidth: 60,
             valueGetter: totalPromedioAportes,
           },
-          { field: "examenfinal", headerName: 'EX', editable: true },
+          { field: "examenfinal", headerName: 'EX', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio5", headerName: '20%', minWidth: 60,
             valueGetter: totalParcialExamen,
           },
           {
-            field: "qfinal", headerName: 'QUI', minWidth: 60, cellStyle: cellStyle,
+            field: "qfinal", headerName: 'QUI 1', minWidth: 60, cellStyle: cellStyle,
             valueGetter: totalFinalQuim,
           },
         ]
@@ -116,13 +136,13 @@ export default {
       {
         headerName: 'QUIMESTRE 2',
         children: [
-          { field: "x1", headerName: 'A1', editable: true },
-          { field: "x2", headerName: 'A2', editable: true },
-          { field: "x3", headerName: 'A3', editable: true },
-          { field: "x4", headerName: 'A4', editable: true },
-          { field: "x5", headerName: 'A5', editable: true },
+          { field: "x1", headerName: 'A1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter},
+          { field: "x2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio11", headerName: 'P1', minWidth: 60, cellStyle: cellStyle,
+            field: "promedio11", headerName: 'P1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.x1.toString().replace(",", ".")
               let a1 = parseFloat(p1)
@@ -134,18 +154,31 @@ export default {
               let a4 = parseFloat(p4)
               let p5 = params.data.x5.toString().replace(",", ".")
               let a5 = parseFloat(p5)
-              let suma = a1 + a2 + a3 + a4 + a5
-              let promedio = (suma / 5).toFixed(2);
-              return `${promedio}`;
+              let suma = 0;
+              let promedio = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              promedio = (suma / aux).toFixed(2);
+              return promedio;
             }
           },
-          { field: "y1", headerName: 'A1', editable: true },
-          { field: "y2", headerName: 'A2', editable: true },
-          { field: "y3", headerName: 'A3', editable: true },
-          { field: "y4", headerName: 'A4', editable: true },
-          { field: "y5", headerName: 'A5', editable: true },
+          { field: "y1", headerName: 'A1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio22", headerName: 'P2', minWidth: 60, cellStyle: cellStyle,
+            field: "promedio22", headerName: 'P2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.y1.toString().replace(",", ".")
               let a1 = parseFloat(p1)
@@ -157,26 +190,39 @@ export default {
               let a4 = parseFloat(p4)
               let p5 = params.data.y5.toString().replace(",", ".")
               let a5 = parseFloat(p5)
-              let suma = a1 + a2 + a3 + a4 + a5
-              let promedio = (suma / 5).toFixed(2);
-              return `${promedio}`;
+              let suma = 0;
+              let promedio = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              promedio = (suma / aux).toFixed(2);
+              return promedio;
             }
           },
           {
-            field: "promedio33", headerName: 'PRO', minWidth: 60,
+            field: "promedio33", headerName: 'PRO', minWidth: 60, 
             valueGetter: totalValueGetter2,
           },
           {
-            field: "promedio44", headerName: '80%', minWidth: 60,
+            field: "promedio44", headerName: '80%', minWidth: 60, 
             valueGetter: totalPromedioAportes2,
           },
-          { field: "examenfinal2", headerName: 'EX', editable: true },
+          { field: "examenfinal2", headerName: 'EX', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio55", headerName: '20%', minWidth: 60,
+            field: "promedio55", headerName: '20%', minWidth: 60, 
             valueGetter: totalParcialExamen2,
           },
           {
-            field: "qfinal2", headerName: 'QUI', minWidth: 60, cellStyle: cellStyle,
+            field: "qfinal2", headerName: 'QUI 2', minWidth: 60, cellStyle: cellStyle, 
             valueGetter: totalFinalQuim2,
           },
         ]
@@ -189,11 +235,10 @@ export default {
         ]
       }
       ],
-      paginationPageSize: 0,
-      cacheBlockSize: 0,
       quimestre: 'p1',
       gridApi: null,
       iftask: false,
+      fullscreen: false,
     };
   },
   components: {
@@ -203,10 +248,11 @@ export default {
   created() {
     this.rowSelection = 'multiple';
     this.onGridReadys();
-    this.paginationPageSize = 8;
-    this.cacheBlockSize = 8;
   },
   methods: {
+    toggle () {
+        this.fullscreen = !this.fullscreen
+      },
     onBtExport() {
       this.gridApi.exportDataAsExcel();
     },
@@ -255,10 +301,37 @@ export default {
         this.isPrint = false;
       }
     },
+    validateNumber(num) {
+            let res = num.toString().replace(",", ".")
+            if (res >= 0 && res <= 10) return true;
+            return false;
+        },
     save() {
       const result = [];
       for (let i = 0; i < this.rowData.length; i++) {
         const element = this.rowData[i];
+        if (!this.validateNumber(element.a1)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.a2)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.a3)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.a4)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.a5)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.b1)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.b2)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.b3)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.b4)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.b5)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.x1)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.x2)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.x3)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.x4)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.x5)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.y1)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.y2)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.y3)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.y4)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.y5)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.examenfinal)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
+        if (!this.validateNumber(element.examenfinal2)) return this.$dialog.alert(` NO SE PUEDE PROCESAR ALGUNOS VALORES`);
         result.push({
           id: element.id,
           fora: element.fora,
@@ -321,6 +394,15 @@ export default {
     },
   }
 };
+var saleValueFormatter = function (params) {
+    var formatted = params.value.toString().replace(',', '.');
+    var result = formatted
+    if (formatted >= 0 && formatted <= 10) {
+      return result;
+    } else {
+      return '❓';
+    }
+  };
 
 var totalValueGetter = function (params) {
   var q1 = params.getValue('promedio1');
@@ -400,7 +482,7 @@ var cellStyle = function (params) {
 };
 var numberToColor = function (val) {
   if (val < 7) {
-    return '#ffaaaa';
+    return '#FEB6C4';
   } else if (val >= 7 && val <= 10) {
     return '#aaffaa';
   } else {

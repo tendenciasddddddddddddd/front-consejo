@@ -3,9 +3,9 @@
         <ProgressBar v-if="isCarga"></ProgressBar>
         <div v-else>
             <div class="d-flex justify-content-between">
-                <span style="font-size: 18px;" class="  s-title-page"> {{ ifAdd ? "Subir un archivo" : " Lista planificación" }}</span>
+                <span style="font-size: 18px;" class="  s-title-page"> {{ ifAdd ? "Subir un archivo" : " Galeria " }}</span>
                 <a class="btn btn-vercel " @click="openAdd">
-                    {{ ifAdd ? "Lista planificación" : " Agregar planificación" }}
+                    {{ ifAdd ? "Lista " : " Agregar imagen" }}
                 </a>
             </div>
             <div v-if="!ifAdd">

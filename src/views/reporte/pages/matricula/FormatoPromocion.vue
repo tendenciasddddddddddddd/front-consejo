@@ -11,7 +11,7 @@
                         <div class="card-header text-center ">
                             <div class="row justify-content-between">
                                 <div class="col-md-2 text-start">
-                                    <img class=" w-90 " src="../../../../assets/img/ecuador.png" alt="Logo" />
+                                    <img class=" w-90 ms-3" src="../../../../assets/img/ecuador.png" alt="Logo" />
                                 </div>
                                 <div class="col-md-8">
                                     <span class="text-xs negros">COORDINACIÓN ZONAL</span><br>
@@ -26,7 +26,7 @@
                                     <span class="text-xs negros">JORNADA MATUTINA</span>
                                 </div>
                                 <div class="col-lg-2  text-md-end ">
-                                    <img class=" w-50 " src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
+                                    <img class=" w-50 me-5" src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
                                 </div>
                             </div>
 
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-lg-11 col-12 mx-auto">
                                     <div class="mt-3" style="width: 670px;">
-                                        <p class="text-justify text-sm negros">
+                                        <p class="text-justify text-xs negros">
                                             De conformidad con lo prescrito en el Art. 197 del Reglamento General a la
                                             Ley Orgánica de
                                             Educación Intercultural y demás normativas vigentes, certifica que el/la
@@ -44,7 +44,7 @@
                                             durante el presente año lectivo:
                                         </p>
                                     </div>
-                                    <div class="">
+                                    <div class="" style="width: 670px;">
                                         <table class="dataTable-table table s-table-flush "
                                             style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
                                             <thead>
@@ -64,28 +64,28 @@
 
                                             <tbody>
                                                 <tr v-for="ite in item.calificaciones" :key="ite.id">
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-sm colorestabla fuente">
-                                                        {{ite.materia}} </td>
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-sm colorestabla fuente">{{ite.materia}}</td>
-                                                    <td style="border-bottom-width: 0px;" class="mb-0 ms-3 text-start text-xs colorestabla fuente">
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-xxs negros fuente">
+                                                        {{ite.area}} </td>
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-xxs negros fuente">{{ite.materia}}</td>
+                                                    <td style="border-bottom-width: 0px;" class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div>
                                                             {{ite.promediof}} &nbsp; {{texto=trasformnumberToText(ite.promediof)}}
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr >
-                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-sm colorestabla fuente"></td>
-                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xs colorestabla "><b>PROMEDIO GENERAL</b></td>
-                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xs colorestabla fuente">
+                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-xs negros fuente"></td>
+                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros "><b>PROMEDIO GENERAL</b></td>
+                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <b>
                                                             {{resultado=calcularPromedio(item.calificaciones)}} {{texto=trasformnumberToText(resultado)}}
                                                         </b>
                                                     </td>
                                                 </tr>
                                                 <tr >
-                                                    <td class="mb-0 ms-3 text-start text-xs colorestabla fuente">EVA. PROYECTOS EDUCATIVOS</td>
-                                                    <td class="mb-0 ms-3 text-start text-xs colorestabla fuente">PROYECTOS ESCOLARES </td>
-                                                    <td class="mb-0 ms-3 text-start text-xs colorestabla fuente">
+                                                    <td class="mb-0 ms-3 text-start text-xxs negros fuente">EVA. PROYECTOS EDUCATIVOS</td>
+                                                    <td class="mb-0 ms-3 text-start text-xxs negros fuente">PROYECTOS ESCOLARES </td>
+                                                    <td class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div>
                                                             EX Demuestra destacado desempeño
                                                         </div>
@@ -97,9 +97,9 @@
                                                     <td ></td>
                                                 </tr>
                                                 <tr >
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xs colorestabla fuente">DESARROLLO HUMANO INTEGRAL</td>
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xs colorestabla fuente">DESARROLLO HUMANO INTEGRA </td>
-                                                    <td class="mb-0 ms-3 text-start text-xs colorestabla fuente">
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">DESARROLLO HUMANO INTEGRAL</td>
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">DESARROLLO HUMANO INTEGRA </td>
+                                                    <td class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div>
                                                             A Lidera el cumplimiento de los <br> compromisos establecidos para la <br> sana
                                                              convivencia social
@@ -107,9 +107,9 @@
                                                     </td>
                                                 </tr>
                                                 <tr >
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xs colorestabla fuente">EVALUACION DEL COMPORTAMIENTO</td>
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xs colorestabla fuente">COMPORTAMIENTO </td>
-                                                    <td class="mb-0 ms-3 text-start text-xs colorestabla fuente">
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">EVALUACION DEL COMPORTAMIENTO</td>
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">COMPORTAMIENTO </td>
+                                                    <td class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         
                                                             A Lidera el cumplimiento de los <br> compromisos establecidos para la <br> sana
                                                              convivencia social
@@ -121,7 +121,7 @@
                                         </table>
                                     </div>
                                     <div class="mt-3" style="width: 670px;">
-                                        <p class="text-justify text-sm negros">
+                                        <p class="text-justify text-xxs negros">
                                             Por lo tanto es promovido/a al <b>{{nextCourse}}.</b>  Para certificar suscriben
                                              en unidad de acto el Rector/a con el/ la Secretario/a General del Plantel.
                                         </p>
@@ -134,19 +134,25 @@
                                     <span class="h6 pb-0">
                                         <b>__________________________________</b>
                                     </span> <br>
-                                    <span class="negros text-sm"><b>RECTOR(A)</b></span>
+                                    <p class="negros text-sm">
+                    <b>{{settings.rector}}</b><br>
+                    RECTOR/A
+                  </p>
                                 </div>
                                 <div>
                                     <div class="text-center">
                                         <span class="h6 pb-0">
                                             <b>__________________________________</b>
                                         </span> <br>
-                                        <span class="negros text-sm"><b>SECRETARIO(A)</b></span>
+                                        <p class="negros text-sm">
+                    <b>{{settings.secretario}}</b><br>
+                    SECRETARIO/A
+                  </p>
                                     </div>
                                 </div>
                             </div> <br>
-                            <p class="text-start ">
-                                <b class=" text-xs negros">EL ANGEL, {{ fechasActual }} </b>
+                            <p class="text-end ">
+                                <b class="me-4 text-xxs negros">EL ANGEL, {{ fechasActual }} </b>
                             </p>
                         </div>
                     </div>
@@ -164,7 +170,8 @@ export default {
     components: { VueHtml2pdf },
     props: {
         rowData: Array,
-        nextCourse: String
+        nextCourse: String,
+        settings: Object,
     },
     data() {
         return {
@@ -210,6 +217,7 @@ export default {
                 .then((x) => {
                     this.info = x.data;
                     this.ifload = false;
+                    console.log(this.info);
                     setTimeout(() => this.generatePDF(), 1200);
                 })
                 .catch((x) => {

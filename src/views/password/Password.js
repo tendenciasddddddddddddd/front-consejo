@@ -1,8 +1,9 @@
 import Modal from "../../shared/Modal.vue";
+import ButtonLoading from "../../shared/ButtonLoading.vue";
 export default {
   name: 'Cuenta',
   components: {
-    Modal
+    Modal, ButtonLoading
   },
   data() {
     return {
@@ -16,10 +17,20 @@ export default {
       confpass: "",
       user: this.$store.state.user,
       isLoading: false,
+      isLoading1: false,
       MsmError: "",
       isContrasenia: true,
       visible: true,
     }
+  },
+  computed: {
+    isDisabled() {
+      if ((this.newContraseña.password == this.confpass)&& this.newContraseña.password) {
+        return  false
+      } else {
+        return true
+      }
+    },
   },
   methods: {
     authenticate() {

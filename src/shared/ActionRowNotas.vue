@@ -24,7 +24,7 @@
                         <path d="M6 14h12v8H6z"></path>
                     </svg> Reporte
                 </a>
-                <a @click="$emit('openModal')" role="button" class="fuente negros tamanio ">
+                <a @click="$emit('openModal')" role="button" class="fuente negros tamanio me-3">
                     <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         viewBox="0 0 24 24" width="20" class="center-icon" style="color: #000">
@@ -33,14 +33,24 @@
                         <path d="M12 15V3"></path>
                     </svg> Descargar
                 </a>
+                <a @click="$emit('toggle')" role="button" class="fuente negros tamanio ">
+                    <svg class="center-icon" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        viewBox="0 0 24 24" width="20" style="color: #000;">
+                        <path
+                            d="M15 3h6m0 0v6m0-6l-7 7M9 21H3m0 0v-6m0 6l7-7M3 9V3m0 0h6M3 3l7 7m11 5v6m0 0h-6m6 0l-7-7">
+                        </path>
+                    </svg>
+                    Pantalla completa
+                </a>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="d-flex justify-content-end">
                 <a class="btn btn btn-vercel" @click="$emit('save')">
-                    <svg style="color: currentcolor;margin-top: -3px;" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        viewBox="0 0 24 24" width="20" >
+                    <svg style="color: currentcolor;margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+                        shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
                         <path d="M12 5v14"></path>
                         <path d="M5 12h14"></path>
                     </svg>

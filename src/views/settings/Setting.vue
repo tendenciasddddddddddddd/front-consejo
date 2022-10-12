@@ -9,13 +9,13 @@
             <li class="nav-item">
               <a class="nav-link " :class="{ 's-active': tabs == 0 }" data-scroll="" href="javascript:;"
                 @click="vueInit(0)">
-                <span :class="{ 's-active2': tabs == 0 }" class="text-sm s-text-versel2">Home</span>
+                <span :class="{ 's-active2': tabs == 0 }" class="text-sm s-text-versel2">Plataforma</span>
               </a>
             </li>
             <li class="nav-item pt-1">
               <a class="nav-link " :class="{ 's-active': tabs == 1 }" data-scroll="" href="javascript:;"
                 @click="vueInit(1)">
-                <span :class="{ 's-active2': tabs == 1 }" class="text-sm s-text-versel2">Nosotros</span>
+                <span :class="{ 's-active2': tabs == 1 }" class="text-sm s-text-versel2">Inicio</span>
               </a>
             </li>
             <li class="nav-item pt-1">
@@ -31,22 +31,31 @@
                 <span :class="{ 's-active2': tabs == 4 }" class="text-sm s-text-versel2">Galeria</span>
               </a>
             </li>
+            <li class="nav-item pt-1">
+              <a class="nav-link  " :class="{ 's-active': tabs == 5 }" data-scroll="" href="javascript:;"
+                @click="vueInit(5)">
+                <span :class="{ 's-active2': tabs == 5 }" class="text-sm s-text-versel2">Nosotros</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="col-lg-10 ">
         <section v-if="tabs == 0">
-          home
+         <Configure/>
         </section>
         <section v-if="tabs == 1">
-          suple
+          Inicio
         </section>
         <section v-if="tabs == 2">
-          3
+         Eventos
         </section>
 
         <section v-if="tabs == 4">
           <Galeria/>
+        </section>
+        <section v-if="tabs == 5">
+          Nosotros
         </section>
       </div>
     </div>
@@ -55,10 +64,11 @@
 
 <script>
 import ProgressBar from "../../shared/ProgressBar";
+import Configure from "./pages/Configure.vue"
 export default {
   name: 'ModuloAula',
   components: {
-    ProgressBar,
+    ProgressBar,Configure,
     Galeria: () => import( /* webpackChunkName: "Galeria" */ './pages/Galeria.vue'),
   },
   data() {
@@ -75,11 +85,11 @@ export default {
       let text_2 = ''
       switch (num) {
         case 0:
-          text_2 = 'Inicio';
+          text_2 = 'Plataforma';
           this.$store.commit('updateHeader', { text_1, text_2 })
           break;
         case 1:
-          text_2 = 'Nosotros';
+          text_2 = 'Inicio';
           this.$store.commit('updateHeader', { text_1, text_2 })
           break;
         case 2:
@@ -88,6 +98,10 @@ export default {
           break;
         case 4:
           text_2 = 'Galeria';
+          this.$store.commit('updateHeader', { text_1, text_2 })
+          break;
+        case 5:
+          text_2 = 'Nosotros';
           this.$store.commit('updateHeader', { text_1, text_2 })
           break;
         default:

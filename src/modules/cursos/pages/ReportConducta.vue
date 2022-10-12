@@ -5,8 +5,10 @@
             :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
             pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
             <section slot="pdf-content">
-            <section class="p-3">
-                <div class="d-flex justify-content-between">
+            <section class="p-2">
+                <div class="row">
+                       <div class="col-lg-11 col-12 mx-auto">
+                        <div class="d-flex justify-content-between">
                     <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                     <div class="text-center">
                         <span class="h6 negros">
@@ -137,6 +139,9 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+                </div>
+               
             </section>
         </section>
         </vue-html2pdf>

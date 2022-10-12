@@ -4,13 +4,14 @@ import ScrimModal from "../../../../shared/ScrimModal"
 import ButtonLoading from "../../../../shared/ButtonLoading.vue";
 import Dropdown from "../../../../shared/Dropdown.vue";
 import ServiceMatricula from '../../../../service/funcions';
+import NoFound2 from '../../../../shared/NoFound2';
 const ResultServiceMatricula = new  ServiceMatricula();
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 export default {
   name: "CreateMatricula",
   components: {
-    Spinner,IsSelect, ScrimModal, ButtonLoading, Dropdown
+    Spinner,IsSelect, ScrimModal, ButtonLoading, Dropdown, NoFound2
   },
   props:{
     modalidad:{

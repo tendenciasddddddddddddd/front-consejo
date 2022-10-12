@@ -4,13 +4,13 @@
     <section v-else>
       <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
         :paginate-elements-by-height="1400" :filename="'matricula'" :pdf-quality="2" :manual-pagination="false"
-        pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait" pdf-content-width="800px"
+        pdf-format="a4" :pdf-margin="15" pdf-orientation="portrait" pdf-content-width="800px"
         @progress="onProgress($event)" ref="html2Pdf">
         <section slot="pdf-content">
           <div v-for="item in info" :key="item.id" class="my-sm-5">
             <div class="card-header text-center ">
               <div class="row justify-content-between">
-                <div class="col-md-2 text-start">
+                <div class="col-md-2 text-end">
                   <img class=" w-50 " src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
                 </div>
                 <div class="col-md-9">
@@ -18,7 +18,7 @@
                     UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
                   </span><br>
                   <span style="margin-top:-10px" class="text-sm text-center negros">
-                    Dirección: Panamericana y Avenida Espejo Teléf: 063731060 - 062977118/119
+                    Dirección: Panamericana y Avenida Espejo Teléf: 063731060 
                   </span> <br>
                   <span class="text-xs negros">El Ángel - Carchi - Ecuador</span>
                 </div>
@@ -26,8 +26,8 @@
                 </div>
               </div>
               <hr style="height: 2px;background: #000;margin-top: -4px;">
-              <div class="text-end">
-                <span class="negros"> <b>17 de agosto de 2020</b> </span>
+              <div class="text-end me-7">
+                <span class="negros"> <b>{{ fechasActual }}</b> </span>
               </div> <br><br><br><br>
               <span class="h5 negros ">CERTIFICADO DE MATRICULA</span>
               <div class="d-flex justify-content-around mt-7">
@@ -38,7 +38,7 @@
                 <div class="col-lg-9 col-12 mx-auto">
                   <div class="mt-5" style="width: 560px;">
                     <p class="text-justify text-sm negros">
-                      Certifico que el(a) Alumno(a): <b> {{ item.nombre }}</b>
+                      Certifico que el(a) Estudiante: <b> {{ item.nombre }}</b>
                       previo los requisitos legales, se matriculó en <b>{{ item.fknivel.nombre }}</b> de la
                       <b>UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"</b> en el año lectivo:
                       <b>{{ item.academico.nombre }}</b>
@@ -60,19 +60,27 @@
                   <span class="h6 pb-0">
                     <b>__________________________________</b>
                   </span> <br>
-                  <span class="negros text-sm"><b>RECTOR/A</b></span>
+                  <p class="negros text-sm">
+                    <b>{{settings.rector}}</b><br>
+                    RECTOR/A
+                  </p>
+                  
+            
                 </div>
                 <div>
                   <div class="text-center">
                     <span class="h6 pb-0">
                       <b>__________________________________</b>
                     </span> <br>
-                    <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                    <p class="negros text-sm">
+                    <b>{{settings.secretario}}</b><br>
+                    SECRETARIO/A
+                  </p>
                   </div>
                 </div>
               </div> <br><br>
               <p class="text-start mt-10">
-                <b class=" text-xs negros">EL ANGEL, {{ fechasActual }} </b>
+                .
               </p>
             </div>
           </div>
@@ -89,7 +97,8 @@ import VueHtml2pdf from "vue-html2pdf";
 export default {
   components: { VueHtml2pdf },
   props: {
-    rowData: Array
+    rowData: Array,
+    settings: Object,
   },
   data() {
     return {

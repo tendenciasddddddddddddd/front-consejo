@@ -18,20 +18,20 @@
             style="height:180px;background-color: rgb(245, 248, 250);border: 1px dashed rgb(81, 111, 144);border-radius: 4px;color: rgb(124, 152, 182);"
             ref="dropzone" @vdropzone-success="afterComplete" @vdropzone-upload-progress="dropzoneUploadProgress" id="drop1" :options="dropOptions">
         </vue-dropzone>
-        <Astronauta v-if="ifLoad"/>
+        <astronauta2 v-if="ifLoad"/>
     </div>
 
 </template>
 
 <script>
 import { StorageRef } from "../boot/firebase";
-import Astronauta from "./Astronauta.vue";
+import Astronauta2 from "./Astronauta2.vue";
 import vueDropzone from "vue2-dropzone";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
 let image = require("../assets/img/usados/all.svg");
 export default {
     props: {},
-    components: { vueDropzone, Astronauta },
+    components: { vueDropzone, Astronauta2 },
     data() {
         return {
             dropOptions: {

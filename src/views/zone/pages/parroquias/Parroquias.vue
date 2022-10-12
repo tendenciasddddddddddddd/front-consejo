@@ -81,27 +81,26 @@
           <template v-slot:header> {{ model._id ? "Actualizar parroquia" : "Añadir parroquia" }}</template>
           <template v-slot:body>
                 <Spinner v-if="isCarga" />
-                  <form v-else @submit.prevent="save" role="form text-left">
+                  <form v-else @submit.prevent="save" id="prov">
                     <h6 v-if="MsmError!=''" class="text-danger text-center fuente">{{ MsmError }}</h6>
-                     <label for="exampleFormControlSelect1"
-                        >Elija un cantón</label
-                      >
+
+                      <p class="parrafo mb-1">Elija un cantón</p>
                        <IsSelect v-if="isCanton"></IsSelect>
                        <Dropdown v-else v-model="model.fkCanton"  :options="listprov"/>
                     <p class="mb-2 text-xs text-danger"> {{ validation.firstError("model.fkCanton") }}</p>
-                    <span class="parrafo mt-2">Nombre de parroquia</span>
+                    <span class="parrafo mt-2">Parroquia</span>
                     <CustomInput v-model="model.nombre" />
-                    <p class="mb-2 text-sm text-danger">
+                    <p class="mb-2 text-xs text-danger">
                       {{ validation.firstError("model.nombre") }}
                     </p>
-                    <div class="text-center mt-2">
-                       <ButtonLoading v-if="ifLoad"/>
-                      <button v-else type="submit" class="btn btnNaranja  mt-1 ">
-                        {{ model._id ? "Actualizar" : "Guardar" }}
-                      </button>
-                    </div>
                   </form>
           </template>
+          <template v-slot:acccion>
+            <ButtonLoading v-if="ifLoad"/>
+                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                        {{ model._id ? "Actualizar" : "Guardar" }}
+                      </button>
+         </template>
         </Modal>
     </div>
 </template>

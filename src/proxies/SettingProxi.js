@@ -16,6 +16,14 @@ export default class SettingProxi{
         return this.axios.delete(this.url + `/galeria/${id}`);
     }
 
+    getConfigure() {
+        return this.axios.get(this.url + `/configure`);
+    }
+
+    editConfigure(id,params) {
+        return this.axios.put(this.url + `/configure/${id}`, params);
+    }
+
 //------------------------------------------------------GESTION DE CANTONES--------------------------------------
 
     

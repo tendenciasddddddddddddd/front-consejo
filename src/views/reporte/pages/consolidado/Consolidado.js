@@ -1,9 +1,11 @@
 import Spinner from "../../../../shared/Spinner.vue";
+import Modal from "../../../../shared/Modal.vue";
+import ButtonLoading from "../../../../shared/ButtonLoading.vue";
 import XLSX from 'xlsx';
 export default {
     name: 'Consolidado',
     components : {
-        Spinner
+        Spinner, Modal, ButtonLoading
     },
     data() {
         return {
@@ -18,6 +20,9 @@ export default {
         }
     },
     methods: {
+      close(){
+        this.$emit('myEventClosedModalConsolidado')
+      },
         getData() {
             
             this.ifLoad = true;

@@ -5,8 +5,10 @@
             :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
             pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
             <section slot="pdf-content">
-                <section class="p-3">
-                  <div class="d-flex justify-content-between">
+                <section class="p-2">
+                    <div class="row">
+                       <div class="col-lg-11 col-12 mx-auto">
+                        <div class="d-flex justify-content-between">
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
@@ -50,37 +52,37 @@
                         <tbody>
                             <tr v-for="item in rowData" :key="item.id">
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xs negros fuente">{{item.nombres}}</td>
+                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente">
                                     {{item.quim1}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente">
                                     {{item.quim2}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente font-weight-bolder">
                                     {{item.promed}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente">
                                     {{item.suple}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente">
                                     {{item.reme}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente">
                                     {{item.gracia}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente font-weight-bolder">
                                     {{item.pfinal}}
                                 </td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    class="mb-0 ms-3 text-center text-xxs negros fuente">
                                     {{getEstado(item.pfinal)}}
                                 </td>
                             </tr>
@@ -102,6 +104,9 @@
                         </div>
                         </div>
                     </div>
+                     </div>
+                </div>
+                 
                 </section>
             </section>
         </vue-html2pdf>

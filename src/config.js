@@ -1,10 +1,10 @@
 export default {
-        apiKey: "AIzaSyA6x0KZAi9JB9iHKIQk2leOrGfuuatNA4c",
-        authDomain: "back-ends.firebaseapp.com",
-        projectId: "back-ends",
-        storageBucket: "back-ends.appspot.com",
-        messagingSenderId: "144052097147",
-        appId: "1:144052097147:web:cdb1a963ea6d425fcad2de",
-        measurementId: "G-S41ZEJ6E0W"
+        apiKey: "AIzaSyCtwsLsXvSj_-k696K2E3L7iKwb4K9DzY4",
+        authDomain: "uemah-f440f.firebaseapp.com",
+        projectId: "uemah-f440f",
+        storageBucket: "uemah-f440f.appspot.com",
+        messagingSenderId: "520085746911",
+        appId: "1:520085746911:web:16f553890e65ad6079e56a",
+        measurementId: "G-P9KE8X2W7Y"
 }
 
