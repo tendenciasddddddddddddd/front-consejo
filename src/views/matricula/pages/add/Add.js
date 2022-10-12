@@ -85,10 +85,7 @@ export default {
           console.log("Error", err);
           this.isLoading2 = false;
           this.$router.push('/Matricula-1')
-          this.$notify({
-            group: "global",
-            text: "Error del internet en el servidor",
-          });
+          this.toast('Error del internet en el servidor');
         });
     },
     __listPeriodo() {
@@ -133,10 +130,7 @@ export default {
       this.$validate().then((success) => {
         //METODO PARA GUARDAR
         if (!success) {
-          this.$notify({
-            group: "global",
-            text: "Por favor llena correctamente los campos solicitados",
-          });
+          this.toast('Por favor llena correctamente los campos solicitados');
           return;
         }
         if (this.isSelecUsers.length>0) {

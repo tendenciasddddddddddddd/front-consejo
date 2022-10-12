@@ -175,10 +175,7 @@ export default {
               this.ifLoad = false;
               if (error.response) {
                 if (error.response.status == 400) {
-                  this.$notify({
-                    group: "global",
-                    text: error.response.data.message,
-                  });
+                  this.toast(' error.response.data.message');
                 }
               } else if (error.request) {
                 alert("duplicado 2");

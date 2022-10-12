@@ -37,7 +37,7 @@
                     <tr v-for="item in inAlumnos" :key="item.fora">
                       <td>
                         <div class="d-flex ms-3">
-                          <span  @click="open(item.fora)" style="cursor:pointer;font-weight: 600;text-decoration: underline;" class="mb-0 ms-3 text-xs mt-1 negros">
+                          <span  @click="open(item.fora)" style="cursor:pointer;font-weight: 600;text-decoration: underline;" class="mb-0 ms-3 text-xs mt-1 links">
                             {{ item.materia }}
                           </span>
                         </div>
@@ -60,19 +60,7 @@
               </div>
             </div>
             <div v-else>
-              <div class="row mt-5">
-                <div class="col-lg-9 col-12 mx-auto">
-                  <div class="text-center">
-                    <img class="w-15 mt-4" src="../../../assets/img/usados/undraw_search.svg" alt="fondo" />
-                    <div class="mt-3 letra fuente">
-                      Hemos buscado en todas partes, pero no tenemos
-                      <br />
-                      nada que mostrarte. Pregunta a tus<br />
-                      docentes.
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <NoFound2  />
             </div>
           </div>
         </section>
@@ -86,6 +74,8 @@
 <script>
 import ProgressBar from '../../../shared/ProgressBar';
 import NoFound2 from '../../../shared/NoFound2';
+import quialifyservice from "../../../modules/cursos/pages/services";
+const ResultServiceNota = new quialifyservice();
 export default {
   name: 'Nota',
   components: {
@@ -140,8 +130,8 @@ export default {
         nombre = notas[j].docente;
         materia = notas[j].materia;
         let calificar = notas[j].notas;
-        parcial1 = this.calcular_promedio_final(calificar[0])
-        parcial2 = this.calcular_promedio_final(calificar[1])
+        parcial1 = ResultServiceNota.calcular_primer_quimestre(calificar, 0)
+        parcial2 = ResultServiceNota.calcular_primer_quimestre(calificar, 1)
         foranea = notas[j]._id;
         this.inAlumnos.push({
           name: nombre,
@@ -152,16 +142,6 @@ export default {
           materia: materia,
         });
       }
-    },
-    calcular_promedio_final(array) {
-      let sum = parseFloat(array.a1) + parseFloat(array.a2) + parseFloat(array.a3) + parseFloat(array.a4) + parseFloat(array.a5) +
-        parseFloat(array.b1) + parseFloat(array.b2) + parseFloat(array.b3) + parseFloat(array.b4) + parseFloat(array.b5)
-      let prom = sum / 10;
-      let prom2_80 = ((prom * 8) / 10).toFixed(2);
-      let exa = array.examen;
-      let exam2_20 = ((parseFloat(exa) * 2) / 10).toFixed(2);
-      let result = (parseFloat(prom2_80) + parseFloat(exam2_20)).toFixed(2);
-      return result;
     },
     open: function (id) {
       this.ifDetalle = true;

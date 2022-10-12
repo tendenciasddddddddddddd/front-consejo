@@ -3,7 +3,6 @@ import ProgressBar from "../../../../shared/ProgressBar"; //
 import ActionRowHeader from "../../../../shared/ActionRowHeader"
 import NoFound from "../../../../shared/NoFound"
 const restResourceService = new RestResource();
-import Cards from "../../../../shared/Cards"
 const arrayColors = [
   "#0f71ae",
   "#1466c9",
@@ -17,7 +16,7 @@ const arrayColors = [
 export default {
   name: "MyAulas",
   components: {
-    ProgressBar,ActionRowHeader, NoFound, Cards,
+    ProgressBar,ActionRowHeader, NoFound, 
   },
   data() {
     return {
@@ -122,7 +121,7 @@ export default {
     },
 
     dialog(id){
-      this.$router.push(`/module-aulas/${id.id}`)
+      this.$router.push(`/module-aulas/${id}`)
     },
   },
   created() {

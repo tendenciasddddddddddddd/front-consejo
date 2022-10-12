@@ -12,7 +12,7 @@
           <!-- Navbar -->
           <Inicio />
           <!-- End Navbar -->
-          <div class="container-fluid  py-2" >
+          <div class="container-fluid  py-1" >
            <router-view/>
             <!-- INICIO FOOTER -->
            <!-- <Help/> -->

@@ -3,7 +3,6 @@ import RestResource from "../../../../service/isAdmin";
 import ActionRowHeader from "../../../../shared/ActionRowHeader"
 import NoFound from "../../../../shared/NoFound"
 const restResourceService = new RestResource();
-import Cards from "../../../../shared/Cards"
 const arrayColors = [
   "#0f71ae",
   "#1466c9",
@@ -17,7 +16,7 @@ const arrayColors = [
 export default {
   name: "MenuCursos",
   components: {
-    ProgressBar,ActionRowHeader, NoFound, Cards
+    ProgressBar,ActionRowHeader, NoFound
   },
   data() {
     return {
@@ -95,7 +94,7 @@ export default {
 
     verificarCalve(obj, clave) {
       this.__limpiarCampos();
-      const daas = this.info.filter((x) => x._id == obj.id );
+      const daas = this.info.filter((x) => x._id == obj._id );
       this.keys = daas[0].codigo;
       this.nomMateria = daas[0].materia;
       this.model._id = daas[0]._id;
