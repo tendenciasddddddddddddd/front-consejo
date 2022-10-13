@@ -121,7 +121,7 @@ export default {
       this.getAll(1, num);
     },
     onPageChange(page) {
-      this.getAll(page, 6);
+      this.getAll(page, 7);
     },
     remove() {
       let message = {
@@ -231,7 +231,7 @@ export default {
       }
     },
     salirBusqueda: function() {
-      this.getAll(1, 6);
+      this.getAll(1, 7);
       this.isSearch = false;
     },
     openChildUser: function() {
@@ -261,6 +261,6 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 6);
+    this.getAll(1, 7);
   },
 };

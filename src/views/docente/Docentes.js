@@ -28,7 +28,7 @@ export default {
       subtitulo: 'none',
       iseliminaddo: false,
       isSearch: false,
-      rows: 6,
+      rows: 7,
       selected: [],
       allSelected: false,
       userIds: [],
@@ -69,7 +69,7 @@ export default {
     },
     refreshData: function () {
       this.ifCreateUpdate = false;
-      this.getAll(this.paginaActual, 6);
+      this.getAll(this.paginaActual, 7);
     },
     getAll(pag, lim) {
       this.isLoading = true;
@@ -207,7 +207,7 @@ export default {
       }
     },
     salirBusqueda: function() {
-      this.getAll(1, 6);
+      this.getAll(1, 7);
       this.isSearch = false;
     },
     changedQuery(num) {
@@ -234,6 +234,6 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 6);
+    this.getAll(1, 7);
   },
 };

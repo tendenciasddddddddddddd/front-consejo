@@ -27,7 +27,7 @@ export default {
       isLoading: false, //EL SNIPPER CARGA EN FALSO
       isSelecUsers: [],
       subtitulo: 'none',
-      rows: 6,
+      rows: 7,
       iseliminaddo: false,
       isSearch: false,
       isActive: false,
@@ -122,7 +122,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 6);
+            this.getAll(this.paginaActual, 7);
             this.allSelected = false;
           })
           .catch(() => {
@@ -219,7 +219,7 @@ export default {
       this.userIds = [];
     },
     salirBusqueda: function () {
-      this.getAll(1, 6);
+      this.getAll(1, 7);
       this.isSearch = false;
     },
 
@@ -233,6 +233,6 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 6);
+    this.getAll(1, 7);
   },
 };
