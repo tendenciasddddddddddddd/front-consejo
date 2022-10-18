@@ -13,6 +13,7 @@ import Vue2Editor from "vue2-editor";
 
 import GAuth from 'vue-google-oauth2'
 
+import VueYoutube from 'vue-youtube'
 
 import VuejsDialog from 'vuejs-dialog';
 
@@ -83,6 +84,7 @@ const gauthOption = {
 }
 Vue.use(GAuth, gauthOption)
 
+Vue.use(VueYoutube)
 
 Vue.use(Vue2Editor);
 

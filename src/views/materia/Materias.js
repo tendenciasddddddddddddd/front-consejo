@@ -69,7 +69,7 @@ export default {
             this.getAll(1, num);
           },
           onPageChange(page) {
-            this.getAll(page, 6);
+            this.getAll(page, 7);
           },
           save() {
             this.isSelecUsers= [];
@@ -87,7 +87,7 @@ export default {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(this.pagina,6);
+                      this.getAll(this.pagina,7);
                     })
                     .catch(() => {
                       console.log("Error")
@@ -100,7 +100,7 @@ export default {
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(this.pagina,6);
+                    this.getAll(this.pagina,7);
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
                     this.ifLoad = false;
@@ -180,7 +180,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.deletedSelected();
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 7);
                 })
                 .catch(() => {
                   console.log("Error imposible");
@@ -218,7 +218,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 7);
                 })
                  .catch(() => {
                    console.log("Error imposible");
@@ -253,7 +253,7 @@ export default {
     },
     created() {
       this.verificarUsuario();
-      this.getAll(1, 6);
+      this.getAll(1, 7);
     },
       validators: { //area
         'model.nombre'(value) {

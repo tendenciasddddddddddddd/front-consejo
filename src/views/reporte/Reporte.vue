@@ -65,25 +65,25 @@ export default {
           id: "0",
           nombre: "Consolidado",
           img: img1,
-          description: "Puedes crear nuevos registros de provincias segun sea necesario ",
+          description: "Puedes generar un archivo del consolidado según sea necesario",
         },
         {
           id: "1",
           nombre: "Matriculas y Promociones",
           img: img2,
-          description: "Puedes crear nuevos registros de Matriculas segun sea necesario ",
+          description: "Puedes generar reportes de matriculas y reportes según sea necesario",
         },
         {
           id: "2",
           nombre: "Notas",
           img: img3,
-          description: "Puedes crear nuevos registros de Notas segun sea necesario ",
+          description: "Puedes generar reportes de calificaciónes según sea necesario ",
         },
          {
           id: "3",
           nombre: "Permisos",
           img: img4,
-          description: "Puedes crear nuevos registros de Permisos segun sea necesario ",
+          description: "Puedes generar reportes de permisos según sea necesario",
         },
        
       ]

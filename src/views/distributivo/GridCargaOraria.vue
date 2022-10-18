@@ -10,38 +10,38 @@
                   </div>
        </div>
        <div class="col-sm-8 ">
-      <a v-on:click="onBtAdd()" class="fuente tamanio negros " href="javascript:;">
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+      <a v-on:click="onBtAdd()" class="fuente tamanio " href="javascript:;">
+        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
           shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="1.5" viewBox="0 0 24 24" width="20">
+          stroke-width="1.5" viewBox="0 0 24 24" width="18">
           <path
             d="M8 17.929H6c-1.105 0-2-.912-2-2.036V5.036C4 3.91 4.895 3 6 3h8c1.105 0 2 .911 2 2.036v1.866m-6 .17h8c1.105 0 2 .91 2 2.035v10.857C20 21.09 19.105 22 18 22h-8c-1.105 0-2-.911-2-2.036V9.107c0-1.124.895-2.036 2-2.036z">
           </path>
         </svg>
-        Agregar
+        <b class="links ms-1">Insertar fila</b>
       </a>
-      <a v-on:click="clearData()" role="button" class="fuente tamanio negros ms-3">
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+      <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3">
+        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
           shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="1.5" viewBox="0 0 24 24" width="20">
+          stroke-width="1.5" viewBox="0 0 24 24" width="18">
           <circle cx="6" cy="6" r="3"></circle>
           <circle cx="6" cy="18" r="3"></circle>
           <path d="M20 4L8.12 15.88"></path>
           <path d="M14.47 14.48L20 20"></path>
           <path d="M8.12 8.12L12 12"></path>
         </svg>
-        Eliminar
+         <b class="links ms-1">Eliminar selección</b> 
       </a>
 
-      <a v-on:click="getRowData()" role="button" class="fuente tamanio negros ms-3">
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+      <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3">
+        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
           shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="1.5" viewBox="0 0 24 24" width="20">
+          stroke-width="1.5" viewBox="0 0 24 24" width="18">
           <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
           <path d="M17 21v-8H7v8"></path>
           <path d="M7 3v5h8"></path>
         </svg>
-        Guardar
+         <b class="links ms-1">Guardar distributivo</b> 
       </a>
     </div>
     </div>
@@ -50,7 +50,7 @@
     <section  v-else style="height: calc(100vh - 180px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
         @grid-ready="onGridReady" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
-        :rowSelection="rowSelection" :isRowSelectable="isRowSelectable" :suppressRowClickSelection="true">
+        :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable" :suppressRowClickSelection="true">
       </ag-grid-vue>
     </section>
     <div v-if="ifload" class="loadingg">
@@ -75,7 +75,7 @@ export default {
     return {
       columnDefs: [
         {
-          field: 'nombre', headerName: 'Docente', cellEditor: 'agSelectCellEditor', checkboxSelection: true, editable: true,
+          field: 'nombre', headerName: 'Docente', cellEditor: 'agSelectCellEditor', checkboxSelection: true, editable: true,rowDrag: true,
           cellEditorParams: () => {
             var arrays = [];
             for (let i = 0; i < this.listDocentes.length; i++) {
@@ -124,6 +124,8 @@ export default {
       columnApi: null,
       defaultColDef: {
         flex: 1,
+        sortable: true,
+        filter: true,
       },
       editType: null,
       rowData: [],
@@ -201,9 +203,10 @@ export default {
         });
     },
     onBtAdd() {
+      var num = this.rowData.length +1;
       var array = []
       array.push({ nombre: 'En blanco', paralelo: 'En blanco', curso: 'En blanco', materia: 'En blanco' })
-      this.gridApi.applyTransaction({ add: array, addIndex: 3, });
+      this.gridApi.applyTransaction({ add: array, addIndex: num, });
     },
     clearData() {
       var selectedRowData = this.gridApi.getSelectedRows();

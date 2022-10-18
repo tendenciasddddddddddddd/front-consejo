@@ -1,5 +1,5 @@
 {
-  "name": "plataforma",
+  "name": "plataforma-educativa",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -36,6 +36,7 @@
     "vue-router": "^3.2.0",
     "vue-select": "^3.12.2",
     "vue-toasted": "^1.1.28",
+    "vue-youtube": "^1.4.0",
     "vue2-datepicker": "^3.10.1",
     "vue2-dropzone": "^3.6.0",
     "vue2-editor": "^2.10.3",
@@ -63,7 +64,7 @@
   },
   "vue": {
     "pwa": {
-      "name": "plataforma",
+      "name": "plataforma-educativa",
       "themeColor": "#F6F8F9",
       "appleMovileWebAppCapable": "yes",
       "appleMovileWebAppStatusBarStyle": "black-translucent"

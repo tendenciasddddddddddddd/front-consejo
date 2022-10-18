@@ -35,7 +35,7 @@
             <li class="nav-item pt-1">
               <a class="nav-link " :class="{ 's-active': tabs == 2 }" data-scroll="" href="javascript:;"
                 @click="vueInit(2)">
-                <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2">Asitencias</span>
+                <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2">Asistencia</span>
               </a>
             </li>
             <li class="nav-item pt-1">
@@ -55,7 +55,7 @@
           <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 2">
-          asistencia
+          En desarrollo
         </section>
         <section v-if="tabs == 3">
           <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />

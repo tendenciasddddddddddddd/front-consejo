@@ -9,9 +9,22 @@
       <table class="dataTable-table table s-table-flush">
         <thead class="thead-light">
           <tr class="cabeza">
-            <th style="background-color: rgb(234, 240, 246); " class=" text-center text-xxs font-weight-bolder">
-              Periodo
-            </th>
+            <th style="background-color: rgb(234, 240, 246); ">
+                   <div  class="d-flex ms-3">
+                      <div v-if="!allSelected " class="form-check " style="min-height: 0rem;">
+                        <input
+                          class="form-check-input cheka"
+                          type="checkbox"
+                          @click="selectAll"
+                        />
+                      </div>
+                       <i @click="deletedSelected" v-else  class="fa fa-minus s-icon-all" aria-hidden="true"></i>
+                      <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                        Periodo
+                      </span>
+                    </div>
+                    
+                  </th>
             <th class="text-uppercase text-center text-xxs font-weight-bolder">
               Fecha modicado
             </th>
@@ -50,21 +63,16 @@
         @pagechanged="onPageChange"></Paginate2>
     </div>
     <Modal v-show="visible" @close="close">
-      <template v-slot:header> Periodo Escolar</template>
+      <template v-slot:header> Periodo escolar</template>
       <template v-slot:body>
         <Spinner v-if="isCarga"></Spinner>
         <form @submit.prevent="save" role="form" id="prov">
-          <span class="parrafo">Nombre de Periodo</span>
+          <p class="text-danger text-center fuente ">{{ MsmError }}</p>
+          <span class="parrafo mb-2">Nombre de Periodo</span>
           <CustomInput v-model="model.nombre" />
           <p class="mb-2 text-xs fuente text-danger">
             {{ validation.firstError("model.nombre") }}
           </p>
-          <span class="parrafo ">Inicio de Periodo</span>
-          <date-picker v-model="model.inicia" valueType="format" class="w-100 fuente"></date-picker>
-          <p class="mb-2 text-xs fuente text-danger">{{ validation.firstError("model.inicia") }}</p>
-          <span class="parrafo mt-2">Fin de Periodo</span>
-          <date-picker v-model="model.finaliza" valueType="format" class="w-100 fuente"></date-picker>
-          <p class="mb-2 text-xs fuente text-danger">{{ validation.firstError("model.finaliza") }}</p>
         </form>
       </template>
       <template v-slot:acccion>

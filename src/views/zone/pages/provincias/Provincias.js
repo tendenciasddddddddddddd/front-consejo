@@ -93,13 +93,13 @@ export default {
                     });    
                 }else{
                   this.ifLoad = true;
-                  this.$proxies._zonasProxi.create(this.model) //-----------GUARDAR CON AXIOS
+                  this.$proxies._zonasProxi.create(this.model) 
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
                     this.getAll(1,6);
                   })
-                  .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
+                  .catch((error) => {
                     this.ifLoad = false;
                     if(error.response){
                       if(error.response.status==500){
@@ -128,12 +128,12 @@ export default {
                 });
             }
           },
-          changeSearch(textSearch) { //queryUsuario
+          changeSearch(textSearch) { 
             if (textSearch.length > 3) {
               this.isSearch = true;
               this.isLoading = true;
               this.$proxies._zonasProxi
-                .queryProvincia(textSearch) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+                .queryProvincia(textSearch) 
                 .then((x) => {
                   this.info = x.data;
                   this.isLoading = false;

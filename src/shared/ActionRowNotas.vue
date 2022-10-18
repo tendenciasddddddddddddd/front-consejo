@@ -48,13 +48,8 @@
         <div class="col-lg-3">
             <div class="d-flex justify-content-end">
                 <a class="btn btn btn-vercel" @click="$emit('save')">
-                    <svg style="color: currentcolor;margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
-                        shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
-                        <path d="M12 5v14"></path>
-                        <path d="M5 12h14"></path>
-                    </svg>
-                    Guardar
+                    &nbsp;
+                    Guardar cambios
                 </a>
             </div>
         </div>

@@ -2,16 +2,15 @@
 import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner";
-import AlertHeader from "../../shared/AlertHeader.vue";
 import Paginate2 from "../../shared/Paginate2.vue";
 import ActionsRow from "../../shared/ActionsRow.vue";
+import AlertHeader from "../../shared/AlertHeader.vue";
 export default {
   name: "Users",
   components: {
     Spinner,
     AddUser : () => import( /* webpackChunkName: "AddUser" */ './components/AddUser.vue'),
     AlertHeader,
-    Modal: () => import(/* webpackChunkName: "Modal" */ "../../shared/Modal.vue"),
     Paginate2,
     ActionsRow
   },
@@ -253,10 +252,7 @@ export default {
         this.getAll(this.paginaActual, 6);
     },
     openModal() {
-      this.visible = true;
-    },
-    close() {
-      this.visible = false;
+      this.$dialog.alert('LA GRILLA ES PARA EL INGRESO DE DOCENTES Y ESTUDIANTES');
     },
   },
   created() {

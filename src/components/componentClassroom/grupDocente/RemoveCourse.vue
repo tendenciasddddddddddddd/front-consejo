@@ -23,7 +23,7 @@
       <div class="fieldset_content__0_ovL">
         <span class="s-title fuente">Eliminar curso</span>
         <p class="s-text-versel mt-2 fuente"> Elimine de forma permanente este curso de Aula Virtual y todo su
-          contenido de la plataforma PCEI-TULCAN. Esta acción no es
+          contenido de la plataforma  Esta acción no es
           reversible, así que continúe con precaución.</p>
 
       </div>

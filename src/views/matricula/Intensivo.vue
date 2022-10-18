@@ -3,12 +3,12 @@
         <div class="text-start">
          <p class="parrafo ms-3">
            (Cómo entender el servicio de matricula)
-            <a
+            <a @click="ifyoutuve=true"
               type="button"
               class="fuente tamanio ms-2"
               v-tooltip.bottom="'Mirar la demostración de el proceso de matriculas y generar los paralelos'">
               <i class="fa fa-eye" aria-hidden="true"></i>
-              <b class="links ms-1 me-2">Ver demostración</b>
+              <b class="links ms-1 me-2">Ver video explicativo</b>
             </a>
           </p>
       </div>
@@ -36,6 +36,9 @@
         </div>
         <div v-if="ifclon">
           <Clon @myEventClosedModalclon="closedChildclon"/>
+        </div>
+        <div v-if="ifyoutuve">
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve"/>
         </div>
     </div>
 </template>
@@ -73,6 +76,7 @@ export default {
       import(
         /* webpackChunkName: "Clon" */ "./pages/clon/Clon.vue"
       ),
+      VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
       CardsOptions
   },
   data() {
@@ -85,6 +89,7 @@ export default {
       ifParalelo1: false,
       ifMigracion: false,
       ifMigracion2: false,
+      ifyoutuve : false,
       ifclon : false,
       mod : 'm1',
       arrays_of_options: [
@@ -109,9 +114,9 @@ export default {
         
          {
           id: "3",
-          nombre: "Respaldo",
+          nombre: "Mantenimiento",
           img: images[3],
-          description: "Le permite generar copias de las matriculas y tambien limpiar la data",
+          description: "Le permite generar copias de las matriculas y tambien limpiar la base de datos",
         },
         {
           id: "4",
@@ -161,6 +166,9 @@ export default {
           console.log("I don't own a pet");
           break;
       }
+    },
+    ClosedYoutuve: function(){
+      this.ifyoutuve = false;
     },
     closedChildMatricula: function() {
       this.ifCreateUpdate = false;

@@ -3,7 +3,6 @@
         <Modal @close="close">
             <template v-slot:header> Generar matriculas</template>
             <template v-slot:body>
-                <section v-if="ifview=='1'">
                     <span style="font-weight:400;" class="text-sm fuente negros">
                         Seleccionar el periodo <b> Anterior</b>
                     </span>
@@ -11,50 +10,24 @@
                         <span v-if="ifLoadPeriodo">Cargando..</span>
                         <Dropdown v-model="PeriodoAnterior" :options="arrayDocumentsLevel" />
                     </div><br>
-                    <span style="font-weight:400;" class="text-sm fuente negros">
-                        Seleccionar el periodo <b>Actual</b>
-                    </span>
-                    <div class="">
-                        <span v-if="ifLoadPeriodo">Cargando..</span>
-                        <Dropdown v-model="PeriodoActual" :options="arrayDocumentsLevel" />
-                    </div>
-                </section>
-                <section v-if="ifview=='2'">
-                    <span  style="font-weight:400;" class="text-sm fuente negros">Matriculas duplicadas</span>
-                    <v-select
-                            class="mt-3"
-                            v-model="objetosRechasados"
-                            multiple
-                            :options="objetosRechasados"
-                            label="nombre"
-                            item-value="nombre"
-                          >
-                            <template #option="{ nombre }">
-                              <h6 style="margin: 0">{{ nombre }}</h6>
-                            </template>
-                            <template #no-options="{ }">
-                              Lo siento, no hay opciones de coincidencia.
-                            </template>
-                          </v-select>
-                </section>
+                    <div class="alertdanger ">
+                    <p class="parrafo">
+                        Todas las matriculas del periodo anterior  <b>{{PeriodoAnterior? PeriodoAnterior.nombre : 'Sin seleccionar'}}</b>
+                        migraran al nuevo periodo vigente 
+                        <b>{{arrayDocumentsLevelActual[0]? arrayDocumentsLevelActual[0].nombre : 'SN'}}</b>
+
+                    </p>
+                </div>
                 <div class="text-center mt-3">
         <img width="120" src="../../../../assets/img/shapes/mundo.svg" alt="">
       </div>
             </template>
             <template v-slot:acccion>
-                <div v-if="ifview=='1'">
                     <ButtonLoading v-if="isLoading" />
                     <button @click="getData" v-else :disabled="isDisabled" class="btn btnNaranja mt-2"
                         style="background-color: #0c2ccc !important;">
                         Procesar matriculas
                     </button>
-                </div>
-                <div v-if="ifview=='2'">
-                    <button @click="close" type="submit" class="btn btnNaranja mt-2"
-                        style="background-color: #0c2ccc !important;">
-                       Terminar
-                    </button>
-                </div>
             </template>
         </Modal>
     </section>
@@ -74,13 +47,14 @@ export default {
     data() {
         return {
             modals: true,
-            ifview: '1',
+            
             ifLoad: false,
             arrayDocumentsLevel: [],
             arrayDocumentsCourse: [],
+            arrayDocumentsLevelActual: [],
             ifLoadPeriodo: false,
             ifLoadCourse: false,
-            PeriodoAnterior: '',
+            PeriodoAnterior: null,
             PeriodoActual: '',
             isLoading: false,
             model: {
@@ -105,7 +79,7 @@ export default {
     },
     methods: {
         getData: function () {
-            if (this.PeriodoAnterior != null && this.PeriodoActual != '') {
+            if (this.PeriodoAnterior != null ) {
                 this.isLoading = true;
                 this.$proxies._migracionProxi
                     .getByIdOfPeriodo(this.PeriodoAnterior._id)
@@ -128,7 +102,7 @@ export default {
                 for (let i = 0; i < array.length; i++) {
                     fkestudiante = array[i].fkestudiante;
                     nombre = array[i].nombre;
-                    academico = this.PeriodoActual._id;
+                    academico = this.arrayDocumentsLevelActual[0]._id;
                     fknivel = this.nextCourse(array[i].fknivel.num);
                     if (fknivel == '') {
                         continue;
@@ -145,17 +119,17 @@ export default {
                          this.toast('Se matriculo correctamente a ' + arraysMatricula.length + ' estudiantes')
                          this.objetosRechasados = res.data.duplicados;
                          if (this.objetosRechasados.length != 0) this.isDuplicado = true;
-                         this.ifview = '2'
+                         this.close()
                      })
                      .catch((error) => {
                          console.log("Error", error);
                          this.isLoading = false;
+                         this.close()
                      });
 
             } 
             } catch (error) {
                 console.log("Error", error);
-                this.ifview = '2'
                 this.isLoading = false;
             }
            
@@ -177,7 +151,9 @@ export default {
             this.$proxies._matriculaProxi
                 .getFull()
                 .then((x) => {
-                    this.arrayDocumentsLevel = x.data.niveles;
+                    let filtro = x.data.niveles;
+                    this.arrayDocumentsLevel = filtro.filter((x) => x.estado != "1");
+                    this.arrayDocumentsLevelActual = filtro.filter((x) => x.estado == "1");
                     this.ifLoadPeriodo = false;
                 })
                 .catch((err) => {

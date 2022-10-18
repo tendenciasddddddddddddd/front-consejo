@@ -7,8 +7,8 @@
             <input v-on:keyup.enter="addItems" type="number" class="form-control buscador" v-model="contador">
           </div>
           <div class="col-md-9">
-            <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3 negros">
-              <svg class="center-icon" style="color: #000; margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+            <a v-on:click="clearData()" role="button" class="fuente tamanio ms-4">
+              <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
                 <path d="M3 6h18"></path>
@@ -16,27 +16,27 @@
                 <path d="M10 11v6"></path>
                 <path d="M14 11v6"></path>
               </svg>
-             Eliminar
+              <b class="links ms-1">Limpiar todo</b> 
             </a>
-            <a v-on:click="onBtExport()" role="button" class="fuente tamanio ms-3 negros">
-              <svg class="center-icon" style="color: #000; margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+            <a v-on:click="onBtExport()" role="button" class="fuente tamanio ms-4 ">
+              <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
                 <path d="M8 17l4 4 4-4"></path>
                 <path d="M12 12v9"></path>
                 <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
               </svg>
-               Descargar
+                <b class="links ms-1">Descargar archivo</b> 
             </a>
-            <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3 negros">
-              <svg class="center-icon" style="color: #000; margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
+            <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-4 ">
+              <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
+                stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
                 <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
                 <path d="M17 21v-8H7v8"></path>
                 <path d="M7 3v5h8"></path>
               </svg>
-              Guardar
+             <b class="links ms-1">Guardar usuarios</b> 
             </a>
           
           </div>
@@ -45,7 +45,7 @@
         <section style="height: calc(100% - 50px);">
           <ag-grid-vue style="width: 100%; height: 100%;" :rowHeight="rowHeight" class="ag-theme-alpine"
             :columnDefs="columnDefs" @grid-ready="onGridReady" :defaultColDef="defaultColDef" :rowData="rowData"
-            :rowSelection="rowSelection" :animateRows="true"></ag-grid-vue>
+            :enableRangeSelection="true"  :suppressMultiRangeSelection="true" :enableFillHandle="true"></ag-grid-vue>
         </section>
         <div v-if="ifload" class="loadingg">
           <div class="inn ">
@@ -345,12 +345,12 @@ var validarPhone = function (email) {
 }
 
 </script>
-<style>
+<!-- <style>
 .ag-theme-alpine {
   /* bright green, 10% opacity */
   /* --ag-selected-row-background-color: rgb(0, 255, 0, 0.1); */
   --ag-odd-row-background-color: #f7f7f7;
 }
 
-</style>
+</style> -->
 

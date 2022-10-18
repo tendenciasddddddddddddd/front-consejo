@@ -283,7 +283,7 @@ margin-left: 0px !important;
   }
   a.disabled {
     cursor: not-allowed !important;
-    color: rgba(0, 0, 0, 0.54) !important;
+    color: #b0c1d4 !important;
   }
   .inactivo {
     pointer-events: none;

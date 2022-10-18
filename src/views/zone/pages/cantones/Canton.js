@@ -39,7 +39,7 @@ export default {
            iseliminaddo : false,
            isCarga: false,
            visible: false,
-           rows: 6,
+           rows: 7,
            allSelected: false,
            isSearch: false,
         }
@@ -93,7 +93,7 @@ export default {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(this.pagina,6); 
+                      this.getAll(this.pagina,7); 
                     })
                     .catch(() => {
                       console.log("Error")
@@ -106,7 +106,7 @@ export default {
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(this.pagina,6); 
+                    this.getAll(this.pagina,7); 
                   })
                   .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
                     this.ifLoad = false;
@@ -214,7 +214,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 7);
                   this.allSelected= false;
                 })
                 .catch(() => {
@@ -253,7 +253,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 7);
                 })
                  .catch(() => {
                    console.log("Error imposible");
@@ -294,7 +294,7 @@ export default {
     created() {
       this.verificarUsuario();
           this.getListProv();
-          this.getAll(1,6);
+          this.getAll(1,7);
       },
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
         'model.nombre'(value) {

@@ -1,8 +1,6 @@
 import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner";
-import DatePicker from "vue2-datepicker";
-import "vue2-datepicker/index.css";
 import AlertHeader from "../../shared/AlertHeader.vue";
 import CustomInput from "../../shared/CustomInput.vue";
 import ButtonLoading from "../../shared/ButtonLoading.vue";
@@ -12,7 +10,6 @@ export default {
   name: "Materias",
   components: {
     Spinner,
-    DatePicker,
     AlertHeader,
     CustomInput,
     ButtonLoading,
@@ -31,19 +28,18 @@ export default {
       pagg: null,
       pagina: 0,
       paginas: 0,
-      isLoading: false, //EL SNIPPER CARGA EN FALSO
+      isLoading: false,
       model: {
-        //-----------VARIABLES DEL MODELO A GUARDAR
         _id: null,
         nombre: null,
-        inicia: null,
-        finaliza: null,
       },
       isSelecUsers: [],
       subtitulo: "none",
       iseliminaddo: false,
       isCarga: false,
       visible: false,
+      allSelected : false,
+      MsmError : "",
     };
   },
   methods: {
@@ -80,10 +76,16 @@ export default {
             .then(() => {
               this.close();
               this.ifLoad = false;
-              this.getAll(this.pagina, 6);
+              this.getAll(this.pagina, 7);
+              this.MsmError ="";
             })
-            .catch(() => {
-              console.log("Error");
+            .catch((error) => {
+              this.ifLoad = false;
+              if(error.response){
+                if(error.response.status==500){
+                  this.MsmError = "Error ese registro ya existe"
+                }
+              }
             });
         } else {
           this.ifLoad = true;
@@ -92,12 +94,15 @@ export default {
             .then(() => {
               this.ifLoad = false;
               this.close();
-              this.getAll(this.pagina, 6);
+              this.getAll(this.pagina, 7);
             })
             .catch((error) => {
-              //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
               this.ifLoad = false;
-              console.log("Error", error.message);
+              if(error.response){
+                if(error.response.status==500){
+                  this.MsmError = "Error ese registro ya existe"
+                }
+              }
             });
         }
       });
@@ -127,11 +132,24 @@ export default {
         this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
       }
     },
+    selectAll: function() {
+      this.allSelected= true;
+      this.isSelecUsers = [];
+      if (this.allSelected) {
+        for (let user in this.info) {
+          this.isSelecUsers.push(this.info[user]._id);
+        }
+      } 
+    },
+    deletedSelected: function() {
+      this.allSelected= false;
+      this.isSelecUsers = [];
+    },
     changedQuery(num) {
       this.getAll(1, num);
     },
     onPageChange(page) {
-      this.getAll(page, 6);
+      this.getAll(page, 7);
     },
     remove() {
       let message = {
@@ -227,8 +245,6 @@ export default {
       this.model._id = "";
       this.model.nombre = "";
       this.MsmError = "";
-      this.model.inicia = null;
-      this.model.finaliza = null;
       this.checked = "";
     },
     close() {
@@ -254,7 +270,7 @@ export default {
       immediate: true,
       handler(pagina) {
         pagina = parseInt(pagina) || 1;
-        this.getAll(pagina, 6);
+        this.getAll(pagina, 7);
         this.isSelecUsers = [];
         this.paginaActual = pagina;
       },
@@ -268,12 +284,6 @@ export default {
         .required()
         .minLength(3)
         .maxLength(40);
-    },
-    "model.inicia"(value) {
-      return this.$validator.value(value).required();
-    },
-    "model.finaliza"(value) {
-      return this.$validator.value(value).required();
     },
   },
 };

@@ -65,7 +65,10 @@ export default {
         });
     },
     onPageChange(page) {
-      this.getAll(page, 6);
+      this.getAll(page, 7);
+    },
+    changedQuery(num) {
+      this.getAll(1, num);
     },
     save() {
       this.isSelecUsers = [];
@@ -83,7 +86,7 @@ export default {
               this.close();
               this.MsmError = "";
               this.ifLoad = false;
-              this.getAll(this.pagina, 6);
+              this.getAll(this.pagina, 7);
             })
             .catch(() => {
               console.log("Error");
@@ -95,7 +98,7 @@ export default {
             .then(() => {
               this.ifLoad = false;
               this.close();
-              this.getAll(this.pagina, 6);
+              this.getAll(this.pagina, 7);
             })
             .catch((error) => {
               this.ifLoad = false;
@@ -178,7 +181,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.isSelecUsers = [];
-            this.getAll(this.pagina, 6);
+            this.getAll(this.pagina, 7);
           })
           .catch(() => {
             console.log("Error imposible");
@@ -250,7 +253,7 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 6);
+    this.getAll(1, 7);
   },
   validators: {
     //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS

@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import RestResource from "../../service/isAdmin";
+const restResourceService = new RestResource();
 import ProgressBar from "../../shared/ProgressBar";
 import Configure from "./pages/Configure.vue"
 export default {
@@ -122,9 +124,15 @@ export default {
           }
         });
       },
+      verificarUsuario() {
+      if (!restResourceService.admin(this.roles)) {
+        this.$router.push("/");
+      }
+    },
   },
   created() {
    this.vueInit(0);
+   this.verificarUsuario()
   },
 
 }

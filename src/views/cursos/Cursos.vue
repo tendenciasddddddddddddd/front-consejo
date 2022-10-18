@@ -76,7 +76,7 @@
             </tr>
           </tbody>
         </table>
-          <Paginate2 :numPages="paginas"  :page="pagina" :total="totalNotas" :subtitulo="subtitulo" @pagechanged="onPageChange"></Paginate2>
+          <Paginate2 :numPages="paginas"  :page="pagina" :total="totalNotas" :subtitulo="subtitulo" @pagechanged="onPageChange" @setChangedQuery="changedQuery"></Paginate2>
         <!-- Modal -->
         <Modal v-show="visible" @close="close">
           <template v-slot:header> {{model._id ? "Editar ente curso" : "Añadir nuevo curso"}}</template>

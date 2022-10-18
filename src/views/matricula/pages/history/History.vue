@@ -1,6 +1,6 @@
 <template>
   <ScrimModal @close="close">
-        <template v-slot:header> Migraciones de matriculas</template>
+        <template v-slot:header> Historial de matriculas</template>
          <template v-slot:body>
               <div class="row">
                 <div class="col-sm-3">
@@ -34,6 +34,13 @@
                     <NoFound2/>
                   </div>
                   <section v-else>
+                    <a role="button" v-if="!iseliminaddo" class="fuente tamanio"
+              :class="{ disabled: isSelecMatricula.length === 0 }" v-on="
+                isSelecMatricula.length ? { click: () => remove() } : {}
+              " v-tooltip.top-center="isSelecMatricula.length? '': 'Seleccionar una o muchas filas para eliminar'">
+              <i class="far fa-trash-alt me-2" aria-hidden="true"> </i>
+              <b :class="{ links: isSelecMatricula.length != 0 }">Eliminar matriculas</b>
+            </a>
                          <table class="dataTable-table table s-table-flush">
                     <thead class="thead-light">
                       <tr class="cabeza">
@@ -136,6 +143,8 @@ export default {
       isSelecMatricula: [],
       allSelected: false,
       curso: '',
+      valor: '',
+      iseliminaddo : false
     };
   },
   watch: {
@@ -144,6 +153,7 @@ export default {
     },
     curso: function (value) {
       if (this.namePeriodo!='' && this.namePeriodo!=null) {
+        this.nameCourse = value._id
         this.searchForCourseAndLever(value._id);
       } else {
         this.$dialog.alert('Seleccione un año electivo')
@@ -239,7 +249,6 @@ export default {
         .getByIdOfCourseAndPeriod(this.namePeriodo._id, nameCourseId)
         .then((x) => {
           this.collections = x.data;
-          console.log(this.collections);
           this.isLoading = false;
         })
         .catch((err) => {
@@ -249,6 +258,60 @@ export default {
     },
     onPageChange: function (page) {
       this.page = page;
+    },
+    dialogDelete() {
+      this.iseliminaddo = true;
+      let isArray = this.isSelecMatricula.length;
+      if (isArray > 0) {
+        this.$proxies._migracionProxi
+          .removeMigraciones(this.isSelecMatricula)
+          .then(() => {
+            this.iseliminaddo = false;
+            this.allSelected = false;
+            this.searchForCourseAndLever(this.nameCourse);
+          })
+          .catch(() => {
+            console.log("Error imposible");
+            this.iseliminaddo = false;
+            this.allSelected = false;
+          });
+      }
+    },
+    remove() {
+      let message = {
+        title: "¿Destruir registro?",
+        body: " Esta acción no se puede deshacer",
+      };
+      let options = {
+        loader: true,
+        okText: "Continuar",
+        cancelText: "Cancelar",
+        animation: "bounce",
+      };
+      this.$dialog
+        .confirm(message, options)
+        .then((dialog) => {
+          this.dialogDelete();
+          setTimeout(() => {
+            dialog.close();
+            this.toast("Se elimino matriculas de sistema con su cuenta");
+          }, 1000);
+        })
+        .catch(function () { });
+    },
+    toast(message) {
+      this.$toasted.info(message, {
+        duration: 2600,
+        position: "top-center",
+        icon: "check-circle",
+        theme: "toasted-primary",
+        action: {
+          text: "CERRAR",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
     },
   },
   created() {

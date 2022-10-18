@@ -1,10 +1,8 @@
 <template>
   <div >
+    <AlertHeader :firsttext="'Gestionar usuarios'" :lasttext="'modifica y elimina usuarios de tu cuenta'"></AlertHeader>
     <div >
-       <div class="s-header-notification mt-3 ms-1">
-         <b class="text-sm" style="color:#000">Gestionar usuarios,</b> <span class="parrafo ">modifica y elimina usuarios de tu cuenta..</span> 
-       </div>
-     
+       
        <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildUser" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openModal"/>
         <Spinner v-if="isLoading"></Spinner>
         <div v-else>
@@ -100,29 +98,6 @@
           </div>
         </div>
     </div>
-    <!-- Modal -->
-    <Modal v-show="visible" @close="close">
-          <template v-slot:header> Exportar lista</template>
-          <template v-slot:body>
-               <div class="p-3">
-              <p class="fuente">
-                El archivo exportado se mostrara en una hoja de calculo
-              </p>
-              <div class="form-group">
-                <p class="parrafo mt-2" for="exampleFormControlSelect1">
-                  Formato de archivo
-                </p>
-                <select class="form-control selector">
-                  <option>CSV</option>
-                  <option>XLS</option>
-                  <option>XLSX</option>
-                </select>
-                <button class="btn btnNaranja mt-4">Exportar</button>
-              </div>
-            </div>
-          </template>
-        </Modal>
-    <!-- End of HubSpot Embed Code -->
     <div v-if="ifCreateUpdate">
         <AddUser :idGet="idUser" @myEventClosedMOdalUser="closedChildUser" @clickUser="refreshUser"/>
     </div>

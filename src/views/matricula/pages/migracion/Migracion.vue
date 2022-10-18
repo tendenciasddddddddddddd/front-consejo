@@ -1,31 +1,26 @@
 <template>
   <section>
     <Modal @close="close">
-    <template v-slot:header> Respaldo de matriculas</template>
+    <template v-slot:header> Clonar matrículas</template>
     <template v-slot:body>
-          <p v-if="ifview=='1'" style="font-weight:400;" class="h6 fuente negros">Guardar matriculas en la base de datos de respaldo</p>
-
-          <p v-if="ifview=='2'" style="font-weight:400;" class="h6 fuente negros">Mantenimiento de la base de datos actual</p>
- 
+      <div class="alertdanger mb-3">
+                    <p class="parrafo">
+                      Este módulo permite respaldar las matrículas actuales a otra base de datos y 
+                      elimina las matrículas actuales antes de empezar un nuevo periodo académico
+                    </p>
+                </div>
+          
+       
       <div class="text-center">
-        <img width="220" src="../../../../assets/img/shapes/issue-navigator-feature.svg" alt="">
+        <img width="200" src="../../../../assets/img/shapes/issue-navigator-feature.svg" alt="">
       </div>
     </template>
     <template v-slot:acccion>
-      <div v-if="ifview=='1'">
         <ButtonLoading v-if="ifLoad" />
         <button @click="cloneData" v-else type="submit" class="btn btnNaranja mt-2"
           style="background-color: #0c2ccc !important;">
-          Clonar Data
+          Ejecutar
         </button>
-      </div>
-      <div v-if="ifview=='2'">
-        <ButtonLoading v-if="ifLoad" />
-        <button @click="removeData" v-else type="submit" class="btn btnNaranja mt-2"
-          style="background-color: #0c2ccc !important;">
-         Limpiar base de datos actual
-        </button>
-      </div>
     </template>
   </Modal>
   </section>
@@ -42,7 +37,6 @@ export default {
     data() {
         return {
             modals: true,
-            ifview: '1',
             ifLoad: false,
         }
     },
@@ -55,13 +49,14 @@ export default {
             this.$proxies._migracionProxi
               .create()
               .then(() => {
-                this.ifview = '2';
                 this.ifLoad = false;
                 this.toast('La base de datos fue migrada')
+                this.removeData();
               })
               .catch((err) => {
                 console.log("Error", err);
                 this.ifLoad = false;
+                this.$emit('myEventClosedModalMigracion1');
               });
         },
         removeData(){
@@ -70,18 +65,19 @@ export default {
               .remove()
               .then(() => {
                 this.ifLoad = false;
-                this.toast('La base de datos esta limpia en esta modalidad')
+                this.toast('Las matriculas de este periodo fueron eliminadas')
                 this.$emit('myEventClosedModalMigracion1');
               })
               .catch((err) => {
                 console.log("Error", err);
                 this.ifLoad = false;
+                this.$emit('myEventClosedModalMigracion1');
               });
         },
         toast(message) {
             this.$toasted.info(message, {
-              duration: 2300,
-              position : 'bottom-center',
+              duration: 3500,
+              position : 'top-center',
               icon: "check-circle",
               theme: "toasted-primary",
               action : {

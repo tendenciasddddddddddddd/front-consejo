@@ -152,7 +152,7 @@
                                 </div>
                             </div> <br>
                             <p class="text-end ">
-                                <b class="me-4 text-xxs negros">EL ANGEL, {{ fechasActual }} </b>
+                                <b class="me-7 text-xxs negros">EL ANGEL, {{ fechasActual }} </b>
                             </p>
                         </div>
                     </div>
