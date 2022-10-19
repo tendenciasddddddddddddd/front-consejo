@@ -2,7 +2,7 @@
   <div>
      <vue-progress-bar  style="margin-top:-23px"></vue-progress-bar>
       <ProgressBar v-if="isData"></ProgressBar>
-    <div v-else class="row">
+    <div v-else class="row ">
       <div class="col-lg-2">
         <div class=" position-sticky top-1">
           <ul class="nav flex-column bg-white border-radius-lg p-1">
@@ -85,6 +85,7 @@
         </section>
       </div>
     </div>
+    <br> <br>
   </div>
 </template>
 

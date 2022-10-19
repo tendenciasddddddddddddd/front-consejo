@@ -12,6 +12,14 @@ const arrayColors = [
   "#1976d3",
   "#874197",
   "#00b6d3",
+  "#0f71ae",
+  "#1466c9",
+  "#303d9d",
+  "#53ab79",
+  "#ba4d8e",
+  "#1976d3",
+  "#874197",
+  "#00b6d3",
 ];
 export default {
   components: {
@@ -29,7 +37,7 @@ export default {
       key: '0',
       //Pagina
       page: 1,
-      perPage: 8,
+      perPage: 12,
       pages: [],
       numPages: 0,
       //CHILD
@@ -58,7 +66,7 @@ export default {
       let perPage = this.perPage;
       let from = page * perPage - perPage;
       let to = page * perPage;
-      this.numPages = Math.ceil(articles.length / 8);
+      this.numPages = Math.ceil(articles.length / 12);
       this.isSelecUsers = [];
       this.arrayShorthand();
       return articles.slice(from, to);

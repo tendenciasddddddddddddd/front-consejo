@@ -13,8 +13,6 @@ export default {
             ifview: '1',
             ifLoad: false,
             infoMat: {},
-            isExtraordianrio: false,
-            isIntensivo: false,
             isTodo: false,
             intensivos: null,
         }
@@ -30,7 +28,7 @@ export default {
               .getMatriculas()
               .then((x) => {
                 this.infoMat = x.data;
-                this.ifview = '2';
+                this.__todo();
                 this.ifLoad = false;
               })
               .catch((err) => {
@@ -38,26 +36,12 @@ export default {
                 this.ifLoad = false;
               });
         },
-        __consolidadoExtra(){
-            this.isExtraordianrio = true;
-              this.intensivos = this.infoMat.filter((x) => x.typo == "m2" );
-              var contador = this.intensivos.length;
-              this.ExportEcxel(contador, this.intensivos);
-              setTimeout(() => this.isExtraordianrio = false, 3000); 
-          },
-          __consolodadoIntensivo(){
-             this.isIntensivo = true;
-              this.intensivos = this.infoMat.filter((x) => x.typo == "m1" );
-              var contador = this.intensivos.length;
-              this.ExportEcxel(contador, this.intensivos);
-              setTimeout(() => this.isIntensivo = false, 3000); 
-          },
           __todo(){
-            this.isTodo = true;
+            this.ifLoad = true;
               this.intensivos = this.infoMat;
               var contador = this.intensivos.length;
               this.ExportEcxel(contador, this.intensivos);
-              setTimeout(() => this.isTodo = false, 3000); 
+              setTimeout(() => this.ifLoad = false, 3000); 
           },
           ExportEcxel(contador, model){
               this.isExcel= true;
@@ -65,12 +49,12 @@ export default {
               for(let i=0; i<contador; i++){
                 var objeto =   {
                   index : i,
-                  nombres: model[i].fkestudiante.fullname,
-                  cedula:  model[i].fkestudiante.cedula,
-                  email:  model[i].fkestudiante.email,
-                  parroquia:  model[i].fkestudiante.fkparroquia,
-                  sexo:  model[i].fkestudiante.sexo,
-                  curso : model[i].fknivel.nombre,
+                  nombres: model[i].fkestudiante? model[i].fkestudiante.fullname: '',
+                  cedula:  model[i].fkestudiante? model[i].fkestudiante.cedula: '',
+                  email:  model[i].fkestudiante? model[i].fkestudiante.email: '',
+                  parroquia:  model[i].fkestudiante? model[i].fkestudiante.fkparroquia: '',
+                  sexo:  model[i].fkestudiante?model[i].fkestudiante.sexo: '',
+                  curso : model[i].fknivel? model[i].fknivel.nombre: '',
                   paralelo: model[i].curso,
                   }
                   anArray.push(objeto);

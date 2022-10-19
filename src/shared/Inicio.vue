@@ -21,8 +21,7 @@
      
      <svg  v-if="!$store.state.isAppMobile" aria-label="Vercel Logo" fill="#000" viewBox="0 0 75 65" width="20"><path d="M37.59.25l36.95 64H.64l36.95-64z"></path></svg>
      <div  v-if="!$store.state.isAppMobile">
-        
-         <span class="ms-3 s-title-page">
+         <span class="ms-3 s-title-page me-8">
         {{$store.state.first_text}}
         <svg data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color:#000"><path d="M16.88 3.549L7.12 20.451"></path></svg>
        
@@ -33,23 +32,21 @@
         class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
         id="navbar" 
       >
+      <div class="input-group me-3">
+<span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+<input v-on:click="greet" v-model="texto" type="text" class="form-control buscador" placeholder="Empezar a escribir..." style="background-color: #fff !important;">
+</div>
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-         <svg @click="openSeach" v-tooltip="'Buscar..'" class="me-3" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color: #000; cursor: pointer;"><path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"></path><path d="M16 16l4.5 4.5"></path></svg>
+         <!-- <svg @click="openSeach" v-tooltip="'Buscar..'" class="me-3" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color: #000; cursor: pointer;"><path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"></path><path d="M16 16l4.5 4.5"></path></svg> -->
          <svg @click="config" v-tooltip="'Configuración'" class="me-3" data-testid="geist-icon" fill="none" height="21" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="21" style="color: #000; cursor: pointer;"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
         <svg @click="openNotification" v-tooltip="'Notifications'" class="me-3" data-testid="geist-icon" fill="none" height="21" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="21" style="color: #000; cursor: pointer;"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg>
         <svg v-tooltip="'Cerrar sesión'"  @click="logout" data-testid="geist-icon" fill="none" height="21" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="21" style="color: #000; cursor: pointer;"><path d="M18.36 6.64a9 9 0 11-12.73 0"></path><path d="M12 2v10"></path></svg>
         
         </div>
-
         <ul class="navbar-nav justify-content-end">
-         
           <li class="nav-item dropdown  d-flex align-items-end">
-            <a
-              href="javascript:;"
-              class="nav-link text-body p-0"
-            >
+            <a href="javascript:;" class="nav-link text-body p-0">
               <div class="avatar me-3 ">
-                
                 <img
                   :src="$store.state.avatar"
                   alt="kal"
@@ -77,7 +74,7 @@
         </FullModal>
       </section>
       <section v-if="ifSeach">
-        <Seach @CloseSeach="closeSeach"/>
+        <Seach @CloseSeach="closeSeach" :texto="texto"/>
       </section>
   </div>
   
@@ -95,6 +92,7 @@ export default {
       avatar2: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
       ifNotification: false,
       ifSeach: false,
+      texto: ''
     };
   },
   components: { 
@@ -102,6 +100,9 @@ export default {
     Seach: () => import( /* webpackChunkName: "Seach" */ './Seach.vue'),
   },
   methods: {
+    greet(){
+      this.ifSeach = true;
+    },
     config(){
       this.$router.push({ path: `/settings` });
     },
@@ -113,9 +114,11 @@ export default {
     },
     openSeach(){
       this.ifSeach = true;
+      this.texto = ''
     },
     closeSeach(){
       this.ifSeach = false;
+      this.texto = ''
     },
     logout() {
       localStorage.clear();

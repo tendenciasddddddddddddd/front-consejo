@@ -22,14 +22,14 @@
     <div class="s-container mt-4" style=" border: 1px solid #e00;">
       <div class="fieldset_content__0_ovL">
         <span class="s-title fuente">Eliminar curso</span>
-        <p class="s-text-versel mt-2 fuente"> Elimine de forma permanente este curso de Aula Virtual y todo su
-          contenido de la plataforma  Esta acción no es
+        <p class="s-text-versel mt-2 fuente"> Elimine de forma permanente este curso de aula virtual y todo su
+          contenido de la plataforma, esta acción no es
           reversible, así que continúe con precaución.</p>
 
       </div>
       <footer class="fieldset_footer__VRdEd">
         <div class="text-end">
-          <button @click="__eliminar" class="btn btn-sm btnNaranja" style="background:#e00 ;">Eliminar </button>
+          <button @click="__eliminar" class="btn btn-sm btn-danger" >Eliminar </button>
         </div>
       </footer>
     </div>

@@ -14,7 +14,7 @@
                                         v-bind:style="{'background':colorsh[index]}">
                                         <span class="in-avatar text-center">
 
-                                            <b>{{item.materia.slice(0,2).toUpperCase()}}</b>
+                                            <b style="font-weight: 400;">{{item.materia.slice(0,2).toUpperCase()}}</b>
                                           
                                         </span>
                                     </span>

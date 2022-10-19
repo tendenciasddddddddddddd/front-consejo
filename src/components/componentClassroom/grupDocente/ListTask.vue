@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
     <div v-if="displayedArticles.length">
       <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
@@ -23,7 +23,7 @@
               </div>
               <div class="mt-3 ms-5"><span class="text-xs ">{{ item.entrega.length }} entregas</span></div>
             </div>
-          <div class="dropstart ms-auto">
+          <div v-if="!$store.state.isAppMobile" class="dropstart ms-auto">
             <div class="d-flex  mt-2">
               <TimeEgo :fecha="item.fechad" />
               <!--v-tooltip.top-center="{content: item.descripcion, html: true}"-->
@@ -40,7 +40,7 @@
     </div>
     <div v-if="ifChildRevision">
       <CheckTask  :collects="checkTasks" :objectUser="objectUser" @myEventTask="closedChildRewiewTrask" @getData="getDataAll"></CheckTask>
-    </div>
+    </div> 
   </div>
 </template>
 

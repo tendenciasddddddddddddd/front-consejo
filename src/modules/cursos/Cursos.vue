@@ -17,7 +17,7 @@
                                         v-bind:style="{'background':colorsh[index]}">
                                         <span class="in-avatar text-center">
 
-                                            <b>{{item.fmateria.nombre.slice(0,2).toUpperCase()}}</b>
+                                            <b style="font-weight: 400;">{{item.fmateria.nombre.slice(0,2).toUpperCase()}}</b>
                                           
                                         </span>
                                     </span>
@@ -64,6 +64,16 @@
                 <NoFound />
             </section>
         </div>
+        <div v-if="ifyoutuve">
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'0wermvL6wcQ'"/>
+        </div>
+        <div class="fixed-plugin">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #6a78d1;
+    border-radius: 20px 20px 2px 20px;
+    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      Ver video explicativo
+    </a>
+  </div>
     </div>
 </template>
 <script >
@@ -81,10 +91,19 @@ const arrayColors = [
     "#1976d3",
     "#874197",
     "#00b6d3",
+    "#0f71ae",
+    "#1466c9",
+    "#303d9d",
+    "#53ab79",
+    "#ba4d8e",
+    "#1976d3",
+    "#874197",
+    "#00b6d3",
 ];
 export default {
     components: {
         ProgressBar, ActionRowHeader, NoFound, 
+        VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     },
     data() {
         return {
@@ -103,7 +122,8 @@ export default {
             //CHILD
             ifChildGroup: false,
             ifChildNew: false,
-            colorsh: []
+            colorsh: [],
+            ifyoutuve : false,
         };
     },
     computed: {
@@ -121,6 +141,9 @@ export default {
         },
     },
     methods: {
+        ClosedYoutuve: function(){
+      this.ifyoutuve = false;
+    },
         paginate(articles) {
             let page = this.page;
             let perPage = this.perPage;

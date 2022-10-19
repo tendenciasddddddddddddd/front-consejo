@@ -345,8 +345,8 @@
             <ul class="nav ms-4 ps-3">
               <li :class="{'active': $route.name === 'es1'}" class="nav-item ">
                 <router-link to="/my-lista" :class="{'active': $route.name === 'es1'}" class="nav-link ">
-                  <span class="sidenav-mini-icon"> M </span>
-                  <span class="sidenav-normal letras fuente">Mi Aula </span>
+                  <span class="sidenav-mini-icon"> C </span>
+                  <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
               </li>
 
@@ -391,23 +391,7 @@
           <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPCION</h6>
         </li>
         <div class="nav-item" id="step_6">
-          <li>
-            <a class="nav-link " role="button" aria-expanded="false">
-              <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-                <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                  stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  viewBox="0 0 24 24" width="20" style="color: #000;">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path>
-                  <path d="M12 17h.01"></path>
-                </svg>
-              </div>
-              <span class="sidenav-mini-icon"> </span>
-              <span class="nav-link-text ms-1 mt-1 selectOption">¿Cómo funciona?</span>
-
-            </a>
-
-          </li>
+         
           <li>
             <a @click=" logout()" class="nav-link " role="button" aria-expanded="false" style="padding-top: 0px;">
               <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">

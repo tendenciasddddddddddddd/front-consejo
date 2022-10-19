@@ -1,7 +1,7 @@
 <template>
-    <div class="row mt-1">
-        <div class="col-lg-4">
-            <div class="input-group">
+    <div class="row mt-3">
+        <div class="col-4">
+            <div class="input-group" >
                 <span class="input-group-text text-body buscador">
                     <svg style="margin-top: -7px;" class="links" data-testid="geist-icon" fill="none" height="20"
                         shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
@@ -14,7 +14,7 @@
                 <input type="text" v-model="search" class="form-control buscador" placeholder="Buscar" />
             </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-5">
             <div class="d-flex justify-content-start">
                 <div class="btnOption">
                     <div v-if="!allSelecteds" class="form-check center-icon">
@@ -65,9 +65,9 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-sm-3">
             <div class="d-flex justify-content-end mb-3">
-                <a class="btn btn btn-vercel" @click="$emit('openModal')">
+                <a v-if="!$store.state.isAppMobile" class="btn btn btn-vercel" @click="$emit('openModal')">
                     <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         viewBox="0 0 24 24" width="20" style="color: currentcolor;">
@@ -75,6 +75,14 @@
                         <path d="M5 12h14"></path>
                     </svg>
                     Añaidir
+                </a>
+                <a v-else class="btn btn btn-vercel" @click="$emit('openModal')">
+                    <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        viewBox="0 0 24 24" width="20" style="color: currentcolor;">
+                        <path d="M12 5v14"></path>
+                        <path d="M5 12h14"></path>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -108,7 +116,6 @@ export default {
     border-radius: 5px;
     border: 1px solid #E8EAF0;
 }
-
 .center-icon {
     margin: 5px;
 }

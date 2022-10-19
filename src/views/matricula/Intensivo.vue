@@ -38,7 +38,7 @@
           <Clon @myEventClosedModalclon="closedChildclon"/>
         </div>
         <div v-if="ifyoutuve">
-          <VueYoutuve @ClosedYoutuve="ClosedYoutuve"/>
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'sFC9qGRA_KM'"/>
         </div>
     </div>
 </template>

@@ -27,7 +27,7 @@
               </div>
             </div>
           </div>
-          <div class="geist-container sm-row md-row lg-row entity_field__3UFpU entity_last__121tA">
+          <div v-if="!$store.state.isAppMobile" class="geist-container sm-row md-row lg-row entity_field__3UFpU entity_last__121tA">
             <div class="geist-container entity_content__ukRDj entity_rightAligned__MnPj3">
               <TimeEgo :fecha="item.fecha" />
             </div>

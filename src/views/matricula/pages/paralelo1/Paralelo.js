@@ -117,13 +117,16 @@ export default {
       }
       if (idArrays.length > 0) {
         this.model.curso =  "Undefined";
+        this.isTabla = true;
         this.$proxies._matriculaProxi
         .updateMatricula(idArrays, this.model)
         .then(() => {
+          this.isTabla = false;
           this.__cambios(this.idCurso);
           this.toast("Cambio exitoso"  );
         })
         .catch(() => {
+          this.isTabla = false;
           this.$dialog.alert('Error en ng server')
         });
       }else  {
@@ -166,15 +169,19 @@ export default {
       })
        if (idArrays.length==0) return; 
        this.model.curso = this.check;
+       this.isTabla = true;
        this.$proxies._matriculaProxi
        .updateMatricula(idArrays, this.model)
        .then(() => {
+        this.isTabla = false;
          this.__cambios(this.idCurso);
          this.toast("Registro exitoso "  );
          this.check = null;
+         
        })
        .catch(() => {
          this.$dialog.alert('Error en ng server')
+         this.isTabla = false;
        });
     } else {
       this.$dialog.alert('SELECIONE UN PARALELO PARA CONTINUAR')

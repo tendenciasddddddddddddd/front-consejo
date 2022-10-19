@@ -7,7 +7,7 @@
             <input v-on:keyup.enter="addItems" type="number" class="form-control buscador" v-model="contador">
           </div>
           <div class="col-md-9">
-            <a v-on:click="clearData()" role="button" class="fuente tamanio ms-4">
+            <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3">
               <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
@@ -18,7 +18,7 @@
               </svg>
               <b class="links ms-1">Limpiar todo</b> 
             </a>
-            <a v-on:click="onBtExport()" role="button" class="fuente tamanio ms-4 ">
+            <a v-on:click="onBtExport()" role="button" class="fuente tamanio ms-3 ">
               <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
@@ -28,7 +28,7 @@
               </svg>
                 <b class="links ms-1">Descargar archivo</b> 
             </a>
-            <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-4 ">
+            <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3 ">
               <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
@@ -48,10 +48,15 @@
             :enableRangeSelection="true"  :suppressMultiRangeSelection="true" :enableFillHandle="true"></ag-grid-vue>
         </section>
         <div v-if="ifload" class="loadingg">
-          <div class="inn ">
-            <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando cuenta a los usuarios ...</h4>
+      <div class="inn ">
+        <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando cuentas
+          <div class="spinner-border text-light mt-2" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
-        </div>
+        </h4>
+      </div>
+    </div>
+      
       </template>
       <template v-slot:footer>
         <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio links me-3">
@@ -203,7 +208,7 @@ export default {
     addItems() {
       this.clearData()
       var aux = parseInt(this.contador)
-      if (aux >= 1 && aux <= 200) {
+      if (aux >= 1 && aux <= 300) {
         var newItems = []
         for (let i = 1; i < aux + 1; i++) {
           newItems.push(createNewRowData(i))

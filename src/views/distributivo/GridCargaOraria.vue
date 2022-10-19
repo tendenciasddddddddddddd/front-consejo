@@ -1,64 +1,78 @@
 <template>
-  <div >
+  <div>
     <div class="row mb-3">
-       <div class="col-sm-4">
+      <div class="col-sm-4">
         <div class="input-group" style="margin-bottom: 7px;">
-                    <span class="input-group-text text-body buscador"><i class="fas fa-search links"
-                        aria-hidden="true"></i></span>
-                    <input class="form-control buscador" type="text" v-on:input="onQuickFilterChanged()"
-                      style="background: white;" id="quickFilter" placeholder="Buscar">
-                  </div>
-       </div>
-       <div class="col-sm-8 ">
-      <a v-on:click="onBtAdd()" class="fuente tamanio " href="javascript:;">
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="1.5" viewBox="0 0 24 24" width="18">
-          <path
-            d="M8 17.929H6c-1.105 0-2-.912-2-2.036V5.036C4 3.91 4.895 3 6 3h8c1.105 0 2 .911 2 2.036v1.866m-6 .17h8c1.105 0 2 .91 2 2.035v10.857C20 21.09 19.105 22 18 22h-8c-1.105 0-2-.911-2-2.036V9.107c0-1.124.895-2.036 2-2.036z">
-          </path>
-        </svg>
-        <b class="links ms-1">Insertar fila</b>
-      </a>
-      <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3">
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="1.5" viewBox="0 0 24 24" width="18">
-          <circle cx="6" cy="6" r="3"></circle>
-          <circle cx="6" cy="18" r="3"></circle>
-          <path d="M20 4L8.12 15.88"></path>
-          <path d="M14.47 14.48L20 20"></path>
-          <path d="M8.12 8.12L12 12"></path>
-        </svg>
-         <b class="links ms-1">Eliminar selección</b> 
-      </a>
+          <span class="input-group-text text-body buscador"><i class="fas fa-search links"
+              aria-hidden="true"></i></span>
+          <input class="form-control buscador" type="text" v-on:input="onQuickFilterChanged()"
+            style="background: white;" id="quickFilter" placeholder="Buscar">
+        </div>
+      </div>
+      <div class="col-sm-8 ">
+        <a v-on:click="onBtAdd()" class="fuente tamanio " href="javascript:;">
+          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
+            shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5" viewBox="0 0 24 24" width="18">
+            <path
+              d="M8 17.929H6c-1.105 0-2-.912-2-2.036V5.036C4 3.91 4.895 3 6 3h8c1.105 0 2 .911 2 2.036v1.866m-6 .17h8c1.105 0 2 .91 2 2.035v10.857C20 21.09 19.105 22 18 22h-8c-1.105 0-2-.911-2-2.036V9.107c0-1.124.895-2.036 2-2.036z">
+            </path>
+          </svg>
+          <b class="links ms-1">Insertar fila</b>
+        </a>
+        <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3">
+          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
+            shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5" viewBox="0 0 24 24" width="18">
+            <circle cx="6" cy="6" r="3"></circle>
+            <circle cx="6" cy="18" r="3"></circle>
+            <path d="M20 4L8.12 15.88"></path>
+            <path d="M14.47 14.48L20 20"></path>
+            <path d="M8.12 8.12L12 12"></path>
+          </svg>
+          <b class="links ms-1">Eliminar selección</b>
+        </a>
 
-      <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3">
-        <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-          shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="1.5" viewBox="0 0 24 24" width="18">
-          <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
-          <path d="M17 21v-8H7v8"></path>
-          <path d="M7 3v5h8"></path>
-        </svg>
-         <b class="links ms-1">Guardar distributivo</b> 
-      </a>
+        <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3">
+          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
+            shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5" viewBox="0 0 24 24" width="18">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
+            <path d="M17 21v-8H7v8"></path>
+            <path d="M7 3v5h8"></path>
+          </svg>
+          <b class="links ms-1">Guardar distributivo</b>
+        </a>
+      </div>
     </div>
-    </div>
-    
+
     <Spinner v-if="isLoading"></Spinner>
-    <section  v-else style="height: calc(100vh - 180px);">
+    <section v-else style="height: calc(100vh - 180px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
         @grid-ready="onGridReady" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
-        :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable" :suppressRowClickSelection="true">
+        :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable"
+        :suppressRowClickSelection="true" >
       </ag-grid-vue>
     </section>
     <div v-if="ifload" class="loadingg">
       <div class="inn ">
         <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando distributivo
-          ...</h4>
+          <div class="spinner-border text-light mt-2" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </h4>
       </div>
     </div>
+    <div v-if="ifyoutuve">
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pLly4oiRqfU'"/>
+        </div>
+        <div class="fixed-plugin">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #6a78d1;
+    border-radius: 20px 20px 2px 20px;
+    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      Ver video explicativo
+    </a>
+  </div>
   </div>
 </template>
 
@@ -69,13 +83,14 @@ import { AgGridVue } from "ag-grid-vue";
 import Spinner from "../../shared/Spinner";
 export default {
   components: {
-    AgGridVue, Spinner
+    AgGridVue, Spinner,
+    VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
   },
   data: function () {
     return {
       columnDefs: [
         {
-          field: 'nombre', headerName: 'Docente', cellEditor: 'agSelectCellEditor', checkboxSelection: true, editable: true,rowDrag: true,
+          field: 'nombre', headerName: 'Docente', cellEditor: 'agSelectCellEditor', checkboxSelection: true, editable: true, rowDrag: true,
           cellEditorParams: () => {
             var arrays = [];
             for (let i = 0; i < this.listDocentes.length; i++) {
@@ -140,6 +155,7 @@ export default {
       listniveles: {},
       listDocentes: [],
       listMaterias: {},
+      ifyoutuve : false,
     };
   },
   created() {
@@ -155,12 +171,15 @@ export default {
     };
   },
   methods: {
+    ClosedYoutuve: function(){
+      this.ifyoutuve = false;
+    },
     onQuickFilterChanged() {
       this.gridApi.setQuickFilter(document.getElementById('quickFilter').value);
     },
     verificarUsuario() {
-      let text_1 = 'Distributivo'
-      let text_2 = 'Año electivo'
+      let text_1 = 'Pages'
+      let text_2 = 'Distributivo'
       this.$store.commit('updateHeader', { text_1, text_2 })
     },
     __listNivele() {
@@ -203,7 +222,7 @@ export default {
         });
     },
     onBtAdd() {
-      var num = this.rowData.length +1;
+      var num = this.rowData.length + 1;
       var array = []
       array.push({ nombre: 'En blanco', paralelo: 'En blanco', curso: 'En blanco', materia: 'En blanco' })
       this.gridApi.applyTransaction({ add: array, addIndex: num, });
@@ -212,7 +231,7 @@ export default {
       var selectedRowData = this.gridApi.getSelectedRows();
       this.gridApi.applyTransaction({ remove: selectedRowData });
     },
- 
+
     getRowData() {
       this.ifload = true;
       let arrayDocente = this.listDocentes
@@ -257,7 +276,7 @@ export default {
           const result = x.data
           if (result.length == 0) {
             this.rowData = toComplete();
-          } else if(result.length == 1){
+          } else if (result.length == 1) {
             this.FormData(x.data)
             this.rowData.push({ nombre: 'En blanco', paralelo: 'En blanco', curso: 'En blanco', materia: 'En blanco' });
           } else {

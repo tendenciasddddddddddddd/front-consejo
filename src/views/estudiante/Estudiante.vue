@@ -95,6 +95,17 @@
     <div v-if="ifGrid">
       <GridUser :typo="'ESTS'" :role="'Estudiante'" @myEventClosedAgGrid="closeAgGrid" @clickAlumnos="refreshData"/>
     </div>
+    <div v-if="ifyoutuve">
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'dbG1xucfNHA'"/>
+        </div>
+   
+      <div class="fixed-plugin">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #6a78d1;
+    border-radius: 20px 20px 2px 20px;
+    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      Ver video explicativo
+    </a>
+  </div>
   </div>
 </template>
 <script src="./Estudiante.js"></script>

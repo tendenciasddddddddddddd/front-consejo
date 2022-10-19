@@ -36,27 +36,27 @@
                           {{ ite.nombre }}</span>
                       </div>
                     </div>
-                    <a v-on:click="save()" role="button" class="fuente tamanio negros ms-3 me-2">
-                    <svg style=" margin-top: -3px;color: #000;" class="center-icon"  data-testid="geist-icon" fill="none" height="20"
+                    <a v-on:click="save()" role="button" class="fuente tamanio  ms-3 me-2">
+                    <svg style=" margin-top: -3px;" class="center-icon"  data-testid="geist-icon" fill="none" height="18"
                       shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
+                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
                       <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
                       <path d="M17 21v-8H7v8"></path>
                       <path d="M7 3v5h8"></path>
                     </svg>
-                    Guardar 
+                      <b class="links ms-1">Guardar</b> 
                   </a>
                   <a v-on:click="onRemoveSelected2()" role="button" class="fuente tamanio "
                     v-tooltip.top-center="'Elimine paralelos selecionados'"> &nbsp;&nbsp; 
-                    <svg style=" margin-top: -3px;color: #000;" class="center-icon" data-testid="geist-icon" fill="none" height="20"
+                    <svg style=" margin-top: -3px;" class="center-icon" data-testid="geist-icon" fill="none" height="18"
                       shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" >
+                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" >
                       <path d="M3 6h18"></path>
                       <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
                       <path d="M10 11v6"></path>
                       <path d="M14 11v6"></path>
                     </svg>
-                   Eliminar asignados
+                   <b class="links ms-1">Eliminar asignados</b> 
                   </a>
                     <div>
                     </div>

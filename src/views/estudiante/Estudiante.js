@@ -12,6 +12,7 @@ export default {
     AlertHeader,
     AlumnoCreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ './components/AddAlumno.vue'),
     GridUser : () => import( /* webpackChunkName: "GridUser" */ '../../components/agGrid/GridUser.vue'),
+    VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     Paginate2,ScrimModal,
     ActionsRow
   },
@@ -39,9 +40,13 @@ export default {
       idUser: null,
       visible: false,
       ifGrid : false,
+      ifyoutuve : false,
     };
   },
   methods: {
+    ClosedYoutuve: function(){
+      this.ifyoutuve = false;
+    },
     verificarUsuario() {
       let text_1 = 'Administración'
       let text_2 = 'Estudiantes'

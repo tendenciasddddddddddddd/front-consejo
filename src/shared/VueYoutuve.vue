@@ -9,12 +9,17 @@
 <script>
 import Modal from "./Modal";
 export default {
+  props: {
+    videoId: {
+      type: String,
+    },
+  },
     components: {
         Modal
     },
     data() {
     return {
-      videoId: 'lG0Ys-2d4MA',
+      // videoId: 'dbG1xucfNHA',
       playerVars: {
         autoplay: 1
       }
