@@ -14,9 +14,10 @@
               <div class="row mt-3" >
                 <div class="col-lg-6 " style="height: calc(100vh - 210px);" >
                   <div class="input-group" style="margin-bottom: 7px;">
-                    <span class="input-group-text text-body buscador"><i class="fas fa-search links"
-                        aria-hidden="true"></i></span>
-                    <input class="form-control buscador" type="text" v-on:input="onQuickFilterChanged()"
+                    <span class="input-group-text negros buscador busca">
+                      <svg style=" margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
+                    </span>
+                    <input class="form-control buscador buscaa" type="text" v-on:input="onQuickFilterChanged()"
                       style="background: white;" id="quickFilter" placeholder="Buscar">
                   </div>
                   <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :defaultColDef="defaultColDef"

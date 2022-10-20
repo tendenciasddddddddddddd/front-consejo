@@ -8,7 +8,7 @@
             </div>
         </template>
         <template v-slot:acccion>
-            <a  class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+            <a  class="btn btnNaranja mt-2">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Uploading
             </a>

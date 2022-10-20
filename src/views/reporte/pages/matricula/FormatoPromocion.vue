@@ -69,7 +69,7 @@
                                                     <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-xxs negros fuente">{{ite.materia}}</td>
                                                     <td style="border-bottom-width: 0px;" class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div>
-                                                            {{ite.promediof}} &nbsp; {{texto=trasformnumberToText(ite.promediof)}}
+                                                            {{ite.promediof}} &nbsp; {{trasformnumberToText(ite.promediof)}}
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -78,7 +78,7 @@
                                                     <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros "><b>PROMEDIO GENERAL</b></td>
                                                     <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <b>
-                                                            {{resultado=calcularPromedio(item.calificaciones)}} {{texto=trasformnumberToText(resultado)}}
+                                                            {{calcularPromedio(item.calificaciones)}} {{trasformnumberToText(calcularPromedio(item.calificaciones))}}
                                                         </b>
                                                     </td>
                                                 </tr>
@@ -217,7 +217,7 @@ export default {
                 .then((x) => {
                     this.info = x.data;
                     this.ifload = false;
-                    console.log(this.info);
+                   // console.log(this.info);
                     setTimeout(() => this.generatePDF(), 1200);
                 })
                 .catch((x) => {

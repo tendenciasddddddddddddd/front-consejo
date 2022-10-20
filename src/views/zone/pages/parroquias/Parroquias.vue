@@ -97,7 +97,7 @@
           </template>
           <template v-slot:acccion>
             <ButtonLoading v-if="ifLoad"/>
-                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" >
                         {{ model._id ? "Actualizar" : "Guardar" }}
                       </button>
          </template>

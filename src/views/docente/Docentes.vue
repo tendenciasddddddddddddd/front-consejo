@@ -1,7 +1,7 @@
 <template>
   <div >
  <AlertHeader :firsttext="'Gestionar docentes'" :lasttext="'Crea, edita, elimina y filtrar'"></AlertHeader>
-        <ActionsRow :longitude="userIds.length" @openModal="openChildDocente2" @remove="remove" @gets="openChildDocente" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid"/>
+        <ActionsRow :longitude="userIds.length" @openModal="openChildDocente2" @remove="remove" @gets="openChildDocente" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid" :ifGrids="1"/>
       
         <Spinner v-if="isLoading"></Spinner>
             <div v-else class="table-responsive ">
@@ -65,14 +65,14 @@
                         />
                       </div>
 
-                      <a class="mb-0 ms-3 text-xs colorestabla fuente">
+                      <span class="mb-0 ms-3 mt-1 text-xs colorestabla fuente">
                         {{ item.fullname }}
-                      </a>
+                      </span>
                     </div>
                   </td>
-                <td class="text-sm colorestabla colorestabla fuente">{{ item.cedula }}</td>
-                <td class="text-sm text-center colorestabla colorestabla fuente">{{ item.email }}</td>
-                <td class="text-xs text-center colorestabla colorestabla fuente">{{ item.updatedAt.substring(0,10) }}</td>
+                <td class="text-xs colorestabla fuente">{{ item.cedula }}</td>
+                <td class="text-sm text-center colorestabla fuente"> {{ item.email?item.email:'No tiene email' }}</td>
+                <td class="text-xs text-center colorestabla fuente">{{ item.updatedAt.substring(0,10) }}</td>
                  <td class="text-sm text-center font-weight-normal fuente">
                     <span class="icon">
                       <i

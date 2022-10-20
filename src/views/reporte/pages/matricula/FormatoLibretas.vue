@@ -29,13 +29,13 @@
                                     </div>
                                     <div class="row ">
                                         <div class="col-lg-6 text-xs negros text-start"> <span>CURSO : <b>{{
-                                        item.fknivel.nombre }} {{ item.curso }}</b></span> <br>
+                                        item.curso }} / {{ item.paralelo }}</b></span> <br>
                                             <span>ESTUDIANTE: <b>{{ item.nombre }}</b></span>
                                         </div>
                                         <div class="col-lg-2 text-xs negros text-start"> CÓDIGO : 250
                                         </div>
                                         <div class="col-lg-4 text-xs negros text-end"><span>PERIODO: <b>{{
-                                        item.academico.nombre
+                                        item.periodo
                                         }}</b></span><br>
                                             <span>FECHA: {{ fechasActual }}</span>
                                         </div>
@@ -143,42 +143,42 @@
                                                             <td style="padding: 1px 3px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
                                                                 class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                                 <div class="row negros" v-if="parcial">
-                                                                    <div class="col">{{ite.notas[numQuimestre].a1}}
+                                                                    <div class="col">{{ite.a1}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].a2}}
+                                                                    <div class="col">{{ite.a2}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].a3}}
+                                                                    <div class="col">{{ite.a3}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].a4}}
+                                                                    <div class="col">{{ite.a4}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].a5}}
+                                                                    <div class="col">{{ite.a5}}
                                                                     </div>
                                                                     <div class="col">
-                                                                        {{prom1=calcularPromedio(ite.notas[numQuimestre].a1,ite.notas[numQuimestre].a2,ite.notas[numQuimestre].a3,ite.notas[numQuimestre].a4,ite.notas[numQuimestre].a5)}}
+                                                                        {{ite.prom1}}
                                                                     </div>
                                                                     <div class="col font-weight-bolder">
-                                                                        {{equi1=calcularEquivalente(ite.notas[numQuimestre].a1,ite.notas[numQuimestre].a2,ite.notas[numQuimestre].a3,ite.notas[numQuimestre].a4,ite.notas[numQuimestre].a5)}}
+                                                                        {{ite.prom1_80}}
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td style="padding: 1px 3px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
                                                                 class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                                 <div class="row negros" v-if="parcial2">
-                                                                    <div class="col">{{ite.notas[numQuimestre].b1}}
+                                                                    <div class="col">{{ite.b1}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].b2}}
+                                                                    <div class="col">{{ite.b2}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].b3}}
+                                                                    <div class="col">{{ite.b3}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].b4}}
+                                                                    <div class="col">{{ite.b4}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].b5}}
+                                                                    <div class="col">{{ite.b5}}
                                                                     </div>
                                                                     <div class="col">
-                                                                        {{prom2=calcularPromedio(ite.notas[numQuimestre].b1,ite.notas[numQuimestre].b2,ite.notas[numQuimestre].b3,ite.notas[numQuimestre].b4,ite.notas[numQuimestre].b5)}}
+                                                                        {{ite.prom2}}
                                                                     </div>
                                                                     <div class="col font-weight-bolder">
-                                                                        {{equi2=calcularEquivalente(ite.notas[numQuimestre].b1,ite.notas[numQuimestre].b2,ite.notas[numQuimestre].b3,ite.notas[numQuimestre].b4,ite.notas[numQuimestre].b5)}}
+                                                                        {{ite.prom2_80}}
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -186,16 +186,16 @@
                                                                 class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                                 <div class="row negros" v-if="parcial && parcial2">
                                                                     <div class="col font-weight-bolder">
-                                                                        {{equi80=calcularPromedio80(equi1, equi2)}}
+                                                                        {{ite.equivalPeriodos}}
                                                                     </div>
-                                                                    <div class="col">{{ite.notas[numQuimestre].examen}}</div>
+                                                                    <div class="col">{{ite.examen}}</div>
                                                                     <div class="col font-weight-bolder">
-                                                                        {{equi20=calcularEquivalenteExamen(ite.notas[numQuimestre].examen)}}
+                                                                        {{ite.exam2_20}}
                                                                     </div>
                                                                     <div class="col font-weight-bolder">
-                                                                        {{total=calcularPromedioTotal(equi80,equi20 )}}
+                                                                        {{ite.final}}
                                                                     </div>
-                                                                    <div class="col">{{totalesLetras(total)}}</div>
+                                                                    <div class="col">{{ite.letras}}</div>
 
                                                                 </div>
                                                             </td>
@@ -400,15 +400,128 @@ export default {
             this.$proxies._matriculaProxi
                 .getMatriculaReporte(array)
                 .then((x) => {
-                    this.info = x.data;
+                    const result = x.data;
                     this.ifload = false;
-                    // console.log(this.info)
-                    setTimeout(() => this.generatePDF(), 600);
+                    this.FormData(result)
+                    this.ifload = false;
+                    setTimeout(() => this.generatePDF(), 1000);
                 })
                 .catch((x) => {
                     console.log("Error", x);
                     this.ifload = false;
                 });
+        },
+        FormData(array){
+         try {
+            let result = []
+            if (array.length > 0) {
+                for (let i = 0; i < array.length; i++) {
+                    const element = array[i];
+                    let curso = element.fknivel? element.fknivel.nombre: 'Undefined';
+                    let paralelo = element.curso;
+                    let nombre = element.nombre;
+                    let periodo = element.academico? element.academico.nombre: 'Undefined';
+                    let calificacionesArray = element.calificaciones;
+                    let calificaciones = []
+                    for (let j = 0; j < calificacionesArray.length; j++) {
+                        const res = calificacionesArray[j];
+                        let materia = res.materia;
+                        let a1 = res.notas[this.numQuimestre].a1;
+                        let a2 = res.notas[this.numQuimestre].a2;
+                        let a3 = res.notas[this.numQuimestre].a3;
+                        let a4 = res.notas[this.numQuimestre].a4;
+                        let a5 = res.notas[this.numQuimestre].a5;
+                        let prom1 = this.promedioP1(res.notas[this.numQuimestre])
+                        let prom1_80 = ((prom1 * 8) / 10).toFixed(2);
+                        // SEGUNDO PARCIAL 
+                        let b1 = res.notas[this.numQuimestre].b1;
+                        let b2 = res.notas[this.numQuimestre].b2;
+                        let b3 = res.notas[this.numQuimestre].b3;
+                        let b4 = res.notas[this.numQuimestre].b4;
+                        let b5 = res.notas[this.numQuimestre].b5;
+                        let prom2 = this.promedioP2(res.notas[this.numQuimestre])
+                        let prom2_80 = ((prom2 * 8) / 10).toFixed(2);
+                        let equivalPeriodos = ((parseFloat(prom1_80) + parseFloat(prom2_80)) / 2).toFixed(2);
+                        let examen =  res.notas[this.numQuimestre].examen;
+                        let exam2_20 = ((parseFloat(examen) * 2) / 10).toFixed(2);
+                        let final = (parseFloat(equivalPeriodos) + parseFloat(exam2_20)).toFixed(2);
+                        let letras = this.totalesLetras(final)
+                        calificaciones.push({
+                            materia : materia,
+                            a1 : a1,
+                            a2 : a2,
+                            a3 : a3,
+                            a4 : a4,
+                            a5 : a5,
+                            prom1 : prom1,
+                            prom1_80: prom1_80,
+                            b1 : b1,
+                            b2 : b2,
+                            b3 : b3,
+                            b4 : b4,
+                            b5 : b5,
+                            prom2 : prom2,
+                            prom2_80: prom2_80,
+                            equivalPeriodos : equivalPeriodos,
+                            examen : examen,
+                            exam2_20 : exam2_20,
+                            final : final,
+                            letras : letras,
+                        })
+                    }
+                    result.push({
+                        curso : curso,
+                        paralelo : paralelo,
+                        nombre : nombre,
+                        periodo : periodo,
+                        calificaciones : calificaciones,
+                    })
+                }
+                this.info = result;
+                this.ifload = false;
+            }
+         } catch (error) {
+            console.log("Error", error);
+            this.ifload = false;
+         }
+        },
+        promedioP1(array) {
+            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
+            let suma = 0;
+              let prom = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              prom = (suma / aux).toFixed(2);
+            return prom;
+        },
+        promedioP2(array) {
+            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3), a4 = parseFloat(array.b4), a5 = parseFloat(array.b5)
+            let suma = 0;
+              let prom = 0;
+              let aux = 0;
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2 + a3 ; aux =3
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1 + a2  ; aux =2
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
+                suma = a1; aux =1
+              } 
+              prom = (suma / aux).toFixed(2);
+            return prom;
         },
         generatePDF() {
              this.$refs.html2Pdf.generatePdf();
@@ -423,86 +536,9 @@ export default {
             const output = month + '\n' + day + ',' + year;
             this.fechasActual = output;
         },
-        calcularPromedio: function (a, b, c, d, e) {
-            let a1 = parseFloat(a),
-                a2 = parseFloat(b),
-                a3 = parseFloat(c),
-                a4 = parseFloat(d),
-                a5 = parseFloat(e);
-            let suma = 0;
-            let aux = 0;
-            if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && a5 != "") {
-                suma = a1 + a2 + a3 + a4 + a5;
-                aux = 5;
-            }
-            if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4;
-                aux = 4;
-            }
-            if (a1 != "" && a2 != "" && a3 != "" && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2 + a3;
-                aux = 3;
-            }
-            if (a1 != "" && a2 != "" && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2;
-                aux = 2;
-            }
-            if (a1 != "" && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1;
-                aux = 1;
-            }
-            let promedio001 = (suma / aux).toFixed(2);
-
-            return promedio001;
-        },
-        calcularEquivalente: function (a, b, c, d, e) {
-            let a1 = parseFloat(a),
-                a2 = parseFloat(b),
-                a3 = parseFloat(c),
-                a4 = parseFloat(d),
-                a5 = parseFloat(e);
-            let suma = 0;
-            let aux = 0;
-            if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && a5 != "") {
-                suma = a1 + a2 + a3 + a4 + a5;
-                aux = 5;
-            }
-            if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4;
-                aux = 4;
-            }
-            if (a1 != "" && a2 != "" && a3 != "" && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2 + a3;
-                aux = 3;
-            }
-            if (a1 != "" && a2 != "" && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2;
-                aux = 2;
-            }
-            if (a1 != "" && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1;
-                aux = 1;
-            }
-            let promedio001 = (suma / aux).toFixed(2);
-            let eq = (promedio001 * 8) / 10;
-            return eq.toFixed(2);
-        },
-        calcularPromedio80: function (a, b,) {
-
-
-            let suma = parseFloat(a) + parseFloat(b)
-            let prom = suma / 2;
-            return prom.toFixed(2);
-        },
-        calcularPromedioTotal: function (a, b,) {
-            let suma = parseFloat(a) + parseFloat(b)
-            return suma.toFixed(2);
-        },
-        calcularEquivalenteExamen: function (a) {
-            let examen = parseFloat(a);
-            let eq = (examen * 2) / 10;
-            return eq.toFixed(2);
-        },
+       
+    
+     
         totalesLetras(total) {
             let num = parseFloat(total);
             let result = ''

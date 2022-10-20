@@ -137,14 +137,3 @@ export default {
 
 }
 </script>
-<style >
-.s-active2 {
-  font-weight: 700;
-  color: #000 !important;
-}
-
-.s-text-versel2 {
-  color: #444;
-}
-
-</style>

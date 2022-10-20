@@ -8,7 +8,7 @@
             </div>
         </template>
         <template v-slot:acccion>
-            <button  class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+            <button  class="btn btnNaranja mt-2" >
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                Procesando
             </button>

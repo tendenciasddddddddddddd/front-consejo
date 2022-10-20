@@ -19,13 +19,12 @@
                     </p>
                 </div>
                 <div class="text-center mt-3">
-        <img width="120" src="../../../../assets/img/shapes/mundo.svg" alt="">
+        <img width="120" src="../../../../assets/img/targeta.webp" alt="">
       </div>
             </template>
             <template v-slot:acccion>
                     <ButtonLoading v-if="isLoading" />
-                    <button @click="getData" v-else :disabled="isDisabled" class="btn btnNaranja mt-2"
-                        style="background-color: #0c2ccc !important;">
+                    <button @click="getData" v-else :disabled="isDisabled" class="btn btnNaranja mt-2">
                         Procesar matriculas
                     </button>
             </template>

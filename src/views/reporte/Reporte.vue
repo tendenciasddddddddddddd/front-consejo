@@ -1,19 +1,5 @@
 <template>
     <div >
-      <div class="text-start">
-         <p class="parrafo mt-2 ms-3">
-           (Cómo entender el servicio de reportes)
-            <a
-              type="button"
-              class="fuente tamanio ms-2"
-              v-tooltip.bottom="'Mirar la demostración de el proceso de matriculas y generar los paralelos'">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-              <b class="links ms-1 me-2">Ver demostración</b>
-            </a>
-          </p>
-      </div>
-        
-      <div class="row">
          <section class="intro_cards mt-3">
           <div class="intro_cards_container">
             <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
@@ -30,7 +16,6 @@
             </div>
           </div>
         </section>
-      </div>
        <div v-if="ifReportPdf">
              <ReportePdfAdmin  @myEventClosedModalReporte="closedChildReportPdf" ></ReportePdfAdmin>
          </div>
@@ -40,6 +25,16 @@
          <div v-if="ifnotas">
              <ReporteNotas  @myEventClosedModalNotas="closedNotas" />
          </div>
+         <div v-if="ifyoutuve">
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'sFC9qGRA_KM'"/>
+        </div>
+        <div class="fixed-plugin">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
+    border-radius: 20px 20px 2px 20px;
+    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      Ver video explicativo
+    </a>
+  </div>
     </div>
 </template>
 
@@ -59,25 +54,26 @@ export default {
       roles: this.$store.state.user.roles,
       ifReportPdf: false,
       ifConsolidado : false,
+      ifyoutuve : false,
       ifnotas: false,
       arrays_of_options: [
         {
           id: "0",
           nombre: "Consolidado",
           img: img1,
-          description: "Puedes generar un archivo del consolidado según sea necesario",
+          description: "Puedes generar un archivo del consolidado de las matriculas",
         },
         {
           id: "1",
           nombre: "Matriculas y Promociones",
           img: img2,
-          description: "Puedes generar reportes de matriculas y reportes según sea necesario",
+          description: "Generar reportes de matriculas, promociones, libretas y comportamiento",
         },
         {
           id: "2",
           nombre: "Notas",
           img: img3,
-          description: "Puedes generar reportes de calificaciónes según sea necesario ",
+          description: "Generar reportes de calificaciónes por curso o por materia",
         },
          {
           id: "3",
@@ -93,6 +89,7 @@ export default {
      ReportePdfAdmin: () => import( /* webpackChunkName: "Report" */ "./pages/matricula/Reportes.vue"),
      Consolidado: () => import( /* webpackChunkName: "Consolidado" */ "./pages/consolidado/Consolidado.vue"),
      ReporteNotas: () => import( /* webpackChunkName: "ReporteNotas" */ "./pages/notas/ReporteNotas.vue"),
+     VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
       CardsOptions
   },
   methods: {
@@ -123,6 +120,9 @@ export default {
     },
     closedNotas: function() {
       this.ifnotas = false;
+    },
+    ClosedYoutuve: function(){
+      this.ifyoutuve = false;
     },
   },
   created() {

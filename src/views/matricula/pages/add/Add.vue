@@ -1,37 +1,28 @@
 <template>
     <ScrimModal @close="close">
-        <template v-slot:header> Registrar matriculas en las modalidades disponibles</template>
+        <template v-slot:header> Registrar matriculas</template>
          <template v-slot:body>
               <div
                 class="d-flex justify-content-center"
-                style="border: 1px solid #ecf0f3;"
+                style="border: 1px solid #cbd6e2;height: calc(100vh - 150px);"
               >
                 <div
                   class="base-lista"
-                  style="border-right: 1px solid #ecf0f3;"
+                  style="border-right: 1px solid #cbd6e2;"
                 >
-                  <div style="border-bottom: 1px solid #ecf0f3;">
+                  <div >
                     <div
                       class="input-group "
                       id="matint_2"
                       style="padding: 15px;"
                     >
                       <span
-                        class="input-group-text text-body buscador"
-                        style="background: white;"
-                        ><i
-                          class="fas fa-search"
-                          style="color:#53575a"
-                          aria-hidden="true"
-                        ></i
+                        class="input-group-text text-body buscador busca"
+                        ><i class="fas fa-search"   aria-hidden="true"></i
                       ></span>
-                      <input
-                        type="text"
-                        v-model="searchQuery"
-                        class="form-control buscador"
-                        placeholder="Buscar por nombre"
-                        style="    background: white;"
-                      />
+                      <input 
+                        type="text" v-model="searchQuery" class="form-control buscador buscaa"
+                        placeholder="Buscar por nombre o apellido"/>
                     </div>
                   </div>
 
@@ -50,9 +41,9 @@
                           class="d-flex ms-1 mb-3 animate__animated animate__fadeInUp list-decoration"
                           :class="[`animations-${index}`]"
                           @click="selectUser(item)"
-                          style="cursor: pointer;"
+                          style="cursor: pointer;" 
                         >
-                          <div class="d-flex px-2 py-1 ms-2">
+                          <div class="d-flex px-2 py-1 ms-2" >
                             <div>
                               <img
                                 :src="item.foto"
@@ -76,7 +67,7 @@
                                 ></span>
                                 <span
                                   class="text-xs text-center font-weight-normal fuente"
-                                  >{{ item.email }}</span
+                                  >{{ item.cedula }}</span
                                 >
                               </div>
                             </div>
@@ -91,7 +82,7 @@
                 </div>
                 <div class="base-lista">
                   <div>
-                    <div style="border-bottom: 1px solid #ecf0f3;">
+                    <div >
                       <form
                         @submit.prevent="sendArraysMatricula"
                         id="matricula"
@@ -215,16 +206,7 @@
                      
                     </div>
                     <div v-else>
-                      <div class="text-center mt-6">
-                        <img
-                          class="w-30"
-                          src="../../../../assets/img/icons/descansa.png"
-                          alt="fondo"
-                        />
-                        <div class="letra fuente mt-4">
-                          No hay datos que mostrar en esta vista
-                        </div>
-                      </div>
+                      <NoFound2/>
                     </div>
                   </div>
                 </div>

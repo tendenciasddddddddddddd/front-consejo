@@ -7,7 +7,7 @@
             <input v-on:keyup.enter="addItems" type="number" class="form-control buscador" v-model="contador">
           </div>
           <div class="col-md-9">
-            <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3">
+            <a v-on:click="clearData()" role="button" class="tamanio ms-3">
               <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
@@ -16,9 +16,9 @@
                 <path d="M10 11v6"></path>
                 <path d="M14 11v6"></path>
               </svg>
-              <b class="links ms-1">Limpiar todo</b> 
+              <b  class="links ms-1 gordo">Limpiar todo</b> 
             </a>
-            <a v-on:click="onBtExport()" role="button" class="fuente tamanio ms-3 ">
+            <a v-on:click="onBtExport()" role="button" class=" tamanio ms-3 ">
               <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
@@ -26,9 +26,9 @@
                 <path d="M12 12v9"></path>
                 <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
               </svg>
-                <b class="links ms-1">Descargar archivo</b> 
+                <b  class="links ms-1 gordo">Descargar archivo</b> 
             </a>
-            <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3 ">
+            <a v-on:click="getRowData()" role="button" class="tamanio ms-3 ">
               <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
                 shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
@@ -36,7 +36,7 @@
                 <path d="M17 21v-8H7v8"></path>
                 <path d="M7 3v5h8"></path>
               </svg>
-             <b class="links ms-1">Guardar usuarios</b> 
+             <b  class="links ms-1 gordo">Guardar usuarios</b> 
             </a>
           
           </div>
@@ -92,16 +92,16 @@ export default {
           return p1
         }},
         {
-          field: 'cedula', headerName: 'CÉDULA', editable: true, maxWidth: 130,
+          field: 'cedula', headerName: 'CÉDULA*', editable: true, maxWidth: 130,
           cellStyle: cellStyle
         },
-        { field: 'email', headerName: 'EMAIL', editable: true, cellStyle: cellStyle2, minWidth: 210, },
-        { field: 'apellidos', headerName: 'APELLIDOS', editable: true },
-        { field: 'nombres', headerName: 'NOMBRES', editable: true },
-        { field: 'telefono', headerName: 'TELÉFONO', editable: true, cellStyle: cellStyle3 },
-        { field: 'sexo', headerName: 'SEXO', editable: true, maxWidth: 130 },
-        { field: 'fknacionalidad', headerName: 'NACIONALIDAD', editable: true },
-        { field: 'fkparroquia', headerName: 'PARROQUIA', editable: true },
+        { field: 'apellidos', headerName: 'APELLIDOS*', editable: true },
+        { field: 'nombres', headerName: 'NOMBRES*', editable: true },
+        { field: 'sexo', headerName: 'SEXO*', editable: true, maxWidth: 130 },
+        { field: 'fknacionalidad', headerName: 'NACIONALIDAD*', editable: true },
+        { field: 'fkparroquia', headerName: 'PARROQUIA*', editable: true },
+        { field: 'telefono', headerName: 'TELÉFONO (OPCIONAL)', editable: true, cellStyle: cellStyle3 },
+        { field: 'email', headerName: 'EMAIL (OPCIONAL)', editable: true, cellStyle: cellStyle2 },
       ],
       rowHeight: 40,
       gridApi: null,
@@ -137,9 +137,8 @@ export default {
       let validate = false;
       this.gridApi.forEachNode(function (node) {
         rowData.push(node.data);
-        if (node.data.cedula == '' || node.data.email == '' ||
-          node.data.apellidos == '*' || node.data.nombres == '*' ||
-          node.data.telefono == '' || node.data.sexo == '' ||
+        if (node.data.cedula == '' ||  node.data.sexo == '' ||
+          node.data.apellidos == '' || node.data.nombres == '' ||
           node.data.fknacionalidad == '' || node.data.fkparroquia == ''
         ) { validate = true }
 
@@ -167,7 +166,7 @@ export default {
         let result = l + ced;
         return result;
       }
-      if (validate) { this.$dialog.alert("::: Todos los campos son requeridos :::"); this.ifload = false; return }
+      if (validate) { this.$dialog.alert("::: Los campos con * son requeridos :::"); this.ifload = false; return }
       this.save(results)
     },
     save(arrays){

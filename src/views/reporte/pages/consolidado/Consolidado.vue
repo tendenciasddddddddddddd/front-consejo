@@ -11,9 +11,8 @@
     </template>
     <template v-slot:acccion>
         <ButtonLoading v-if="ifLoad" />
-        <button @click="getData" v-else type="submit" class="btn btnNaranja mt-2"
-          style="background-color: #0c2ccc !important;">
-          Cargar archivo
+        <button @click="getData" v-else type="submit" class="btn btnNaranja mt-2">
+          Descargar archivo
         </button>
     </template>
   </Modal>

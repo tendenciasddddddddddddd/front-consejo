@@ -76,7 +76,7 @@ export default {
             this.toast("Por favor revise su conexion a internet");
           }
           if (x.response.status == 400) {
-            this.toast("El usuario no esta registrado en el sistema");
+            this.toast("El email no esta registrado en el sistema");
           } else {
             this.toast("La cuenta de correo electronico no existe");
           }

@@ -66,7 +66,7 @@
                   </p>
             </form>
             <ButtonLoading v-if="ifLoad" />
-            <button v-else type="submit" class=" btn btnNaranja" form="pefilD"  style="background-color: #0c2ccc !important;">
+            <button v-else type="submit" class=" btn btnNaranja" form="pefilD"  style="background-color: #8b3dff !important;">
               Actualizar Información
             </button>
             <br> <br> <br>

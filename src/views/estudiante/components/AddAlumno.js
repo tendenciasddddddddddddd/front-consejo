@@ -17,7 +17,6 @@ export default {
     Spinner,
     IsSelect,
     FullModal, CustomInput, Dropdown, ButtonLoading,
-    AllUsersCsv : () => import( /* webpackChunkName: "AllUsersCsv" */ './AllUsersCsv.vue'),
     
   },
   props: {
@@ -43,7 +42,7 @@ export default {
         //-----------VARIABLES DEL MODELO A GUARDAR
         _id: null,
         username: null,
-        email: null,
+        email: '',
         password: null,
         nombres: null,
         apellidos: null,
@@ -51,7 +50,7 @@ export default {
         foto:
           "https://res.cloudinary.com/dvpp07pji/image/upload/v1665121545/profile_p23jj9.png",
         typo: "ESTS",
-        telefono: null,
+        telefono: '',
         updatedAt: null,
         role: null,
         fullname: null,
@@ -244,9 +243,7 @@ export default {
         this.$router.push("/");
       }
     },
-    openInport(){
-      this.tab ='inport';
-    },
+ 
     close(){
       this.$emit('myEventClosedMOdalAlumno');
     },
@@ -280,14 +277,8 @@ export default {
       return this.$validator
         .value(value)
         .required()
-        .minLength(9)
+        .minLength(4)
         .maxLength(50);
-    },
-    "model.email"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .email();
     },
     "model.nombres"(value) {
       return this.$validator
@@ -302,13 +293,6 @@ export default {
         .required()
         .minLength(5)
         .maxLength(50);
-    },
-    "model.telefono"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(9)
-        .maxLength(20);
     },
     "model.fkparroquia"(value) {
       return this.$validator.value(value).required();

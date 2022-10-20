@@ -125,7 +125,7 @@
                                                             <div class="col">{{ite.comportamiento[0].p2}}</div>
 
                                                             <div class="col">
-                                                                {{prom1=calcularPromedio(ite.comportamiento[0].p1,ite.comportamiento[0].p2)}}
+                                                                {{calcularPromedio(ite.comportamiento[0].p1,ite.comportamiento[0].p2)}}
                                                             </div>
                                                             <div class="col font-weight-bolder">
                                                                 {{calcularEquivalente(ite.comportamiento[0].p1,ite.comportamiento[0].p2)}}
@@ -138,7 +138,7 @@
                                                             <div class="col">{{ite.comportamiento[1].p1}}</div>
                                                             <div class="col">{{ite.comportamiento[1].p2}}</div>
                                                             <div class="col">
-                                                                {{prom2=calcularPromedio(ite.comportamiento[1].p1,ite.comportamiento[1].p2)}}
+                                                                {{calcularPromedio(ite.comportamiento[1].p1,ite.comportamiento[1].p2)}}
                                                             </div>
                                                             <div class="col font-weight-bolder">
                                                                 {{calcularEquivalente(ite.comportamiento[1].p1,ite.comportamiento[1].p2)}}
@@ -255,8 +255,6 @@ export default {
             fechasActual: '',
             texto: '',
             resultado: '',
-            prom1: '',
-            prom2: '',
         }
     },
     watch: {

@@ -42,7 +42,7 @@ export default {
     isActive:false,
     numQuimestre: 0,
     settings : {},
-    checked : 1,
+    checked : 0,
     parcial: false,
     parcial2: false,
     }

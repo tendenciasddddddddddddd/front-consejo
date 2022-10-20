@@ -3,14 +3,15 @@
     <div class="row mb-3">
       <div class="col-sm-4">
         <div class="input-group" style="margin-bottom: 7px;">
-          <span class="input-group-text text-body buscador"><i class="fas fa-search links"
-              aria-hidden="true"></i></span>
-          <input class="form-control buscador" type="text" v-on:input="onQuickFilterChanged()"
-            style="background: white;" id="quickFilter" placeholder="Buscar">
+          <span class="input-group-text negros buscador busca">
+          <svg style=" margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
+        </span>
+        <input type="text" id="quickFilter" v-on:input="onQuickFilterChanged()" class="form-control buscador buscaa" placeholder="Buscar" />
+
         </div>
       </div>
       <div class="col-sm-8 ">
-        <a v-on:click="onBtAdd()" class="fuente tamanio " href="javascript:;">
+        <a v-on:click="onBtAdd()" class=" tamanio " href="javascript:;">
           <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
             shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
             stroke-width="1.5" viewBox="0 0 24 24" width="18">
@@ -18,9 +19,9 @@
               d="M8 17.929H6c-1.105 0-2-.912-2-2.036V5.036C4 3.91 4.895 3 6 3h8c1.105 0 2 .911 2 2.036v1.866m-6 .17h8c1.105 0 2 .91 2 2.035v10.857C20 21.09 19.105 22 18 22h-8c-1.105 0-2-.911-2-2.036V9.107c0-1.124.895-2.036 2-2.036z">
             </path>
           </svg>
-          <b class="links ms-1">Insertar fila</b>
+          <b class="links ms-1 gordo">Insertar fila</b>
         </a>
-        <a v-on:click="clearData()" role="button" class="fuente tamanio ms-3">
+        <a v-on:click="clearData()" role="button" class=" tamanio ms-3">
           <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
             shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
             stroke-width="1.5" viewBox="0 0 24 24" width="18">
@@ -30,10 +31,10 @@
             <path d="M14.47 14.48L20 20"></path>
             <path d="M8.12 8.12L12 12"></path>
           </svg>
-          <b class="links ms-1">Eliminar selección</b>
+          <b class="links ms-1 gordo">Eliminar selección</b>
         </a>
 
-        <a v-on:click="getRowData()" role="button" class="fuente tamanio ms-3">
+        <a v-on:click="getRowData()" role="button" class=" tamanio ms-3">
           <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
             shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
             stroke-width="1.5" viewBox="0 0 24 24" width="18">
@@ -41,7 +42,7 @@
             <path d="M17 21v-8H7v8"></path>
             <path d="M7 3v5h8"></path>
           </svg>
-          <b class="links ms-1">Guardar distributivo</b>
+          <b class="links ms-1 gordo">Guardar distributivo</b>
         </a>
       </div>
     </div>
@@ -67,7 +68,7 @@
           <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pLly4oiRqfU'"/>
         </div>
         <div class="fixed-plugin">
-    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #6a78d1;
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
     border-radius: 20px 20px 2px 20px;
     box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
@@ -90,7 +91,7 @@ export default {
     return {
       columnDefs: [
         {
-          field: 'nombre', headerName: 'Docente', cellEditor: 'agSelectCellEditor', checkboxSelection: true, editable: true, rowDrag: true,
+          field: 'nombre', headerName: 'DOCENTE', cellEditor: 'agSelectCellEditor', checkboxSelection: true, editable: true, rowDrag: true,
           cellEditorParams: () => {
             var arrays = [];
             for (let i = 0; i < this.listDocentes.length; i++) {
@@ -102,7 +103,7 @@ export default {
           },
         },
         {
-          field: 'curso',
+          field: 'curso', headerName: 'CURSO',
           cellEditor: 'agSelectCellEditor', editable: true,
           cellEditorParams: () => {
             var arrays = [];
@@ -115,7 +116,7 @@ export default {
           },
         },
         {
-          field: 'materia', cellEditor: 'agSelectCellEditor', editable: true,
+          field: 'materia',headerName: 'MATERIA', cellEditor: 'agSelectCellEditor', editable: true,
 
           cellEditorParams: () => {
             var arrays = [];
@@ -128,7 +129,7 @@ export default {
           }
         },
         {
-          field: 'paralelo', cellEditor: 'agSelectCellEditor', editable: true,
+          field: 'paralelo',headerName: 'PARALELO', cellEditor: 'agSelectCellEditor', editable: true,
           minWidth: 120, maxWidth: 120,
           cellEditorParams: {
             values: ['A', 'B', 'C', 'D', 'E'],
@@ -182,7 +183,7 @@ export default {
       let text_2 = 'Distributivo'
       this.$store.commit('updateHeader', { text_1, text_2 })
     },
-    __listNivele() {
+    __listNivele: function() {
       this.isCurso = true;
       this.$proxies._gestionProxi
         .getNiveles()
@@ -195,7 +196,7 @@ export default {
           this.isCurso = false;
         });
     },
-    __listdocentes() {
+    __listdocentes: function() {
       this.isDocente = true;
       this.$proxies._registroProxi
         .getListDocentes()
@@ -208,7 +209,7 @@ export default {
           this.isDocente = false;
         });
     },
-    __listmaterias() {
+    __listmaterias: function() {
       this.isMateria = true;
       this.$proxies._gestionProxi
         .getListMaterias()

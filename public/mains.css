@@ -137,15 +137,15 @@ margin-left: 0px !important;
     border-width: 1px 0px 0px;
   }
   .buscador {
-    border: 1px solid #cbd6e2;
-    background-color: #f5f8fa !important;
+    border: 1px solid rgb(43 59 74 / 30%) !important;
+    background-color: #fff !important;
     padding: 9px 10px !important;
-    border-radius: 3px !important;
+    border-radius: 4px !important;
     font-size: 14px !important;
     transition: all 0.15s ease-out !important;
-    color: #33475b !important;
+    color: #0d1216 !important;
     display: block !important;
-    height: 36px !important;
+    height: 38px !important;
     line-height: 22px !important;
     text-align: left !important;
     /* box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 7%), 0px 1px 1.5px 0px rgb(0 0 0 / 5%); */
@@ -156,28 +156,47 @@ margin-left: 0px !important;
     box-shadow: 0 0 4px 1px rgb(0 208 228 / 30%), 0 0 0 1px #00d0e4 !important;
     outline: 0 !important;
   }
-  .input-group .form-control:focus {
-    border-left: 1px solid #00d0e4 !important;
-    border-right: 1px solid #00d0e4 !important;
+  .busca{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
+  .buscaa{
+    border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; border-left: 0px !important;
+  }
+ 
   .btnNaranja {
-    background-color: #ff7a59 !important;
-    border-color: #ff7a59 !important;
+    background-color: #8b3dff !important;
+    border: 2px solid transparent !important;
     color: #fff !important;
-    font-weight: 500 !important;
-    border-radius: 3px !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
     border-style: solid !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
     line-height: 16px !important;
     text-transform: none !important;
-    padding: 11px 22px !important;
+    padding: 1px 22px !important;
+    height: 40px !important;
   }
   .btnNaranja:hover {
-    background-color: #ffbcac !important;
-    border-color: #ff8f73 !important;
-    color: #fff !important;
+    background-color: #9e77f3 !important;
   }
 
+  .btnNaranja2 {
+    background-color: rgb(64 87 109 / 7%) !important;
+    border: 2px solid transparent !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+    border-style: solid !important;
+    font-size: 15px !important;
+    line-height: 16px !important;
+    text-transform: none !important;
+    padding: 1px 22px !important;
+    height: 40px !important;
+  }
+  .btnNaranja2:hover {
+    background-color: rgb(57 76 96 / 15%) !important;
+  }
   .btnTrasparente {
     background-color: #eaf0f6 !important;
     border-color: #afa9a9 !important;
@@ -272,7 +291,7 @@ margin-left: 0px !important;
     color: #fff;
   }
   .tamanio {
-    font-size: 15px;
+    font-size: 14px;
   }
   .links {
     color: #0091ae;

@@ -40,8 +40,8 @@
                     <p class="text-justify text-sm negros">
                       Certifico que el(a) Estudiante: <b> {{ item.nombre }}</b>
                       previo los requisitos legales, se matriculó en <b>{{ item.fknivel.nombre }}</b> de la
-                      <b>UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"</b> en el año lectivo:
-                      <b>{{ item.academico.nombre }}</b>
+                      <b>UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"</b> en el año lectivo: <br>
+                      <b >{{ item.academico.nombre }}</b>
                     </p>
                   </div>
                   <div class="mt-3" style="width: 560px;">

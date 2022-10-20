@@ -9,8 +9,8 @@
         {{ nombre }}
       </p>
       <a class="img__description ">
-        <a class="btn btnNaranja" style="margin-top:31%;"  href="javascript:;"
-          ><i class="bx bxs-low-vision"></i> Entrar</a
+        <button class="btn btnNaranja" style="margin-top:31%;"  href="javascript:;"
+          ><i class="bx bxs-low-vision"></i> Entrar</button
         ></a
       >
       <span class="parrafo cardSubTitle">

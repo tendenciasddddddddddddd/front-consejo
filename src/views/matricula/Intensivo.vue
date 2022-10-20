@@ -1,18 +1,7 @@
 <template>
     <div >
-        <div class="text-start">
-         <p class="parrafo ms-3">
-           (Cómo entender el servicio de matricula)
-            <a @click="ifyoutuve=true"
-              type="button"
-              class="fuente tamanio ms-2"
-              v-tooltip.bottom="'Mirar la demostración de el proceso de matriculas y generar los paralelos'">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-              <b class="links ms-1 me-2">Ver video explicativo</b>
-            </a>
-          </p>
-      </div>
-         <section class="intro_cards ">
+        
+         <section class="intro_cards mt-3">
           <div class="intro_cards_container">
             <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
               <CardsOptions :index="i"  :img="item.img" :nombre="item.nombre" :description="item.description" @optionsFuntions="optionsView"></CardsOptions>
@@ -40,6 +29,13 @@
         <div v-if="ifyoutuve">
           <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'sFC9qGRA_KM'"/>
         </div>
+        <div class="fixed-plugin">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
+    border-radius: 20px 20px 2px 20px;
+    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      Ver video explicativo
+    </a>
+  </div>
     </div>
 </template>
 <script>

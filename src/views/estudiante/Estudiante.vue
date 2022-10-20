@@ -1,7 +1,7 @@
 <template>
   <div >
      <AlertHeader :firsttext="'Gestionar estudiantes'" :lasttext="'Crea nuevos estudiantes, edita y elimina Alumnos'"></AlertHeader>
-        <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildAlumno" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid"/>
+        <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildAlumno" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid" :ifGrids="1"/>
         <Spinner v-if="isLoading"></Spinner>
           <div v-else class="table-responsive " >
             <table  class=" dataTable-table table s-table-flush"  >
@@ -61,16 +61,16 @@
                           @click="selectOne(item._id)"
                         />
                       </div>
-                      <span class="mb-0 ms-3 text-xs colorestabla fuente">
+                      <span class="mb-0 ms-3 text-xs negros fuente">
                         {{ item.fullname }}
                       </span>
                     </div>
                   </td>
-                  <td class="text-sm colorestabla colorestabla fuente">
+                  <td class="text-xs colorestabla  fuente">
                     {{ item.cedula }}
                   </td>
                   <td class="text-sm text-center colorestabla fuente">
-                    {{ item.email }}
+                    {{ item.email?item.email:'No tiene email' }}
                   </td>
                   <td class="text-xs text-center colorestabla fuente">
                     {{ item.updatedAt.substring(0, 10) }}
@@ -100,9 +100,8 @@
         </div>
    
       <div class="fixed-plugin">
-    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #6a78d1;
-    border-radius: 20px 20px 2px 20px;
-    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
+    border-radius: 20px 20px 2px 20px;  box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
   </div>

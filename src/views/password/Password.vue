@@ -5,7 +5,7 @@
           <template v-slot:body>
              <p class="parrafo">Cambia tu contraseña cuando lo necesites. Por seguridad</p>
              <div class="text-center">
-        <img width="220" src="../../assets/img/consolidado.svg" alt="">
+        <img width="220" src="../../assets/img/descarga.svg" alt="">
       </div>
              <div class="text-sm text-danger">{{ MsmError }}</div>
                <div v-if="isContrasenia" class="p-2">
@@ -56,15 +56,13 @@
           <template v-slot:acccion>
       <div v-if="isContrasenia">
         <ButtonLoading v-if="isLoading" />
-        <button form="res1" v-else type="submit" class="btn btnNaranja mt-2"
-          style="background-color: #0c2ccc !important;">
+        <button form="res1" v-else type="submit" class="btn btnNaranja mt-2">
           Verificar Contraseña
         </button>
       </div>
       <div v-else>
         <ButtonLoading v-if="isLoading1" />
-        <button form="res2" v-else :disabled="isDisabled" class="btn btnNaranja mt-2"
-          style="background-color: #0c2ccc !important;">
+        <button form="res2" v-else :disabled="isDisabled" class="btn btnNaranja mt-2">
           Guardar contraseña
         </button>
       </div>

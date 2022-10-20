@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btnNaranja  mb-2" type="button" disabled  style="background-color: white !important; color: #000 !important;">
+  <button class="btn btnNaranja  mb-2" type="button" disabled  >
     <span
       class="spinner-border spinner-border-sm"
       role="status"

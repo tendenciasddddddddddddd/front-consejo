@@ -1,13 +1,13 @@
 <template>
-    <div class="d-flex justify-content-center mt-7">
+    <div class="d-flex justify-content-center mt-6">
               <div class="text-center">
                 <img
-                  style="width: 120px;"
-                  src="../assets/img/icons/EDy-detective.svg"
+                  style="width: 300px;"
+                  src="../assets/img/basurero.webp"
                   alt="fondo"
                 />
-                <div class=" mt-4 letra fuente">
-                  No hay datos que mostrar para tu búsqueda
+                <div class="  letra fuente">
+                  No hay elementos para mostrar
                 </div>
               </div>
             </div>

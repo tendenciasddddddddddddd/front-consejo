@@ -36,7 +36,7 @@ Axios.interceptors.response.use(
        //localStorage.removeItem('access_token');
        //window.location.reload(true);
       }
-      else if(error.response.status===403||error.response.status===401||error.response.status===404) {//||error.response.status===401
+      else if(error.response.status===403||error.response.status===401||error.response.status===405) {//||error.response.status===401
         localStorage.clear();
         window.location.reload(true);
         console.log(error.response.status)
@@ -46,7 +46,7 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'https://uemah.com/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/
+let url = 'http://localhost:3000/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/
 // if(localStorage.getItem("config")!==null){
 //     let config = JSON.parse(localStorage.getItem("config"))
 //     url = config

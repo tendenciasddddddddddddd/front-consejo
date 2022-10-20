@@ -12,14 +12,13 @@
           
        
       <div class="text-center">
-        <img width="200" src="../../../../assets/img/shapes/issue-navigator-feature.svg" alt="">
+        <img width="200" src="../../../../assets/img/clonar.webp" alt="">
       </div>
     </template>
     <template v-slot:acccion>
         <ButtonLoading v-if="ifLoad" />
-        <button @click="cloneData" v-else type="submit" class="btn btnNaranja mt-2"
-          style="background-color: #0c2ccc !important;">
-          Ejecutar
+        <button @click="cloneData" v-else type="submit" class="btn btnNaranja mt-2">
+          Ejecutar proceso
         </button>
     </template>
   </Modal>

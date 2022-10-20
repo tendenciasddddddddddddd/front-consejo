@@ -5,15 +5,8 @@
 
 
       <a class="navbar-brand m-0" href="javascript:;">
-        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
-          class="burger-icon opacity-transition s-absolute s-right-24px s-cursor-pointer s-flex-none s-to-right"
-          style="width: 28px; height: 28px;">
-          <g class="style-scope yt-icon">
-            <path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z" class="style-scope yt-icon"></path>
-          </g>
-        </svg>
-
-        <span class="sidenav-mini-icon negros" style="font-size:20px"> &nbsp; Sistema</span>
+                  <img :src="$store.state.avatar" alt="kal" class="avatar avatar-sm rounded-circle" style="width: 36px!important;"/>
+        <span class="sidenav-mini-icon negros ms-2" style="font-size:16px">Personal </span>
       </a>
 
     </div>
@@ -26,12 +19,8 @@
             :class="{'actived': $route.name === 'default'||$route.name === '1'||$route.name === 'd1'||$route.name === 'e1'}"
             aria-controls="dashboardsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color: #000">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
-                <path d="M9 22V12h6v10"></path>
-              </svg>
+              <svg class="icons" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.03 3.327a1.599 1.599 0 0 1 1.94 0l7.384 5.61c.407.31.646.795.646 1.31v9.117c0 .903-.723 1.636-1.615 1.636h-3.762a1.626 1.626 0 0 1-1.615-1.636V15.88A2.015 2.015 0 0 0 12 13.847a2.015 2.015 0 0 0-2.008 2.034v3.483c0 .903-.723 1.636-1.615 1.636H4.615A1.626 1.626 0 0 1 3 19.364v-9.117c0-.515.24-1 .646-1.31l7.385-5.61Zm.908 1.195-7.384 5.61a.144.144 0 0 0-.054.115v9.117c0 .08.056.136.115.136h3.762c.06 0 .115-.057.115-.136V15.88c0-1.953 1.562-3.534 3.508-3.534s3.508 1.581 3.508 3.534v3.483c0 .08.056.136.115.136h3.762c.059 0 .115-.057.115-.136v-9.117a.144.144 0 0 0-.054-.115l-7.384-5.61a.099.099 0 0 0-.124 0Z" fill="currentColor"></path></svg>
+             
 
             </div>
             <span class="nav-link-text ms-1 mt-1">Área personal</span>
@@ -119,15 +108,7 @@
             :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '1234'}"
             aria-controls="applicationsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color: #000;">
-                <path d="M6 3v12"></path>
-                <circle cx="18" cy="6" r="3"></circle>
-                <circle cx="6" cy="18" r="3"></circle>
-                <path d="M18 9a9 9 0 01-9 9"></path>
-              </svg>
-
+              <svg class="icons"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.5 10V5a.5.5 0 0 0-.5-.5h-4.5V10h5zm0 1.5h-5v8H19a.5.5 0 0 0 .5-.5v-7.5zm-6.5-7H5a.5.5 0 0 0-.5.5v14c0 .28.22.5.5.5h8v-15zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2z"></path></svg>
             </div>
             <span class="nav-link-text ms-1 mt-1">Gestión Curso</span>
           </a>
@@ -164,16 +145,7 @@
             :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'}"
             aria-controls="ecommerceExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color: #000;">
-                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-                <path d="M14 2v6h6"></path>
-                <path d="M16 13H8"></path>
-                <path d="M16 17H8"></path>
-                <path d="M10 9H8"></path>
-              </svg>
-
+              <svg class="icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="_775853201__a" d="M13 7h7c1.1 0 2 .83 2 1.86v9.28c0 1.03-.9 1.86-2 1.86H4c-1.1 0-2-.83-2-1.86V8.86c0-.14.02-.28.05-.42A2 2 0 0 1 2 8V6c0-1.1.9-2 2-2h6.56a2 2 0 0 1 1.9 1.37L13 7zm-1.58 0-.39-1.16a.5.5 0 0 0-.47-.34H4a.5.5 0 0 0-.5.5v1.06c.16-.04.33-.06.5-.06h7.42zM4 8.5c-.3 0-.5.19-.5.36v9.28c0 .17.2.36.5.36h16c.3 0 .5-.19.5-.36V8.86c0-.17-.2-.36-.5-.36H4z"></path></defs><use fill="currentColor" fill-rule="nonzero" xlink:href="#_775853201__a"></use></svg>
             </div>
             <span class="nav-link-text ms-1 mt-1">Matriculas</span>
           </a>
@@ -252,14 +224,7 @@
           <a :class="{'actived': $route.name === 'al'}" data-bs-toggle="collapse" href="#authExamples1"
             class="nav-link " aria-controls="authExamples1" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm   text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color: #000">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                <path d="M2 17l10 5 10-5"></path>
-                <path d="M2 12l10 5 10-5"></path>
-              </svg>
-
+              <svg class="icons" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 18.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5h6.5c.275 0 .5.225.5.5v13.5H4Zm8.5 1.497V20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5c1.102 0 2 .895 2 2v3.997h2L20 9c1.105 0 2 .892 2 2v7l-1.5-.001V11c0-.278-.222-.5-.5-.5l-3.126-.001-4.374-.002v8l7.5.003a.5.5 0 0 0 .5-.5H22a2 2 0 0 1-2 2l-7.5-.003ZM5 7.497h4.5v-1.5H5v1.5Zm0 3h4.5v-1.5H5v1.5Zm4.5 3H5v-1.5h4.5v1.5Zm-4.5 3h4.5v-1.5H5v1.5Zm11-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Zm3-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Z" fill="currentColor"></path></svg>
             </div>
             <span class="nav-link-text ms-1 mt-1">Aulas Virtuales</span>
           </a>
@@ -291,16 +256,10 @@
           <a :class="{'actived': $route.name === 'e2'}" data-bs-toggle="collapse" href="#componentsExamples"
             class="nav-link " aria-controls="componentsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color:#000">
-                <path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z"></path>
-                <path d="M16 8L2 22"></path>
-                <path d="M17.5 15H9"></path>
-              </svg>
+             
+              <svg class="icons" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="25" viewBox="0 0 24 24"><path d="M5.75 12.75a.75.75 0 0 1 0 1.5H4V16a.75.75 0 0 1-1.5 0v-1.75H.75a.75.75 0 0 1 0-1.5H2.5V11A.75.75 0 0 1 4 11v1.75h1.75zm13.6 3.74a.6.6 0 0 0 .13.01h3.02a.8.8 0 0 0-.47-.74l-2.56-1.12a1.5 1.5 0 0 1-.9-1.38v-.51a1.5 1.5 0 0 1 .65-1.24c.96-.66 1.7-2.47 1.7-4.26 0-1.93-.8-2.75-2.44-2.75-.15 0-.3 0-.43.02a5.5 5.5 0 0 0-.7-1.4c.18-.03.8-.12 1.13-.12 2.4 0 3.95 1.41 3.95 4.25 0 1.7-.66 2.68-1.54 4.73l-.82.77v.51l2.56 1.13A2.31 2.31 0 0 1 24 16.5a1.5 1.5 0 0 1-1.5 1.5h-2.35a2.98 2.98 0 0 0-.8-1.5v-.01zm-4.82-1.27 2.73 1.2A2.92 2.92 0 0 1 19 19.1v.4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-.4c0-1.16.69-2.2 1.75-2.66l2.75-1.18v-1.24C7.92 12.62 7 9.99 7 7.5 7 3.9 8.91 2 11.97 2 15.03 2 17 3.79 17 7.38c0 2.44-.92 5.1-2.47 6.54v1.3zm-1.5-1.3a1.5 1.5 0 0 1 .48-1.1c1.18-1.1 1.99-3.3 1.99-5.44 0-2.66-1.2-3.88-3.53-3.88-2.27 0-3.47 1.29-3.47 4 0 2.18.81 4.36 1.99 5.39a1.5 1.5 0 0 1 .51 1.13v1.24a1.5 1.5 0 0 1-.9 1.38l-2.76 1.18a1.39 1.39 0 0 0-.84 1.28v.4h11v-.4c0-.56-.33-1.07-.84-1.3l-2.74-1.21a1.5 1.5 0 0 1-.89-1.37v-1.3z"></path></svg>
             </div>
-            <span class="nav-link-text ms-1 mt-1">Notas</span>
+            <span class="nav-link-text ms-1 mt-1">Módulo notas</span>
           </a>
           <div :class="{'show':
           $route.name === 'e2'||
@@ -330,12 +289,8 @@
             href="#componentsExamples10" class="nav-link " aria-controls="componentsExamples10" role="button"
             aria-expanded="false">
             <div class="icon-shape icon-sm   text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color:#000">
-                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path>
-              </svg>
+              <svg class="icons" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 18.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5h6.5c.275 0 .5.225.5.5v13.5H4Zm8.5 1.497V20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5c1.102 0 2 .895 2 2v3.997h2L20 9c1.105 0 2 .892 2 2v7l-1.5-.001V11c0-.278-.222-.5-.5-.5l-3.126-.001-4.374-.002v8l7.5.003a.5.5 0 0 0 .5-.5H22a2 2 0 0 1-2 2l-7.5-.003ZM5 7.497h4.5v-1.5H5v1.5Zm0 3h4.5v-1.5H5v1.5Zm4.5 3H5v-1.5h4.5v1.5Zm-4.5 3h4.5v-1.5H5v1.5Zm11-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Zm3-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Z" fill="currentColor"></path></svg>
+             
             </div>
             <span class="nav-link-text ms-1 mt-1">Aulas Virtuales</span>
           </a>

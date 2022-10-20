@@ -4,21 +4,17 @@
              <div class="modal-content">
                
                <div class="modal-body croll">
-                 
-                 <div class="h5 negros mb-3" style="font-weight: 600"><slot name="header">  </slot></div>
+                 <div class="h5 negros mb-3 text-center" style="font-weight: 600"><slot name="header">  </slot></div>
                  <slot  name="body">  </slot> 
                  <div class="d-flex justify-content-between mt-3">
-                   <a
+                   <button
                    @click="close"
-                   class="btn btnNaranja mt-2"
-                   style="background-color: white !important; color: #000 !important;"
+                   class="btn btnNaranja2 mt-2"
                  >
-                  Cerrar &nbsp; <i style="font-size: 12px" class="fa fa-close"></i>
-                 </a>
+                 Cancelar &nbsp; <i style="font-size: 12px" class="fa fa-close"></i>
+                   </button>
                  <slot name="acccion">  </slot>
                  </div>
-                  
-                  <!-- BODY OF MODAL -->
                </div>
              </div>
            </div>

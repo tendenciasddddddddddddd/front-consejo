@@ -13,15 +13,15 @@
                         PLATAFORMA
                       </h3>
                       <p class="parrafo">
-                        Ingrese su email y contraseña para iniciar sesión
+                        Ingrese su email o cédula y contraseña para iniciar sesión
                       </p>
                     </div>
                     <div class="card-body">
                       <form @submit.prevent="authenticate" class="text-start">
-                        <span class="parrafo ">Dirección de correo</span>
+                        <span class="parrafo ">Cédula o dirección de correo </span>
                         <div class="mb-3 mt-1">
-                          <input v-model="login.email" id="username" type="email" class="form-control buscador fuente"
-                            placeholder="Email" aria-label="Email" required autocomplete="off" />
+                          <input v-model="login.email" id="username" type="text" class="form-control buscador fuente"
+                            aria-label="Email" required autocomplete="off" />
                         </div>
 
                         <span class="parrafo mt-2">Contraseña
@@ -33,7 +33,7 @@
                           <input v-if="showPassword" type="text" class="form-control buscador fuente"
                             v-model="login.password" />
                           <input v-else v-model="login.password" id="password" type="password"
-                            class="form-control buscador fuente" placeholder="Password" aria-label="Password"
+                            class="form-control buscador fuente"  aria-label="Password"
                             required />
                         </div>
                         <a @click="isVisible = 'passw'" href="javascript:;" class="fuente tamanio links ">
