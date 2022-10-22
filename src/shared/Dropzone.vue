@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="text-end">
-            <a @click="removeAllFiles" class="fuente tamanio" href="javascript:;" >
+            <a @click="removeAllFiles" class=" tamanio" href="javascript:;" >
                
                 <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -11,7 +11,7 @@
                     <path d="M10 11v6"></path>
                     <path d="M14 11v6"></path>
                 </svg>
-                <b class=" me-2 links">Limpiar</b>
+                <b class=" me-2 links gordo">Quitar este archivo</b>
             </a>
         </div>
         <vue-dropzone class="mt-1"
@@ -28,7 +28,7 @@ import { StorageRef } from "../boot/firebase";
 import Astronauta2 from "./Astronauta2.vue";
 import vueDropzone from "vue2-dropzone";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
-let image = require("../assets/img/usados/all.svg");
+let image = require("../assets/img/submit.svg");
 export default {
     props: {},
     components: { vueDropzone, Astronauta2 },
@@ -38,7 +38,7 @@ export default {
                 url: "https://httpbin.org/post",
                 dictDefaultMessage: `
         <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
-        <p class='text-sm fuente links'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
+        <p class='text-sm  links2'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
         `,
                 maxFilesize: 2,
                 maxFiles: 1,

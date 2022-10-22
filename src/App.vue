@@ -6,13 +6,13 @@
         <Header v-if="!$store.state.isAppMobile"></Header>
          <AppMovile v-else/>
         <main
-          class="main-content position-relative  h-10 border-radius-lg "
+          class="main-content position-relative  h-10"
           
         >
           <!-- Navbar -->
           <Inicio />
           <!-- End Navbar -->
-          <div class="container-fluid  py-2" >
+          <div class="container-fluid  py-1 mt-2" >
            <router-view/>
             <!-- INICIO FOOTER -->
            <!-- <Help/> -->

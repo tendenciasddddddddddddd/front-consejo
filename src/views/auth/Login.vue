@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <main class="main-content main-content-bg mt-0" style="background: white;">
+  <div v-bind:style="{ 'background-image': 'url(' + fondo + ')' }" style="
+      background-size: 100% auto;background-position: top;    min-height: calc(100vh - 30px);">
+        <main class="main-content main-content-bg mt-0"  >
       <section>
         <div class="page-header ">
           <div class="container">
             <div class="row">
-              <div class="col-xl-5 col-lg-5 col-md-6  mx-auto">
+              <div class="col-xl-5 col-lg-5 col-md-6  mx-auto" >
                 <div class="">
-                  <div v-if="isVisible == 'logins'" class="card card-plain  mt-4">
-                    <div class="card-header pb-0 text-center">
+                  <div v-if="isVisible == 'logins'" class="card card-plain  mt-4" style="background: #fff;border-radius: 6px;">
+                    <div class="card-header pb-0 text-center" >
                       <h3 class="negros fuente">
                         PLATAFORMA
                       </h3>
@@ -36,8 +37,8 @@
                             class="form-control buscador fuente"  aria-label="Password"
                             required />
                         </div>
-                        <a @click="isVisible = 'passw'" href="javascript:;" class="fuente tamanio links ">
-                          <b>Olvidé mi contraseña</b>
+                        <a @click="isVisible = 'passw'" href="javascript:;" class="tamanio links ">
+                          <b class="gordo">Olvidé mi contraseña</b>
                         </a>
                         <div class="form-check form-switch mt-2">
                           <input class="form-check-input" type="checkbox" id="rememberMe" />
@@ -48,7 +49,7 @@
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Cargando...
                           </button>
-                          <button v-else class="btn btnNaranja w-100 mt-2 mb-0 fuente" style="font-size: 18px;">
+                          <button v-else class="btn btnNaranja w-100 mt-2 mb-0" style="font-size: 18px;">
                             Iniciar sesión
                           </button>
                           <br>
@@ -75,20 +76,20 @@
                           </div>
                         </div>
                       </form>
-                    </div>
+                    </div><br>
 
                   </div>
 
                   <!--  REXUPERAR CONTRASEÑA  -->
 
-                  <div v-if="isVisible == 'passw'" class="card card-plain mt-4">
+                  <div v-if="isVisible == 'passw'" class="card card-plain mt-4"  style="background: #fff;border-radius: 6px;">
                     <ResetPass @emitGoBackLogin="goBackLogin" @emitCambioPageResset="goRessetPassword"
                       @emitGoUserError="goUserError" />
                   </div>
 
                   <!--  VEFIFICAR CODE  -->
 
-                  <div v-if="isVisible == 'forgot'" class="card card-plain mt-3">
+                  <div v-if="isVisible == 'forgot'" class="card card-plain mt-3" style="background: #fff;border-radius: 6px;">
 
                     <CheckCode :codex="code" @emitGoPageUpdatePassword="goUpdatePassword"
                       @emitGoBackLogin2="goBackLogin"/>
@@ -97,13 +98,13 @@
 
                   <!--  RESET PASS  -->
 
-                  <div v-if="isVisible == 'resett'" class="card card-plain mt-3">
+                  <div v-if="isVisible == 'resett'" class="card card-plain mt-3" style="background: #fff;border-radius: 6px;">
                     <Update :email="emailss" @emitGoBackLogin3="goBackLogin"/>
                   </div>
 
                   <!--  ERROR DE CUENTA  -->
 
-                  <div v-if="isVisible == 'error'" class="card card-plain mt-3">
+                  <div v-if="isVisible == 'error'" class="card card-plain mt-3" style="background: #fff;border-radius: 6px;">
                     <UserError @emitGoBackLogin1="goBackLogin"></UserError>
                   </div>
                 </div>
@@ -114,12 +115,14 @@
         </div>
       </section>
     </main>
-    <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-    <footer class="footer py-5">
+
+   
+    <!-- -------- style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));" ------- -->
+    <footer class="footer py-5" >
       <div class="container">
         <div class="row">
           <div class="col-8 mx-auto text-center mt-1">
-            <p class="mb-0 text-secondary">
+            <p class="mb-0 text-white">
               Copyright © 2022
             </p>
           </div>

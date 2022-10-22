@@ -60,13 +60,14 @@
          <section v-else>
           <NoFound />
         </section>
+        <Paginate v-if="displayedArticles.length" :numPages="numPages"  :page="page" :total="info.length" @pagechanged="onPageChange"></Paginate>
       </div>
     <div v-if="ifChildGroup">
       <ListAllEstudiantes :idGet="key" @myEvent="closedChildGruopen"></ListAllEstudiantes>
     </div>
     <div v-if="ifChildNew">
       <CreateCurso @myEvent2="closedChildNew" @clickSave="refresh"></CreateCurso>
-    </div>
+    </div><br> <br>
   </div>
 </template>
 <script src="./AulasListas.js"></script>

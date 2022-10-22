@@ -6,7 +6,7 @@
 
       <a class="navbar-brand m-0" href="javascript:;">
                   <img :src="$store.state.avatar" alt="kal" class="avatar avatar-sm rounded-circle" style="width: 36px!important;"/>
-        <span class="sidenav-mini-icon negros ms-2" style="font-size:16px">Personal </span>
+        <span class="sidenav-mini-icon negros ms-2" style="font-size:16px">{{nombre.toString().split(' ')[0]}} </span>
       </a>
 
     </div>
@@ -66,13 +66,7 @@
             :class="{'actived': $route.name === '000'||$route.name === '222' ||$route.name === '333'}"
             aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="20" style="color: #000;">
-                <path d="M12 20h9"></path>
-                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-              </svg>
-
+              <svg class="icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11.75 5.25h7.5a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5zm0 6h7.5a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5zm0 6h7.5a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5zM6 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
             </div>
             <span class="nav-link-text ms-1 mt-1">Registros</span>
           </a>
@@ -387,7 +381,7 @@ export default {
       user: this.$store.state.user,
       isMobile: false,
       visibl: false,
-
+      nombre : false
     }
   },
   beforeDestroy() {
@@ -398,6 +392,7 @@ export default {
   mounted() {
     this.onResize()
     window.addEventListener('resize', this.onResize, { passive: true })
+    this.inforUsers()
   },
 
   methods: {
@@ -410,13 +405,17 @@ export default {
       //window.location.reload(true);
     },
     onResize() {
-      this.isMobile = window.innerWidth < 600
+      this.isMobile = window.innerWidth < 1100
     },
     openCuenta() {
       this.visibl = true;
     },
     close() {
       this.visibl = false;
+    },
+    inforUsers() {
+      const info = JSON.parse(localStorage.getItem('Xf'));
+      if (info) this.nombre = info.nombre;
     },
   },
 }

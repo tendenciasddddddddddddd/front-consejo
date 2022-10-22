@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-80">
     <div class="s-container">
       <div class="fieldset_content__0_ovL">
         <span class="s-title fuente">Código de acceso</span>
@@ -10,10 +10,10 @@
       </div>
       <footer class="fieldset_footer__VRdEd">
         <div class="text-end">
-          <button v-if="code == codigo" disabled class="btn btn-vercel"
+          <button v-if="code == codigo" disabled class="btn btnNaranja2"
             style="padding-top: 1px !important;">Actualizar</button>
           <template v-else>
-            <a v-if="!ifLoad" @click="updateCodeCourse" href="javascript:;" class="btn btn-vercel">Actualizar</a>
+            <button v-if="!ifLoad" @click="updateCodeCourse" href="javascript:;" class="btn btnNaranja2">Actualizar</button>
           </template>
 
         </div>
@@ -29,7 +29,7 @@
       </div>
       <footer class="fieldset_footer__VRdEd">
         <div class="text-end">
-          <button @click="__eliminar" class="btn btn-sm btn-danger" >Eliminar </button>
+          <button @click="__eliminar" class="btn btnNaranja3" >Eliminar </button>
         </div>
       </footer>
     </div>

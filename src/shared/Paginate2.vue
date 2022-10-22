@@ -2,7 +2,7 @@
   <ul class="pagination pagination-dark justify-content-center mt-4">
     <li class="page-item">
       <a
-        class=" tamanio links paginates me-3"
+        class=" tamanio links2 paginates me-3"
         :class="{ inactivo: pageh == 1 }"
         @click="onClickPreviousPage"
       >
@@ -35,7 +35,7 @@
         :class="{
           inactivo: pageh == numPagesh || numPagesh == 0,
         }"
-        class="tamanio links paginates ms-3"
+        class="tamanio links2 paginates ms-3"
         @click="onClickNextPage"
       >
         <b class="me-2 gordo">Siguiente</b>
@@ -58,7 +58,7 @@
       <li>
             <div class="btn-group dropup me-3 ms-3">
               <a  @click="activar" type="button"
-                class=" tamanio links paginates dropdown-toggle " >
+                class=" tamanio links2 paginates dropdown-toggle " >
                 <b> {{subtitulo}} </b>
               </a>
               <ul  :class="{ 'show': isActive === true }"

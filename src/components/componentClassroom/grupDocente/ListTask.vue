@@ -21,9 +21,9 @@
                   </div>
                 </div>
               </div>
-              <div class="mt-3 ms-5"><span class="text-xs ">{{ item.entrega.length }} entregas</span></div>
+              <div   class="mt-3 ms-5"><span class="text-xs ">{{ item.entrega.length }} entregas</span></div>
             </div>
-          <div v-if="!$store.state.isAppMobile" class="dropstart ms-auto">
+          <div   v-if="!$store.state.isAppMobile" class="dropstart ms-auto">
             <div class="d-flex  mt-2">
               <TimeEgo :fecha="item.fechad" />
               <!--v-tooltip.top-center="{content: item.descripcion, html: true}"-->

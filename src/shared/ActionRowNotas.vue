@@ -8,44 +8,18 @@
                 <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="d-flex justify-content-start">
-                <a @click="$emit('open')" role="button" class="  tamanio me-3">
-                    <svg class="center-icon"  data-testid="geist-icon" fill="none" height="20"
-                        shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
-                        <path d="M6 9V2h12v7"></path>
-                        <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
-                        <path d="M6 14h12v8H6z"></path>
-                    </svg> <b class="gordo links">Imprimir reporte</b> 
-                </a>
-                <a @click="$emit('openModal')" role="button" class=" tamanio me-3">
-                    <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        viewBox="0 0 24 24" width="20" class="center-icon" >
-                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
-                        <path d="M7 10l5 5 5-5"></path>
-                        <path d="M12 15V3"></path>
-                    </svg>  <b class="gordo links">Descargar</b> 
-                </a>
-                <a @click="$emit('toggle')" role="button" class="tamanio ">
-                    <svg class="center-icon" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        viewBox="0 0 24 24" width="20" >
-                        <path
-                            d="M15 3h6m0 0v6m0-6l-7 7M9 21H3m0 0v-6m0 6l7-7M3 9V3m0 0h6M3 3l7 7m11 5v6m0 0h-6m6 0l-7-7">
-                        </path>
-                    </svg> <b class="gordo links"> Pantalla completa</b> 
-                   
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3">
+        
+        <div class="col-lg-9">
             <div class="d-flex justify-content-end">
-                <a class="btn btn btn-vercel" @click="$emit('save')">
-                    &nbsp;
+                <button class="btn btn btnNaranja2 me-2" @click="$emit('toggle')">
+                    Pantalla completa
+                </button>
+                <button class="btn btn btnNaranja2 me-2" @click="$emit('open')">
+                    Imprimir reporte
+                </button>
+                <button class="btn btn btnNaranja" @click="$emit('save')">
                     Guardar cambios
-                </a>
+                </button>
             </div>
         </div>
 

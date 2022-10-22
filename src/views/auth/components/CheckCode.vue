@@ -53,12 +53,12 @@
     background: #fbd5dc;"> 
            <span class="text-sm fuente text-dark">{{ isErrorCode }}</span></div>
     </div>
-    <div class="">
+    <div class="mb-4">
       <a
         @click="activeGoBackLogin"
         href="javascript:;"
-        class="fuente tamanio ms-4"
-        >Volver a <b class="links ms-2">Inicio de sesión</b>
+        class="tamanio ms-4"
+        >Volver a <b class="links ms-2 gordo">Inicio de sesión</b>
       </a>
     </div>
   </div>

@@ -4,13 +4,11 @@ const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner";
 import Paginate2 from "../../shared/Paginate2.vue";
 import ActionsRow from "../../shared/ActionsRow.vue";
-import AlertHeader from "../../shared/AlertHeader.vue";
 export default {
   name: "Users",
   components: {
     Spinner,
     AddUser : () => import( /* webpackChunkName: "AddUser" */ './components/AddUser.vue'),
-    AlertHeader,
     Paginate2,
     ActionsRow
   },
@@ -32,7 +30,7 @@ export default {
         nombres: null,
         apellidos: null,
         cedula: null,
-        foto: null,
+        foto: 'https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp',
         status: null,
         telefono: null,
         updatedAt: null,

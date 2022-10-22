@@ -32,7 +32,7 @@
             </template>
             <template v-slot:footer>
                 <ButtonLoading v-if="isImageUploads" />
-                <button @click="cropImages()" v-else class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
+                <button @click="cropImages()" v-else class="btn btnNaranja mt-2">
                     Guardar
                 </button>
             </template>

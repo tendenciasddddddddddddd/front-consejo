@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AlertHeader :firsttext="'Gestionar cursos'" :lasttext="'Crea, edita, elimina, filtra y procesa datos'"></AlertHeader>
+    <AlertHeader :firsttext="'Administrar cursos disponibles'" ></AlertHeader>
       <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets" @desactiveState="desactiveState" />
   
       <Spinner v-if="isLoading"></Spinner>

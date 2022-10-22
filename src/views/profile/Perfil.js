@@ -1,5 +1,6 @@
  import Spinner from "../../shared/Spinner";
 import RestResource from '../../service/isAdmin'
+import NoFound from "../../shared/NoFound"
 const restResourceService = new RestResource();
 const avat = require('../../assets/img/icons/profile.jpg')
 import ButtonLoading from "../../shared/ButtonLoading.vue";
@@ -8,7 +9,7 @@ export default {
   name: "Perfil",
   components: {
     Spinner,
-    ButtonLoading, CustomInput,
+    ButtonLoading, CustomInput,NoFound,
     Avatar: () =>import( /* webpackChunkName: "Avatar" */ "./pages/Avatar.vue"),
   },
   data() {
@@ -45,6 +46,7 @@ export default {
         correo: null,
       },
       isAvatar: false,
+      nomb: false,
     };
   },
   methods: {
@@ -145,21 +147,6 @@ export default {
         .minLength(5)
         .maxLength(50);
     },
-    "model.telefono"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(9)
-        .maxLength(12);
-    },
-    "model.email"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .email();
-    },
-    ////////////////////////////////////////////////////////////////
-
 
 
     "model.fknacionalidad"(value) {

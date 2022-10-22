@@ -48,7 +48,7 @@
     </div>
 
     <Spinner v-if="isLoading"></Spinner>
-    <section v-else style="height: calc(100vh - 180px);">
+    <section v-else style="height: calc(100vh - 250px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
         @grid-ready="onGridReady" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
         :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable"
@@ -73,7 +73,7 @@
     box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
-  </div>
+  </div> 
   </div>
 </template>
 

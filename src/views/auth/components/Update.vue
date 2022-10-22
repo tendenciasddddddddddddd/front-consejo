@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="card-header pb-0 text-center">
-      <h2 class=" fuente ">
+      <h2 class=" fuente negros">
        Plataforma
-        <i style="color: #ff7a59" class="ni ni-app"></i>
+       
       </h2>
       <p class="h5 fuente" style="font-weight: 400;">
         Es un placer conocerte.
@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
       <form @submit.prevent="ResetCount" class="text-start">
-        <p class="parrafo">Nueva Contraseña</p>
+        <p class="parrafo">Nueva contraseña</p>
         <div class="mb-3">
           <input
             v-model="resetPasswords.password"
@@ -49,12 +49,12 @@
         </div>
       </form>
     </div>
-    <div class="">
+    <div class="mb-4">
       <a
         @click="activeGoBackLogin"
         href="javascript:;"
-        class="fuente tamanio ms-4"
-        >Volver a <b class="links ms-2">Inicio de sesión</b>
+        class=" tamanio ms-4"
+        >Volver a <b class="links ms-2 gordo">Inicio de sesión</b>
       </a>
     </div>
   </div>

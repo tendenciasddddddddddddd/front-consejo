@@ -1,8 +1,5 @@
 <template>
-  <div class="row">
-    <div class="col-lg-4 col-12 mx-auto">
-       
-      </div>
+  <div >
       <h1 aria-label="Develop. Preview. Ship." class="hero_title__HaAVy"><span
           class="animated-gradient-text_background__OCnk0 animated-gradient-text_background-1__c2kfC"
           style="--content:'Sistema';--padding:0.05em;--start-color:#007CF0;--end-color:#00DFD8"><span
@@ -14,9 +11,6 @@
           style="--content:'UEMAH';--padding:0.05em;--start-color:#FF4D4D;--end-color:#F9CB28"><span
             class="animated-gradient-text_foreground__kb6tN animated-gradient-text_foreground-3__kum5b">UEMAH</span></span>
       </h1>
-      
-      
-
   </div>
 </template>
 <style>

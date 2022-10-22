@@ -1,7 +1,7 @@
 <template>
    <div class="input-group">
-        <span class="input-group-text text-body buscador"><i class="fas fa-search links" aria-hidden="true"></i></span>
-        <input type="text" v-model="search" class="form-control buscador" placeholder="Buscar" />
+        <span class="input-group-text text-body buscador busca"><i class="fas fa-search" aria-hidden="true"></i></span>
+        <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
     </div>
 </template>
 <script>

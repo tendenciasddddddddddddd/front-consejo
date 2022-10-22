@@ -3,7 +3,7 @@
     <div class="card-header pb-0 text-center">
       <h2 class="negros fuente ">
         PLATAFORMA
-        <i style="color: #ff7a59" class="ni ni-app"></i>
+       
       </h2>
       <img
         class="w-30"
@@ -23,12 +23,12 @@
         </p>
       </div>
     </div>
-    <div class="">
+    <div class="mb-4">
       <a
         @click="activeGoBackLogin"
         href="javascript:;"
-        class="fuente tamanio ms-4"
-        >Volver a <b class="links ms-2">Inicio de sesión</b>
+        class=" tamanio ms-4"
+        >Volver a <b class="links ms-2 gordo">Inicio de sesión</b>
       </a>
     </div>
   </div>

@@ -27,7 +27,7 @@ export default {
       model: {//-----------VARIABLES DEL MODELO A GUARDAR
         _id: null, username: null,  email: null,
         password: null, nombres: null, apellidos: null,
-        cedula: null, foto: 'https://res.cloudinary.com/dvpp07pji/image/upload/v1665121545/profile_p23jj9.png', typo: 'ADMS',
+        cedula: null, foto: 'https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp', typo: 'ADMS',
         telefono: null,
         updatedAt:null, role:null,fullname : null,
      },

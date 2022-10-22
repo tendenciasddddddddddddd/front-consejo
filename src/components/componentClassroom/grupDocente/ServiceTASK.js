@@ -47,7 +47,7 @@ export default class ServiciosTask {
      let minutes = Math.floor((hoursms)/(60*1000));
      let minutesms=diferenciaHoras % (60*1000);
      let sec = Math.floor((minutesms)/(1000));
-     return 'Dias '+ days+", Horas "+hours+", Minutos "+minutes+", y Segundos "+sec;
+     return 'Dias '+ days+"-- Horas "+hours+"-- Minutos "+minutes+"-- Segundos "+sec;
     } 
  }
  resolveDate(dates){

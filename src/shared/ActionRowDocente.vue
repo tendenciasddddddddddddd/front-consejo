@@ -1,8 +1,8 @@
 <template>
-    <div class="row mt-3">
-        <div class="col-4">
-            <div class="input-group" >
-                <span class="input-group-text text-body buscador">
+    <div class="row mt-1">
+        <div class="col-3">
+            <div class="input-group " >
+                <span class="input-group-text text-body buscador busca">
                     <svg style="margin-top: -7px;" class="links" data-testid="geist-icon" fill="none" height="20"
                         shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
@@ -10,28 +10,22 @@
                         <path d="M16 16l4.5 4.5"></path>
                     </svg>
                 </span>
-
-                <input type="text" v-model="search" class="form-control buscador" placeholder="Buscar" />
+                <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
             </div>
         </div>
-        <div class="col-5">
-            <div class="d-flex justify-content-start">
-                <div class="btnOption">
-                    <div v-if="!allSelecteds" class="form-check center-icon">
+       
+        <div class="col-9">
+            <div class="d-flex justify-content-end mb-3">
+                <!-- <button class="btn btnNaranja2 me-2">
+                    <div v-if="!allSelecteds" class="form-check center-icon ">
                         <input @click="$emit('selectAll')" class="form-check-input cheka " type="checkbox" />
                     </div>
                     <i @click="$emit('deletedSelected')" v-else class="fa fa-minus s-icon-all center-icon" aria-hidden="true"></i>
-                </div>
-                <a @click="$emit('getDataAlls')" role="button" class="fuente tamanio ms-2 me-2 btnOption"
-                    v-tooltip.top-center="'Actualizar datos'">
-                    <svg class="links center-icon" data-testid="geist-icon" fill="none" height="22"
-                        shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22">
-                        <path d="M1 4v6h6"></path>
-                        <path d="M3.51 15a9 9 0 102.13-9.36L1 10"></path>
-                    </svg>
-                </a>
-                <a @click="$emit('gets')" role="button" class="fuente tamanio me-2 btnOption"
+                </button> -->
+                <button v-if="!$store.state.isAppMobile" :disabled="longitude != 1" class="btn btnNaranja2 me-2"  @click="$emit('gets')">
+                    Actualizar
+                </button>
+                <a v-else @click="$emit('gets')" role="button" class="fuente tamanio me-2 btnOption"
                     :class="{ disabled: longitude != 1 }"
                     v-tooltip.top-center="longitude ? '' : 'Seleccionar una item para editar'">
                     <svg class="center-icon" :class="{ links: longitude === 1 }" data-testid="geist-icon" fill="none"
@@ -41,17 +35,10 @@
                         <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                     </svg>
                 </a>
-                <a @click="$emit('examDetail')" role="button" class="fuente tamanio me-2 btnOption"
-                    :class="{ disabled: longitude != 1 }"
-                    v-tooltip.top-center="longitude ? '' : 'Seleccionar una item para mostrar'">
-                    <svg class="center-icon" :class="{ links: longitude === 1 }" data-testid="geist-icon" fill="none"
-                        height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                </a>
-                <a @click="$emit('remove')" role="button" class="fuente tamanio me-2 btnOption"
+                <button role="botton" v-if="!$store.state.isAppMobile" :disabled="longitude === 0" class="btn btnNaranja2 me-2"  @click="$emit('remove')">
+                    Eliminar
+                </button>
+                <a v-else @click="$emit('remove')" role="button" class="fuente tamanio me-2 btnOption"
                     :class="{ disabled: longitude === 0 }"
                     v-tooltip.top-center="longitude ? '' : 'Seleccionar uno o varios items para eiminar'">
                     <svg class="center-icon" :class="{ links: longitude != 0 }" data-testid="geist-icon" fill="none"
@@ -63,21 +50,14 @@
                         <path d="M14 11v6"></path>
                     </svg>
                 </a>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="d-flex justify-content-end mb-3">
-                <a v-if="!$store.state.isAppMobile" class="btn btn btn-vercel" @click="$emit('openModal')">
-                    <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        viewBox="0 0 24 24" width="20" style="color: currentcolor;">
-                        <path d="M12 5v14"></path>
-                        <path d="M5 12h14"></path>
-                    </svg>
+                <button v-if="!$store.state.isAppMobile" class="btn btnNaranja2 me-2"  @click="$emit('getDataAlls')">
+                    Actualizar
+                </button>
+                <button v-if="!$store.state.isAppMobile" class="btn btnNaranja" @click="$emit('openModal')">
                     Añaidir
-                </a>
-                <a v-else class="btn btn btn-vercel" @click="$emit('openModal')">
-                    <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
+                </button>
+                <a v-else class="fuente tamanio me-2 btnOption" @click="$emit('openModal')">
+                    <svg class="center-icon negros" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         viewBox="0 0 24 24" width="20" style="color: currentcolor;">
                         <path d="M12 5v14"></path>

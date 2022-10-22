@@ -46,9 +46,9 @@
           </form>
          </template>
           <template v-slot:footer>
-             <a class="btn btnNaranjaClaro"  @click="$emit('myEvent2')">
+             <button class="btn btnNaranja2"  @click="$emit('myEvent2')">
               <i class="ni ni-bold-left"></i> &nbsp; Volver
-            </a>
+            </button>
             &nbsp; &nbsp;
              <a v-if="!isComplete" class="btn btnDisabled">Guardar</a>
              <template v-else>

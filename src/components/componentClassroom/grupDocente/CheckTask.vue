@@ -8,10 +8,11 @@
                     <NoFound2 v-if="!displayedArticles.length" />
                     <section v-else>
                         <div v-for="item in displayedArticles" :key="item.id" class="mt-3">
-                            <div class="s-iems mb-2">
-                                <div @click="changeNote(item)" style="cursor: pointer;">
+                            <div class=" mb-2">
+                                <div class="list-decoration" @click="changeNote(item)" style="cursor: pointer;">
                                     <span class="text-xs negros text-media">
-                                        <i class="fa fa-user me-2" style="color: rgb(124, 152, 182);" aria-hidden="true"></i>
+                                        <svg class="me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="23" viewBox="0 0 24 24"><path d="M5.75 12.75a.75.75 0 0 1 0 1.5H4V16a.75.75 0 0 1-1.5 0v-1.75H.75a.75.75 0 0 1 0-1.5H2.5V11A.75.75 0 0 1 4 11v1.75h1.75zm13.6 3.74a.6.6 0 0 0 .13.01h3.02a.8.8 0 0 0-.47-.74l-2.56-1.12a1.5 1.5 0 0 1-.9-1.38v-.51a1.5 1.5 0 0 1 .65-1.24c.96-.66 1.7-2.47 1.7-4.26 0-1.93-.8-2.75-2.44-2.75-.15 0-.3 0-.43.02a5.5 5.5 0 0 0-.7-1.4c.18-.03.8-.12 1.13-.12 2.4 0 3.95 1.41 3.95 4.25 0 1.7-.66 2.68-1.54 4.73l-.82.77v.51l2.56 1.13A2.31 2.31 0 0 1 24 16.5a1.5 1.5 0 0 1-1.5 1.5h-2.35a2.98 2.98 0 0 0-.8-1.5v-.01zm-4.82-1.27 2.73 1.2A2.92 2.92 0 0 1 19 19.1v.4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-.4c0-1.16.69-2.2 1.75-2.66l2.75-1.18v-1.24C7.92 12.62 7 9.99 7 7.5 7 3.9 8.91 2 11.97 2 15.03 2 17 3.79 17 7.38c0 2.44-.92 5.1-2.47 6.54v1.3zm-1.5-1.3a1.5 1.5 0 0 1 .48-1.1c1.18-1.1 1.99-3.3 1.99-5.44 0-2.66-1.2-3.88-3.53-3.88-2.27 0-3.47 1.29-3.47 4 0 2.18.81 4.36 1.99 5.39a1.5 1.5 0 0 1 .51 1.13v1.24a1.5 1.5 0 0 1-.9 1.38l-2.76 1.18a1.39 1.39 0 0 0-.84 1.28v.4h11v-.4c0-.56-.33-1.07-.84-1.3l-2.74-1.21a1.5 1.5 0 0 1-.89-1.37v-1.3z"></path></svg>
+                                        
                                         {{ item.nombre }}
                                     </span> <br>
                                     <div class="ms-2">
@@ -42,46 +43,38 @@
                     <NoFound2 v-if="!detalleTask.id" />
                     <section v-else >
                         <div>
-                            <div class="row">
-                               <div class="col-lg-6">
-                                <span class="text-sm negros ">
-                                Estudiante: <u class="ms-4 text-media">{{ detalleTask.nombre }}</u>
-                            </span>
-                               </div>
-                               <div class="col-lg-6">
+                                <span class="h5 negros gordo ">
+                                 <b class=" text-media">{{ detalleTask.nombre }}</b><br>
+                            </span><br>
                                 <span v-if="subpanel" class="text-sm negros">
-                                Link trabajo:
-                                <a href="javascript:;" class="ms-2  tamanio ">
-                                    <b class="links text-media"> <del>Tarea sin entregar</del> </b>
-                                </a>
+                                <button href="javascript:;" disabled class="btn btnNaranja3 w-100">
+                                    No entrego archivo 
+                                </button>
                             </span> 
-
-                            <span v-else class="text-sm negros">
-                                Link trabajo:
-                                <a :href="detalleTask.tarea" target="_blank" class="ms-2  tamanio ">
-                                    <b class="links text-media">Click para revisar el trabajo</b>
+                             
+                            <span v-else class="text-sm negros ">
+                                <a :href="detalleTask.tarea" target="_blank" class=" btn btnNaranja w-100" style="    padding: 10px !important;">
+                                   <span class="">Click para revisar el trabajo</span>
                                 </a>
                             </span>
-                               </div>
-                            </div>
-                            
-                           
+                            <hr>
+                            <form @submit.prevent="save" role="form" class="mt-3 ">
+                                <span class="text-sm negros">Calificación de la tarea</span>
 
-                            <form @submit.prevent="save" role="form" class="mt-3 text-start">
-                                <span class="parrafo ">Ingrese la calificación</span>
-
-                                <CustomInput v-model="model.nota" />
+                                <CustomInput v-model="model.nota" class="w-40 mt-2"/>
                                 <p class="mb-2 text-xs fuente text-danger">
                                     {{ validation.firstError("model.nota") }}
                                 </p>
-                                <span class="parrafo">Observaciones (Opcional)</span>
-                                <Editor v-model="model.observar" />
+                                <hr>
+                                <span class="text-sm negros">Observaciones de la tarea (Opcional)</span>
+                                <Editor v-model="model.observar" class="mt-2"/>
                                 <ButtonLoading v-if="ifLoad" />
-                                <button v-else role="button" type="submit" class="btn-vercel-white mt-3">Guardar
+                                <button v-else role="button" type="submit" class="btn btnNaranja2 mt-3">Guardar
                                     Nota</button>
                             </form>
+                            <hr>
                             <p  class="parrafo mt-2">
-                                Comentarios:
+                                Descripción:
                                 <span v-html="detalleTask.comentario"> </span>
 
                             </p>
@@ -97,9 +90,9 @@
                 <b>Regresar</b>
             </a>
             <ButtonLoading v-if="ifLoad" />
-            <a v-else type="submit" @click="getData" class="btn btn-vercel ms-4">
+            <button v-else type="submit" @click="getData" class="btn btnNaranja ms-4">
                 Guardar todo y salir
-            </a>
+            </button>
         </template>
     </ScrimModal>
 </template>
@@ -109,7 +102,7 @@ import ScrimModal from "../../../shared/ScrimModal"
 import CustomInput from "../../../shared/CustomInput.vue";
 import ActionsCheck from "../../../shared/ActionsCheck.vue";
 import Paginate from "../../../shared/Paginate"
-import NoFound2 from "../../../shared/NoFound2"
+import NoFound2 from "../../../shared/NoFound"
 import ButtonLoading from "../../../shared/ButtonLoading.vue"
 import Editor from "../../../shared/Editor.vue";
 export default {

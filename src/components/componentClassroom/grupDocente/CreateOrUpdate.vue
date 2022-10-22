@@ -3,26 +3,26 @@
     <template v-slot:header> Tareas</template>
     <template v-slot:body>
       <form @submit.prevent="save" id="task">
-          <span class="parrafo">Nombre de Tarea</span>
+          <span class="text-sm negros">Nombre de Tarea</span>
           <CustomInput v-model="model.task.nombre" />
           <p class="mb-2 text-xs text-danger">
             {{ validation.firstError("model.task.nombre") }}
           </p>
 
-          <span class="parrafo ">Fecha de entrega </span>
+          <span class="text-sm negros ">Fecha de entrega </span>
            <Picker v-model="model.task.finicio"/>
           <p class="mb-2 text-xs text-danger">
             {{ validation.firstError("model.task.finicio") }}
           </p>
           
-          <span @click="openCont" class="links text-sm fuente mt-2">
-            <b> Subir archivo 👆 (Opcional)</b>
+          <span  class="negros text-sm fuente mt-2">
+            <b> Subir archivo (Opcional)</b>
           </span>
-          <div v-if="clickme == true">
+          <div >
            <Dropzone  @uploadArchive="submitArchive"/>
           </div>
           <br>
-          <span class="parrafo ">Descripción</span>
+          <span class="text-sm negros">Descripción</span>
            <Editor v-model="model.task.descripcion" />
           
           <p class="mb-0 text-xs text-danger">
@@ -31,9 +31,9 @@
       </form>
     </template>
     <template v-slot:footer>
-      <a class="btn btnNaranjaClaro me-2" @click="close">
+      <button class="btn btnNaranja2 me-2" @click="close">
         Cancelar
-      </a>
+      </button>
       <ButtonLoading v-if="ifLoad"/>
       <button v-else type="submit" id="addRowButton" class="btn btnNaranja" form="task">
         Guardar

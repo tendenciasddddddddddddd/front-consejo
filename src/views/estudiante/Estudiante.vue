@@ -1,6 +1,6 @@
 <template>
   <div >
-     <AlertHeader :firsttext="'Gestionar estudiantes'" :lasttext="'Crea nuevos estudiantes, edita y elimina Alumnos'"></AlertHeader>
+     <!-- <AlertHeader :firsttext="'Administración de estudiantes en la plataforma'" ></AlertHeader> -->
         <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildAlumno" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid" :ifGrids="1"/>
         <Spinner v-if="isLoading"></Spinner>
           <div v-else class="table-responsive " >
@@ -100,8 +100,7 @@
         </div>
    
       <div class="fixed-plugin">
-    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
-    border-radius: 20px 20px 2px 20px;  box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px;  box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
   </div>

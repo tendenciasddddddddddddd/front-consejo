@@ -4,7 +4,7 @@
     <template v-slot:body>
       <div v-if="!tarea_atrazada">
         <p class="parrafo " v-html="collects.descripcion"></p>
-        <span class="text-sm negros" style="text-decoration: underline;"> {{ isPlaso }} </span>
+        <button class="btn btnNaranja2 w-100"> {{ isPlaso }} </button>
         <div lass="mt-2">
           <a v-if="collects.archivo" class="parrafo" style=" cursor: pointer;" target="_blank"
             :href="collects.archivo">
@@ -27,10 +27,10 @@
     </template>
     <template v-slot:footer>
       <div v-if="!tarea_atrazada">
-        <a class="btn btnNaranjaClaro me-3" @click="close">
+        <button class="btn btnNaranja2 me-3" @click="close">
           Volver
-        </a>
-        <a v-if="!isComplete" class="btn btnDisabled">Guardar</a>
+        </button>
+        <button v-if="!isComplete" class="btn btnDisabled">Guardar</button>
         <template v-else>
           <ButtonLoading v-if="ifLoad" />
         <button v-else class="btn btnNaranja " @click="saveArbolEntrega()">

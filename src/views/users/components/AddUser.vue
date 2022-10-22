@@ -51,9 +51,9 @@
             </div>
           </template>
           <template v-slot:footer>
-            <a class="btn btnNaranjaClaro me-3" @click="$emit('myEventClosedMOdalUser')">
+            <button class="btn btnNaranja2 me-3" @click="$emit('myEventClosedMOdalUser')">
                 <i class="ni ni-bold-left"></i> &nbsp; Vulver
-              </a>
+              </button>
               <ButtonLoading v-if="ifLoad"/>
                 <button v-else
                 type="submit"

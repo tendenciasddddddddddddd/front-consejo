@@ -3,8 +3,7 @@
         <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
         <ProgressBar v-if="isData"></ProgressBar>
         <div v-else>
-            <ActionRowHeader :FirstText="'Gestión'" :LastText="' Aulas virtuales'" :numPages="numPages" :page="page"
-                :IfAdd="0" @pagechanged="onPageChange" @changeSearch="changeSearch"></ActionRowHeader>
+            <ActionRowHeader  :IfAdd="0"  @changeSearch="changeSearch"></ActionRowHeader>
             <section class="projects_projects__f_nDO mt-3" v-if="displayedArticles.length">
                 <div v-for="(item, index) in displayedArticles" :key="item.id"
                     class="styles_projectCardWrapper__zSMNk s-mopa animate__animated animate__fadeInUp"
@@ -59,21 +58,23 @@
                         </span>
                     </a>
                 </div>
+               
             </section>
             <section v-else>
                 <NoFound />
             </section>
+            <Paginate v-if="displayedArticles.length" :numPages="numPages"  :page="page" :total="info.length" @pagechanged="onPageChange"></Paginate>
         </div>
         <div v-if="ifyoutuve">
           <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'0wermvL6wcQ'"/>
         </div>
-        <div class="fixed-plugin">
+        <div class="fixed-plugin" v-if="!$store.state.isAppMobile">
     <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
-    border-radius: 20px 20px 2px 20px;
-    box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      border-radius: 20px 20px 2px 20px;
+     box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
-  </div>
+  </div> <br> <br>
     </div>
 </template>
 <script >
@@ -81,7 +82,8 @@ import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 import ProgressBar from "../../shared/ProgressBar"; //
 import ActionRowHeader from "../../shared/ActionRowHeader"
-import NoFound from "../../shared/NoFound"
+import NoFound from "../../shared/NoFound";
+import Paginate from "../../shared/Paginate"
 const arrayColors = [
     "#0f71ae",
     "#1466c9",
@@ -102,7 +104,7 @@ const arrayColors = [
 ];
 export default {
     components: {
-        ProgressBar, ActionRowHeader, NoFound, 
+        ProgressBar, ActionRowHeader, NoFound, Paginate,
         VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     },
     data() {
@@ -116,7 +118,7 @@ export default {
             key: '0',
             //Pagina
             page: 1,
-            perPage: 8,
+            perPage: 12,
             pages: [],
             numPages: 0,
             //CHILD
@@ -149,7 +151,7 @@ export default {
             let perPage = this.perPage;
             let from = page * perPage - perPage;
             let to = page * perPage;
-            this.numPages = Math.ceil(articles.length / 8);
+            this.numPages = Math.ceil(articles.length / 12);
             this.isSelecUsers = [];
             this.arrayShorthand();
             return articles.slice(from, to);

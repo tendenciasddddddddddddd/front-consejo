@@ -37,7 +37,7 @@
                           {{ ite.nombre }}</span>
                       </div>
                     </div>
-                    <a v-on:click="save()" role="button" class="fuente tamanio  ms-3 me-2">
+                    <a v-on:click="save()" role="button" class="tamanio  ms-3 me-2">
                     <svg style=" margin-top: -3px;" class="center-icon"  data-testid="geist-icon" fill="none" height="18"
                       shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
                       stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
@@ -45,9 +45,9 @@
                       <path d="M17 21v-8H7v8"></path>
                       <path d="M7 3v5h8"></path>
                     </svg>
-                      <b class="links ms-1">Guardar</b> 
+                      <b class="links ms-1 gordo">Guardar</b> 
                   </a>
-                  <a v-on:click="onRemoveSelected2()" role="button" class="fuente tamanio "
+                  <a v-on:click="onRemoveSelected2()" role="button" class="tamanio "
                     v-tooltip.top-center="'Elimine paralelos selecionados'"> &nbsp;&nbsp; 
                     <svg style=" margin-top: -3px;" class="center-icon" data-testid="geist-icon" fill="none" height="18"
                       shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
@@ -57,7 +57,7 @@
                       <path d="M10 11v6"></path>
                       <path d="M14 11v6"></path>
                     </svg>
-                   <b class="links ms-1">Eliminar asignados</b> 
+                   <b class="links ms-1 gordo">Eliminar asignados</b> 
                   </a>
                     <div>
                     </div>
@@ -89,10 +89,9 @@
       </div>
     </template>
     <template v-slot:footer>
-      <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio links me-3">
+      <button @click="close"  class="btn btnNaranja2 me-3">
         <b>Salir de aqui</b>
-      </a>
-
+      </button>
     </template>
   </ScrimModal>
 </template>

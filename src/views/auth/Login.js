@@ -1,3 +1,4 @@
+const image9 = require("../../assets/img/fondo.webp")
 export default {
   name: "Login",
   components: {
@@ -19,6 +20,7 @@ export default {
       isVisible: "logins",
       code: "",
       emailss:'',
+      fondo:image9,
       //AUTH LOGIN GOOGLE
       model: {
         email: null,

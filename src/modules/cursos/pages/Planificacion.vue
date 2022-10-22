@@ -64,7 +64,7 @@
 
 <script>
 import Dropzone from "../../../shared/Dropzone.vue"
-import NoFound2 from "../../../shared/NoFound2"
+import NoFound2 from "../../../shared/NoFound"
 import ProgressBar from "../../../shared/ProgressBar";
 export default {
     name: 'Planificacion',

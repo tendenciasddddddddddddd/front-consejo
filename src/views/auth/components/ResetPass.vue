@@ -4,7 +4,7 @@
       <h3 class="negros fuente ">
         PLATAFORMA
       </h3>
-      <p class="h5 fuente">
+      <p class="h5 fuente gordo">
         Restablece tu contraseña
       </p>
       <p class="parrafo">
@@ -47,9 +47,9 @@
         </div>
       </form>
     </div>
-    <div class="">
-      <a @click="activeGoBackLogin" href="javascript:;" class="fuente tamanio ms-4"
-        >Volver a <b class="links ms-2">Inicio de sesión</b>
+    <div class="mb-4">
+      <a @click="activeGoBackLogin" href="javascript:;" class="tamanio ms-4"
+        >Volver a <b class="links ms-2 gordo">Inicio de sesión</b>
       </a>
     </div>
   </div>

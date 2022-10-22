@@ -1,6 +1,6 @@
 <template>
   <div >
-    <AlertHeader :firsttext="'Gestionar usuarios'" :lasttext="'modifica y elimina usuarios de tu cuenta'"></AlertHeader>
+    
     <div >
        
        <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildUser" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openModal"/>
