@@ -3,9 +3,9 @@
     <fullscreen v-model="fullscreen" style="background: #fff;">
       <Astronauta v-if="isPrint"/>
     <div v-else>
-      <ActionRowNotas  @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch" @toggle="toggle"/>
+      <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch" @toggle="toggle"/>
     </div>
-    <section style="height: calc(100vh - 240px);">
+    <section style="height: calc(100vh - 265px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
         :enableFillHandle="true" @grid-ready="onGridReady">
@@ -47,7 +47,7 @@ export default {
       columnDefs: [{
         headerName: 'LISTADO',
         children: [
-        { field: "nombres", headerName: 'ESTUDIANTES', minWidth: 260, pinned: 'left',},
+        { field: "nombres", headerName: 'ESTUDIANTES', minWidth: 270, pinned: 'left',},
         ]
       },{
         headerName: 'QUIMESTRE 1',
@@ -239,6 +239,7 @@ export default {
       gridApi: null,
       iftask: false,
       fullscreen: false,
+      ifsaved: false
     };
   },
   components: {

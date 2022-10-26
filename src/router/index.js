@@ -96,6 +96,12 @@ const routes = [{
     component: () => import( /* webpackChunkName: "Distributivov1" */ '../views/distributivo/GridCargaOraria.vue'),
   },
 
+  { //-------------------------------------DISTRIBUTIVO------------------------------
+    path: '/planificacion',
+    name: '3333',
+    component: () => import( /* webpackChunkName: "Planificacion" */ '../views/distributivo/Planificacion.vue'),
+  },
+
   ////------------------------------------REPORTES-----------------------------
   {
     path: '/opciones-reportes',

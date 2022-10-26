@@ -57,7 +57,6 @@ export default {
           this.isLoading = false;
         })
         .catch(() => {
-          console.log("Error imposible");
           this.isLoading = false;
         });
     },
@@ -71,12 +70,13 @@ export default {
         }
         if (this.model._id) {
           this.ifLoad = true;
+          this.model.nombre = this.model.nombre.trim();
           this.$proxies._matriculaProxi
             .update(this.model._id, this.model)
             .then(() => {
               this.close();
               this.ifLoad = false;
-              this.getAll(this.pagina, 7);
+              this.getAll(this.pagina, 8);
               this.MsmError ="";
             })
             .catch((error) => {
@@ -89,12 +89,13 @@ export default {
             });
         } else {
           this.ifLoad = true;
+          this.model.nombre = this.model.nombre.trim();
           this.$proxies._matriculaProxi
-            .create(this.model) //-----------GUARDAR CON AXIOS
+            .create(this.model) 
             .then(() => {
               this.ifLoad = false;
               this.close();
-              this.getAll(this.pagina, 7);
+              this.getAll(this.pagina, 8);
             })
             .catch((error) => {
               this.ifLoad = false;
@@ -119,7 +120,6 @@ export default {
             this.isCarga = false;
           })
           .catch(() => {
-            console.log("Error");
             this.isCarga = false;
           });
       }
@@ -149,7 +149,7 @@ export default {
       this.getAll(1, num);
     },
     onPageChange(page) {
-      this.getAll(page, 7);
+      this.getAll(page, 8);
     },
     remove() {
       let message = {
@@ -184,7 +184,7 @@ export default {
             this.getAll(this.pagina, 6);
           })
           .catch(() => {
-            console.log("Error imposible");
+            this.iseliminaddo = false;
           });
       }
     },
@@ -222,7 +222,7 @@ export default {
             this.getAll(this.pagina, 6);
           })
            .catch(() => {
-             console.log("Error imposible");
+            this.iseliminaddo = false;
            });
       }
     },
@@ -270,7 +270,7 @@ export default {
       immediate: true,
       handler(pagina) {
         pagina = parseInt(pagina) || 1;
-        this.getAll(pagina, 7);
+        this.getAll(pagina, 8);
         this.isSelecUsers = [];
         this.paginaActual = pagina;
       },

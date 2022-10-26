@@ -32,7 +32,7 @@ Axios.interceptors.response.use(
     error => {
       if (!error.response) {
       
-       alert('Los servicios no se encuentra en linea')
+       alert('Espere un momento por favor ocurrió algo inesperado')
        //localStorage.removeItem('access_token');
        //window.location.reload(true);
       }
@@ -46,7 +46,7 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'http://localhost:3000/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/
+let url = 'https://uemah.com/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/
 // if(localStorage.getItem("config")!==null){
 //     let config = JSON.parse(localStorage.getItem("config"))
 //     url = config

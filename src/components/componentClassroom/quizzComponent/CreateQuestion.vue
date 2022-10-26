@@ -9,14 +9,14 @@
             {{ validation.firstError("model.examen.nombre") }}
           </p>
 
-          <span class="parrafo ">Fecha de inicio {{start}}</span>
+          <span class="parrafo ">Fecha de inicio <span class="text-danger">{{start}}</span> </span>
           <date-picker v-model="model.examen.startDate"  type="datetime" class="w-100 fuente">
           </date-picker>
           <p class="mb-2 text-xs text-danger">
             {{ validation.firstError("model.examen.startDate") }}
           </p>
           
-           <span class="parrafo ">Fecha de finalización {{end}}</span>
+           <span class="parrafo ">Fecha de finalización <span class="text-danger">{{end}}</span></span>
            <date-picker v-model="model.examen.endDate"  type="datetime" class="w-100 fuente">
            </date-picker>
            <p class="mb-2 text-xs text-danger">
@@ -29,11 +29,11 @@
             {{ validation.firstError("model.examen.time") }}
           </p>
 
-           <span class="parrafo">Intentos permitidos</span>
-          <CustomInput v-model="model.examen.intenAllowed" />
+           <!-- <span class="parrafo">Intentos permitidos</span>
+          <CustomInput aria-disabled="" v-model="model.examen.intenAllowed" />
           <p class="mb-2 text-xs text-danger">
             {{ validation.firstError("model.examen.intenAllowed") }}
-          </p>
+          </p> -->
 
           <span class="parrafo">Presentacion de preguntas aleatorias</span>
            <div class="form-check form-switch mt-1">
@@ -72,9 +72,9 @@
       </form>
     </template>
     <template v-slot:footer>
-      <a class="btn btnNaranjaClaro me-2" @click="close">
+      <button class="btn btnNaranja2 me-2" @click="close">
         Cancelar
-      </a>
+      </button>
       <ButtonLoading v-if="ifLoad"/>
       <button v-else type="submit" id="addRowButton" class="btn btnNaranja" form="exam">
         Guardar
@@ -135,7 +135,6 @@ export default {
       this.$emit('EventClose');
     },
     save() {
-      console.log('dcd')
       this.$validate().then((success) => {
         if (!success) {
           this.toast('Por favor llena correctamente los campos solicitados');

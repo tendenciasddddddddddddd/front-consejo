@@ -6,9 +6,10 @@
       <NoFound2 v-if="!info" />
       <div v-else>
         <section>
-          <span class=" negros" style="font-weight: 400; font-size: 15px;">
+          <p class=" negros" style="font-weight: 400; font-size: 15px;">
           {{ info.academico.nombre }} {{ info.fknivel.nombre }}
-          {{ info.curso }}</span>
+          {{ info.curso }}</p> 
+          <button @click="getData()" class="btn btnNaranja2">Actualizar notas</button>
           <div>
             <div v-if="inAlumnos.length">
               <div class="table-responsive mt-3">
@@ -37,7 +38,7 @@
                     <tr v-for="item in inAlumnos" :key="item.fora">
                       <td>
                         <div class="d-flex ms-3">
-                          <span  @click="open(item.fora)" style="cursor:pointer;font-weight: 600;text-decoration: underline;" class="mb-0 ms-3 text-xs mt-1 links">
+                          <span  @click="open(item.fora)" style="cursor:pointer;text-decoration: underline;" class="mb-0 ms-3 text-xs mt-1 links2 gordo">
                             {{ item.materia }}
                           </span>
                         </div>
@@ -73,7 +74,7 @@
 </template>
 <script>
 import ProgressBar from '../../../shared/ProgressBar';
-import NoFound2 from '../../../shared/NoFound2';
+import NoFound2 from '../../../shared/NoFound';
 import quialifyservice from "../../../modules/cursos/pages/services";
 const ResultServiceNota = new quialifyservice();
 export default {
@@ -95,6 +96,9 @@ export default {
   },
   methods: {
     getData() {
+      let text_1 = 'Notas'
+      let text_2 = 'Detalle de notas'
+      this.$store.commit('updateHeader',{text_1, text_2})
       this.isData = true;
       this.$Progress.start();
       if (this.user.id) {

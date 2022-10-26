@@ -2,11 +2,13 @@
   <div>
     <fullscreen v-model="fullscreen" style="background: #fff;">
       <Astronauta v-if="isPrint"/>
-    <ActionRowNotas @remove="remove" @save="save" @openModal="onBtExport" @open="open" @toggle="toggle"/>
-    <section style="height: calc(100vh - 180px);">
+      <div v-else>
+        <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch" @toggle="toggle"/>
+      </div>
+    <section style="height: calc(100vh - 260px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
-      :pagination="true" :paginationPageSize="paginationPageSize" :cacheBlockSize="cacheBlockSize"
+      
       @grid-ready="onGridReady">
     </ag-grid-vue>
     </section>
@@ -42,7 +44,7 @@
         },
         rowSelection: null,
         columnDefs: [
-          { field: "nombres", headerName: 'ESTUDIANTES', minWidth: 190, pinned: 'left', },
+          { field: "nombres", headerName: 'ESTUDIANTES', minWidth: 270, pinned: 'left', },
           { field: "quim1", headerName: 'QUIM 1', minWidth: 60 },
           { field: "quim2", headerName: 'QUIM 2', minWidth: 60 },
           { field: "promed", headerName: 'P ANUAL', minWidth: 70, cellStyle: cellStyle },
@@ -86,12 +88,11 @@
             }
           },
         ],
-        paginationPageSize: 0,
-        cacheBlockSize: 0,
         quimestre: 'p1',
         gridApi: null,
         iftask: false,
         fullscreen: false,
+        ifsaved: false
       };
     },
     components: {
@@ -101,8 +102,6 @@
     created() {
       this.rowSelection = 'multiple';
       this.onGridReadys();
-      this.paginationPageSize = 8;
-      this.cacheBlockSize = 8;
     },
     methods: {
       toggle () {
@@ -111,7 +110,9 @@
       onBtExport() {
         this.gridApi.exportDataAsExcel();
       },
-  
+      changeSearch(value) {
+      this.gridApi.setQuickFilter(value);
+    },
       onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;

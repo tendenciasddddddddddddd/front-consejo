@@ -17,7 +17,6 @@
             <div class="mt-3">
               <button @click="close()" class="btn btn-link negros p-0 fixed-plugin-close-button">
                 <svg data-testid="geist-icon" fill="none" height="36" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="36" style="color:#000"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
-                
               </button>
             </div>
           </div>
@@ -36,9 +35,8 @@
           </div>
         </div>
       </div>
-      <section v-else class="text-center mt-5">
-        <img width="160" src="../assets/img/usados/undraw_search.svg" alt="">
-        <p class="mb-3 mt-3 letra fuente">No hay coincidencia para mostrar</p>
+      <section v-else>
+        <NoFound/>
       </section>
           <!-- fin cuerpo -->
         </div>
@@ -55,9 +53,10 @@
 </template>
 
 <script>
-
+import NoFound from "./NoFound.vue";
 export default {
   components: {
+    NoFound
   },
   props: {
     texto: {

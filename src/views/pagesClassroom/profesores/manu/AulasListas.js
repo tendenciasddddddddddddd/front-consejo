@@ -5,6 +5,7 @@ import ActionRowHeader from "../../../../shared/ActionRowHeader"
 import NoFound from "../../../../shared/NoFound"
 import Paginate from "../../../../shared/Paginate"
 const arrayColors = [
+  "#8b3dff",
   "#0f71ae",
   "#1466c9",
   "#303d9d",
@@ -13,6 +14,7 @@ const arrayColors = [
   "#1976d3",
   "#874197",
   "#00b6d3",
+  "#8b3dff",
   "#0f71ae",
   "#1466c9",
   "#303d9d",

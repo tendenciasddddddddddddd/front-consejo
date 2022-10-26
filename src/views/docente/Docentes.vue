@@ -24,9 +24,9 @@
                       </span>
                     </div>
                      <div v-else>
-                        <a @click="salirBusqueda" type="button" class="fuente tamanio ">
+                        <a @click="salirBusqueda" type="button" class=" tamanio ">
                             <i class="fa fa-times me-2  iconos"></i>
-                           <b class="links">Limpiar filtro </b>
+                           <b class="links2">Limpiar filtro </b>
                         </a>
                     </div>
                   </th>

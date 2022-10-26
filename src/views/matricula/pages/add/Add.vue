@@ -108,9 +108,8 @@
                       </form>
                       <div class="text-end me-3">
                         <span style="color:#8e9ba4" class="me-2 text-sm">{{fecha}}</span>
-                         <span style="color:#16ca91" class="text-sm text-end">Estudiantes seleccionados ({{isSelecUsers.length}})</span>
-                      </div>
-                     
+                         <span  class="text-sm text-end links2 gordo">Estudiantes seleccionados ({{isSelecUsers.length}})</span>
+                      </div> 
                     </div>
                     <div v-if="isSelecUsers.length || isDuplicado" class=" p-3 ">
                      <div class="mola">

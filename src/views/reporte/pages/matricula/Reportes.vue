@@ -20,6 +20,7 @@
                 </div>
               </div>
               <div class="col-lg-8 text-start">
+                
                 <div class="btn-group dropup">
                   <a class="tamanio me-3" role="button" @click="conducta_pdf">
                     <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
@@ -28,7 +29,7 @@
                       <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
                       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
                     </svg>
-                   <b class="gordo links"> Conducta</b>
+                   <b class="gordo links2"> Conducta</b>
                   </a>
                 </div>
                 <div class="btn-group dropup">
@@ -42,7 +43,7 @@
                       <path d="M16 17H8"></path>
                       <path d="M10 9H8"></path>
                     </svg>
-                    <b class="gordo links"> Libretas</b>
+                    <b class="gordo links2"> Libretas</b>
                   </a>
 
                 </div>
@@ -54,7 +55,7 @@
                     <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
                     <path d="M13 2v7h7"></path>
                   </svg>
-                   <b class="gordo links">Promoción</b>
+                   <b class="gordo links2">Promoción</b>
                 </a>
                 <a class="tamanio" role="button" @click="get()">
                   <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
@@ -64,7 +65,7 @@
                     <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
                     <path d="M6 14h12v8H6z"></path>
                   </svg>
-                   <b class="gordo links ">Reporte matricula</b>
+                   <b class="gordo links2 ">Reporte matricula</b>
                 </a>
               </div>
             </div>
@@ -193,9 +194,9 @@
       </div>
     </template>
     <template v-slot:footer>
-      <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio links me-3">
+      <button @click="close"  class="btn btnNaranja2 me-3">
         <b>Salir de aqui</b>
-      </a>
+      </button>
     </template>
   </ScrimModal>
 </template>

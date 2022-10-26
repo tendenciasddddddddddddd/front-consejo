@@ -22,9 +22,9 @@
                       </span>
                     </div>
                      <div  v-else>
-                        <a @click="salirBusqueda" type="button" class="fuente tamanio ">
+                        <a @click="salirBusqueda" type="button" class=" tamanio ">
                             <i class="fa fa-times me-2  iconos"></i>
-                           <b class="links">Limpiar filtro </b>
+                           <b class="links2">Limpiar filtro </b>
                         </a>
                     </div>
                   </th>
@@ -96,7 +96,7 @@
       <GridUser :typo="'ESTS'" :role="'Estudiante'" @myEventClosedAgGrid="closeAgGrid" @clickAlumnos="refreshData"/>
     </div>
     <div v-if="ifyoutuve">
-          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'dbG1xucfNHA'"/>
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'lH6ccpBNlgg'"/>
         </div>
    
       <div class="fixed-plugin">

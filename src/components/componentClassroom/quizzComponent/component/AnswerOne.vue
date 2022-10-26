@@ -1,7 +1,7 @@
 <template>
     <div>
          <div class="text-start">
-            <p class="text-dark fuente text-sm">Seleccione una respuesta.</p>
+            <p class="gordo negros text-sm">Seleccione una respuesta.</p>
         </div>
         <div v-for="survey in optins.options" :key="survey.id" >
             <div class=" p-2  noactive s-items-quizz " :class="{ activado: checked === survey.id }">
@@ -14,16 +14,16 @@
                             </div>
                         </div>
                         <div class="col-lg-10 mt-2 mb-2">
-                            <span class="fuente h6 s-font text-center ">{{ survey.text }} </span>
+                            <span class="negros h6 s-font text-center ">{{ survey.text }} </span>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="text-end mt-2">
-             <button v-if="checked!==''" @click="nextQuestion" class="btn btnNaranja">Siguiente</button>
-             <a v-else class="btn btnDisabled"> Siguiente </a>
+        <div class="text-end mt-3">
+            <button  :disabled="checked===''" @click="nextQuestion" class="btn btnNaranja2"> <b>Siguiente pregunta</b> </button>
+             
          </div>
     </div>
 </template>
@@ -39,7 +39,6 @@ export default {
     methods : {
         selectAnswer(res) {
             this.checked = res;
-            console.log(this.checked)
         },
         nextQuestion() {
             if(this.checked!==''){

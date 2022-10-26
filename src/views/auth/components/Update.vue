@@ -14,19 +14,16 @@
     </div>
     <div class="card-body">
       <form @submit.prevent="ResetCount" class="text-start">
-        <p class="parrafo">Nueva contraseña</p>
+        <p class="parrafo">Nueva contraseña
+          <span style="font-size: 17px;cursor: pointer;" class="ms-2"><i @click="toggleShow" class="fas"
+                              :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
+        </p>
         <div class="mb-3">
-          <input
-            v-model="resetPasswords.password"
-            id="password"
-            type="password"
-            class="form-control buscador fuente"
-            placeholder="Password"
-            aria-label="Password"
-            required
-            minlength="5"
-            autocapitalize="off"
-          />
+
+          <input v-if="showPassword" type="text" class="form-control buscador fuente"
+                   v-model="resetPasswords.password" />
+            <input v-else v-model="resetPasswords.password"  type="password"
+                   class="form-control buscador fuente" required />
         </div>
 
         <div class="text-center">
@@ -54,7 +51,7 @@
         @click="activeGoBackLogin"
         href="javascript:;"
         class=" tamanio ms-4"
-        >Volver a <b class="links ms-2 gordo">Inicio de sesión</b>
+        >Volver a <b class="links2 ms-2 gordo">Inicio de sesión</b>
       </a>
     </div>
   </div>
@@ -75,9 +72,18 @@ export default {
         password: null,
       },
       isResert: false,
+      showPassword: false,
     };
   },
+  computed: {
+    buttonLabel() {
+      return (this.showPassword) ? "Hide" : "Show";
+    }
+  },
   methods: {
+    toggleShow() {
+        this.showPassword = !this.showPassword;
+     },
     activeGoBackLogin: function() {
       this.$emit("emitGoBackLogin3");
     },

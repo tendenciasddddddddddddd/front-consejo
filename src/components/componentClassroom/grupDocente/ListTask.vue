@@ -2,7 +2,8 @@
   <div >
     <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
     <div v-if="displayedArticles.length">
-      <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
+        <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
+        
         <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
             <div class="d-flex py-1">
               <div class="form-check my-auto">
@@ -11,22 +12,27 @@
               </div>
 
               <div @click="openChildRewiewTrask(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" >
-                  {{ item.nombre }}
+                <h6 class="mb-0 text-sm negros " >
+                 {{ item.nombre }}
                 </h6>
-                <div class="text-sm colorestabla fuente">
+                <div class="text-xs negros">
                   <div >
-                    <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Tarea Enviada
+                    <span style="background-color: rgb(0, 189, 165);"
+                                        class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
+                    {{ item.entrega.length }} entregas
                   </div>
                 </div>
               </div>
-              <div   class="mt-3 ms-5"><span class="text-xs ">{{ item.entrega.length }} entregas</span></div>
+              <div class="mt-1 ms-6"><span class="text-sm negros">
+                <TimeEgo :fecha="item.fechad" />
+              </span></div>
+              
             </div>
+           
           <div   v-if="!$store.state.isAppMobile" class="dropstart ms-auto">
-            <div class="d-flex  mt-2">
-              <TimeEgo :fecha="item.fechad" />
-              <!--v-tooltip.top-center="{content: item.descripcion, html: true}"-->
+            <div class="d-flex ">
+             
+              <button class="btn btnNaranja2 ms-3">Duplicar tarea</button>
             </div>
           </div>
         </div>

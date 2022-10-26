@@ -1,4 +1,3 @@
-import AlertHeader from "../../shared/AlertHeader.vue";
 import Spinner from "../../shared/Spinner";
 import CustomInput from "../../shared/CustomInput.vue";
 import ButtonLoading from "../../shared/ButtonLoading.vue";
@@ -8,7 +7,6 @@ export default {
     name: 'Materias',
     components: {
       Spinner,
-      AlertHeader,
       CustomInput,
       ButtonLoading,
       Paginate2,ActionsRow,
@@ -44,14 +42,14 @@ export default {
     methods: {
       verificarUsuario() {
         let text_1 = 'Gestion'
-        let text_2 = 'Materias de cursos'
+        let text_2 = 'Materias'
         this.$store.commit('updateHeader',{text_1, text_2})
       },
         getAll(pag, lim) {
             this.isLoading = true;
             this.subtitulo = lim + ' filas por página';
             this.$proxies._gestionProxi
-              .getAllMaterias(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+              .getAllMaterias(pag, lim)
               .then((x) => {
                 this.info = x.data.niveles;
                 this.pagg = x.data;
@@ -61,7 +59,6 @@ export default {
                 this.isLoading = false;
               })
               .catch(() => {
-                console.log("Error imposible");
                 this.isLoading = false;
               });
           },
@@ -69,7 +66,7 @@ export default {
             this.getAll(1, num);
           },
           onPageChange(page) {
-            this.getAll(page, 7);
+            this.getAll(page, 8);
           },
           save() {
             this.isSelecUsers= [];
@@ -87,22 +84,29 @@ export default {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(this.pagina,7);
+                      this.getAll(this.pagina,8);
                     })
-                    .catch(() => {
-                      console.log("Error")
+                    .catch((error) => {
+                      this.ifLoad = false;
+                      if(error.response){
+                        if(error.response.status==500){
+                          this.MsmError = "Error ese registro ya existe"
+                        }
+                      }else{
+                        console.log('Error', error.message); 
+                      }
                     });    
                 }else{
                   this.ifLoad = true;
                   this.model.nombre = this.model.nombre.trim();
                   this.model.area = this.model.area.trim();
-                  this.$proxies._gestionProxi.createMaterias(this.model) //-----------GUARDAR CON AXIOS
+                  this.$proxies._gestionProxi.createMaterias(this.model)
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(this.pagina,7);
+                    this.getAll(this.pagina,8);
                   })
-                  .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
+                  .catch((error) => {
                     this.ifLoad = false;
                     if(error.response){
                       if(error.response.status==500){
@@ -180,10 +184,10 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.deletedSelected();
-                  this.getAll(this.pagina, 7);
+                  this.getAll(this.pagina, 8);
                 })
                 .catch(() => {
-                  console.log("Error imposible");
+                  this.iseliminaddo = false;
                 });
             }
           },
@@ -218,10 +222,10 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 7);
+                  this.getAll(this.pagina, 8);
                 })
                  .catch(() => {
-                   console.log("Error imposible");
+                  this.iseliminaddo = false;
                  });
             }
           },
@@ -249,11 +253,10 @@ export default {
           close() {
             this.visible = false;
           },
-  
     },
     created() {
       this.verificarUsuario();
-      this.getAll(1, 7);
+      this.getAll(1, 8);
     },
       validators: { //area
         'model.nombre'(value) {

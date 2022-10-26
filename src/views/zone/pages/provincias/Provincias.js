@@ -40,7 +40,7 @@ export default {
            isCarga: false,
            visible: false,
            allSelected: false,
-           rows: 6,
+           rows: 8,
            isSearch: false,
         }
     },
@@ -81,23 +81,32 @@ export default {
               }
                 if(this.model._id){
                   this.ifLoad = true;
+                  this.model.nombre = this.model.nombre.trim();
                   this.$proxies._zonasProxi.update(this.model._id, this.model)
                     .then(() => {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(1,6);
+                      this.getAll(1,8);
                     })
-                    .catch(() => {
-                      console.log("Error")
+                    .catch((error) => {
+                      this.ifLoad = false;
+                    if(error.response){
+                      if(error.response.status==500){
+                        this.MsmError = "Error ese registro ya existe"
+                      }
+                    }else{
+                      console.log('Error', error.message); 
+                    }
                     });    
                 }else{
                   this.ifLoad = true;
+                  this.model.nombre = this.model.nombre.trim();
                   this.$proxies._zonasProxi.create(this.model) 
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(1,6);
+                    this.getAll(1,8);
                   })
                   .catch((error) => {
                     this.ifLoad = false;
@@ -145,7 +154,7 @@ export default {
             }
           },
           salirBusqueda: function() {
-            this.getAll(1, 6);
+            this.getAll(1, 8);
             this.isSearch = false;
           },
           changedQuery(num) {
@@ -193,7 +202,7 @@ export default {
                 setTimeout(() => {
                   dialog.close();
                   this.toast("Se elimino registro de sistema con su cuenta");
-                }, 600);
+                }, 800);
               })
               .catch(function() {});
           },
@@ -205,7 +214,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 8);
                   this.allSelected= false;
                 })
                 .catch(() => {
@@ -231,7 +240,7 @@ export default {
                 setTimeout(() => {
                   dialog.close();
                   this.toast("Se cambio el estado del registro");
-                }, 600);
+                }, 800);
               })
               .catch(function() {});
           },
@@ -244,7 +253,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 8);
                 })
                  .catch(() => {
                    console.log("Error imposible");
@@ -263,7 +272,7 @@ export default {
           }, 
         toast(message) {
           this.$toasted.info(message, {
-            duration: 2600,
+            duration: 2800,
             position: "top-center",
             icon: "check-circle",
             theme: "toasted-primary",
@@ -278,7 +287,7 @@ export default {
     },
     created() {
       this.verificarUsuario();
-      this.getAll(1,6);
+      this.getAll(1,8);
     },
     
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS

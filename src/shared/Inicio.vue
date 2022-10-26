@@ -63,7 +63,10 @@
             </li>
           </ul>
         </div>
+        <!-- <div class="form-check form-switch ">
+<input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
 
+</div> -->
       </div>
 
     </nav>
@@ -141,7 +144,7 @@ export default {
     },
     isMobile() {
       let estado;
-      if (screen.width <= 760) {
+      if (screen.width <= 800) {
         estado = true;
         this.$store.commit('updatepx', { estado })
       }

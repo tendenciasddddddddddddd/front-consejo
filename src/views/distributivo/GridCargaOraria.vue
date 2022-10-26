@@ -1,49 +1,24 @@
 <template>
   <div>
-    <div class="row mb-3">
+    <div class="row mb-3 mt-2">
       <div class="col-sm-4">
         <div class="input-group" style="margin-bottom: 7px;">
           <span class="input-group-text negros buscador busca">
           <svg style=" margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
         </span>
         <input type="text" id="quickFilter" v-on:input="onQuickFilterChanged()" class="form-control buscador buscaa" placeholder="Buscar" />
-
         </div>
       </div>
       <div class="col-sm-8 ">
-        <a v-on:click="onBtAdd()" class=" tamanio " href="javascript:;">
-          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-            shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="1.5" viewBox="0 0 24 24" width="18">
-            <path
-              d="M8 17.929H6c-1.105 0-2-.912-2-2.036V5.036C4 3.91 4.895 3 6 3h8c1.105 0 2 .911 2 2.036v1.866m-6 .17h8c1.105 0 2 .91 2 2.035v10.857C20 21.09 19.105 22 18 22h-8c-1.105 0-2-.911-2-2.036V9.107c0-1.124.895-2.036 2-2.036z">
-            </path>
-          </svg>
-          <b class="links ms-1 gordo">Insertar fila</b>
-        </a>
-        <a v-on:click="clearData()" role="button" class=" tamanio ms-3">
-          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-            shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="1.5" viewBox="0 0 24 24" width="18">
-            <circle cx="6" cy="6" r="3"></circle>
-            <circle cx="6" cy="18" r="3"></circle>
-            <path d="M20 4L8.12 15.88"></path>
-            <path d="M14.47 14.48L20 20"></path>
-            <path d="M8.12 8.12L12 12"></path>
-          </svg>
-          <b class="links ms-1 gordo">Eliminar selección</b>
-        </a>
-
-        <a v-on:click="getRowData()" role="button" class=" tamanio ms-3">
-          <svg style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-            shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="1.5" viewBox="0 0 24 24" width="18">
-            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
-            <path d="M17 21v-8H7v8"></path>
-            <path d="M7 3v5h8"></path>
-          </svg>
-          <b class="links ms-1 gordo">Guardar distributivo</b>
-        </a>
+        <button v-on:click="onBtAdd()" role="button" class="btn btnNaranja2 ">
+          Insertar fila
+        </button>
+        <button v-on:click="clearData()" role="button" class="btn btnNaranja2 ms-3">
+          Eliminar selección
+        </button>
+        <button v-on:click="getRowData()" role="button" class="btn btnNaranja ms-3">
+          Guardar distributivo
+        </button>
       </div>
     </div>
 
@@ -65,7 +40,7 @@
       </div>
     </div>
     <div v-if="ifyoutuve">
-          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pLly4oiRqfU'"/>
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'F3jhGLxjeXA'"/>
         </div>
         <div class="fixed-plugin">
     <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
@@ -117,7 +92,6 @@ export default {
         },
         {
           field: 'materia',headerName: 'MATERIA', cellEditor: 'agSelectCellEditor', editable: true,
-
           cellEditorParams: () => {
             var arrays = [];
             for (let i = 0; i < this.listMaterias.length; i++) {
@@ -130,7 +104,7 @@ export default {
         },
         {
           field: 'paralelo',headerName: 'PARALELO', cellEditor: 'agSelectCellEditor', editable: true,
-          minWidth: 120, maxWidth: 120,
+          minWidth: 120, maxWidth: 120, valueFormatter: saleValueFormatter,
           cellEditorParams: {
             values: ['A', 'B', 'C', 'D', 'E'],
           },
@@ -235,6 +209,8 @@ export default {
 
     getRowData() {
       this.ifload = true;
+      let validate = false;
+      let validate2 = false;
       let arrayDocente = this.listDocentes
       let arrayCursos = this.listniveles
       let arrayMaterias = this.listMaterias
@@ -242,6 +218,8 @@ export default {
       this.gridApi.forEachNode(function (node) {
         if (node.data != null) {
           if (node.data.paralelo != 'En blanco') {
+            if (!validateParalelo(node.data.paralelo)) validate2 = true;
+            try {
             const docente = seachDocente(node.data.nombre);
             const curso = seachCurso(node.data.curso);
             const materia = seachMateria(node.data.materia);
@@ -250,8 +228,11 @@ export default {
               fdocente: docente[0]._id,
               fmateria: materia[0]._id,
               paralelo: node.data.paralelo,
-              planificacion: ''
-            })
+              planificacion: []
+            }) 
+            } catch (error) {
+              validate = true;
+            }
           }
         }
       })
@@ -267,6 +248,14 @@ export default {
         const result = arrayMaterias.filter((x) => x.nombre == items);
         return result;
       }
+      function validateParalelo(paralelo) {
+            var formatted = paralelo.toString();
+            let par = ['A', 'B', 'C', 'D', 'E']
+            if (par.includes(formatted))  return true;
+            return false;
+      }
+      if (validate) { this.$dialog.alert("::: La información ingresada contiene errores :::"); this.ifload = false; return }
+      if (validate2) { this.$dialog.alert("NO SE PUEDE PROCESAR ALGUNOS VALORES"); this.ifload = false; return }
       this.save(results)
     },
     getAll() {
@@ -294,9 +283,10 @@ export default {
       const result = [];
       for (let i = 0; i < array.length; i++) {
         const element = array[i];
-        let { fullname } = element.fdocente;
-        let { nombre } = element.fnivel
-        result.push({ nombre: fullname, paralelo: element.paralelo, curso: nombre, materia: element.fmateria.nombre })
+        let  fullname  = element.fdocente? element.fdocente.fullname : 'Undefined';
+        let  nombre  = element.fnivel? element.fnivel.nombre : 'Undefined';
+        let materia =  element.fmateria? element.fmateria.nombre : 'Undefined';
+        result.push({ nombre: fullname, paralelo: element.paralelo, curso: nombre, materia: materia })
       }
       this.rowData = result
     },
@@ -344,4 +334,13 @@ var toComplete = function () {
   rowData.push({ nombre: 'En blanco', paralelo: 'En blanco', curso: 'En blanco', materia: 'En blanco' });
   return rowData;
 }
+var saleValueFormatter = function (params) {
+  var formatted = params.value.toString();
+  let paralelo = ['A', 'B', 'C', 'D', 'E']
+  if (paralelo.includes(formatted)) {
+    return formatted;
+  } else {
+      return '❓';
+    }
+  };
 </script>

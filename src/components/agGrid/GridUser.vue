@@ -4,45 +4,21 @@
       <template v-slot:body>
         <div class="row mb-3">
           <div class="col-md-3">
-            <input v-on:keyup.enter="addItems" type="number" class="form-control buscador" v-model="contador">
+            <input v-on:keyup.enter="addItems" type="number" placeholder="Ingrese un número" class="form-control buscador" v-model="contador">
           </div>
           <div class="col-md-9">
-            <a v-on:click="clearData()" role="button" class="tamanio ms-3">
-              <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
-                shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
-                <path d="M3 6h18"></path>
-                <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
-                <path d="M10 11v6"></path>
-                <path d="M14 11v6"></path>
-              </svg>
-              <b  class="links ms-1 gordo">Limpiar todo</b> 
-            </a>
-            <a v-on:click="onBtExport()" role="button" class=" tamanio ms-3 ">
-              <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="20"
-                shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20">
-                <path d="M8 17l4 4 4-4"></path>
-                <path d="M12 12v9"></path>
-                <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
-              </svg>
-                <b  class="links ms-1 gordo">Descargar archivo</b> 
-            </a>
-            <a v-on:click="getRowData()" role="button" class="tamanio ms-3 ">
-              <svg class="center-icon" style=" margin-top: -3px;" data-testid="geist-icon" fill="none" height="18"
-                shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
-                <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
-                <path d="M17 21v-8H7v8"></path>
-                <path d="M7 3v5h8"></path>
-              </svg>
-             <b  class="links ms-1 gordo">Guardar usuarios</b> 
-            </a>
-          
+            <button v-on:click="clearData()" role="button" class="btn btnNaranja2 ms-3">
+              Limpiar todo
+            </button>
+            <button v-on:click="onBtExport()" role="button" class="btn btnNaranja2 ms-3">
+              Descargar archivo 
+            </button>
+            <button v-on:click="getRowData()" role="button" class="btn btnNaranja ms-3 ">
+              Guardar usuarios
+            </button>
           </div>
-
         </div>
-        <section style="height: calc(100% - 50px);">
+        <section style="height: calc(100vh - 210px);">
           <ag-grid-vue style="width: 100%; height: 100%;" :rowHeight="rowHeight" class="ag-theme-alpine"
             :columnDefs="columnDefs" @grid-ready="onGridReady" :defaultColDef="defaultColDef" :rowData="rowData"
             :enableRangeSelection="true"  :suppressMultiRangeSelection="true" :enableFillHandle="true"></ag-grid-vue>
@@ -59,9 +35,9 @@
       
       </template>
       <template v-slot:footer>
-        <a @click="close" style="text-decoration: underline;" href="javascript:;" class="fuente tamanio links me-3">
-          <b>Salir de aqui</b>
-        </a>
+        <button @click="close"  class="btn btnNaranja2 me-3">
+          Salir de aqui
+        </button>
       </template>
     </ScrimModal>
 </template>
@@ -97,11 +73,11 @@ export default {
         },
         { field: 'apellidos', headerName: 'APELLIDOS*', editable: true },
         { field: 'nombres', headerName: 'NOMBRES*', editable: true },
-        { field: 'sexo', headerName: 'SEXO*', editable: true, maxWidth: 130 },
-        { field: 'fknacionalidad', headerName: 'NACIONALIDAD*', editable: true },
-        { field: 'fkparroquia', headerName: 'PARROQUIA*', editable: true },
-        { field: 'telefono', headerName: 'TELÉFONO (OPCIONAL)', editable: true, cellStyle: cellStyle3 },
-        { field: 'email', headerName: 'EMAIL (OPCIONAL)', editable: true, cellStyle: cellStyle2 },
+        { field: 'fknacionalidad', headerName: 'NACIONALIDAD (OPC)', editable: true },
+        { field: 'fkparroquia', headerName: 'PARROQUIA (OPC)', editable: true },
+        { field: 'sexo', headerName: 'SEXO (OPC)', editable: true, maxWidth: 130 },
+        { field: 'telefono', headerName: 'TELÉFONO (OPC)', editable: true, cellStyle: cellStyle3 },
+        { field: 'email', headerName: 'EMAIL (OPC)', editable: true, cellStyle: cellStyle2 },
       ],
       rowHeight: 40,
       gridApi: null,
@@ -137,13 +113,12 @@ export default {
       let validate = false;
       this.gridApi.forEachNode(function (node) {
         rowData.push(node.data);
-        if (node.data.cedula == '' ||  node.data.sexo == '' ||
-          node.data.apellidos == '' || node.data.nombres == '' ||
-          node.data.fknacionalidad == '' || node.data.fkparroquia == ''
+        if (node.data.cedula == '' ||  
+          node.data.apellidos == '' || node.data.nombres == ''
         ) { validate = true }
-
-        results.push({
-          cedula: node.data.cedula.trim(),
+        try {
+          results.push({
+          cedula: node.data.cedula.toString().trim(), //const result = typeof str === 'string' ? str.trim() : '';
           email: node.data.email.trim(),
           apellidos: node.data.apellidos.trim(),
           nombres: node.data.nombres.trim(),
@@ -159,8 +134,12 @@ export default {
           fullname: node.data.apellidos.trim() + " " + node.data.nombres.trim(),
           roles: "",
         });
-
+        } catch (error) {
+          console.log(error)
+          validate = true
+        }
       });
+      
       function psw(apell, ced) {
         let l = apell.toLowerCase().charAt(0);
         let result = l + ced;
@@ -168,6 +147,7 @@ export default {
       }
       if (validate) { this.$dialog.alert("::: Los campos con * son requeridos :::"); this.ifload = false; return }
       this.save(results)
+      
     },
     save(arrays){
       if (arrays.length > 0) {

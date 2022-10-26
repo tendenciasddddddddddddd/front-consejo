@@ -12,8 +12,8 @@
        <div class="col" :style="[$store.state.isAppMobile ? {'min-width': '115px'} : {'min-width': '245px'}]">
             <div class="d-flex justify-content-end">
         <div class="mt-1 ms-2" v-if="IfAdd==1">
-          <button v-if="!$store.state.isAppMobile" href="javascript:;" style="margin-top: -3px;" @click="$emit('openCreateCourse')"  class="btn btnNaranja2">
-             <span class="me-2">Crear nuevo curso</span> 
+          <button v-if="!$store.state.isAppMobile" href="javascript:;" style="margin-top: -3px;" @click="$emit('openCreateCourse')"  class="btn btnNaranja">
+             <span class="me-2">Crear curso</span> 
             </button>
             <a v-else href="javascript:;" style="margin-top: -3px;" @click="$emit('openCreateCourse')"  class="btn btn-vercel ">
             <svg data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" style="color: currentcolor;"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>

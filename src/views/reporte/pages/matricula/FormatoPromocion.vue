@@ -3,7 +3,7 @@
         <div v-if="ifload">Trabajando...</div>
         <section v-else>
             <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-                :paginate-elements-by-height="1400" :filename="'promocion'" :pdf-quality="2" :manual-pagination="false"
+                :paginate-elements-by-height="1400" :filename="'promocion'" :pdf-quality="1.5" :manual-pagination="false"
                 pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait" pdf-content-width="800px"
                 @progress="onProgress($event)" ref="html2Pdf">
                 <section slot="pdf-content">
@@ -18,12 +18,13 @@
                                     <span class="h6 negros">
                                         UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
                                     </span><br>
-                                    <span style="margin-top:-10px" class="text-sm text-center negros">
-                                        CERTIFICADO ANUAL DE PROMOCIÓN
-                                    </span> <br>
-                                    <span class="text-xs negros">AÑO LECTIVO <b>{{ item.academico.nombre
-                                    }}</b></span><br>
-                                    <span class="text-xs negros">JORNADA MATUTINA</span>
+                                    <p style="margin-top:-10px" class="text-sm text-center negros">
+                                        CERTIFICADO ANUAL DE PROMOCIÓN <br>
+                                        <span class="text-xs negros">AÑO LECTIVO <b>{{ item.academico.nombre
+                                    }}</b></span>
+                                    </p> 
+                                    
+                                   
                                 </div>
                                 <div class="col-lg-2  text-md-end ">
                                     <img class=" w-50 me-5" src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
@@ -33,7 +34,7 @@
 
                             <div class="row">
                                 <div class="col-lg-11 col-12 mx-auto">
-                                    <div class="mt-3" style="width: 670px;">
+                                    <div class="" style="width: 670px;">
                                         <p class="text-justify text-xs negros">
                                             De conformidad con lo prescrito en el Art. 197 del Reglamento General a la
                                             Ley Orgánica de
@@ -64,19 +65,19 @@
 
                                             <tbody>
                                                 <tr v-for="ite in item.calificaciones" :key="ite.id">
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-xxs negros fuente">
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);padding: 0px 2px;" class="mb-0 text-start ms-3 text-xxs negros fuente">
                                                         {{ite.area}} </td>
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);" class="mb-0 text-start ms-3 text-xxs negros fuente">{{ite.materia}}</td>
-                                                    <td style="border-bottom-width: 0px;" class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);padding: 0px 2px;" class="mb-0 text-start ms-3 text-xxs negros fuente">{{ite.materia}}</td>
+                                                    <td style="border-bottom-width: 0px;padding: 0px 2px;" class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <div>
                                                             {{ite.promediof}} &nbsp; {{trasformnumberToText(ite.promediof)}}
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr >
-                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-xs negros fuente"></td>
-                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros "><b>PROMEDIO GENERAL</b></td>
-                                                    <td style="border-top: 1px solid rgb(223 227 235);" class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                                    <td style="border-top: 1px solid rgb(223 227 235);padding: 1px 2px;" class="mb-0 ms-3 text-xs negros fuente"></td>
+                                                    <td style="border-top: 1px solid rgb(223 227 235);padding: 1px 2px;" class="mb-0 ms-3 text-start text-xxs negros "><b>PROMEDIO GENERAL</b></td>
+                                                    <td style="border-top: 1px solid rgb(223 227 235);padding: 1px 2px;" class="mb-0 ms-3 text-start text-xxs negros fuente">
                                                         <b>
                                                             {{calcularPromedio(item.calificaciones)}} {{trasformnumberToText(calcularPromedio(item.calificaciones))}}
                                                         </b>
@@ -218,7 +219,7 @@ export default {
                     this.info = x.data;
                     this.ifload = false;
                    // console.log(this.info);
-                    setTimeout(() => this.generatePDF(), 1200);
+                    setTimeout(() => this.generatePDF(), 3000);
                 })
                 .catch((x) => {
                     console.log("Error", x);

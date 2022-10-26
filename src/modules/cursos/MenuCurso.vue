@@ -1,15 +1,17 @@
 <template>
   <div>
     <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
-      <div class="uGmi4w">
-        <div class="zCtFuA s-text-versel2" @click="$router.go(-1)">
-          <svg class="me-2" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision"
+      <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
+        <div class="" @click="$router.go(-1)">
+          <button class="btn btnNaranja2 mt-2">
+            <svg class="me-2" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="22" style="color: #000;">
+                viewBox="0 0 24 24" width="24" style="color: #000;">
                 <path d="M19 12H5"></path>
                 <path d="M12 19l-7-7 7-7"></path>
               </svg>
-          Atrás</div>
+          </button>
+         </div>
         <span class="WuKWng"></span>
       <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
         Notas
@@ -26,14 +28,14 @@
       </div>
       <span class="WuKWng"></span>
       <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 2 }" @click="vueInit(2)">
-        Conducta
+        Proyectos
         <section v-if="tabs == 2" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
       </div>
       <span class="WuKWng"></span>
       <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 3 }" @click="vueInit(3)">
-        Asistencia
+        Conducta
         <section v-if="tabs == 3" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
@@ -42,6 +44,13 @@
       <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 4 }" @click="vueInit(4)">
         Planificación
         <section v-if="tabs == 4" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div>
+      <span class="WuKWng"></span>
+      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 5 }" @click="vueInit(5)">
+        Asistencia
+        <section v-if="tabs == 5" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
       </div>
@@ -86,7 +95,7 @@
               <a class="nav-link " :class="{ 's-active': tabs == 2 }" data-scroll="" href="javascript:;"
                 @click="vueInit(2)">
                 
-                <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2 ms-2">Asistencia</span>
+                <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2 ms-2">Proyectos</span>
               </a>
             </li>
             <li class="nav-item pt-1">
@@ -107,7 +116,7 @@
           <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 2">
-          En desarrollo
+          <Proyectos :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 3">
           <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
@@ -115,8 +124,12 @@
         <section v-if="tabs == 4">
           <Planificacion :id="idDistributivo" :planificacion="planificacion" />
         </section>
+        <section v-if="tabs == 5">
+          En desarrollo
+        </section>
       </div>
-    </div> <br>
+    </div> 
+    <br>
   </div>
 </template>
 
@@ -131,9 +144,10 @@ export default {
   name: 'ModuloAula',
   components: {
     ProgressBar, Calificaciones,
-    Planificacion: () => import( /* webpackChunkName: "Planificacion" */ './pages/Planificacion.vue'),
+    Planificacion: () => import( /* webpackChunkName: "Planificacions" */ './pages/Planificacion.vue'),
     Supletorios: () => import( /* webpackChunkName: "Supletorios" */ './pages/Supletorios.vue'),
     Comportamiento: () => import( /* webpackChunkName: "Comportamiento" */ './pages/Comportamiento.vue'),
+    Proyectos: () => import( /* webpackChunkName: "Proyectos" */ './pages/Proyectos.vue'),
   },
   data() {
     return {
@@ -158,7 +172,8 @@ export default {
           gracia: '0',
           pfinal: '0',
           notas: [{ }],
-          comportamiento : [{}]
+          comportamiento : [{}],
+          proyectos : [{}],
         },
       },
       collectionTasks: [],
@@ -189,10 +204,17 @@ export default {
         this.$proxies._notasProxi
           .getAll(this.$route.params.id)
           .then((x) => {
+            const isExiste = []
             this.isVerific = x.data.filter((x) => x.curso == this.para);
-            const isExiste = this.isVerific[0].calificaciones.filter((x) => x.materia == this.mate);
-            if (isExiste == 0) {
-              this.confirmarMateria();
+            for (let i = 0; i < this.isVerific.length; i++) {
+              const element = this.isVerific[i];
+              const aux = element.calificaciones.filter((x) => x.materia == this.mate);
+              if (aux.length ==0) {
+                isExiste.push(element._id)
+              }
+            }
+            if (isExiste.length > 0) {
+              this.configDocenteMateria(isExiste);
             } else {
               const arrays = ResultServiceNota.llenar_tabla_notas(
                 this.isVerific,
@@ -200,16 +222,16 @@ export default {
               );
               this.inAlumnos = arrays.sort(function (a, b) {
                 var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
-                if (nameA < nameB) //sort string ascending
+                if (nameA < nameB) 
                   return -1;
                 if (nameA > nameB)
                   return 1;
-                return 0; //default return value (no sorting)
+                return 0; 
               });
               this.isData = false;
               this.$Progress.finish();
             }
-            const text_1 = this.mate + ' ' + this.para
+            const text_1 = this.mate + ' - ' + this.para
             const text_2 = 'Notas'
             this.$store.commit('updateHeader', { text_1, text_2 })
           })
@@ -220,57 +242,31 @@ export default {
           });
       }
     },
-    confirmarMateria() {
-      let message = {
-        title: "¿Registro de calificaciones?",
-        body:
-          "Para poder registrar las notas es importante saber que todos los estudiantes ya tengan una matricula y un paralelo. Si es así Clic en CONTINUAR caso contrario Cancelar.",
-      };
-      let options = {
-        loader: true,
-        okText: "Continuar",
-        cancelText: "Cancelar",
-        animation: "bounce",
-      };
-      this.$dialog
-        .confirm(message, options)
-        .then((dialog) => {
-          this.configDocenteMateria();
-          setTimeout(() => {
-            dialog.close();
-            this.toast("Configuración exitosa");
-          }, 1900);
-        })
-        .catch(() => {
-          this.$router.go(-1);
-        });
-    },
-    configDocenteMateria() {
+
+    configDocenteMateria(array) {
       let contador = this.isVerific.length;
       if (contador > 0) {
-        let arrays = [];
-        for (let i = 0; i < this.isVerific.length; i++) {
-          arrays.push(this.isVerific[i]._id);
-        }
         const notass = [
           {  quimestre: 'p1', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',},
           { quimestre: 'p2', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',}
         ]
         const comportamiento = [{p1:'1',p2:'1'}, {p1:'1',p2:'1'}]
+        const proyectos = [{p1:'1',p2:'1'}, {p1:'1',p2:'1'}]
         this.model2.calificaciones.docente = this.docentes;
         this.model2.calificaciones.materia = this.mate;
         this.model2.calificaciones.area = this.area;
         this.model2.calificaciones.notas = notass;
         this.model2.calificaciones.comportamiento = comportamiento;
+        this.model2.calificaciones.proyectos = proyectos
         this.$proxies._notasProxi
-          .updateReforma(arrays, this.model2) 
+          .updateReforma(array, this.model2) 
           .then(() => {
             this.getDataActualizada();
-            arrays = [];
+            array = [];
           })
           .catch(() => {
             this.$dialog.alert("No se puede completar la operación");
-            arrays = [];
+            array = [];
           });
       }
     },
@@ -306,6 +302,36 @@ export default {
     },
     vueInit: function(num) {
       this.tabs = num;
+      let text_1 = this.mate + ' - ' + this.para;
+      let text_2 = ''
+      switch (num) {
+        case 0:
+          text_2= 'Notas';
+          this.$store.commit('updateHeader',{text_1, text_2})
+          break;
+        case 1:
+          text_2= 'Supletorios';
+          this.$store.commit('updateHeader',{text_1, text_2})
+          break;
+        case 2:
+          text_2= 'Proyectos escolares';
+          this.$store.commit('updateHeader',{text_1, text_2})
+          break;
+        case 3:
+          text_2= 'Conducta';
+          this.$store.commit('updateHeader',{text_1, text_2})
+          break;
+        case 4:
+          text_2= 'Planificación';
+          this.$store.commit('updateHeader',{text_1, text_2})
+          break;
+         case 5:
+          text_2= 'Asistencia';
+          this.$store.commit('updateHeader',{text_1, text_2})
+          break;
+        default:
+          break;
+      }
     },
     verificarUsuario() {
       if (!restResourceService.docente(this.roles)) this.$router.push("/");

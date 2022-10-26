@@ -3,8 +3,8 @@
         <template v-slot:header>Módulo de reportes</template>
         <template v-slot:body>
             <span class="negros text-sm">El módulo de reporte genéra file pdf de matricula, libretas, notas y promoción</span>
-            <div class="text-center mt-2">
-                <img width="300" src="../assets/img/notas_espera.svg" alt="">
+            <div class="text-center ">
+                <img width="200" src="../assets/img/carpetas.webp" alt="">
             </div>
         </template>
         <template v-slot:acccion>

@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-center mt-6">
+    <div class="d-flex justify-content-center mt-5">
               <div class="text-center">
                 <img
                   style="width: 300px;"

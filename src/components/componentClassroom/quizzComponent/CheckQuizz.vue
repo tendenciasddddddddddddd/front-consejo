@@ -11,8 +11,13 @@
                             <div class=" mb-2">
                                 <div class="list-decoration" @click="changeNote(item)" style="cursor: pointer;">
                                     <span class="text-xs negros text-media">
-                                        <svg class="me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="23" viewBox="0 0 24 24"><path d="M5.75 12.75a.75.75 0 0 1 0 1.5H4V16a.75.75 0 0 1-1.5 0v-1.75H.75a.75.75 0 0 1 0-1.5H2.5V11A.75.75 0 0 1 4 11v1.75h1.75zm13.6 3.74a.6.6 0 0 0 .13.01h3.02a.8.8 0 0 0-.47-.74l-2.56-1.12a1.5 1.5 0 0 1-.9-1.38v-.51a1.5 1.5 0 0 1 .65-1.24c.96-.66 1.7-2.47 1.7-4.26 0-1.93-.8-2.75-2.44-2.75-.15 0-.3 0-.43.02a5.5 5.5 0 0 0-.7-1.4c.18-.03.8-.12 1.13-.12 2.4 0 3.95 1.41 3.95 4.25 0 1.7-.66 2.68-1.54 4.73l-.82.77v.51l2.56 1.13A2.31 2.31 0 0 1 24 16.5a1.5 1.5 0 0 1-1.5 1.5h-2.35a2.98 2.98 0 0 0-.8-1.5v-.01zm-4.82-1.27 2.73 1.2A2.92 2.92 0 0 1 19 19.1v.4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-.4c0-1.16.69-2.2 1.75-2.66l2.75-1.18v-1.24C7.92 12.62 7 9.99 7 7.5 7 3.9 8.91 2 11.97 2 15.03 2 17 3.79 17 7.38c0 2.44-.92 5.1-2.47 6.54v1.3zm-1.5-1.3a1.5 1.5 0 0 1 .48-1.1c1.18-1.1 1.99-3.3 1.99-5.44 0-2.66-1.2-3.88-3.53-3.88-2.27 0-3.47 1.29-3.47 4 0 2.18.81 4.36 1.99 5.39a1.5 1.5 0 0 1 .51 1.13v1.24a1.5 1.5 0 0 1-.9 1.38l-2.76 1.18a1.39 1.39 0 0 0-.84 1.28v.4h11v-.4c0-.56-.33-1.07-.84-1.3l-2.74-1.21a1.5 1.5 0 0 1-.89-1.37v-1.3z"></path></svg>
-                                        
+                                        <svg class="me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                            width="22" height="23" viewBox="0 0 24 24">
+                                            <path
+                                                d="M5.75 12.75a.75.75 0 0 1 0 1.5H4V16a.75.75 0 0 1-1.5 0v-1.75H.75a.75.75 0 0 1 0-1.5H2.5V11A.75.75 0 0 1 4 11v1.75h1.75zm13.6 3.74a.6.6 0 0 0 .13.01h3.02a.8.8 0 0 0-.47-.74l-2.56-1.12a1.5 1.5 0 0 1-.9-1.38v-.51a1.5 1.5 0 0 1 .65-1.24c.96-.66 1.7-2.47 1.7-4.26 0-1.93-.8-2.75-2.44-2.75-.15 0-.3 0-.43.02a5.5 5.5 0 0 0-.7-1.4c.18-.03.8-.12 1.13-.12 2.4 0 3.95 1.41 3.95 4.25 0 1.7-.66 2.68-1.54 4.73l-.82.77v.51l2.56 1.13A2.31 2.31 0 0 1 24 16.5a1.5 1.5 0 0 1-1.5 1.5h-2.35a2.98 2.98 0 0 0-.8-1.5v-.01zm-4.82-1.27 2.73 1.2A2.92 2.92 0 0 1 19 19.1v.4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-.4c0-1.16.69-2.2 1.75-2.66l2.75-1.18v-1.24C7.92 12.62 7 9.99 7 7.5 7 3.9 8.91 2 11.97 2 15.03 2 17 3.79 17 7.38c0 2.44-.92 5.1-2.47 6.54v1.3zm-1.5-1.3a1.5 1.5 0 0 1 .48-1.1c1.18-1.1 1.99-3.3 1.99-5.44 0-2.66-1.2-3.88-3.53-3.88-2.27 0-3.47 1.29-3.47 4 0 2.18.81 4.36 1.99 5.39a1.5 1.5 0 0 1 .51 1.13v1.24a1.5 1.5 0 0 1-.9 1.38l-2.76 1.18a1.39 1.39 0 0 0-.84 1.28v.4h11v-.4c0-.56-.33-1.07-.84-1.3l-2.74-1.21a1.5 1.5 0 0 1-.89-1.37v-1.3z">
+                                            </path>
+                                        </svg>
+
                                         {{ item.nombre }}
                                     </span> <br>
                                     <div class="ms-2">
@@ -35,60 +40,51 @@
                             </div>
                         </div>
                     </section>
-                   
+
                 </div>
                 <div class="col-sm-6 " style="border-right: 1px solid rgb(203 214 226);">
                     <NoFound2 v-if="!detalleTask.id" />
-                    <section v-else >
-                                <span class="h5 negros gordo ">
-                                 <b class=" text-media">{{ detalleTask.nombre }}</b><br>
-                            </span><br>
-                                <span v-if="subpanel" class="text-sm negros">
-                                <button href="javascript:;" disabled class="btn btnNaranja2 w-100">
-                                    Sin archivo 
-                                </button>
-                            </span> 
-                             
-                            <span v-else class="text-sm negros ">
-                                <a :href="detalleTask.tarea" target="_blank" class=" btn btnNaranja w-100" style="    padding: 10px !important;">
-                                   <span class="">Click para revisar el trabajo</span>
-                                </a>
-                               
-                            </span>
-                            <hr>
-                            <div   style="overflow-y: auto;height: calc(85vh - 150px);overflow-x: auto;">
-                                <p  class="parrafo mt-2">
-                                Detalle de la tarea:
-                                <span v-html="detalleTask.comentario"> </span>
+                    <section v-else>
+                        <span class="h5 negros gordo ">
+                            <b class=" text-media">{{ detalleTask.nombre }}</b><br>
+                        </span>
+                        <div  v-for="item in collects.surveys" :key="item.id">
+                            <h5 class=" negros" v-html="item.question" style="font-weight: 400;">
+                            </h5>
+                            <div>
+                                <ul>
+                                    <li v-for="(option) in item.options" :key="option.id" >
 
-                            </p>
+                                        <span v-if="item.reqq.includes(option.id) " class="gordo links2 text-sm" >
+                                           <span >
+                                            {{ option.text }} <svg v-if="isClassActive(item._id, option.id)" style="    color: #6bca2c;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M4.53 11.9 9 16.38 19.44 5.97a.75.75 0 0 1 1.06 1.06L9.53 17.97c-.3.29-.77.29-1.06 0l-5-5c-.7-.71.35-1.77 1.06-1.07z"></path></svg>
+                                           </span> 
+                                        </span>
+                                        <span v-else class="negros text-sm ">
+                                            <span >
+                                                {{ option.text }}
+                                                <svg v-if="isClassActive(item._id, option.id)" style="color: red;" width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.818 4.05a.75.75 0 0 0-1.06 1.06l3.181 3.183-3.182 3.182a.75.75 0 1 0 1.061 1.06L8 9.355l3.182 3.182a.75.75 0 1 0 1.06-1.061L9.062 8.293l3.182-3.182a.75.75 0 0 0-1.061-1.06L8 7.231 4.818 4.05Z" fill="currentColor"></path></svg>
+                                            </span>
+                                        </span>
+                                    </li>
+                                </ul>
                             </div>
-                            
+                        </div>
                     </section>
                 </div>
-                <div class="col-sm-3 croll panel1"  style="overflow-y: auto;">
+                <div class="col-sm-3 croll panel1" style="overflow-y: auto;">
                     <NoFound2 v-if="!detalleTask.id" />
-                    <div v-else>
-                            <form @submit.prevent="save" role="form" class=" ">
-                                <span class="text-sm negros">Calificación de la tarea</span>
-
-                                <CustomInput v-model="model.nota" class=" mt-2"/>
-                                <p class="mb-2 text-xs fuente text-danger">
-                                    {{ validation.firstError("model.nota") }}
-                                </p>
-                                <hr>
-                                <span class="text-sm negros">Comentarios de retroalimentación</span>
-                                <Editor v-model="model.observar" class="mt-2"/>
-                                <ButtonLoading v-if="ifLoad" />
-                                <button v-else role="button" type="submit" class="btn btnNaranja2 mt-3">Guardar
-                                    Nota</button>
-                            </form>
-                        </div>
+                    <div v-else class="text-center">
+                        <span class="text-sm negros">Puntaje</span>
+                        <p class="h5 negros">{{ detalleTask.nota?detalleTask.nota:'0'  }} / {{ collects.surveys.length }}</p>
+                        <span class="text-sm negros">Puntaje</span>
+                        <p class="h5 negros">{{ aprox  }} </p>
+                    </div>
                 </div>
             </div>
         </template>
         <template v-slot:footer>
-            <button @click="close"  class="btn btnNaranja2">
+            <button @click="close" class="btn btnNaranja2">
                 <b>Regresar</b>
             </button>
             <ButtonLoading v-if="ifLoad" />
@@ -98,14 +94,11 @@
         </template>
     </ScrimModal>
 </template>
-
 <script>
 import ScrimModal from "../../../shared/ScrimModal"
-import CustomInput from "../../../shared/CustomInput.vue";
 import ActionsCheck from "../../../shared/ActionsCheck.vue";
 import NoFound2 from "../../../shared/NoFound"
 import ButtonLoading from "../../../shared/ButtonLoading.vue"
-import Editor from "../../../shared/Editor.vue";
 export default {
     name: "CheckTask",
     props: {
@@ -113,10 +106,11 @@ export default {
         objectUser: Array
     },
     components: {
-        ScrimModal, CustomInput, ActionsCheck, NoFound2, ButtonLoading, Editor
+        ScrimModal, ActionsCheck, NoFound2, ButtonLoading
     },
     data() {
         return {
+            aprox:0,
             dataUser: [],
             model: {//-----------VARIABLES DEL MODELO A GUARDAR
                 nota: '',
@@ -153,8 +147,24 @@ export default {
         }
     },
     methods: {
+        isClassActive(idQuizz, req){
+            let response = this.detalleTask.responses;
+            if (response.length > 0) {
+                for (let i = 0; i < response.length; i++) {
+                    const element = response[i];
+                    let myRespuestas = element.myResponse
+                    if (element.idQuestion == idQuizz) {
+                        myRespuestas.includes(req)
+                            if (myRespuestas.includes(req)) {
+                                return true
+                            }
+                    }
+                }
+            }
+        
+        },
         close() {
-            this.$emit('myEventTask')
+            this.$emit('myEventquizz')
         },
         vueInit() {
             this.dataUser = []
@@ -164,27 +174,24 @@ export default {
                 let nombre = '';
                 let tarea = '';
                 let nota = '';
-                let observar = '';
-                let comentario = '';
+                let responses = []
                 for (let i = 0; i < this.objectUser.length; i++) {
                     id = this.objectUser[i].usuario;
                     idTask = '0';
                     nombre = this.objectUser[i].name;
                     tarea = '';
                     nota = '';
-                    observar = '';
-                    comentario = '';
+                    responses = []
                     for (let j = 0; j < this.collects.entrega.length; j++) {
                         if (this.collects.entrega[j].idUser == id) {
                             idTask = this.collects.entrega[j]._id
                             tarea = this.collects.entrega[j].link;
-                            nota = this.collects.entrega[j].nota;
-                            observar = this.collects.entrega[j].observar
-                            comentario = this.collects.entrega[j].comentario
+                            nota = this.collects.entrega[j].puntage;
+                            responses = this.collects.entrega[j].responses;
                             break;
                         }
                     }
-                    this.dataUser.push({ id: id, tarea: tarea, idTask: idTask, nombre: nombre, nota: nota, observar: observar, comentario: comentario })
+                    this.dataUser.push({ id: id, tarea: tarea, idTask: idTask, nombre: nombre, nota: nota, responses: responses })
                 }
             }
         },
@@ -194,8 +201,9 @@ export default {
         changeNote(item) {
             this.subpanel = false;
             this.detalleTask = item;
-            this.model.nota = item.nota;
-            this.model.observar = item.observar;
+            let long = this.collects.surveys.length;
+            let not = parseInt(this.detalleTask.nota?this.detalleTask.nota:'0')
+            this.aprox = not = ((not*10)/long).toFixed(2)
             if (item.tarea == '') {
                 this.subpanel = true
             }
@@ -231,7 +239,8 @@ export default {
                                 for (let i = 0; i < this.dataUser.length; i++) {
                                     if (this.dataUser[i].id == this.detalleTask.id) {
                                         this.dataUser[i].nota = this.model.nota
-                                        this.dataUser[i].observar = this.model.observar
+                                        this.dataUser[i].responses = this.model.responses
+
                                     }
                                 }
                                 this._regresar();
@@ -269,29 +278,29 @@ export default {
                 });
         },
         dialogUpdate() {
-                    this.ifLoad = true;
-                    this.model2.nota = this.model.nota;
-                    this.model2.idUser = this.detalleTask.id;
-                    this.model2.observar = this.model.observar;
-                    this.$proxies._aulaProxi
-                        .sendTask(this.collects._id, this.model2) //-----------EDITAR CON AXIOS
-                        .then(() => {
-                            this.ifLoad = false;
-                            this.toast('Tarea calificada exitosamente');
-                            for (let i = 0; i < this.dataUser.length; i++) {
-                                if (this.dataUser[i].id == this.detalleTask.id) {
-                                    this.dataUser[i].nota = this.model.nota
-                                    this.dataUser[i].observar = this.model.observar
-                                }
-                            }
-                            this.model2.nota = ''
-                            this.model2.idUser = ''
-                            this._regresar();
-                        })
-                        .catch((err) => {
-                            console.log("Error", err);
-                            this.ifLoad = false;
-                        });
+            this.ifLoad = true;
+            this.model2.nota = this.model.nota;
+            this.model2.idUser = this.detalleTask.id;
+            this.model2.observar = this.model.observar;
+            this.$proxies._aulaProxi
+                .sendTask(this.collects._id, this.model2) //-----------EDITAR CON AXIOS
+                .then(() => {
+                    this.ifLoad = false;
+                    this.toast('Tarea calificada exitosamente');
+                    for (let i = 0; i < this.dataUser.length; i++) {
+                        if (this.dataUser[i].id == this.detalleTask.id) {
+                            this.dataUser[i].nota = this.model.nota
+                            this.dataUser[i].observar = this.model.observar
+                        }
+                    }
+                    this.model2.nota = ''
+                    this.model2.idUser = ''
+                    this._regresar();
+                })
+                .catch((err) => {
+                    console.log("Error", err);
+                    this.ifLoad = false;
+                });
         },
         getData() {
             this.$emit('getData');

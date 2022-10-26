@@ -16,18 +16,18 @@
                                         v-bind:style="{'background':colorsh[index]}">
                                         <span class="in-avatar text-center">
 
-                                            <b style="font-weight: 400;">{{item.fmateria.nombre.slice(0,2).toUpperCase()}}</b>
+                                            <b style="font-weight: 400;">{{item.fmateria? item.fmateria.nombre.slice(0,2).toUpperCase(): 'NA'}}</b>
                                           
                                         </span>
                                     </span>
                                     <div class="stack_stack__A16oG ms-3">
                                         <span class="cardTitle fuente"
-                                            style="font-size: 16px;margin-top: -5px;">{{item.fmateria.nombre}}</span>
+                                            style="font-size: 16px;margin-top: -5px;">{{item.fmateria? item.fmateria.nombre: 'Undefined'}}</span>
                                         <span class="tag fuente tag-purple">Curso activo</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{item.fnivel.nombre}}</p>
+                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{item.fnivel? item.fnivel.nombre: 'Undefined'}}</p>
                                 </div>
                                 <div>
                                     <span class="text-xs  fuente mt-2" style="color: #516f90 !important;">
@@ -66,12 +66,10 @@
             <Paginate v-if="displayedArticles.length" :numPages="numPages"  :page="page" :total="info.length" @pagechanged="onPageChange"></Paginate>
         </div>
         <div v-if="ifyoutuve">
-          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'0wermvL6wcQ'"/>
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'"/>
         </div>
         <div class="fixed-plugin" v-if="!$store.state.isAppMobile">
-    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
-      border-radius: 20px 20px 2px 20px;
-     box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px; box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
   </div> <br> <br>
@@ -85,6 +83,7 @@ import ActionRowHeader from "../../shared/ActionRowHeader"
 import NoFound from "../../shared/NoFound";
 import Paginate from "../../shared/Paginate"
 const arrayColors = [
+    "#8b3dff",
     "#0f71ae",
     "#1466c9",
     "#303d9d",
@@ -93,6 +92,7 @@ const arrayColors = [
     "#1976d3",
     "#874197",
     "#00b6d3",
+    "#8b3dff",
     "#0f71ae",
     "#1466c9",
     "#303d9d",

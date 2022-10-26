@@ -1,15 +1,17 @@
 <template>
   <div>
     <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
-      <div class="uGmi4w">
-        <div class="zCtFuA s-text-versel2" @click="$router.go(-1)">
-          <svg class="me-2" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision"
+      <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
+        <div class="" @click="$router.go(-1)">
+          <button class="btn btnNaranja2 mt-2">
+            <svg class="me-2" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="22" style="color: #000;">
+                viewBox="0 0 24 24" width="24" style="color: #000;">
                 <path d="M19 12H5"></path>
                 <path d="M12 19l-7-7 7-7"></path>
               </svg>
-          Atrás</div>
+          </button>
+         </div>
         <span class="WuKWng"></span>
       <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
         Tareas
@@ -119,10 +121,10 @@
           <ListTask :object="collectionTasks" :objectUser="collectionUser" @getDataTask="getData"/>
         </section>
         <section v-if="tabs == 1">
-          <ListQuizz :object="collectionQuizz" @getDataTask="getData"/>
+          <ListQuizz :object="collectionQuizz" :objectUser="collectionUser" @getDataTask="getData"/>
         </section>
         <section v-if="tabs == 2">
-         Foros
+          <h4 class="negros">En desarrollo</h4>
         </section>
         <section v-if="tabs == 3">
           <ListUsers :objectUser="collectionUser" @getDataTask="getData"/>

@@ -28,7 +28,7 @@ export default {
       subtitulo: 'none',
       iseliminaddo: false,
       isSearch: false,
-      rows: 7,
+      rows: 8,
       selected: [],
       allSelected: false,
       userIds: [],
@@ -69,13 +69,13 @@ export default {
     },
     refreshData: function () {
       this.ifCreateUpdate = false;
-      this.getAll(this.paginaActual, 7);
+      this.getAll(this.paginaActual, 8);
     },
     getAll(pag, lim) {
       this.isLoading = true;
       this.subtitulo = this.rows + ' filas por página';
       this.$proxies._registroProxi
-        .getAllDocentes(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+        .getAllDocentes(pag, lim) 
         .then((x) => {
           this.info = x.data.usuarios;
           this.pagg = x.data;
@@ -83,16 +83,13 @@ export default {
           this.paginas = this.pagg.paginas;
           this.totalNotas = this.pagg.total;
           this.isLoading = false;
-
         })
         .catch(() => {
-          console.log("Error imposible");
           this.isLoading = false;
         });
     },
 
     selectOne(ids) {
-
       if (!this.userIds.includes(ids)) {
         this.userIds.push(ids);
       } else {
@@ -144,11 +141,11 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 6);
+            this.getAll(this.paginaActual, 8);
             this.allSelected = false;
           })
           .catch(() => {
-            console.log("Error imposible");
+            this.iseliminaddo = false;
           });
       }
     },
@@ -183,19 +180,19 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 6);
+            this.getAll(this.paginaActual, 8);
           })
           .catch(() => {
-            console.log("Error imposible");
+            this.iseliminaddo = false;
           });
       }
     },
-    changeSearch(textSearch) { //queryUsuario
+    changeSearch(textSearch) { 
       if (textSearch.length > 3) {
         this.isSearch = true;
         this.isLoading = true;
         this.$proxies._registroProxi
-          .queryDocente(textSearch) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+          .queryDocente(textSearch) 
           .then((x) => {
             this.info = x.data;
             this.isLoading = false;
@@ -207,7 +204,7 @@ export default {
       }
     },
     salirBusqueda: function() {
-      this.getAll(1, 7);
+      this.getAll(1, 8);
       this.isSearch = false;
     },
     changedQuery(num) {
@@ -234,6 +231,6 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 7);
+    this.getAll(1, 8);
   },
 };

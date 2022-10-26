@@ -6,30 +6,33 @@
                 <section class="s-column1 croll">
                     <NoFound2 v-if="surveys.length == 0" />
                     <Encuesta v-else v-for="survey in surveys" :key="survey.id" :survey="survey"
-                        @removeQuiz="removeQuiz" />
+                        @removeQuiz="removeQuiz" @editQuizz="editQuizz" />
                 </section>
-                <section class="s-column2">
-                    <div class="exam-question-screen__content-area">
+                <section class="s-column2" style="background-color: rgb(64 87 109 / 7%);">
+                    <Spinner v-if="ifCambio" />
+                    <div v-else class="exam-question-screen__content-area croll " style="overflow-y: auto;">
                         <div v-if="isOptionQuizz == 0" class="mt-7">
                             <OptionQuizz @clickOption="clickOption" />
                         </div>
                         <div v-if="isOptionQuizz == 1" class="text-center ">
-                            <TrueOrFalse @addSurvey="pushSurvey($event)" />
+                            <TrueOrFalse @addSurvey="pushSurvey($event)" @editSurvey="editSurvey($event)"
+                                :arrayEdit="arrayEdit" />
                         </div>
                         <div v-if="isOptionQuizz == 2" class="text-center ">
-                            <AgregarEncuesta @addSurvey="pushSurvey($event)" />
+                            <AgregarEncuesta @addSurvey="pushSurvey($event)" :arrayEdit="arrayEdit"
+                            @editSurvey="editSurvey($event)"/>
                         </div>
                         <div v-if="isOptionQuizz == 3" class="text-center">
-                            <SelectMany @addSurvey="pushSurvey($event)" />
+                            <SelectMany @addSurvey="pushSurvey($event)" :arrayEdit="arrayEdit"/>
                         </div>
                     </div>
                 </section>
             </div>
         </template>
-         <template v-slot:footer>
-           <a href="javascript:;" @click="clickOption(0)" class="btn btn-vercel-white">Cambiar pregunta</a>
-                        <a href="javascript:;" @click="save" class="btn btn-vercel ms-3">Finalizar con
-                            ({{ surveys.length }}) preguntas</a>
+        <template v-slot:footer>
+            <button href="javascript:;" @click="clickOption(0)" class="btn btnNaranja2">Cambiar pregunta</button>
+            <button href="javascript:;" @click="save" class="btn btnNaranja ms-3">Finalizar con
+                ({{ surveys.length }}) preguntas</button>
         </template>
     </ScrimModal>
 </template>
@@ -41,14 +44,15 @@ import Encuesta from "./component/Encuesta";
 import OptionQuizz from "./component/OptionQuizz.vue";
 import TrueOrFalse from "./component/TrueOrFalse.vue";
 import SelectMany from "./component/SelectMany.vue";
-import NoFound2 from "../../../shared/NoFound2"
+import NoFound2 from "../../../shared/NoFound"
+import Spinner from "../../../shared/Spinner"
 export default {
     name: "CreateQuizz",
     props: {
         id: String,
     },
     components: {
-        ScrimModal, AgregarEncuesta, Encuesta, OptionQuizz, TrueOrFalse, SelectMany, NoFound2
+        ScrimModal, AgregarEncuesta, Encuesta, OptionQuizz, TrueOrFalse, SelectMany, NoFound2, Spinner
     },
     data() {
         return {
@@ -61,6 +65,8 @@ export default {
                 reqq: [],
                 tipo: 0
             },
+            arrayEdit: [],
+            ifCambio: false,
         }
     },
     methods: {
@@ -76,12 +82,15 @@ export default {
                     this.isOptionQuizz = 0;
                     break;
                 case 1:
+                    this.arrayEdit = []
                     this.isOptionQuizz = 1;
                     break;
                 case 2:
+                    this.arrayEdit = []
                     this.isOptionQuizz = 2;
                     break;
                 case 3:
+                    this.arrayEdit = []
                     this.isOptionQuizz = 3;
                     break;
                 default:
@@ -92,8 +101,44 @@ export default {
             this.surveys.push(survey);
             this.clickOption(0);
         },
+        editSurvey(obj) {
+            console.log(obj)
+            for (var i in this.surveys) {
+                if (this.surveys[i].id == obj.id) {
+                    this.surveys[i] = obj;
+                    break; 
+                }
+            }
+            console.log(this.surveys)
+            this.clickOption(0);
+        },
         removeQuiz(id) {
             this.surveys = removeFunction(this.surveys, "id", id)
+        },
+        editQuizz(array) {
+            this.ifCambio = true;
+            this.isOptionQuizz = 0;
+            console.log(array)
+            console.log(this.surveys)
+            this.arrayEdit = []
+            this.arrayEdit = this.surveys.filter((x) => x.id == array)
+            if (this.arrayEdit.length > 0) {
+                if (this.arrayEdit[0].tipo==1) setTimeout(() => this.openTrueOfFalse(), 300);
+                if (this.arrayEdit[0].tipo==2) setTimeout(() => this.openSelectOne(), 300);
+                if (this.arrayEdit[0].tipo==3) setTimeout(() => this.openMany(), 300);
+            }
+        },
+        openTrueOfFalse: function() {
+            this.isOptionQuizz = 1
+            this.ifCambio = false;
+        },
+        openSelectOne: function() {
+            this.isOptionQuizz = 2
+            this.ifCambio = false;
+        },
+        openMany: function() {
+            this.isOptionQuizz = 3
+            this.ifCambio = false;
         },
         getData() {
             this.$emit('getData');
@@ -145,39 +190,3 @@ function removeFunction(myObjects, prop, valu) {
 }
 
 </script>
- <style >
- .s-column1 {
-     /* background-color: rgb(245, 248, 250); */
-     border-right: 1px solid rgb(203, 214, 226);
-     max-width: 300px;
-     min-width: 300px;
-     height: calc(100vh - 126px);
-     flex: 1 1 0%;
-     overflow-y: auto;
- }
- 
- .s-column2 {
-     flex: 1 1 0%;
-     min-width: 320px;
- }
- 
- .exam-question-screen__content-area {
-     padding: 21px 42px;
-     background-color: #eaf0f6;
-     min-height: 476.875px;
- }
- 
- .s-font {
-     font-weight: 400 !important;
- }
- 
- .s-icon {
-     font-size: 30px !important;
- }
- 
-
- 
- .s-input {
-     background-color: #fff !important;
- }
- </style>

@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  fixed-start croll" id="sidenav-main"
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  fixed-start croll " id="sidenav-main"
     style="background-color: white !important; margin-top: 2.2rem!important;overflow-x: hidden;overflow-y: auto;">
     <div class="sidenav-header">
 
@@ -54,7 +54,7 @@
                   <span class="sidenav-normal letras fuente">Perfil </span>
                 </router-link>
               </li>
-
+            
             </ul>
           </div>
         </li>
@@ -99,7 +99,7 @@
         </li>
         <li class="nav-item" v-if="user.roles.includes('Admin')||user.roles.includes('Vicerrector')" id="step_3">
           <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link "
-            :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '1234'}"
+            :class="{'actived': $route.name === '1111'||$route.name === '2222'||$route.name === '3333'||$route.name === '1234'}"
             aria-controls="applicationsExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
               <svg class="icons"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19.5 10V5a.5.5 0 0 0-.5-.5h-4.5V10h5zm0 1.5h-5v8H19a.5.5 0 0 0 .5-.5v-7.5zm-6.5-7H5a.5.5 0 0 0-.5.5v14c0 .28.22.5.5.5h8v-15zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2z"></path></svg>
@@ -108,7 +108,7 @@
           </a>
           <div class="collapse " :class="{'show':
           $route.name === '1111'||$route.name === '1234'||
-          $route.name === '2222'}" id="applicationsExamples">
+          $route.name === '2222' ||$route.name === '3333'}" id="applicationsExamples">
             <ul class="nav ms-4 ps-3">
               <li :class="{'active': $route.name === '1111'}" class="nav-item " v-if="user.roles.includes('Admin')">
                 <router-link to="/Cursos" :class="{'active': $route.name === '1111'}" class="nav-link ">
@@ -122,15 +122,18 @@
                   <span class="sidenav-normal letras fuente">Materias </span>
                 </router-link>
               </li>
-              <li :class="{'active': $route.name === '2222'}" class="nav-item ">
+              <li :class="{'active': $route.name === '2222'}" class="nav-item "  v-if="user.roles.includes('Admin')">
                 <router-link to="/Distributivo-v1" :class="{'active': $route.name === '2222'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> D </span>
                   <span class="sidenav-normal letras fuente">Distributivo </span>
                 </router-link>
               </li>
-
-
-
+              <li :class="{'active': $route.name === '3333'}" class="nav-item ">
+                <router-link to="/planificacion" :class="{'active': $route.name === '3333'}" class="nav-link ">
+                  <span class="sidenav-mini-icon"> P </span>
+                  <span class="sidenav-normal letras fuente">Planificaciones </span>
+                </router-link>
+              </li>
             </ul>
           </div>
         </li>
@@ -141,7 +144,7 @@
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
               <svg class="icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="_775853201__a" d="M13 7h7c1.1 0 2 .83 2 1.86v9.28c0 1.03-.9 1.86-2 1.86H4c-1.1 0-2-.83-2-1.86V8.86c0-.14.02-.28.05-.42A2 2 0 0 1 2 8V6c0-1.1.9-2 2-2h6.56a2 2 0 0 1 1.9 1.37L13 7zm-1.58 0-.39-1.16a.5.5 0 0 0-.47-.34H4a.5.5 0 0 0-.5.5v1.06c.16-.04.33-.06.5-.06h7.42zM4 8.5c-.3 0-.5.19-.5.36v9.28c0 .17.2.36.5.36h16c.3 0 .5-.19.5-.36V8.86c0-.17-.2-.36-.5-.36H4z"></path></defs><use fill="currentColor" fill-rule="nonzero" xlink:href="#_775853201__a"></use></svg>
             </div>
-            <span class="nav-link-text ms-1 mt-1">Matriculas</span>
+            <span class="nav-link-text ms-1 mt-1">Módulo matricula</span>
           </a>
           <div class="collapse " id="ecommerceExamples" :class="{'show':
                     $route.name === '11'||
@@ -358,7 +361,10 @@
                 Cerrar sesión
               </span>
             </a>
+            <div class="form-check form-switch " style="padding-left: 1.6rem !important;;">
+<input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
 
+</div>
           </li>
         </div>
         <div v-if="visibl">

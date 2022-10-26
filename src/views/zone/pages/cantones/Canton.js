@@ -39,7 +39,7 @@ export default {
            iseliminaddo : false,
            isCarga: false,
            visible: false,
-           rows: 7,
+           rows: 8,
            allSelected: false,
            isSearch: false,
         }
@@ -88,27 +88,36 @@ export default {
                   this.ifLoad = true;
                   this.model.prov = this.model.fkProvincia._id;
                   this.model.fkProvincia = this.model.fkProvincia.nombre;
+                  this.model.nombre = this.model.nombre.trim();
                   this.$proxies._zonasProxi.updateCanton(this.model._id, this.model)
                     .then(() => {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(this.pagina,7); 
+                      this.getAll(this.pagina,8); 
                     })
-                    .catch(() => {
-                      console.log("Error")
+                    .catch((error) => {
+                      this.ifLoad = false;
+                    if(error.response){
+                      if(error.response.status==500){
+                        this.MsmError = "Error "+ this.model.nombre + " ya esta registrado"
+                      }
+                    }else{
+                      console.log('Error', error.message); 
+                    }
                     });    
                 }else{
                   this.ifLoad = true;
                   this.model.prov = this.model.fkProvincia._id;
                   this.model.fkProvincia = this.model.fkProvincia.nombre;
-                  this.$proxies._zonasProxi.createCanton(this.model) //-----------GUARDAR CON AXIOS
+                  this.model.nombre = this.model.nombre.trim();
+                  this.$proxies._zonasProxi.createCanton(this.model)
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(this.pagina,7); 
+                    this.getAll(this.pagina,8); 
                   })
-                  .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
+                  .catch((error) => {
                     this.ifLoad = false;
                     if(error.response){
                       if(error.response.status==500){
@@ -132,7 +141,6 @@ export default {
                     this.model = x.data;
                     this.isCarga = false; 
                 }).catch(() => {
-                    console.log("Error")
                     this.isCarga = false; 
                 });
             }
@@ -148,13 +156,12 @@ export default {
                   this.isLoading = false;
                 })
                 .catch(() => {
-                  console.log("Error imposible");
                   this.isLoading = false;
                 });
             }
           },
           salirBusqueda: function() {
-            this.getAll(1, 6);
+            this.getAll(1, 8);
             this.isSearch = false;
           },
           changedQuery(num) {
@@ -214,11 +221,11 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.isSelecUsers = [];
-                  this.getAll(this.pagina, 7);
+                  this.getAll(this.pagina, 8);
                   this.allSelected= false;
                 })
                 .catch(() => {
-                  console.log("Error imposible");
+                  this.iseliminaddo = false;
                 });
             }
           },
@@ -253,7 +260,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 7);
+                  this.getAll(this.pagina, 8);
                 })
                  .catch(() => {
                    console.log("Error imposible");
@@ -294,7 +301,7 @@ export default {
     created() {
       this.verificarUsuario();
           this.getListProv();
-          this.getAll(1,7);
+          this.getAll(1,8);
       },
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
         'model.nombre'(value) {

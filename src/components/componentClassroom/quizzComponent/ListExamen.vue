@@ -71,7 +71,10 @@ export default {
      
       let array = this.object.filter((x) => x._id == item)
       if (array.length > 0) {
-       this.$dialog
+        if (array[0].security=='') {
+          this.clickComnitnue(array[0]);
+        } else {
+          this.$dialog
         .prompt(
           {
             title: "Llenar cuestionario",
@@ -101,6 +104,7 @@ export default {
         })
         .catch(() => {
         });
+        }
       }
     },
     clickComnitnue(objects){

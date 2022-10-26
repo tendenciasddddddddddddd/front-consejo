@@ -12,8 +12,8 @@
           <section v-else >
             <div v-if="filtros.length" >
               <div class="row mt-3" >
-                <div class="col-lg-6 " style="height: calc(100vh - 210px);" >
-                  <div class="input-group" style="margin-bottom: 7px;">
+                <div class="col-lg-6 " style="height: calc(100vh - 235px);" >
+                  <div class="input-group mb-3" style="margin-bottom: 7px;">
                     <span class="input-group-text negros buscador busca">
                       <svg style=" margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
                     </span>
@@ -27,7 +27,7 @@
                   </ag-grid-vue>
                 </div>
                
-                <div class="col-lg-6 "  style="height: calc(100vh - 210px);">
+                <div class="col-lg-6 "  style="height: calc(100vh - 235px);">
                   <div class="d-flex justify-content-start">
                     <div v-for="ite in paralelos" :key="ite.id">
                       <div class="form-check  me-2">
@@ -37,32 +37,16 @@
                           {{ ite.nombre }}</span>
                       </div>
                     </div>
-                    <a v-on:click="save()" role="button" class="tamanio  ms-3 me-2">
-                    <svg style=" margin-top: -3px;" class="center-icon"  data-testid="geist-icon" fill="none" height="18"
-                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18">
-                      <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
-                      <path d="M17 21v-8H7v8"></path>
-                      <path d="M7 3v5h8"></path>
-                    </svg>
-                      <b class="links ms-1 gordo">Guardar</b> 
-                  </a>
-                  <a v-on:click="onRemoveSelected2()" role="button" class="tamanio "
-                    v-tooltip.top-center="'Elimine paralelos selecionados'"> &nbsp;&nbsp; 
-                    <svg style=" margin-top: -3px;" class="center-icon" data-testid="geist-icon" fill="none" height="18"
-                      shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                      stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" >
-                      <path d="M3 6h18"></path>
-                      <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
-                      <path d="M10 11v6"></path>
-                      <path d="M14 11v6"></path>
-                    </svg>
-                   <b class="links ms-1 gordo">Eliminar asignados</b> 
-                  </a>
+                    <button v-on:click="save()" role="button" class="btn btnNaranja  ms-3 me-2">
+                    Guardar
+                    </button>
+                  <button v-on:click="onRemoveSelected2()" role="button" class="btn btnNaranja2">
+                   <b >Eliminar asignados</b> 
+                  </button>
                     <div>
                     </div>
                   </div>
-                  <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine mt-3"
+                  <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine mt-2"
                     :defaultColDef="defaultColDef" rowSelection="multiple" :getRowId="getRowId" :rowDragManaged="true"
                     :animateRows="true" :rowDragMultiRow="true" :suppressRowClickSelection="true"
                     :groupDisplayType="groupDisplayType" :rowData="topRowData" :columnDefs="topColumns"

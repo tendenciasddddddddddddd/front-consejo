@@ -1,4 +1,3 @@
-//import Paginacion from '../../../shared/Paginacion'
 import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner";
@@ -8,7 +7,7 @@ export default {
   name: "Users",
   components: {
     Spinner,
-    AddUser : () => import( /* webpackChunkName: "AddUser" */ './components/AddUser.vue'),
+    AddUser: () => import( /* webpackChunkName: "AddUser" */ './components/AddUser.vue'),
     Paginate2,
     ActionsRow
   },
@@ -30,7 +29,7 @@ export default {
         nombres: null,
         apellidos: null,
         cedula: null,
-        foto: 'https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp',
+        foto: 'https://res.cloudinary.com/dvpp08pji/image/upload/v1666453688/avatar_didazq.webp',
         status: null,
         telefono: null,
         updatedAt: null,
@@ -54,7 +53,7 @@ export default {
   },
   computed: {
     resultQuery() {
-      if (this.searchQuery.length>1) {
+      if (this.searchQuery.length > 1) {
         return this.listbuscador.filter((item) => {
           return this.searchQuery
             .toLowerCase()
@@ -69,7 +68,7 @@ export default {
     verificarUsuario() {
       let text_1 = 'Administración'
       let text_2 = 'Usuarios'
-      this.$store.commit('updateHeader',{text_1, text_2})
+      this.$store.commit('updateHeader', { text_1, text_2 })
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
       }
@@ -78,7 +77,7 @@ export default {
       this.isLoading = true;
       this.subtitulo = lim + " filas por página";
       this.$proxies._usuarioProxi
-        .getAll(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+        .getAll(pag, lim)
         .then((x) => {
           this.info = x.data.usuarios;
           this.pagg = x.data;
@@ -88,37 +87,35 @@ export default {
           this.isLoading = false;
         })
         .catch(() => {
-          console.log("Error imposible");
           this.isLoading = false;
         });
     },
 
     selectOne(ids) {
-      
       if (!this.userIds.includes(ids)) {
         this.userIds.push(ids);
       } else {
         this.userIds.splice(this.userIds.indexOf(ids), 1);
       }
     },
-    selectAll: function() {
-      this.allSelected= true;
+    selectAll: function () {
+      this.allSelected = true;
       this.userIds = [];
       if (this.allSelected) {
         for (let user in this.info) {
           this.userIds.push(this.info[user]._id);
         }
-      } 
+      }
     },
-    deletedSelected: function() {
-      this.allSelected= false;
+    deletedSelected: function () {
+      this.allSelected = false;
       this.userIds = [];
     },
     changedQuery(num) {
       this.getAll(1, num);
     },
     onPageChange(page) {
-      this.getAll(page, 7);
+      this.getAll(page, 8);
     },
     remove() {
       let message = {
@@ -140,7 +137,7 @@ export default {
             this.toast("Se elimino a usuarios de sistema con su cuenta");
           }, 1000);
         })
-        .catch(function() {});
+        .catch(function () { });
     },
     dialogDelete() {
       this.iseliminaddo = true;
@@ -154,7 +151,7 @@ export default {
             this.getAll(this.paginaActual, 6);
           })
           .catch(() => {
-            console.log("Error imposible");
+            this.iseliminaddo = false;
           });
       }
     },
@@ -172,89 +169,89 @@ export default {
         },
       });
     },
-    changeSearch(textSearch) {//queryUsuario
-        if (textSearch.length > 3) {
-          this.isSearch = true;
-          this.isLoading = true;
-          this.$proxies._usuarioProxi
-            .queryUsuario(textSearch) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
-            .then((x) => {
-              this.info = x.data;
-              this.isLoading = false;
-            })
-            .catch(() => {
-              console.log("Error imposible");
-              this.isLoading = false;
-            });
-        }
+    changeSearch(textSearch) {
+      if (textSearch.length > 3) {
+        this.isSearch = true;
+        this.isLoading = true;
+        this.$proxies._usuarioProxi
+          .queryUsuario(textSearch)
+          .then((x) => {
+            this.info = x.data;
+            this.isLoading = false;
+          })
+          .catch(() => {
+            this.isLoading = false;
+          });
+      }
     },
-    
-    desactiveState(){//activateNivel
-      let message = {
-        title: "¿Cambiar el estado?",
-        body: " Esta acción cambiara el estado del usuario",
-      };
-      let options = {
-        loader: true,
-        okText: "Continuar",
-        cancelText: "Cancelar",
-        animation: "bounce",
-      };
-      this.$dialog
-        .confirm(message, options)
-        .then((dialog) => {
-          this.dialogState();
-          setTimeout(() => {
-            dialog.close();
-            this.toast("Se cambio el estado del registro");
-          }, 600);
-        })
-        .catch(function() {});
+
+    desactiveState() {
+      if (this.userIds.length == 1) {
+        let message = {
+          title: "¿Cambiar el estado?",
+          body: " Esta acción cambiara el estado del usuario",
+        };
+        let options = {
+          loader: true,
+          okText: "Continuar",
+          cancelText: "Cancelar",
+          animation: "bounce",
+        };
+        this.$dialog
+          .confirm(message, options)
+          .then((dialog) => {
+            this.dialogState();
+            setTimeout(() => {
+              dialog.close();
+              this.toast("Se cambio el estado del registro");
+            }, 600);
+          })
+          .catch(function () { });
+      } else {
+        this.$dialog.alert("::: Seleccione un campo para continuar :::");
+      }
     },
     dialogState() {
       if (this.userIds.length > 0) {
-        let reg = this.info.filter((x)=> x._id == this.userIds[0]);
+        let reg = this.info.filter((x) => x._id == this.userIds[0]);
         let state = reg[0].status == 1 ? 0 : 1;
         this.$proxies._usuarioProxi
-         .activateUsers(this.userIds, state)
+          .activateUsers(this.userIds, state)
           .then(() => {
             this.iseliminaddo = false;
-           this.userIds = [];
-            this.getAll(this.paginaActual, 6);
+            this.userIds = [];
+            this.getAll(this.paginaActual, 8);
           })
-           .catch(() => {
-             console.log("Error imposible");
-           });
+          .catch(() => {
+            this.iseliminaddo = false;
+          });
       }
     },
-    salirBusqueda: function() {
-      this.getAll(1, 7);
+    salirBusqueda: function () {
+      this.getAll(1, 8);
       this.isSearch = false;
     },
-    openChildUser: function() {
-        let aux = this.userIds.length;
-        if (aux===1) {
-            this.idUser = this.userIds[0];
-            this.ifCreateUpdate = true;
-        }
-    },
-    openChildUser2: function() {
-        this.idUser = null;
+    openChildUser: function () {
+      let aux = this.userIds.length;
+      if (aux === 1) {
+        this.idUser = this.userIds[0];
         this.ifCreateUpdate = true;
+      }
     },
-    closedChildUser: function() {
-        this.ifCreateUpdate = false;
+    openChildUser2: function () {
+      this.idUser = null;
+      this.ifCreateUpdate = true;
     },
-    refreshUser : function() {
-        this.ifCreateUpdate = false;
-        this.getAll(this.paginaActual, 6);
+    closedChildUser: function () {
+      this.ifCreateUpdate = false;
     },
-    openModal() {
-      this.$dialog.alert('LA GRILLA ES PARA EL INGRESO DE DOCENTES Y ESTUDIANTES');
+    refreshUser: function () {
+      this.ifCreateUpdate = false;
+      this.getAll(this.paginaActual, 6);
     },
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 7);
+    this.getAll(1, 8);
   },
 };

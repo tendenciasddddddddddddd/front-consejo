@@ -15,7 +15,7 @@
         </fullscreen>
        
         <div v-if="iftask">
-            <ReportConducta @EventClosed="closed" @getData="getDataAll" :rowData="rowData"
+            <ReporteProyectos @EventClosed="closed" @getData="getDataAll" :rowData="rowData"
                 @changeStatus="changeStatus" />
         </div>
     </div>
@@ -126,7 +126,7 @@ export default {
     },
     components: {
         AgGridVue, ActionRowNotas,Astronauta ,
-        ReportConducta: () => import( /* webpackChunkName: "ReportConducta" */ "./ReportConducta.vue"),
+        ReporteProyectos: () => import( /* webpackChunkName: "ReporteProyectos" */ "./ReporteProyectos.vue"),
     },
     created() {
         this.rowSelection = 'multiple';
@@ -147,9 +147,10 @@ export default {
             this.gridColumnApi = params.columnApi;
         },
         onGridReadys() {
+            console.log(this.object)
             var anArray = [];
             for (let i = 0; i < this.object.length; i++) {
-                const quim = this.object[i].comportamiento;
+                const quim = this.object[i].proyectos;
                     var objeto = {
                         id: this.object[i].id,
                         fora: this.object[i].fora,
@@ -198,7 +199,7 @@ export default {
                 result.push({
                     id: element.id,
                     fora: element.fora,
-                    comportamiento: [
+                    proyectos: [
                         { p1: element.p1, p2 : element.p2},
                         { p1: element.p3, p2 : element.p4}
                     ]
@@ -207,11 +208,11 @@ export default {
             }
              this.ifsaved = true;
              this.$proxies._notasProxi
-                 .updateComportamiento(this.$route.params.id, result)
+                 .updateProyectos(this.$route.params.id, result)
                  .then(() => {
                      this.ifsaved = false;
                      this.getDataAll();
-                     this.toast("Se guardo las notas de comportamiento con exito");
+                     this.toast("Se guardo las notas de proyectos con exito");
                  })
                  .catch(() => {
                      this.$dialog.alert("No se puede completar la operación");

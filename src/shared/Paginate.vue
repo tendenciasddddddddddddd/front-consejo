@@ -2,7 +2,7 @@
   <ul class="pagination pagination-dark justify-content-center mt-4">
     <li class="page-item">
       <a
-        class="tamanio links paginates me-3"
+        class="tamanio links2 paginates me-3"
         :class="{ inactivo: pages == 1 }"
         @click="onClickPreviousPage"
       >
@@ -35,7 +35,7 @@
         :class="{
           inactivo: pages == numPages || numPages == 0,
         }"
-        class="tamanio links paginates ms-3"
+        class="tamanio links2 paginates ms-3"
         @click="onClickNextPage"
       >
         <b class="me-2 gordo">Siguiente</b>

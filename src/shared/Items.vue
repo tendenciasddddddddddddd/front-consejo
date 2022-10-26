@@ -38,7 +38,8 @@
   </div>
 </template>
 
-<script>import TimeEgo from "../shared/TimeEgo";
+<script>
+import TimeEgo from "../shared/TimeEgo";
 export default {
   name : 'Items',
   props: { item: Object, index: Number, isSelecUser: Array, },

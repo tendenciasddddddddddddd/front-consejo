@@ -11,11 +11,11 @@
                     <path d="M10 11v6"></path>
                     <path d="M14 11v6"></path>
                 </svg>
-                <b class=" me-2 links gordo">Quitar este archivo</b>
+                <b class=" me-2 links2 gordo">Quitar este archivo</b>
             </a>
         </div>
         <vue-dropzone class="mt-1"
-            style="height:180px;background-color: rgb(245, 248, 250);border: 1px dashed rgb(81, 111, 144);border-radius: 4px;color: rgb(124, 152, 182);"
+            style="height:280px;background-color: rgb(245, 248, 250);border: 1px dashed rgb(81, 111, 144);border-radius: 4px;color: rgb(124, 152, 182);"
             ref="dropzone" @vdropzone-success="afterComplete" @vdropzone-upload-progress="dropzoneUploadProgress" id="drop1" :options="dropOptions">
         </vue-dropzone>
         <astronauta2 v-if="ifLoad"/>
@@ -37,8 +37,8 @@ export default {
             dropOptions: {
                 url: "https://httpbin.org/post",
                 dictDefaultMessage: `
-        <img alt='Image placeholder' style='padding-top:-12px;' height='130px;' class='mx-4 mt-n6' src='${image}'>
-        <p class='text-sm  links2'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
+        <img alt='Image placeholder' style='height:130px;margin-top: 1px !important;' class='mx-4 mt-n6' src='${image}'>
+        <p class='text-sm gordo mt-2 links2'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
         `,
                 maxFilesize: 2,
                 maxFiles: 1,

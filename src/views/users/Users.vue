@@ -3,7 +3,7 @@
     
     <div >
        
-       <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildUser" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openModal"/>
+       <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildUser" @desactiveState="desactiveState" @changeSearch="changeSearch"/>
         <Spinner v-if="isLoading"></Spinner>
         <div v-else>
           <div class="table-responsive mt-1" v-if="viewtable === 1">

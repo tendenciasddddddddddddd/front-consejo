@@ -41,6 +41,10 @@ export default class NotasProxi {
         return this.axios.put(this.url + `/notas/createComportamiento/${id}`, params); //GUARADRA NOTA DE COMPORTAMIENTO
     }
 
+    updateProyectos(id, params) {
+        return this.axios.put(this.url + `/notas/createProyectos/${id}`, params); //GUARADRA NOTA DE COMPORTAMIENTO
+    }
+
     deleteAllNote(id, params) {
         return this.axios.put(this.url + `/notas/deleteallnote/${id}`, params); //confirmfullnote
     }

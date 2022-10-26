@@ -33,27 +33,23 @@ export default {
       ifcarga: false,
       
       model: {
-        //-----------VARIABLES DEL MODELO A GUARDAR
         _id: null,
-        username: null,
         email: null,
         password: null,
         nombres: null,
         apellidos: null,
         cedula: null,
-        foto: "https://res.cloudinary.com/dvpp07pji/image/upload/v1665121545/profile_p23jj9.png",
+        foto: "https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp",
         typo: "DOCS",
         telefono: null,
         updatedAt: null,
         role: null,
         fullname: null,
-        ////////////////////////////////
         sexo: '',
         fketnia: '',
         fknacionalidad: '',
         fkparroquia: null,
         titulo: null,
-
       },
       listNacionalidad: {},
       isNacion: false,
@@ -81,7 +77,6 @@ export default {
   },
   methods: {
     listEtnias() {
-      //-----------TRAE LA LISTA DE LOS ROLES
       this.isEtnia = true;
       this.$proxies._registroProxi
         .getEtnias()
@@ -89,8 +84,7 @@ export default {
           this.listEtnia = x.data.datas;
           this.isEtnia = false;
         })
-        .catch((err) => {
-          console.log("Error", err);
+        .catch(() => {
           this.isEtnia = false;
         });
     },
@@ -102,14 +96,11 @@ export default {
           this.listNacionalidad = x.data.datas;
           this.isNacion = false;
         })
-        .catch((err) => {
-          console.log("Error", err);
+        .catch(() => {
           this.isNacion = false;
         });
     },
     get() {
-      //-----------EN CASO DE QUE SE QUIERA EDITAR EL ID TIENE UN VALOR Y HACE UNA CONSULTA GET
-      
       if (this.idKey) {
         this.popular ="Editar Docente"
         this.ifcarga = true;
@@ -120,41 +111,41 @@ export default {
             this.ifcarga = false;
           })
           .catch(() => {
-            console.log("Error");
+            this.ifcarga = false;
           });
       }
     },
     save() {
-      //-----------BOTTON DE GUADAR TIENE VALIDAR Y SI EL ID ES NULL ENTONCES GUARDA
       this.$validate().then((success) => {
-        //METODO PARA GUARDAR
         if (!success) {
           this.toast('Por favor llena correctamente los campos solicitados');
           return;
         }
         if (this.model._id) {
-          //-----------SI EL ID TIENE VALOR ENTONCES ES EDITAR
           this.ifLoad = true;
+          this.model.apellidos = this.model.apellidos.trim();
+          this.model.nombres = this.model.nombres.trim();
+          this.model.cedula = this.model.cedula.trim();
           this.model.sexo = this.model.sexo.nombre;
           this.model.fkparroquia = this.model.fkparroquia.nombre;
           this.model.fknacionalidad = this.model.fknacionalidad.nombre;
           this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
-            .updateDocentes(this.model._id, this.model) //-----------EDITAR CON AXIOS
+            .updateDocentes(this.model._id, this.model) 
             .then(() => {
               this.ifLoad = false;
-              //this.router.go('/usuarios/Usuario')
               this.$emit('clickDocente')
             })
-            .catch((err) => {
-              console.log("Error", err);
+            .catch(() => {
+              this.toast("CEDULA DUPLICADA");
               this.ifLoad = false;
             });
         } else {
-          //-----------DE LO CONTRARIO ENTRA A SER UN DOCUMENTO NUEVO
           this.ifLoad = true;
-          this.model.username = this.model.cedula;
+          this.model.apellidos = this.model.apellidos.trim();
+          this.model.nombres = this.model.nombres.trim();
+          this.model.cedula = this.model.cedula.trim();
           this.model.password = this.__getPasswods(
             this.model.apellidos,
             this.model.cedula
@@ -165,13 +156,12 @@ export default {
             this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
-            .createDocentes(this.model) //-----------GUARDAR CON AXIOS
+            .createDocentes(this.model)
             .then(() => {
               this.ifLoad = false;
               this.$emit('clickDocente')
             })
             .catch((error) => {
-              //-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
               this.ifLoad = false;
               if (error.response) {
                 if (error.response.status == 400) {
@@ -200,7 +190,6 @@ export default {
         });
     },
     __getPasswods(apell, ced) {
-      //-----------CREA LA CONTRASEÑAS PARA LOS USUARIOS EJMPLO {M1004095632}
       let l = apell.toLowerCase().charAt(0);
       let result = l + ced;
       return result;
@@ -250,7 +239,6 @@ export default {
   },
 
   validators: {
-    //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
     "model.cedula"(value) {
       return this.$validator
         .value(value)

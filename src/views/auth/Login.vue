@@ -26,7 +26,7 @@
                         </div>
 
                         <span class="parrafo mt-2">Contraseña
-                          <span class="ms-2" style="cursor: pointer;"><i @click="toggleShow" class="fas"
+                          <span style="font-size: 17px;cursor: pointer;" class="ms-2"><i @click="toggleShow" class="fas"
                               :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
 
                         </span>
@@ -37,7 +37,7 @@
                             class="form-control buscador fuente"  aria-label="Password"
                             required />
                         </div>
-                        <a @click="isVisible = 'passw'" href="javascript:;" class="tamanio links ">
+                        <a @click="isVisible = 'passw'" href="javascript:;" class="tamanio links2 gordo">
                           <b class="gordo">Olvidé mi contraseña</b>
                         </a>
                         <div class="form-check form-switch mt-2">

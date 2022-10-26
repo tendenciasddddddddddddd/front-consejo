@@ -1,30 +1,24 @@
 <template>
   <div>
-    <AlertHeader :firsttext="'Gestionar matricula'" :lasttext="'Crea, edita, elimina y filtra'"></AlertHeader>
     <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets"
       @desactiveState="desactiveState" />
-
     <Spinner v-if="isLoading"></Spinner>
     <div v-else class="table-responsive mt-1">
       <table class="dataTable-table table s-table-flush">
         <thead class="thead-light">
           <tr class="cabeza">
             <th style="background-color: rgb(234, 240, 246); ">
-                   <div  class="d-flex ms-3">
-                      <div v-if="!allSelected " class="form-check " style="min-height: 0rem;">
-                        <input
-                          class="form-check-input cheka"
-                          type="checkbox"
-                          @click="selectAll"
-                        />
-                      </div>
-                       <i @click="deletedSelected" v-else  class="fa fa-minus s-icon-all" aria-hidden="true"></i>
-                      <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
-                        Periodo
-                      </span>
-                    </div>
-                    
-                  </th>
+              <div class="d-flex ms-3">
+                <div v-if="!allSelected " class="form-check " style="min-height: 0rem;">
+                  <input class="form-check-input cheka" type="checkbox" @click="selectAll" />
+                </div>
+                <i @click="deletedSelected" v-else class="fa fa-minus s-icon-all" aria-hidden="true"></i>
+                <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                  Periodo
+                </span>
+              </div>
+
+            </th>
             <th class="text-uppercase text-center text-xxs font-weight-bolder">
               Fecha modicado
             </th>
@@ -48,7 +42,7 @@
               </div>
             </td>
             <td class="text-sm text-center text-dark fuente">
-              {{ item.updatedAt.substring(0, 10) }}
+              {{ item.updatedAt }}
             </td>
             <td class="text-sm text-center font-weight-normal">
               <span class="icon">
@@ -67,7 +61,9 @@
       <template v-slot:body>
         <Spinner v-if="isCarga"></Spinner>
         <form @submit.prevent="save" role="form" id="prov">
-          <p class="text-danger text-center fuente ">{{ MsmError }}</p>
+          <div v-if="MsmError!=''" class="is-error">
+            <span class="text-sm negros gordo">{{ MsmError }}</span>
+          </div>
           <span class="parrafo mb-2">Nombre de Periodo</span>
           <CustomInput v-model="model.nombre" />
           <p class="mb-2 text-xs fuente text-danger">
@@ -76,14 +72,12 @@
         </form>
       </template>
       <template v-slot:acccion>
-            <ButtonLoading v-if="ifLoad"/>
-                      <button form="prov" v-else type="submit" class="btn btnNaranja mt-2" >
-                        {{ model._id ? "Actualizar periodo" : "Guardar periodo" }}
-                      </button>
-         </template>
+        <ButtonLoading v-if="ifLoad" />
+        <button form="prov" v-else type="submit" class="btn btnNaranja mt-2">
+          {{ model._id ? "Actualizar periodo" : "Guardar periodo" }}
+        </button>
+      </template>
     </Modal>
   </div>
 </template>
-
 <script src="./Periodo.js"></script>
-

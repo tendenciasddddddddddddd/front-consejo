@@ -15,7 +15,7 @@
                             UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
                         </span><br>
                         <p class="text-xs text-center negros">
-                            REPORTE DE COMPORTAMIENTO
+                            REPORTE DE PROYECTOS
                         </p>
                         <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                             {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
@@ -144,7 +144,7 @@
                
             </section>
             <div v-if="info.length >= 16" style="page-break-before:always;"></div>
-            <section v-if="info.length >= 16" class="mt-sm-4 mx-md-3">
+            <section v-if="info.length >= 16">
                 <div class="mt-sm-4 mx-md-3">
                     <div class="py-3 px-3">
                         <div class="card-header">
@@ -155,7 +155,7 @@
                             UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
                         </span><br>
                         <p class="text-xs text-center negros">
-                            REPORTE DE COMPORTAMIENTO
+                            REPORTE DE PROYECTOS
                         </p>
                         <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                             {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
@@ -286,7 +286,7 @@
                
             </section>
             <div v-if="info.length >= 31" style="page-break-before:always;"></div>
-            <section v-if="info.length >= 31" class="mt-sm-4 mx-md-3">
+            <section v-if="info.length >= 31">
                 <div class="mt-sm-4 mx-md-3">
                     <div class="py-3 px-3">
                         <div class="card-header">
@@ -297,7 +297,7 @@
                             UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
                         </span><br>
                         <p class="text-xs text-center negros">
-                            REPORTE DE COMPORTAMIENTO
+                            REPORTE DE PROYECTOS
                         </p>
                         <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                             {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
@@ -423,7 +423,7 @@
                 </div>
                     </div>
                     </div>
-                      
+                       
                 </div>
                
             </section>
@@ -528,7 +528,7 @@ export default {
     mounted() {
         this.rowSelection = 'multiple';
         this.initiaSetap()
-        setTimeout(() => this.generatePDF(), 2000);
+        setTimeout(() => this.generatePDF(), 1000);
     },
 
 }

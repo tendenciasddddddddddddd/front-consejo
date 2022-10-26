@@ -1,4 +1,3 @@
-import AlertHeader from "../../shared/AlertHeader.vue";
 import Spinner from "../../shared/Spinner";
 import CustomInput from "../../shared/CustomInput.vue";
 import ButtonLoading from "../../shared/ButtonLoading.vue";
@@ -8,10 +7,9 @@ export default {
   name: "Nivel",
   components: {
     Spinner,
-    AlertHeader,
     CustomInput,
     ButtonLoading,
-    Paginate2,ActionsRow,
+    Paginate2, ActionsRow,
     Modal: () =>
       import(/* webpackChunkName: "Modal" */ "../../shared/Modal.vue"),
   },
@@ -42,15 +40,15 @@ export default {
   },
   methods: {
     verificarUsuario() {
-        let text_1 = 'Gestion'
-        let text_2 = 'Cursos de matricula'
-        this.$store.commit('updateHeader',{text_1, text_2})
-      },
+      let text_1 = 'Gestion'
+      let text_2 = 'Cursos niveles'
+      this.$store.commit('updateHeader', { text_1, text_2 })
+    },
     getAll(pag, lim) {
       this.isLoading = true;
       this.subtitulo = lim + " filas por página";
       this.$proxies._gestionProxi
-        .getAll(pag, lim) //EJECUTA LOS PROXIS QUE INYECTA AXIOS
+        .getAll(pag, lim)
         .then((x) => {
           this.info = x.data.niveles;
           this.pagg = x.data;
@@ -60,12 +58,11 @@ export default {
           this.isLoading = false;
         })
         .catch(() => {
-          console.log("Error imposible");
           this.isLoading = false;
         });
     },
     onPageChange(page) {
-      this.getAll(page, 7);
+      this.getAll(page, 8);
     },
     changedQuery(num) {
       this.getAll(1, num);
@@ -79,6 +76,7 @@ export default {
         }
         this.ifLoad = true;
         if (this.model._id) {
+          this.model.num = this.model.num.trim();
           this.model.nombre = this.model.nombre.trim();
           this.$proxies._gestionProxi
             .update(this.model._id, this.model)
@@ -86,25 +84,33 @@ export default {
               this.close();
               this.MsmError = "";
               this.ifLoad = false;
-              this.getAll(this.pagina, 7);
+              this.getAll(this.pagina, 8);
             })
-            .catch(() => {
-              console.log("Error");
+            .catch((error) => {
+              this.ifLoad = false;
+              if (error.response) {
+                if (error.response.status == 500) {
+                  this.MsmError = "Error los registros número y curso son unicos"
+                }
+              } else {
+                console.log('Error', error.message);
+              }
             });
         } else {
+          this.model.num = this.model.num.trim();
           this.model.nombre = this.model.nombre.trim();
           this.$proxies._gestionProxi
             .create(this.model) //-----------GUARDAR CON AXIOS
             .then(() => {
               this.ifLoad = false;
               this.close();
-              this.getAll(this.pagina, 7);
+              this.getAll(this.pagina, 8);
             })
             .catch((error) => {
               this.ifLoad = false;
               if (error.response) {
                 if (error.response.status == 500) {
-                  this.MsmError = "Error ese registro ya existe";
+                  this.MsmError = "Error los registros número y curso son unicos";
                 }
               } else {
                 console.log("Error", error.message);
@@ -126,7 +132,6 @@ export default {
             this.checked = this.model.modalidad;
           })
           .catch(() => {
-            console.log("Error");
             this.isCarga = false;
           });
       }
@@ -138,17 +143,17 @@ export default {
         this.isSelecUsers.splice(this.isSelecUsers.indexOf(ids), 1);
       }
     },
-    selectAll: function() {
-      this.allSelected= true;
+    selectAll: function () {
+      this.allSelected = true;
       this.userIds = [];
       if (this.allSelected) {
         for (let user in this.info) {
           this.isSelecUsers.push(this.info[user]._id);
         }
-      } 
+      }
     },
-    deletedSelected: function() {
-      this.allSelected= false;
+    deletedSelected: function () {
+      this.allSelected = false;
       this.isSelecUsers = [];
     },
     remove() {
@@ -171,7 +176,7 @@ export default {
             this.toast("Se elimino registro de sistema con su cuenta");
           }, 600);
         })
-        .catch(function() {});
+        .catch(function () { });
     },
     dialogDelete() {
       this.iseliminaddo = true;
@@ -181,14 +186,14 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.isSelecUsers = [];
-            this.getAll(this.pagina, 7);
+            this.getAll(this.pagina, 8);
           })
           .catch(() => {
-            console.log("Error imposible");
+            this.iseliminaddo = false;
           });
       }
     },
-    desactiveState(){//activateNivel
+    desactiveState() {//activateNivel
       let message = {
         title: "¿Cambiar el estado?",
         body: " Esta acción cambiara el estado de los registros",
@@ -208,22 +213,22 @@ export default {
             this.toast("Se cambio el estado del registro");
           }, 600);
         })
-        .catch(function() {});
+        .catch(function () { });
     },
     dialogState() {
       if (this.isSelecUsers.length > 0) {
-        let reg = this.info.filter((x)=> x._id == this.isSelecUsers[0]);
+        let reg = this.info.filter((x) => x._id == this.isSelecUsers[0]);
         let state = reg[0].estado == 1 ? 0 : 1;
         this.$proxies._gestionProxi
-         .activateNivel(this.isSelecUsers, state)
+          .activateNivel(this.isSelecUsers, state)
           .then(() => {
             this.iseliminaddo = false;
-           this.isSelecUsers = [];
+            this.isSelecUsers = [];
             this.getAll(this.pagina, 6);
           })
-           .catch(() => {
-             console.log("Error imposible");
-           });
+          .catch(() => {
+            this.iseliminaddo = false;
+          });
       }
     },
     toast(message) {
@@ -244,7 +249,7 @@ export default {
       this.visible = true;
       this.model._id = "";
       this.model.nombre = "";
-      this.model.num= '';
+      this.model.num = '';
       this.MsmError = "";
     },
     close() {
@@ -253,7 +258,7 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 7);
+    this.getAll(1, 8);
   },
   validators: {
     //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS

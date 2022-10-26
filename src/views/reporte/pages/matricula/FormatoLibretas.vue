@@ -3,14 +3,13 @@
         <div v-if="ifload">Trabajando...</div>
         <section v-else>
             <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-                :paginate-elements-by-height="1400" :filename="'libretas'" :pdf-quality="2" :manual-pagination="false"
+                :paginate-elements-by-height="1400" :filename="'libretas'" :pdf-quality="1.5" :manual-pagination="false"
                 pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape" pdf-content-width="1128px"
                 @progress="onProgress($event)" ref="html2Pdf">
                 <section slot="pdf-content">
-                    <div v-for="item in info" :key="item.id">
-                        <div class="row">
-                            <div class="col-lg-11 col-12 mx-auto">
-                                <div class="p-2 text-center " style="background: white;">
+                    <div v-for="item in info" :key="item.id" class="mt-sm-4 mx-md-3">
+                        <div class="card-header  ">
+                                <div class=" text-center ">
                                     <div class="row justify-content-between">
                                         <div class="col-md-1 text-start">
                                             <img class=" w-100 " src="../../../../assets/img/alfonso/alfonso.jpg"
@@ -42,23 +41,22 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 col-12 mx-auto">
-
                                             <div class="">
                                                 <table class="dataTable-table table s-table-flush "
                                                     style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
                                                     <thead>
                                                         <tr>
                                                             <th
-                                                                style="padding: 1px 3px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                                                style="padding: 0px 2px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
                                                             </th>
-                                                            <th style="padding: 1px 3px;border-top: 1px solid #d9d9d9;">
+                                                            <th style="padding: 0px 2px;border-top: 1px solid #d9d9d9;">
                                                             </th>
                                                             <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
-                                                                style="padding: 1px 3px;border-top: 1px solid #d9d9d9;">
+                                                                style="padding: 0px 2px;border-top: 1px solid #d9d9d9;">
                                                                 <span v-if="numQuimestre==0">PRIMER QUIMESTRE</span>
                                                                 <span v-else>SEGUNDO QUIMESTRE</span>
                                                             </th>
-                                                            <th style="padding: 1px 3px;border-top: 1px solid #d9d9d9;">
+                                                            <th style="padding: 0px 2px;border-top: 1px solid #d9d9d9;">
                                                             </th>
                                                         </tr>
                                                         <tr>
@@ -237,22 +235,7 @@
                                                         <tr>
                                                             <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
                                                                 class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                                                <b>Informe de Aprendizaje: Art. 209 numeral 1, 2
-                                                                    R/LOEI</b>
-                                                                <div class="row">
-                                                                    <div class="col-sm-4">
-                                                                        TAI = Tareas <br>
-                                                                        L = Lecciones.
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        AIC = Actividades Individ.Clase <br>
-                                                                        ESE= Evaluación sumativa escrita
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        AGC = Actividades Grupales <br>
-                                                                        PR = Promedio
-                                                                    </div>
-                                                                </div>
+                                                               
                                                                 <b>Escala de Calificaciones Art. 194, reformado, Decreto
                                                                     presidencial No. 366-13 (Art.9)</b>
                                                                 <div class="row">
@@ -297,21 +280,7 @@
                                                                     </div>
 
                                                                 </div>
-                                                                <b>Evaluación Proyectos Educativos</b>
-                                                                <div class="row">
-                                                                    <div class="col-sm-3">
-                                                                        EX =Excelente
-                                                                    </div>
-                                                                    <div class="col-sm-3">
-                                                                        MB = Muy Buena
-                                                                    </div>
-                                                                    <div class="col-sm-3">
-                                                                        B=Buena
-                                                                    </div>
-                                                                    <div class="col-sm-3">
-                                                                        R=Regular
-                                                                    </div>
-                                                                </div>
+                                                               
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -319,7 +288,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-around mt-3">
+                                    <div class="d-flex justify-content-around mt-2">
                                         <div class="text-center">
                                             <span class="h6 pb-0">
                                                 <b>__________________________________</b>
@@ -341,9 +310,8 @@
                                             </div>
 
                                         </div>
-                                    </div><br>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                         <div style="page-break-before:always;"></div>
                     </div>

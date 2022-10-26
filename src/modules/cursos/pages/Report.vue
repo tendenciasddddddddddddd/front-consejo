@@ -2,12 +2,12 @@
     <div>
         <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
             :paginate-elements-by-height="1400" :filename="data.nivel+'-'+data.paralelo+'-'+data.materia"
-            :pdf-quality="2" :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
+            :pdf-quality="1.5" :manual-pagination="true" pdf-format="a4" :pdf-margin="0" pdf-orientation="landscape"
             pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
             <section slot="pdf-content">
-                <section class="p-3" >
-                    <div class="row">
-                       <div class="col-lg-11 col-12 mx-auto">
+                <section class="mt-sm-4 mx-md-3 ">
+                    <div class="card-header">
+                       <div class="py-3 px-3">
                         <div class="d-flex justify-content-between">
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
@@ -90,7 +90,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in info" :key="item.id">
+                            <tr v-for="(item) in info.slice(0,15)" :key="item.id">
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
                                     class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
                                 <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
@@ -124,6 +124,7 @@
                                         <div class="col">{{item.eq}}</div>
                                     </div>
                                 </td>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -145,7 +146,298 @@
                     </div>
                        </div>
                     </div>
-                    
+                </section>
+                <div v-if="info.length >= 16" style="page-break-before:always;"></div>
+                <section v-if="info.length >= 16">
+                    <div class="mt-sm-4 mx-md-3">
+                        <div class="py-3 px-3">
+                            <div class="card-header ">
+                        <div class="d-flex justify-content-between">
+                        <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
+                        <div class="text-center">
+                            <span class="h6 negros">
+                                UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                            </span><br>
+                            <p class="text-xs text-center negros">
+                                REPORTE DE NOTAS
+                            </p>
+                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
+                                {{data.paralelo}}</span>
+                        </div>
+                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                                alt="Logo" /></div>
+                    </div>
+                    <table class="dataTable-table table s-table-flush "
+                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                        <thead>
+                            <tr>
+                                <th
+                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                </th>
+                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                <th class="text-uppercase text-start negros text-xxs font-weight-bolder"
+                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;">
+                                    {{data.materia}}
+                                </th>
+                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                            </tr>
+
+                            <tr>
+                                <th style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    LISTADO DE ESTUDIANTES
+                                </th>
+                                <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
+                                    style="padding: 4px 5px;">PRIMER QUIMESTRE</th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    SEGUNDO QUIMESTRE
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    TOTAL
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);"></th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">p1</div>
+                                        <div class="col">p2</div>
+                                        <div class="col">pro</div>
+                                        <div class="col">pro(80%)</div>
+                                        <div class="col">exa</div>
+                                        <div class="col">exa(20%)</div>
+                                        <div class="col">qui</div>
+                                    </div>
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">p1</div>
+                                        <div class="col">p2</div>
+                                        <div class="col">pro</div>
+                                        <div class="col">pro(80%)</div>
+                                        <div class="col">exa</div>
+                                        <div class="col">exa(20%)</div>
+                                        <div class="col">qui</div>
+                                    </div>
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">pa</div>
+                                        <div class="col">eq</div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item) in info.slice(15,30)" :key="item.id">
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col">{{item.p1}}</div>
+                                        <div class="col">{{item.p2}}</div>
+                                        <div class="col">{{item.prom1}}</div>
+                                        <div class="col">{{item.prom1_80}}</div>
+                                        <div class="col">{{item.exam1}}</div>
+                                        <div class="col">{{item.exam1_20}}</div>
+                                        <div class="col font-weight-bolder">{{item.promedio_final1}}</div>
+                                    </div>
+                                </td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col">{{item.p3}}</div>
+                                        <div class="col">{{item.p4}}</div>
+                                        <div class="col">{{item.prom2}}</div>
+                                        <div class="col">{{item.prom2_80}}</div>
+                                        <div class="col">{{item.exam2}}</div>
+                                        <div class="col">{{item.exam2_20}}</div>
+                                        <div class="col font-weight-bolder">{{item.promedio_final2}}</div>
+                                    </div>
+                                </td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;"
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
+                                        <div class="col">{{item.eq}}</div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-around mt-6">
+                        <div class="text-center">
+                            <span class="h6 pb-0">
+                                <b>__________________________________</b>
+                            </span> <br>
+                            <span class="negros text-sm"><b>RECTOR/A</b></span>
+                        </div>
+                        <div>
+                            <div class="text-center">
+                                <span class="h6 pb-0">
+                                    <b>__________________________________</b>
+                                </span> <br>
+                                <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                            </div>
+                        </div>
+                    </div>
+                       </div>
+                        </div>
+                       
+                    </div>
+                </section>
+                <div v-if="info.length >= 31" style="page-break-before:always;"></div>
+                <section v-if="info.length >= 31">
+                    <div class="mt-sm-4 mx-md-3">
+                        <div class="py-3 px-3">
+                            <div class="card-header ">
+                        <div class="d-flex justify-content-between">
+                        <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
+                        <div class="text-center">
+                            <span class="h6 negros">
+                                UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                            </span><br>
+                            <p class="text-xs text-center negros">
+                                REPORTE DE NOTAS
+                            </p>
+                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
+                                {{data.paralelo}}</span>
+                        </div>
+                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                                alt="Logo" /></div>
+                    </div>
+                    <table class="dataTable-table table s-table-flush "
+                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                        <thead>
+                            <tr>
+                                <th
+                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                </th>
+                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                <th class="text-uppercase text-start negros text-xxs font-weight-bolder"
+                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;">
+                                    {{data.materia}}
+                                </th>
+                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                            </tr>
+
+                            <tr>
+                                <th style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    LISTADO DE ESTUDIANTES
+                                </th>
+                                <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
+                                    style="padding: 4px 5px;">PRIMER QUIMESTRE</th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    SEGUNDO QUIMESTRE
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    TOTAL
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);"></th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">p1</div>
+                                        <div class="col">p2</div>
+                                        <div class="col">pro</div>
+                                        <div class="col">pro(80%)</div>
+                                        <div class="col">exa</div>
+                                        <div class="col">exa(20%)</div>
+                                        <div class="col">qui</div>
+                                    </div>
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">p1</div>
+                                        <div class="col">p2</div>
+                                        <div class="col">pro</div>
+                                        <div class="col">pro(80%)</div>
+                                        <div class="col">exa</div>
+                                        <div class="col">exa(20%)</div>
+                                        <div class="col">qui</div>
+                                    </div>
+                                </th>
+                                <th style="padding: 4px 5px;"
+                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                    <div class="row">
+                                        <div class="col">pa</div>
+                                        <div class="col">eq</div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item) in info.slice(30,45)" :key="item.id">
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col">{{item.p1}}</div>
+                                        <div class="col">{{item.p2}}</div>
+                                        <div class="col">{{item.prom1}}</div>
+                                        <div class="col">{{item.prom1_80}}</div>
+                                        <div class="col">{{item.exam1}}</div>
+                                        <div class="col">{{item.exam1_20}}</div>
+                                        <div class="col font-weight-bolder">{{item.promedio_final1}}</div>
+                                    </div>
+                                </td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col">{{item.p3}}</div>
+                                        <div class="col">{{item.p4}}</div>
+                                        <div class="col">{{item.prom2}}</div>
+                                        <div class="col">{{item.prom2_80}}</div>
+                                        <div class="col">{{item.exam2}}</div>
+                                        <div class="col">{{item.exam2_20}}</div>
+                                        <div class="col font-weight-bolder">{{item.promedio_final2}}</div>
+                                    </div>
+                                </td>
+                                <td style="padding: 4px 5px;border-bottom-width: 0px;"
+                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                    <div class="row negros">
+                                        <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
+                                        <div class="col">{{item.eq}}</div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-around mt-6">
+                        <div class="text-center">
+                            <span class="h6 pb-0">
+                                <b>__________________________________</b>
+                            </span> <br>
+                            <span class="negros text-sm"><b>RECTOR/A</b></span>
+                        </div>
+                        <div>
+                            <div class="text-center">
+                                <span class="h6 pb-0">
+                                    <b>__________________________________</b>
+                                </span> <br>
+                                <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                            </div>
+                        </div>
+                    </div>
+                       </div>
+                        </div>
+                       
+                    </div>
                 </section>
             </section>
         </vue-html2pdf>
@@ -158,7 +450,7 @@ export default {
     name: 'AddNota',
     components: { VueHtml2pdf },
     props: {
-        rowData: Array
+        rowData: Array //v-if="info.length >= 16"
     },
     data() {
         return {
@@ -333,7 +625,7 @@ export default {
     mounted() {
         this.rowSelection = 'multiple';
         this.initiaSetap()
-        setTimeout(() => this.generatePDF(), 1000);
+        setTimeout(() => this.generatePDF(), 2000);
     },
 }
 </script>

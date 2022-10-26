@@ -3,8 +3,13 @@
     <template v-slot:header> {{ collects.nombre }}</template>
     <template v-slot:body>
       <div v-if="!tarea_atrazada">
-        <p class="parrafo " v-html="collects.descripcion"></p>
-        <button class="btn btnNaranja2 w-100"> {{ isPlaso }} </button>
+        <div class="is-error"> 
+          <span class="text-sm negros gordo">{{ isPlaso }} </span>
+        </div>
+        <div class="croll" style="overflow-y: auto;height: auto;">
+          <p class="parrafo " v-html="collects.descripcion"></p>
+        </div>
+       
         <div lass="mt-2">
           <a v-if="collects.archivo" class="parrafo" style=" cursor: pointer;" target="_blank"
             :href="collects.archivo">
@@ -12,7 +17,7 @@
           </a>
         </div>
         <Dropzone @uploadArchive="submitArchive" />
-        <span class="parrafo ">Comentario</span>
+        <span class="parrafo ">Descripción</span>
         <Editor v-model="model.comentario" />
       </div>
       <div v-else>

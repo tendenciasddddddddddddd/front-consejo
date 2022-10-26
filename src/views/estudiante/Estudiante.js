@@ -76,7 +76,7 @@ export default {
       this.ifGrid = false;
     },
     refreshData: function () {
-      this.getAll(this.paginaActual, 6);
+      this.getAll(this.paginaActual, 8);
     },
     getAll(pag, lim) {
       this.isLoading = true;
@@ -166,7 +166,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 6);
+            this.getAll(this.paginaActual, 8);
           })
           .catch(() => {
             console.log("Error imposible");

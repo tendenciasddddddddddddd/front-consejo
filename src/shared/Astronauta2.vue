@@ -4,7 +4,7 @@
         <template v-slot:body>
             <span class="negros text-sm">El módulo nube almacena sus archivos en carpetas en ES3 con el mejor performance</span>
             <div class="text-center mt-2">
-                <img width="300" src="../assets/img/notas_espera.svg" alt="">
+                <img width="300" src="../assets/img/submit.svg" alt="">
             </div>
         </template>
         <template v-slot:acccion>

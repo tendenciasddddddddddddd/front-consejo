@@ -95,7 +95,7 @@ export default {
   methods: {
     verificarUsuario() {
         let text_1 = 'Matriculas'
-      let text_2 = 'Reportes y consolidado'
+      let text_2 = 'Reportes'
       this.$store.commit('updateHeader',{text_1, text_2})
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");

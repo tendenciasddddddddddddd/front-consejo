@@ -5,33 +5,32 @@
             <Spinner v-if="isedit"></Spinner>
             <div v-else >
               <form @submit.prevent="save" id="usuarios">
-                <div class="p-1 border-radius-xl bg-white js-active" data-animation="FadeIn" >
                         <span class="parrafo">Número de Cédula</span>
                          <CustomInput v-model="model.cedula" />
-                        <p class="mb-3 text-xs text-danger">
+                        <p class="mb-2 text-xs text-danger">
                           {{ validation.firstError("model.cedula") }}
                         </p>
                         <span class="parrafo">Correo Electrónico</span>
                          <CustomInput v-model="model.email" />
-                        <p class="mb-3 text-xs text-danger">
+                        <p class="mb-2 text-xs text-danger">
                           {{ validation.firstError("model.email") }}
                         </p>
                         <span class="parrafo">Nombres Completos</span>
                         <CustomInput v-model="model.nombres" />
-                        <p class="mb-3 text-xs text-danger">
+                        <p class="mb-2 text-xs text-danger">
                           {{ validation.firstError("model.nombres") }}
                         </p>                   
                         <span class="parrafo">Apellidos Completos</span>
                          <CustomInput v-model="model.apellidos" />
-                        <p class="mb-3 text-xs text-danger">
+                        <p class="mb-2 text-xs text-danger">
                           {{ validation.firstError("model.apellidos") }}
                         </p>
                         <span class="parrafo">Numero de teléfono</span>
                         <CustomInput v-model="model.telefono" />
-                        <p class="mb-3 text-xs text-danger">
+                        <p class="mb-2 text-xs text-danger">
                           {{ validation.firstError("model.telefono") }}
                         </p>                     
-                       <span class="parrafo">Rol</span>
+                       <span class="parrafo">Rol de usuario</span>
                         <p class="parrafo" v-if="isRole">Cargando</p>
                         <div v-else v-for="ite in listRol" :key="ite._id">
                         <div class="form-check mb-1">
@@ -46,7 +45,6 @@
                           <a class="parrafo " for="ite._id"> {{ ite.name }}</a>
                         </div>
                       </div>
-                </div>
               </form>
             </div>
           </template>

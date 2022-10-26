@@ -48,7 +48,6 @@ export default {
             this.$Progress.finish();
           })
           .catch(() => {
-            console.log("En esta ruta no hay nada que mostrar");
             this.isData = false;
           });
       }

@@ -8,6 +8,7 @@ export default class quialifyservice {
       let foranea = "";
       let quim = [];
       let comp = [];
+      let pro = [];
       let suple = 0;
       let reme = 0;
       let gracia = 0;
@@ -17,6 +18,7 @@ export default class quialifyservice {
         if (notas[j].materia == materia) {
           let calificar = notas[j].notas;
           let comport = notas[j].comportamiento;
+          let proy = notas[j].proyectos
           promedio = notas[j].promediof;
           suple = notas[j].suple;
           reme = notas[j].reme;
@@ -28,6 +30,9 @@ export default class quialifyservice {
           }
           for (let h = 0; h < comport.length; h++) {
             comp.push(comport[h]);
+          }
+          for (let w = 0; w < proy.length; w++) {
+            pro.push(proy[w]);
           }
           break;
         }
@@ -43,6 +48,7 @@ export default class quialifyservice {
         gracia: gracia,
         pfinal: pfinal,
         comportamiento: comp,
+        proyectos : pro
       });
     }
     return inAlumnos;

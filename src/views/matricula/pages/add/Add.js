@@ -60,20 +60,17 @@ export default {
     getAll() {
       this.isLoading = true;
       this.$proxies._matriculaProxi
-        .getAllEstudiantes() //LISTA DE ESTUDIANTES
+        .getAllEstudiantes()
         .then((x) => {
           this.info = x.data;
           this.isLoading = false;
         })
         .catch(() => {
-          console.log("Error imposible");
           this.isLoading = false;
-         
         });
     },
 
     __listNivele() {
-      //-----------TRAE LA LISTA DE LOS ROLES
       this.isLoading2 = true;
       this.$proxies._gestionProxi
         .getNiveles()
@@ -81,15 +78,12 @@ export default {
           this.listniveles = x.data;
           this.isLoading2 = false;
         })
-        .catch((err) => {
-          console.log("Error", err);
+        .catch(() => {
           this.isLoading2 = false;
-          this.$router.push('/Matricula-1')
           this.toast('Error del internet en el servidor');
         });
     },
     __listPeriodo() {
-      //-----------TRAE LA LISTA DE LOS ROLES
       this.isLoading1 = true;
       this.$proxies._matriculaProxi
         .getFull()
@@ -100,12 +94,11 @@ export default {
           );
           this.isLoading1 = false;
         })
-        .catch((err) => {
-          console.log("Error", err);
+        .catch(() => {
           this.isLoading1 = false;
         });
     },
- 
+
     fechaActual(){
       this.fecha = ResultServiceMatricula.calcular_fecha();
     },
@@ -128,7 +121,6 @@ export default {
     
     sendArraysMatricula(){
       this.$validate().then((success) => {
-        //METODO PARA GUARDAR
         if (!success) {
           this.toast('Por favor llena correctamente los campos solicitados');
           return;
@@ -144,18 +136,15 @@ export default {
             fknivel = this.model.fknivel._id;
             this.arraysMatricula.push({fkestudiante:fkestudiante, nombre: nombre, estado: 1, fecha:this.fecha,
               academico: academico, fknivel: fknivel, typo: this.isModalidad, curso: "Undefined", nmatricula:'1', folio: '1'})
-         }
-
-         
+         }        
          this.$proxies._matriculaProxi
-           .createMatricula(this.arraysMatricula, this.isModalidad) //-----------GUARDAR CON AXIOS
+           .createMatricula(this.arraysMatricula, this.isModalidad)
            .then((res) => {
              this.ifLoad = false;
              this.toast('Se matriculo correctamente a '+ this.arraysMatricula.length + ' estudiantes')
              this.objetosRechasados = res.data.duplicados;
              if (this.objetosRechasados.length!=0) this.isDuplicado = true;
              this. __limpiarCampos();
-           
            })
            .catch((error) => {
                console.log("Error", error);
@@ -165,7 +154,6 @@ export default {
       })
      
     },
-
 
     selectUser(objeto){
       let longitud = this.isSelecUsers.length;
@@ -232,8 +220,6 @@ export default {
   },
 
   validators: {
-    //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
-
     "model.academico"(value) {
       return this.$validator.value(value).required();
     },

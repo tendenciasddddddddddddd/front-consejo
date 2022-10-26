@@ -1,4 +1,3 @@
-
 import Spinner from '../../../../shared/Spinner';
 import IsSelect from '../../../../shared/IsSelect';
 import CustomInput from "../../../../shared/CustomInput.vue";
@@ -42,7 +41,7 @@ export default {
            isCarga: false,
            visible: false,
            allSelected: false,
-           rows: 6,
+           rows: 8,
            isSearch: false,
         }
     },
@@ -89,15 +88,23 @@ export default {
                   this.ifLoad = true;
                   this.model.cant = this.model.fkCanton._id;
                   this.model.fkCanton = this.model.fkCanton.nombre;
+                  this.model.nombre = this.model.nombre.trim();
                   this.$proxies._zonasProxi.updateParroquia(this.model._id, this.model)
                     .then(() => {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(this.pagina,6); 
+                      this.getAll(this.pagina,8); 
                     })
-                    .catch(() => {
-                      console.log("Error")
+                    .catch((error) => {
+                      this.ifLoad = false;
+                    if(error.response){
+                      if(error.response.status==500){
+                        this.MsmError = "Error "+ this.model.nombre + " ya esta registrado"
+                      }
+                    }else{
+                      console.log('Error', error.message); 
+                    }
                     });    
                 }else{
                   this.ifLoad = true;
@@ -108,13 +115,14 @@ export default {
                   }
                   this.model.cant = this.model.fkCanton._id;
                   this.model.fkCanton = this.model.fkCanton.nombre;
-                  this.$proxies._zonasProxi.createParroquia(this.model) //-----------GUARDAR CON AXIOS
+                  this.model.nombre = this.model.nombre.trim();
+                  this.$proxies._zonasProxi.createParroquia(this.model)
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(this.pagina,6); 
+                    this.getAll(this.pagina,8); 
                   })
-                  .catch((error) => {//-----------EN CASO DE TENER DUPLICADO LOS DOCUMENTOS EL SERVIDOR LANZARA LA EXEPCION
+                  .catch((error) => {
                     this.ifLoad = false;
                     if(error.response){
                       if(error.response.status==500){
@@ -138,7 +146,6 @@ export default {
                     this.model = x.data;
                     this.isCarga = false; 
                 }).catch(() => {
-                    console.log("Error")
                     this.isCarga = false; 
                 });
             }
@@ -154,13 +161,12 @@ export default {
                   this.isLoading = false;
                 })
                 .catch(() => {
-                  console.log("Error imposible");
                   this.isLoading = false;
                 });
             }
           },
           salirBusqueda: function() {
-            this.getAll(1, 6);
+            this.getAll(1, 8);
             this.isSearch = false;
           },
           changedQuery(num) {
@@ -208,7 +214,7 @@ export default {
                 setTimeout(() => {
                   dialog.close();
                   this.toast("Se elimino registro de sistema con su cuenta");
-                }, 600);
+                }, 800);
               })
               .catch(function() {});
           },
@@ -220,11 +226,11 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 8);
                   this.allSelected= false;
                 })
                 .catch(() => {
-                  console.log("Error imposible");
+                  this.iseliminaddo = false;
                 });
             }
           },
@@ -246,7 +252,7 @@ export default {
                 setTimeout(() => {
                   dialog.close();
                   this.toast("Se cambio el estado del registro");
-                }, 600);
+                }, 800);
               })
               .catch(function() {});
           },
@@ -259,10 +265,10 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 6);
+                  this.getAll(this.pagina, 8);
                 })
                  .catch(() => {
-                   console.log("Error imposible");
+                   this.iseliminaddo = false;
                  });
             }
           },
@@ -279,7 +285,7 @@ export default {
           }, 
         toast(message) {
           this.$toasted.info(message, {
-            duration: 2600,
+            duration: 2800,
             position: "top-center",
             icon: "check-circle",
             theme: "toasted-primary",
@@ -301,7 +307,7 @@ export default {
       created() {
         this.verificarUsuario();
         this.getListProv();
-        this.getAll(1,6);
+        this.getAll(1,8);
       },
       validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
         'model.nombre'(value) {

@@ -50,6 +50,8 @@ export default {
       infoMat2: null,
       model: {
         curso: null,
+        calificaciones: [],
+        asistencias: [],
       },
       isSelecCurosos: {},
       isClick: false,

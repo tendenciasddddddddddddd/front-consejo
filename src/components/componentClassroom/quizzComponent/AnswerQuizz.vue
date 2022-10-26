@@ -4,21 +4,20 @@
         <template v-slot:body>
             <div class="flex-containes2" direction="row" wrap="nowrap" style="margin-top: -1rem;">
                 <section class="s-column1 croll d-md-block d-none">
-
-                    <NoFound2 />
-
+                    <p class="negros negros mt-3">DESCIPCIÓN DE EVALIACION</p>
+                    <span v-html="itemQuizz.descripcion"> </span>
                 </section>
                 <section class="s-column2">
                     <div class="exam-question-screen__content-area">
                         <div v-if="finaly" class="text-center mt-6">
                             <img style="width: 180px;" src="../../../assets/img/shapes/success-green.svg" alt="fondo" />
-                            <br><span class="h3">Examen completo</span>
-                            <br><a href="javascript:;" v-if="!ifLoad" @click="save"
-                                class="btn btn-vercel-white mt-3">Finalizar
-                                evaluación</a>
+                            <br><span class="h3 negros gordo">Examen completo</span>
+                            <br><button href="javascript:;" v-if="!ifLoad" @click="save"
+                                class="btn btnNaranja mt-3">Finalizar
+                                evaluación</button>
                         </div>
                         <div v-else>
-                            <div class="d-flex justify-content-between text-sm text-dark fuente">
+                            <div class="d-flex justify-content-between text-sm negros gordo">
                                 <div> <b>Pregunta {{ index + 1 }}</b> de {{ questions.length }}</div>
                                 <div><span>Tiempo restante: {{ timerText }}</span></div>
                             </div> <br>
@@ -36,14 +35,13 @@
             </div>
         </template>
         <template v-slot:footer>
-            <a href="javascript:;" v-if="!ifLoad" @click="save" class="btn btn-vercel ms-3">Finalizar evaluación</a>
+            <button href="javascript:;" v-if="!ifLoad" @click="save" class="btn btnNaranja ms-3">Finalizar evaluación</button>
         </template>
     </ScrimModal>
 </template>
 
 <script>
 import ScrimModal from "../../../shared/ScrimModal"
-import NoFound2 from "../../../shared/NoFound2"
 import AnswerOne from "./component/AnswerOne.vue"
 import AnswerMany from "./component/AnswerMany.vue"
 export default {
@@ -52,7 +50,7 @@ export default {
         itemQuizz: Object,
     },
     components: {
-        ScrimModal, NoFound2, AnswerOne, AnswerMany
+        ScrimModal,  AnswerOne, AnswerMany
     },
     data() {
         return {
@@ -81,6 +79,7 @@ export default {
             this.$emit('EventClose')
         },
         vueInit() {
+           
             if (this.itemQuizz.randomize) {
                 let questions = this.itemQuizz.surveys
                 questions = shuffle(questions);
@@ -98,13 +97,11 @@ export default {
         pushAnswer(res) {
             this.response.push(res);
             this.contador += parseFloat(res.puntaje)
-            console.log(this.contador)
             if (this.index < this.questions.length - 1) {
                 this.index++
             } else {
                 this.finaly = true;
             }
-
         },
         save() { // solveQuiz
             this.model.idUser = this.user.id;
@@ -175,37 +172,6 @@ function shuffle(sourceArray) {
 }
 </script>
  <style >
- .s-column1 {
-     /* background-color: rgb(245, 248, 250); */
-     border-right: 1px solid rgb(203, 214, 226);
-     max-width: 300px;
-     min-width: 300px;
-     flex: 1 1 0%;
-     overflow-y: auto;
- }
- 
- .s-column2 {
-     flex: 1 1 0%;
-     min-width: 320px;
- }
- 
- .exam-question-screen__content-area {
-     padding: 21px 42px;
-     background-color: #eaf0f6;
-     min-height: 476.875px;
- }
- 
- .s-font {
-     font-weight: 400 !important;
- }
- 
- .s-icon {
-     font-size: 30px !important;
- }
- 
- .s-input {
-     background-color: #fff !important;
- }
  
  .s-items-quizz {
      margin-top: 12px !important;

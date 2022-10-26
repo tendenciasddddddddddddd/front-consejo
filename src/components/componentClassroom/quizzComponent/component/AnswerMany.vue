@@ -1,27 +1,27 @@
 <template>
     <div>
-         <p class="text-dark fuente text-sm">Seleccione una o varias respuesta.</p>
+         <p class="negros gordo text-sm">Seleccione una o varias respuesta.</p>
         <div v-for="survey in optins.options" :key="survey.id">
             <div class=" p-2  noactive s-items-quizz " :class="{ activado: answers.includes(survey.id) }">
                 <div @click="selectMany(survey.id)" style="cursor: pointer;">
                     <div class="row">
                         <div class="col-lg-2 ">
-                            <div class="form-check my-auto supcheka mt-2 ms-2">
+                            <div class="form-check my-auto supcheka mt-2 ms-2" @click="selectMany(survey.id)">
                                 <input class="form-check-input cheka " type="checkbox" v-model="answers"
                                     :value="survey.id" @click="selectMany(survey.id)" />
                             </div>
                         </div>
                         <div class="col-lg-10 mt-2 mb-2">
-                            <span class="fuente h6 s-font text-center ">{{ survey.text }} </span>
+                            <span class="negros h6 s-font text-center ">{{ survey.text }} </span>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="text-end mt-2">
-            <button v-if="answers.length!==0" @click="nextQuestion" class="btn btnNaranja">Siguiente</button>
-            <a v-else class="btn btnDisabled"> Siguiente </a>
+        <div class="text-end mt-3">
+            <button  :disabled="answers.length==0" @click="nextQuestion" class="btn btnNaranja2"> <b>Siguiente pregunta</b> </button>
+           
         </div>
     </div>
 </template>
@@ -48,11 +48,10 @@ export default {
             
         },
         nextQuestion() {
-
             let punt = this.calculateScore();
             this.$emit("nextQuestions", {
                 idQuestion: this.optins._id,
-                myResponse: [this.checked],
+                myResponse: this.answers,
                 puntaje : punt
             })
             this.answers = [];
@@ -100,7 +99,6 @@ export default {
             }
             if (puntucion < 0) puntucion = 0;
             puntucion = (Math.round(puntucion * 100) / 100).toFixed(2);
-            console.log(puntucion)
             return puntucion;
         },
 

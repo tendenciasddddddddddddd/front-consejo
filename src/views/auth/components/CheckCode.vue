@@ -58,7 +58,7 @@
         @click="activeGoBackLogin"
         href="javascript:;"
         class="tamanio ms-4"
-        >Volver a <b class="links ms-2 gordo">Inicio de sesión</b>
+        >Volver a <b class="links2 ms-2 gordo">Inicio de sesión</b>
       </a>
     </div>
   </div>

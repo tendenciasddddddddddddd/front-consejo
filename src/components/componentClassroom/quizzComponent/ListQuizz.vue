@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @deletedSelected="deletedSelect" @remove="remove" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
+    <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @deletedSelected="deletedSelect" @remove="remove" @getDataAlls="getDataAll" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
      <div v-if="displayedArticles.length">
       <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
         <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
@@ -10,25 +10,26 @@
                   @click="selectOne(item._id)" />
               </div>
 
-              <div @click="openChildRewiewTrask(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros" style="color: #007dbc;text-decoration: underline;">
+              <div @click="openChildRewiewQuizz(item)" class="d-flex flex-column justify-content-center ms-3">
+                <h6 class="mb-0 text-sm negros " >
                   {{ item.nombre }}
                 </h6>
-                <div class="text-sm colorestabla fuente">
-                  <div >
-                    <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                    Examen enviado
+                <div class="text-xs colorestabla  negros">
+                  <div ><span style="background-color: rgb(0, 189, 165);"
+                                        class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
+                    {{ item.surveys.length }} preguntas
                   </div>
-                 
                 </div>
               </div>
-              <div class="mt-3 ms-5"><span class="text-xs ">{{ item.surveys.length }} entregas</span></div>
+              <div   class="mt-1 ms-6"><span class="text-sm negros">
+                <TimeEgo :fecha="item.fechad" />
+              </span></div>
+            
             </div>
           <div class="dropstart ms-auto">
-            <div class="d-flex  mt-2">
-              <TimeEgo :fecha="item.createQuizz" />
-              <!--v-tooltip.top-center="{content: item.descripcion, html: true}"-->
-            </div>
+            <div class="d-flex ">
+             <button class="btn btnNaranja2 ms-3">Duplicar examen</button>
+           </div>
           </div>
         </div>
       </div>
@@ -41,9 +42,11 @@
      <div v-if="isQuizz">
       <CreateQuizz :id="idQuizz"  @EventClose="closed"  @getData="getDataAll"/>
     </div>
+    <div v-if="isCheckQuizz">
+      <CheckQuizz  :collects="checkTasks" :id="idQuizz" :objectUser="objectUser"  @myEventquizz="closeCheckTask"  @getData="getDataAll"/>
+    </div>
   </div>
 </template>
-
 <script>
 import NoFound from "../../../shared/NoFound"
 import TimeEgo from "../../../shared/TimeEgo";
@@ -59,12 +62,14 @@ export default {
     NoFound, ActionRowDocente, TimeEgo,Paginate,
     CreateQuizz: () => import( /* webpackChunkName: "CreateQuizz" */ "./CreateQuizz.vue"),
     CreateQuestion: () => import( /* webpackChunkName: "CreateQuestion" */ "./CreateQuestion.vue"),
+    CheckQuizz: () => import( /* webpackChunkName: "CheckQuizz" */ "./CheckQuizz.vue"),
   },
   data() {
     return {
       userIds: [],
       isQuizz: false,
       isQuestion: false,
+      isCheckQuizz: false,
       isSelecUsers: [],
       allSelected : false,
       collestQuizz: [],
@@ -96,10 +101,8 @@ export default {
     vueInit(){
       if (this.object.length > 0) {
         for (var i = 0; i < this.object.length; i++) {
-           console.log('es',this.object[i])
            if (this.object[i].surveys.length === 0) {
             this.idQuizz = this.object[i]._id;
-            console.log(this.idQuizz)
             this.openCuestions()
            }
         }
@@ -118,6 +121,19 @@ export default {
     },
     closeCuestions: function (){
        this.isQuizz= false;
+    },
+    closeCheckTask: function (){
+       this.isCheckQuizz= false;
+    },
+    openChildRewiewQuizz: function(obj){
+      this.checkTasks = {
+        descripcion: obj.descripcion,
+        surveys : obj.surveys,
+        entrega: obj.answers,
+        nombre: obj.nombre,
+        _id : obj._id
+      }
+      this.isCheckQuizz = true;
     },
     paginate(articles) {
       let page = this.page;
