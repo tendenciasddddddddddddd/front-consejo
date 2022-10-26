@@ -11,6 +11,10 @@
           style="--content:'UEMAH';--padding:0.05em;--start-color:#FF4D4D;--end-color:#F9CB28"><span
             class="animated-gradient-text_foreground__kb6tN animated-gradient-text_foreground-3__kum5b">UEMAH</span></span>
       </h1>
+      <div class="text-end">
+        <a target="_blank" href="https://firebasestorage.googleapis.com/v0/b/uemah-f440f.appspot.com/o/apps%2FPlatform.exe?alt=media&token=b91314d6-24c9-45a3-8f1a-e830764d419f" class="h6 gordo negros links2">Aplicacion de escritorio</a>
+      </div>
+      
   </div>
 </template>
 <style>
