@@ -16,7 +16,7 @@ async function createWindow() {
     width: 1220,
     height: 728,
     autoHideMenuBar: true,
-    icon: 'public/img/icons.jpg',
+   // icon: 'public/img/icons.jpg',
     webPreferences: {
       
       // Use pluginOptions.nodeIntegration, leave this alone

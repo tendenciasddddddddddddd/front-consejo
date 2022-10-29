@@ -12,7 +12,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                                UNIDAD EDUCATIVA "CARLOS ROMO DAVILA"
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE NOTAS
@@ -20,7 +20,7 @@
                             <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cuba/logo.webp"
                                 alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
@@ -156,7 +156,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                                UNIDAD EDUCATIVA "CARLOS ROMO DAVILA"
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE NOTAS
@@ -164,7 +164,7 @@
                             <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cuba/logo.webp"
                                 alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
@@ -302,7 +302,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                                UNIDAD EDUCATIVA "CARLOS ROMO DAVILA"
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE NOTAS
@@ -310,7 +310,7 @@
                             <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cuba/logo.webp"
                                 alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "

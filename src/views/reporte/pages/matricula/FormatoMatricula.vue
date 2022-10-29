@@ -11,16 +11,16 @@
             <div class="card-header text-center ">
               <div class="row justify-content-between">
                 <div class="col-md-2 text-end">
-                  <img class=" w-50 " src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
+                  <img class=" w-50 " src="../../../../assets/img/cuba/logo.webp" alt="Logo" />
                 </div>
                 <div class="col-md-9">
                   <span class="h6 negros">
-                    UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                    {{settings.unidadeducativa}}
                   </span><br>
                   <span style="margin-top:-10px" class="text-sm text-center negros">
-                    Dirección: Panamericana y Avenida Espejo Teléf: 063731060 
+                    Dirección: {{settings.direccion}} Teléf:  {{settings.telefono}} 
                   </span> <br>
-                  <span class="text-xs negros">El Ángel - Carchi - Ecuador</span>
+                  <span class="text-xs negros"> {{settings.ubicacion}}</span>
                 </div>
                 <div class="col-lg-1  text-md-end ">
                 </div>
@@ -40,7 +40,7 @@
                     <p class="text-justify text-sm negros">
                       Certifico que el(a) Estudiante: <b> {{ item.nombre }}</b>
                       previo los requisitos legales, se matriculó en <b>{{ item.fknivel.nombre }}</b> de la
-                      <b>UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"</b> en el año lectivo: <br>
+                      <b>{{settings.unidadeducativa}}</b> en el año lectivo: <br>
                       <b >{{ item.academico.nombre }}</b>
                     </p>
                   </div>

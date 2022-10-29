@@ -1,46 +1,55 @@
 <template>
   <div>
+    <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
+      <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
+      
+      <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
+       Reportes
+        <section v-if="tabs == 0" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div>
+      <span class="WuKWng"></span>
+      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 1 }" @click="vueInit(1)">
+        Inicio
+        <section v-if="tabs == 1" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div>
+      <span class="WuKWng"></span>
+      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 2 }" @click="vueInit(2)">
+        Eventos
+        <section v-if="tabs == 2" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div>
+      <span class="WuKWng"></span>
+      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 3 }" @click="vueInit(3)">
+        Galeria
+        <section v-if="tabs == 3" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div>
+      <span class="WuKWng"></span>
+      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 4 }" @click="vueInit(4)">
+        Nosotros
+        <section v-if="tabs == 4" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div>
+      <span class="WuKWng"></span>
+      <!-- <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 5 }" @click="vueInit(5)">
+        Asistencia
+        <section v-if="tabs == 5" class="FOQEMQ mt-2">
+          <div class="hPlFoQ"></div>
+        </section>
+      </div> -->
+      </div>
+    </section>
     <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
     <div v-else class="row">
-      <div class="col-lg-2">
-        <div class=" position-sticky top-1">
-          <ul class="nav flex-column bg-white border-radius-lg p-1">
-            <li class="nav-item">
-              <a class="nav-link " :class="{ 's-active': tabs == 0 }" data-scroll="" href="javascript:;"
-                @click="vueInit(0)">
-                <span :class="{ 's-active2': tabs == 0 }" class="text-sm s-text-versel2">Plataforma</span>
-              </a>
-            </li>
-            <li class="nav-item pt-1">
-              <a class="nav-link " :class="{ 's-active': tabs == 1 }" data-scroll="" href="javascript:;"
-                @click="vueInit(1)">
-                <span :class="{ 's-active2': tabs == 1 }" class="text-sm s-text-versel2">Inicio</span>
-              </a>
-            </li>
-            <li class="nav-item pt-1">
-              <a class="nav-link " :class="{ 's-active': tabs == 2 }" data-scroll="" href="javascript:;"
-                @click="vueInit(2)">
-                <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2">Eventos</span>
-              </a>
-            </li>
-
-            <li class="nav-item pt-1">
-              <a class="nav-link  " :class="{ 's-active': tabs == 4 }" data-scroll="" href="javascript:;"
-                @click="vueInit(4)">
-                <span :class="{ 's-active2': tabs == 4 }" class="text-sm s-text-versel2">Galeria</span>
-              </a>
-            </li>
-            <li class="nav-item pt-1">
-              <a class="nav-link  " :class="{ 's-active': tabs == 5 }" data-scroll="" href="javascript:;"
-                @click="vueInit(5)">
-                <span :class="{ 's-active2': tabs == 5 }" class="text-sm s-text-versel2">Nosotros</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-10 ">
+      <div class="col-9">
         <section v-if="tabs == 0">
          <Configure/>
         </section>
@@ -57,6 +66,9 @@
         <section v-if="tabs == 5">
           Nosotros
         </section>
+      </div>
+      <div class="col-3">
+            <img src="../../assets/img/clonar.webp" alt="">
       </div>
     </div>
   </div>

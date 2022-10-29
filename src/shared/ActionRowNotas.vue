@@ -12,10 +12,10 @@
         <div class="col-lg-7">
             <div class="d-flex justify-content-end">
                 <button class="btn btn btnNaranja2 me-2" @click="$emit('toggle')">
-                     Pantalla completa
+                    <svg data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style=""><path d="M15 3h6m0 0v6m0-6l-7 7M9 21H3m0 0v-6m0 6l7-7M3 9V3m0 0h6M3 3l7 7m11 5v6m0 0h-6m6 0l-7-7"></path></svg>
                 </button>
                 <button class="btn btn btnNaranja2 me-2" @click="$emit('open')">
-                     Reporte
+                    <svg data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style=""><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
                 </button>
                 <button class="btn btn btnNaranja" @click="$emit('save')">
                     Guardar cambios

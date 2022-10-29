@@ -18,6 +18,10 @@ export default class IdentityProxy{
         return this.axios.post(this.url+'/auth/forgotPassword',params) //UPDTAE PASS
     }
 
+    resetPasswordUser(id){
+        return this.axios.post(this.url + `/auth/resetPasswordUsers/${id}`) //RESET PASWORD USER EMAIL
+    }
+
     login(params){ 
         return this.axios.post(this.url+'/auth/signin',params)
     }

@@ -5,7 +5,7 @@
         <div>
             <ul>
                 <li v-for="(option) in survey.options" :key="option.id" >
-                    <span v-if="survey.reqq[0].includes(option.id)" class="gordo links2 text-sm ">
+                    <span v-if="survey.reqq[0].toString().includes(option.id)" class="gordo links2 text-sm ">
                         {{ option.text }}
                     </span>
                     <span v-else class="negros text-sm ">

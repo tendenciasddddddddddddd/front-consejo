@@ -41,6 +41,7 @@ export default {
       visible: false,
       ifGrid : false,
       ifyoutuve : false,
+      ifPassword : false
     };
   },
   methods: {
@@ -217,6 +218,19 @@ export default {
         for (let user in this.info) {
           this.userIds.push(this.info[user]._id);
         }
+      }
+    },
+    resetPassword(id) {
+      if (id) {
+        this.ifPassword = true
+        this.$proxies.identityProxy
+          .resetPasswordUser(id)
+          .then(() => {
+            this.ifPassword = false
+          })
+          .catch(() => {
+            this.ifPassword = false
+          });
       }
     },
     deletedSelected: function () {

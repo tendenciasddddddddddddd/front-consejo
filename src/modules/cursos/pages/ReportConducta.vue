@@ -12,7 +12,7 @@
                     <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                     <div class="text-center">
                         <span class="h6 negros">
-                            UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                            UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
                         </span><br>
                         <p class="text-xs text-center negros">
                             REPORTE DE COMPORTAMIENTO
@@ -20,7 +20,7 @@
                         <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                             {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
                     </div>
-                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
                             alt="Logo" /></div>
                 </div>
                 <table class="dataTable-table table s-table-flush "
@@ -152,7 +152,7 @@
                     <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                     <div class="text-center">
                         <span class="h6 negros">
-                            UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                            UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
                         </span><br>
                         <p class="text-xs text-center negros">
                             REPORTE DE COMPORTAMIENTO
@@ -160,7 +160,7 @@
                         <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                             {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
                     </div>
-                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
                             alt="Logo" /></div>
                 </div>
                 <table class="dataTable-table table s-table-flush "
@@ -294,7 +294,7 @@
                     <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                     <div class="text-center">
                         <span class="h6 negros">
-                            UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                            UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
                         </span><br>
                         <p class="text-xs text-center negros">
                             REPORTE DE COMPORTAMIENTO
@@ -302,7 +302,7 @@
                         <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                             {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
                     </div>
-                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/alfonso/alfonso.jpg"
+                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
                             alt="Logo" /></div>
                 </div>
                 <table class="dataTable-table table s-table-flush "

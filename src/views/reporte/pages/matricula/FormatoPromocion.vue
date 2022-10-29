@@ -16,7 +16,7 @@
                                 <div class="col-md-8">
                                     <span class="text-xs negros">COORDINACIÓN ZONAL</span><br>
                                     <span class="h6 negros">
-                                        UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
+                                        {{settings.unidadeducativa}}
                                     </span><br>
                                     <p style="margin-top:-10px" class="text-sm text-center negros">
                                         CERTIFICADO ANUAL DE PROMOCIÓN <br>
@@ -27,7 +27,7 @@
                                    
                                 </div>
                                 <div class="col-lg-2  text-md-end ">
-                                    <img class=" w-50 me-5" src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
+                                    <img class=" w-50 me-5" src="../../../../assets/img/cuba/logo.webp" alt="Logo" />
                                 </div>
                             </div>
 
@@ -153,7 +153,7 @@
                                 </div>
                             </div> <br>
                             <p class="text-end ">
-                                <b class="me-7 text-xxs negros">EL ANGEL, {{ fechasActual }} </b>
+                                <b class="me-7 text-xxs negros">CUBA, {{ fechasActual }} </b>
                             </p>
                         </div>
                     </div>

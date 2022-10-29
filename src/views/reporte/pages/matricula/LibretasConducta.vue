@@ -12,18 +12,19 @@
                         <div class="card-header text-center ">
                             <div class="row justify-content-between">
                                 <div class="col-md-2 text-start">
-                                    <img class=" w-70  ms-3" src="../../../../assets/img/alfonso/alfonso.jpg" alt="Logo" />
+                                    <img class=" w-70  ms-3" src="../../../../assets/img/cuba/logo.webp" alt="Logo" />
                                 </div>
                                 <div class="col-md-9">
-                                    <span class="h6 negros">
-                                        UNIDAD EDUCATIVA DEL MILENIO "ALFONSO HERRERA"
-                                    </span><br>
-                                    <p class="text-xs text-center negros">
-                                        Dirección: Panamericana y Avenida Espejo Teléf: 063731060 <br>
-                                        El Ángel - Carchi - Ecuador
-                                    </p>
-                                </div>
-                                <div class="col-md-1"></div>
+                  <span class="h6 negros">
+                    {{settings.unidadeducativa}}
+                  </span><br>
+                  <span style="margin-top:-10px" class="text-sm text-center negros">
+                    Dirección: {{settings.direccion}} Teléf:  {{settings.telefono}} 
+                  </span> <br>
+                  <span class="text-xs negros"> {{settings.ubicacion}}</span>
+                </div>
+                <div class="col-lg-1   ">
+                </div>
                             </div>
                             <div class="row mt-2  ms-3  me-4">
                                 <div class="col-lg-7 text-xs negros text-start">

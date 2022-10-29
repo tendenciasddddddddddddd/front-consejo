@@ -108,10 +108,14 @@ export default {
     verificarUsuario() {
       this.$proxies._settingProxi.getConfigure()
           .then((x) => {
-              const {rector, secretario,} = x.data[0];
+              const {rector, secretario,unidadeducativa,ubicacion,direccion,telefono} = x.data[0];
               this.settings = {
                 secretario : secretario,
                 rector : rector,
+                unidadeducativa: unidadeducativa,
+                ubicacion: ubicacion,
+                telefono:telefono,
+                direccion: direccion
               }  
           }).catch(() => {
               console.log("Error")

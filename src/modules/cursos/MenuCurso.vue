@@ -48,12 +48,12 @@
         </section>
       </div>
       <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 5 }" @click="vueInit(5)">
+      <!-- <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 5 }" @click="vueInit(5)">
         Asistencia
         <section v-if="tabs == 5" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
-      </div>
+      </div> -->
       </div>
     </section>
     <ProgressBar v-if="isData"></ProgressBar>

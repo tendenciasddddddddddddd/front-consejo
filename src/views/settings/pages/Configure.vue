@@ -5,9 +5,29 @@
             <span style="font-size: 18px;" class=" s-title-page">Configuración de plataforma</span>
             <div v-if="!ifAdd">
                 <div v-if="info.length" >
-                   <div class="w-50">
+                   <div class="w-70">
                     <form @submit.prevent="save">
-                        <p class="parrafo mb-1 mt-2">Rector</p>
+                    <p class="parrafo mb-1 mt-2">Unidad Educativa</p>
+                    <CustomInput v-model="model.unidadeducativa" />
+                    <p class=" text-xs text-danger">
+                      {{ validation.firstError("model.unidadeducativa") }}
+                    </p>
+                    <p class="parrafo mb-1">Ubicación</p>
+                    <CustomInput v-model="model.ubicacion" />
+                    <p class=" text-xs text-danger">
+                      {{ validation.firstError("model.ubicacion") }}
+                    </p>
+                    <p class="parrafo mb-1">Teléfono</p>
+                    <CustomInput v-model="model.telefono" />
+                    <p class=" text-xs text-danger">
+                      {{ validation.firstError("model.telefono") }}
+                    </p>
+                    <p class="parrafo mb-1">Dirección</p>
+                    <CustomInput v-model="model.direccion" />
+                    <p class=" text-xs text-danger">
+                      {{ validation.firstError("model.direccion") }}
+                    </p>
+                    <p class="parrafo mb-1 mt-2">Rector</p>
                     <CustomInput v-model="model.rector" />
                     <p class=" text-xs text-danger">
                       {{ validation.firstError("model.rector") }}
@@ -28,7 +48,7 @@
                       {{ validation.firstError("model.inspector") }}
                     </p>
                     <br>
-                    <a @click="save" type="submit" class="btn btn-vercel ">Actualizar información</a>
+                    <button @click="save" type="submit" class="btn btnNaranja ">Actualizar información</button>
                     </form>
                    </div>
                 </div>
@@ -61,6 +81,10 @@ export default {
             archivo: '',
             ifLoad: false,
             model: {
+                unidadeducativa:'',
+                ubicacion: '',
+                telefono: '',
+                direccion: '',
                 rector: '',
                 vicerector: '',
                 secretario: '',
@@ -105,9 +129,13 @@ export default {
             this.isCarga = true;
             this.$proxies._settingProxi.getConfigure()
                 .then((x) => {
-                    const {_id, inspector, rector, secretario, vicerector} = x.data[0];
+                    const {_id, unidadeducativa, inspector, ubicacion, rector, telefono, secretario, direccion, vicerector} = x.data[0];
                     this.info = x.data;
                     this.ids = _id;
+                    this.model.unidadeducativa = unidadeducativa;
+                    this.model.ubicacion = ubicacion;
+                    this.model.telefono = telefono;
+                    this.model.direccion = direccion;
                     this.model.inspector = inspector;
                     this.model.rector = rector;
                     this.model.secretario = secretario;
@@ -134,6 +162,25 @@ export default {
         },
     },
     validators: { //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
+        'model.unidadeducativa'(value) {
+          return this.$validator
+            .value(value)
+            .required()
+        },
+        'model.ubicacion'(value) {
+          return this.$validator
+            .value(value)
+            .required()
+        }, 'model.telefono'(value) {
+          return this.$validator
+            .value(value)
+            .required()
+        },
+        'model.direccion'(value) {
+          return this.$validator
+            .value(value)
+            .required()
+        },
         'model.inspector'(value) {
           return this.$validator
             .value(value)

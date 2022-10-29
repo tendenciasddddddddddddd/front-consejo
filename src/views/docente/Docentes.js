@@ -1,7 +1,6 @@
 import RestResource from '../../service/isAdmin'
 const restResourceService = new RestResource();
 import Spinner from '../../shared/Spinner';
-import AlertHeader from "../../shared/AlertHeader.vue";
 import Paginate2 from "../../shared/Paginate2.vue";
 import ActionsRow from "../../shared/ActionsRow.vue";
 export default {
@@ -9,7 +8,6 @@ export default {
   components: {
     Spinner,
     DocenteCreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ './components/Add.vue'),
-    AlertHeader,
     GridUser : () => import( /* webpackChunkName: "GridUser" */ '../../components/agGrid/GridUser.vue'),
     Paginate2,
     ActionsRow
@@ -36,6 +34,7 @@ export default {
       ifCreateUpdate: false,
       idUser: null,
       ifGrid : false,
+      ifPassword : false,
     };
   },
   methods: {
@@ -184,6 +183,19 @@ export default {
           })
           .catch(() => {
             this.iseliminaddo = false;
+          });
+      }
+    },
+    resetPassword(id) {
+      if (id) {
+        this.ifPassword = true
+        this.$proxies.identityProxy
+          .resetPasswordUser(id)
+          .then(() => {
+            this.ifPassword = false
+          })
+          .catch(() => {
+            this.ifPassword = false
           });
       }
     },

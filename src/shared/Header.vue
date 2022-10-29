@@ -142,7 +142,8 @@
             :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'}"
             aria-controls="ecommerceExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-              <svg class="icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="_775853201__a" d="M13 7h7c1.1 0 2 .83 2 1.86v9.28c0 1.03-.9 1.86-2 1.86H4c-1.1 0-2-.83-2-1.86V8.86c0-.14.02-.28.05-.42A2 2 0 0 1 2 8V6c0-1.1.9-2 2-2h6.56a2 2 0 0 1 1.9 1.37L13 7zm-1.58 0-.39-1.16a.5.5 0 0 0-.47-.34H4a.5.5 0 0 0-.5.5v1.06c.16-.04.33-.06.5-.06h7.42zM4 8.5c-.3 0-.5.19-.5.36v9.28c0 .17.2.36.5.36h16c.3 0 .5-.19.5-.36V8.86c0-.17-.2-.36-.5-.36H4z"></path></defs><use fill="currentColor" fill-rule="nonzero" xlink:href="#_775853201__a"></use></svg>
+             
+              <svg class="icons" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 3h6.558a2 2 0 0 1 1.898 1.368L12 6h7c1.105 0 2 .831 2 1.857V10h-1.5V7.857c0-.171-.2-.357-.5-.357H3c-.3 0-.5.186-.5.357v9.286c0 .171.2.357.5.357h9V19H3c-1.105 0-2-.831-2-1.857V7.857c0-.142.017-.28.05-.413A2.006 2.006 0 0 1 1 7V5a2 2 0 0 1 2-2Zm7.419 3H3c-.173 0-.34.02-.5.059V5a.5.5 0 0 1 .5-.5h6.558a.5.5 0 0 1 .475.342L10.419 6Zm8.711 6a.62.62 0 0 1 .62.62v2.63h2.63a.62.62 0 0 1 .62.62v.26a.62.62 0 0 1-.62.62h-2.63v2.63a.62.62 0 0 1-.62.62h-.26a.62.62 0 0 1-.62-.62v-2.63h-2.63a.62.62 0 0 1-.62-.62v-.26a.62.62 0 0 1 .62-.62h2.63v-2.63a.62.62 0 0 1 .62-.62h.26Z" fill="currentColor"></path></svg>
             </div>
             <span class="nav-link-text ms-1 mt-1">Módulo matricula</span>
           </a>
@@ -361,10 +362,10 @@
                 Cerrar sesión
               </span>
             </a>
-            <div class="form-check form-switch " style="padding-left: 1.6rem !important;;">
+            <!-- <div class="form-check form-switch " style="padding-left: 1.6rem !important;;">
 <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
 
-</div>
+</div> -->
           </li>
         </div>
         <div v-if="visibl">

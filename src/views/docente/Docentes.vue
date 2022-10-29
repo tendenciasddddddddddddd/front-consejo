@@ -1,6 +1,5 @@
 <template>
   <div >
- <AlertHeader :firsttext="'Gestionar docentes'" :lasttext="'Crea, edita, elimina y filtrar'"></AlertHeader>
         <ActionsRow :longitude="userIds.length" @openModal="openChildDocente2" @remove="remove" @gets="openChildDocente" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid" :ifGrids="1"/>
       
         <Spinner v-if="isLoading"></Spinner>
@@ -47,7 +46,10 @@
                   Fecha mod
                 </th>
                 <th  class="text-uppercase text-center text-xxs font-weight-bolder" >
-                  Accion
+                  estado
+                </th>
+                <th  class="text-uppercase text-center text-xxs font-weight-bolder" >
+                  res
                 </th>
               </tr>
             </thead>
@@ -72,7 +74,9 @@
                   </td>
                 <td class="text-xs colorestabla fuente">{{ item.cedula }}</td>
                 <td class="text-sm text-center colorestabla fuente"> {{ item.email?item.email:'No tiene email' }}</td>
-                <td class="text-xs text-center colorestabla fuente">{{ item.updatedAt.substring(0,10) }}</td>
+                <td class="text-xs text-center colorestabla fuente">
+                    {{ item.updatedAt.substring(0, 10) }}
+                  </td>
                  <td class="text-sm text-center font-weight-normal fuente">
                     <span class="icon">
                       <i
@@ -81,6 +85,10 @@
                       ></i>
                       <i v-else class="fa fa-times"></i>
                     </span>
+                  </td>
+                  
+                  <td class="text-sm text-center ">
+                    <svg v-if="!ifPassword" @click="resetPassword(item._id)" style="cursor:pointer" class="negros" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12.75 14.33v3.03a.75.75 0 0 1-1.5 0v-3.03c-.6-.3-1.03-.94-1.03-1.69 0-1.02.8-1.85 1.78-1.85s1.78.83 1.78 1.85c0 .75-.42 1.4-1.03 1.69zM6 8h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2zm0 1.5a.5.5 0 0 0-.5.5v9c0 .28.22.5.5.5h12a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5H6zM7.5 8H6a6 6 0 1 1 12 0h-1.5a4.5 4.5 0 1 0-9 0z"></path></svg>
                   </td>
               </tr>
             </tbody>
@@ -93,6 +101,11 @@
     <div v-if="ifGrid">
       <GridUser :typo="'DOCS'" :role="'Docente'" @myEventClosedAgGrid="closeAgGrid" @clickAlumnos="refreshData"/>
     </div>
+    <div class="fixed-plugin">
+    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px;  box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+      Ver video explicativo
+    </a>
+  </div>
   </div>
 </template>
 <script src="./Docentes.js"></script>

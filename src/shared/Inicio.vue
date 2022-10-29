@@ -8,7 +8,9 @@
       step_7
     " id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-1">
-        <span v-if="!$store.state.isAppMobile" class="h5 mt-2" style="color: #8b3dff;">UEMAH
+        <span v-if="!$store.state.isAppMobile" class="h5 mt-2">
+          <img width="28" src="../assets/img/logoss.webp" alt="">
+          <span style="color:#8b3dff">UEMAH</span>
          
         </span> 
        

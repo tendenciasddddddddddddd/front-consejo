@@ -1667,8 +1667,9 @@ body.modal-open {
 .FOQEMQ {
   flex-shrink: 0;
   position: relative;
-  height: 5px;
+  height: 3px;
   width: 100%;
+  margin-left: -10px;
 }
 .hPlFoQ {
   width: 100px;
@@ -1677,6 +1678,6 @@ body.modal-open {
   background-color: #8b3dff;
 }
 .canvaActive {
-  font-weight: 700;
+  font-weight: 600;
   color: #000 !important;
 }
