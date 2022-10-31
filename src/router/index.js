@@ -102,6 +102,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "Planificacion" */ '../views/distributivo/Planificacion.vue'),
   },
 
+  { //-------------------------------------DISTRIBUTIVO------------------------------
+    path: '/tutores',
+    name: '4444',
+    component: () => import( /* webpackChunkName: "Planificacion" */ '../views/distributivo/GridTutores.vue'),
+  },
   ////------------------------------------REPORTES-----------------------------
   {
     path: '/opciones-reportes',
@@ -116,6 +121,13 @@ const routes = [{
     component: () => import( /* webpackChunkName: "Setting" */ '../views/settings/Setting.vue'),
   },
 
+   ////------------------------------------SETTING-----------------------------
+   {
+    path: '/apps',
+    name: 'app1',
+    component: () => import( /* webpackChunkName: "Setting" */ '../views/settings/Apps.vue'),
+  },
+
   ////------------------------------------DOCENTES-----------------------------
   {
     path: '/perfil',
@@ -126,6 +138,11 @@ const routes = [{
     path: '/opciones-curso',
     name: 'd2',
     component: () => import( /* webpackChunkName: "Cursos" */ '../modules/cursos/Cursos.vue'),
+  },
+  {
+    path: '/tutoresDocente',
+    name: 'dh',
+    component: () => import( /* webpackChunkName: "TutoresDocente" */ '../modules/tutores/TutoresDocente'),
   },
   {
     path: '/zoom',

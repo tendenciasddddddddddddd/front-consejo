@@ -12,7 +12,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
+                                 {{ settings.unidadeducativa }}
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE SUPLETORIOS
@@ -20,8 +20,7 @@
                             <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>  <span class="negros text-xs">{{data.materia}}</span> 
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
-                                alt="Logo" /></div>
+                        <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
                         style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
@@ -88,22 +87,28 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-around mt-6">
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>RECTOR/A</b></span>
-                        </div>
-                        <div>
-                            <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
-                        </div>
-                        </div>
-                    </div>
+                   <div class="d-flex justify-content-around mt-6">
+                                <div class="text-center">
+                                    <span class="h6 pb-0">
+                                        <b>__________________________________</b>
+                                    </span> <br>
+                                    <p class="negros text-sm">
+                                        <b>{{ settings.rector }}</b> <br>
+                                        RECTOR/A
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="text-center">
+                                        <span class="h6 pb-0">
+                                            <b>__________________________________</b>
+                                        </span> <br>
+                                        <p class="negros text-sm">
+                                            <b>{{ nombre }}</b> <br>
+                                            DOCENTE
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                      </div>
                 </div>
                  
@@ -117,7 +122,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
+                                 {{ settings.unidadeducativa }}
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE SUPLETORIOS
@@ -125,8 +130,7 @@
                             <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>  <span class="negros text-xs">{{data.materia}}</span> 
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
-                                alt="Logo" /></div>
+                        <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
                         style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
@@ -193,22 +197,28 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-around mt-6">
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>RECTOR/A</b></span>
-                        </div>
-                        <div>
-                            <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
-                        </div>
-                        </div>
-                    </div>
+                   <div class="d-flex justify-content-around mt-6">
+                                <div class="text-center">
+                                    <span class="h6 pb-0">
+                                        <b>__________________________________</b>
+                                    </span> <br>
+                                    <p class="negros text-sm">
+                                        <b>{{ settings.rector }}</b> <br>
+                                        RECTOR/A
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="text-center">
+                                        <span class="h6 pb-0">
+                                            <b>__________________________________</b>
+                                        </span> <br>
+                                        <p class="negros text-sm">
+                                            <b>{{ nombre }}</b> <br>
+                                            DOCENTE
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                      </div>
                         </div>
                        
@@ -224,7 +234,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
+                                 {{ settings.unidadeducativa }}
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE SUPLETORIOS
@@ -232,8 +242,7 @@
                             <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>  <span class="negros text-xs">{{data.materia}}</span> 
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
-                                alt="Logo" /></div>
+                        <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
                         style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
@@ -300,22 +309,28 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-around mt-6">
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>RECTOR/A</b></span>
-                        </div>
-                        <div>
-                            <div class="text-center">
-                            <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                            </span> <br>
-                          <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
-                        </div>
-                        </div>
-                    </div>
+                   <div class="d-flex justify-content-around mt-6">
+                                <div class="text-center">
+                                    <span class="h6 pb-0">
+                                        <b>__________________________________</b>
+                                    </span> <br>
+                                    <p class="negros text-sm">
+                                        <b>{{ settings.rector }}</b> <br>
+                                        RECTOR/A
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="text-center">
+                                        <span class="h6 pb-0">
+                                            <b>__________________________________</b>
+                                        </span> <br>
+                                        <p class="negros text-sm">
+                                            <b>{{ nombre }}</b> <br>
+                                            DOCENTE
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                      </div>
                         </div>
                        
@@ -339,7 +354,9 @@ export default {
         return {
             isprint: false,
             statusbar: "",
-            data : ''
+            data : '',
+            settings: {},
+            nombre: ''
         }
     },
     watch: {
@@ -348,6 +365,10 @@ export default {
         }
     },
     methods: {
+        inforUsers() {
+            const info = JSON.parse(localStorage.getItem('Xf'));
+            if (info) this.nombre = info.nombre;
+        },
         initiaSetap(){
             this.data = JSON.parse(localStorage.getItem("myCourse"));
         },
@@ -375,12 +396,26 @@ export default {
             } else{
               return 'Error';
             }
-        }
+        },
+        initialSetup() {
+            this.$proxies._settingProxi.getConfigure()
+                .then((x) => {
+                    const { rector, logo, unidadeducativa } = x.data[0];
+                    this.settings = {
+                        rector: rector,
+                        unidadeducativa: unidadeducativa,
+                        logo: logo
+                    }
+                    setTimeout(() => this.generatePDF(), 2000);
+                }).catch(() => {
+                    console.log("Error")
+                });
+        },
     },
     mounted() {
-        this.rowSelection = 'multiple';
         this.initiaSetap()
-        setTimeout(() => this.generatePDF(), 1000);
+        this.inforUsers()
+        this.initialSetup();
     },
 
 }

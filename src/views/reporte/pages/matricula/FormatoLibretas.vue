@@ -3,7 +3,7 @@
         <div v-if="ifload">Trabajando...</div>
         <section v-else>
             <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-                :paginate-elements-by-height="1400" :filename="'libretas'" :pdf-quality="1.5" :manual-pagination="false"
+                :paginate-elements-by-height="1400" :filename="'libretas'" :pdf-quality="2" :manual-pagination="false"
                 pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape" pdf-content-width="1128px"
                 @progress="onProgress($event)" ref="html2Pdf">
                 <section slot="pdf-content">
@@ -12,7 +12,7 @@
                                 <div class=" text-center ">
                                     <div class="row justify-content-between">
                                         <div class="col-md-1 text-start">
-                                            <img class=" w-100 " src="../../../../assets/img/cuba/logo.webp"
+                                            <img class=" w-90 " :src="settings.logo"
                                                 alt="Logo" />
                                         </div>
                                         <div class="col-md-11">
@@ -313,7 +313,7 @@
                                     </div>
                                 </div>
                         </div>
-                        <div style="page-break-before:always;"></div>
+                        <div v-if="aux<12" style="page-break-before:always;"></div>
                     </div>
                 </section>
             </vue-html2pdf>
@@ -347,7 +347,8 @@ export default {
             equi2: 0,
             equi80: 0,
             equi20: 0,
-            total: 0
+            total: 0,
+            aux : 0
         }
     },
     watch: {
@@ -392,6 +393,7 @@ export default {
                     let calificacionesArray = element.calificaciones;
                     let calificaciones = []
                     for (let j = 0; j < calificacionesArray.length; j++) {
+                        this.aux = this.aux+1
                         const res = calificacionesArray[j];
                         let materia = res.materia;
                         let a1 = res.notas[this.numQuimestre].a1;

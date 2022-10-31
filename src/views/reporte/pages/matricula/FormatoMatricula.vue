@@ -11,7 +11,7 @@
             <div class="card-header text-center ">
               <div class="row justify-content-between">
                 <div class="col-md-2 text-end">
-                  <img class=" w-50 " src="../../../../assets/img/cuba/logo.webp" alt="Logo" />
+                  <img class=" w-50 " :src="settings.logo" alt="Logo" />
                 </div>
                 <div class="col-md-9">
                   <span class="h6 negros">

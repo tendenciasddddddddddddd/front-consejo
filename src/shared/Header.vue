@@ -108,7 +108,7 @@
           </a>
           <div class="collapse " :class="{'show':
           $route.name === '1111'||$route.name === '1234'||
-          $route.name === '2222' ||$route.name === '3333'}" id="applicationsExamples">
+          $route.name === '2222' ||$route.name === '3333'||$route.name === '4444'}" id="applicationsExamples">
             <ul class="nav ms-4 ps-3">
               <li :class="{'active': $route.name === '1111'}" class="nav-item " v-if="user.roles.includes('Admin')">
                 <router-link to="/Cursos" :class="{'active': $route.name === '1111'}" class="nav-link ">
@@ -128,6 +128,12 @@
                   <span class="sidenav-normal letras fuente">Distributivo </span>
                 </router-link>
               </li>
+              <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
+                <router-link to="/tutores" :class="{'active': $route.name === '4444'}" class="nav-link ">
+                  <span class="sidenav-mini-icon"> T </span>
+                  <span class="sidenav-normal letras fuente">Tutores</span>
+                </router-link>
+              </li>
               <li :class="{'active': $route.name === '3333'}" class="nav-item ">
                 <router-link to="/planificacion" :class="{'active': $route.name === '3333'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> P </span>
@@ -145,7 +151,7 @@
              
               <svg class="icons" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 3h6.558a2 2 0 0 1 1.898 1.368L12 6h7c1.105 0 2 .831 2 1.857V10h-1.5V7.857c0-.171-.2-.357-.5-.357H3c-.3 0-.5.186-.5.357v9.286c0 .171.2.357.5.357h9V19H3c-1.105 0-2-.831-2-1.857V7.857c0-.142.017-.28.05-.413A2.006 2.006 0 0 1 1 7V5a2 2 0 0 1 2-2Zm7.419 3H3c-.173 0-.34.02-.5.059V5a.5.5 0 0 1 .5-.5h6.558a.5.5 0 0 1 .475.342L10.419 6Zm8.711 6a.62.62 0 0 1 .62.62v2.63h2.63a.62.62 0 0 1 .62.62v.26a.62.62 0 0 1-.62.62h-2.63v2.63a.62.62 0 0 1-.62.62h-.26a.62.62 0 0 1-.62-.62v-2.63h-2.63a.62.62 0 0 1-.62-.62v-.26a.62.62 0 0 1 .62-.62h2.63v-2.63a.62.62 0 0 1 .62-.62h.26Z" fill="currentColor"></path></svg>
             </div>
-            <span class="nav-link-text ms-1 mt-1">Módulo matricula</span>
+            <span class="nav-link-text ms-1 mt-1">Matriculas</span>
           </a>
           <div class="collapse " id="ecommerceExamples" :class="{'show':
                     $route.name === '11'||
@@ -176,7 +182,7 @@
           </div>
         </li>
         <li class="nav-item" v-if="user.roles.includes('Docente')">
-          <a :class="{'actived': $route.name === 'd2'||$route.name === 'd4'||$route.name === 'dr'}"
+          <a :class="{'actived': $route.name === 'd2'||$route.name === 'dh'||$route.name === 'dr'}"
             data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples" role="button"
             aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
@@ -193,19 +199,24 @@
           </a>
           <div class="collapse " id="authExamples" :class="{'show':
           $route.name === 'd2'||
-          $route.name === 'd4'||
+          $route.name === 'dh'||
           $route.name === 'dr'}">
             <ul class="nav ms-4 ps-3">
 
-              <li :class="{'active': $route.name === 'd2'||$route.name === 'd4'}" class="nav-item ">
-                <router-link to="/opciones-curso" :class="{'active': $route.name === 'd2'||$route.name === 'd4'}"
+              <li :class="{'active': $route.name === 'd2'}" class="nav-item ">
+                <router-link to="/opciones-curso" :class="{'active': $route.name === 'd2'}"
                   class="nav-link ">
                   <span class="sidenav-mini-icon"> C </span>
                   <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
               </li>
-
-
+              <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
+                <router-link to="/tutoresDocente" :class="{'active': $route.name === 'dh'}"
+                  class="nav-link ">
+                  <span class="sidenav-mini-icon"> L </span>
+                  <span class="sidenav-normal letras fuente">Libretas </span>
+                </router-link>
+              </li>
 
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">
                 <router-link to="/zoom" :class="{'active': $route.name === 'dr'}" class="nav-link ">
@@ -335,6 +346,26 @@
                 <router-link to="/settings" :class="{'active': $route.name === 's1'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> S </span>
                   <span class="sidenav-normal letras fuente">Setting </span>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item" id="step_5">
+          <a :class="{'actived': $route.name === 'app1'}" data-bs-toggle="collapse" href="#pageApps" class="nav-link "
+            aria-controls="pageApps" role="button" aria-expanded="false">
+            <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
+              <svg class="icons" style="color: #000;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5 4h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6-6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6-6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM5 16h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"></path></svg>
+              
+            </div>
+            <span class="nav-link-text ms-1 mt-1">Apps</span>
+          </a>
+          <div :class="{'show': $route.name === 'app1'}" class="collapse " id="pageApps">
+            <ul class="nav ms-4 ps-3">
+              <li :class="{'active': $route.name === 'app1'}" class="nav-item ">
+                <router-link to="/apps" :class="{'active': $route.name === 'app1'}" class="nav-link ">
+                  <span class="sidenav-mini-icon"> A </span>
+                  <span class="sidenav-normal letras fuente">Aplicaciones </span>
                 </router-link>
               </li>
             </ul>

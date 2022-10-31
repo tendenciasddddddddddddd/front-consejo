@@ -1,19 +1,16 @@
 <template>
   <div>
-    <fullscreen v-model="fullscreen" style="background: #fff;">
       <Astronauta v-if="isPrint"/>
       <div v-else>
-        <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch" @toggle="toggle"/>
+        <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
       </div>
-    <section style="height: calc(100vh - 260px);">
+    <section style="height: calc(100vh - 165px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
       
       @grid-ready="onGridReady">
     </ag-grid-vue>
     </section>
-    </fullscreen>
-    
     <div v-if="iftask">
       <ReporteSupletorio @EventClosed="closed" @getData="getDataAll" :rowData="rowData" @changeStatus="changeStatus" />
     </div>
@@ -91,7 +88,6 @@
         quimestre: 'p1',
         gridApi: null,
         iftask: false,
-        fullscreen: false,
         ifsaved: false
       };
     },
@@ -104,9 +100,6 @@
       this.onGridReadys();
     },
     methods: {
-      toggle () {
-        this.fullscreen = !this.fullscreen
-      },
       onBtExport() {
         this.gridApi.exportDataAsExcel();
       },
@@ -241,7 +234,7 @@
   };
   var numberToColor = function (val) {
     if (val < 7) {
-      return '#FEB6C4';
+      return '#ffd1d3';
     } else if (val >= 7 && val <= 10) {
       return '#aaffaa';
     } else {

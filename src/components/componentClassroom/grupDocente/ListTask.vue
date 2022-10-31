@@ -1,10 +1,9 @@
 <template>
   <div >
     <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
-    <div v-if="displayedArticles.length">
-        <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
-        
-        <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
+    <div class="row" v-if="displayedArticles.length">
+        <div class="col-sm-6 liTask" v-for="(item, index) in displayedArticles" :key="item.id">
+          <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
             <div class="d-flex py-1">
               <div class="form-check my-auto">
                 <input class="form-check-input cheka" type="checkbox" v-model="isSelecUsers" :value="item._id"
@@ -26,16 +25,14 @@
               <div class="mt-1 ms-6"><span class="text-sm negros">
                 <TimeEgo :fecha="item.fechad" />
               </span></div>
-              
             </div>
-           
           <div   v-if="!$store.state.isAppMobile" class="dropstart ms-auto">
             <div class="d-flex ">
-             
-              <button class="btn btnNaranja2 ms-3">Duplicar tarea</button>
+              <button class="btn btnNaranja2 ms-3">Duplicar</button>
             </div>
           </div>
         </div>
+
       </div>
        <Paginate :numPages="numPages"  :page="page" :total="object.length" @pagechanged="onPageChange"></Paginate>
      
@@ -86,7 +83,7 @@ export default {
       searchQuery: '',
         //Pagina 
        page: 1,
-       perPage: 4,
+       perPage: 8,
        pages: [],
        numPages:0,
        ifChildRevision: false

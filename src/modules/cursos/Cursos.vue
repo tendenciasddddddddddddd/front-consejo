@@ -15,9 +15,7 @@
                                     <span class="avatar_avatar__OLijw stack_stack__A16oG"
                                         v-bind:style="{'background':colorsh[index]}">
                                         <span class="in-avatar text-center">
-
                                             <b style="font-weight: 400;">{{item.fmateria? item.fmateria.nombre.slice(0,2).toUpperCase(): 'NA'}}</b>
-                                          
                                         </span>
                                     </span>
                                     <div class="stack_stack__A16oG ms-3">
@@ -171,7 +169,8 @@ export default {
             for (let i = 0; i < this.info.length; i++) {
                 const res = this.info[i];
                 if (res._id == id) {
-                    var myCourse = {
+                    try {
+                        var myCourse = {
                         paralelo: res.paralelo,
                         nombre: res.nombre,
                         materia: res.fmateria.nombre,
@@ -184,9 +183,18 @@ export default {
                     localStorage.removeItem("myCourse");
                     if (!localStorage.getItem("myCourse")) {
                         localStorage.setItem("myCourse", JSON.stringify(myCourse));
-                        this.$router.push({ path: `/menuCurso/${id}` });
+                        if (res.fnivel.num ==1||res.fnivel.num ==2||res.fnivel.num ==3){
+                            this.$dialog.alert('Módulo Inicial 1, Inicial 2 y Primer año en mantenimiento')
+                        } else{
+                            this.$router.push({ path: `/menuCurso/${id}` });
+                        }
                     }
                     break;
+                    } catch (error) {
+                        this.$dialog.alert('No se puede mostrar este curso')
+                        console.log(error);
+                        break;
+                    }  
                 }
             }
         },
@@ -198,7 +206,6 @@ export default {
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
                         this.info = x.data;
-                        // console.log(this.info);
                         this.isData = false;
                         this.$Progress.finish();
                     })
@@ -215,8 +222,8 @@ export default {
             this.getData();
         },
         verificarUsuario() {
-            let text_1 = 'Gestión'
-            let text_2 = 'Cursos'
+            let text_1 = 'Cursos'
+            let text_2 = 'Carga Horaria'
             this.$store.commit('updateHeader', { text_1, text_2 })
             if (!restResourceService.docente(this.roles)) {
                 this.$router.push("/");

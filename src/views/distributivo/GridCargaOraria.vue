@@ -197,10 +197,10 @@ export default {
         });
     },
     onBtAdd() {
-      var num = this.rowData.length + 1;
+    //  var num = this.rowData.length + 1;
       var array = []
       array.push({ nombre: 'En blanco', paralelo: 'En blanco', curso: 'En blanco', materia: 'En blanco' })
-      this.gridApi.applyTransaction({ add: array, addIndex: num, });
+      this.gridApi.applyTransaction({ add: array, addIndex: 0, });
     },
     clearData() {
       var selectedRowData = this.gridApi.getSelectedRows();

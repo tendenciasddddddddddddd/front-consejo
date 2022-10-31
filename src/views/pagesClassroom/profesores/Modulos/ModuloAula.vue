@@ -1,18 +1,11 @@
 <template>
   <div>
-    <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
+    <ScrimModal @close="$router.go(-1)"> 
+      <template v-slot:header>{{collection.materia}} </template>
+      <template v-slot:body>
+        <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
       <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
-        <div class="" @click="$router.go(-1)">
-          <button class="btn btnNaranja2 mt-2">
-            <svg class="me-2" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="24" style="color: #000;">
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-              </svg>
-          </button>
-         </div>
-        <span class="WuKWng"></span>
+       
       <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
         Tareas
         <section v-if="tabs == 0" class="FOQEMQ mt-2">
@@ -134,7 +127,15 @@
         </section>
       </div>
     </div>
-    <br> <br>
+      </template>
+      <template v-slot:footer>
+        <button @click="$router.go(-1)"  class="btn btnNaranja2 me-2">
+          Salir de aqui
+        </button>
+      </template>
+     </ScrimModal>
+    
+    
   </div>
 </template>
 

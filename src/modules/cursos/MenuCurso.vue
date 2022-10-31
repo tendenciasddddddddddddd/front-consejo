@@ -1,61 +1,28 @@
 <template>
-  <div>
-    <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
-      <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
-        <div class="" @click="$router.go(-1)">
-          <button class="btn btnNaranja2 mt-2">
-            <svg class="me-2" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="24" style="color: #000;">
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-              </svg>
-          </button>
-         </div>
-        <span class="WuKWng"></span>
-      <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
-        Notas
-        <section v-if="tabs == 0" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 1 }" @click="vueInit(1)">
-        Supletorios
-        <section v-if="tabs == 1" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 2 }" @click="vueInit(2)">
-        Proyectos
-        <section v-if="tabs == 2" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 3 }" @click="vueInit(3)">
-        Conducta
-        <section v-if="tabs == 3" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 4 }" @click="vueInit(4)">
-        Planificación
-        <section v-if="tabs == 4" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <!-- <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 5 }" @click="vueInit(5)">
-        Asistencia
-        <section v-if="tabs == 5" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div> -->
-      </div>
-    </section>
+    <ScrimModal @close="$router.go(-1)">
+      <template v-slot:header>
+    <div class="fjrDCGRR_tab">
+                  <img class="mt-1" width="45" height="45" src="https://static.canva.com/web/images/a360aa861ca5d2ba3d1213b62d63cc21.png" alt="">
+                 <div @click="tabs=0" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 0 }">
+                  Notas
+                   <span   :class="{ 'eeEHPkk': tabs == 0 }"></span>
+                 </div>
+                 <div @click="tabs=3" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 3 }">Conducta
+                     <span   :class="{ 'eeEHPkk': tabs == 3 }"></span>
+                   </div>
+                   <div @click="tabs=2" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 2 }">Proyectos
+                     <span   :class="{ 'eeEHPkk': tabs == 2 }"></span>
+                   </div>
+                   <div @click="tabs=1" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 1 }">Supletorios
+                     <span   :class="{ 'eeEHPkk': tabs == 1 }"></span>
+                   </div>
+                   <div @click="tabs=4" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 4 }">Planificación
+                     <span   :class="{ 'eeEHPkk': tabs == 4 }"></span>
+                   </div>
+              </div>
+       </template>
+      <template v-slot:body>
+   
     <ProgressBar v-if="isData"></ProgressBar>
     <div v-else class="row" >
       <div class="col-lg-2" v-if="$store.state.isAppMobile">
@@ -128,9 +95,14 @@
           En desarrollo
         </section>
       </div>
-    </div> 
-    <br>
-  </div>
+    </div>
+      </template>
+      <template v-slot:footer>
+        <button @click="$router.go(-1)"  class="btn btnNaranja2 me-3">
+          Salir de aqui
+        </button>
+      </template>
+    </ScrimModal>
 </template>
 
 <script>
@@ -140,10 +112,11 @@ import quialifyservice from "./pages/services";
 const ResultServiceNota = new quialifyservice();
 import ProgressBar from "../../shared/ProgressBar";
 import Calificaciones from "./pages/Calificaciones.vue";
+import ScrimModal from "../../shared/ScrimModal2"
 export default {
   name: 'ModuloAula',
   components: {
-    ProgressBar, Calificaciones,
+    ProgressBar, Calificaciones, ScrimModal,
     Planificacion: () => import( /* webpackChunkName: "Planificacions" */ './pages/Planificacion.vue'),
     Supletorios: () => import( /* webpackChunkName: "Supletorios" */ './pages/Supletorios.vue'),
     Comportamiento: () => import( /* webpackChunkName: "Comportamiento" */ './pages/Comportamiento.vue'),
@@ -179,12 +152,10 @@ export default {
       collectionTasks: [],
       idDistributivo: '',
       planificacion: '',
+      
     }
   },
   methods: {
-    close(){
-      this.$router.go(-1);
-    },
     LoadCourse: function () {
       const seccio = JSON.parse(localStorage.getItem("myCourse")); //quimestre
       const info = JSON.parse(localStorage.getItem("Xf"));
@@ -302,41 +273,12 @@ export default {
     },
     vueInit: function(num) {
       this.tabs = num;
-      let text_1 = this.mate + ' - ' + this.para;
-      let text_2 = ''
-      switch (num) {
-        case 0:
-          text_2= 'Notas';
-          this.$store.commit('updateHeader',{text_1, text_2})
-          break;
-        case 1:
-          text_2= 'Supletorios';
-          this.$store.commit('updateHeader',{text_1, text_2})
-          break;
-        case 2:
-          text_2= 'Proyectos escolares';
-          this.$store.commit('updateHeader',{text_1, text_2})
-          break;
-        case 3:
-          text_2= 'Conducta';
-          this.$store.commit('updateHeader',{text_1, text_2})
-          break;
-        case 4:
-          text_2= 'Planificación';
-          this.$store.commit('updateHeader',{text_1, text_2})
-          break;
-         case 5:
-          text_2= 'Asistencia';
-          this.$store.commit('updateHeader',{text_1, text_2})
-          break;
-        default:
-          break;
-      }
     },
     verificarUsuario() {
       if (!restResourceService.docente(this.roles)) this.$router.push("/");
       this.LoadCourse();
     },
+    
     toast(message) {
       this.$toasted.info(message, {
         duration: 2300,

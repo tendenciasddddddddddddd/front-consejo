@@ -40,7 +40,7 @@ export default {
         <img alt='Image placeholder' style='height:130px;margin-top: 1px !important;' class='mx-4 mt-n6' src='${image}'>
         <p class='text-sm gordo mt-2 links2'><i class='fa fa-cloud-upload mr-2'></i>&nbsp;&nbsp;Seleccionar un archivo </p>
         `,
-                maxFilesize: 2,
+                maxFilesize: 4,
                 maxFiles: 1,
                 thumbnailHeight: 140,
             },

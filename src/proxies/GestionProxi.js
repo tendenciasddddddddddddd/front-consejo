@@ -103,12 +103,20 @@ export default class GestionProxi {
         return this.axios.put(this.url + `/distributivo/planificacion/${id}`, params);
     }
 
-    updateInfoDocentes(id) {
-        return this.axios.get(this.url + `/distributivo/nuedist?id=${id}`);
+    async updateInfoDocentes(id) {
+        return await this.axios.get(this.url + `/distributivo/nuedist?id=${id}`);
     }
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
+    getAllGridTutor() {
+        return this.axios.get(this.url + `/tutores/fulltutor`);
+    }
+    
+    createArrayTutor(params) {
+        return this.axios.post(this.url + '/tutores/many/', params);
+    }
 
-
-
+    async getTutorDocentes(id) {
+        return await this.axios.get(this.url + `/tutores/nuedist?id=${id}`);
+    }
 }

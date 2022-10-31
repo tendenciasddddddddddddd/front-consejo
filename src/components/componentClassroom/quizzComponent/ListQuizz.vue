@@ -1,8 +1,8 @@
 <template>
   <div>
     <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @deletedSelected="deletedSelect" @remove="remove" @getDataAlls="getDataAll" @gets="editTask" @openModal="openModal" @selectAll="selectAlls"/>
-     <div v-if="displayedArticles.length">
-      <div class=" liTask" v-for="(item, index) in displayedArticles" :key="item.id">
+     <div class="row" v-if="displayedArticles.length">
+      <div class="col-sm-6 liTask" v-for="(item, index) in displayedArticles" :key="item.id">
         <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp " :class="[`animations-${index}`]">
             <div class="d-flex py-1">
               <div class="form-check my-auto">

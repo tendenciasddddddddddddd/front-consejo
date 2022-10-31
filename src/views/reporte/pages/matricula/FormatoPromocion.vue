@@ -27,7 +27,7 @@
                                    
                                 </div>
                                 <div class="col-lg-2  text-md-end ">
-                                    <img class=" w-50 me-5" src="../../../../assets/img/cuba/logo.webp" alt="Logo" />
+                                    <img class=" w-50 me-5" :src="settings.logo" alt="Logo" />
                                 </div>
                             </div>
 

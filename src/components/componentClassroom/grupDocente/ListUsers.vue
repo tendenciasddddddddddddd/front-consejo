@@ -3,8 +3,8 @@
         <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs"
             @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @selectAll="selectAlls" />
         <NoFound v-if="displayedArticles.length == 0" />
-        <section v-else>
-            <div v-for="(item, index) in displayedArticles" :key="item.id" class="liTask mt-2">
+        <section  class="row" v-else>
+            <div v-for="(item, index) in displayedArticles" :key="item.id" class="liTask  col-sm-6">
                 <div class="d-flex cajasTask fadeIn1 animate__animated animate__fadeInUp "
                     :class="[`animations-${index}`]">
                     <div class="d-flex py-1">
@@ -55,7 +55,7 @@ export default {
             allSelected: false,
             searchQuery: '',
             page: 1,
-            perPage: 4,
+            perPage: 8,
             pages: [],
             numPages: 0,
         }

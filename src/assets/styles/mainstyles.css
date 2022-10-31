@@ -595,22 +595,22 @@ margin-bottom: 12px!important;
 .fjrDCGRR_tab {
   display: flex;
   margin-bottom: -1px;
-  border-bottom: 1px solid rgb(203, 214, 226);
 }
 .inn_tab{
-  font-size: 16px;
-  padding: 12px 28px;
-  color: rgb(51, 71, 91);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 18px 28px;
   position: relative;
   transition-property: color;
   white-space: nowrap;
+  cursor: pointer;
 }
 .eeEHPkk {
   transition: all 150ms ease-out 0s;
   background-color: currentcolor;
   border-radius: 1px;
   bottom: -2.5px;
-  height: 5px;
+  height: 3px;
   left: 0px;
   position: absolute;
   width: 100%;
@@ -632,12 +632,22 @@ margin-bottom: 12px!important;
 .toasted.toasted-primary .action {
   color: white !important;
 }
+.card.card-background:after {
+  background: linear-gradient(to top right,#3123af 0,#0bf) !important;
+}
+.formatos{
+  border: 0.0625rem solid #dadce0;
+    background-color: #fff;
+   
+    border-radius: 0.5rem;
+}
 .cajasTask {
-   background-color: #ffffff; 
-   padding: 0.7rem;
-  border-radius: 5px;
-  transition: all 0.3s ease-out;
-  box-shadow: 0 2px 4px rgb(174 190 205 / 30%), 0 0 0 1px rgb(0 0 0 / 3%);
+  border: 1px solid rgb(57 76 96 / 15%);
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease-out;
+  /* box-shadow: 0 2px 4px rgb(174 190 205 / 30%), 0 0 0 1px rgb(0 0 0 / 3%); */
 }
 .cajasTask:hover {
   box-shadow: 0 5px 8px 0 rgb(35 47 62 / 29%);

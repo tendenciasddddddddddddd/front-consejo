@@ -12,7 +12,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA "CARLOS ROMO DAVILA"
+                                 {{settings.unidadeducativa}}
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE NOTAS
@@ -20,7 +20,7 @@
                             <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cuba/logo.webp"
+                        <div class="text-end"><img class="mt-2 w-25 me-3" :src="settings.logo"
                                 alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
@@ -133,14 +133,20 @@
                             <span class="h6 pb-0">
                                 <b>__________________________________</b>
                             </span> <br>
-                            <span class="negros text-sm"><b>RECTOR/A</b></span>
+                            <p class="negros text-sm">
+                                <b>{{settings.rector}}</b> <br>
+                                RECTOR/A
+                            </p>
                         </div>
                         <div>
                             <div class="text-center">
                                 <span class="h6 pb-0">
                                     <b>__________________________________</b>
                                 </span> <br>
-                                <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                                <p class="negros text-sm">
+                                    <b>{{nombre}}</b> <br>
+                                     DOCENTE 
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -156,7 +162,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA "CARLOS ROMO DAVILA"
+                                 {{settings.unidadeducativa}}
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE NOTAS
@@ -164,7 +170,7 @@
                             <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cuba/logo.webp"
+                        <div class="text-end"><img class="mt-2 w-25 me-3" :src="settings.logo"
                                 alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
@@ -277,14 +283,20 @@
                             <span class="h6 pb-0">
                                 <b>__________________________________</b>
                             </span> <br>
-                            <span class="negros text-sm"><b>RECTOR/A</b></span>
+                            <p class="negros text-sm">
+                                <b>{{settings.rector}}</b> <br>
+                                RECTOR/A
+                            </p>
                         </div>
                         <div>
                             <div class="text-center">
                                 <span class="h6 pb-0">
                                     <b>__________________________________</b>
                                 </span> <br>
-                                <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                                <p class="negros text-sm">
+                                    <b>{{nombre}}</b> <br>
+                                     DOCENTE 
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -302,7 +314,7 @@
                         <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
                         <div class="text-center">
                             <span class="h6 negros">
-                                UNIDAD EDUCATIVA "CARLOS ROMO DAVILA"
+                               {{settings.unidadeducativa}}
                             </span><br>
                             <p class="text-xs text-center negros">
                                 REPORTE DE NOTAS
@@ -310,7 +322,7 @@
                             <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
                                 {{data.paralelo}}</span>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cuba/logo.webp"
+                        <div class="text-end"><img class="mt-2 w-25 me-3" :src="settings.logo"
                                 alt="Logo" /></div>
                     </div>
                     <table class="dataTable-table table s-table-flush "
@@ -423,14 +435,20 @@
                             <span class="h6 pb-0">
                                 <b>__________________________________</b>
                             </span> <br>
-                            <span class="negros text-sm"><b>RECTOR/A</b></span>
+                            <p class="negros text-sm">
+                                <b>{{settings.rector}}</b> <br>
+                                RECTOR/A
+                            </p>
                         </div>
                         <div>
                             <div class="text-center">
                                 <span class="h6 pb-0">
                                     <b>__________________________________</b>
                                 </span> <br>
-                                <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                                <p class="negros text-sm">
+                                    <b>{{nombre}}</b> <br>
+                                     DOCENTE 
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -458,6 +476,8 @@ export default {
             statusbar: "",
             data: '',
             info: [],
+            settings: {},
+            nombre: ''
         }
     },
     watch: {
@@ -466,6 +486,10 @@ export default {
         }
     },
     methods: {
+        inforUsers() {
+            const info = JSON.parse(localStorage.getItem('Xf'));
+            if (info) this.nombre = info.nombre;
+        },
         initiaSetap() {
             try {
                 this.data = JSON.parse(localStorage.getItem("myCourse"));
@@ -621,11 +645,25 @@ export default {
         generatePDF() {
             this.$refs.html2Pdf.generatePdf();
         },
+        initialSetup() {
+        this.$proxies._settingProxi.getConfigure()
+                .then((x) => {
+                    const { rector,logo, unidadeducativa } = x.data[0];
+                    this.settings = {
+                        rector: rector,
+                        unidadeducativa: unidadeducativa,
+                        logo:logo
+                    }
+                    setTimeout(() => this.generatePDF(), 2000);
+                }).catch(() => {
+                    console.log("Error")
+                });
+    },
     },
     mounted() {
-        this.rowSelection = 'multiple';
         this.initiaSetap()
-        setTimeout(() => this.generatePDF(), 2000);
+        this.inforUsers()
+        this.initialSetup();
     },
 }
 </script>

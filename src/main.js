@@ -27,7 +27,6 @@ import "vue-select/dist/vue-select.css";
 import toasted from "vue-toasted";
 
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
-import VueFullscreen from 'vue-fullscreen'
 
 import VueProgressBar from 'vue-progressbar'
 
@@ -111,7 +110,6 @@ Vue.use(VueProgressBar, {
   height: '3px'
 })
 
-Vue.use(VueFullscreen)
 
 Vue.use({
   install(Vue){

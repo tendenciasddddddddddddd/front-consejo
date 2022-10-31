@@ -1,433 +1,503 @@
 <template>
     <div>
         <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-            :paginate-elements-by-height="1400" :filename="data.nivel+'-'+data.paralelo+'-'+data.materia" :pdf-quality="1.5"
-            :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
+            :paginate-elements-by-height="1400" :filename="data.nivel + '-' + data.paralelo + '-' + data.materia"
+            :pdf-quality="1.5" :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
             pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
             <section slot="pdf-content">
-            <section class="mt-sm-4 mx-md-3">
-                <div class="card-header">
-                       <div class="py-3 px-3">
-                        <div class="d-flex justify-content-between">
-                    <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
-                    <div class="text-center">
-                        <span class="h6 negros">
-                            UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
-                        </span><br>
-                        <p class="text-xs text-center negros">
-                            REPORTE DE PROYECTOS
-                        </p>
-                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
-                            {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
-                    </div>
-                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
-                            alt="Logo" /></div>
-                </div>
-                <table class="dataTable-table table s-table-flush "
-                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                        <thead>
-                            <tr>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
-                                class="text-uppercase text-start negros text-xxs font-weight-bolder"> Estudiantes
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 qui1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    qui2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    eq</th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    pf</th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                   eq</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in info.slice(0,15)" :key="item.id">
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xs negros fuente">{{item.nombres}}</td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom1_eq}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p3}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq3}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p4}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq4}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom2_eq}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.total}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;background: #dbdde4;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.total_eq}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <div class="d-flex justify-content-around mt-6">
-                    <div class="text-center">
-                        <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                        </span> <br>
-                        <span class="negros text-sm"><b>RECTOR/A</b></span>
-                    </div>
-                    <div>
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                                <b>__________________________________</b>
-                            </span> <br>
-                            <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+                <section class="mt-sm-4 mx-md-3">
+                    <div class="card-header">
+                        <div class="py-3 px-3">
+                            <div class="d-flex justify-content-between">
+                                <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" />
+                                </div>
+                                <div class="text-center">
+                                    <span class="h6 negros">
+                                        {{ settings.unidadeducativa }}
+                                    </span><br>
+                                    <p class="text-xs text-center negros">
+                                        REPORTE DE PROYECTOS
+                                    </p>
+                                    <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }} -
+                                        {{ data.paralelo }}</span> <span class="negros text-xs">{{ data.materia }}</span>
+                                </div>
+                                <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" />
+                                </div>
+                            </div>
+                            <table class="dataTable-table table s-table-flush "
+                                style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
+                                            class="text-uppercase text-start negros text-xxs font-weight-bolder">
+                                            Estudiantes
+                                        </th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            p1</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            p2</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            qui1</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            p1</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            p2</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            qui2</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            pf</th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
+                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                            eq</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in info.slice(0, 15)" :key="item.id">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 text-start ms-3 text-xs negros fuente">{{ item.nombres }}</td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.p1 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.eq1 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.p2 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.eq2 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                            {{ item.prom1 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                            {{ item.prom1_eq }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.p3 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.eq3 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.p4 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                            {{ item.eq4 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                            {{ item.prom2 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                            {{ item.prom2_eq }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                            {{ item.total }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;background: #dbdde4;"
+                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                            {{ item.total_eq }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-around mt-6">
+                                <div class="text-center">
+                                    <span class="h6 pb-0">
+                                        <b>__________________________________</b>
+                                    </span> <br>
+                                    <p class="negros text-sm">
+                                        <b>{{ settings.rector }}</b> <br>
+                                        RECTOR/A
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="text-center">
+                                        <span class="h6 pb-0">
+                                            <b>__________________________________</b>
+                                        </span> <br>
+                                        <p class="negros text-sm">
+                                            <b>{{ nombre }}</b> <br>
+                                            DOCENTE
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    </div>
-                </div>
-               
-            </section>
-            <div v-if="info.length >= 16" style="page-break-before:always;"></div>
-            <section v-if="info.length >= 16">
-                <div class="mt-sm-4 mx-md-3">
-                    <div class="py-3 px-3">
-                        <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                    <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
-                    <div class="text-center">
-                        <span class="h6 negros">
-                            UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
-                        </span><br>
-                        <p class="text-xs text-center negros">
-                            REPORTE DE PROYECTOS
-                        </p>
-                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
-                            {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
-                    </div>
-                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
-                            alt="Logo" /></div>
-                </div>
-                <table class="dataTable-table table s-table-flush "
-                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                        <thead>
-                            <tr>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
-                                class="text-uppercase text-start negros text-xxs font-weight-bolder"> Estudiantes
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 qui1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    qui2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    eq</th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    pf</th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                   eq</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in info.slice(15,30)" :key="item.id">
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xs negros fuente">{{item.nombres}}</td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom1_eq}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p3}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq3}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p4}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq4}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom2_eq}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.total}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;background: #dbdde4;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.total_eq}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <div class="d-flex justify-content-around mt-6">
-                    <div class="text-center">
-                        <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                        </span> <br>
-                        <span class="negros text-sm"><b>RECTOR/A</b></span>
-                    </div>
-                    <div>
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                                <b>__________________________________</b>
-                            </span> <br>
-                            <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+
+                </section>
+                <div v-if="info.length >= 16" style="page-break-before:always;"></div>
+                <section v-if="info.length >= 16">
+                    <div class="mt-sm-4 mx-md-3">
+                        <div class="py-3 px-3">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png"
+                                            alt="Logo" /></div>
+                                    <div class="text-center">
+                                        <span class="h6 negros">
+                                            {{ settings.unidadeducativa }}
+                                        </span><br>
+                                        <p class="text-xs text-center negros">
+                                            REPORTE DE PROYECTOS
+                                        </p>
+                                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }}
+                                            -
+                                            {{ data.paralelo }}</span> <span
+                                            class="negros text-xs">{{ data.materia }}</span>
+                                    </div>
+                                    <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" />
+                                    </div>
+                                </div>
+                                <table class="dataTable-table table s-table-flush "
+                                    style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
+                                                class="text-uppercase text-start negros text-xxs font-weight-bolder">
+                                                Estudiantes
+                                            </th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p1</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p2</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                qui1</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p1</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p2</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                qui2</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                pf</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in info.slice(15, 30)" :key="item.id">
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 text-start ms-3 text-xs negros fuente">{{ item.nombres }}</td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p1 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq1 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p2 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq2 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom1 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom1_eq }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p3 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq3 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p4 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq4 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom2 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom2_eq }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.total }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;background: #dbdde4;"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.total_eq }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-around mt-6">
+                                    <div class="text-center">
+                                        <span class="h6 pb-0">
+                                            <b>__________________________________</b>
+                                        </span> <br>
+                                        <p class="negros text-sm">
+                                            <b>{{ settings.rector }}</b> <br>
+                                            RECTOR/A
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <div class="text-center">
+                                            <span class="h6 pb-0">
+                                                <b>__________________________________</b>
+                                            </span> <br>
+                                            <p class="negros text-sm">
+                                                <b>{{ nombre }}</b> <br>
+                                                DOCENTE
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
-                    </div>
-                    </div>
-                       
-                </div>
-               
-            </section>
-            <div v-if="info.length >= 31" style="page-break-before:always;"></div>
-            <section v-if="info.length >= 31">
-                <div class="mt-sm-4 mx-md-3">
-                    <div class="py-3 px-3">
-                        <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                    <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
-                    <div class="text-center">
-                        <span class="h6 negros">
-                            UNIDAD EDUCATIVA "CESAR ANTONIO MOSQUERA"
-                        </span><br>
-                        <p class="text-xs text-center negros">
-                            REPORTE DE PROYECTOS
-                        </p>
-                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
-                            {{data.paralelo}}</span> <span class="negros text-xs">{{data.materia}}</span>
-                    </div>
-                    <div class="text-end"><img class="mt-2 w-25 me-3" src="../../../assets/img/cesar/cesar.jpg"
-                            alt="Logo" /></div>
-                </div>
-                <table class="dataTable-table table s-table-flush "
-                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                        <thead>
-                            <tr>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
-                                class="text-uppercase text-start negros text-xxs font-weight-bolder"> Estudiantes
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 qui1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p1</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 p2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                 eq</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    qui2</th>
-                                 <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    eq</th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    pf</th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;" class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                   eq</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in info.slice(30,45)" :key="item.id">
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xs negros fuente">{{item.nombres}}</td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom1}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom1_eq}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p3}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq3}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.p4}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente">
-                                    {{item.eq4}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom2}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.prom2_eq}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.total}}
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;background: #dbdde4;"
-                                    class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                    {{item.total_eq}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <div class="d-flex justify-content-around mt-6">
-                    <div class="text-center">
-                        <span class="h6 pb-0">
-                            <b>__________________________________</b>
-                        </span> <br>
-                        <span class="negros text-sm"><b>RECTOR/A</b></span>
-                    </div>
-                    <div>
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                                <b>__________________________________</b>
-                            </span> <br>
-                            <span class="negros text-sm"><b>DOCENTE TUTOR</b></span>
+
+                </section>
+                <div v-if="info.length >= 31" style="page-break-before:always;"></div>
+                <section v-if="info.length >= 31">
+                    <div class="mt-sm-4 mx-md-3">
+                        <div class="py-3 px-3">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png"
+                                            alt="Logo" /></div>
+                                    <div class="text-center">
+                                        <span class="h6 negros">
+                                            {{ settings.unidadeducativa }}
+                                        </span><br>
+                                        <p class="text-xs text-center negros">
+                                            REPORTE DE PROYECTOS
+                                        </p>
+                                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }}
+                                            -
+                                            {{ data.paralelo }}</span> <span
+                                            class="negros text-xs">{{ data.materia }}</span>
+                                    </div>
+                                    <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" />
+                                    </div>
+                                </div>
+                                <table class="dataTable-table table s-table-flush "
+                                    style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
+                                                class="text-uppercase text-start negros text-xxs font-weight-bolder">
+                                                Estudiantes
+                                            </th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p1</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p2</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                qui1</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p1</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                p2</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                qui2</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                pf</th>
+                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
+                                                class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                                eq</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in info.slice(30, 45)" :key="item.id">
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 text-start ms-3 text-xs negros fuente">{{ item.nombres }}</td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p1 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq1 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p2 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq2 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom1 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom1_eq }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p3 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq3 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.p4 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente">
+                                                {{ item.eq4 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom2 }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.prom2_eq }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.total }}
+                                            </td>
+                                            <td style="padding: 4px 5px;border-bottom-width: 0px;background: #dbdde4;"
+                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                                {{ item.total_eq }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-around mt-6">
+                                    <div class="text-center">
+                                        <span class="h6 pb-0">
+                                            <b>__________________________________</b>
+                                        </span> <br>
+                                        <p class="negros text-sm">
+                                            <b>{{ settings.rector }}</b> <br>
+                                            RECTOR/A
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <div class="text-center">
+                                            <span class="h6 pb-0">
+                                                <b>__________________________________</b>
+                                            </span> <br>
+                                            <p class="negros text-sm">
+                                                <b>{{ nombre }}</b> <br>
+                                                DOCENTE
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
-                    </div>
-                    </div>
-                       
-                </div>
-               
+
+                </section>
             </section>
-        </section>
         </vue-html2pdf>
     </div>
 </template>
@@ -436,7 +506,7 @@
 import VueHtml2pdf from "vue-html2pdf";
 export default {
     name: 'AddNota',
-    components: { VueHtml2pdf},
+    components: { VueHtml2pdf },
     props: {
         rowData: Array
     },
@@ -446,6 +516,8 @@ export default {
             statusbar: "",
             data: '',
             info: [],
+            settings: {},
+            nombre: ''
         }
     },
     watch: {
@@ -454,6 +526,10 @@ export default {
         }
     },
     methods: {
+        inforUsers() {
+            const info = JSON.parse(localStorage.getItem('Xf'));
+            if (info) this.nombre = info.nombre;
+        },
         initiaSetap() {
             this.data = JSON.parse(localStorage.getItem("myCourse"));
             if (this.rowData.length > 0) {
@@ -480,15 +556,15 @@ export default {
                         p2: p2,
                         eq2: eq2,
                         prom1: prom1,
-                        prom1_eq : prom1_eq,
+                        prom1_eq: prom1_eq,
                         p3: p3,
                         eq3: eq3,
                         p4: p4,
                         eq4: eq4,
                         prom2: prom2,
-                        prom2_eq : prom2_eq,
+                        prom2_eq: prom2_eq,
                         total: total,
-                        total_eq : total_eq,
+                        total_eq: total_eq,
                     })
                 }
             }
@@ -522,13 +598,27 @@ export default {
             alert("PDF generated successfully!");
         },
         generatePDF() {
-             this.$refs.html2Pdf.generatePdf();
+            this.$refs.html2Pdf.generatePdf();
+        },
+        initialSetup() {
+            this.$proxies._settingProxi.getConfigure()
+                .then((x) => {
+                    const { rector, logo, unidadeducativa } = x.data[0];
+                    this.settings = {
+                        rector: rector,
+                        unidadeducativa: unidadeducativa,
+                        logo: logo
+                    }
+                    setTimeout(() => this.generatePDF(), 2000);
+                }).catch(() => {
+                    console.log("Error")
+                });
         },
     },
     mounted() {
-        this.rowSelection = 'multiple';
         this.initiaSetap()
-        setTimeout(() => this.generatePDF(), 1000);
+        this.inforUsers()
+        this.initialSetup();
     },
 
 }

@@ -1,11 +1,12 @@
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 import ProgressBar from "../../../../shared/ProgressBar";
+import ScrimModal from "../../../../shared/ScrimModal"
 import ListTask from "../../../../components/componentClassroom/grupDocente/ListTask";
 export default {
   name: 'ModuloAula',
   components: {
-    ProgressBar,ListTask,
+    ProgressBar,ListTask,ScrimModal,
     RemoveCourse: () => import( /* webpackChunkName: "RemoveCourse" */ '../../../../components/componentClassroom/grupDocente/RemoveCourse'),
     ListUsers: () => import( /* webpackChunkName: "ListUsers" */ '../../../../components/componentClassroom/grupDocente/ListUsers'),
     ListQuizz: () => import( /* webpackChunkName: "ListQuizz" */ '../../../../components/componentClassroom/quizzComponent/ListQuizz'),

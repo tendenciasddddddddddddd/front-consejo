@@ -67,7 +67,7 @@
           Nosotros
         </section>
       </div>
-      <div class="col-3">
+      <div class="col-3 mt-3">
             <img src="../../assets/img/clonar.webp" alt="">
       </div>
     </div>
