@@ -3,7 +3,7 @@
     <div v-if="ifload">Trabajando...</div>
     <section v-else>
       <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-        :paginate-elements-by-height="1400" :filename="'matricula'" :pdf-quality="1.5" :manual-pagination="false"
+        :paginate-elements-by-height="1400" :filename="'matricula'" :pdf-quality="2" :manual-pagination="false"
         pdf-format="a4" :pdf-margin="15" pdf-orientation="portrait" pdf-content-width="800px"
         @progress="onProgress($event)" ref="html2Pdf">
         <section slot="pdf-content">
@@ -141,7 +141,7 @@ export default {
         .then((x) => {
           this.info = x.data;
           this.ifload = false;
-          setTimeout(() => this.generatePDF(), 1200);
+          setTimeout(() => this.generatePDF(), 2000);
         })
         .catch((x) => {
           console.log("Error", x);

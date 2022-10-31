@@ -373,7 +373,7 @@ export default {
                     this.ifload = false;
                     this.FormData(result)
                     this.ifload = false;
-                    setTimeout(() => this.generatePDF(), 1000);
+                    setTimeout(() => this.generatePDF(), 2000);
                 })
                 .catch((x) => {
                     console.log("Error", x);
