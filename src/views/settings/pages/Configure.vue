@@ -63,7 +63,7 @@
               <p class="text-sm negros h6 mb-2 mt-2">Dirección</p>
               <div class="row">
                 <div class="col-8">
-                  <span v-if="!ifTelefono" class="negros text-sm">{{ model.direccion }}</span>
+                  <span v-if="!ifDireccion" class="negros text-sm">{{ model.direccion }}</span>
                   <CustomInput v-else v-model="model.direccion" />
                   <p class=" text-xs text-danger">
                     {{ validation.firstError("model.direccion") }}
@@ -77,7 +77,7 @@
               <p class="text-sm negros h6 mb-2 mt-2">Rector</p>
               <div class="row">
                 <div class="col-8">
-                  <span v-if="!ifTelefono" class="negros text-sm">{{ model.rector }}</span>
+                  <span v-if="!ifRector" class="negros text-sm">{{ model.rector }}</span>
                   <CustomInput v-else v-model="model.rector" />
                   <p class=" text-xs text-danger">
                     {{ validation.firstError("model.rector") }}
@@ -91,7 +91,7 @@
               <p class="text-sm negros h6 mb-2 mt-2">Vicerector</p>
               <div class="row">
                 <div class="col-8">
-                  <span v-if="!ifTelefono" class="negros text-sm">{{ model.vicerector }}</span>
+                  <span v-if="!ifVice" class="negros text-sm">{{ model.vicerector }}</span>
                   <CustomInput v-else v-model="model.vicerector" />
                   <p class=" text-xs text-danger">
                     {{ validation.firstError("model.vicerector") }}
@@ -105,7 +105,7 @@
               <p class="text-sm negros h6 mb-2 mt-2">Secretario</p>
               <div class="row">
                 <div class="col-8">
-                  <span v-if="!ifTelefono" class="negros text-sm">{{ model.secretario }}</span>
+                  <span v-if="!ifSecreto" class="negros text-sm">{{ model.secretario }}</span>
                   <CustomInput v-else v-model="model.secretario" />
                   <p class=" text-xs text-danger">
                     {{ validation.firstError("model.secretario") }}
@@ -119,7 +119,7 @@
               <p class="text-sm negros h6 mb-2 mt-2">Inspector</p>
               <div class="row">
                 <div class="col-8">
-                  <span v-if="!ifTelefono" class="negros text-sm">{{ model.inspector }}</span>
+                  <span v-if="!ifInsper" class="negros text-sm">{{ model.inspector }}</span>
                   <CustomInput v-else v-model="model.inspector" />
                   <p class=" text-xs text-danger">
                     {{ validation.firstError("model.inspector") }}

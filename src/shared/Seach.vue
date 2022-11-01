@@ -82,10 +82,6 @@ export default {
       if (this.user.roles == 'Admin') {
         this.admins.push({
         id: 1, txt: 'Usuarios de sistema', url: '/Users'},
-      { id: 2, txt: 'Registro de provincias', url: '/Provincias'},
-      { id: 3,txt: 'Registro de cantón', url: '/Canton'},
-      { id: 4, txt: 'Registro de parroquias', url: '/Parroquia'},
-      { id: 5,txt: 'Registro de nacionalidad', url: '/Nacionalidad'},
       { id: 6, txt: 'Registro de estudiantes', url: '/Estudiate'},
       { id: 7, txt: 'Registro de docentes', url: '/Docente'},
       { id: 8, txt: 'Cursos niveles', url: '/Cursos'},

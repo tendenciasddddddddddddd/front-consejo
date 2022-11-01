@@ -6,14 +6,13 @@ import ServiceRegiste from "../../../service/funcions";
 const ResultServiceEstudiante = new ServiceRegiste();
 import FullModal from "../../../shared/FullModal.vue";
 import CustomInput from "../../../shared/CustomInput.vue";
-import Dropdown from "../../../shared/Dropdown.vue";
 import ButtonLoading from "../../../shared/ButtonLoading.vue";
 export default {
   name: "CreaUsuario",
   components: {
     Spinner,
     IsSelect,
-    FullModal, CustomInput, Dropdown, ButtonLoading,
+    FullModal, CustomInput, ButtonLoading,
     
   },
   props: {
@@ -26,7 +25,6 @@ export default {
       roles: this.$store.state.user.roles,
       idKey: this.idGet,
       info: null,
-      listParroquia: null,
       isLoading: false,
       ifLoad: false,
       mensaje: "",
@@ -53,55 +51,9 @@ export default {
       },
       checked: "",
       valido: false,
-      listEtnia: {},
-      isEtnia: false,
-      sexos: [
-        {
-          value: "0",
-          nombre: "Masculino",
-        },
-        {
-          value: "1",
-          nombre: "Femenino",
-        },
-        {
-          value: "2",
-          nombre: "Otros",
-        },
-        {
-          value: "3",
-          nombre: "No conforme",
-        },
-      ],
-      listNacionalidad: {},
-      isNacion: false,
     };
   },
   methods: {
-    listEtnias() {
-      this.isEtnia = true;
-      this.$proxies._registroProxi
-        .getEtnias()
-        .then((x) => {
-          this.listEtnia = x.data.datas;
-          this.isEtnia = false;
-        })
-        .catch(() => {
-          this.isEtnia = false;
-        });
-    },
-    listNacion() {
-      this.isNacion = true;
-     this.$proxies._registroProxi
-        .getNacionalidad()
-        .then((x) => {
-          this.listNacionalidad = x.data.datas;
-          this.isNacion = false;
-        })
-        .catch(() => {
-          this.isNacion = false;
-        });
-    },
     get() {
       if (this.idKey) {
         this.ifcarga = true;
@@ -127,10 +79,6 @@ export default {
           this.model.apellidos = this.model.apellidos.trim();
           this.model.nombres = this.model.nombres.trim();
           this.model.cedula = this.model.cedula.trim();
-          this.model.sexo = this.model.sexo.nombre;
-          this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos + " " + this.model.nombres;
            this.$proxies._registroProxi
              .update(this.model._id, this.model) 
@@ -152,10 +100,6 @@ export default {
             this.model.apellidos,
             this.model.cedula
           );
-          this.model.sexo = this.model.sexo.nombre;
-          this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos + " " + this.model.nombres;
          
           this.$proxies._registroProxi
@@ -188,18 +132,6 @@ export default {
       this.$emit('clickAlumnos');
     },
 
-    __listParroquias() {
-      this.isParroquia = true;
-      this.$proxies._registroProxi
-        .getParroquia()
-        .then((x) => {
-          this.listParroquia = x.data.datas;
-          this.isParroquia = false;
-        })
-        .catch(() => {
-          this.isParroquia = false;
-        });
-    },
     __getPasswods(apell, ced) {
       let l = apell.toLowerCase().charAt(0);
       let result = l + ced;
@@ -245,9 +177,6 @@ export default {
   created() {
     this.verificarUsuario();
     this.get();
-    this.__listParroquias();
-    this.listEtnias();
-    this.listNacion();
   },
 
   validators: {
@@ -255,7 +184,7 @@ export default {
       return this.$validator
         .value(value)
         .required()
-        .minLength(4)
+        .minLength(2)
         .maxLength(20);
     },
     "model.nombres"(value) {
@@ -271,18 +200,6 @@ export default {
         .required()
         .minLength(5)
         .maxLength(50);
-    },
-    "model.fkparroquia"(value) {
-      return this.$validator.value(value).required();
-    },
-    "model.fketnia"(value) {
-      return this.$validator.value(value).required();
-    },
-    "model.sexo"(value) {
-      return this.$validator.value(value).required();
-    },
-    "model.fknacionalidad"(value) {
-      return this.$validator.value(value).required();
     },
   },
 };

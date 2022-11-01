@@ -22,50 +22,29 @@
                         {{ validation.firstError("model.nombres") }}
                       </p>
 
-                      <span class="parrafo">Numero Teléfono</span>
+                      <span class="parrafo">Numero Teléfono (Opcional)</span>
                       <CustomInput v-model="model.telefono" />
-                      <p class="mb-2 text-xs fuente text-danger">
-                        {{ validation.firstError("model.telefono") }}
-                      </p>
                       
-                      <span class="parrafo">Correo Electrónico</span>
+                      <span class="parrafo">Correo Electrónico (Opcional)</span>
                        <CustomInput v-model="model.email" />
-                      <p class="mb-2 text-xs fuente text-danger">
-                        {{ validation.firstError("model.email") }}
-                      </p>
 
-                        <span class="parrafo">Nacionalidad</span>
-                         <IsSelect v-if="isNacion"></IsSelect>
-                       <Dropdown v-else v-model="model.fknacionalidad"  :options="listNacionalidad"/>
-                       <p class="mb-2 text-xs fuente text-danger">
-                        {{ validation.firstError("model.fknacionalidad") }}
-                      </p>
+                        <span class="parrafo">Nacionalidad (Opcional)</span>
+                       <CustomInput v-model="model.fknacionalidad" />
 
-                      <span class="parrafo">Parroquia</span>
-                       <IsSelect v-if="isParroquia"></IsSelect>
-                       <Dropdown v-else v-model="model.fkparroquia"  :options="listParroquia"/>
-                        <p class="mb-2 text-xs fuente text-danger">
-                          {{ validation.firstError("model.fkparroquia") }}
-                        </p>
+                      <span class="parrafo">Parroquia (Opcional)</span>
+                       <CustomInput  v-model="model.fkparroquia" />
 
-                        <span class="parrafo">Etnia</span>
-                         <IsSelect v-if="isEtnia"></IsSelect>
-                       <Dropdown v-else v-model="model.fketnia"  :options="listEtnia"/>
-                        <p class="mb-2 text-xs fuente text-danger">
-                          {{ validation.firstError("model.fketnia") }}
-                        </p>
+                        <span class="parrafo">Etnia (Opcional)</span>
+                       <CustomInput v-model="model.fketnia" />
+
                         <span class="parrafo">Género</span>
-                        <Dropdown v-model="model.sexo"  :options="sexos"/>
-                        <p class="mb-2 text-xs fuente text-danger">
-                          {{ validation.firstError("model.sexo") }}
-                        </p>
+                        <CustomInput v-model="model.sexo"  />
  
                       <span class="parrafo">Título Actual</span>
                         <textarea
                         v-model="model.titulo"
                         class="multisteps-form__input form-control fuente"
                         type="text"
-                        required
                       />
             </form>
                   </div>

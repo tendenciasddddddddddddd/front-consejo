@@ -20,36 +20,6 @@ const routes = [{
     beforeEnter: authorization
   },
  
-  { //-------ZONAS------
-    path: '/option-zonas',
-    name: '000',
-    component: () => import( /* webpackChunkName: "Zone" */ '../views/zone/Zone.vue'),
-  },
-  { //-------------------------------------ZONAS------------------------------
-    path: '/Provincias',
-    name: '000',
-    component: () => import( /* webpackChunkName: "Provincias" */ '../views/zone/pages/provincias/Provincias.vue'),
-  },
-  { //-------------------------------------ZONAS------------------------------
-    path: '/Canton',
-    name: '000',
-    component: () => import( /* webpackChunkName: "Canton" */ '../views/zone/pages/cantones/Canton.vue'),
-  },
-  { //-------------------------------------ZONAS------------------------------
-    path: '/Parroquia',
-    name: '000',
-    component: () => import( /* webpackChunkName: "Parroquias" */ '../views/zone/pages/parroquias/Parroquias.vue'),
-  },
-  { //-------------------------------------ZONAS------------------------------
-    path: '/Nacionalidad',
-    name: '000',
-    component: () => import( /* webpackChunkName: "Nacionalidad" */ '../views/zone/pages/nacionalidad/Nacionalidad.vue'),
-  },
-  { //-------------------------------------ZONAS------------------------------
-    path: '/Etnias',
-    name: '000',
-    component: () => import( /* webpackChunkName: "Etnias" */ '../views/zone/pages/etnias/Etnias.vue'),
-  },
   { //-------------------------------------REGISTROS------------------------------
     path: '/Estudiate',
     name: '222',

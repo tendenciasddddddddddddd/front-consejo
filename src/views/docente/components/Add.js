@@ -5,13 +5,12 @@ const restResourceService = new RestResource();
 //IMPORTAR HIJOS
 import FullModal from "../../../shared/FullModal.vue";
 import CustomInput from "../../../shared/CustomInput.vue";
-import Dropdown from "../../../shared/Dropdown.vue";
 import ButtonLoading from "../../../shared/ButtonLoading.vue";
 export default {
   name: "AddDocentes",
   components:{
       Spinner,
-      FullModal, CustomInput, Dropdown, ButtonLoading,IsSelect
+      FullModal, CustomInput, ButtonLoading,IsSelect
   },
   props: {
     idGet: {
@@ -25,13 +24,10 @@ export default {
       tab: "init",
       tabla: "ontask",
       info: null,
-      listParroquia: {},
-      isParroquia: false,
       isLoading: false,
       popular:'Crear Docente',
       ifLoad: false,
       ifcarga: false,
-      
       model: {
         _id: null,
         email: null,
@@ -51,55 +47,9 @@ export default {
         fkparroquia: null,
         titulo: null,
       },
-      listNacionalidad: {},
-      isNacion: false,
-      listEtnia: {},
-      isEtnia: false,
-      sexos: [
-        {
-          value: "0",
-          nombre: "Masculino",
-        },
-        {
-          value: "1",
-          nombre: "Femenino",
-        },
-        {
-          value: "2",
-          nombre: "Otros",
-        },
-        {
-          value: "3",
-          nombre: "No conforme",
-        },
-      ],
     };
   },
   methods: {
-    listEtnias() {
-      this.isEtnia = true;
-      this.$proxies._registroProxi
-        .getEtnias()
-        .then((x) => {
-          this.listEtnia = x.data.datas;
-          this.isEtnia = false;
-        })
-        .catch(() => {
-          this.isEtnia = false;
-        });
-    },
-    listNacion() {
-      this.isNacion = true;
-     this.$proxies._registroProxi
-        .getNacionalidad()
-        .then((x) => {
-          this.listNacionalidad = x.data.datas;
-          this.isNacion = false;
-        })
-        .catch(() => {
-          this.isNacion = false;
-        });
-    },
     get() {
       if (this.idKey) {
         this.popular ="Editar Docente"
@@ -126,10 +76,6 @@ export default {
           this.model.apellidos = this.model.apellidos.trim();
           this.model.nombres = this.model.nombres.trim();
           this.model.cedula = this.model.cedula.trim();
-          this.model.sexo = this.model.sexo.nombre;
-          this.model.fkparroquia = this.model.fkparroquia.nombre;
-          this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-          this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
             .updateDocentes(this.model._id, this.model) 
@@ -150,10 +96,6 @@ export default {
             this.model.apellidos,
             this.model.cedula
           );
-            this.model.sexo = this.model.sexo.nombre;
-            this.model.fkparroquia = this.model.fkparroquia.nombre;
-            this.model.fknacionalidad = this.model.fknacionalidad.nombre;
-            this.model.fketnia = this.model.fketnia.nombre;
           this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
             .createDocentes(this.model)
@@ -177,18 +119,6 @@ export default {
       });
     },
 
-    __listParroquias() {
-      this.isParroquia = true;
-      this.$proxies._registroProxi
-        .getParroquia()
-        .then((x) => {
-          this.listParroquia = x.data.datas;
-          this.isParroquia = false;
-        })
-        .catch(() => {
-          this.isParroquia = false;
-        });
-    },
     __getPasswods(apell, ced) {
       let l = apell.toLowerCase().charAt(0);
       let result = l + ced;
@@ -233,9 +163,6 @@ export default {
   created() {
     this.verificarUsuario();
     this.get();
-    this.__listParroquias();
-    this.listEtnias();
-    this.listNacion();
   },
 
   validators: {
@@ -243,14 +170,8 @@ export default {
       return this.$validator
         .value(value)
         .required()
-        .minLength(9)
+        .minLength(2)
         .maxLength(50);
-    },
-    "model.email"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .email();
     },
     "model.nombres"(value) {
       return this.$validator
@@ -266,32 +187,6 @@ export default {
         .minLength(5)
         .maxLength(50);
     },
-    "model.telefono"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(9)
-        .maxLength(12);
-    },
-
-    "model.titulo"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(2)
-        .maxLength(80);
-    },
-      "model.fkparroquia"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.fketnia"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.sexo"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.fknacionalidad"(value) {
-        return this.$validator.value(value).required();
-      },
+  
   },
 };

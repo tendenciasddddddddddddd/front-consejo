@@ -61,9 +61,9 @@
         <li class="nav-item mt-3">
           <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
         </li>
-        <li class="nav-item" v-if="user.roles.includes('Admin')" id="step_2">
+        <li class="nav-item" v-if="user.roles.includes('Admin')">
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link "
-            :class="{'actived': $route.name === '000'||$route.name === '222' ||$route.name === '333'}"
+            :class="{'actived':$route.name === '222' ||$route.name === '333'}"
             aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm  text-center d-flex align-items-center justify-content-center  me-2">
               <svg class="icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11.75 5.25h7.5a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5zm0 6h7.5a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5zm0 6h7.5a.75.75 0 1 1 0 1.5h-7.5a.75.75 0 1 1 0-1.5zM6 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
@@ -71,16 +71,9 @@
             <span class="nav-link-text ms-1 mt-1">Registros</span>
           </a>
           <div class="collapse " :class="{'show':
-          $route.name === '000'||
           $route.name === '222'||
           $route.name === '333'}" id="pagesExamples">
             <ul class="nav ms-4 ps-3">
-              <li :class="{'active': $route.name === '000'}" class="nav-item ">
-                <router-link to="/option-zonas" :class="{'active': $route.name === '000'}" class="nav-link ">
-                  <span class="sidenav-mini-icon"> Z </span>
-                  <span class="sidenav-normal letras fuente">Zonas </span>
-                </router-link>
-              </li>
               <li :class="{'active': $route.name === '222'}" class="nav-item ">
                 <router-link to="/Estudiate" :class="{'active': $route.name === '222'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> E </span>
@@ -128,12 +121,12 @@
                   <span class="sidenav-normal letras fuente">Distributivo </span>
                 </router-link>
               </li>
-              <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
+              <!-- <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
                 <router-link to="/tutores" :class="{'active': $route.name === '4444'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> T </span>
                   <span class="sidenav-normal letras fuente">Tutores</span>
                 </router-link>
-              </li>
+              </li> -->
               <li :class="{'active': $route.name === '3333'}" class="nav-item ">
                 <router-link to="/planificacion" :class="{'active': $route.name === '3333'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> P </span>
@@ -210,13 +203,13 @@
                   <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
               </li>
-              <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
+              <!-- <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
                 <router-link to="/tutoresDocente" :class="{'active': $route.name === 'dh'}"
                   class="nav-link ">
                   <span class="sidenav-mini-icon"> L </span>
                   <span class="sidenav-normal letras fuente">Libretas </span>
                 </router-link>
-              </li>
+              </li> -->
 
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">
                 <router-link to="/zoom" :class="{'active': $route.name === 'dr'}" class="nav-link ">

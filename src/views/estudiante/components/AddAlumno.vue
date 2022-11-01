@@ -32,30 +32,17 @@
             <span class="parrafo">Correo Electrónico (Opcional)</span>
             <CustomInput v-model="model.email" />
 
-            <span class="parrafo">Nacionalidad</span>
-            <IsSelect v-if="isNacion"></IsSelect>
-            <Dropdown v-else v-model="model.fknacionalidad" :options="listNacionalidad" />
-            <p class="mb-2 text-xs fuente text-danger">
-              {{ validation.firstError("model.fknacionalidad") }}
-            </p>
+            <span class="parrafo">Nacionalidad (Opcional)</span>
+            <CustomInput  v-model="model.fknacionalidad" />
 
-            <span class="parrafo">Parroquia</span>
-            <IsSelect v-if="isParroquia"></IsSelect>
-            <Dropdown v-else v-model="model.fkparroquia" :options="listParroquia" />
-            <p class="mb-2 text-xs fuente text-danger">
-              {{ validation.firstError("model.fkparroquia") }}
-            </p>
-            <span class="parrafo">Etnia</span>
-            <IsSelect v-if="isEtnia"></IsSelect>
-            <Dropdown v-else v-model="model.fketnia" :options="listEtnia" />
-            <p class="mb-2 text-xs fuente text-danger">
-              {{ validation.firstError("model.fketnia") }}
-            </p>
-            <span class="parrafo">Género</span>
-            <Dropdown v-model="model.sexo" :options="sexos" />
-            <p class="mb-2 text-xs fuente text-danger">
-              {{ validation.firstError("model.sexo") }}
-            </p>
+            <span class="parrafo">Parroquia (Opcional)</span>
+            <CustomInput  v-model="model.fkparroquia"  />
+
+            <span class="parrafo">Etnia (Opcional)</span>
+            <CustomInput  v-model="model.fketnia"  />
+
+            <span class="parrafo">Género (Opcional)</span>
+            <CustomInput v-model="model.sexo"  />
           </form>
         </div>
       </template>
