@@ -11,7 +11,7 @@
                         <div class="card-header text-center ">
                             <div class="row justify-content-between">
                                 <div class="col-md-2 text-start">
-                                    <img class=" w-90 ms-3" src="../../../../assets/img/ecuador.png" alt="Logo" />
+                                    <img class=" w-90 ms-3" src="../../../../assets/img/ecuador.jpg" alt="Logo" />
                                 </div>
                                 <div class="col-md-8">
                                     <span class="text-xs negros">COORDINACIÓN ZONAL</span><br>

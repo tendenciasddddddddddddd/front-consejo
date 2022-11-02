@@ -83,7 +83,7 @@ export default {
       searchQuery: '',
         //Pagina 
        page: 1,
-       perPage: 8,
+       perPage: 10,
        pages: [],
        numPages:0,
        ifChildRevision: false

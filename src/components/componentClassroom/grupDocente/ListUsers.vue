@@ -55,7 +55,7 @@ export default {
             allSelected: false,
             searchQuery: '',
             page: 1,
-            perPage: 8,
+            perPage: 10,
             pages: [],
             numPages: 0,
         }

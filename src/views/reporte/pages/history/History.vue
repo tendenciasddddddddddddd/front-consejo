@@ -196,7 +196,7 @@ export default {
       this.isSelecMatricula = [];
     },
     close() {
-      this.$emit("myEventClosedModalMigracion2");
+      this.$emit("myEventClosedModalNotas");
     },
 
     changeSearch(textSearch) { //queryUsuario

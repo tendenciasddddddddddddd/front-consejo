@@ -599,7 +599,7 @@ margin-bottom: 12px!important;
 .inn_tab{
   font-size: 15px;
   font-weight: 600;
-  padding: 18px 28px;
+  padding: 14px 28px;
   position: relative;
   transition-property: color;
   white-space: nowrap;
@@ -1525,6 +1525,9 @@ body.modal-open {
 .s-text-versel2{
   color:#444;
 }
+.s-text-versel3{
+  color:#fff;
+}
 
 .s-active{
   background: rgb(57 76 96 / 15%);
@@ -1689,5 +1692,9 @@ body.modal-open {
 }
 .canvaActive {
   font-weight: 600;
-  color: #000 !important;
+  color: #00c4cc !important;
+  background: #00c4cc;
+  border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
+

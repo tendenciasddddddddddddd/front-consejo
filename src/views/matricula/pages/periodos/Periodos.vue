@@ -1,21 +1,110 @@
-import RestResource from "../../service/isAdmin";
-const restResourceService = new RestResource();
-import Spinner from "../../shared/Spinner";
-import AlertHeader from "../../shared/AlertHeader.vue";
-import CustomInput from "../../shared/CustomInput.vue";
-import ButtonLoading from "../../shared/ButtonLoading.vue";
-import Paginate2 from "../../shared/Paginate2.vue";
-import ActionsRow from "../../shared/ActionsRow.vue";
+<template>
+  <section>
+    <ScrimModal @close="close">
+      <template v-slot:header> Automatización de matrículas</template>
+      <template v-slot:body>
+        <div>
+      <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets"
+        @desactiveState="desactiveState" />
+      <Spinner v-if="isLoading"></Spinner>
+      <div v-else class="table-responsive mt-1">
+        <table class="dataTable-table table s-table-flush">
+          <thead class="thead-light">
+            <tr class="cabeza">
+              <th style="background-color: rgb(234, 240, 246); ">
+                <div class="d-flex ms-3">
+                  <div v-if="!allSelected " class="form-check " style="min-height: 0rem;">
+                    <input class="form-check-input cheka" type="checkbox" @click="selectAll" />
+                  </div>
+                  <i @click="deletedSelected" v-else class="fa fa-minus s-icon-all" aria-hidden="true"></i>
+                  <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
+                    Periodo
+                  </span>
+                </div>
+  
+              </th>
+              <th class="text-uppercase text-center text-xxs font-weight-bolder">
+                Fecha modicado
+              </th>
+  
+              <th class="text-uppercase text-center text-xxs font-weight-bolder">
+                Estado
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in info" :key="item.id">
+              <td>
+                <div class="d-flex ms-3">
+                  <div class="form-check supcheka my-auto">
+                    <input class="form-check-input cheka" type="checkbox" v-model="isSelecUsers" :value="item._id"
+                      @click="selectUser(item._id)" />
+                  </div>
+                  <a class="mb-0 ms-3 text-sm colorestabla fuente">
+                    {{ item.nombre }}
+                  </a>
+                </div>
+              </td>
+              <td class="text-sm text-center text-dark fuente">
+                {{ item.updatedAt }}
+              </td>
+              <td class="text-sm text-center font-weight-normal">
+                <span class="icon">
+                   <i v-if="item.estado.includes('1')" class="fa fa-check"></i>
+                  <i v-else class="fa fa-times"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <Paginate2 :numPages="paginas" :page="pagina" :total="totalNotas" :subtitulo="subtitulo"
+          @pagechanged="onPageChange"></Paginate2>
+      </div>
+      <Modal v-show="visible" @close="closet">
+        <template v-slot:header> Periodo escolar</template>
+        <template v-slot:body>
+          <Spinner v-if="isCarga"></Spinner>
+          <form @submit.prevent="save" role="form" id="prov">
+            <div v-if="MsmError!=''" class="is-error">
+              <span class="text-sm negros gordo">{{ MsmError }}</span>
+            </div>
+            <span class="parrafo mb-2">Nombre de Periodo</span>
+            <CustomInput v-model="model.nombre" />
+            <p class="mb-2 text-xs fuente text-danger">
+              {{ validation.firstError("model.nombre") }}
+            </p>
+          </form>
+        </template>
+        <template v-slot:acccion>
+          <ButtonLoading v-if="ifLoad" />
+          <button form="prov" v-else type="submit" class="btn btnNaranja mt-2">
+            {{ model._id ? "Actualizar periodo" : "Guardar periodo" }}
+          </button>
+        </template>
+      </Modal>
+    </div>
+      </template>
+    </ScrimModal>
+  </section>
+
+</template>
+<script >
+import ScrimModal from "../../../../shared/ScrimModal.vue";
+import ButtonLoading from "../../../../shared/ButtonLoading.vue";
+import Spinner from "../../../../shared/Spinner";
+import CustomInput from "../../../../shared/CustomInput.vue";
+import Paginate2 from "../../../../shared/Paginate2.vue";
+import ActionsRow from "../../../../shared/ActionsRow.vue";
 export default {
-  name: "Materias",
+  name: 'MigracionMatricula',
   components: {
+    ScrimModal, 
     Spinner,
-    AlertHeader,
     CustomInput,
     ButtonLoading,
     Paginate2,ActionsRow,
     Modal: () =>
-      import(/* webpackChunkName: "Modal" */ "../../shared/Modal.vue"),
+      import(/* webpackChunkName: "Modal" */ "../../../../shared/Modal.vue"),
   },
   data() {
     return {
@@ -40,9 +129,33 @@ export default {
       visible: false,
       allSelected : false,
       MsmError : "",
-    };
+    }
+  },
+  watch: {
+    "$route.query.pagina": {
+      immediate: true,
+      handler(pagina) {
+        pagina = parseInt(pagina) || 1;
+        this.getAll(pagina, 8);
+        this.isSelecUsers = [];
+        this.paginaActual = pagina;
+      },
+    },
+  },
+  validators: {
+    //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
+    "model.nombre"(value) {
+      return this.$validator
+        .value(value)
+        .required()
+        .minLength(3)
+        .maxLength(40);
+    },
   },
   methods: {
+    close() {
+      this.$emit('myEventClosedModalMigracion1')
+    },
     getAll(pag, lim) {
       this.isLoading = true;
       this.subtitulo = lim + " filas por página";
@@ -74,7 +187,7 @@ export default {
           this.$proxies._matriculaProxi
             .update(this.model._id, this.model)
             .then(() => {
-              this.close();
+              this.closet();
               this.ifLoad = false;
               this.getAll(this.pagina, 8);
               this.MsmError ="";
@@ -94,7 +207,7 @@ export default {
             .create(this.model) 
             .then(() => {
               this.ifLoad = false;
-              this.close();
+              this.closet();
               this.getAll(this.pagina, 8);
             })
             .catch((error) => {
@@ -247,43 +360,11 @@ export default {
       this.MsmError = "";
       this.checked = "";
     },
-    close() {
+    closet() {
       this.visible = false;
     },
-  
-    
-    verificarUsuario() {
-      let text_1 = 'Matricula'
-      let text_2 = 'Periodos'
-      this.$store.commit('updateHeader',{text_1, text_2})
-      if (!restResourceService.admin(this.roles)) {
-        this.$router.push("/");
-      }
-    },
+   
   },
-  created() {
-    this.verificarUsuario();
-  },
-  mounted() {},
-  watch: {
-    "$route.query.pagina": {
-      immediate: true,
-      handler(pagina) {
-        pagina = parseInt(pagina) || 1;
-        this.getAll(pagina, 8);
-        this.isSelecUsers = [];
-        this.paginaActual = pagina;
-      },
-    },
-  },
-  validators: {
-    //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
-    "model.nombre"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(3)
-        .maxLength(40);
-    },
-  },
-};
+
+}
+</script>

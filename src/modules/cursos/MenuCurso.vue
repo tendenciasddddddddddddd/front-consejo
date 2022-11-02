@@ -2,22 +2,21 @@
     <ScrimModal @close="$router.go(-1)">
       <template v-slot:header>
     <div class="fjrDCGRR_tab">
-                  <img class="mt-1" width="45" height="45" src="https://static.canva.com/web/images/a360aa861ca5d2ba3d1213b62d63cc21.png" alt="">
-                 <div @click="tabs=0" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 0 }">
-                  Notas
-                   <span   :class="{ 'eeEHPkk': tabs == 0 }"></span>
+                 <div @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
+                  <span style="color:#fff">  Notas</span>
+                  
                  </div>
-                 <div @click="tabs=3" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 3 }">Conducta
-                     <span   :class="{ 'eeEHPkk': tabs == 3 }"></span>
+                 <div @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Conducta</span>
+                    
                    </div>
-                   <div @click="tabs=2" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 2 }">Proyectos
-                     <span   :class="{ 'eeEHPkk': tabs == 2 }"></span>
+                   <div @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff">Proyectos</span>
+                    
                    </div>
-                   <div @click="tabs=1" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 1 }">Supletorios
-                     <span   :class="{ 'eeEHPkk': tabs == 1 }"></span>
+                   <div @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }"><span style="color:#fff">Supletorios</span>
+                    
                    </div>
-                   <div @click="tabs=4" class=" inn_tab s-text-versel2" :class="{ 'canvaActive': tabs == 4 }">Planificación
-                     <span   :class="{ 'eeEHPkk': tabs == 4 }"></span>
+                   <div @click="tabs=4" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 4 }"><span style="color:#fff">Planificación</span>
+                    
                    </div>
               </div>
        </template>
@@ -158,14 +157,14 @@ export default {
   methods: {
     LoadCourse: function () {
       const seccio = JSON.parse(localStorage.getItem("myCourse")); //quimestre
-      const info = JSON.parse(localStorage.getItem("Xf"));
+      //const info = JSON.parse(localStorage.getItem("Xf"));
       this.para = seccio.paralelo;
       this.name = seccio.nombre;
       this.mate = seccio.materia;
       this.area = seccio.area;
       this.idDistributivo = seccio.idDistributivo;
       this.planificacion = seccio.planificacion;
-      this.docentes = info.nombre;
+      this.docentes = seccio.nombredoc;
       this.getData();
     },
     getData() {
@@ -221,8 +220,8 @@ export default {
           {  quimestre: 'p1', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',},
           { quimestre: 'p2', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',}
         ]
-        const comportamiento = [{p1:'1',p2:'1'}, {p1:'1',p2:'1'}]
-        const proyectos = [{p1:'1',p2:'1'}, {p1:'1',p2:'1'}]
+        const comportamiento = [{p1:'A',p2:'A'}, {p1:'A',p2:'A'}]
+        const proyectos = [{p1:'EX',p2:'EX'}, {p1:'EX',p2:'EX'}]
         this.model2.calificaciones.docente = this.docentes;
         this.model2.calificaciones.materia = this.mate;
         this.model2.calificaciones.area = this.area;
@@ -275,8 +274,12 @@ export default {
       this.tabs = num;
     },
     verificarUsuario() {
-      if (!restResourceService.docente(this.roles)) this.$router.push("/");
-      this.LoadCourse();
+      if (restResourceService.docente(this.roles)||restResourceService.admin(this.roles)){
+        this.LoadCourse();
+      } else {
+        this.$router.push("/page-not-found");
+      }
+     
     },
     
     toast(message) {

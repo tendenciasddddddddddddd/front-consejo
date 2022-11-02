@@ -20,7 +20,7 @@
                   <span style="margin-top:-10px" class="text-sm text-center negros">
                     Dirección: {{settings.direccion}} Teléf:  {{settings.telefono}} 
                   </span> <br>
-                  <span class="text-xs negros"> {{settings.ubicacion}}</span>
+                  <span class="text-xs negros">El Ángel {{settings.ubicacion}}</span>
                 </div>
                 <div class="col-lg-1  text-md-end ">
                 </div>
@@ -40,7 +40,7 @@
                     <p class="text-justify text-sm negros">
                       Certifico que el(a) Estudiante: <b> {{ item.nombre }}</b>
                       previo los requisitos legales, se matriculó en <b>{{ item.fknivel.nombre }}</b> de la
-                      <b>{{settings.unidadeducativa}}</b> en el año lectivo: <br>
+                      <b>{{settings.unidadeducativa}}</b> en el Año Lectivo: <br>
                       <b >{{ item.academico.nombre }}</b>
                     </p>
                   </div>
@@ -48,7 +48,7 @@
                     <p class="text-justify text-sm negros">
                       Así consta en el Folio No. <b>{{ item.folio }}</b> del respectivo libro de matrícula con el No.
                       <b>{{ item.nmatricula }} </b> y con esta
-                      fecha, <b>{{ item.fecha }}</b>
+                      fecha, <b style="text-transform: lowercase;">{{ item.fecha}}</b>
 
                     </p>
                   </div>

@@ -43,11 +43,7 @@ const routes = [{
     component: () => import( /* webpackChunkName: "Materias" */ '../views/materia/Materias.vue'),
   },
 
-  { //-------------------------------------MATRICULA------------------------------
-    path: '/Periodo',
-    name: '11',
-    component: () => import( /* webpackChunkName: "Periodo" */ '../views/periodo/Periodo.vue'),
-  },
+
   { //-------------------------------------MATRICULA------------------------------
     path: '/Intensivo',
     name: '77',

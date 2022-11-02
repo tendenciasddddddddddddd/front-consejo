@@ -23,7 +23,7 @@
              <Consolidado  @myEventClosedModalConsolidado="closedChildConsolidado" ></Consolidado>
          </div>
          <div v-if="ifnotas">
-             <ReporteNotas  @myEventClosedModalNotas="closedNotas" />
+             <History  @myEventClosedModalNotas="closedNotas" />
          </div>
          <div v-if="ifyoutuve">
           <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'sFC9qGRA_KM'"/>
@@ -43,7 +43,7 @@ import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 const img1 = require("../../assets/img/shapes/90260b20-d6c6-418f-9961-9282c5d85d78.png")
 const img2 = require("../../assets/img/icons/pdf.png")
-const img3 = require("../../assets/img/logs/add-on-reporting.svg")
+const img3 = require("../../assets/img/icons/smiling_face.svg")
 const img4 = require("../../assets/img/logs/documents.svg")
 import CardsOptions from "../../shared/CardsClick.vue"
 export default {
@@ -71,9 +71,9 @@ export default {
         },
         {
           id: "2",
-          nombre: "Notas",
+          nombre: "Historial Matriculas",
           img: img3,
-          description: "Generar reportes de calificaciónes por curso o por materia",
+          description: "Generar reportes de matriculas y notas de todos los años",
         },
          {
           id: "3",
@@ -88,8 +88,9 @@ export default {
   components:{
      ReportePdfAdmin: () => import( /* webpackChunkName: "Report" */ "./pages/matricula/Reportes.vue"),
      Consolidado: () => import( /* webpackChunkName: "Consolidado" */ "./pages/consolidado/Consolidado.vue"),
-     ReporteNotas: () => import( /* webpackChunkName: "ReporteNotas" */ "./pages/notas/ReporteNotas.vue"),
+    // ReporteNotas: () => import( /* webpackChunkName: "ReporteNotas" */ "./pages/notas/ReporteNotas.vue"),
      VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
+     History: () =>import( /* webpackChunkName: "History" */ "./pages/history/History.vue"),
       CardsOptions
   },
   methods: {

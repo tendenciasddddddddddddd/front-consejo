@@ -5,7 +5,7 @@
             <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
                 :paginate-elements-by-height="1400" :filename="'libretas'" :pdf-quality="2" :manual-pagination="false"
                 pdf-format="a4" :pdf-margin="[30, 0, 30, 0]" pdf-orientation="landscape" pdf-content-width="1128px"
-                @progress="onProgress($event)" ref="html2Pdf">
+                @progress="onProgress($event)"   @beforeDownload="beforeDownload($event)" ref="html2Pdf">
                 <section slot="pdf-content">
                     <div v-for="item in info" :key="item.id" class="mt-sm-4 mx-md-3">
                         <div class="card-header  ">
@@ -316,7 +316,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="aux<12" style="page-break-before:left;"></div>
+                        <div v-if="aux<12" class="html2pdf__page-break"></div>
+                        <!-- <div v-if="aux<12" style="page-break-before:left;"></div> -->
                     </div>
                 </section>
             </vue-html2pdf>

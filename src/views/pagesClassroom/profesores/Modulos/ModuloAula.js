@@ -1,7 +1,7 @@
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 import ProgressBar from "../../../../shared/ProgressBar";
-import ScrimModal from "../../../../shared/ScrimModal"
+import ScrimModal from "../../../../shared/ScrimModal2"
 import ListTask from "../../../../components/componentClassroom/grupDocente/ListTask";
 export default {
   name: 'ModuloAula',

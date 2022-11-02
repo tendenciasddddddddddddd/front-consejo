@@ -18,10 +18,10 @@
           <ParaleloMatricula1 @myEventClosedModalParalelo1="closedChildParalelo1"/>
         </div>
         <div v-if="ifMigracion">
-          <MigracionMatricula @myEventClosedModalMigracion1="closedChildMigracion" :idGet="mod"/>
+          <Periodos @myEventClosedModalMigracion1="closedChildMigracion" :idGet="mod"/>
         </div>
           <div v-if="ifMigracion2">
-          <MigrationnList @myEventClosedModalMigracion2="closedChildMigracionList"/>
+          <ReporteNotas @myEventClosedModalMigracion2="closedChildMigracionList"/>
         </div>
         <div v-if="ifclon">
           <Clon @myEventClosedModalclon="closedChildclon"/>
@@ -60,13 +60,13 @@ export default {
       import(
         /* webpackChunkName: "EnlistarParalelo" */ "./pages/paralelo1/Paralelo.vue"
       ),
-      MigracionMatricula: () =>
+      Periodos: () =>
       import(
-        /* webpackChunkName: "MigracionMatricula" */ "./pages/migracion/Migracion.vue"
+        /* webpackChunkName: "Periodos" */ "./pages/periodos/Periodos.vue"
       ),
-      MigrationnList: () =>
+      ReporteNotas: () =>
       import(
-        /* webpackChunkName: "MigrationnList" */ "./pages/history/History.vue"
+        /* webpackChunkName: "ReporteNotas" */ "./pages/notas/AllNotas.vue"
       ),
       Clon: () =>
       import(
@@ -89,10 +89,16 @@ export default {
       ifclon : false,
       mod : 'm1',
       arrays_of_options: [
+      {
+          id: "3",
+          nombre: "Periodos",
+          img: images[0],
+          description: "Le permite generar copias de las matriculas y tambien limpiar la base de datos",
+        },
         {
           id: "0",
           nombre: "Matricular",
-          img: images[0],
+          img: images[3],
           description: "Puedes crear nueva matricula, la matricula es unica por cada estudiante",
         },
         {
@@ -108,24 +114,19 @@ export default {
           description: "Puede ver o eliminar la lista de los matriculados en el periodo",
         },
         
-         {
-          id: "3",
-          nombre: "Mantenimiento",
-          img: images[3],
-          description: "Le permite generar copias de las matriculas y tambien limpiar la base de datos",
+        {
+          id: "5",
+          nombre: "Registro notas",
+          img: images[4],
+          description: "Le permite mirar y editar notas de todos los cursos sin excepciones",
         },
         {
           id: "4",
-          nombre: "Migraciones",
+          nombre: "Automatización",
           img: images[5],
-          description: "Le permite migrar las matriculas de un periodo a otro periodo",
+          description: "Le permite automatizar las matriculas con tal solo 2 pasos",
         },
-        {
-          id: "5",
-          nombre: "Historial Matriculas",
-          img: images[4],
-          description: "Le permite generar copias de las matriculas y tambien limpiar la data",
-        },
+        
       ]
     };
   },
@@ -141,22 +142,22 @@ export default {
     optionsView: function(num){
       switch (num) {
         case 0:
-          this.ifCreateUpdate = true;
+          this.ifMigracion = true; // this.ifCreateUpdate = true;
           break;
         case 1:
-        this.ifParalelo1 = true;
+        this.ifCreateUpdate = true;  // this.ifParalelo1 = true;
           break;
         case 2:
-        this.ifRemoveMatricula = true;
+        this.ifParalelo1 = true; //  this.ifRemoveMatricula = true;
           break;
         case 3:
-          this.ifMigracion = true;
+          this.ifRemoveMatricula = true;
           break;
         case 4:
-          this.ifclon = true;
+          this.ifMigracion2 = true;
           break;
         case 5:
-          this.ifMigracion2 = true;
+          this.ifclon = true; //this.ifclon = true;
           break;
         default:
           console.log("I don't own a pet");

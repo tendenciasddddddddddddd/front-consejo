@@ -121,12 +121,12 @@
                   <span class="sidenav-normal letras fuente">Distributivo </span>
                 </router-link>
               </li>
-              <!-- <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
+              <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
                 <router-link to="/tutores" :class="{'active': $route.name === '4444'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> T </span>
                   <span class="sidenav-normal letras fuente">Tutores</span>
                 </router-link>
-              </li> -->
+              </li>
               <li :class="{'active': $route.name === '3333'}" class="nav-item ">
                 <router-link to="/planificacion" :class="{'active': $route.name === '3333'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> P </span>
@@ -138,7 +138,7 @@
         </li>
         <li class="nav-item" v-if="user.roles.includes('Admin')" id="step_4">
           <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link "
-            :class="{'actived': $route.name === '11'||$route.name === '77'||$route.name === 'r2'}"
+            :class="{'actived': $route.name === '77'||$route.name === 'r2'}"
             aria-controls="ecommerceExamples" role="button" aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
              
@@ -146,25 +146,14 @@
             </div>
             <span class="nav-link-text ms-1 mt-1">Matriculas</span>
           </a>
-          <div class="collapse " id="ecommerceExamples" :class="{'show':
-                    $route.name === '11'||
-                    $route.name === '77'||
-          $route.name === 'r2'}">
+          <div class="collapse " id="ecommerceExamples" :class="{'show': $route.name === '77'|| $route.name === 'r2'}">
             <ul class="nav ms-4 ps-3">
-              <li :class="{'active': $route.name === '11'}" class="nav-item ">
-                <router-link to="/Periodo" :class="{'active': $route.name === '11'}" class="nav-link ">
-                  <span class="sidenav-mini-icon"> P </span>
-                  <span class="sidenav-normal letras fuente">Periodos </span>
-                </router-link>
-              </li>
               <li :class="{'active': $route.name === '77'}" class="nav-item ">
                 <router-link to="/Intensivo" :class="{'active ': $route.name === '77'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> M </span>
                   <span class="sidenav-normal letras fuente">Matricula </span>
                 </router-link>
               </li>
-
-
               <li :class="{'active': $route.name === 'r2'}" class="nav-item ">
                 <router-link to="/opciones-reportes" :class="{'active': $route.name === 'r2'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> R </span>
@@ -203,13 +192,13 @@
                   <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
               </li>
-              <!-- <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
+              <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
                 <router-link to="/tutoresDocente" :class="{'active': $route.name === 'dh'}"
                   class="nav-link ">
                   <span class="sidenav-mini-icon"> L </span>
                   <span class="sidenav-normal letras fuente">Libretas </span>
                 </router-link>
-              </li> -->
+              </li>
 
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">
                 <router-link to="/zoom" :class="{'active': $route.name === 'dr'}" class="nav-link ">

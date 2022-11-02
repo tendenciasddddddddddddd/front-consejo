@@ -80,10 +80,10 @@ export default class Functions {
     }
     calcular_fecha(){
       var date = new Date();
-      const months = ["ENERO", "FEBRERO", "MARZO","ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+      const months = ["Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
      const formatDate = (date)=>{
-     let formatted_date = date.getDate() + " " + months[date.getMonth()] + " DEL " + date.getFullYear()
+     let formatted_date = date.getDate() + " " + months[date.getMonth()] + " Del " + date.getFullYear()
      return formatted_date;
      }
      let fecha = formatDate(date)

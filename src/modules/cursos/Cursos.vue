@@ -166,6 +166,8 @@ export default {
             });
         },
         openModules(id) {
+            const info = JSON.parse(localStorage.getItem("Xf"));
+
             for (let i = 0; i < this.info.length; i++) {
                 const res = this.info[i];
                 if (res._id == id) {
@@ -177,7 +179,8 @@ export default {
                         area: res.fmateria.area,
                         idDistributivo: res._id,
                         planificacion: res.planificacion,
-                        nivel: res.fnivel.nombre
+                        nivel: res.fnivel.nombre,
+                        nombredoc: info.nombre
                     };
                     let id = res.fnivel._id;
                     localStorage.removeItem("myCourse");
@@ -206,6 +209,7 @@ export default {
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
                         this.info = x.data;
+                        console.log(this.info)
                         this.isData = false;
                         this.$Progress.finish();
                     })

@@ -207,8 +207,9 @@ export default {
     },
     watch: {
         curso: function (value) {
+            console.log(value)
             this.isSelecMatricula = [];
-            this.__cambios(value._id, value.num);
+            this.__cambios(value._id, value.paralelo );
         }
     },
     computed: {
@@ -264,6 +265,9 @@ export default {
 
         },
         verificarUsuario() {
+            let text_1 = 'Tutores';
+            let text_2 = 'Libretas'
+            this.$store.commit('updateHeader',{text_1, text_2})
             this.$proxies._settingProxi.getConfigure()
                 .then((x) => {
                     const { rector,logo, unidadeducativa, ubicacion, direccion, telefono } = x.data[0];
@@ -294,7 +298,7 @@ export default {
                         for (let i = 0; i < result.length; i++) {
                             const element = result[i].fnivel;
                             const paralelo = result[i].paralelo
-                            this.listniveles.push({_id: element._id, nombre: element.nombre + '--' + paralelo})
+                            this.listniveles.push({_id: element._id, paralelo: paralelo, nombre: element.nombre + ':: PARALELO (' + paralelo + ')'})
                         }
                     }
                     this.isLoading1 = false;
@@ -305,13 +309,14 @@ export default {
                 });
         },
 
-        __cambios(cursos) {
+        __cambios(cursos, para) {
             this.infoMat = []
             this.isTabla = true;
             this.$proxies._matriculaProxi
                 .getInfoListReport(cursos)
                 .then((x) => {
-                    this.infoMat = x.data;
+                    const datas = x.data
+                    this.infoMat = datas.filter((x) => x.curso == para)
                     this.isTabla = false;
                 })
                 .catch((err) => {

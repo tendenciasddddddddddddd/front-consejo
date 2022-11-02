@@ -1,15 +1,16 @@
 <template>
     <div>
-            <Astronauta v-if="isPrint"/>
+        <Astronauta v-if="isPrint" />
         <div v-else>
-            <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
+            <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open"
+                @changeSearch="changeSearch" />
         </div>
         <section style="height: calc(100vh - 165px);">
             <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
-            :rowData="rowData" :defaultColDef="defaultColDef" :enableRangeSelection="true"
-            :suppressCopySingleCellRanges="true"  @grid-ready="onGridReady" :enableFillHandle="true">
-        </ag-grid-vue>
-        </section> 
+                :rowData="rowData" :defaultColDef="defaultColDef" :enableRangeSelection="true"
+                :suppressCopySingleCellRanges="true" @grid-ready="onGridReady" :enableFillHandle="true">
+            </ag-grid-vue>
+        </section>
         <div v-if="iftask">
             <ReportConducta @EventClosed="closed" @getData="getDataAll" :rowData="rowData"
                 @changeStatus="changeStatus" />
@@ -45,82 +46,246 @@ export default {
                 {
                     headerName: 'QUIMESTRE 1',
                     children: [
-                        { field: "p1", headerName: 'P1', minWidth: 60, editable: true, valueFormatter: saleValueFormatter, },
-                        { field: "p2", headerName: 'P2', minWidth: 60, editable: true, valueFormatter: saleValueFormatter, },
-                        { field: "v1", headerName: 'C1', minWidth: 60,  valueGetter: parcilaValue1},
-                        { field: "v2", headerName: 'C2', minWidth: 60, valueGetter: parcilaValue2 },
                         {
-                            field: "promedio1", headerName: 'PR', minWidth: 60,cellStyle: cellStyle,
-                            valueGetter: params => {
-                                let p1 = params.data.p1.toString().replace(",", ".")
-                                let re1 = parseFloat(p1)
-                                let p2 = params.data.p2.toString().replace(",", ".")
-                                let re2 = parseFloat(p2)
-                                var result = (re1 + re2) / 2
-                                return `${result.toFixed(2)}`;
-                            },
+                            field: "p1", headerName: 'PARCIAL 1', minWidth: 60, editable: true, valueFormatter: saleValueFormatter2,
+                            cellEditor: 'agRichSelectCellEditor', cellEditorPopup: true,
+                            cellEditorParams: { cellHeight: 30, values: ['A', 'B', 'C', 'D', 'E'] },
                         },
                         {
-                            field: "eq1", headerName: 'PR', minWidth: 60,
-                            valueGetter: quimestreValue1
+                            field: "p2", headerName: 'PARCIAL 2', minWidth: 60, editable: true, valueFormatter: saleValueFormatter2,
+                            cellEditor: 'agRichSelectCellEditor', cellEditorPopup: true,
+                            cellEditorParams: { cellHeight: 30, values: ['A', 'B', 'C', 'D', 'E'] },
+                        },
+                        {
+                            field: "promedio1", headerName: 'PROMEDIO', minWidth: 60, cellStyle: cellStyle,
+                            valueGetter: params => {
+                                let aux = 0;
+                                let aux2 = 0;
+                                let p1 = params.data.p1.toString().replace(",", ".")
+                                let p2 = params.data.p2.toString().replace(",", ".")
+                                switch (p1) {
+                                    case "A": aux = 5;
+                                        break;
+                                    case "B": aux = 4;
+                                        break;
+                                    case "C": aux = 3;
+                                        break;
+                                    case "D": aux = 2;
+                                        break;
+                                    case "E": aux = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                switch (p2) {
+                                    case "A": aux2 = 5;
+                                        break;
+                                    case "B": aux2 = 4;
+                                        break;
+                                    case "C": aux2 = 3;
+                                        break;
+                                    case "D": aux2 = 2;
+                                        break;
+                                    case "E": aux2 = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                var result = parseInt((aux + aux2) / 2)
+                                var letra = 'E'
+                                switch (result) {
+                                    case 5: letra = 'A';
+                                        break;
+                                    case 4: letra = 'B';
+                                        break;
+                                    case 3: letra = 'C';
+                                        break;
+                                    case 2: letra = 'D';
+                                        break;
+                                    case 1: letra = 'E';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return `${letra}`;
+                            },
                         },
                     ]
                 },
                 {
                     headerName: 'QUIMESTRE 2',
                     children: [
-                        { field: "p3", headerName: 'P1', minWidth: 60, editable: true, valueFormatter: saleValueFormatter, },
-                        { field: "p4", headerName: 'P2', minWidth: 60, editable: true,  valueFormatter: saleValueFormatter,},
-                        { field: "v3", headerName: 'C1', minWidth: 60,  valueGetter: parcilaValue3},
-                        { field: "v4", headerName: 'C2', minWidth: 60, valueGetter: parcilaValue4 },
                         {
-                            field: "promedio2", headerName: 'PR', minWidth: 60,cellStyle: cellStyle,
+                            field: "p3", headerName: 'PARCIAL 1', minWidth: 60, editable: true, valueFormatter: saleValueFormatter2,
+                            cellEditor: 'agRichSelectCellEditor', cellEditorPopup: true,
+                            cellEditorParams: { cellHeight: 30, values: ['A', 'B', 'C', 'D', 'E'] },
+                        },
+                        {
+                            field: "p4", headerName: 'PARCIAL 2', minWidth: 60, editable: true, valueFormatter: saleValueFormatter2,
+                            cellEditor: 'agRichSelectCellEditor', cellEditorPopup: true,
+                            cellEditorParams: { cellHeight: 30, values: ['A', 'B', 'C', 'D', 'E'] },
+                        },
+
+                        {
+                            field: "promedio2", headerName: 'PROMEDIO', minWidth: 60, cellStyle: cellStyle,
                             valueGetter: params => {
-                                let p1 = params.data.p3.toString().replace(",", ".")
-                                let re1 = parseFloat(p1)
-                                let p2 = params.data.p4.toString().replace(",", ".")
-                                let re2 = parseFloat(p2)
-                                var result = (re1 + re2) / 2
-                                return `${result.toFixed(2)}`;
+                                let aux = 0;
+                                let aux2 = 0;
+                                let p1 = params.data.p3.toString()
+                                let p2 = params.data.p4.toString()
+                                switch (p1) {
+                                    case "A": aux = 5;
+                                        break;
+                                    case "B": aux = 4;
+                                        break;
+                                    case "C": aux = 3;
+                                        break;
+                                    case "D": aux = 2;
+                                        break;
+                                    case "E": aux = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                switch (p2) {
+                                    case "A": aux2 = 5;
+                                        break;
+                                    case "B": aux2 = 4;
+                                        break;
+                                    case "C": aux2 = 3;
+                                        break;
+                                    case "D": aux2 = 2;
+                                        break;
+                                    case "E": aux2 = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                var result = parseInt((aux + aux2) / 2)
+                                var letra = 'E'
+                                switch (result) {
+                                    case 5: letra = 'A';
+                                        break;
+                                    case 4: letra = 'B';
+                                        break;
+                                    case 3: letra = 'C';
+                                        break;
+                                    case 2: letra = 'D';
+                                        break;
+                                    case 1: letra = 'E';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return `${letra}`;
                             },
                         },
-                        {
-                            field: "eq2", headerName: 'PR', minWidth: 60,
-                            valueGetter: quimestreValue2
-                        },
+
                     ]
                 },
                 {
                     headerName: 'FINAL',
                     children: [
-                        { field: "final", headerName: 'PF', minWidth: 60, editable: true,cellStyle: cellStyle,
-                        valueGetter: params => {
-                                let p1 = params.data.p1.toString().replace(",", ".")
-                                let re1 = parseFloat(p1)
-                                let p2 = params.data.p2.toString().replace(",", ".")
-                                let re2 = parseFloat(p2)
-                                let p3 = params.data.p3.toString().replace(",", ".")
-                                let re3 = parseFloat(p3)
-                                let p4 = params.data.p4.toString().replace(",", ".")
-                                let re4 = parseFloat(p4)
-                                var result = (re1 + re2 + re3 + re4) / 4
-                                return `${result.toFixed(2)}`;
+                        {
+                            field: "final", headerName: 'PROMEDIO FINAL', minWidth: 60, editable: true, cellStyle: cellStyle,
+                            valueGetter: params => {
+                                let aux = 0;
+                                let aux2 = 0;
+                                let aux3 = 0;
+                                let aux4 = 0;
+                                let p1 = params.data.p1.toString()
+                                let p2 = params.data.p2.toString()
+                                let p3 = params.data.p3.toString()
+                                let p4 = params.data.p4.toString()
+                                switch (p1) {
+                                    case "A": aux = 5;
+                                        break;
+                                    case "B": aux = 4;
+                                        break;
+                                    case "C": aux = 3;
+                                        break;
+                                    case "D": aux = 2;
+                                        break;
+                                    case "E": aux = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                switch (p2) {
+                                    case "A": aux2 = 5;
+                                        break;
+                                    case "B": aux2 = 4;
+                                        break;
+                                    case "C": aux2 = 3;
+                                        break;
+                                    case "D": aux2 = 2;
+                                        break;
+                                    case "E": aux2 = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                switch (p3) {
+                                    case "A": aux3 = 5;
+                                        break;
+                                    case "B": aux3 = 4;
+                                        break;
+                                    case "C": aux3 = 3;
+                                        break;
+                                    case "D": aux3 = 2;
+                                        break;
+                                    case "E": aux3 = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                switch (p4) {
+                                    case "A": aux4 = 5;
+                                        break;
+                                    case "B": aux4 = 4;
+                                        break;
+                                    case "C": aux4 = 3;
+                                        break;
+                                    case "D": aux4 = 2;
+                                        break;
+                                    case "E": aux4 = 1;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                var result = parseInt((aux + aux2 + aux3 + aux4) / 4)
+                                var letra = 'E'
+                                switch (result) {
+                                    case 5: letra = 'A';
+                                        break;
+                                    case 4: letra = 'B';
+                                        break;
+                                    case 3: letra = 'C';
+                                        break;
+                                    case 2: letra = 'D';
+                                        break;
+                                    case 1: letra = 'E';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return `${letra}`;
                             },
-                         },
-                        { field: "fin", headerName: 'F', minWidth: 60, editable: true, 
-                    valueGetter: final},
-                        
+                        },
+
+
                     ]
                 },
             ],
             quimestre: 'p1',
             gridApi: null,
             iftask: false,
-            ifsaved : false
+            ifsaved: false
         };
     },
     components: {
-        AgGridVue, ActionRowNotas,Astronauta ,
+        AgGridVue, ActionRowNotas, Astronauta,
         ReportConducta: () => import( /* webpackChunkName: "ReportConducta" */ "./ReportConducta.vue"),
     },
     created() {
@@ -132,8 +297,8 @@ export default {
             this.gridApi.exportDataAsExcel();
         },
         changeSearch(value) {
-      this.gridApi.setQuickFilter(value);
-    },
+            this.gridApi.setQuickFilter(value);
+        },
         onGridReady(params) {
             this.gridApi = params.api;
             this.gridColumnApi = params.columnApi;
@@ -142,16 +307,16 @@ export default {
             var anArray = [];
             for (let i = 0; i < this.object.length; i++) {
                 const quim = this.object[i].comportamiento;
-                    var objeto = {
-                        id: this.object[i].id,
-                        fora: this.object[i].fora,
-                        nombres: this.object[i].name,
-                        p1: quim[0].p1,
-                        p2: quim[0].p2,
-                        p3: quim[1].p1,
-                        p4: quim[1].p2,
-                    }
-                    anArray.push(objeto);
+                var objeto = {
+                    id: this.object[i].id,
+                    fora: this.object[i].fora,
+                    nombres: this.object[i].name,
+                    p1: quim[0].p1,
+                    p2: quim[0].p2,
+                    p3: quim[1].p1,
+                    p4: quim[1].p2,
+                }
+                anArray.push(objeto);
             }
             this.rowData = anArray;
         },
@@ -175,9 +340,12 @@ export default {
             }
         },
         validateNumber(num) {
-            let res = num.toString().replace(",", ".")
-            if (res >= 0 && res <= 10) return true;
-            return false;
+            let paralelo = ['A', 'B', 'C', 'D', 'E']
+            if (paralelo.includes(num)) {
+                return true;
+            } else {
+                return false;
+            }
         },
         save() {
             const result = [];
@@ -191,200 +359,67 @@ export default {
                     id: element.id,
                     fora: element.fora,
                     comportamiento: [
-                        { p1: element.p1, p2 : element.p2},
-                        { p1: element.p3, p2 : element.p4}
+                        { p1: element.p1, p2: element.p2 },
+                        { p1: element.p3, p2: element.p4 }
                     ]
                 })
 
             }
-             this.ifsaved = true;
-             this.$proxies._notasProxi
-                 .updateComportamiento(this.$route.params.id, result)
-                 .then(() => {
-                     this.ifsaved = false;
-                     this.getDataAll();
-                     this.toast("Se guardo las notas de comportamiento con exito");
-                 })
-                 .catch(() => {
-                     this.$dialog.alert("No se puede completar la operación");
-                     this.ifsaved = false;
-                 });
+            this.ifsaved = true;
+            this.$proxies._notasProxi
+                .updateComportamiento(this.$route.params.id, result)
+                .then(() => {
+                    this.ifsaved = false;
+                    this.getDataAll();
+                    this.toast("Se guardo las notas de comportamiento con exito");
+                })
+                .catch(() => {
+                    this.$dialog.alert("No se puede completar la operación");
+                    this.ifsaved = false;
+                });
         },
         toast(message) {
-      this.$toasted.info(message, {
-        duration: 1600,
-        position: 'top-center',
-        icon: "check-circle",
-        theme: "toasted-primary",
-        action: {
-          text: 'CERRAR',
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
-          }
-        }
-      });
-    },
+            this.$toasted.info(message, {
+                duration: 1600,
+                position: 'top-center',
+                icon: "check-circle",
+                theme: "toasted-primary",
+                action: {
+                    text: 'CERRAR',
+                    onClick: (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
+        },
     }
 };
-var parcilaValue1 = function (params) {
-    let res = params.data.p1.toString().replace(",", ".")
-    let num = parseFloat(res)
-    var result = ''
-    if (num <= 10 && num >= 9) {
-        result = 'A'
-    } else if (num <= 8.99 && num >= 7) {
-        result = 'B'
-    } else if (num <= 6.99 && num >= 4.01) {
-        result = 'C'
-    } else if (num <= 4 && num >= 1) {
-        result = 'D'
+
+
+
+var saleValueFormatter2 = function (params) {
+    var formatted = params.value.toString();
+    let paralelo = ['A', 'B', 'C', 'D', 'E']
+    if (paralelo.includes(formatted)) {
+        return formatted;
     } else {
-        result = 'NA'
+        return '❓';
     }
-    return `${result}`;
 };
-var parcilaValue2 = function (params) {
-    let res = params.data.p2.toString().replace(",", ".")
-    let num = parseFloat(res)
-    var result = ''
-    if (num <= 10 && num >= 9) {
-        result = 'A'
-    } else if (num <= 8.99 && num >= 7) {
-        result = 'B'
-    } else if (num <= 6.99 && num >= 4.01) {
-        result = 'C'
-    } else if (num <= 4 && num >= 1) {
-        result = 'D'
+var cellStyle = function (params) {
+    const color = numberToColor(params.value);
+    return {
+        backgroundColor: color,
+    };
+};
+var numberToColor = function (val) {
+    if (val == 'D' || val == 'E' || val == 'C') {
+        return '#ffd1d3';
+    } else if (val == 'A' || val == 'B') {
+        return '#aaffaa';
     } else {
-        result = 'NA'
+        return '#aaaaff';
     }
-    return `${result}`;
 };
-var quimestreValue1 = function (params) {
-    let p1 = params.data.p1.toString().replace(",", ".")
-    let re1 = parseFloat(p1)
-    let p2 = params.data.p2.toString().replace(",", ".")
-    let re2 = parseFloat(p2)
-    var prom = (re1 + re2) / 2
-    let num = prom.toFixed(2)
-    let result = ''
-    if (num <= 10 && num >= 9) {
-        result = 'A'
-    } else if (num <= 8.99 && num >= 7) {
-        result = 'B'
-    } else if (num <= 6.99 && num >= 4.01) {
-        result = 'C'
-    } else if (num <= 4 && num >= 1) {
-        result = 'D'
-    } else {
-        result = 'NA'
-    }
-    return `${result}`;
-};
-var parcilaValue3 = function (params) {
-    let res = params.data.p3.toString().replace(",", ".")
-    let num = parseFloat(res)
-    var result = ''
-    if (num <= 10 && num >= 9) {
-        result = 'A'
-    } else if (num <= 8.99 && num >= 7) {
-        result = 'B'
-    } else if (num <= 6.99 && num >= 4.01) {
-        result = 'C'
-    } else if (num <= 4 && num >= 1) {
-        result = 'D'
-    } else {
-        result = 'NA'
-    }
-    return `${result}`;
-};
-var parcilaValue4 = function (params) {
-    let res = params.data.p4.toString().replace(",", ".")
-    let num = parseFloat(res)
-    var result = ''
-    if (num <= 10 && num >= 9) {
-        result = 'A'
-    } else if (num <= 8.99 && num >= 7) {
-        result = 'B'
-    } else if (num <= 6.99 && num >= 4.01) {
-        result = 'C'
-    } else if (num <= 4 && num >= 1) {
-        result = 'D'
-    } else {
-        result = 'NA'
-    }
-    return `${result}`;
-};
-var quimestreValue2 = function (params) {
-    let p1 = params.data.p3.toString().replace(",", ".")
-    let re1 = parseFloat(p1)
-    let p2 = params.data.p4.toString().replace(",", ".")
-    let re2 = parseFloat(p2)
-    var prom = (re1 + re2) / 2
-    let num = prom.toFixed(2)
-    let result = ''
-    if (num <= 10 && num >= 9) {
-        result = 'A'
-    } else if (num <= 8.99 && num >= 7) {
-        result = 'B'
-    } else if (num <= 6.99 && num >= 4.01) {
-        result = 'C'
-    } else if (num <= 4 && num >= 1) {
-        result = 'D'
-    } else {
-        result = 'NA'
-    }
-    return `${result}`;
-};
- var final = function (params) {
-     let p1 = params.data.p1.toString().replace(",", ".")
-     let re1 = parseFloat(p1)
-     let p2 = params.data.p2.toString().replace(",", ".")
-     let re2 = parseFloat(p2)
-     let p3 = params.data.p3.toString().replace(",", ".")
-     let re3 = parseFloat(p3)
-     let p4 = params.data.p4.toString().replace(",", ".")
-     let re4 = parseFloat(p4)
-     
-     var prom = (re1 + re2 + re3 + re4) / 4
-     let num = prom.toFixed(2)
-     let result = ''
-     if (num <= 10 && num >= 9) {
-         result = 'A'
-     } else if (num <= 8.99 && num >= 7) {
-         result = 'B'
-     } else if (num <= 6.99 && num >= 4.01) {
-         result = 'C'
-     } else if (num <= 4 && num >= 1) {
-         result = 'D'
-     } else {
-         result = 'NA'
-     }
-     return `${result}`;
- };
-     var saleValueFormatter = function (params) {
-       var formatted = params.value.toString().replace(',', '.');
-       var result = formatted
-       if (formatted >= 0 && formatted <= 10) {
-         return result;
-       } else {
-         return '❓';
-       }
-     };
-     var cellStyle = function (params) {
-       const color = numberToColor(params.value);
-       return {
-         backgroundColor: color,
-       };
-     };
-     var numberToColor = function (val) {
-       if (val < 7) {
-         return '#ffd1d3';
-       } else if (val >= 7 && val <= 10) {
-         return '#aaffaa';
-       } else {
-         return '#aaaaff';
-       }
-     };
 </script>
     
