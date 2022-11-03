@@ -121,12 +121,12 @@
                   <span class="sidenav-normal letras fuente">Distributivo </span>
                 </router-link>
               </li>
-              <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
+              <!-- <li :class="{'active': $route.name === '4444'}" class="nav-item "  v-if="user.roles.includes('Admin')">
                 <router-link to="/tutores" :class="{'active': $route.name === '4444'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> T </span>
                   <span class="sidenav-normal letras fuente">Tutores</span>
                 </router-link>
-              </li>
+              </li> -->
               <li :class="{'active': $route.name === '3333'}" class="nav-item ">
                 <router-link to="/planificacion" :class="{'active': $route.name === '3333'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> P </span>
@@ -192,13 +192,13 @@
                   <span class="sidenav-normal letras fuente">Cursos </span>
                 </router-link>
               </li>
-              <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
+              <!-- <li :class="{'active': $route.name === 'dh'}" class="nav-item ">
                 <router-link to="/tutoresDocente" :class="{'active': $route.name === 'dh'}"
                   class="nav-link ">
                   <span class="sidenav-mini-icon"> L </span>
                   <span class="sidenav-normal letras fuente">Libretas </span>
                 </router-link>
-              </li>
+              </li> -->
 
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">
                 <router-link to="/zoom" :class="{'active': $route.name === 'dr'}" class="nav-link ">
