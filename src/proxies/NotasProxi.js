@@ -21,6 +21,10 @@ export default class NotasProxi {
         return this.axios.put(this.url + `/notas/reform/${id}`, params); //RUTA ARBOL 1
     }
 
+    updateInicialesReforma(id, params) {
+        return this.axios.put(this.url + `/notas/iniciales/${id}`, params); //RUTA ARBOL 1
+    }
+
     updateReforma2(id, params) {
         return this.axios.put(this.url + `/notas/ref2/${id}`, params); //RUTA ARBOL 2
     }
@@ -42,7 +46,11 @@ export default class NotasProxi {
     }
 
     updateProyectos(id, params) {
-        return this.axios.put(this.url + `/notas/createProyectos/${id}`, params); //GUARADRA NOTA DE COMPORTAMIENTO
+        return this.axios.put(this.url + `/notas/createProyectos/${id}`, params); //createIniciales
+    }
+
+    updateIniciales(id, params) {
+        return this.axios.put(this.url + `/notas/createIniciales/${id}`, params); //createIniciales
     }
 
     deleteAllNote(id, params) {

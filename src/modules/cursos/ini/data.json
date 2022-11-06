@@ -1,0 +1,1445 @@
+{
+    "inicial1": [
+        {
+            "id": 1,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Comunica algunos datos de su identidad como: nombre, apellido, edad y nombres de los padres"
+        },
+        {
+            "id": 2,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Identifica las características generales que diferencian a niños y niñas y se reconoce como parte de uno de esos grupos. "
+        },
+        {
+            "id": 3,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Reconoce algunas de sus características físicas como: color de pelo, ojos, piel tamaño, entre otros, como parte de proceso de su reconocimiento como ser único e irrepetible."
+        },
+        {
+            "id": 4,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Manifiesta sus emociones y sentimientos con mayor intencionalidad mediante expresiones orales y gestuales."
+        },
+        {
+            "id":5,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Elige actividades, vestuarios entre otros demostrando sus gustos y preferencias."
+        },
+        {
+            "id": 6,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Se reconoce como parte integrante de una familia a la que pertenece"
+        },
+        {
+            "id": 7,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Realiza acciones de lavado de manos, cara, dientes con la guía del adulto, como parte del proceso de la adquisición de hábitos de higiene."
+        },
+        {
+            "id": 8,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Acude al baño autónomamente, requiriendo la ayuda del adulto para su aseo"
+        },
+        {
+            "id": 9,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Se saca y pone algunas prendas de vestir como: interior, pantalón o falda y medias sin ayuda del adulto"
+        },
+        {
+            "id": 10,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Selecciona prendas de vestir de acuerdo a su preferencia"
+        },
+        {
+            "id": 11,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Utiliza la cuchara y el vaso cuando se alimenta demostrando cada vez mayores niveles de independencia."
+        },
+        {
+            "id": 12,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Identifica las situaciones de peligro a las que se puede exponer en su entorno inmediato comprendiendo las normas de prevención planteadas por el adulto."
+        },
+        {
+            "id": 13,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Ejecuta acciones de seguridad para evitar accidentes que se pueden producir en su entorno inmediato"
+        },
+        {
+            "id": 14,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Imita las acciones a seguir en situaciones de riesgo como: temblores, incendios, entre otros, determinadas en el plan de contingencia institucional"
+        },
+        {
+            "id": 15,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Colabora en el mantenimiento del orden del aula ubicando los objetos en su lugar"
+        },
+        {
+            "id": 16,
+            "iden": "CONVIVENCIA",
+            "des": "Demuestra preferencia por jugar con un niño específico estableciendo amistad en función de algún grado de empatía."
+        },
+        {
+            "id": 17,
+            "iden": "CONVIVENCIA",
+            "des": "Reconoce y practica normas de convivencia en el centro de educación inicial y en el hogar establecidas por el adulto.  "
+        },
+        {
+            "id": 18,
+            "iden": "CONVIVENCIA",
+            "des": "Reconoce los oficios de personas que brindan servicio a la comunidad. "
+        },
+        {
+            "id": 19,
+            "iden": "CONVIVENCIA",
+            "des": "Reconoce a los miembros de su familia y los roles que cumple cada uno "
+        },
+        {
+            "id": 20,
+            "iden": "CONVIVENCIA",
+            "des": "Demuestra interés ante emociones y sentimientos de las personas de su entorno familiar y escolar"
+        },
+        {
+            "id": 21,
+            "iden": "CONVIVENCIA",
+            "des": "Demuestra interés ante diferentes problemas que presentan sus compañeros y adultos de su entorno."
+        },
+        {
+            "id": 22,
+            "iden": "CONVIVENCIA",
+            "des": "Colabora espontáneamente con los adultos en actividades y situaciones sencillas. "
+        },
+        {
+            "id": 23,
+            "iden": "CONVIVENCIA",
+            "des": "Se relaciona con sus compañeros sin discriminación de aspectos como: género y diversidad cultural, necesidades especiales, entre otros.  "
+        },
+        {
+            "id": 24,
+            "iden": "CONVIVENCIA",
+            "des": "Establece relaciones con personas cercanas a su entorno familiar y escolar ampliando su campo de interacción. "
+        },
+        {
+            "id": 25,
+            "iden": "CONVIVENCIA",
+            "des": "Se integra progresivamente en juegos grupales de reglas sencillas "
+        },
+        {
+            "id": 26,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Participa en algunas prácticas tradicionales de su entorno disfrutando de las diferentes manifestaciones culturales. "
+        },
+        {
+            "id": 27,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Reconoce y aprecia algunas expresiones culturales importantes de su localidad."
+        },
+        {
+            "id": 28,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Apoya en el cuidado de plantas y animales de su entorno."
+        },
+        {
+            "id": 29,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Realiza acciones que apoyan al cuidado del medio ambiente como: botar la basura en su lugar, no desperdiciar el agua, entre otras.  "
+        },
+        {
+            "id": 30,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Identifica los alimentos nutritivos reconociendo la importancia de éstos en su crecimiento.  "
+        },
+        {
+            "id": 31,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Reconoce las características de las plantas alimenticias comprendiendo su importancia en la alimentación "
+        },
+        {
+            "id": 32,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Identifica las características de los animales que pueden cumplir el rol de mascota y los cuidados que requieren.  "
+        },
+        {
+            "id": 33,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Reconoce diferentes elementos de su entorno natural mediante la discriminación sensorial. "
+        },
+        {
+            "id": 34,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Reconoce y diferencia entre elementos naturales y artificiales por medio de los sentidos. "
+        },
+        {
+            "id": 35,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Identifica a los seres vivos de su entorno a través de la exploración del mundo natural. "
+        },
+        {
+            "id": 36,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica las nociones de tiempo en acciones que suceden antes y ahora. "
+        },
+        {
+            "id": 37,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Imita patrones simples con elementos de su entorno. "
+        },
+        {
+            "id": 38,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Reconoce y compara objetos de acuerdo a su tamaño (grande/ pequeño)"
+        },
+        {
+            "id": 39,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Diferencia entre colecciones de más y menos objetos."
+        },
+        {
+            "id": 40,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Clasifica objetos con un atributo (tamaño, color o forma). "
+        },
+        {
+            "id": 41,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Comprende la relación de número cantidad hasta el 5. "
+        },
+        {
+            "id": 42,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Reconoce la ubicación de objetos en relación a sí mismo según las nociones espaciales de: arriba/abajo, al lado, dentro/fuera, cerca/lejos. "
+        },
+        {
+            "id": 43,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Cuenta oralmente del 1 al 10 con secuencia numérica, en la mayoría de veces "
+        },
+        {
+            "id": 44,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica características del día y la noche "
+        },
+        {
+            "id": 45,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": " Reconoce los colores primarios, el blanco y el negro en objetos e imágenes del entorno. "
+        },
+        {
+            "id": 46,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Descubre formas básicas circulares, triangulares, rectangulares y cuadrangulares en objetos del entorno. "
+        },
+        {
+            "id": 47,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "dentifica objetos de formas similares en el entorno"
+        },
+        {
+            "id": 48,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica en los objetos las nociones de medida: alto/bajo, pesado/liviano "
+        },
+        {
+            "id": 49,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Ordena en secuencia lógica sucesos de hasta tres eventos, en actividades de la rutina diaria y en escenas de cuentos.  "
+        },
+        {
+            "id": 50,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se expresa oralmente de manera comprensible, presenta dificultades en la pronunciación de s, r, t, l, g, j, f. "
+        },
+        {
+            "id": 51,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se comunica utilizando en su vocabulario palabras que nombran personas, animales, objetos y acciones conocidas. "
+        },
+        {
+            "id": 52,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Participa en conversaciones cortas repitiendo lo que el otro dice y haciendo preguntas.  "
+        },
+        {
+            "id": 53,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Describe oralmente imágenes que observa en materiales gráficos y digitales empleando oraciones. "
+        },
+        {
+            "id": 54,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Reproduce canciones y poemas cortos, incrementando su vocabulario y capacidad retentiva. "
+        },
+        {
+            "id": 55,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se expresa utilizando oraciones cortas en las que puede omitir o usar incorrectamente algunas palabras."
+        },
+        {
+            "id": 56,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Sigue instrucciones sencillas que involucren la ejecución de dos actividades "
+        },
+        {
+            "id": 57,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Relata cuentos, narrados por el adulto con la ayuda de los paratextos utilizando su propio lenguaje. "
+        },
+        {
+            "id": 58,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Responde preguntas sobre un texto narrado por el adulto, basándose en los paratextos que observa. "
+        },
+        {
+            "id": 59,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Identifica etiquetas y rótulos con la ayuda de un adulto y las asocia con el objeto o lugar que los representa "
+        },
+        {
+            "id": 60,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Cuenta un cuento en base a sus imágenes sin seguir la secuencia de las páginas. "
+        },
+        {
+            "id": 61,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Identifica su cuento preferido por la imagen de la portada."
+        },
+        {
+            "id": 62,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Realiza movimientos articulatorios básicos: sopla, intenta inflar globos, imita movimientos de labios, lengua y mejillas"
+        },
+        {
+            "id": 63,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Repite rimas identificando los sonidos que suenan iguales. "
+        },
+        {
+            "id": 64,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Identifica “auditivamente” el fonema (sonido) inicial de su nombre. "
+        },
+        {
+            "id": 65,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Comunica a través de dibujos de objetos del entorno con algún detalle que lo vuelve identificable, como representación simbólica de sus ideas.  "
+        },
+        {
+            "id": 66,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Comunica de manera escrita sus ideas a través de garabatos controlados, líneas, círculos o zigzag "
+        },
+        {
+            "id": 67,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Expresa sus vivencias y experiencias a través del dibujo libre"
+        },
+        {
+            "id": 68,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Experimenta a través de la manipulación de materiales y mezcla de colores la realización de trabajos creativos utilizando las técnicas grafoplásticas. "
+        },
+        {
+            "id": 69,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Canta canciones cortas asociando la letra con expresiones de su cuerpo"
+        },
+        {
+            "id": 70,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Imita pasos de baile intentando reproducir los movimientos y seguir el ritmo "
+        },
+        {
+            "id": 71,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Se integra durante la ejecución de rondas, bailes y juegos tradicionales "
+        },
+        {
+            "id": 72,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Representa a personas de su entorno asumiendo roles a través del juego simbólico.  "
+        },
+        {
+            "id": 73,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Expresa su gusto o disgusto al observar una obra artística relacionada a la plástica o a la escultura.  "
+        },
+        {
+            "id": 74,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Ejecuta patrones de hasta dos ritmos con partes del cuerpo y elementos o instrumentos sonoros. "
+        },
+        {
+            "id": 75,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Imita e identifica sonidos onomatopéyicos, naturales y artificiales del entorno. "
+        },
+        {
+            "id": 76,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Utiliza frecuentemente una de las dos manos o pies al realizar las actividades. "
+        },
+        {
+            "id": 77,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Representa la figura humana utilizando el monigote o renacuajo. "
+        },
+        {
+            "id": 78,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Identifica en su cuerpo y en el de los demás partes gruesas del cuerpo humano y partes de la cara a través de la exploración sensorial. "
+        },
+        {
+            "id": 79,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza representaciones gráficas utilizando el garabateo con nombre "
+        },
+        {
+            "id": 80,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza movimientos de manos, dedos y muñecas que le permiten coger objetos utilizando la pinza trípode y digital.  "
+        },
+        {
+            "id": 81,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza actividades de coordinación visomotriz con materiales sencillos y de tamaño grande. "
+        },
+        {
+            "id": 82,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza ejercicios que involucran movimientos segmentados de partes gruesas del cuerpo (cabeza, tronco y extremidades) "
+        },
+        {
+            "id": 83,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Mantiene control postural en diferentes posiciones del cuerpo (sentado, de pie, en cuclillas, de cúbito dorsal y cúbito ventral).  "
+        },
+        {
+            "id": 84,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Mantiene el equilibro al caminar sobre líneas rectas, y curvas con altura (aprox. 5 cm) intentando mantener el control postural "
+        },
+        {
+            "id": 85,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza ejercicios de equilibrio dinámico y estático controlando los movimientos de las partes gruesas del cuerpo y estructurando motricidad facial y gestual según la consigna por lapsos cortos de tiempo. "
+        },
+        {
+            "id": 86,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza actividades intentando controlar su fuerza y tonicidad muscular como: lanzar, atrapar y patear objetos y pelotas, entre otros."
+        },
+        {
+            "id": 87,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Camina, corre y salta de un lugar a otro coordinadamente combinando estas formas de desplazamiento, a velocidades diferentes y en superficies planas e inclinadas"
+        },
+        {
+            "id": 88,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Galopa y salta coordinadamente a diferentes ritmos.  "
+        },
+        {
+            "id": 89,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Trepa y repta combinando obstáculos y recorridos."
+        },
+        {
+            "id": 90,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Sube escaleras sin apoyo en posición de pie, escalón por escalón ubicando alternadamente un pie en cada peldaño, y bajarlas con apoyo. "
+        },
+        {
+            "id": 91,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Salta sobre un pie o sobre el otro de manera autónoma. "
+        },
+        {
+            "id": 92,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Salta en dos pies en sentido vertical obstáculos de 15 a 25 cm en altura y en sentido horizontal longitudes de aproximadamente 40 a 60 cm"
+        },
+        {
+            "id": 93,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Camina y corre coordinadamente manteniendo el equilibrio a diferentes distancias, orientaciones y ritmos utilizando el espacio total."
+        },
+        {
+            "id": 94,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza movimientos para la coordinación de ojo y pie como: patear pelotas hacia diferentes direcciones. "
+        },
+        {
+            "id": 95,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza varios movimientos y desplazamientos a diferentes velocidades (rápido, lento).  "
+        },
+        {
+            "id": 96,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Utiliza el espacio parcial para realizar representaciones gráficas"
+        },
+        {
+            "id": 97,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza desplazamientos y movimientos utilizando el espacio total a diferentes distancias (largas-cortas)."
+        },
+        {
+            "id": 98,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Se orienta en el espacio realizando desplazamientos en función de consignas dadas con las nociones: arriba-abajo, a un lado a otro lado, dentro/fuera. "
+        },
+        {
+            "id": 99,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Ubica algunas partes de su cuerpo en función de las nociones de arriba-abajo, adelante-atrás "
+        },
+        {
+            "id": 100,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza ejercicios de simetría corporal como: observar en el espejo y en otros materiales las partes semejantes que conforman el lado derecho e izquierdo de la cara"
+        }
+    ],
+
+    "inicial2": [
+        {
+            "id": 1,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Practica las acciones a seguir en situaciones de riesgo como: temblores, incendios, entre otros, determinadas en el plan de contingencia institucional."
+        },
+        {
+            "id": 2,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "dentifica situaciones de peligro en que se puede exponer en su entorno inmediato y seguir pautas de comportamiento para evitarlas."
+        },
+        {
+            "id": 3,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Practica hábitos de orden ubicando los objetos en el lugar correspondiente."
+        },
+        {
+            "id": 4,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Utiliza la cuchara, tenedor y el vaso cuando se alimenta de manera autónoma"
+        },
+        {
+            "id":5,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Selecciona las prendas de vestir de acuerdo al estado climático (prendas para el frío, prendas para el calor). "
+        },
+        {
+            "id": 6,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Se viste y desviste de manera independiente con prendas de vestir sencillas."
+        },
+        {
+            "id": 7,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Realiza independientemente normas de aseo al ir al baño. "
+        },
+        {
+            "id": 8,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Practica con autonomía hábitos de higiene personal como lavarse las manos, los dientes y la cara."
+        },
+        {
+            "id": 9,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Se identifica como miembro de una familia reconociéndose como parte importante de la misma."
+        },
+        {
+            "id": 10,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Toma decisiones con respecto a la elección de actividades, vestuario, entre otros, en función de sus gustos y preferencias, argumentando las mismas"
+        },
+        {
+            "id": 11,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Identifica y manifiesta sus emociones y sentimientos, expresando las causas de los mismos mediante el lenguaje verbal."
+        },
+        {
+            "id": 12,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Identifica sus características físicas y de las personas de su entorno como parte del proceso de aceptación de sí mismo y de respeto a los demás."
+        },
+        {
+            "id": 13,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Demuestra curiosidad por las características físicas (genitales) que le permiten reconocerse como niño o niña."
+        },
+        {
+            "id": 14,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Comunica algunos datos de su identidad como: nombres completos, edad, nombres de familiares cercanos y lugar donde vive."
+        },
+        {
+            "id": 15,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Practica normas de seguridad para evitar accidentes a los que se puede exponer en su entorno inmediato."
+        },
+        {
+            "id": 16,
+            "iden": "CONVIVENCIA",
+            "des": "Identifica instituciones y profesiones que brindan servicios a la comunidad y los roles que ellos cumplen. "
+        },
+        {
+            "id": 17,
+            "iden": "CONVIVENCIA",
+            "des": "Identifica las profesiones, oficios y ocupaciones que cumplen los miembros de su familia."
+        },
+        {
+            "id": 18,
+            "iden": "CONVIVENCIA",
+            "des": "Demuestra sensibilidad ante deseos, emociones y sentimientos de otras personas."
+        },
+        {
+            "id": 19,
+            "iden": "CONVIVENCIA",
+            "des": "Demuestra actitudes de solidaridad ante situaciones de necesidad de sus compañeros y adultos de su entorno."
+        },
+        {
+            "id": 20,
+            "iden": "CONVIVENCIA",
+            "des": "Colabora en actividades que se desarrollan con otros niños y adultos de su entorno."
+        },
+        {
+            "id": 21,
+            "iden": "CONVIVENCIA",
+            "des": "Demuestra preferencia de jugar la mayor parte del tiempo con un amigo estableciendo niveles de empatías más estables."
+        },
+        {
+            "id": 22,
+            "iden": "CONVIVENCIA",
+            "des": "Respeta las diferencias individuales que existen entre sus compañeros como:  género, diversidad cultural, necesidades especiales, estructura familiar, entre otros. "
+        },
+        {
+            "id": 23,
+            "iden": "CONVIVENCIA",
+            "des": "Incrementa su campo de interrelación con otras personas a más del grupo familiar y escolar interactuando con mayor facilidad."
+        },
+        {
+            "id": 24,
+            "iden": "CONVIVENCIA",
+            "des": "Propone juegos construyendo sus propias reglas interactuando con otros"
+        },
+        {
+            "id": 25,
+            "iden": "CONVIVENCIA",
+            "des": "Participa en juegos grupales siguiendo las reglas y asumiendo roles que le permitan mantener un ambiente armónico con sus pares. "
+        },
+        {
+            "id": 26,
+            "iden": "CONVIVENCIA",
+            "des": "Asume y respeta normas de convivencia en el centro de educación inicial y en el hogar acordadas con el adulto. "
+        },
+        {
+            "id": 27,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Establece comparaciones entre los elementos del entorno a través de la discriminación sensorial."
+        },
+        {
+            "id": 28,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Participa en algunas prácticas tradicionales de su entorno disfrutando y respetando las diferentes manifestaciones culturales. "
+        },
+        {
+            "id": 29,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Identifica prácticas socioculturales de su localidad demostrando curiosidad ante sus tradiciones"
+        },
+        {
+            "id": 30,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Realiza acciones de cuidado y protección de plantas y animales de su entorno erradicando actitudes de maltrato."
+        },
+        {
+            "id": 31,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Practica hábitos de cuidado y conservación del medio ambiente que eviten la contaminación del aire, suelo y agua. "
+        },
+        {
+            "id": 32,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Diferencia entre alimentos nutritivos y no nutritivos identificando los beneficios de una alimentación sana y saludable. "
+        },
+        {
+            "id": 33,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Observa el proceso del ciclo vital de las plantas mediante actividades de experimentación. "
+        },
+        {
+            "id": 34,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Identifica las características de los animales domésticos y silvestres estableciendo las diferencias entre ellos"
+        },
+        {
+            "id": 35,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Explora e identifica los diferentes elementos y fenómenos del entorno natural mediante procesos que propicien la indagación. "
+        },
+        {
+            "id": 36,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Diferencia los seres vivos y elementos no vivos de su entorno explorando su mundo natural."
+        },
+        {
+            "id": 37,
+            "iden": "RELACIONES CON EL MEDIO NATURAL Y CULTURAL",
+            "des": "Identifica características de las plantas por su utilidad, estableciendo diferencias entre ellas.  "
+        },
+        {
+            "id": 38,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Continúa y reproduce patrones simples con objetos concretos y representaciones gráficas."
+        },
+        {
+            "id": 39,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Ordena en secuencia lógica sucesos de hasta cinco eventos en representaciones gráficas de sus actividades de la rutina diaria y en escenas de cuentos. "
+        },
+        {
+            "id": 40,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica características de mañana, tarde y noche."
+        },
+        {
+            "id": 41,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica las nociones de tiempo en acciones que suceden antes, ahora y después"
+        },
+        {
+            "id": 42,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Reconoce la ubicación de objetos en relación a sí mismo y diferentes puntos de referencia según las nociones espaciales de: entre, adelante/atrás, junto a, cerca/lejos. "
+        },
+        {
+            "id": 43,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica en los objetos las nociones de medida: largo/corto, grueso/delgado."
+        },
+        {
+            "id": 44,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Asocia las formas de los objetos del entorno con las figuras geométricas bidimensionales. "
+        },
+        {
+            "id": 45,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica figuras geométricas básicas: círculo, cuadrado y triángulo en objetos del entorno y en representaciones gráficas. "
+        },
+        {
+            "id": 46,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Experimenta la mezcla de dos colores primarios para formar colores secundarios."
+        },
+        {
+            "id": 47,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Reconoce los colores secundarios en objetos e imágenes del entorno"
+        },
+        {
+            "id": 48,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Cuenta oralmente del 1 al 15 con secuencia numérica."
+        },
+        {
+            "id": 49,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Establece la relación de correspondencia entre los elementos de colecciones de  objetos"
+        },
+        {
+            "id": 50,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Comprende la relación de número-cantidad hasta el 10. "
+        },
+        {
+            "id": 51,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Comprende la relación del numeral (representación simbólica del número) con la cantidad hasta el 5."
+        },
+        {
+            "id": 52,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": " Clasifica objetos con dos atributos (tamaño, color o forma)."
+        },
+        {
+            "id": 53,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Compara y arma colecciones de más, igual y menos objetos. "
+        },
+        {
+            "id": 54,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Identifica semejanzas y diferencias en objetos del entorno con criterios de forma, color y tamaño."
+        },
+        {
+            "id": 55,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Compara y ordena secuencialmente un conjunto pequeño de objetos de acuerdo a su tamaño."
+        },
+        {
+            "id": 56,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Produce palabras que riman espontáneamente tomado en cuenta los sonidos finales de las mismas.  "
+        },
+        {
+            "id": 57,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Identifica “auditivamente” el fonema (sonido) inicial de las palabras más utilizadas. "
+        },
+        {
+            "id": 58,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se comunica a través de dibujos de objetos con detalles que lo vuelven identificables, como representación simbólica de sus ideas. "
+        },
+        {
+            "id": 59,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Comunica de manera escrita sus ideas intentando imitar letras o formas parecidas a letras."
+        },
+        {
+            "id": 60,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Reconoce etiquetas y rótulos de su entorno inmediato y los “lee”."
+        },
+        {
+            "id": 61,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se comunica incorporando palabras nuevas a su vocabulario en función de los ambientes y experiencias en las que interactúa. "
+        },
+        {
+            "id": 62,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Reproduce trabalenguas sencillos, adivinanzas canciones y poemas cortos, mejorando su pronunciación y potenciando su capacidad imaginativa. "
+        },
+        {
+            "id": 63,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Responde preguntas sobre un texto narrado por el adulto, relacionadas a los personajes y acciones principales.  "
+        },
+        {
+            "id": 64,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Relata cuentos, narrados por el adulto, manteniendo la secuencia, sin la ayuda del paratexto."
+        },
+        {
+            "id": 65,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Sigue instrucciones sencillas que involucren la ejecución de tres o más actividades."
+        },
+        {
+            "id": 66,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Participa en conversaciones más complejas y largas manteniéndose dentro del tema."
+        },
+        {
+            "id": 67,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se expresa utilizando oraciones cortas y completas manteniendo el orden de las palabras. "
+        },
+        {
+            "id": 68,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Describe oralmente imágenes gráficas y digitales, estructurando oraciones más elaboradas que describan a los objetos que observa. "
+        },
+        {
+            "id": 69,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Cuenta un cuento en base a sus imágenes a partir de la portada y siguiendo la secuencia de las páginas."
+        },
+        {
+            "id": 70,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Asocia la imagen de la portada con el título de los cuentos conocidos"
+        },
+        {
+            "id": 71,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Realiza modificaciones del contenido de un cuento relatado por el adulto, cambiando partes del él como: acciones y final. "
+        },
+        {
+            "id": 72,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Colabora en la creación de textos colectivos con la ayuda del docente."
+        },
+        {
+            "id": 73,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Realiza movimientos articulatorios complejos: movimientos de los labios juntos de izquierda a derecha, hacia adelante, movimiento de las mandíbulas a los lados, inflar las mejillas y movimiento de lengua de"
+        },
+        {
+            "id": 74,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Se expresa oralmente pronunciando correctamente la mayoría de palabras, puede presentarse dificultades en la pronunciación de s, y la r."
+        },
+        {
+            "id": 75,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Ejecuta patrones de más de dos ritmos con partes del cuerpo y elementos o instrumentos sonoros"
+        },
+        {
+            "id": 76,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Expresa sus vivencias y experiencias a través del dibujo libre"
+        },
+        {
+            "id": 77,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Realiza actividades creativas utilizando las técnicas grafoplásticas con variedad de materiales. "
+        },
+        {
+            "id": 78,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Canta canciones siguiendo el ritmo y coordinando con las expresiones de su cuerpo. "
+        },
+        {
+            "id": 79,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Mantiene el ritmo y la secuencia de pasos sencillos durante la ejecución de coreografías."
+        },
+        {
+            "id": 80,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Participa en rondas populares, bailes y juegos tradicionales, asumiendo los roles y respetando las reglas. "
+        },
+        {
+            "id": 81,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Participa en dramatizaciones, asumiendo roles de diferentes personas del entorno y de personajes de cuentos e historietas. "
+        },
+        {
+            "id": 82,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Discrimina sonidos onomatopéyicos y diferencia los sonidos naturales de los artificiales. "
+        },
+        {
+            "id": 83,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "Expresa su opinión al observar una obra artística relacionada a la plástica o a la escultura."
+        },
+        {
+            "id": 84,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Ubica algunas partes de su cuerpo en función de las nociones de: al lado, junto a, cerca-lejos.  "
+        },
+        {
+            "id": 85,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Mantiene el equilibro al caminar sobre líneas rectas, curvas y quebradas con altura (aprox. 20 cm) logrando un adecuado control postural.  "
+        },
+        {
+            "id": 86,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza ejercicios de equilibrio estático y dinámico, controlando los movimientos de las partes gruesas del cuerpo y estructurando motricidad facial y gestual según la consigna incrementando el lapso de tiempo. "
+        },
+        {
+            "id": 87,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Ejecuta actividades coordinadamente y con un control adecuado de fuerza y tonicidad muscular como: lanzar, atrapar y patear objetos y pelotas."
+        },
+        {
+            "id": 88,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Camina, corre y salta de un lugar a otro coordinadamente combinando estas formas de desplazamiento, a velocidades diferentes y en superficies planas e  inclinadas con obstáculos."
+        },
+        {
+            "id": 89,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Galopa y salta coordinadamente con obstáculos ejecutando circuitos."
+        },
+        {
+            "id": 90,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Trepa y repta a diferentes ritmos y en posiciones corporales diversas (cúbito ventral y cúbito dorsal). "
+        },
+        {
+            "id": 91,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Sube y baja escaleras alternando los pies. "
+        },
+        {
+            "id": 92,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Salta de un pie a otro alternadamente, de manera autónoma."
+        },
+        {
+            "id": 93,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Salta en dos pies en sentido vertical obstáculos de 20 a 30 cm en altura y en sentido horizontal longitudes de aproximadamente 50 a 70 cm. "
+        },
+        {
+            "id": 94,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Camina y corre con soltura y seguridad manteniendo el equilibrio a diferentes distancias, orientaciones y ritmos en espacios parciales. "
+        },
+        {
+            "id": 95,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza varios movimientos y desplazamientos combinados a diferentes velocidades (rápido, lento), duración (largos y corto)"
+        },
+        {
+            "id": 96,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Utiliza el espacio parcial e inicia con el uso del espacio total para realizar representaciones gráficas."
+        },
+        {
+            "id": 97,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza desplazamientos y movimientos combinados utilizando el espacio total y parcial a diferentes distancias (largas-cortas)."
+        },
+        {
+            "id": 98,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Se orienta en el espacio realizando desplazamientos en función de consignas dadas con las nociones: entre, adelante-atrás, junto a, cerca-lejos."
+        },
+        {
+            "id": 99,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza movimientos diferenciados con los lados laterales del cuerpo (un lado y otro lado)."
+        },
+        {
+            "id": 100,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza ejercicios de simetría corporal como: identificar en el espejo y otros materiales las partes semejantes que conforman el lado derecho e izquierdo del cuerpo"
+        },
+        {
+            "id": 101,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Emplea su lado dominante en la realización de la mayoría de las actividades que utilice la mano, ojo y pie. "
+        },
+        {
+            "id": 102,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Representa la figura humana utilizando el monigote e incorporando detalles según la interiorización de su imagen corporal."
+        },
+        {
+            "id": 103,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Identifica en su cuerpo y en el de los demás partes y articulaciones del cuerpo humano, así como partes finas de la cara, a través de la exploración sensorial"
+        },
+        {
+            "id": 104,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza movimientos para la coordinación de ojo y pie como: patear pelotas hacia un punto fijo determinado. "
+        },
+        {
+            "id": 105,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza representaciones gráficas utilizando el dibujo con detalles que le dan intencionalidad y sentido para identificarlos "
+        },
+        {
+            "id": 106,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Utiliza la pinza digital para coger lápices, marcadores, pinceles y diversos tipos de materiales."
+        },
+        {
+            "id": 107,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza actividades de coordinación viso motriz con niveles de dificultad creciente en el tamaño y tipo de materiales."
+        },
+        {
+            "id": 108,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Realiza ejercicios que involucran movimientos segmentados de partes gruesas y finas del cuerpo (cuello, hombro, codo, muñeca, dedos, cadera, rodilla, tobillo, pie)."
+        },
+        {
+            "id": 109,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "Mantiene un adecuado control postural en diferentes posiciones del cuerpo y en desplazamientos."
+        }
+    ],
+    "primero": [
+        {
+            "id": 1,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "I.CS.1.2.1. Practica con autonomía y responsabilidad actividades y tareas cotidianas, como hábitos de alimentación, higiene y cuidado personal."
+        },
+        {
+            "id": 2,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "I.CS.1.2.2. Reconoce las situaciones de peligro de su entorno cercano, en función de evitar accidentes, mediante la aplicación de normas de seguridad, autorregulación y participación de las actividades propuestas "
+        },
+        {
+            "id": 3,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "I.CN.1.2.1. Relaciona las partes principales de su cuerpo y los órganos de los sentidos con su función y percepciones del mundo que lo rodean."
+        },
+        {
+            "id": 4,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "Expresa sus datos personales (nombre, apellidos, edad, teléfono, lugar donde vive y país en el que vive) (Ref. I.CS.1.1.1) "
+        },
+        {
+            "id":5,
+            "iden": "IDENTIDAD Y AUTONOMÍA",
+            "des": "I.CS.1.1.2. Reconoce que tiene una historia personal, familiar y que forma parte de una comunidad y de un núcleo familiar con el que comparte actividades, de recreación y celebración, y que posee características "
+        },
+        {
+            "id": 6,
+            "iden": "CONVIVENCIA",
+            "des": "I.CS.1.3.1. Practica normas de respeto consigo mismo y con los demás, respetando las diferencias individuales existentes, tanto en criterio como en opiniones, y practica los acuerdos establecidos con el grupo. "
+        },
+        {
+            "id": 7,
+            "iden": "CONVIVENCIA",
+            "des": "I.CN.1.2.2. Promueve hábitos (higiene corporal, alimentación sana, juego y descanso) y medidas preventivas para una vida saludable. "
+        },
+        {
+            "id": 8,
+            "iden": "CONVIVENCIA",
+            "des": "I.CS.1.3.2. Reconoce sus derechos y responsabilidades y la importancia de asumir con responsabilidad sus compromisos, y discrimina los modelos positivos y negativos de comportamiento de su medio natural y social. "
+        },
+        {
+            "id": 9,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.3.4. Comunica, de forma oral, el procedimiento y los cambios que se producen en los materiales, al exponer objetos de uso cotidiano a agentes naturales (calor, luz, agua y fuerza). "
+        },
+        {
+            "id": 10,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.3.3. Relaciona el movimiento de objetos de su entorno inmediato con la fuerza ejercida (halar o empujar). "
+        },
+        {
+            "id": 11,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.3.2. Clasifica objetos de uso cotidiano, en función del tipo de materiales naturales (algodón, madera, cuero, metal) y artificiales (plástico, vidrio, goma, hormigón). "
+        },
+        {
+            "id": 12,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.3.1. Distingue en objetos de uso cotidiano las propiedades físicas de la materia (forma, textura, color, tamaño, peso, flexibilidad, dureza, tendencia a flotar o hundirse, permeabilidad, transparencia, luminosidad "
+        },
+        {
+            "id": 13,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.1.5. Expone comportamientos de respeto y cuidado hacia el hábitat y los seres vivos de su entorno. "
+        },
+        {
+            "id": 14,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.2.3. Comunica de forma oral la importancia de los órganos de los sentidos para obtener información sensorial (escuchar, hablar, sentir, ver, oler) de su vida diaria. "
+        },
+        {
+            "id": 15,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.1.1. Identifica las características (crecer, reproducirse, responder a estímulos), necesidades (alimento, aire, agua), hábitat e importancia de los seres vivos (ser humano, animales domésticos y silvestres, plantas "
+        },
+        {
+            "id": 16,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.1.2. Diferencia objetos inertes (rocas, agua, silla, etc.) de seres vivos (plantas, animales y ser humano) de su entorno, en función de las características, necesidades y hábitat "
+        },
+        {
+            "id": 17,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.1.3. Discrimina, desde su propia experiencia, la importancia de las plantas y animales de su entorno. "
+        },
+        {
+            "id": 18,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.1.4. Reconoce a partir de la observación directa y/o representaciones gráficas, plantas cultivadas y silvestres y animales domésticos y silvestres."
+        },
+        {
+            "id": 19,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CS.1.6.1. Identifica alguna de las manifestaciones culturales (música, comida, festividades, tradición oral) de la localidad y describe los lugares, tradiciones y costumbres importantes de la región y país al que pertenece. "
+        },
+        {
+            "id": 20,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CS.1.5.1. Reconoce la función que cumplen los medios de transporte, los medios de comunicación y las principales ocupaciones y profesiones que existen en la comunidad a la que pertenece."
+        },
+        {
+            "id": 21,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CS.1.4.1. Reconoce la organización y dependencias de la vivienda y de la escuela, identificando la utilidad de la tecnología en esos espacios. "
+        },
+        {
+            "id": 22,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.5.2. Explica las características del tiempo atmosférico (lluvia, viento, nubes, variación de temperatura), sus cambios y efectos en su localidad. "
+        },
+        {
+            "id": 23,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.5.1. Explica las características de los elementos naturales (animales, plantas, cuerpos de agua) construidos como parte del paisaje local. "
+        },
+        {
+            "id": 24,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.4.2. Detecta desde la percepción del entorno inmediato fuentes de sonido, (débiles y fuertes) y los compara con el ruido. "
+        },
+        {
+            "id": 25,
+            "iden": "DESCRUBRIMIENTO Y COMPRENSIÓN DEL MEDIO NATURAL Y CULTURAL",
+            "des": "I.CN.1.4.1. Detecta, desde la observación de su entorno inmediato, diferentes fuentes de luz (natural y artificial)."
+        },
+        {
+            "id": 26,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.1.2.Describe la ubicación de los objetos del entorno."
+        },
+        {
+            "id": 27,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.1.1.Compara y distingue objetos según su color, tamaño, longitud, textura y forma en situaciones cotidianas.  "
+        },
+        {
+            "id": 28,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Resuelve situaciones cotidianas de conteo de colecciones de objetos hasta el 20 (utilizando material del medio). Ref. I.M.1.2.2. "
+        },
+        {
+            "id": 29,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Resuelve situaciones cotidianas de adición y sustracción, con números naturales hasta el 10 (utilizando material del medio). Ref. I.M.1.2.2. "
+        },
+        {
+            "id": 30,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Resuelve situaciones cotidianas que requieren de la comparación de colecciones de objetos mediante el uso de cuantificadores. Ref. I.M.1.2.2.  "
+        },
+        {
+            "id": 31,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.2.1. Establece relaciones de orden y escribe secuencias numéricas ascendentes y descendentes, con números naturales del 1 al 10 y con números ordinales, hasta el quinto, para explicar situaciones cotidianas.  "
+        },
+        {
+            "id": 32,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.3.2. Clasifica objetos del entorno y los agrupa considerando su tamaño, longitud, capacidad, peso o temperatura y expresa verbalmente los criterios de la agrupación. "
+        },
+        {
+            "id": 33,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "Utiliza unidades de medida no convencionales para indicar la longitud y peso. (Ref. I.M.1.4.1)  "
+        },
+        {
+            "id": 34,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.4.2 Emplea unidades de tiempo para ordenar secuencias temporales que describan actividades significativas y sus actividades cotidianas. "
+        },
+        {
+            "id": 35,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": " I.M.1.5.1. Soluciona problemas mediante la organización y representación de datos estadísticos provenientes de situaciones cotidianas y de la identificación en eventos probables y no probables del entorno "
+        },
+        {
+            "id": 36,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.3.1. Encuentra, en el entorno y en elementos de su uso personal, objetos que contienen o son semejantes a los cuerpos y figuras geométricas, los selecciona de acuerdo a su interés y comparte con sus  "
+        },
+        {
+            "id": 37,
+            "iden": "RELACIONES LÓGICO MATEMÁTICAS",
+            "des": "I.M.1.1.3.Construye series utilizando objetos del entorno, sonidos, movimientos, figuras y cuerpos geométricos y agrupaciones de elementos "
+        },
+        {
+            "id": 38,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Desarrolla su gusto por la escucha de textos literarios con disfrute de las palabras y las ideas. (Ref. I.LL.1.7.1.)"
+        },
+        {
+            "id": 39,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "I.LL.1.1.1. Interpreta la silueta y los paratextos (soporte, formato, tipografía, imagen, color, estructura externa) de diversos textos escritos cotidianos, deduciendo su contenido y uso, reflexiona sobre su intención "
+        },
+        {
+            "id": 40,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Distingue palabras y expresiones coloquiales de su localidad (términos, dichos populares, etc.) e indaga sobre sus significados. (Ref. I.LL.1.2.1.)"
+        },
+        {
+            "id": 41,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Reconoce la entonación y pronunciación de los diferentes dialectos del habla castellana del país e interactúa respetuosamente con sus hablantes. (Ref. I.LL.1.2.1.) "
+        },
+        {
+            "id": 42,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Desarrolla la expresión oral en contextos cotidianos usando la conciencia lingüística. (Conciencia semántica: reconoce el significado de las palabras, de acuerdo al contexto de la frase u oración) (Ref. I.LL.1.3.1.) "
+        },
+        {
+            "id": 43,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Desarrolla la expresión oral en contextos cotidianos usando la conciencia lingüística. (Conciencia léxica: reconoce que la cadena hablada está formada por una serie determinada de palabras que se relacionan entre sí"
+        },
+        {
+            "id": 44,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Desarrolla la expresión oral en contextos cotidianos usando la conciencia lingüística. (Conciencia sintáctica: reconoce que las palabras en la oración se agrupan de acuerdo a un orden y jerarquía) (Ref. I.LL.1.3.1.)"
+        },
+        {
+            "id": 45,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Desarrolla la expresión oral en contextos cotidianos usando la conciencia lingüística. (Conciencia fonológica: reconoce que las palabras están formadas por sonidos y la habilidad de manipular los sonidos dentro de "
+        },
+        {
+            "id": 46,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Adapta el tono de voz, los gestos, la entonación y el vocabulario, según el contexto y la intención de la situación comunicativa que enfrente. (Ref. LL.1.3.1.) "
+        },
+        {
+            "id": 47,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Elabora significados de diversos materiales impresos del entorno, a partir de diferenciar entre imagen y texto escrito de relacionar el contenido del texto con sus conocimientos y experiencias previas, y los elementos del "
+        },
+        {
+            "id": 48,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "I.LL.1.5.1. Accede a la lectura por placer y como medio para aprender, utilizando los recursos de la biblioteca de aula y/o de la web, registra la información consultada mediante dibujos y otros gráficos. "
+        },
+        {
+            "id": 49,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Registra, expresa y comunica ideas mediante sus propios códigos. (Ref. I.LL.1.6.1.) "
+        },
+        {
+            "id":50,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Explora la formación de palabras y oraciones, utilizando la conciencia lingüística (fonológica, léxica, sintáctica y semántica). (Ref. I.LL.1.6.1.) "
+        },
+        {
+            "id": 51,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Selecciona y utiliza diferentes recursos y materiales para sus producciones escritas y muestra interés por escribir al reconocer que puede expresar por escrito sentimientos y opiniones que le generan las "
+        },
+        {
+            "id": 52,
+            "iden": "COMPRENSIÓN Y EXPRESIÓN DEL LENGUAJE",
+            "des": "Representa pasajes de los textos literarios escuchados, utilizando sus propios códigos, dibujos y/o escenificaciones corporales, y establece relaciones entre textos leídos o escuchados y el entorno personal. (Ref. I.) "
+        },
+        {
+            "id": 53,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "I.ECA.1.1.1. Explora y representa corporal, musical, gráfica o verbalmente ideas, sentimientos o emociones de forma libre y espontánea. "
+        },
+        {
+            "id": 54,
+            "iden": "EXPRESIÓN ARTÍSTICA",
+            "des": "I.ECA.1.1.2. Experimenta con sus sentidos, cualidades o características para expresarse libremente en juegos y actividades que le permitan relacionarse con otros y su entorno próximo. "
+        },
+        {
+            "id": 55,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "I.EF.1.1.3. Establece acuerdos colectivos que favorezcan la participación y el cuidado de sí mismo, sus pares y el ambiente de aprendizaje, en diferentes prácticas corporales expresivo-comunicativas. "
+        },
+        {
+            "id": 56,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "I.EF.1.1.2. Reconoce sus posibilidades de creación, interpretación y traducción de mensajes corporales propios y de pares a otros lenguajes.  "
+        },
+        {
+            "id": 57,
+            "iden": "EXPRESIÓN CORPORAL Y MOTRICIDAD",
+            "des": "I.EF.1.1.1. Construye y comunica mensajes (convencionales y/o espontáneos) utilizando diferentes recursos expresivos (gestos, ritmos, posturas, tipos de movimiento en el tiempo y el espacio, entre otros). "
+        },
+        {
+            "id":58,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.1.1. Manifiesta curiosidad e interés por explorar de manera espontánea las cualidades de la voz, el cuerpo y de elementos del entorno, natural y artificial, y describe sus características. (J.4., I.2.) "
+        },
+        {
+            "id": 59,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.3.2. Intuye las posibilidades del propio cuerpo en actividades de movimiento y de juego dramático. (J.1., S.1.)  "
+        },
+        {
+            "id": 60,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.3.1. Participa en juegos simbólicos y realiza producciones artísticas sencillas con una intención expresiva y/o comunicativa. (I.3., S.1.) "
+        },
+        {
+            "id": 61,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.2.2. Reconoce y describe corporal, gráfica o verbalmente ideas, sentimientos o emociones (alegría, tristeza, paso del tiempo, presencia de la naturaleza, etc.) en la observación de imágenes y la escucha de piezas "
+        },
+        {
+            "id": 62,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.2.1. Hace una diferenciación básica de las manifestaciones culturales y artísticas de su entorno próximo, identificando a sus actores y/o creadores, y expresa las ideas y emociones que suscita la observación "
+        },
+        {
+            "id": 63,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.1.2. Se interesa y participa activamente en la realización de juegos sensoriomotores y en procesos de improvisación y creación musical. (I.3., S.1.) "
+        },
+        {
+            "id": 64,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.4.2 Comprende la planificación del proceso de trabajo que se le propone o que surge del grupo en la realización de producciones artísticas colectivas. (S.4., J.2., I.2., I.4.)  "
+        },
+        {
+            "id": 65,
+            "iden": "EDUCACIÓN CULTURAL Y ARTÍSTICA",
+            "des": "I.ECA.1.4.1 Establece relaciones empáticas con sus compañeros y los adultos que eventualmente participan en la realización de actividades artísticas colectivas. (S.1., I.3.) "
+        },
+        {
+            "id": 66,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.1.3. Identifica lógicas de los juegos, las habilidades motrices básicas que se requieren, los objetivos que hay que lograr y los materiales necesarios para la construcción de implementos. (I.2., S.3.) "
+        },
+        {
+            "id": 67,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.1.2. Comprende la necesidad de respetar reglas, roles y acuerdos simples para el cuidado de sí mismo, sus pares y el ambiente de aprendizaje antes, durante y después de su participación en diferentes "
+        },
+        {
+            "id":68,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.1.1. Ajusta sus acciones motrices en función de sus estados corporales, ritmos internos y objetivos de los juegos. (S.3.) "
+        },
+        {
+            "id": 69,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.2.2. Realiza acuerdos necesarios para el cuidado de sí mismo, de sus pares y el ambiente de aprendizaje. (J.3., S.4.) "
+        },
+        {
+            "id": 70,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.2.1. Experimenta las mejores maneras de practicar habilidades motrices básicas, destrezas y acrobacias a partir de identificar los factores que favorecen u obstaculizan la práctica. (J.4., S.3.)  "
+        },
+        {
+            "id": 71,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.5.1. Reconoce la necesidad de utilizar los cuidados básicos de higiene personal y del ambiente durante su participación en prácticas corporales. (J.3., I.2) "
+        },
+        {
+            "id": 72,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.4.2. Participa en diferentes prácticas corporales, reconociendo su ubicación en el tiempo y el espacio de manera estática y dinámica, las características y posibilidades de movimiento de sus partes y segmentos "
+        },
+        {
+            "id": 73,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.4.1. Participa en diferentes prácticas corporales, reconociendo sus estados corporales en reposo y durante la acción y las asocia a sus modos de participación en las mismas. (J.4., S.3.) "
+        },
+        {
+            "id": 74,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.3.3. Establece acuerdos colectivos que favorezcan la participación y el cuidado de sí mismo, sus pares y el ambiente de aprendizaje, en diferentes prácticas corporales expresivo-comunicativas. (J.3., S.4.)"
+        },
+        {
+            "id": 75,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.3.2. Reconoce sus ritmos internos, sus estados corporales y de ánimo, sus posibilidades de interpretación y traducción de mensajes corporales propios y de pares a otros lenguajes. (I.3.) "
+        },
+        {
+            "id": 76,
+            "iden": "EDUCACIÓN FÍSICA",
+            "des": "I.EF.1.3.1. Construye y comunica mensajes (convencionales y/o espontáneos) utilizando diferentes recursos expresivos (gestos, ritmos, posturas, tipos de movimiento en el tiempo y el espacio, otros). (I.3.) ."
+        },
+        {
+            "id": 77,
+            "iden": "INGLÉS",
+            "des": "I.EFL.1.2.1. Learners can recognize and follow simple instructions in order to act upon them. (CEFR: Starter Topics: Home, classroom, animals, food, numbers, colors, shapes)."
+        },
+        {
+            "id": 78,
+            "iden": "INGLÉS",
+            "des": "I.EFL.1.1.1. Learners can understand familiar words, and simple instructions about their own surroundings (CEFR: Starter Topics: Home, classroom, animals, food, numbers, colors, shapes).  "
+        }
+       
+    ]
+}

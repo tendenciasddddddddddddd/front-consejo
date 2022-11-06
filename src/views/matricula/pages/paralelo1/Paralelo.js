@@ -52,6 +52,7 @@ export default {
         curso: null,
         calificaciones: [],
         asistencias: [],
+        iniciales: []
       },
       isSelecCurosos: {},
       isClick: false,

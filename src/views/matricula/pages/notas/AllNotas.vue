@@ -4,12 +4,12 @@
         <template v-slot:body>
             <Spinner v-if="isDocente"></Spinner>
             <div v-else>
-                        <Dropdown v-model="docente" :options="listDocentes" /><br>
-                        <Spinner v-if="isData"></Spinner>
-                        <Dropdown v-else v-model="curso" :options="listniveles" />
+                <Dropdown v-model="docente" :options="listDocentes" /><br>
+                <Spinner v-if="isData"></Spinner>
+                <Dropdown v-else v-model="curso" :options="listniveles" />
             </div>
         </template>
-        
+
     </Modal>
 </template>
   
@@ -20,7 +20,7 @@ import Dropdown from "../../../../shared/Dropdown.vue";
 export default {
     name: 'Report',
     components: {
-        Spinner, Modal, Dropdown, 
+        Spinner, Modal, Dropdown,
     },
     data() {
         return {
@@ -65,56 +65,55 @@ export default {
                 });
         },
         __cambios(res) {
-            if (res!= null) {
+            if (res != null) {
                 var myCourse = {
-                        paralelo: res.paralelo,
-                        nombre: res.nombre,
-                        materia: res.materia,
-                        area: res.area,
-                        idDistributivo: res.idDistributivo,
-                        planificacion: res.planificacion,
-                        nivel: res.nivel,
-                        nombredoc: res.nombredoc
-                    };
-                    let id = res._id;
-                    localStorage.removeItem("myCourse");
-                    if (!localStorage.getItem("myCourse")) {
-                        localStorage.setItem("myCourse", JSON.stringify(myCourse));
-                        if (res.num ==1||res.num ==2||res.num ==3){
-                            this.$dialog.alert('Módulo Inicial 1, Inicial 2 y Primer año en mantenimiento')
-                        } else{
-                            this.$router.push({ path: `/menuCurso/${id}` });
-                        }
+                    paralelo: res.paralelo,
+                    nombre: res.nombre,
+                    materia: res.materia,
+                    area: res.area,
+                    idDistributivo: res.idDistributivo,
+                    planificacion: res.planificacion,
+                    nivel: res.nivel,
+                    nombredoc: res.nombredoc,
+                    num: res.num
+                };
+                let id = res._id;
+                localStorage.removeItem("myCourse");
+                if (!localStorage.getItem("myCourse")) {
+                    localStorage.setItem("myCourse", JSON.stringify(myCourse));
+                    if (res.num == 1 || res.num == 2 || res.num == 3) {
+                        this.$router.push({ path: `/iniciales/${id}` });
+                    } else {
+                        this.$router.push({ path: `/menuCurso/${id}` });
                     }
+                }
             }
-           
+
         },
         __cambiosDistributivo(data) {
-            if (data!=null) {
+            if (data != null) {
                 this.isData = true;
-            this.$Progress.start();
-            if (data._id) {
-                this.$proxies._gestionProxi
-                    .updateInfoDocentes(data._id)
-                    .then((x) => {
-                        let result = x.data;
-                        this.nombreDocente = data.nombre
-                        this.getData(result);
-                        console.log("info", result);
-                        this.isData = false;
-                        this.$Progress.finish();
-                    })
-                    .catch((err) => {
-                        console.log("Error", err);
-                        this.isData = false;
-                        this.$Progress.fail();
-                    });
+                this.$Progress.start();
+                if (data._id) {
+                    this.$proxies._gestionProxi
+                        .updateInfoDocentes(data._id)
+                        .then((x) => {
+                            let result = x.data;
+                            this.nombreDocente = data.nombre
+                            this.getData(result);
+                            this.isData = false;
+                            this.$Progress.finish();
+                        })
+                        .catch((err) => {
+                            console.log("Error", err);
+                            this.isData = false;
+                            this.$Progress.fail();
+                        });
+                }
             }
-            }
-           
         },
         getData(result) {
-           this.listniveles = []
+            this.listniveles = []
             if (result.length > 0) {
                 for (let i = 0; i < result.length; i++) {
                     let id = result[i].fnivel._id;
@@ -123,17 +122,17 @@ export default {
                     const paralelo = result[i].paralelo;
                     const idDistributivo = result[i]._id;
                     this.listniveles.push({
-                         _id: id, 
-                         paralelo: paralelo, 
-                         nombre:  element.nombre + ' (' + paralelo + ') '+element2.nombre,
-                         materia: element2.nombre,
-                         area: element2.area,
-                         idDistributivo: idDistributivo,
-                         planificacion: result[i].planificacion,
-                         nivel: element.nombre,
-                         num: element.num,
-                         nombredoc: this.nombreDocente
-                         })
+                        _id: id,
+                        paralelo: paralelo,
+                        nombre: element.nombre + ' (' + paralelo + ') ' + element2.nombre,
+                        materia: element2.nombre,
+                        area: element2.area,
+                        idDistributivo: idDistributivo,
+                        planificacion: result[i].planificacion,
+                        nivel: element.nombre,
+                        num: element.num,
+                        nombredoc: this.nombreDocente
+                    })
                 }
             }
         },

@@ -180,14 +180,15 @@ export default {
                         idDistributivo: res._id,
                         planificacion: res.planificacion,
                         nivel: res.fnivel.nombre,
-                        nombredoc: info.nombre
+                        nombredoc: info.nombre,
+                        num : res.fnivel.num
                     };
                     let id = res.fnivel._id;
                     localStorage.removeItem("myCourse");
                     if (!localStorage.getItem("myCourse")) {
                         localStorage.setItem("myCourse", JSON.stringify(myCourse));
                         if (res.fnivel.num ==1||res.fnivel.num ==2||res.fnivel.num ==3){
-                            this.$dialog.alert('Módulo Inicial 1, Inicial 2 y Primer año en mantenimiento')
+                            this.$router.push({ path: `/iniciales/${id}` });
                         } else{
                             this.$router.push({ path: `/menuCurso/${id}` });
                         }
@@ -209,7 +210,6 @@ export default {
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
                         this.info = x.data;
-                        console.log(this.info)
                         this.isData = false;
                         this.$Progress.finish();
                     })

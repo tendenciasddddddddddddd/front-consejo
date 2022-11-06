@@ -111,6 +111,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "TutoresDocente" */ '../modules/tutores/TutoresDocente'),
   },
   {
+    path: '/iniciales/:id',
+    name: 'iniciales',
+    component: () => import( /* webpackChunkName: "TutoresDocente" */ '../modules/cursos/ini/iniciales.vue'),
+  },
+  {
     path: '/zoom',
     name: 'dr',
     component: () => import( /* webpackChunkName: "Perfil" */ '../modules/zoom/Zoom.vue'),
