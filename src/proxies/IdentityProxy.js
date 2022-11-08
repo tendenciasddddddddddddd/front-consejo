@@ -26,6 +26,10 @@ export default class IdentityProxy{
         return this.axios.post(this.url+'/auth/signin',params)
     }
 
+    userFound(){ 
+        return this.axios.get(this.url+'/auth/')
+    }
+
     GoogleAuthApi(params){ 
         return this.axios.post(this.url+'/auth/GoogleAuthApis',params)
     }

@@ -634,6 +634,7 @@ margin-bottom: 12px!important;
 }
 .card.card-background:after {
   background: linear-gradient(to top right,#3123af 0,#0bf) !important;
+  border-radius: 0.5rem !important;
 }
 .formatos{
   border: 0.0625rem solid #dadce0;
@@ -1693,8 +1694,6 @@ body.modal-open {
 .canvaActive {
   font-weight: 600;
   color: #00c4cc !important;
-  background: #00c4cc;
-  border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+  background: rgb(57 76 96 / 35%);
 }
 

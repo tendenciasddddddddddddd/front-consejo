@@ -1,37 +1,37 @@
 <template>
   <div>
     <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
-      <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
+      <div class="uGmi4w" >
       
-      <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
+      <div class="zCtFuA  s-text-versel2 " @click="vueInit(0)">
        Reportes
         <section v-if="tabs == 0" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
       </div>
       <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 1 }" @click="vueInit(1)">
+      <div class="zCtFuA s-text-versel2 "  @click="vueInit(1)">
         Inicio
         <section v-if="tabs == 1" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
       </div>
       <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 2 }" @click="vueInit(2)">
+      <div class="zCtFuA s-text-versel2 "  @click="vueInit(2)">
         Eventos
         <section v-if="tabs == 2" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
       </div>
       <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 3 }" @click="vueInit(3)">
+      <div class="zCtFuA s-text-versel2 "  @click="vueInit(3)">
         Galeria
         <section v-if="tabs == 3" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>
         </section>
       </div>
       <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 4 }" @click="vueInit(4)">
+      <div class="zCtFuA s-text-versel2 " @click="vueInit(4)">
         Nosotros
         <section v-if="tabs == 4" class="FOQEMQ mt-2">
           <div class="hPlFoQ"></div>

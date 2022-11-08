@@ -2,10 +2,10 @@
     <div>
         <div v-if="ifload">Trabajando...</div>
         <section v-else>
-            <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-                :paginate-elements-by-height="1400" :filename="'promocion'" :pdf-quality="2" :manual-pagination="false"
+            <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="false" :preview-modal="false"
+                :paginate-elements-by-height="1400" :filename="'promocion'" :pdf-quality="1.8" :manual-pagination="false"
                 pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait" pdf-content-width="800px"
-                @progress="onProgress($event)" ref="html2Pdf">
+                @progress="onProgress($event)"  @beforeDownload="beforeDownload($event)" ref="html2Pdf">
                 <section slot="pdf-content">
                     <div v-for="item in info" :key="item.id" class="my-sm-5">
                         <div class="card-header text-center ">
@@ -190,6 +190,17 @@ export default {
         }
     },
     methods: {
+        async beforeDownload ({ html2pdf, options, pdfContent }) {
+            await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
+                const totalPages = pdf.internal.getNumberOfPages()
+                for (let i = 1; i <= totalPages; i++) {
+                    pdf.setPage(i)
+                    pdf.setFontSize(10)
+                    pdf.setTextColor(150)
+                    pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
+                } 
+            }).save()
+        },
         onProgress(event) {
             this.statusbar = event;
         },
@@ -218,15 +229,15 @@ export default {
                     this.info = x.data;
                     this.ifload = false;
                    // console.log(this.info);
-                    setTimeout(() => this.generatePDF(), 3000);
+                    setTimeout(() => this.generatePDF(), 100);
                 })
                 .catch((x) => {
                     console.log("Error", x);
                     this.ifload = false;
                 });
         },
-        generatePDF() {
-            this.$refs.html2Pdf.generatePdf();
+        async generatePDF() {
+           await this.$refs.html2Pdf.generatePdf();
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

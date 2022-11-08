@@ -255,7 +255,21 @@
 
 export default {
   name: "Default",
-
+  methods: {
+    authenticate ()  {
+      this.$proxies.identityProxy
+        .userFound(this.login)
+        .then(() => {
+        
+        })
+        .catch(() => {
+         
+        });
+    },
+  },
+  created() {
+    this. authenticate ();
+  }
 };
 </script>
 

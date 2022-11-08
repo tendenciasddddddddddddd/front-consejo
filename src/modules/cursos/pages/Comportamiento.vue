@@ -414,7 +414,7 @@ var cellStyle = function (params) {
 };
 var numberToColor = function (val) {
     if (val == 'D' || val == 'E' || val == 'C') {
-        return '#ffd1d3';
+        return '#fbe4e7';
     } else if (val == 'A' || val == 'B') {
         return '#aaffaa';
     } else {

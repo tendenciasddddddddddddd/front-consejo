@@ -286,8 +286,8 @@ export default {
                     this.ifload = false;
                 });
         },
-        generatePDF() {
-            this.$refs.html2Pdf.generatePdf();
+        async generatePDF() {
+           await this.$refs.html2Pdf.generatePdf();
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

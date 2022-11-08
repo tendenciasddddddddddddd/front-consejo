@@ -476,7 +476,7 @@ var cellStyle = function (params) {
 };
 var numberToColor = function (val) {
   if (val < 7) {
-    return '#ffd1d3';
+    return '#fbe4e7';
   } else if (val >= 7 && val <= 10) {
     return '#aaffaa';
   } else {

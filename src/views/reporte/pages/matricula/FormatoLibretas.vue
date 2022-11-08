@@ -493,8 +493,8 @@ export default {
               prom = (suma / aux).toFixed(2);
             return prom;
         },
-        generatePDF() {
-             this.$refs.html2Pdf.generatePdf();
+        async generatePDF() {
+            await this.$refs.html2Pdf.generatePdf();
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

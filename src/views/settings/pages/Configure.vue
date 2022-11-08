@@ -2,7 +2,6 @@
   <div>
     <ProgressBar v-if="isCarga"></ProgressBar>
     <div v-else>
-      <span style="font-size: 18px;" class=" s-title-page">Configuración de plataforma</span>
       <div v-if="!ifAdd">
         <div v-if="info.length">
           <div class="w-70">
@@ -131,7 +130,7 @@
               </div>
               <hr>
 
-              <button @click="save" type="submit" class="btn btnNaranja ">Actualizar información</button>
+              <button @click="save" type="submit" class="btn btnNaranja ">Actualizar configuración</button>
             </form>
           </div>
         </div>
