@@ -46,7 +46,7 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'https://uemah.com/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/
+let url = 'https://uecam.net/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ http://35.169.34.86:4000/
 // if(localStorage.getItem("config")!==null){
 //     let config = JSON.parse(localStorage.getItem("config"))
 //     url = config
