@@ -9,7 +9,7 @@
     " id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-1">
         <span v-if="!$store.state.isAppMobile" class="h5 mt-2">
-          <span style="color:#fff;font: oblique bold 120% cursive;">UEMAH</span>
+          <span style="color:#fff;font: oblique bold 120% cursive;">UECMA</span>
         </span> 
        
         <div v-if="!$store.state.isAppMobile">
