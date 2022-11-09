@@ -136,7 +136,7 @@ export default {
       immediate: true,
       handler(pagina) {
         pagina = parseInt(pagina) || 1;
-        this.getAll(pagina, 8);
+        this.getAll(pagina, 10);
         this.isSelecUsers = [];
         this.paginaActual = pagina;
       },
@@ -189,7 +189,7 @@ export default {
             .then(() => {
               this.closet();
               this.ifLoad = false;
-              this.getAll(this.pagina, 8);
+              this.getAll(this.pagina, 10);
               this.MsmError ="";
             })
             .catch((error) => {
@@ -208,7 +208,7 @@ export default {
             .then(() => {
               this.ifLoad = false;
               this.closet();
-              this.getAll(this.pagina, 8);
+              this.getAll(this.pagina, 10);
             })
             .catch((error) => {
               this.ifLoad = false;
@@ -262,7 +262,7 @@ export default {
       this.getAll(1, num);
     },
     onPageChange(page) {
-      this.getAll(page, 8);
+      this.getAll(page, 10);
     },
     remove() {
       let message = {

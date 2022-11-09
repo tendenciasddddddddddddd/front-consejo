@@ -1,11 +1,11 @@
 <template>
   <div v-bind:style="{ 'background-image': 'url(' + fondo + ')' }" style="
-      background-size: 100% auto;background-position: top;    min-height: calc(100vh - 30px);">
+      background-size: 100% auto;background-position: top;    min-height: calc(100vh - 50px);">
         <main class="main-content main-content-bg mt-0"  >
       <section>
-        <div class="page-header ">
+        <div class="page-header " style="    height: 85vh;background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));">
           <div class="container">
-            <div class="row">
+            <div class="row" >
               <div class="col-xl-5 col-lg-5 col-md-6  mx-auto" >
                 <div class="">
                   <div v-if="isVisible == 'logins'" class="card card-plain  mt-4" style="background: #fff;border-radius: 6px;">
@@ -118,7 +118,7 @@
 
    
     <!-- -------- style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));" ------- -->
-    <footer class="footer py-5" >
+    <footer class="footer py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));">
       <div class="container">
         <div class="row">
           <div class="col-8 mx-auto text-center mt-1">

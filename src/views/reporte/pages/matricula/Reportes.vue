@@ -22,18 +22,18 @@
               <div class="col-lg-8 text-start">
                 
                 <div class="btn-group dropup">
-                  <a class="tamanio me-3" role="button" @click="conducta_pdf">
+                  <a v-on="isSelecMatricula.length ? { click: () => conducta_pdf() } : {}" class="tamanio me-3" role="button"  :class="{ disabled: isSelecMatricula.length === 0 }">
                     <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                       stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                       viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
                       <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
                       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
                     </svg>
-                   <b class="gordo links2"> Conducta</b>
+                   <b class="gordo" :class="{ links2: isSelecMatricula.length != 0}"> Conducta</b>
                   </a>
                 </div>
                 <div class="btn-group dropup">
-                  <a class="tamanio  me-3" role="button" @click="activar">
+                  <a v-on="isSelecMatricula.length ? { click: () => activar() } : {}" class="tamanio  me-3" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
                     <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                       stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                       viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
@@ -43,21 +43,21 @@
                       <path d="M16 17H8"></path>
                       <path d="M10 9H8"></path>
                     </svg>
-                    <b class="gordo links2"> Libretas</b>
+                    <b class="gordo" :class="{ links2: isSelecMatricula.length != 0}"> Libretas</b>
                   </a>
 
                 </div>
 
-                <a class="tamanio me-3" role="button" @click="get2()">
+                <a v-on="isSelecMatricula.length ? { click: () => get2() } : {}" class="tamanio me-3" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
                   <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
                     <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
                     <path d="M13 2v7h7"></path>
                   </svg>
-                   <b class="gordo links2">Promoción</b>
+                   <b class="gordo" :class="{ links2: isSelecMatricula.length != 0}">Promoción</b>
                 </a>
-                <a class="tamanio" role="button" @click="get()">
+                <a  v-on="isSelecMatricula.length ? { click: () => get() } : {}" class="tamanio" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
                   <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
@@ -65,7 +65,7 @@
                     <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
                     <path d="M6 14h12v8H6z"></path>
                   </svg>
-                   <b class="gordo links2 ">Reporte matricula</b>
+                   <b class="gordo " :class="{ links2: isSelecMatricula.length != 0}">Reporte matricula</b>
                 </a>
               </div>
             </div>

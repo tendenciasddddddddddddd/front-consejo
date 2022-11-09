@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
+        <vue-progress-bar style="margin-top:-8px"></vue-progress-bar>
         <ProgressBar v-if="isData"></ProgressBar>
         <div v-else>
             <ActionRowHeader  :IfAdd="0"  @changeSearch="changeSearch"></ActionRowHeader>

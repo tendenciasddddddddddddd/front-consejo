@@ -34,7 +34,7 @@
     <div class="col-lg-2">
       <div class="d-flex justify-content-end mb-3">
         <button class="btn btnNaranja" @click="$emit('openModal')">
-          Añadir nuevo
+          Añadir nuevo 
         </button>
       </div>
     </div>

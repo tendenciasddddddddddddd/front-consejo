@@ -604,6 +604,7 @@ margin-bottom: 12px!important;
   transition-property: color;
   white-space: nowrap;
   cursor: pointer;
+  border-right: 3px solid rgb(237 239 242 / 20%);
 }
 .eeEHPkk {
   transition: all 150ms ease-out 0s;
@@ -1301,7 +1302,7 @@ body.modal-open {
     margin-bottom: 0.5rem;
 }
 .s-title-page {
-  font-weight: 600;color:#000; font-size: 16px;
+  font-weight: 600;color:#fff; font-size: 16px;
 }
 .s-table-flush {
   border-color: rgb(223, 227, 235) !important;
@@ -1694,6 +1695,6 @@ body.modal-open {
 .canvaActive {
   font-weight: 600;
   color: #00c4cc !important;
-  background: rgb(57 76 96 / 35%);
+  background: rgb(254 255 255 / 25%);
 }
 

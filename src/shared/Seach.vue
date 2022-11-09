@@ -4,7 +4,7 @@
       <a class="fixed-plugin-button text-dark position-fixed px-3 py-2" style="background-color: #f5f8fa;">
         <i class="fa fa-cog py-2 negros"> </i>
       </a>
-      <div class="card shadow-lg  desplega w-100" style="z-index: 9999;top: 100px">
+      <div class="card shadow-lg  desplega w-100" style="z-index: 99999;top: 57px">
         <div
           style="border: 1px solid #dfe3eb;margin-left: -20px; margin-right: -10px; border-radius: 0px; min-height: 68px; padding: 1px 28px 1px 48px; background-color: #f5f8fa;">
           <div class="d-flex justify-content-between">
@@ -23,7 +23,6 @@
           <!-- End Toggle Button -->
         </div>
         <div class="card-body pt-sm-3 pt-0 croll" style="overflow-y: auto;height: auto;">
-          
       <div class="mt-2" v-if="displayedArticles.length">
         <div class="seachAll mb-3" v-for="item in displayedArticles" :key="item.id">
           <div class="d-flex justify-content-between" style="cursor:pointer;" @click="goToPage(item.url)">

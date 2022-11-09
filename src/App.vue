@@ -2,7 +2,7 @@
   <div id="app" >
     <template v-if="hasConfig">
       <div v-if="isLoggedIn">
-
+        <Inicio />
         <Header v-if="!$store.state.isAppMobile"></Header>
          <AppMovile v-else/>
         <main
@@ -10,7 +10,7 @@
           
         >
           <!-- Navbar -->
-          <Inicio />
+          
           <!-- End Navbar -->
           <div class="container-fluid  py-1 mt-2" >
            <router-view/>

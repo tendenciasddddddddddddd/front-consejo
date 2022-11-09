@@ -95,7 +95,7 @@
       <GridUser :typo="'ESTS'" :role="'Estudiante'" @myEventClosedAgGrid="closeAgGrid" @clickAlumnos="refreshData"/>
     </div>
     <div v-if="ifyoutuve">
-          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'lH6ccpBNlgg'"/>
+          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'768843570'"/>
         </div>
    
       <div class="fixed-plugin">

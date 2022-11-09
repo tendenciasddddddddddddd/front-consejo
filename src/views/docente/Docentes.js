@@ -26,7 +26,7 @@ export default {
       subtitulo: 'none',
       iseliminaddo: false,
       isSearch: false,
-      rows: 8,
+      rows: 9,
       selected: [],
       allSelected: false,
       userIds: [],
@@ -68,7 +68,7 @@ export default {
     },
     refreshData: function () {
       this.ifCreateUpdate = false;
-      this.getAll(this.paginaActual, 8);
+      this.getAll(this.paginaActual, 9);
     },
     getAll(pag, lim) {
       this.isLoading = true;
@@ -140,7 +140,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 8);
+            this.getAll(this.paginaActual, 9);
             this.allSelected = false;
           })
           .catch(() => {
@@ -179,7 +179,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 8);
+            this.getAll(this.paginaActual, 9);
           })
           .catch(() => {
             this.iseliminaddo = false;
@@ -216,7 +216,7 @@ export default {
       }
     },
     salirBusqueda: function() {
-      this.getAll(1, 8);
+      this.getAll(1, 9);
       this.isSearch = false;
     },
     changedQuery(num) {
@@ -243,6 +243,6 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 8);
+    this.getAll(1, 9);
   },
 };

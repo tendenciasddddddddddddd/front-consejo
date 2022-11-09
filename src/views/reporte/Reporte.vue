@@ -1,6 +1,6 @@
 <template>
     <div >
-         <section class="intro_cards mt-3">
+         <section class="intro_cards mt-4">
           <div class="intro_cards_container">
             <div  v-for="(item, i) in arrays_of_options" :key="item.id" class="intro_card_container"  >
               <CardsOptions :index="i"  :img="item.img" :nombre="item.nombre" :description="item.description" @optionsFuntions="optionsView"></CardsOptions>

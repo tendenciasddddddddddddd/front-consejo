@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav style="box-shadow:0 2px 4px -1px rgb(57 76 96 / 15%) !important;  " class="navbar navbar-main navbar-expand-lg position-sticky
+    <nav style="box-shadow: none !important; padding: 0rem  !important;  background: radial-gradient(100.99% 100.73% at 0% 0%,rgba(0,196,204,0.725916) 0%,#00c4cc 0.01%,rgba(0,196,204,0) 100%),radial-gradient(68.47% 129.02% at 22.82% 97.71%,#6420ff 0%,rgba(100,32,255,0) 100%),radial-gradient(106.1% 249.18% at 0% 0%,#00c4cc 0%,rgba(0,196,204,0) 100%),radial-gradient(64.14% 115.13% at 5.49% 50%,#6420ff 0%,rgba(100,32,255,0) 100%),#7d2ae7;" class="navbar navbar-main navbar-expand-lg position-sticky
       top-1
       px-0
       z-index-sticky
@@ -9,14 +9,11 @@
     " id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-1">
         <span v-if="!$store.state.isAppMobile" class="h5 mt-2">
-          <img width="28" src="../assets/img/logoss.webp" alt="">
-          <span style="color:#8b3dff">UECMA</span>
-         
+          <span style="color:#fff;font: oblique bold 120% cursive;">UEMAH</span>
         </span> 
        
-       
         <div v-if="!$store.state.isAppMobile">
-          <span class="ms-3 s-title-page me-8" style="font-size: 17px;font-weight: 700;">
+          <span class="ms-4 s-title-page me-8" style="font-size: 16px;font-weight: 600;">
             {{$store.state.first_text}}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="m6.47 4.29 3.54 3.53c.1.1.1.26 0 .36L6.47 11.7a.75.75 0 1 0 1.06 1.06l3.54-3.53c.68-.69.68-1.8 0-2.48L7.53 3.23a.75.75 0 0 0-1.06 1.06z"></path></svg>
             {{$store.state.last_text}}</span>
@@ -35,11 +32,11 @@
               placeholder="Empezar a escribir..." >
           </div>
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <!-- <svg @click="openSeach" v-tooltip="'Buscar..'" class="me-3" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color: #000; cursor: pointer;"><path d="M11 17.25a6.25 6.25 0 110-12.5 6.25 6.25 0 010 12.5z"></path><path d="M16 16l4.5 4.5"></path></svg> -->
+            <!-- box-shadow:rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;  -->
             <svg @click="config" v-tooltip="'Configuración'" class="me-3" data-testid="geist-icon" fill="none"
               height="21" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
               stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="21"
-              style="color: #000; cursor: pointer;">
+              style="color: #fff; cursor: pointer;">
               <circle cx="12" cy="12" r="3"></circle>
               <path
                 d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z">
@@ -48,16 +45,17 @@
             <svg @click="openNotification" v-tooltip="'Notifications'" class="me-3" data-testid="geist-icon" fill="none"
               height="21" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
               stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="21"
-              style="color: #000; cursor: pointer;">
+              style="color: #fff; cursor: pointer;">
               <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
               <path d="M13.73 21a2 2 0 01-3.46 0"></path>
             </svg>
 
-            <button class="btn btnNaranja" style="min-width: 123px;" @click="logout"> Cerrar sesión</button>
+            <button class="btn btnNaranja" style="min-width: 126px;color: #000 !important;
+    background-color: rgb(255 255 255) !important;font-weight: 600 !important;" @click="logout">  Cerrar sesión</button>
           </div>
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item dropdown  d-flex align-items-end">
-              <a href="javascript:;" class="nav-link text-body p-0">
+              <a  class="nav-link text-body p-0">
                 <div class="avatar me-1 ">
                   <img :src="$store.state.avatar" alt="kal" class="avatar avatar-sm rounded-circle ava" />
                 </div>

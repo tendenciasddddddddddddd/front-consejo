@@ -1,5 +1,4 @@
 import Spinner from '../../../shared/Spinner';
-import IsSelect from "../../../shared/IsSelect";
 import RestResource from '../../../service/isAdmin'
 const restResourceService = new RestResource();
 //IMPORTAR HIJOS
@@ -10,7 +9,7 @@ export default {
   name: "AddDocentes",
   components:{
       Spinner,
-      FullModal, CustomInput, ButtonLoading,IsSelect
+      FullModal, CustomInput, ButtonLoading
   },
   props: {
     idGet: {

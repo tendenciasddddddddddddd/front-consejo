@@ -66,7 +66,7 @@ export default {
             this.getAll(1, num);
           },
           onPageChange(page) {
-            this.getAll(page, 8);
+            this.getAll(page, 9);
           },
           save() {
             this.isSelecUsers= [];
@@ -84,7 +84,7 @@ export default {
                       this.close();
                       this.MsmError ="";
                       this.ifLoad = false;
-                      this.getAll(this.pagina,8);
+                      this.getAll(this.pagina,9);
                     })
                     .catch((error) => {
                       this.ifLoad = false;
@@ -104,7 +104,7 @@ export default {
                   .then(() => {
                     this.ifLoad = false;
                     this.close();
-                    this.getAll(this.pagina,8);
+                    this.getAll(this.pagina,9);
                   })
                   .catch((error) => {
                     this.ifLoad = false;
@@ -184,7 +184,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                   this.deletedSelected();
-                  this.getAll(this.pagina, 8);
+                  this.getAll(this.pagina, 9);
                 })
                 .catch(() => {
                   this.iseliminaddo = false;
@@ -222,7 +222,7 @@ export default {
                 .then(() => {
                   this.iseliminaddo = false;
                  this.isSelecUsers = [];
-                  this.getAll(this.pagina, 8);
+                  this.getAll(this.pagina, 9);
                 })
                  .catch(() => {
                   this.iseliminaddo = false;
@@ -256,7 +256,7 @@ export default {
     },
     created() {
       this.verificarUsuario();
-      this.getAll(1, 8);
+      this.getAll(1, 9);
     },
       validators: { //area
         'model.nombre'(value) {

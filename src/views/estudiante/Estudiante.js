@@ -1,7 +1,6 @@
 import RestResource from '../../service/isAdmin'
 const restResourceService = new RestResource();
 import Spinner from '../../shared/Spinner';
-import AlertHeader from "../../shared/AlertHeader.vue";
 import Paginate2 from "../../shared/Paginate2.vue";
 import ActionsRow from "../../shared/ActionsRow.vue";
 import ScrimModal from "../../shared/ScrimModal"
@@ -9,7 +8,6 @@ export default {
   name: "indexUsiario",
   components: {
     Spinner,
-    AlertHeader,
     AlumnoCreateOrUpdate: () => import( /* webpackChunkName: "CreateOrUpdate" */ './components/AddAlumno.vue'),
     GridUser : () => import( /* webpackChunkName: "GridUser" */ '../../components/agGrid/GridUser.vue'),
     VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
@@ -28,7 +26,7 @@ export default {
       isLoading: false, //EL SNIPPER CARGA EN FALSO
       isSelecUsers: [],
       subtitulo: 'none',
-      rows: 8,
+      rows: 9,
       iseliminaddo: false,
       isSearch: false,
       isActive: false,
@@ -77,7 +75,7 @@ export default {
       this.ifGrid = false;
     },
     refreshData: function () {
-      this.getAll(this.paginaActual, 8);
+      this.getAll(this.paginaActual, 9);
     },
     getAll(pag, lim) {
       this.isLoading = true;
@@ -128,7 +126,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 8);
+            this.getAll(this.paginaActual, 9);
             this.allSelected = false;
           })
           .catch(() => {
@@ -167,7 +165,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 8);
+            this.getAll(this.paginaActual, 9);
           })
           .catch(() => {
             console.log("Error imposible");
@@ -238,7 +236,7 @@ export default {
       this.userIds = [];
     },
     salirBusqueda: function () {
-      this.getAll(1, 8);
+      this.getAll(1, 9);
       this.isSearch = false;
     },
 
@@ -252,6 +250,6 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 8);
+    this.getAll(1, 9);
   },
 };

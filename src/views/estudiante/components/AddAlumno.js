@@ -1,5 +1,4 @@
 import Spinner from "../../../shared/Spinner";
-import IsSelect from "../../../shared/IsSelect";
 import RestResource from "../../../service/isAdmin";
 const restResourceService = new RestResource();
 import ServiceRegiste from "../../../service/funcions";
@@ -11,7 +10,6 @@ export default {
   name: "CreaUsuario",
   components: {
     Spinner,
-    IsSelect,
     FullModal, CustomInput, ButtonLoading,
     
   },

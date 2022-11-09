@@ -1,4 +1,4 @@
-const image9 = require("../../assets/img/fondo.webp")
+const image9 = require("../../assets/img/fondo2.webp")
 export default {
   name: "Login",
   components: {

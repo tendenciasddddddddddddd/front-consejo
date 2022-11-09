@@ -1,5 +1,4 @@
 import Spinner from "../../../../shared/Spinner";
-import IsSelect from '../../../../shared/IsSelect'
 import ScrimModal from "../../../../shared/ScrimModal"
 import ButtonLoading from "../../../../shared/ButtonLoading.vue";
 import Dropdown from "../../../../shared/Dropdown.vue";
@@ -11,7 +10,7 @@ const restResourceService = new RestResource();
 export default {
   name: "CreateMatricula",
   components: {
-    Spinner,IsSelect, ScrimModal, ButtonLoading, Dropdown, NoFound2
+    Spinner, ScrimModal, ButtonLoading, Dropdown, NoFound2
   },
   props:{
     modalidad:{

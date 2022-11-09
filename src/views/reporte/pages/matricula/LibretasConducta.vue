@@ -2,10 +2,11 @@
     <div>
         <div v-if="ifload">Trabajando...</div>
         <section v-else>
-            <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-                :paginate-elements-by-height="1400" :filename="'libro-conducta'" :pdf-quality="2" :manual-pagination="false"
-                pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait" pdf-content-width="800px"
-                @progress="onProgress($event)" ref="html2Pdf">
+            <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="false" :preview-modal="false"
+                :paginate-elements-by-height="1400" :filename="'libro-conducta'" :pdf-quality="1.8"
+                :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait"
+                pdf-content-width="800px" @progress="onProgress($event)" @beforeDownload="beforeDownload($event)"
+                ref="html2Pdf">
                 <section slot="pdf-content">
                     <div v-for="item in info" :key="item.id" class="my-sm-5">
 
@@ -15,46 +16,47 @@
                                     <img class=" w-70  ms-3" :src="settings.logo" alt="Logo" />
                                 </div>
                                 <div class="col-md-9">
-                  <span class="h6 negros">
-                    {{settings.unidadeducativa}}
-                  </span><br>
-                  <span style="margin-top:-10px" class="text-sm text-center negros">
-                    Dirección: {{settings.direccion}} Teléf:  {{settings.telefono}} 
-                  </span> <br>
-                  <span class="text-xs negros"> {{settings.ubicacion}}</span>
-                </div>
-                <div class="col-lg-1   ">
-                </div>
+                                    <span class="h6 negros">
+                                        {{ settings.unidadeducativa }}
+                                    </span><br>
+                                    <span style="margin-top:-10px" class="text-sm text-center negros">
+                                        Dirección: {{ settings.direccion }} Teléf: {{ settings.telefono }}
+                                    </span> <br>
+                                    <span class="text-xs negros"> {{ settings.ubicacion }}</span>
+                                </div>
+                                <div class="col-lg-1   ">
+                                </div>
                             </div>
                             <div class="row mt-2  ms-3  me-4">
                                 <div class="col-lg-7 text-xs negros text-start">
                                     <div class="row">
-                                       <div class="col-lg-3">
-                                        CURSO : <br>
-                                        ALUMNO:
-                                       </div>
-                                       <div class="col-lg-9">
-                                        <b>{{ item.fknivel.nombre}}{{ item.curso }}</b> <br>
-                                        <b>{{ item.nombre }}</b>
-                                       </div>
+                                        <div class="col-lg-3">
+                                            CURSO : <br>
+                                            ALUMNO:
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <b>{{ item.fknivel.nombre }}{{ item.curso }}</b> <br>
+                                            <b>{{ item.nombre }}</b>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 text-xs negros text-end">
                                     <div class="row">
-                                       <div class="col">
-                                        PERIODO : <br>
-                                        FECHA : <br>
-                                        CÓDIGO :
-                                       </div>
-                                       <div class="col">
-                                        <b>{{item.academico.nombre}}</b> <br>
-                                        <b>{{ fechasActual }}</b> <br>
-                                        <b>344</b>
-                                       </div>
+                                        <div class="col">
+                                            PERIODO : <br>
+                                            FECHA : <br>
+                                            CÓDIGO :
+                                        </div>
+                                        <div class="col">
+                                            <b>{{ item.academico.nombre }}</b> <br>
+                                            <b>{{ fechasActual }}</b> <br>
+                                            <b>344</b>
+                                        </div>
                                     </div>
                                 </div>
                             </div><br>
-                            <span class="h6 negros mt-2 mb-2" style="font-weight: 400;">LIBRO QUIMESTRAL DE APRENDIZAJES Y
+                            <span class="h6 negros mt-2 mb-2" style="font-weight: 400;">LIBRO QUIMESTRAL DE APRENDIZAJES
+                                Y
                                 COMPORTAMIENTO</span>
                             <div class="row">
                                 <div class="col-lg-11 col-12 mx-auto">
@@ -91,7 +93,7 @@
                                                             <div class="col">a1</div>
                                                             <div class="col">a2</div>
                                                             <div class="col">pr</div>
-                                                            <div class="col">eq</div>
+
                                                         </div>
                                                     </th>
                                                     <th style="padding: 4px 5px;"
@@ -100,15 +102,14 @@
                                                             <div class="col">b1</div>
                                                             <div class="col">b2</div>
                                                             <div class="col">pr</div>
-                                                            <div class="col">eq</div>
+
                                                         </div>
                                                     </th>
                                                     <th style="padding: 4px 5px;"
                                                         class="text-uppercase text-center negros text-xxs font-weight-bolder">
                                                         <div class="row">
                                                             <div class="col">eq</div>
-                                                            <div class="col">ex</div>
-
+                                                           
                                                         </div>
                                                     </th>
                                                 </tr>
@@ -118,48 +119,46 @@
                                                 <tr v-for="ite in item.calificaciones" :key="ite.id">
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
                                                         class="mb-0 text-start ms-3 text-xxs negros fuente">
-                                                        {{ite.materia}}</td>
+                                                        {{ ite.materia }}</td>
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                                        class="mb-0 ms-3 text-center text-xxs negros fuente">
                                                         <div class="row negros">
-                                                            <div class="col">{{ite.comportamiento[0].p1}}</div>
-                                                            <div class="col">{{ite.comportamiento[0].p2}}</div>
+                                                            <div class="col">{{ ite.comportamiento[0].p1 }}</div>
+                                                            <div class="col">{{ ite.comportamiento[0].p2 }}</div>
 
                                                             <div class="col">
-                                                                {{calcularPromedio(ite.comportamiento[0].p1,ite.comportamiento[0].p2)}}
+                                                                {{ calcularPromedio(ite.comportamiento[0].p1,
+                                                                        ite.comportamiento[0].p2)
+                                                                }}
                                                             </div>
-                                                            <div class="col font-weight-bolder">
-                                                                {{calcularEquivalente(ite.comportamiento[0].p1,ite.comportamiento[0].p2)}}
-                                                            </div>
+
                                                         </div>
                                                     </td>
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                                        class="mb-0 ms-3 text-center text-xxs negros fuente">
                                                         <div class="row negros">
-                                                            <div class="col">{{ite.comportamiento[1].p1}}</div>
-                                                            <div class="col">{{ite.comportamiento[1].p2}}</div>
+                                                            <div class="col">{{ ite.comportamiento[1].p1 }}</div>
+                                                            <div class="col">{{ ite.comportamiento[1].p2 }}</div>
                                                             <div class="col">
-                                                                {{calcularPromedio(ite.comportamiento[1].p1,ite.comportamiento[1].p2)}}
+                                                                {{ calcularPromedio(ite.comportamiento[1].p1,
+                                                                        ite.comportamiento[1].p2)
+                                                                }}
                                                             </div>
-                                                            <div class="col font-weight-bolder">
-                                                                {{calcularEquivalente(ite.comportamiento[1].p1,ite.comportamiento[1].p2)}}
-                                                            </div>
+
                                                         </div>
                                                     </td>
                                                     <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
+                                                        class="mb-0 ms-3 text-center text-xxs negros fuente">
                                                         <div class="row negros">
                                                             <div class="col font-weight-bolder">
-                                                                {{calcularPromedio80(
-                                                                ite.comportamiento[0].p1, ite.comportamiento[0].p2,
-                                                                ite.comportamiento[1].p1, ite.comportamiento[1].p2
-                                                                )}}
+                                                                {{ calcularPromedio80(
+                                                                        ite.comportamiento[0].p1, ite.comportamiento[0].p2,
+                                                                        ite.comportamiento[1].p1, ite.comportamiento[1].p2
+                                                                    )
+                                                                }}
                                                             </div>
 
-                                                            <div class="col text-xxs">{{calcularPromedioTotal(
-                                                                ite.comportamiento[0].p1, ite.comportamiento[0].p2,
-                                                                ite.comportamiento[1].p1, ite.comportamiento[1].p2
-                                                                )}}</div>
+                                                         
 
                                                         </div>
                                                     </td>
@@ -173,7 +172,7 @@
                                                         class="mb-0 ms-3 text-start text-xxs negros ">PROMEDIOS </td>
                                                     <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
                                                         class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                                        {{total(item.calificaciones)}}
+                                                        {{ total(item.calificaciones) }}
                                                     </td>
                                                 </tr>
 
@@ -191,7 +190,7 @@
                                                     <td style="border-bottom-width: 0px;"
                                                         class="mb-0 ms-3 text-start text-xxs negros ">
                                                         <b>A</b> <br>
-                                                        <b>{{totalEquivalente(item.calificaciones)}}</b>
+                                                        <b>{{ totalEquivalente(item.calificaciones) }}</b>
                                                     </td>
 
                                                 </tr>
@@ -208,9 +207,9 @@
                                         <b>__________________________________</b>
                                     </span> <br>
                                     <p class="negros text-sm">
-                                                <b>{{settings.rector}}</b><br>
-                                                RECTOR/A
-                                            </p>
+                                        <b>{{ settings.rector }}</b><br>
+                                        RECTOR/A
+                                    </p>
                                 </div>
                                 <div>
                                     <div class="text-center">
@@ -218,9 +217,9 @@
                                             <b>__________________________________</b>
                                         </span> <br>
                                         <p class="negros text-sm">
-                                                    <b>{{settings.secretario}}</b><br>
-                                                    SECRETARIO/A
-                                                </p>
+                                            <b>{{ settings.secretario }}</b><br>
+                                            SECRETARIO/A
+                                        </p>
                                     </div>
 
                                 </div>
@@ -264,6 +263,17 @@ export default {
         }
     },
     methods: {
+        async beforeDownload({ html2pdf, options, pdfContent }) {
+            await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
+                const totalPages = pdf.internal.getNumberOfPages()
+                for (let i = 1; i <= totalPages; i++) {
+                    pdf.setPage(i)
+                    pdf.setFontSize(10)
+                    pdf.setTextColor(150)
+                    pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
+                }
+            }).save()
+        },
         onProgress(event) {
             this.statusbar = event;
         },
@@ -279,7 +289,7 @@ export default {
                     this.info = x.data;
                     this.ifload = false;
                     // console.log(this.info)
-                      setTimeout(() => this.generatePDF(), 2000);
+                    setTimeout(() => this.generatePDF(), 200);
                 })
                 .catch((x) => {
                     console.log("Error", x);
@@ -287,7 +297,7 @@ export default {
                 });
         },
         async generatePDF() {
-           await this.$refs.html2Pdf.generatePdf();
+            await this.$refs.html2Pdf.generatePdf();
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -300,9 +310,55 @@ export default {
             this.fechasActual = output;
         },
         calcularPromedio: function (a, b) {
-            let suma = parseFloat(a) + parseFloat(b);
-            let prom = suma / 2;
-            return prom.toFixed(2);
+            let aux = 0;
+            let aux2 = 0;
+            let p1 = a
+            let p2 = b
+            switch (p1) {
+                case "A": aux = 5;
+                    break;
+                case "B": aux = 4;
+                    break;
+                case "C": aux = 3;
+                    break;
+                case "D": aux = 2;
+                    break;
+                case "E": aux = 1;
+                    break;
+                default:
+                    break;
+            }
+            switch (p2) {
+                case "A": aux2 = 5;
+                    break;
+                case "B": aux2 = 4;
+                    break;
+                case "C": aux2 = 3;
+                    break;
+                case "D": aux2 = 2;
+                    break;
+                case "E": aux2 = 1;
+                    break;
+                default:
+                    break;
+            }
+            var result = parseInt((aux + aux2) / 2)
+            var letra = 'E'
+            switch (result) {
+                case 5: letra = 'A';
+                    break;
+                case 4: letra = 'B';
+                    break;
+                case 3: letra = 'C';
+                    break;
+                case 2: letra = 'D';
+                    break;
+                case 1: letra = 'E';
+                    break;
+                default:
+                    break;
+            }
+            return `${letra}`;
         },
         calcularEquivalente: function (a, b) {
             let suma = (parseFloat(a) + parseFloat(b)) / 2;
@@ -322,48 +378,110 @@ export default {
             return `${result}`;
         },
         calcularPromedio80: function (a, b, c, d) {
-            let suma = parseFloat(a) + parseFloat(b) + parseFloat(c) + parseFloat(d)
-            let prom = suma / 4;
-            return prom.toFixed(2);
-        },
-        calcularPromedioTotal: function (a, b, c, d) {
-            let suma = parseFloat(a) + parseFloat(b) + parseFloat(c) + parseFloat(d)
-            let num = suma / 4;
-            let result = ''
-            if (num <= 10 && num >= 9) {
-                result = 'Domina Aprendizaje'
-            } else if (num <= 8.99 && num >= 7) {
-                result = 'Alcanza Aprendizaje'
-            } else if (num <= 6.99 && num >= 4.01) {
-                result = 'Próximo Alcanza'
-            } else if (num <= 4 && num >= 1) {
-                result = 'No Alcanza'
-            } else {
-                result = 'undefined'
+            let aux = 0;
+            let aux2 = 0;
+            let aux3 = 0;
+            let aux4 = 0;
+            let p1 = a
+            let p2 = b
+            let p3 = c
+            let p4 = d
+            switch (p1) {
+                case "A": aux = 5;
+                    break;
+                case "B": aux = 4;
+                    break;
+                case "C": aux = 3;
+                    break;
+                case "D": aux = 2;
+                    break;
+                case "E": aux = 1;
+                    break;
+                default:
+                    break;
             }
-            return `${result}`;
+            switch (p2) {
+                case "A": aux2 = 5;
+                    break;
+                case "B": aux2 = 4;
+                    break;
+                case "C": aux2 = 3;
+                    break;
+                case "D": aux2 = 2;
+                    break;
+                case "E": aux2 = 1;
+                    break;
+                default:
+                    break;
+            }
+            switch (p3) {
+                case "A": aux3 = 5;
+                    break;
+                case "B": aux3 = 4;
+                    break;
+                case "C": aux3 = 3;
+                    break;
+                case "D": aux3 = 2;
+                    break;
+                case "E": aux3 = 1;
+                    break;
+                default:
+                    break;
+            }
+            switch (p4) {
+                case "A": aux4 = 5;
+                    break;
+                case "B": aux4 = 4;
+                    break;
+                case "C": aux4 = 3;
+                    break;
+                case "D": aux4 = 2;
+                    break;
+                case "E": aux4 = 1;
+                    break;
+                default:
+                    break;
+            }
+            var result = parseInt((aux + aux2 + aux3 + aux4) / 4)
+            var letra = 'E'
+            switch (result) {
+                case 5: letra = 'A';
+                    break;
+                case 4: letra = 'B';
+                    break;
+                case 3: letra = 'C';
+                    break;
+                case 2: letra = 'D';
+                    break;
+                case 1: letra = 'E';
+                    break;
+                default:
+                    break;
+            }
+            return `${letra}`;
         },
-        total(array){
-          let aux = 0
-          for (let i = 0; i < array.length; i++) {
-            const element = array[i].comportamiento;
-            let result = parseFloat(element[0].p1) + parseFloat(element[0].p2) + parseFloat(element[1].p1) + parseFloat(element[1].p2)
-            let prom = result / 4
-            aux = aux + prom
-          }
-          let total = (aux / array.length).toFixed(2);
-          return total
+  
+        total(array) {
+            let aux = 0
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].comportamiento;
+                let result = parseFloat(element[0].p1) + parseFloat(element[0].p2) + parseFloat(element[1].p1) + parseFloat(element[1].p2)
+                let prom = result / 4
+                aux = aux + prom
+            }
+            let total = (aux / array.length).toFixed(2);
+            return total
         },
-        totalEquivalente(array){
-          let aux = 0
-          for (let i = 0; i < array.length; i++) {
-            const element = array[i].comportamiento;
-            let result = parseFloat(element[0].p1) + parseFloat(element[0].p2) + parseFloat(element[1].p1) + parseFloat(element[1].p2)
-            let prom = result / 4
-            aux = aux + prom
-          }
-          let num = (aux / array.length).toFixed(2);
-          let result = ''
+        totalEquivalente(array) {
+            let aux = 0
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].comportamiento;
+                let result = parseFloat(element[0].p1) + parseFloat(element[0].p2) + parseFloat(element[1].p1) + parseFloat(element[1].p2)
+                let prom = result / 4
+                aux = aux + prom
+            }
+            let num = (aux / array.length).toFixed(2);
+            let result = ''
             if (num <= 10 && num >= 9) {
                 result = 'A'
             } else if (num <= 8.99 && num >= 7) {
