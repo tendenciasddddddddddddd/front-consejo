@@ -27,7 +27,7 @@
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
         @grid-ready="onGridReady" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
         :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable"
-        :suppressRowClickSelection="true" >
+        :enableRangeSelection="true" :suppressRowClickSelection="true" :enableFillHandle="true">
       </ag-grid-vue>
     </section>
     <div v-if="ifload" class="loadingg">

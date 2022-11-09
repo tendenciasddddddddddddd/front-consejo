@@ -11,9 +11,9 @@
                         <div class="card-header text-center ">
                             <div class="row justify-content-between">
                                 <div class="col-md-2 text-start">
-                                    <img class=" w-90 ms-3" src="../../../../assets/img/ecuador.jpg" alt="Logo" />
+                                    <img class=" w-65 ms-3" src="../../../../assets/img/escudos.jpg" alt="Logo" />
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <span class="text-xs negros">COORDINACIÓN ZONAL</span><br>
                                     <span class="h6 negros">
                                         {{settings.unidadeducativa}}
@@ -26,8 +26,8 @@
                                     
                                    
                                 </div>
-                                <div class="col-lg-2  text-md-end ">
-                                    <img class=" w-50 me-5" :src="settings.logo" alt="Logo" />
+                                <div class="col-lg-3  text-md-end ">
+                                    <img class=" w-100 me-5" src="../../../../assets/img/nuevo-logo-Mineduc.jpg" alt="Logo" />
                                 </div>
                             </div>
 
