@@ -14,16 +14,10 @@
               {{ validation.firstError("model.cedula") }}
             </p>
 
-            <span class="parrafo">Apellidos Completos</span>
-            <CustomInput v-model="model.apellidos" />
+            <span class="parrafo">Apellidos / Nombres</span>
+            <CustomInput v-model="model.fullname" />
             <p class="mb-2 text-xs fuente text-danger">
-              {{ validation.firstError("model.apellidos") }}
-            </p>
-
-            <span class="parrafo">Nombres Completos</span>
-            <CustomInput v-model="model.nombres" />
-            <p class="mb-2 text-xs fuente text-danger">
-              {{ validation.firstError("model.nombres") }}
+              {{ validation.firstError("model.fullname") }}
             </p>
 
             <span class="parrafo">Numero Teléfono (Opcional)</span>

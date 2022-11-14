@@ -43,6 +43,7 @@ export default {
     };
   },
   methods: {
+ 
     ClosedYoutuve: function(){
       this.ifyoutuve = false;
     },
@@ -75,6 +76,7 @@ export default {
       this.ifGrid = false;
     },
     refreshData: function () {
+      this.userIds = [];
       this.getAll(this.paginaActual, 9);
     },
     getAll(pag, lim) {

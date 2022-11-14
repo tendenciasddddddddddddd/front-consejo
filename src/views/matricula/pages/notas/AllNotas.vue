@@ -4,7 +4,9 @@
         <template v-slot:body>
             <Spinner v-if="isDocente"></Spinner>
             <div v-else>
+                <span class="negros text-sm gordo">Docente</span>
                 <Dropdown v-model="docente" :options="listDocentes" /><br>
+                <span class="negros text-sm gordo">Curso</span>
                 <Spinner v-if="isData"></Spinner>
                 <Dropdown v-else v-model="curso" :options="listniveles" />
             </div>

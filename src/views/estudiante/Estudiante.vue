@@ -3,7 +3,7 @@
      <!-- <AlertHeader :firsttext="'Administración de estudiantes en la plataforma'" ></AlertHeader> -->
         <ActionsRow :longitude="userIds.length" @openModal="openChildUser2" @remove="remove" @gets="openChildAlumno" @desactiveState="desactiveState" @changeSearch="changeSearch" @openModalh="openAgGrid" :ifGrids="1"/>
         <Spinner v-if="isLoading"></Spinner>
-          <div v-else class="table-responsive " >
+          <div v-else class="table-responsive ">
             <table  class=" dataTable-table table s-table-flush"  >
               <thead class="thead-light">
                 <tr class="cabeza">

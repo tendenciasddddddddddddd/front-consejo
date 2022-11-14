@@ -31,8 +31,6 @@ export default {
         _id: null,
         email: null,
         password: null,
-        nombres: null,
-        apellidos: null,
         cedula: null,
         foto: "https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp",
         typo: "DOCS",
@@ -72,10 +70,8 @@ export default {
         }
         if (this.model._id) {
           this.ifLoad = true;
-          this.model.apellidos = this.model.apellidos.trim();
-          this.model.nombres = this.model.nombres.trim();
+          this.model.fullname = this.model.fullname.trim();
           this.model.cedula = this.model.cedula.trim();
-          this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
             .updateDocentes(this.model._id, this.model) 
             .then(() => {
@@ -88,14 +84,12 @@ export default {
             });
         } else {
           this.ifLoad = true;
-          this.model.apellidos = this.model.apellidos.trim();
-          this.model.nombres = this.model.nombres.trim();
+          this.model.fullname = this.model.fullname.trim();
           this.model.cedula = this.model.cedula.trim();
           this.model.password = this.__getPasswods(
-            this.model.apellidos,
+            this.model.fullname,
             this.model.cedula
           );
-          this.model.fullname = this.model.apellidos +" "+ this.model.nombres;
           this.$proxies._registroProxi
             .createDocentes(this.model)
             .then(() => {
@@ -172,14 +166,7 @@ export default {
         .minLength(2)
         .maxLength(50);
     },
-    "model.nombres"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(5)
-        .maxLength(50);
-    },
-    "model.apellidos"(value) {
+    "model.fullname"(value) {
       return this.$validator
         .value(value)
         .required()

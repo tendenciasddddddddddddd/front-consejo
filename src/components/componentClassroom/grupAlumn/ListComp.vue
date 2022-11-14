@@ -3,9 +3,12 @@
     <ActionRowUser :longitude="isSelecUsers.length" @changeSearch="changeSearchs" @examDetail="examDetail"
       @gets="editTask" @openModal="openModal" @getDataAlls="getDataAll" /> 
     <div class="mt-2" v-if="displayedArticles.length">
-      <Items v-for="(item, index) in displayedArticles" :key="item.id" :item="item" :index="index" @nextPage="openModal"
+      <div class="row">
+        <Items class="col-sm-6 " v-for="(item, index) in displayedArticles" :key="item.id" :item="item" :index="index" @nextPage="openModal"
         @selectOne="selectOne" />
       <Paginate :numPages="numPages" :page="page" :total="object.length" @pagechanged="onPageChange"></Paginate>
+      </div>
+     
 
     </div>
     <NoFound v-else />

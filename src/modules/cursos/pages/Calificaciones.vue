@@ -4,13 +4,13 @@
     <div v-else>
       <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
     </div>
-    <section style="height: calc(100vh - 165px);">
+    <section style="height: calc(100vh - 140px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
         :enableFillHandle="true" @grid-ready="onGridReady"  :detailRowAutoHeight="true">
     </ag-grid-vue>
     </section>
-    <div v-if="iftask">
+    <div v-if="iftask" style="display: none">
          <Report  @EventClosed="closed" @getData="getDataAll" :rowData="rowData" @changeStatus="changeStatus"/>
     </div>
   </div>
@@ -50,13 +50,13 @@ export default {
         headerName: 'QUIMESTRE 1',
         children: [
           
-          { field: "a1", headerName: 'A1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a1", headerName: 'IN1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio1", headerName: 'P1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
+            field: "promedio1", headerName: 'PR1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.a1.toString().replace(",", "."),p2 = params.data.a2.toString().replace(",", "."),
                p3 = params.data.a3.toString().replace(",", "."),p4 = params.data.a4.toString().replace(",", "."),
@@ -80,13 +80,13 @@ export default {
               return promedio;
             }
           },
-          { field: "b1", headerName: 'A1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b1", headerName: 'IN1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio2", headerName: 'P2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
+            field: "promedio2", headerName: 'PR2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.b1.toString().replace(",", "."), p2 = params.data.b2.toString().replace(",", "."),
                   p3 = params.data.b3.toString().replace(",", "."), p4 = params.data.b4.toString().replace(",", "."),
@@ -133,13 +133,13 @@ export default {
       {
         headerName: 'QUIMESTRE 2',
         children: [
-          { field: "x1", headerName: 'A1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter},
-          { field: "x2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "x3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "x4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "x5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x1", headerName: 'IN1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter},
+          { field: "x2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio11", headerName: 'P1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
+            field: "promedio11", headerName: 'PR1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.x1.toString().replace(",", ".")
               let a1 = parseFloat(p1)
@@ -169,13 +169,13 @@ export default {
               return promedio;
             }
           },
-          { field: "y1", headerName: 'A1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y2", headerName: 'A2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y3", headerName: 'A3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y4", headerName: 'A4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y5", headerName: 'A5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y1", headerName: 'IN1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
-            field: "promedio22", headerName: 'P2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
+            field: "promedio22", headerName: 'PR2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.y1.toString().replace(",", ".")
               let a1 = parseFloat(p1)
@@ -283,9 +283,9 @@ export default {
       this.$emit('getDataTask');
     },
     open: function(){
-      this.iftask = false;
-      setTimeout(() => this.iftask = true, 100);
       this.isPrint = true;
+      this.iftask = true;
+     
     },
     closed: function () {
         this.iftask = false
@@ -293,6 +293,7 @@ export default {
     changeStatus(ev){
       if (ev=='100') {
         this.isPrint = false;
+        this.iftask = false;
       }
     },
     validateNumber(num) {

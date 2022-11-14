@@ -4,7 +4,7 @@
         <div class="full-background" ></div>
         <div class="card-body pt-4 pb-4">
           <h1 class="text-white">Apps</h1>
-          <p>La plataforma cuenta con varias aplicaciónes ques e ejecutan en todos los sistemas operativos como windos linux Ios.</p>
+          <p>La plataforma cuenta con varias aplicaciónes ques e ejecutan en todos los sistemas operativos como windows, linux y android.</p>
         </div>
       </div>
       <div class="row mt-4">

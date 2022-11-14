@@ -126,18 +126,22 @@
             <NoFound />
           </section>
         </section>
-        <section v-if="ifmatricula">
+        <section v-if="ifmatricula" style="display: none">
           <FormatoMatricula :rowData="rowData" @changeStatus="changeStatus" :settings="settings" />
         </section>
-        <section v-if="ifpromocion">
+        <section v-if="ifpromocion" style="display: none">
           <FormatoPromocion :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
             :settings="settings" />
         </section>
-        <section v-if="iflibretas">
+        <section v-if="ifPromocionInicial" style="display: none">
+          <InicialesPromocion :numActual="numActual" :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
+            :settings="settings" />
+        </section>
+        <section v-if="iflibretas" style="display: none">
           <FormatoLibretas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
             :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
         </section>
-        <section v-if="ifconducta">
+        <section v-if="ifconducta" style="display: none">
           <LibretasConducta :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
             :settings="settings" :numQuimestre="numQuimestre" />
         </section>

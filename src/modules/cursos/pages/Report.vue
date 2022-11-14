@@ -1,472 +1,315 @@
 <template>
     <div>
-        <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-            :paginate-elements-by-height="1400" :filename="data.nivel+'-'+data.paralelo+'-'+data.materia"
-            :pdf-quality="1.5" :manual-pagination="true" pdf-format="a4" :pdf-margin="0" pdf-orientation="landscape"
-            pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
-            <section slot="pdf-content">
-                <section class="mt-sm-4 mx-md-3 ">
-                    <div class="card-header">
-                       <div class="py-3 px-3">
-                        <div class="d-flex justify-content-between">
-                        <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
-                        <div class="text-center">
-                            <span class="h6 negros">
-                                 {{settings.unidadeducativa}}
-                            </span><br>
-                            <p class="text-xs text-center negros">
-                                REPORTE DE NOTAS
-                            </p>
-                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
-                                {{data.paralelo}}</span>
+        <section id="box">
+            <section style="margin-right: 1rem!important;margin-left: 1rem!important;margin-top: 1.5rem!important;">
+                <div style="padding: 1rem;">
+                    <div style="padding-top: 1rem!important;padding-bottom: 1rem!important;">
+                        <div
+                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                            <div style="flex: 0 0 auto;width: 12%;text-align: left!important;">
+                                <img style="width: 100%!important;" src="../../../assets/img/ecuador.jpg" alt="Logo" />
+                            </div>
+                            <div style="flex: 0 0 auto; width: 76%;text-align: center!important;">
+                                <span style="color:#000;font-weight: 600;font-size: 1rem;line-height: 1.375;">
+                                    {{ settings.unidadeducativa }}
+                                </span><br>
+                                <p style="font-size: .75rem!important;">
+                                    REPORTE DE NOTAS
+                                </p>
+                                <span style="font-size: .875rem!important;"><b>Año Lectivo: </b>2021-2022 &nbsp;
+                                    {{ data.nivel }} -
+                                    {{ data.paralelo }}</span>
+                            </div>
+                            <div style="flex: 0 0 auto; width: 12%;text-align: right!important;"><img
+                                    style="width: 50%!important;margin-right: 1rem!important;" :src="settings.logo"
+                                    alt="Logo" /></div>
                         </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" :src="settings.logo"
-                                alt="Logo" /></div>
-                    </div>
-                    <table class="dataTable-table table s-table-flush "
-                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                        <thead>
-                            <tr>
-                                <th
-                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
-                                <th class="text-uppercase text-start negros text-xxs font-weight-bolder"
-                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;">
-                                    {{data.materia}}
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
-                            </tr>
+                        <table
+                            style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                            <thead>
+                                <tr>
+                                    <th
+                                        style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                    </th>
+                                    <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                    <th
+                                        style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
+                                        <b> {{ data.materia }}</b>
+                                    </th>
+                                    <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                </tr>
 
-                            <tr>
-                                <th style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    LISTADO DE ESTUDIANTES
-                                </th>
-                                <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
-                                    style="padding: 4px 5px;">PRIMER QUIMESTRE</th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    SEGUNDO QUIMESTRE
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    TOTAL
-                                </th>
-                            </tr>
-                            <tr>
-                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);"></th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">p1</div>
-                                        <div class="col">p2</div>
-                                        <div class="col">pro</div>
-                                        <div class="col">pro(80%)</div>
-                                        <div class="col">exa</div>
-                                        <div class="col">exa(20%)</div>
-                                        <div class="col">qui</div>
-                                    </div>
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">p1</div>
-                                        <div class="col">p2</div>
-                                        <div class="col">pro</div>
-                                        <div class="col">pro(80%)</div>
-                                        <div class="col">exa</div>
-                                        <div class="col">exa(20%)</div>
-                                        <div class="col">qui</div>
-                                    </div>
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">pa</div>
-                                        <div class="col">eq</div>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item) in info.slice(0,15)" :key="item.id">
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col">{{item.p1}}</div>
-                                        <div class="col">{{item.p2}}</div>
-                                        <div class="col">{{item.prom1}}</div>
-                                        <div class="col">{{item.prom1_80}}</div>
-                                        <div class="col">{{item.exam1}}</div>
-                                        <div class="col">{{item.exam1_20}}</div>
-                                        <div class="col font-weight-bolder">{{item.promedio_final1}}</div>
-                                    </div>
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col">{{item.p3}}</div>
-                                        <div class="col">{{item.p4}}</div>
-                                        <div class="col">{{item.prom2}}</div>
-                                        <div class="col">{{item.prom2_80}}</div>
-                                        <div class="col">{{item.exam2}}</div>
-                                        <div class="col">{{item.exam2_20}}</div>
-                                        <div class="col font-weight-bolder">{{item.promedio_final2}}</div>
-                                    </div>
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
-                                        <div class="col">{{item.eq}}</div>
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-around mt-6">
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                                <b>__________________________________</b>
-                            </span> <br>
-                            <p class="negros text-sm">
-                                <b>{{settings.rector}}</b> <br>
-                                RECTOR/A
-                            </p>
-                        </div>
-                        <div>
-                            <div class="text-center">
-                                <span class="h6 pb-0">
-                                    <b>__________________________________</b>
+                                <tr>
+                                    <th
+                                        style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                        <b>LISTADO DE ESTUDIANTES</b>
+                                    </th>
+                                    <th style="padding: 4px 5px;font-size: .65rem!important;"> <b>PRIMER QUIMESTRE</b>
+                                    </th>
+                                    <th style="padding: 4px 5px;font-size: .65rem!important;">
+                                        <b>SEGUNDO QUIMESTRE</b>
+                                    </th>
+                                    <th style="padding: 4px 5px;font-size: .65rem!important;">
+                                        TOTAL
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th
+                                        style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);border-bottom: 1px solid #e9ecef;">
+                                    </th>
+                                    <th
+                                        style="min-width: 130px;padding: 4px 5px;font-weight: 700!important;font-size: .65rem!important;text-transform: uppercase!important;border-bottom: 1px solid #e9ecef;">
+                                        <div
+                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                            <div style=" flex: 1 0 0%;">p1</div>
+                                            <div style=" flex: 1 0 0%;">p2</div>
+                                            <div style=" flex: 1 0 0%;">pro</div>
+                                            <div style=" flex: 1 0 0%;">(80%)</div>
+                                            <div style=" flex: 1 0 0%;">exa</div>
+                                            <div style=" flex: 1 0 0%;">(20%)</div>
+                                            <div style=" flex: 1 0 0%;">qui</div>
+                                        </div>
+                                    </th>
+                                    <th
+                                        style="min-width: 130px;padding: 4px 5px;font-weight: 700!important;font-size: .65rem!important;text-transform: uppercase!important;border-bottom: 1px solid #e9ecef;">
+                                        <div
+                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                            <div style=" flex: 1 0 0%;">p1</div>
+                                            <div style=" flex: 1 0 0%;">p2</div>
+                                            <div style=" flex: 1 0 0%;">pro</div>
+                                            <div style=" flex: 1 0 0%;">(80%)</div>
+                                            <div style=" flex: 1 0 0%;">exa</div>
+                                            <div style=" flex: 1 0 0%;">(20%)</div>
+                                            <div style=" flex: 1 0 0%;">qui</div>
+                                        </div>
+                                    </th>
+                                    <th
+                                        style="padding: 4px 5px;font-weight: 700!important;font-size: .65rem!important;text-transform: uppercase!important;border-bottom: 1px solid #e9ecef;">
+                                        <div
+                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                            <div style=" flex: 1 0 0%;">pa</div>
+                                            <div style=" flex: 1 0 0%;">eq</div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item) in info.slice(0, 20)" :key="item.id">
+                                    <td
+                                        style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                        {{ item.nombres }}</td>
+                                    <td
+                                        style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                        <div
+                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                            <div style=" flex: 1 0 0%;">{{ item.p1 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.p2 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.prom1 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.prom1_80 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.exam1 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.exam1_20 }}</div>
+                                            <div style=" flex: 1 0 0%;"> <b>{{ item.promedio_final1 }}</b> </div>
+                                        </div>
+                                    </td>
+                                    <td
+                                        style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                        <div
+                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                            <div style=" flex: 1 0 0%;">{{ item.p3 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.p4 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.prom2 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.prom2_80 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.exam2 }}</div>
+                                            <div style=" flex: 1 0 0%;">{{ item.exam2_20 }}</div>
+                                            <div style=" flex: 1 0 0%;"> <b>{{ item.promedio_final2 }}</b> </div>
+                                        </div>
+                                    </td>
+                                    <td style="padding: 4px 5px;border-bottom-width: 0px;font-size: .65rem!important;">
+                                        <div
+                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                            <div style=" flex: 1 0 0%;"> <b>{{ item.promedioAnual }}</b> </div>
+                                            <div style=" flex: 1 0 0%;">{{ item.eq }}</div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div
+                            style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>______________________________</b>
                                 </span> <br>
-                                <p class="negros text-sm">
-                                    <b>{{nombre}}</b> <br>
-                                     DOCENTE 
+                                <p style=" font-size: .875rem!important;">
+                                    <b>{{ settings.rector }}</b><br>
+                                    RECTOR/A
+                                </p>
+                            </div>
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>_____________________________</b>
+                                </span> <br>
+                                <p style="font-size: .875rem!important;">
+                                    <b>{{ nombre }}</b><br>
+                                    DOCENTE/TUTOR
                                 </p>
                             </div>
                         </div>
                     </div>
-                       </div>
-                    </div>
-                </section>
-                <div v-if="info.length >= 16" style="page-break-before:always;"></div>
-                <section v-if="info.length >= 16">
-                    <div class="mt-sm-4 mx-md-3">
-                        <div class="py-3 px-3">
-                            <div class="card-header ">
-                        <div class="d-flex justify-content-between">
-                        <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
-                        <div class="text-center">
-                            <span class="h6 negros">
-                                 {{settings.unidadeducativa}}
-                            </span><br>
-                            <p class="text-xs text-center negros">
-                                REPORTE DE NOTAS
-                            </p>
-                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
-                                {{data.paralelo}}</span>
-                        </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" :src="settings.logo"
-                                alt="Logo" /></div>
-                    </div>
-                    <table class="dataTable-table table s-table-flush "
-                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                        <thead>
-                            <tr>
-                                <th
-                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
-                                <th class="text-uppercase text-start negros text-xxs font-weight-bolder"
-                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;">
-                                    {{data.materia}}
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
-                            </tr>
-
-                            <tr>
-                                <th style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    LISTADO DE ESTUDIANTES
-                                </th>
-                                <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
-                                    style="padding: 4px 5px;">PRIMER QUIMESTRE</th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    SEGUNDO QUIMESTRE
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    TOTAL
-                                </th>
-                            </tr>
-                            <tr>
-                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);"></th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">p1</div>
-                                        <div class="col">p2</div>
-                                        <div class="col">pro</div>
-                                        <div class="col">pro(80%)</div>
-                                        <div class="col">exa</div>
-                                        <div class="col">exa(20%)</div>
-                                        <div class="col">qui</div>
-                                    </div>
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">p1</div>
-                                        <div class="col">p2</div>
-                                        <div class="col">pro</div>
-                                        <div class="col">pro(80%)</div>
-                                        <div class="col">exa</div>
-                                        <div class="col">exa(20%)</div>
-                                        <div class="col">qui</div>
-                                    </div>
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">pa</div>
-                                        <div class="col">eq</div>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item) in info.slice(15,30)" :key="item.id">
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col">{{item.p1}}</div>
-                                        <div class="col">{{item.p2}}</div>
-                                        <div class="col">{{item.prom1}}</div>
-                                        <div class="col">{{item.prom1_80}}</div>
-                                        <div class="col">{{item.exam1}}</div>
-                                        <div class="col">{{item.exam1_20}}</div>
-                                        <div class="col font-weight-bolder">{{item.promedio_final1}}</div>
-                                    </div>
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col">{{item.p3}}</div>
-                                        <div class="col">{{item.p4}}</div>
-                                        <div class="col">{{item.prom2}}</div>
-                                        <div class="col">{{item.prom2_80}}</div>
-                                        <div class="col">{{item.exam2}}</div>
-                                        <div class="col">{{item.exam2_20}}</div>
-                                        <div class="col font-weight-bolder">{{item.promedio_final2}}</div>
-                                    </div>
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
-                                        <div class="col">{{item.eq}}</div>
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-around mt-6">
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                                <b>__________________________________</b>
-                            </span> <br>
-                            <p class="negros text-sm">
-                                <b>{{settings.rector}}</b> <br>
-                                RECTOR/A
-                            </p>
-                        </div>
-                        <div>
-                            <div class="text-center">
-                                <span class="h6 pb-0">
-                                    <b>__________________________________</b>
-                                </span> <br>
-                                <p class="negros text-sm">
-                                    <b>{{nombre}}</b> <br>
-                                     DOCENTE 
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                       </div>
-                        </div>
-                       
-                    </div>
-                </section>
-                <div v-if="info.length >= 31" style="page-break-before:always;"></div>
-                <section v-if="info.length >= 31">
-                    <div class="mt-sm-4 mx-md-3">
-                        <div class="py-3 px-3">
-                            <div class="card-header ">
-                        <div class="d-flex justify-content-between">
-                        <div><img class="mt-2 ms-3 w-50 " src="../../../assets/img/ecuador.png" alt="Logo" /></div>
-                        <div class="text-center">
-                            <span class="h6 negros">
-                               {{settings.unidadeducativa}}
-                            </span><br>
-                            <p class="text-xs text-center negros">
-                                REPORTE DE NOTAS
-                            </p>
-                            <span class="negros text-sm"><b>Año Lectivo: </b>2021-2022 &nbsp; {{data.nivel}} -
-                                {{data.paralelo}}</span>
-                        </div>
-                        <div class="text-end"><img class="mt-2 w-25 me-3" :src="settings.logo"
-                                alt="Logo" /></div>
-                    </div>
-                    <table class="dataTable-table table s-table-flush "
-                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                        <thead>
-                            <tr>
-                                <th
-                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
-                                <th class="text-uppercase text-start negros text-xxs font-weight-bolder"
-                                    style="padding: 4px 5px;border-top: 1px solid #d9d9d9;">
-                                    {{data.materia}}
-                                </th>
-                                <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
-                            </tr>
-
-                            <tr>
-                                <th style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    LISTADO DE ESTUDIANTES
-                                </th>
-                                <th class="text-uppercase text-center negros text-xxs font-weight-bolder"
-                                    style="padding: 4px 5px;">PRIMER QUIMESTRE</th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    SEGUNDO QUIMESTRE
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    TOTAL
-                                </th>
-                            </tr>
-                            <tr>
-                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);"></th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">p1</div>
-                                        <div class="col">p2</div>
-                                        <div class="col">pro</div>
-                                        <div class="col">pro(80%)</div>
-                                        <div class="col">exa</div>
-                                        <div class="col">exa(20%)</div>
-                                        <div class="col">qui</div>
-                                    </div>
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">p1</div>
-                                        <div class="col">p2</div>
-                                        <div class="col">pro</div>
-                                        <div class="col">pro(80%)</div>
-                                        <div class="col">exa</div>
-                                        <div class="col">exa(20%)</div>
-                                        <div class="col">qui</div>
-                                    </div>
-                                </th>
-                                <th style="padding: 4px 5px;"
-                                    class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                    <div class="row">
-                                        <div class="col">pa</div>
-                                        <div class="col">eq</div>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item) in info.slice(30,45)" :key="item.id">
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 text-start ms-3 text-xxs negros fuente">{{item.nombres}}</td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col">{{item.p1}}</div>
-                                        <div class="col">{{item.p2}}</div>
-                                        <div class="col">{{item.prom1}}</div>
-                                        <div class="col">{{item.prom1_80}}</div>
-                                        <div class="col">{{item.exam1}}</div>
-                                        <div class="col">{{item.exam1_20}}</div>
-                                        <div class="col font-weight-bolder">{{item.promedio_final1}}</div>
-                                    </div>
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col">{{item.p3}}</div>
-                                        <div class="col">{{item.p4}}</div>
-                                        <div class="col">{{item.prom2}}</div>
-                                        <div class="col">{{item.prom2_80}}</div>
-                                        <div class="col">{{item.exam2}}</div>
-                                        <div class="col">{{item.exam2_20}}</div>
-                                        <div class="col font-weight-bolder">{{item.promedio_final2}}</div>
-                                    </div>
-                                </td>
-                                <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                    class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                    <div class="row negros">
-                                        <div class="col font-weight-bolder">{{item.promedioAnual}}</div>
-                                        <div class="col">{{item.eq}}</div>
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-around mt-6">
-                        <div class="text-center">
-                            <span class="h6 pb-0">
-                                <b>__________________________________</b>
-                            </span> <br>
-                            <p class="negros text-sm">
-                                <b>{{settings.rector}}</b> <br>
-                                RECTOR/A
-                            </p>
-                        </div>
-                        <div>
-                            <div class="text-center">
-                                <span class="h6 pb-0">
-                                    <b>__________________________________</b>
-                                </span> <br>
-                                <p class="negros text-sm">
-                                    <b>{{nombre}}</b> <br>
-                                     DOCENTE 
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                       </div>
-                        </div>
-                       
-                    </div>
-                </section>
+                </div>
             </section>
-        </vue-html2pdf>
+            <div v-if="info.length >= 21" style="page-break-before:always;"></div>
+            <section v-if="info.length >= 21">
+                <div style="margin-right: 1rem!important;margin-left: 1rem!important;margin-top: 2.2rem!important;">
+                    <div style="padding-top: 1rem!important;padding-bottom: 1rem!important;">
+                        <div style="padding: 1rem;">
+
+                            <table
+                                style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                        </th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                        <th
+                                            style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
+                                            <b> {{ data.materia }}</b>
+                                        </th>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th
+                                            style="padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            <b>LISTADO DE ESTUDIANTES</b>
+                                        </th>
+                                        <th style="padding: 4px 5px;font-size: .65rem!important;"> <b>PRIMER
+                                                QUIMESTRE</b> </th>
+                                        <th style="padding: 4px 5px;font-size: .65rem!important;">
+                                            <b>SEGUNDO QUIMESTRE</b>
+                                        </th>
+                                        <th style="padding: 4px 5px;font-size: .65rem!important;">
+                                            TOTAL
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th
+                                            style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);border-bottom: 1px solid #e9ecef;">
+                                        </th>
+                                        <th
+                                            style="min-width: 130px;padding: 4px 5px;font-weight: 700!important;font-size: .65rem!important;text-transform: uppercase!important;border-bottom: 1px solid #e9ecef;">
+                                            <div
+                                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                <div style=" flex: 1 0 0%;">p1</div>
+                                                <div style=" flex: 1 0 0%;">p2</div>
+                                                <div style=" flex: 1 0 0%;">pro</div>
+                                                <div style=" flex: 1 0 0%;">(80%)</div>
+                                                <div style=" flex: 1 0 0%;">exa</div>
+                                                <div style=" flex: 1 0 0%;">(20%)</div>
+                                                <div style=" flex: 1 0 0%;">qui</div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            style="min-width: 130px;padding: 4px 5px;font-weight: 700!important;font-size: .65rem!important;text-transform: uppercase!important;border-bottom: 1px solid #e9ecef;">
+                                            <div
+                                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                <div style=" flex: 1 0 0%;">p1</div>
+                                                <div style=" flex: 1 0 0%;">p2</div>
+                                                <div style=" flex: 1 0 0%;">pro</div>
+                                                <div style=" flex: 1 0 0%;">(80%)</div>
+                                                <div style=" flex: 1 0 0%;">exa</div>
+                                                <div style=" flex: 1 0 0%;">(20%)</div>
+                                                <div style=" flex: 1 0 0%;">qui</div>
+                                            </div>
+                                        </th>
+                                        <th
+                                            style="padding: 4px 5px;font-weight: 700!important;font-size: .65rem!important;text-transform: uppercase!important;border-bottom: 1px solid #e9ecef;">
+                                            <div
+                                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                <div style=" flex: 1 0 0%;">pa</div>
+                                                <div style=" flex: 1 0 0%;">eq</div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(item) in info.slice(20, 50)" :key="item.id">
+                                        <td
+                                            style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            {{ item.nombres }}</td>
+                                        <td
+                                            style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            <div
+                                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                <div style=" flex: 1 0 0%;">{{ item.p1 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.p2 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.prom1 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.prom1_80 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.exam1 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.exam1_20 }}</div>
+                                                <div style=" flex: 1 0 0%;"> <b>{{ item.promedio_final1 }}</b> </div>
+                                            </div>
+                                        </td>
+                                        <td
+                                            style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            <div
+                                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                <div style=" flex: 1 0 0%;">{{ item.p3 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.p4 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.prom2 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.prom2_80 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.exam2 }}</div>
+                                                <div style=" flex: 1 0 0%;">{{ item.exam2_20 }}</div>
+                                                <div style=" flex: 1 0 0%;"> <b>{{ item.promedio_final2 }}</b> </div>
+                                            </div>
+                                        </td>
+                                        <td
+                                            style="padding: 4px 5px;border-bottom-width: 0px;font-size: .65rem!important;">
+                                            <div
+                                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                <div style=" flex: 1 0 0%;"> <b>{{ item.promedioAnual }}</b> </div>
+                                                <div style=" flex: 1 0 0%;">{{ item.eq }}</div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div
+                                style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
+                                <div style="text-align: center!important;">
+                                    <span>
+                                        <b>______________________________</b>
+                                    </span> <br>
+                                    <p style=" font-size: .875rem!important;">
+                                        <b>{{ settings.rector }}</b><br>
+                                        RECTOR/A
+                                    </p>
+                                </div>
+                                <div style="text-align: center!important;">
+                                    <span>
+                                        <b>_____________________________</b>
+                                    </span> <br>
+                                    <p style="font-size: .875rem!important;">
+                                        <b>{{ nombre }}</b><br>
+                                        DOCENTE/TUTOR
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </section>
     </div>
 </template>
 
 <script>
-import VueHtml2pdf from "vue-html2pdf";
 export default {
     name: 'AddNota',
-    components: { VueHtml2pdf },
     props: {
         rowData: Array //v-if="info.length >= 16"
     },
@@ -486,6 +329,25 @@ export default {
         }
     },
     methods: {
+        printDownload() {
+            try {
+                const box = document.getElementById('box').innerHTML;
+            let w = window.open('', '_blank', 'height=600,width=900,top=150,left= 400');
+            w.document.write('<html><head><title></title>');
+            w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;size:landscape;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
+            w.document.write('</head><body >');
+            w.document.write(box);
+            w.document.write('</body></html>');
+            w.document.close()
+            w.setTimeout(function () {
+                w.print()
+            }, 1000)
+            this.statusbar = 100;
+            } catch (error) {
+                this.statusbar = 100; 
+                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+            }
+        },
         inforUsers() {
             const info = JSON.parse(localStorage.getItem('Xf'));
             if (info) this.nombre = info.nombre;
@@ -535,83 +397,84 @@ export default {
                 }
             } catch (error) {
                 console.log(error);
+                this.statusbar = 100;
             }
 
         },
         promedioP1(array) {
             let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
             let suma = 0;
-              let prom = 0;
-              let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
-                suma = a1 + a2 + a3 + a4 + a5; aux =5
-              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
-                suma = a1 + a2 + a3 + a4; aux =4
-              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2 + a3 ; aux =3
-              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2  ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1; aux =1
-              } 
-              prom = (suma / aux).toFixed(2);
+            let prom = 0;
+            let aux = 0;
+            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
+                suma = a1 + a2 + a3 + a4 + a5; aux = 5
+            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
+                suma = a1 + a2 + a3 + a4; aux = 4
+            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2 + a3; aux = 3
+            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2; aux = 2
+            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1; aux = 1
+            }
+            prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP2(array) {
             let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3), a4 = parseFloat(array.b4), a5 = parseFloat(array.b5)
             let suma = 0;
-              let prom = 0;
-              let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
-                suma = a1 + a2 + a3 + a4 + a5; aux =5
-              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
-                suma = a1 + a2 + a3 + a4; aux =4
-              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2 + a3 ; aux =3
-              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2  ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1; aux =1
-              } 
-              prom = (suma / aux).toFixed(2);
+            let prom = 0;
+            let aux = 0;
+            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
+                suma = a1 + a2 + a3 + a4 + a5; aux = 5
+            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
+                suma = a1 + a2 + a3 + a4; aux = 4
+            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2 + a3; aux = 3
+            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2; aux = 2
+            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1; aux = 1
+            }
+            prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP3(array) {
             let a1 = parseFloat(array.x1), a2 = parseFloat(array.x2), a3 = parseFloat(array.x3), a4 = parseFloat(array.x4), a5 = parseFloat(array.x5)
             let suma = 0;
-              let prom = 0;
-              let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
-                suma = a1 + a2 + a3 + a4 + a5; aux =5
-              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
-                suma = a1 + a2 + a3 + a4; aux =4
-              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2 + a3 ; aux =3
-              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2  ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1; aux =1
-              } 
-              prom = (suma / aux).toFixed(2);
+            let prom = 0;
+            let aux = 0;
+            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
+                suma = a1 + a2 + a3 + a4 + a5; aux = 5
+            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
+                suma = a1 + a2 + a3 + a4; aux = 4
+            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2 + a3; aux = 3
+            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2; aux = 2
+            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1; aux = 1
+            }
+            prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP4(array) {
             let a1 = parseFloat(array.y1), a2 = parseFloat(array.y2), a3 = parseFloat(array.y3), a4 = parseFloat(array.y4), a5 = parseFloat(array.y5)
             let suma = 0;
-              let prom = 0;
-              let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
-                suma = a1 + a2 + a3 + a4 + a5; aux =5
-              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
-                suma = a1 + a2 + a3 + a4; aux =4
-              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2 + a3 ; aux =3
-              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1 + a2  ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
-                suma = a1; aux =1
-              } 
-              prom = (suma / aux).toFixed(2);
+            let prom = 0;
+            let aux = 0;
+            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
+                suma = a1 + a2 + a3 + a4 + a5; aux = 5
+            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
+                suma = a1 + a2 + a3 + a4; aux = 4
+            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2 + a3; aux = 3
+            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1 + a2; aux = 2
+            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+                suma = a1; aux = 1
+            }
+            prom = (suma / aux).toFixed(2);
             return prom;
         },
         parcilaValue1(params) {
@@ -639,26 +502,21 @@ export default {
         onProgress(event) {
             this.statusbar = event;
         },
-        hasGenerated() {
-            alert("PDF generated successfully!");
-        },
-        generatePDF() {
-            this.$refs.html2Pdf.generatePdf();
-        },
         initialSetup() {
-        this.$proxies._settingProxi.getConfigure()
+            this.$proxies._settingProxi.getConfigure()
                 .then((x) => {
-                    const { rector,logo, unidadeducativa } = x.data[0];
+                    const { rector, logo, unidadeducativa } = x.data[0];
                     this.settings = {
                         rector: rector,
                         unidadeducativa: unidadeducativa,
-                        logo:logo
+                        logo: logo
                     }
-                    setTimeout(() => this.generatePDF(), 2000);
+                    setTimeout(() => this.printDownload(), 1200);
                 }).catch(() => {
                     console.log("Error")
+                    this.statusbar = 100;
                 });
-    },
+        },
     },
     mounted() {
         this.initiaSetap()

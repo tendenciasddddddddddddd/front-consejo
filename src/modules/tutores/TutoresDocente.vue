@@ -103,7 +103,7 @@
                     <NoFound />
                 </section>
             </section>
-            <section v-if="iflibretas">
+            <section v-if="iflibretas" style="display: none">
           <Quimestral :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
             :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
         </section>
@@ -207,7 +207,6 @@ export default {
     },
     watch: {
         curso: function (value) {
-            console.log(value)
             this.isSelecMatricula = [];
             this.__cambios(value._id, value.paralelo );
         }
@@ -286,6 +285,7 @@ export default {
         changeStatus(ev) {
             if (ev == '100') {
                 this.isPrint = false;
+                this.iflibretas = true
             }
         },
         __listNivele() {
@@ -334,21 +334,16 @@ export default {
             if (this.isSelecMatricula.length > 0) {
                 if (this.parcial != '' || this.parcial2 != '') {
                     this.numQuimestre = this.checked;
-                    this.iflibretas = false
+                    this.iflibretas = true
                     this.closeModal();
                     this.isPrint = true;
                     this.rowData = this.isSelecMatricula
-                    setTimeout(() => this.callLibretas(), 150);
                 } else {
                     this.$dialog.alert("Seleccionar un parcial");
                 }
             } else {
                 this.$dialog.alert("Seleccione un estudiante al menos");
             }
-        },
-        callLibretas() {
-            if (this.rowData.length > 0) this.iflibretas = true
-            if (this.rowData.length == 0) this.isPrint = false;
         },
     },
     created() {

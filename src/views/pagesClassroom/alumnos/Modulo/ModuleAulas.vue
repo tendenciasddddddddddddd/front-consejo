@@ -1,50 +1,21 @@
 <template>
   <div>
-    <section class="BJZ27Q mb-3" v-if="!$store.state.isAppMobile">
-      <div class="uGmi4w" style="box-shadow: rgb(57 76 96 / 15%) 0px 2px 4px -1px !important;">
-        <div class="" @click="$router.go(-1)">
-          <button class="btn btnNaranja2 mt-2">
-            <svg class="me-2" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="24" style="color: #000;">
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-              </svg>
-          </button>
-         </div>
-        <span class="WuKWng"></span>
-      <div class="zCtFuA  s-text-versel2 " :class="{ 'canvaActive': tabs == 0 }" @click="vueInit(0)">
-        Tareas
-        <section v-if="tabs == 0" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 1 }" @click="vueInit(1)">
-        Evaluaciones
-        <section v-if="tabs == 1" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 2 }" @click="vueInit(2)">
-        Foros
-        <section v-if="tabs == 2" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-      <span class="WuKWng"></span>
-      <div class="zCtFuA s-text-versel2 " :class="{ 'canvaActive': tabs == 3 }" @click="vueInit(3)">
-        Estudiantes
-        <section v-if="tabs == 3" class="FOQEMQ mt-2">
-          <div class="hPlFoQ"></div>
-        </section>
-      </div>
-     
-      
-      </div>
-    </section> 
-    <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
+    <ScrimModal @close="$router.go(-1)">
+      <template v-slot:header>
+        <div v-if="!$store.state.isAppMobile" class="fjrDCGRR_tab">
+                 <div @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
+                  <span style="color:#fff">  Tareas</span>
+                 </div>
+                 <div @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }"><span style="color:#fff">Evaluaciones</span>
+                   </div>
+                   <div @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff"> Foros</span>
+                   </div>
+                   <div @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Estudiantes</span>
+                   </div>
+              </div>
+      </template>
+      <template v-slot:body>
+        <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
     <div v-else class="row">
       <div class="col-lg-2" v-if="$store.state.isAppMobile">
@@ -102,7 +73,10 @@
 
       </div>
     </div>
-    <br> <br>
+      </template>
+      
+    </ScrimModal> 
+    
   </div>
 </template>
 

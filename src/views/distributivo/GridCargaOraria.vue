@@ -23,7 +23,7 @@
     </div>
 
     <Spinner v-if="isLoading"></Spinner>
-    <section v-else style="height: calc(100vh - 250px);">
+    <section v-else style="height: calc(100vh - 220px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
         @grid-ready="onGridReady" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
         :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable"

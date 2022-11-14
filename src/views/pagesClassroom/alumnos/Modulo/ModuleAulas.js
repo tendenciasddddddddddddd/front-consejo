@@ -1,11 +1,12 @@
 import RestResource from "../../../../service/isAdmin";
 const restResourceService = new RestResource();
 import ProgressBar from "../../../../shared/ProgressBar";
+import ScrimModal from "../../../../shared/ScrimModal2"
 import ListComp from "../../../../components/componentClassroom/grupAlumn/ListComp.vue";
 export default {
   name: 'ModuleAulas',
   components: {
-    ProgressBar,ListComp,
+    ProgressBar,ListComp,ScrimModal,
     ListUser: () => import( /* webpackChunkName: "ListUser" */ '../../../../components/componentClassroom/grupAlumn/ListUser'),
     ListExamen: () => import( /* webpackChunkName: "ListExamen" */ '../../../../components/componentClassroom/quizzComponent/ListExamen'),
   },

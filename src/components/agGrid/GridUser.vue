@@ -71,8 +71,7 @@ export default {
           field: 'cedula', headerName: 'CÉDULA*', editable: true, maxWidth: 130,
           cellStyle: cellStyle
         },
-        { field: 'apellidos', headerName: 'APELLIDOS*', editable: true },
-        { field: 'nombres', headerName: 'NOMBRES*', editable: true },
+        { field: 'fullname', headerName: 'APELLIDOS/NOMBRES*', editable: true, minWidth:280 },
         { field: 'fknacionalidad', headerName: 'NACIONALIDAD (OPC)', editable: true },
         { field: 'fkparroquia', headerName: 'PARROQUIA (OPC)', editable: true },
         { field: 'sexo', headerName: 'SEXO (OPC)', editable: true, maxWidth: 130 },
@@ -114,13 +113,13 @@ export default {
       this.gridApi.forEachNode(function (node) {
         rowData.push(node.data);
         if (node.data.cedula == '' ||  
-          node.data.apellidos == '' || node.data.nombres == ''
+          node.data.fullname == '' 
         ) { validate = true }
         try {
           results.push({
           cedula: node.data.cedula.toString().trim(), //const result = typeof str === 'string' ? str.trim() : '';
           email: node.data.email.trim(),
-          apellidos: node.data.apellidos.trim(),
+          fullname: node.data.fullname.trim(),
           nombres: node.data.nombres.trim(),
           telefono: node.data.telefono.trim(),
           sexo: node.data.sexo.trim(),
@@ -130,8 +129,7 @@ export default {
           typo: tipos,
           foto: foto,
           username: node.data.cedula.trim(),
-          password: psw(node.data.apellidos.trim(), node.data.cedula.trim()),
-          fullname: node.data.apellidos.trim() + " " + node.data.nombres.trim(),
+          password: psw(node.data.fullname.trim(), node.data.cedula.trim()),
           roles: "",
         });
         } catch (error) {

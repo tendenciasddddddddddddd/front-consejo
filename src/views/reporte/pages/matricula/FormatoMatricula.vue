@@ -2,52 +2,48 @@
   <div>
     <div v-if="ifload">Trabajando...</div>
     <section v-else>
-      <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="false" :preview-modal="false"
-        :paginate-elements-by-height="1400" :filename="'matricula'" :pdf-quality="1.8" :manual-pagination="false"
-        pdf-format="a4" :pdf-margin="15" pdf-orientation="portrait" pdf-content-width="800px"
-        @progress="onProgress($event)" 
-       @beforeDownload="beforeDownload($event)"
-    ref="html2Pdf">
-        <section slot="pdf-content">
-          <div v-for="item in info" :key="item.id" class="my-sm-5">
-            <div class="card-header text-center ">
-              <div class="row justify-content-between">
-                <div class="col-md-2 text-end">
-                  <img class=" w-50 " :src="settings.logo" alt="Logo" />
+        <section id="box">
+
+          <div v-for="item in info" :key="item.id" style="margin-top: 1rem!important; margin-bottom: 3rem!important;">
+            <div  style="text-align: center!important;padding: 1.5rem;color:#000;">
+              <div  style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                <div  style="flex: 0 0 auto; width: 16.666667%;text-align: right!important;">
+                  <img style="width: 40%!important;" :src="settings.logo" alt="Logo" />
                 </div>
-                <div class="col-md-9">
-                  <span class="h6 negros">
+                <div  style="flex: 0 0 auto; width: 75%;">
+                  <span style="color:#000;font-weight: 600;font-size: 1.25rem;line-height: 1.375;">
                     {{settings.unidadeducativa}}
                   </span><br>
-                  <span style="margin-top:-10px" class="text-sm text-center negros">
+                  <span style="margin-top:-10px;text-align: center!important;" >
                     Dirección: {{settings.direccion}} Teléf:  {{settings.telefono}} 
                   </span> <br>
-                  <span class="text-xs negros">El Ángel {{settings.ubicacion}}</span>
+                  <span  style="font-size: .75rem!important;color:#000;">
+                    El Ángel {{settings.ubicacion}}</span>
                 </div>
-                <div class="col-lg-1  text-md-end ">
-                </div>
+                
               </div>
-              <hr style="height: 2px;background: #000;margin-top: -4px;">
-              <div class="text-end me-7">
-                <span class="negros"> <b>{{ fechasActual }}</b> </span>
+              <hr style="height: 1px;background: #000;">
+              <div style="text-align: right!important;margin-right: 5rem!important;">
+                <span > <b>{{ fechasActual }}</b> </span>
               </div> <br><br><br><br>
-              <span class="h5 negros ">CERTIFICADO DE MATRICULA</span>
-              <div class="d-flex justify-content-around mt-7">
-                <div class="text-sm negros">Matrícula No. <b>{{ item.nmatricula }}</b> </div>
-                <div class="text-sm negros">Año Lectivo: <b>{{ item.academico.nombre }}</b> </div>
+              <span  style="font-weight: 600;font-size: 1.25rem;line-height: 1.375;">
+                CERTIFICADO DE MATRICULA</span>
+              <div c style="margin-top: 6rem!important;display: flex!important;justify-content: space-around!important;">
+                <div >Matrícula No. <b>{{ item.nmatricula }}</b> </div>
+                <div >Año Lectivo: <b>{{ item.academico.nombre }}</b> </div>
               </div>
-              <div class="row">
-                <div class="col-lg-9 col-12 mx-auto">
-                  <div class="mt-5" style="width: 560px;">
-                    <p class="text-justify text-sm negros">
+              <div  style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                <div  style="flex: 0 0 auto; width: 75%;    margin-right: auto!important; margin-left: auto!important;">
+                  <div style="width: 560px;margin-top: 3rem!important;">
+                    <p  style="text-align: justify !important;font-size: .875rem!important;line-height: 1.5;">
                       Certifico que el(a) Estudiante: <b> {{ item.nombre }}</b>
                       previo los requisitos legales, se matriculó en <b>{{ item.fknivel.nombre }}</b> de la
                       <b>{{settings.unidadeducativa}}</b> en el Año Lectivo: <br>
                       <b >{{ item.academico.nombre }}</b>
                     </p>
                   </div>
-                  <div class="mt-3" style="width: 560px;">
-                    <p class="text-justify text-sm negros">
+                  <div  style="width: 560px;margin-top: 1rem!important;">
+                    <p  style="text-align: justify !important; color:#000;font-size: .875rem!important;">
                       Así consta en el Folio No. <b>{{ item.folio }}</b> del respectivo libro de matrícula con el No.
                       <b>{{ item.nmatricula }} </b> y con esta
                       fecha, <b style="text-transform: lowercase;">{{ item.fecha}}</b>
@@ -57,47 +53,41 @@
                 </div>
               </div>
 
-              <div class="d-flex justify-content-around mt-5">
-                <div class="text-center">
-                  <span class="h6 pb-0">
-                    <b>__________________________________</b>
+              <div style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
+                <div style="text-align: center!important;">
+                  <span >
+                    <b>______________________________</b>
                   </span> <br>
-                  <p class="negros text-sm">
+                  <p  style=" font-size: .875rem!important;">
                     <b>{{settings.rector}}</b><br>
                     RECTOR/A
                   </p>
                   
             
                 </div>
-                <div>
-                  <div class="text-center">
-                    <span class="h6 pb-0">
-                      <b>__________________________________</b>
+                <div  style="text-align: center!important;">
+                    <span >
+                      <b>_____________________________</b>
                     </span> <br>
-                    <p class="negros text-sm">
+                    <p style="font-size: .875rem!important;">
                     <b>{{settings.secretario}}</b><br>
                     SECRETARIO/A
                   </p>
-                  </div>
                 </div>
-              </div> <br><br>
-              <p class="text-start mt-10">
-                .
-              </p>
+              </div> 
+              <div style="page-break-before:always;"></div>
             </div>
           </div>
         </section>
-
-      </vue-html2pdf>
 
     </section>
   </div>
 </template>
 
 <script>
-import VueHtml2pdf from "vue-html2pdf";
+//import VueHtml2pdf from "vue-html2pdf";
 export default {
-  components: { VueHtml2pdf },
+ // components: { VueHtml2pdf },
   props: {
     rowData: Array,
     settings: Object,
@@ -116,22 +106,27 @@ export default {
     }
   },
   methods: {
-    async beforeDownload ({ html2pdf, options, pdfContent }) {
-            await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
-                const totalPages = pdf.internal.getNumberOfPages()
-                for (let i = 1; i <= totalPages; i++) {
-                    pdf.setPage(i)
-                    pdf.setFontSize(10)
-                    pdf.setTextColor(150)
-                    pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
-                } 
-            }).save()
+    printDownload() {
+            try {
+                const box = document.getElementById('box').innerHTML;
+            let w = window.open('', '_blank', 'height=600,width=800,top=150,left= 400');
+            w.document.write('<html><head><title></title>');
+            w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
+            w.document.write('</head><body >');
+            w.document.write(box);
+            w.document.write('</body></html>');
+            w.document.close()
+            w.setTimeout(function () {
+                w.print()
+            }, 1000)
+            this.statusbar = 100;
+            } catch (error) {
+                this.statusbar = 100; 
+                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+            }
         },
     onProgress(event) {
       this.statusbar = event;
-    },
-    hasGenerated() {
-      alert("PDF generated successfully!");
     },
     getData(ids) {
       this.ifload = true;
@@ -154,15 +149,12 @@ export default {
         .then((x) => {
           this.info = x.data;
           this.ifload = false;
-          setTimeout(() => this.generatePDF(), 100);
+        setTimeout(() => this.printDownload(), 1000);
         })
         .catch((x) => {
           console.log("Error", x);
           this.ifload = false;
         });
-    },
-    async generatePDF() {
-     await this.$refs.html2Pdf.generatePdf();
     },
     __calcularfechaActual() {
       const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

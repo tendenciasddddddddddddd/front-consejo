@@ -13,6 +13,7 @@ export default {
     FormatoPromocion: () => import( /* webpackChunkName: "FormatoPromocion" */ "./FormatoPromocion.vue"),
     FormatoLibretas: () => import( /* webpackChunkName: "FormatoLibretas" */ "./FormatoLibretas.vue"),
     LibretasConducta: () => import( /* webpackChunkName: "LibretasConducta" */ "./LibretasConducta.vue"),
+    InicialesPromocion: () => import( /* webpackChunkName: "InicialesPromocion" */ "./InicialesPromocion.vue"),
   },
   data() {
     return {
@@ -28,6 +29,7 @@ export default {
       ifpromocion: false,
       iflibretas: false,
       ifconducta: false,
+      ifPromocionInicial: false,
       isPrint: false,
       searchQuery: '',
       //Pagina 
@@ -45,12 +47,14 @@ export default {
     checked : 0,
     parcial: false,
     parcial2: false,
+    numActual: 0,
     }
   },
   watch: {
     curso: function (value) {
       this.isSelecMatricula = [];
       this.__cambios(value._id, value.num);
+      this.numActual = value.num;
     }
   },
   computed: {
@@ -125,6 +129,11 @@ export default {
     changeStatus(ev){
       if (ev=='100') {
         this.isPrint = false;
+        this.ifmatricula = false
+        this.ifpromocion = false
+        this.iflibretas = false
+        this.ifconducta = false;
+        this.ifPromocionInicial = false
       }
     },
     __listNivele() {
@@ -171,26 +180,19 @@ export default {
     },
     get: function () {
       if (this.isSelecMatricula.length > 0) {
-        this.ifmatricula = false
-        this.ifpromocion = false
-        this.iflibretas = false
-        this.ifconducta = false
         this.isPrint = true;
+        this.ifmatricula = true;
         this.rowData = this.isSelecMatricula
-        setTimeout(() => this.callReport(), 150);
       } else {
         this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
     get2: function () {
       if (this.isSelecMatricula.length > 0) {
-        this.ifmatricula = false
-        this.ifpromocion = false
-        this.iflibretas = false
-        this.ifconducta = false
         this.isPrint = true;
+        if (this.numActual==1 || this.numActual==2 || this.numActual==3) {this.ifPromocionInicial= true}
+        else {this.ifpromocion = true}
         this.rowData = this.isSelecMatricula
-        setTimeout(() => this.callReport2(), 150);
       } else {
         this.$dialog.alert("Seleccione un estudiante al menos");
       }
@@ -199,14 +201,10 @@ export default {
       if (this.isSelecMatricula.length > 0) {
         if (this.parcial !='' || this.parcial2 !='') {
           this.numQuimestre = this.checked;
-          this.ifmatricula = false
-          this.ifpromocion = false
-          this.iflibretas = false
-          this.ifconducta = false
           this.closeModal();
           this.isPrint = true;
+          this.iflibretas = true
           this.rowData = this.isSelecMatricula
-          setTimeout(() => this.callLibretas(), 150);
         }else {
           this.$dialog.alert("Seleccionar un parcial");
         }
@@ -216,34 +214,13 @@ export default {
     },
     conducta_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
-          this.ifmatricula = false
-          this.ifpromocion = false
-          this.iflibretas = false
-          this.ifconducta = false
           this.isPrint = true;
+          this.ifconducta = true;
           this.rowData = this.isSelecMatricula
-          setTimeout(() => this.callConducta(), 150);
       }else {
         this.$dialog.alert("Selecione un estudiante por lo menos");
       }
     },
-    callReport() {
-      if (this.rowData.length > 0) this.ifmatricula = true
-      if (this.rowData.length == 0)  this.isPrint = false;
-    },
-    callReport2() {
-      if (this.rowData.length > 0) this.ifpromocion = true
-      if (this.rowData.length == 0)  this.isPrint = false;
-    },
-    callLibretas() {
-      if (this.rowData.length > 0) this.iflibretas = true
-      if (this.rowData.length == 0)  this.isPrint = false;
-    },
-    callConducta() {
-      if (this.rowData.length > 0) this.ifconducta = true
-      if (this.rowData.length == 0)  this.isPrint = false;
-    },
-    
   },
   created() {
     this.verificarUsuario();

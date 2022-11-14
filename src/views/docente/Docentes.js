@@ -69,6 +69,7 @@ export default {
     refreshData: function () {
       this.ifCreateUpdate = false;
       this.getAll(this.paginaActual, 9);
+      this.userIds = [];
     },
     getAll(pag, lim) {
       this.isLoading = true;

@@ -1,368 +1,190 @@
 <template>
     <div>
-        <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="true" :preview-modal="true"
-            :paginate-elements-by-height="1400" :filename="data.nivel + '-' + data.paralelo + '-' + data.materia"
-            :pdf-quality="1.5" :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="landscape"
-            pdf-content-width="1128px" @progress="onProgress($event)" ref="html2Pdf">
-            <section slot="pdf-content">
-                <section class="mt-sm-4 mx-md-3">
-                    <div class="card-header">
-                        <div class="py-3 px-3">
-                            <div class="d-flex justify-content-between">
-                                <div><img width="150" class="mt-2 ms-3  " src="../../../assets/img/ecuador.jpg" alt="Logo" />
+            <section id="box">
+                <section style="margin-right: 1rem!important;margin-left: 1rem!important;margin-top: 1.5rem!important;">
+                    <div style="padding: 1rem;">
+                        <div style="padding-top: 1rem!important;padding-bottom: 1rem!important;">
+                            <div style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                <div style="flex: 0 0 auto;width: 12%;text-align: left!important;">
+                                    <img width="150" style="width: 100%!important;" src="../../../assets/img/ecuador.jpg" alt="Logo" />
                                 </div>
-                                <div class="text-center">
-                                    <span class="h6 negros">
+                                <div style="flex: 0 0 auto; width: 76%;text-align: center!important;">
+                                    <span style="color:#000;font-weight: 600;font-size: 1rem;line-height: 1.375;">
                                         {{ settings.unidadeducativa }}
                                     </span><br>
-                                    <p class="text-xs text-center negros">
+                                    <p style="font-size: .75rem!important;">
                                         REPORTE DE COMPORTAMIENTO
                                     </p>
-                                    <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }} -
-                                        {{ data.paralelo }}</span> <span class="negros text-xs">{{ data.materia }}</span>
+                                    <span style="font-size: .875rem!important;"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }} -
+                                        {{ data.paralelo }}</span> <span style="font-size: .65rem!important;">{{ data.materia }}</span>
                                 </div>
-                                <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" />
+                                <div style="flex: 0 0 auto; width: 12%;text-align: right!important;">
+                                    <img style="width: 50%!important;margin-right: 1rem!important;" :src="settings.logo" alt="Logo" />
                                 </div>
                             </div>
-                            <table class="dataTable-table table s-table-flush "
-                                style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
+                            <table style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
                                 <thead>
                                     <tr>
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
-                                            class="text-uppercase text-start negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                             Estudiantes
                                         </th>
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 1</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 2</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);font-size: .65rem!important;">
                                             Quimestre 1</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 1</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 2</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);font-size: .65rem!important;">
                                             Quimestre 2</th>
                                         
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;font-size: .65rem!important;">
                                             Promedio Final</th>
                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in info.slice(0, 15)" :key="item.id">
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                            class="mb-0 text-start ms-3 text-xs negros fuente">{{ item.nombres }}</td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                    <tr v-for="item in info.slice(0, 25)" :key="item.id">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">{{ item.nombres }}</td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                             {{ item.p1 }}
                                         </td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                             {{ item.p2 }}
                                         </td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);font-size: .65rem!important;">
                                             {{ item.prom1 }}
                                         </td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                             {{ item.p3 }}
                                         </td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                             {{ item.p4 }}
                                         </td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);font-size: .65rem!important;">
                                             {{ item.prom2 }}
                                         </td>
-                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
-                                            class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;font-size: .65rem!important;">
                                             {{ item.total }}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-around mt-6">
-                                <div class="text-center">
-                                    <span class="h6 pb-0">
-                                        <b>__________________________________</b>
-                                    </span> <br>
-                                    <p class="negros text-sm">
-                                        <b>{{ settings.rector }}</b> <br>
-                                        RECTOR/A
-                                    </p>
-                                </div>
-                                <div>
-                                    <div class="text-center">
-                                        <span class="h6 pb-0">
-                                            <b>__________________________________</b>
-                                        </span> <br>
-                                        <p class="negros text-sm">
-                                            <b>{{ nombre }}</b> <br>
-                                            DOCENTE
-                                        </p>
-                                    </div>
-                                </div>
+                            <div
+                            style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>______________________________</b>
+                                </span> <br>
+                                <p style=" font-size: .875rem!important;">
+                                    <b>{{ settings.rector }}</b><br>
+                                    RECTOR/A
+                                </p>
                             </div>
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>_____________________________</b>
+                                </span> <br>
+                                <p style="font-size: .875rem!important;">
+                                    <b>{{ nombre }}</b><br>
+                                    DOCENTE/TUTOR
+                                </p>
+                            </div>
+                        </div>
                         </div>
                     </div>
 
                 </section>
-                <div v-if="info.length >= 16" style="page-break-before:always;"></div>
-                <section v-if="info.length >= 16" class="mt-sm-4 mx-md-3">
-                    <div class="mt-sm-4 mx-md-3">
-                        <div class="py-3 px-3">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <div><img width="150" class="mt-2 ms-3  " src="../../../assets/img/ecuador.jpg" alt="Logo" />
-                                </div>
-                                    <div class="text-center">
-                                        <span class="h6 negros">
-                                            {{ settings.unidadeducativa }}
-                                        </span><br>
-                                        <p class="text-xs text-center negros">
-                                            REPORTE DE COMPORTAMIENTO
-                                        </p>
-                                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }}
-                                            -
-                                            {{ data.paralelo }}</span> <span
-                                            class="negros text-xs">{{ data.materia }}</span>
-                                    </div>
-                                    <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" />
-                                    </div>
-                                </div>
-                                <table class="dataTable-table table s-table-flush "
-                                    style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                                    <thead>
-                                        <tr>
-                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
-                                            class="text-uppercase text-start negros text-xxs font-weight-bolder">
+                <div v-if="info.length >= 26" style="page-break-before:always;"></div>
+                <section v-if="info.length >= 26" >
+                    <div style="margin-right: 1rem!important;margin-left: 1rem!important;margin-top: 2.2rem!important;">
+                        <div style="padding-top: 1rem!important;padding-bottom: 1rem!important;">
+                            <div style="padding: 1rem;">
+                                <table style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                             Estudiantes
                                         </th>
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 1</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 2</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);font-size: .65rem!important;">
                                             Quimestre 1</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 1</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;font-size: .65rem!important;">
                                             Parcial 2</th>
                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);font-size: .65rem!important;">
                                             Quimestre 2</th>
                                         
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
+                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;font-size: .65rem!important;">
                                             Promedio Final</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="item in info.slice(15, 30)" :key="item.id">
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 text-start ms-3 text-xs negros fuente">{{ item.nombres }}</td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p1 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p2 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                                {{ item.prom1 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p3 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p4 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                                {{ item.prom2 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                                {{ item.total }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="d-flex justify-content-around mt-6">
-                                    <div class="text-center">
-                                        <span class="h6 pb-0">
-                                            <b>__________________________________</b>
-                                        </span> <br>
-                                        <p class="negros text-sm">
-                                            <b>{{ settings.rector }}</b> <br>
-                                            RECTOR/A
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <div class="text-center">
-                                            <span class="h6 pb-0">
-                                                <b>__________________________________</b>
-                                            </span> <br>
-                                            <p class="negros text-sm">
-                                                <b>{{ nombre }}</b> <br>
-                                                DOCENTE
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in info.slice(25, 50)" :key="item.id">
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">{{ item.nombres }}</td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            {{ item.p1 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            {{ item.p2 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);font-size: .65rem!important;">
+                                            {{ item.prom1 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            {{ item.p3 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                            {{ item.p4 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);font-size: .65rem!important;">
+                                            {{ item.prom2 }}
+                                        </td>
+                                        <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;font-size: .65rem!important;">
+                                            {{ item.total }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div
+                            style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>______________________________</b>
+                                </span> <br>
+                                <p style=" font-size: .875rem!important;">
+                                    <b>{{ settings.rector }}</b><br>
+                                    RECTOR/A
+                                </p>
+                            </div>
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>_____________________________</b>
+                                </span> <br>
+                                <p style="font-size: .875rem!important;">
+                                    <b>{{ nombre }}</b><br>
+                                    DOCENTE/TUTOR
+                                </p>
                             </div>
                         </div>
-
-                    </div>
-
-                </section>
-                <div v-if="info.length >= 31" style="page-break-before:always;"></div>
-                <section v-if="info.length >= 31" class="mt-sm-4 mx-md-3">
-                    <div class="mt-sm-4 mx-md-3">
-                        <div class="py-3 px-3">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <div><img width="150" class="mt-2 ms-3  " src="../../../assets/img/ecuador.jpg" alt="Logo" />
-                                </div>
-                                    <div class="text-center">
-                                        <span class="h6 negros">
-                                            {{ settings.unidadeducativa }}
-                                        </span><br>
-                                        <p class="text-xs text-center negros">
-                                            REPORTE DE COMPORTAMIENTO
-                                        </p>
-                                        <span class="negros text-xs"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }}
-                                            -
-                                            {{ data.paralelo }}</span> <span
-                                            class="negros text-xs">{{ data.materia }}</span>
-                                    </div>
-                                    <div class="text-end"><img class="mt-2 w-35 me-3" :src="settings.logo" alt="Logo" />
-                                    </div>
-                                </div>
-                                <table class="dataTable-table table s-table-flush "
-                                    style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                                    <thead>
-                                        <tr>
-                                            <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;border-right: 1px solid rgb(223 227 235);"
-                                            class="text-uppercase text-start negros text-xxs font-weight-bolder">
-                                            Estudiantes
-                                        </th>
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Parcial 1</th>
-                                       
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Parcial 2</th>
-                                       
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Quimestre 1</th>
-                                       
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Parcial 1</th>
-                                       
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Parcial 2</th>
-                                       
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: rgb(234 235 239);"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Quimestre 2</th>
-                                        
-                                        <th style="padding: 4px 5px;border-top: 1px solid #d9d9d9;background: #dbdde4;"
-                                            class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                            Promedio Final</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="item in info.slice(30, 45)" :key="item.id">
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 text-start ms-3 text-xs negros fuente">{{ item.nombres }}</td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p1 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p2 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                                {{ item.prom1 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p3 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente">
-                                                {{ item.p4 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: rgb(234 235 239);"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                                {{ item.prom2 }}
-                                            </td>
-                                            <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);background: #dbdde4;"
-                                                class="mb-0 ms-3 text-center text-xs negros fuente font-weight-bolder">
-                                                {{ item.total }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="d-flex justify-content-around mt-6">
-                                    <div class="text-center">
-                                        <span class="h6 pb-0">
-                                            <b>__________________________________</b>
-                                        </span> <br>
-                                        <p class="negros text-sm">
-                                            <b>{{ settings.rector }}</b> <br>
-                                            RECTOR/A
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <div class="text-center">
-                                            <span class="h6 pb-0">
-                                                <b>__________________________________</b>
-                                            </span> <br>
-                                            <p class="negros text-sm">
-                                                <b>{{ nombre }}</b> <br>
-                                                DOCENTE
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -370,15 +192,11 @@
 
                 </section>
             </section>
-        </vue-html2pdf>
     </div>
 </template>
 <script>
-
-import VueHtml2pdf from "vue-html2pdf";
 export default {
     name: 'AddNota',
-    components: { VueHtml2pdf },
     props: {
         rowData: Array
     },
@@ -398,6 +216,25 @@ export default {
         }
     },
     methods: {
+        printDownload() {
+            try {
+                const box = document.getElementById('box').innerHTML;
+            let w = window.open('', '_blank', 'height=600,width=900,top=150,left= 400');
+            w.document.write('<html><head><title></title>');
+            w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;size:landscape;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
+            w.document.write('</head><body >');
+            w.document.write(box);
+            w.document.write('</body></html>');
+            w.document.close()
+            w.setTimeout(function () {
+                w.print()
+            }, 1000)
+            this.statusbar = 100;
+            } catch (error) {
+                this.statusbar = 100; 
+                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+            }
+        },
         inforUsers() {
             const info = JSON.parse(localStorage.getItem('Xf'));
             if (info) this.nombre = info.nombre;
@@ -485,12 +322,6 @@ export default {
         onProgress(event) {
             this.statusbar = event;
         },
-        hasGenerated() {
-            alert("PDF generated successfully!");
-        },
-        generatePDF() {
-            this.$refs.html2Pdf.generatePdf();
-        },
         initialSetup() {
             this.$proxies._settingProxi.getConfigure()
                 .then((x) => {
@@ -500,9 +331,10 @@ export default {
                         unidadeducativa: unidadeducativa,
                         logo: logo
                     }
-                    setTimeout(() => this.generatePDF(), 2000);
+                    setTimeout(() => this.printDownload(), 1000);
                 }).catch(() => {
                     console.log("Error")
+                    this.statusbar = 100;
                 });
         },
     },

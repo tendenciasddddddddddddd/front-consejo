@@ -85,7 +85,6 @@ border-bottom: solid 1px rgb(223 227 235) !important;
 --ag-card-radius: 10px!important;
 --ag-card-shadow: 0 10px 40px rgb(174 190 205) !important;
 --ag-tab-min-width: 350px!important;
---ag-header-background-color: rgb(234, 240, 246)!important;
 --ag-font-size: 13px !important;
 }
 .ag-theme-alpine .ag-row, .ag-theme-alpine-dark .ag-row {

@@ -1,5 +1,5 @@
 <template>
-    <div class="row mt-1 mb-3 ">
+    <div class="row  mb-1 ">
         <div class="col-lg-4">
             <div class="input-group">
                 <span class="input-group-text negros buscador busca">

@@ -1,7 +1,6 @@
 import Axios from 'axios'
 import IdentityProxy from './IdentityProxy.js'
 import UsuariosProxi from './UsuariosProxi'
-import ZonasProxi from './ZonasProxi'
 import RegistrosProxi from './RegistrosProxi'
 import GestionProxi from './GestionProxi'
 import MatriculaProxi from './MatriculaProxi'
@@ -46,7 +45,7 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'https://uecam.net/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ https://uecam.net/
+let url = 'https://uemah.com/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ https://uecam.net/
 // if(localStorage.getItem("config")!==null){
 //     let config = JSON.parse(localStorage.getItem("config"))
 //     url = config
@@ -55,7 +54,6 @@ let url = 'https://uecam.net/api'; //http://localhost:3000/ https://uemah.com/ap
 export default{
     identityProxy: new IdentityProxy(Axios, url),
     _usuarioProxi: new UsuariosProxi(Axios, url),
-    _zonasProxi: new ZonasProxi(Axios, url),
     _registroProxi : new RegistrosProxi(Axios, url),
     _gestionProxi : new GestionProxi(Axios, url),
     _matriculaProxi : new MatriculaProxi(Axios, url), 

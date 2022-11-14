@@ -2,245 +2,223 @@
     <div>
         <div v-if="ifload">Trabajando...</div>
         <section v-else>
-            <vue-html2pdf :show-layout="false" :float-layout="true" :enable-download="false" :preview-modal="false"
-                :paginate-elements-by-height="1400" :filename="'libro-conducta'" :pdf-quality="1.8"
-                :manual-pagination="false" pdf-format="a4" :pdf-margin="10" pdf-orientation="portrait"
-                pdf-content-width="800px" @progress="onProgress($event)" @beforeDownload="beforeDownload($event)"
-                ref="html2Pdf">
-                <section slot="pdf-content">
-                    <div v-for="item in info" :key="item.id" class="my-sm-5">
-
-                        <div class="card-header text-center ">
-                            <div class="row justify-content-between">
-                                <div class="col-md-2 text-start">
-                                    <img class=" w-70  ms-3" :src="settings.logo" alt="Logo" />
-                                </div>
-                                <div class="col-md-9">
-                                    <span class="h6 negros">
-                                        {{ settings.unidadeducativa }}
-                                    </span><br>
-                                    <span style="margin-top:-10px" class="text-sm text-center negros">
-                                        Dirección: {{ settings.direccion }} Teléf: {{ settings.telefono }}
-                                    </span> <br>
-                                    <span class="text-xs negros"> {{ settings.ubicacion }}</span>
-                                </div>
-                                <div class="col-lg-1   ">
-                                </div>
+            <section id="box">
+                <div v-for="item in info" :key="item.id"
+                    style="margin-top: 1rem!important; margin-bottom: 1rem!important;">
+                    <div style="text-align: center!important;padding: 1.5rem;color:#000;">
+                        <div
+                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                            <div style="flex: 0 0 auto; width: 16.666667%;text-align: center!important;">
+                                <img style="width: 65%!important;" :src="settings.logo" alt="Logo" />
                             </div>
-                            <div class="row mt-2  ms-3  me-4">
-                                <div class="col-lg-7 text-xs negros text-start">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            CURSO : <br>
-                                            ALUMNO:
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <b>{{ item.fknivel.nombre }}{{ item.curso }}</b> <br>
-                                            <b>{{ item.nombre }}</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 text-xs negros text-end">
-                                    <div class="row">
-                                        <div class="col">
-                                            PERIODO : <br>
-                                            FECHA : <br>
-                                            CÓDIGO :
-                                        </div>
-                                        <div class="col">
-                                            <b>{{ item.academico.nombre }}</b> <br>
-                                            <b>{{ fechasActual }}</b> <br>
-                                            <b>344</b>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br>
-                            <span class="h6 negros mt-2 mb-2" style="font-weight: 400;">LIBRO QUIMESTRAL DE APRENDIZAJES
-                                Y
-                                COMPORTAMIENTO</span>
-                            <div class="row">
-                                <div class="col-lg-11 col-12 mx-auto">
-
-                                    <div class="">
-                                        <table class="dataTable-table table s-table-flush "
-                                            style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;">
-                                            <thead>
-                                                <tr>
-                                                    <th style="border-top: 1px solid #d9d9d9;padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        ASIGNATURAS
-                                                    </th>
-                                                    <th style="border-top: 1px solid #d9d9d9;padding: 4px 5px;"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        QUIMESTRE 1
-                                                    </th>
-                                                    <th style="border-top: 1px solid #d9d9d9;padding: 4px 5px;"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        QUIMESTRE 2
-                                                    </th>
-                                                    <th style="border-top: 1px solid #d9d9d9;padding: 4px 5px;"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        RESULTADOS
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <th
-                                                        style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);">
-                                                    </th>
-                                                    <th style="padding: 4px 5px;"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        <div class="row">
-                                                            <div class="col">a1</div>
-                                                            <div class="col">a2</div>
-                                                            <div class="col">pr</div>
-
-                                                        </div>
-                                                    </th>
-                                                    <th style="padding: 4px 5px;"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        <div class="row">
-                                                            <div class="col">b1</div>
-                                                            <div class="col">b2</div>
-                                                            <div class="col">pr</div>
-
-                                                        </div>
-                                                    </th>
-                                                    <th style="padding: 4px 5px;"
-                                                        class="text-uppercase text-center negros text-xxs font-weight-bolder">
-                                                        <div class="row">
-                                                            <div class="col">eq</div>
-                                                           
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr v-for="ite in item.calificaciones" :key="ite.id">
-                                                    <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 text-start ms-3 text-xxs negros fuente">
-                                                        {{ ite.materia }}</td>
-                                                    <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-center text-xxs negros fuente">
-                                                        <div class="row negros">
-                                                            <div class="col">{{ ite.comportamiento[0].p1 }}</div>
-                                                            <div class="col">{{ ite.comportamiento[0].p2 }}</div>
-
-                                                            <div class="col">
-                                                                {{ calcularPromedio(ite.comportamiento[0].p1,
-                                                                        ite.comportamiento[0].p2)
-                                                                }}
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                    <td style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-center text-xxs negros fuente">
-                                                        <div class="row negros">
-                                                            <div class="col">{{ ite.comportamiento[1].p1 }}</div>
-                                                            <div class="col">{{ ite.comportamiento[1].p2 }}</div>
-                                                            <div class="col">
-                                                                {{ calcularPromedio(ite.comportamiento[1].p1,
-                                                                        ite.comportamiento[1].p2)
-                                                                }}
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                    <td style="padding: 4px 5px;border-bottom-width: 0px;"
-                                                        class="mb-0 ms-3 text-center text-xxs negros fuente">
-                                                        <div class="row negros">
-                                                            <div class="col font-weight-bolder">
-                                                                {{ calcularPromedio80(
-                                                                        ite.comportamiento[0].p1, ite.comportamiento[0].p2,
-                                                                        ite.comportamiento[1].p1, ite.comportamiento[1].p2
-                                                                    )
-                                                                }}
-                                                            </div>
-
-                                                         
-
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 "></td>
-                                                    <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 "> </td>
-                                                    <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xxs negros ">PROMEDIOS </td>
-                                                    <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                                        {{ total(item.calificaciones) }}
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <table style="margin-top: -16px;border-top: 0px;"
-                                            class="dataTable-table table s-table-flush ">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);"
-                                                        class="mb-0 ms-3 text-start text-xxs negros fuente">
-                                                        DESARROLLO HUMANO INTEGRA <br>
-                                                        COMPORTAMIENTO
-                                                    </td>
-                                                    <td style="border-bottom-width: 0px;"
-                                                        class="mb-0 ms-3 text-start text-xxs negros ">
-                                                        <b>A</b> <br>
-                                                        <b>{{ totalEquivalente(item.calificaciones) }}</b>
-                                                    </td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                            <div style="flex: 0 0 auto; width: 75%;">
+                                <span style="color:#000;font-weight: 600;font-size: 1rem;line-height: 1.375;">
+                                    {{ settings.unidadeducativa }}
+                                </span><br>
+                                <span style="text-align: center!important;font-size: .75rem!important;">
+                                    Dirección: {{ settings.direccion }} Teléf: {{ settings.telefono }}
+                                </span> <br>
+                                <span style="font-size: .65rem!important;"> {{ settings.ubicacion }}</span>
                             </div>
-
-                            <div class="d-flex justify-content-around mt-7">
-                                <div class="text-center">
-                                    <span class="h6 pb-0">
-                                        <b>__________________________________</b>
-                                    </span> <br>
-                                    <p class="negros text-sm">
-                                        <b>{{ settings.rector }}</b><br>
-                                        RECTOR/A
-                                    </p>
-                                </div>
-                                <div>
-                                    <div class="text-center">
-                                        <span class="h6 pb-0">
-                                            <b>__________________________________</b>
-                                        </span> <br>
-                                        <p class="negros text-sm">
-                                            <b>{{ settings.secretario }}</b><br>
-                                            SECRETARIO/A
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div><br><br><br><br>
 
                         </div>
+                        <div
+                            style="font-size: .75rem!important; --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                            <div style="flex: 0 0 auto; width: 60%;  text-align: left!important;">
+                                <div
+                                    style="margin-left: 20px; --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                    <div style="flex: 0 0 auto;width: 20%;">
+                                        CURSO : <br>
+                                        ALUMNO:
+                                    </div>
+                                    <div style="flex: 0 0 auto;width: 80%;">
+                                        <b>{{ item.fknivel.nombre }}{{ item.curso }}</b> <br>
+                                        <b>{{ item.nombre }}</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="flex: 0 0 auto; width: 40%;  text-align: right!important;">
+                                <div
+                                    style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                    <div style=" flex: 1 0 0%;">
+                                        PERIODO : <br>
+                                        FECHA : <br>
+                                        CÓDIGO :
+                                    </div>
+                                    <div style=" flex: 1 0 0%;">
+                                        <b>{{ item.academico.nombre }}</b> <br>
+                                        <b>{{ fechasActual }}</b> <br>
+                                        <b>344</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <span style="font-weight: 400;font-size: 1rem!important; margin-top: 0.5rem!important;">LIBRO
+                            QUIMESTRAL DE APRENDIZAJES
+                            Y
+                            COMPORTAMIENTO</span>
+                        <div
+                            style="margin-top: 0.5rem !important; --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                            <div
+                                style="flex: 0 0 auto; width: 91%;    margin-right: auto!important; margin-left: auto!important;">
+                                <div style="width: 670px;">
+                                    <table
+                                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    style="border-top: 1px solid #d9d9d9;padding: 4px 5px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                                    ASIGNATURAS
+                                                </th>
+                                                <th
+                                                    style="border-top: 1px solid #d9d9d9;padding: 4px 5px;font-size: .65rem!important;">
+                                                    QUIMESTRE 1
+                                                </th>
+                                                <th
+                                                    style="border-top: 1px solid #d9d9d9;padding: 4px 5px;font-size: .65rem!important;">
+                                                    QUIMESTRE 2
+                                                </th>
+                                                <th
+                                                    style="border-top: 1px solid #d9d9d9;padding: 4px 5px;font-size: .65rem!important;">
+                                                    RESULTADOS
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th style="padding: 4px 5px;border-right: 1px solid rgb(223 227 235);">
+                                                </th>
+                                                <th
+                                                    style="padding: 4px 5px;font-size: .65rem!important;text-transform: uppercase!important;">
+                                                    <div
+                                                        style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                        <div style=" flex: 1 0 0%;">a1</div>
+                                                        <div style=" flex: 1 0 0%;">a2</div>
+                                                        <div style=" flex: 1 0 0%;">pr</div>
 
+                                                    </div>
+                                                </th>
+                                                <th
+                                                    style="padding: 4px 5px;font-size: .65rem!important;text-transform: uppercase!important;">
+                                                    <div
+                                                        style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                        <div style=" flex: 1 0 0%;">b1</div>
+                                                        <div style=" flex: 1 0 0%;">b2</div>
+                                                        <div style=" flex: 1 0 0%;">pr</div>
+
+                                                    </div>
+                                                </th>
+                                                <th
+                                                    style="padding: 4px 5px;font-size: .65rem!important;text-transform: uppercase!important;">
+                                                    <div>promedio</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr v-for="ite in item.calificaciones" :key="ite.id">
+                                                <td
+                                                    style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;">
+                                                    {{ ite.materia }}</td>
+                                                <td
+                                                    style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;">
+                                                    <div
+                                                        style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                        <div style=" flex: 1 0 0%;">{{ ite.comportamiento[0].p1 }}</div>
+                                                        <div style=" flex: 1 0 0%;">{{ ite.comportamiento[0].p2 }}</div>
+                                                        <div style=" flex: 1 0 0%;">
+                                                            {{ calcularPromedio(ite.comportamiento[0].p1,
+                                                                    ite.comportamiento[0].p2)
+                                                            }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;">
+                                                    <div
+                                                        style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
+                                                        <div style=" flex: 1 0 0%;">{{ ite.comportamiento[1].p1 }}</div>
+                                                        <div style=" flex: 1 0 0%;">{{ ite.comportamiento[1].p2 }}</div>
+                                                        <div style=" flex: 1 0 0%;">
+                                                            {{ calcularPromedio(ite.comportamiento[1].p1,
+                                                                    ite.comportamiento[1].p2)
+                                                            }}
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    style="padding: 4px 5px;border-bottom-width: 0px;font-size: .65rem!important;text-align: center!important;">
+                                                    {{ calcularPromedio80(
+                                                            ite.comportamiento[0].p1, ite.comportamiento[0].p2,
+                                                            ite.comportamiento[1].p1, ite.comportamiento[1].p2
+                                                        )
+                                                    }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);">
+                                                </td>
+                                                <td style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);">
+                                                </td>
+                                                <td
+                                                    style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                                    PROMEDIOS </td>
+                                                <td
+                                                    style="padding: 4px 5px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                                    {{ total(item.calificaciones) }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table
+                                        style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                        <tbody>
+                                            <tr>
+                                                <td
+                                                    style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                                   
+                                                    COMPORTAMIENTO
+                                                </td>
+                                                <td style="border-bottom-width: 0px;font-size: .65rem!important;">
+                                                
+                                                    <b>{{ total(item.calificaciones) }}</b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>______________________________</b>
+                                </span> <br>
+                                <p style=" font-size: .875rem!important;">
+                                    <b>{{ settings.rector }}</b><br>
+                                    RECTOR/A
+                                </p>
+                            </div>
+                            <div style="text-align: center!important;">
+                                <span>
+                                    <b>_____________________________</b>
+                                </span> <br>
+                                <p style="font-size: .875rem!important;">
+                                    <b>{{ settings.secretario }}</b><br>
+                                    SECRETARIO/A
+                                </p>
+                            </div>
+                        </div>
+                        <div style="page-break-before:always;"></div>
                     </div>
-
-                </section>
-
-            </vue-html2pdf>
-
+                </div>
+            </section>
         </section>
     </div>
 </template>
   
 <script>
-import VueHtml2pdf from "vue-html2pdf";
 export default {
-    components: { VueHtml2pdf },
     props: {
         rowData: Array,
         nextCourse: String,
@@ -263,22 +241,27 @@ export default {
         }
     },
     methods: {
-        async beforeDownload({ html2pdf, options, pdfContent }) {
-            await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
-                const totalPages = pdf.internal.getNumberOfPages()
-                for (let i = 1; i <= totalPages; i++) {
-                    pdf.setPage(i)
-                    pdf.setFontSize(10)
-                    pdf.setTextColor(150)
-                    pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
-                }
-            }).save()
+        printDownload() {
+            try {
+                const box = document.getElementById('box').innerHTML;
+            let w = window.open('', '_blank', 'height=600,width=800,top=150,left= 400');
+            w.document.write('<html><head><title></title>');
+            w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
+            w.document.write('</head><body >');
+            w.document.write(box);
+            w.document.write('</body></html>');
+            w.document.close()
+            w.setTimeout(function () {
+                w.print()
+            }, 1000)
+            this.statusbar = 100;
+            } catch (error) {
+                this.statusbar = 100; 
+                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+            }
         },
         onProgress(event) {
             this.statusbar = event;
-        },
-        hasGenerated() {
-            alert("PDF generated successfully!");
         },
         initialSetup() {
             let array = this.rowData;
@@ -289,15 +272,12 @@ export default {
                     this.info = x.data;
                     this.ifload = false;
                     // console.log(this.info)
-                    setTimeout(() => this.generatePDF(), 200);
+                    setTimeout(() => this.printDownload(), 1200);
                 })
                 .catch((x) => {
                     console.log("Error", x);
                     this.ifload = false;
                 });
-        },
-        async generatePDF() {
-            await this.$refs.html2Pdf.generatePdf();
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -360,23 +340,7 @@ export default {
             }
             return `${letra}`;
         },
-        calcularEquivalente: function (a, b) {
-            let suma = (parseFloat(a) + parseFloat(b)) / 2;
-            let num = suma.toFixed(2);
-            let result = ''
-            if (num <= 10 && num >= 9) {
-                result = 'A'
-            } else if (num <= 8.99 && num >= 7) {
-                result = 'B'
-            } else if (num <= 6.99 && num >= 4.01) {
-                result = 'C'
-            } else if (num <= 4 && num >= 1) {
-                result = 'D'
-            } else {
-                result = 'NA'
-            }
-            return `${result}`;
-        },
+
         calcularPromedio80: function (a, b, c, d) {
             let aux = 0;
             let aux2 = 0;
@@ -460,17 +424,95 @@ export default {
             }
             return `${letra}`;
         },
-  
+
         total(array) {
-            let aux = 0
+            let auxH = 0
             for (let i = 0; i < array.length; i++) {
                 const element = array[i].comportamiento;
-                let result = parseFloat(element[0].p1) + parseFloat(element[0].p2) + parseFloat(element[1].p1) + parseFloat(element[1].p2)
-                let prom = result / 4
-                aux = aux + prom
+                let aux = 0;
+                let aux2 = 0;
+                let aux3 = 0;
+                let aux4 = 0;
+                let p1 = element[0].p1
+                let p2 = element[0].p2
+                let p3 = element[1].p1
+                let p4 = element[1].p2
+                switch (p1) {
+                case "A": aux = 5;
+                    break;
+                case "B": aux = 4;
+                    break;
+                case "C": aux = 3;
+                    break;
+                case "D": aux = 2;
+                    break;
+                case "E": aux = 1;
+                    break;
+                default:
+                    break;
             }
-            let total = (aux / array.length).toFixed(2);
-            return total
+            switch (p2) {
+                case "A": aux2 = 5;
+                    break;
+                case "B": aux2 = 4;
+                    break;
+                case "C": aux2 = 3;
+                    break;
+                case "D": aux2 = 2;
+                    break;
+                case "E": aux2 = 1;
+                    break;
+                default:
+                    break;
+            }
+            switch (p3) {
+                case "A": aux3 = 5;
+                    break;
+                case "B": aux3 = 4;
+                    break;
+                case "C": aux3 = 3;
+                    break;
+                case "D": aux3 = 2;
+                    break;
+                case "E": aux3 = 1;
+                    break;
+                default:
+                    break;
+            }
+            switch (p4) {
+                case "A": aux4 = 5;
+                    break;
+                case "B": aux4 = 4;
+                    break;
+                case "C": aux4 = 3;
+                    break;
+                case "D": aux4 = 2;
+                    break;
+                case "E": aux4 = 1;
+                    break;
+                default:
+                    break;
+            }
+                let prom = parseInt((aux + aux2 + aux3 + aux4) / 4)
+                auxH = auxH + prom
+            }
+            let result = parseInt(auxH / array.length);
+            var letra = 'E'
+            switch (result) {
+                case 5: letra = 'A';
+                    break;
+                case 4: letra = 'B';
+                    break;
+                case 3: letra = 'C';
+                    break;
+                case 2: letra = 'D';
+                    break;
+                case 1: letra = 'E';
+                    break;
+                default:
+                    break;
+            }
+            return `${letra}`;
         },
         totalEquivalente(array) {
             let aux = 0
