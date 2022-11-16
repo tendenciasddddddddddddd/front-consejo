@@ -33,8 +33,7 @@ export default {
         email: '',
         password: null,
         cedula: null,
-        foto:
-          "https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp",
+        foto:this.$store.state.imgs,
         typo: "ESTS",
         telefono: '',
         updatedAt: null,

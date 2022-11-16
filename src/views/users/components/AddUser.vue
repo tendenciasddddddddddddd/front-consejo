@@ -15,21 +15,13 @@
                         <p class="mb-2 text-xs text-danger">
                           {{ validation.firstError("model.email") }}
                         </p>
-                        <span class="parrafo">Nombres Completos</span>
-                        <CustomInput v-model="model.nombres" />
+                        <span class="parrafo">Apellidos / Nombres </span>
+                        <CustomInput v-model="model.fullname" />
                         <p class="mb-2 text-xs text-danger">
-                          {{ validation.firstError("model.nombres") }}
+                          {{ validation.firstError("model.fullname") }}
                         </p>                   
-                        <span class="parrafo">Apellidos Completos</span>
-                         <CustomInput v-model="model.apellidos" />
-                        <p class="mb-2 text-xs text-danger">
-                          {{ validation.firstError("model.apellidos") }}
-                        </p>
                         <span class="parrafo">Numero de teléfono</span>
-                        <CustomInput v-model="model.telefono" />
-                        <p class="mb-2 text-xs text-danger">
-                          {{ validation.firstError("model.telefono") }}
-                        </p>                     
+                        <CustomInput v-model="model.telefono" />                    
                        <span class="parrafo">Rol de usuario</span>
                         <p class="parrafo" v-if="isRole">Cargando</p>
                         <div v-else v-for="ite in listRol" :key="ite._id">

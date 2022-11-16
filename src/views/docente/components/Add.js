@@ -32,7 +32,7 @@ export default {
         email: null,
         password: null,
         cedula: null,
-        foto: "https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp",
+        foto: this.$store.state.imgs,
         typo: "DOCS",
         telefono: null,
         updatedAt: null,

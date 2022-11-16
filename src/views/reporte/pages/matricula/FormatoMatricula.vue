@@ -149,7 +149,7 @@ export default {
         .then((x) => {
           this.info = x.data;
           this.ifload = false;
-        setTimeout(() => this.printDownload(), 1000);
+        setTimeout(() => this.printDownload(), 1500);
         })
         .catch((x) => {
           console.log("Error", x);

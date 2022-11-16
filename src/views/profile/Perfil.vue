@@ -23,16 +23,12 @@
             </div>
             <hr>
             <form @submit.prevent="save" id="pefilD">
-                  <span class="parrafo negros">Nombres</span>
-                  <CustomInput v-model="model.nombres" />
+                  <span class="parrafo negros">Apellidos Nombres</span>
+                  <CustomInput v-model="model.fullname" />
                   <div class="mb-2 text-sm ">
-                    {{ validation.firstError("model.nombres") }}
+                    {{ validation.firstError("model.fullname") }}
                   </div>
-                  <span class="parrafo negros">Apellidos</span>
-                  <CustomInput v-model="model.apellidos" />
-                  <p class="mb-2 text-sm text-danger">
-                    {{ validation.firstError("model.apellidos") }}
-                  </p>
+                 
                   <span class="parrafo negros">Email</span>
                   <CustomInput v-model="model.email" />
 
@@ -40,27 +36,18 @@
                 <div class="col-sm-6 ">
                   <span class="parrafo negros">Parroquia</span>
                   <CustomInput v-model="model.fkparroquia" />
-                  <p class="mb-2 text-sm text-danger">
-                    {{ validation.firstError("model.fkparroquia") }}
-                  </p>
                 </div>
                 <div class="col-sm-6 ">
                   <span class="parrafo negros">Etnia</span>
                   <CustomInput v-model="model.fketnia" />
-                  <p class="mb-2 text-sm text-danger">
-                    {{ validation.firstError("model.fketnia") }}
-                  </p>
                 </div>
               </div>
                   <span class="parrafo negros">Teléfono</span>
                   <CustomInput v-model="model.telefono" />
                   
-                  <span class="parrafo mt-2 negros">Género</span>
+                  <span class="parrafo mt-2  negros">Género</span>
                   <CustomInput v-model="model.sexo" />
-                  <p class="mb-4 text-sm text-danger">
-                    {{ validation.firstError("model.sexo") }}
-                  </p>
-            </form>
+            </form> <br>
             <ButtonLoading v-if="ifLoad" />
             <button v-else type="submit" class=" btn btnNaranja" form="pefilD"  style="background-color: #8b3dff !important;">
               Actualizar Información 

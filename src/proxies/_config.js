@@ -45,11 +45,8 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'https://uemah.com/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ https://uecam.net/
-// if(localStorage.getItem("config")!==null){
-//     let config = JSON.parse(localStorage.getItem("config"))
-//     url = config
-// }
+let url = 'https://uehuaca.com/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ https://uecam.net/
+// https://uehuaca.com/
 
 export default{
     identityProxy: new IdentityProxy(Axios, url),

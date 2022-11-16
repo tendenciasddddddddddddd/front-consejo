@@ -108,7 +108,7 @@ export default {
       var tipos = this.typo;
       const rowData = [];
       const results = []
-      let foto = "https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp";
+      let foto = this.$store.state.imgs;
       let validate = false;
       this.gridApi.forEachNode(function (node) {
         rowData.push(node.data);

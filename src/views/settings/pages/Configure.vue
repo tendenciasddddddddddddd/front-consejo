@@ -7,7 +7,7 @@
           <div class="w-70">
             <form @submit.prevent="save">
               <p class="text-sm negros h6  mb-1 mt-4">Logo del colegio</p>
-              <div class="row">
+              <div v-if="!ifImage" class="row">
                 <div class="col-8">
                   <img :src="url ? url : model.logo" alt="logo" class="avatar avatar-xl rounded-circle ava">
                 </div>
@@ -15,7 +15,7 @@
                   <input type="file" class="form-control" @change="onFileChange">
                 </div>
               </div>
-
+               <div v-else class="negros text-sm"> <b>Cargando imagen...</b> </div>
               <hr>
               <p class="text-sm negros h6 mb-1 mt-2">Unidad Educativa</p>
               <div class="row">
@@ -163,6 +163,7 @@ export default {
       ifAdd: false,
       archivo: '',
       ifLoad: false,
+      ifImage: false,
       model: {
         unidadeducativa: '',
         ubicacion: '',
@@ -196,11 +197,12 @@ export default {
       this.ifAdd = !this.ifAdd
     },
     onFileChange(e) {
+      this.ifImage = true
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
       var formData = new FormData();
       formData.append("myFile", file);
-      axios.post("https://uemah.com/api/upload", formData, {
+      axios.post("https://uehuaca.com/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -208,10 +210,11 @@ export default {
         .then(result => {
           const urls = result.data;
           this.model.logo= urls;
-          console.log(this.model.logo)
+          this.ifImage = false
         })
         .catch(err => {
           console.log(err);
+          this.ifImage = false
         });
     },
     save() {

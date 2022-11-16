@@ -32,8 +32,7 @@ export default {
         _id: null,
         username: null,
         email: null,
-        nombres: null,
-        apellidos: null,
+        fullname: null,
         cedula: null,
         sexo: null,
         fketnia: null,
@@ -120,7 +119,7 @@ export default {
       let text_1 = 'Cuenta'
       let text_2 = 'Información de perfil'
       this.$store.commit('updateHeader',{text_1, text_2})
-      if(!restResourceService.docente(this.roles)&&!restResourceService.estudiante(this.roles)){
+      if(!restResourceService.docente(this.roles)&&!restResourceService.estudiante(this.roles)&&!restResourceService.admin(this.roles)){
         this.$router.push("/");
       }
     }
@@ -133,33 +132,12 @@ export default {
   validators: {
     //ATRIBUTOS RAPA VALIDAR LOS CAMBIOS
 
-    "model.nombres"(value) {
+    "model.fullname"(value) {
       return this.$validator
         .value(value)
         .required()
         .minLength(5)
         .maxLength(50);
     },
-    "model.apellidos"(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(5)
-        .maxLength(50);
-    },
-
-
-    "model.fknacionalidad"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.fkparroquia"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.fketnia"(value) {
-        return this.$validator.value(value).required();
-      },
-      "model.sexo"(value) {
-        return this.$validator.value(value).required();
-      },
   },
 };

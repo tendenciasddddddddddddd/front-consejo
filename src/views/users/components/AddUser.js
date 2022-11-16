@@ -26,10 +26,10 @@ export default {
       isRol: "",
       model: {
         _id: null, email: null,
-        password: null, nombres: null, apellidos: null,
-        cedula: null, foto: 'https://res.cloudinary.com/dvpp07pji/image/upload/v1666453678/avatar_didazq.webp', typo: 'ADMS',
+        password: null, fullname: null, 
+        cedula: null, foto: this.$store.state.imgs, typo: 'ADMS',
         telefono: null,
-        updatedAt: null, role: null, fullname: null,
+        updatedAt: null, role: null, 
       },
       isedit: false,
       isRole: false
@@ -67,11 +67,9 @@ export default {
         }
         if (this.model._id) {
           this.ifLoad = true;
-          this.model.apellidos = this.model.apellidos.trim();
-          this.model.nombres = this.model.nombres.trim();
+          this.model.fullname = this.model.fullname.trim();
           this.model.cedula = this.model.cedula.trim();
           this.model.role = this.checked;
-          this.model.fullname = this.model.apellidos + " " + this.model.nombres;
           this.$proxies._usuarioProxi.update(this.model._id, this.model)
             .then(() => {
               this.ifLoad = false;
@@ -94,12 +92,10 @@ export default {
             });
         } else {
           this.ifLoad = true;
-          this.model.apellidos = this.model.apellidos.trim();
-          this.model.nombres = this.model.nombres.trim();
+          this.model.fullname = this.model.fullname.trim();
           this.model.cedula = this.model.cedula.trim();
-          this.model.password = this.__getPasswods(this.model.apellidos, this.model.cedula);
+          this.model.password = this.__getPasswods(this.model.fullname, this.model.cedula);
           this.model.role = this.checked;
-          this.model.fullname = this.model.apellidos + " " + this.model.nombres;
           this.$proxies._usuarioProxi.create(this.model)
             .then(() => {
               this.ifLoad = false;
@@ -174,28 +170,12 @@ export default {
         .required()
         .email();
     },
-    'model.nombres'(value) {
+    'model.fullname'(value) {
       return this.$validator
         .value(value)
         .required()
         .minLength(5)
         .maxLength(50);
     },
-    'model.apellidos'(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .minLength(5)
-        .maxLength(50);
-    },
-    'model.telefono'(value) {
-      return this.$validator
-        .value(value)
-        .required()
-        .integer()
-        .minLength(9)
-        .maxLength(12);
-    },
-
   },
 };

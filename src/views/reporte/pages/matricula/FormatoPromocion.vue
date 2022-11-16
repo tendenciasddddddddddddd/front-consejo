@@ -247,7 +247,7 @@ export default {
                     this.info = x.data;
                     this.ifload = false;
                     // console.log(this.info);
-                    setTimeout(() => this.printDownload(), 1100);
+                    setTimeout(() => this.printDownload(), 1500);
                 })
                 .catch((x) => {
                     console.log("Error", x);
