@@ -10,7 +10,7 @@
       <div class="container-fluid py-1 px-1">
         <svg v-if="!$store.state.isAppMobile" class="me-2" style="color:#fff; cursor:pointer;" xmlns="http://www.w3.org/2000/svg" id="navbarMinimize" onclick="navbarMinimize(this)" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.75 5.25h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 0 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5z"></path></svg>
         <span v-if="!$store.state.isAppMobile" class="h5 mt-2">
-          <span style="color:#fff;font: oblique bold 120% cursive;">HUACA</span>
+          <span style="color:#fff;font: oblique bold 120% cursive;">UEL</span>
         </span> 
        
         <div v-if="!$store.state.isAppMobile">
