@@ -52,7 +52,8 @@ export default {
         curso: null,
         calificaciones: [],
         asistencias: [],
-        iniciales: []
+        iniciales: [],
+        dhi: []
       },
       isSelecCurosos: {},
       isClick: false,

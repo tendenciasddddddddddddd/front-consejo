@@ -1,35 +1,42 @@
 <template>
     <div>
-        <vue-progress-bar style="margin-top:-8px"></vue-progress-bar>
+        <vue-progress-bar style="margin-top:-6px;"></vue-progress-bar>
         <ProgressBar v-if="isData"></ProgressBar>
         <div v-else>
-            <ActionRowHeader  :IfAdd="0"  @changeSearch="changeSearch"></ActionRowHeader>
+            <ActionRowHeader :IfAdd="0" @changeSearch="changeSearch"></ActionRowHeader>
             <section class="projects_projects__f_nDO mt-3" v-if="displayedArticles.length">
                 <div v-for="(item, index) in displayedArticles" :key="item.id"
                     class="styles_projectCardWrapper__zSMNk s-mopa animate__animated animate__fadeInUp"
                     :class="[`animations-${index}`]">
-                    <a href="javascript:;" @click="openModules(item._id)" class="link_link__LTNaQ styles_projectCard__2QnBU ">
+                    <a href="javascript:;" @click="openModules(item._id)"
+                        class="link_link__LTNaQ styles_projectCard__2QnBU ">
                         <div class="styles_projectCardDetails__vcWBi stack_stack__A16oG">
                             <div class="stack_stack__A16oG">
                                 <div class=" d-flex justify-content-start">
                                     <span class="avatar_avatar__OLijw stack_stack__A16oG"
-                                        v-bind:style="{'background':colorsh[index]}">
+                                        v-bind:style="{ 'background': colorsh[index] }">
                                         <span class="in-avatar text-center">
-                                            <b style="font-weight: 400;">{{item.fmateria? item.fmateria.nombre.slice(0,2).toUpperCase(): 'NA'}}</b>
+                                            <b style="font-weight: 400;">{{ item.fmateria ?
+                                                    item.fmateria.nombre.slice(0, 2).toUpperCase() : 'NA'
+                                            }}</b>
                                         </span>
                                     </span>
                                     <div class="stack_stack__A16oG ms-3">
-                                        <span class="cardTitle fuente"
-                                            style="font-size: 16px;margin-top: -5px;">{{item.fmateria? item.fmateria.nombre: 'Undefined'}}</span>
+                                        <span class="cardTitle fuente" style="font-size: 16px;margin-top: -5px;">{{
+                                                item.fmateria ?
+                                                    item.fmateria.nombre : 'Undefined'
+                                        }}</span>
                                         <span class="tag fuente tag-purple">Curso activo</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{item.fnivel? item.fnivel.nombre: 'Undefined'}}</p>
+                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{ item.fnivel ?
+                                            item.fnivel.nombre : 'Undefined'
+                                    }}</p>
                                 </div>
                                 <div>
                                     <span class="text-xs  fuente mt-2" style="color: #516f90 !important;">
-                                        {{'PARALELO: ' + item.paralelo}}
+                                        {{ 'PARALELO: ' + item.paralelo }}
                                     </span>
                                     <span style="color:black">
                                         <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor"
@@ -56,21 +63,39 @@
                         </span>
                     </a>
                 </div>
-               
+
             </section>
             <section v-else>
                 <NoFound />
             </section>
-            <Paginate v-if="displayedArticles.length" :numPages="numPages"  :page="page" :total="info.length" @pagechanged="onPageChange"></Paginate>
+            <Paginate v-if="displayedArticles.length" :numPages="numPages" :page="page" :total="info.length"
+                @pagechanged="onPageChange"></Paginate>
         </div>
         <div v-if="ifyoutuve">
-          <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'"/>
+            <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
         </div>
+        <Modal v-if="!habilitar">
+            <template v-slot:header>Módulo de notas</template>
+            <template v-slot:body>
+                <span class="negros text-sm">El módulo de registro de notas conducta y asistencia se encuantra
+                    temporalmente fuera de linea</span>
+                <div class="text-center mt-2">
+                    <img width="300" src="../../assets/img/notas_espera.svg" alt="">
+                </div>
+            </template>
+            <template v-slot:acccion>
+                <button @click="goToBack" class="btn btnNaranja mt-2" >
+                    Continuar
+                </button>
+            </template>
+        </Modal>
         <div class="fixed-plugin" v-if="!$store.state.isAppMobile">
-    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px; box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
-      Ver video explicativo
-    </a>
-  </div> <br> <br>
+            <a @click="ifyoutuve = true"
+                class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white"
+                style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px; box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+                Ver video explicativo
+            </a>
+        </div> <br> <br>
     </div>
 </template>
 <script >
@@ -79,6 +104,7 @@ const restResourceService = new RestResource();
 import ProgressBar from "../../shared/ProgressBar"; //
 import ActionRowHeader from "../../shared/ActionRowHeader"
 import NoFound from "../../shared/NoFound";
+import Modal from "../../shared/Modal"
 import Paginate from "../../shared/Paginate"
 const arrayColors = [
     "#8b3dff",
@@ -102,8 +128,8 @@ const arrayColors = [
 ];
 export default {
     components: {
-        ProgressBar, ActionRowHeader, NoFound, Paginate,
-        VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
+        ProgressBar, ActionRowHeader, NoFound, Paginate, Modal,
+        VueYoutuve: () => import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     },
     data() {
         return {
@@ -123,7 +149,8 @@ export default {
             ifChildGroup: false,
             ifChildNew: false,
             colorsh: [],
-            ifyoutuve : false,
+            ifyoutuve: false,
+            habilitar: true,
         };
     },
     computed: {
@@ -141,9 +168,9 @@ export default {
         },
     },
     methods: {
-        ClosedYoutuve: function(){
-      this.ifyoutuve = false;
-    },
+        ClosedYoutuve: function () {
+            this.ifyoutuve = false;
+        },
         paginate(articles) {
             let page = this.page;
             let perPage = this.perPage;
@@ -153,6 +180,9 @@ export default {
             this.isSelecUsers = [];
             this.arrayShorthand();
             return articles.slice(from, to);
+        },
+        goToBack() {
+            this.$router.push("/");
         },
         onPageChange: function (page) {
             this.page = page;
@@ -173,32 +203,32 @@ export default {
                 if (res._id == id) {
                     try {
                         var myCourse = {
-                        paralelo: res.paralelo,
-                        nombre: res.nombre,
-                        materia: res.fmateria.nombre,
-                        area: res.fmateria.area,
-                        idDistributivo: res._id,
-                        planificacion: res.planificacion,
-                        nivel: res.fnivel.nombre,
-                        nombredoc: info.nombre,
-                        num : res.fnivel.num
-                    };
-                    let id = res.fnivel._id;
-                    localStorage.removeItem("myCourse");
-                    if (!localStorage.getItem("myCourse")) {
-                        localStorage.setItem("myCourse", JSON.stringify(myCourse));
-                        if (res.fnivel.num ==1||res.fnivel.num ==2||res.fnivel.num ==3){
-                            this.$router.push({ path: `/iniciales/${id}` });
-                        } else{
-                            this.$router.push({ path: `/menuCurso/${id}` });
+                            paralelo: res.paralelo,
+                            nombre: res.nombre,
+                            materia: res.fmateria.nombre,
+                            area: res.fmateria.area,
+                            idDistributivo: res._id,
+                            planificacion: res.planificacion,
+                            nivel: res.fnivel.nombre,
+                            nombredoc: info.nombre,
+                            num: res.fnivel.num
+                        };
+                        let id = res.fnivel._id;
+                        localStorage.removeItem("myCourse");
+                        if (!localStorage.getItem("myCourse")) {
+                            localStorage.setItem("myCourse", JSON.stringify(myCourse));
+                            if (res.fnivel.num == 1 || res.fnivel.num == 2 || res.fnivel.num == 3) {
+                                this.$router.push({ path: `/iniciales/${id}` });
+                            } else {
+                                this.$router.push({ path: `/menuCurso/${id}` });
+                            }
                         }
-                    }
-                    break;
+                        break;
                     } catch (error) {
                         this.$dialog.alert('No se puede mostrar este curso')
                         console.log(error);
                         break;
-                    }  
+                    }
                 }
             }
         },
@@ -233,10 +263,34 @@ export default {
                 this.$router.push("/");
             }
         },
+        InitialSetup() {
+            this.$Progress.start();
+            this.isData = true;
+            this.$proxies._settingProxi.getApertura()
+                .then((x) => {
+                    const { inicio, fin } = x.data[0];
+                    if (this.validateTimes(inicio, fin)) {
+                        this.habilitar = true;
+                        this.getData();
+                    } else {
+                        this.habilitar = false;
+                    }
+                }).catch((er) => {
+                    console.log(er)
+                    this.isData = false;
+                    this.$Progress.finish();
+                });
+        },
+        validateTimes(fechaInicio, fechaFin) {
+            let fechaActual = new Date().toISOString();
+            if (fechaActual <= fechaFin && fechaActual >= fechaInicio) return true;
+            return false;
+        },
     },
     created() {
         this.verificarUsuario();
-        this.getData();
+
+        this.InitialSetup()
     },
 };
 

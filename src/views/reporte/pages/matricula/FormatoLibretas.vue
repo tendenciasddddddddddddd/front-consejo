@@ -189,24 +189,37 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr  v-if="item.proyectos.length > 0">
                                                             <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;">
                                                                 PROYECTOS ESCOLARES</td>
-                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;"><span v-if="parcial">EX</span></td>
-                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;"><span v-if="parcial2">EX</span> </td>
+                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;"><span v-if="parcial">
+                                                                {{item.proyectos[numQuimestre].p1}}</span></td>
+                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;"><span v-if="parcial2">
+                                                                {{item.proyectos[numQuimestre].p2}}</span> </td>
                                                             <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;">
-                                                                <span v-if="parcial && parcial2">EX</span>
+                                                                <span v-if="parcial && parcial2"> {{item.proyectos[numQuimestre].p1}}</span>
                                                             </td>
                                                         </tr>
-                                                        <tr >
+                                                        <tr  v-if="item.dhi.length > 0">
                                                             <td style="padding: 1px 3px;font-size: .65rem!important;">
-                                                                COMPORTAMIENTO </td>
-                                                            <td style="padding: 1px 3px;font-size: .65rem!important;"> <span v-if="parcial">A</span> </td>
+                                                                DESARROLLO HUMANO INTEGRAL</td>
+                                                            <td style="padding: 1px 3px;font-size: .65rem!important;"> <span v-if="parcial">{{item.dhi[numQuimestre].p1}}</span> </td>
                                                             <td style="padding: 1px 3px;font-size: .65rem!important;" >
-                                                                <span v-if="parcial2">A</span>
+                                                                <span v-if="parcial2">{{item.dhi[numQuimestre].p2}}</span>
                                                             </td>
                                                             <td style="padding: 1px 3px;font-size: .65rem!important;" >
-                                                                <span v-if="parcial && parcial2">AA</span>
+                                                                <span v-if="parcial && parcial2">{{item.dhi[numQuimestre].p1}}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-if="item.comportamiento.length > 0">
+                                                            <td style="padding: 1px 3px;font-size: .65rem!important;">
+                                                                COMPORTAMIENTO </td>
+                                                            <td style="padding: 1px 3px;font-size: .65rem!important;"> <span v-if="parcial">{{item.comportamiento[numQuimestre].p1}}</span> </td>
+                                                            <td style="padding: 1px 3px;font-size: .65rem!important;" >
+                                                                <span v-if="parcial2">{{item.comportamiento[numQuimestre].p2}}</span>
+                                                            </td>
+                                                            <td style="padding: 1px 3px;font-size: .65rem!important;" >
+                                                                <span v-if="parcial && parcial2">{{item.comportamiento[numQuimestre].p1}}</span>
                                                             </td>
                                                         </tr>
 
@@ -334,7 +347,7 @@ export default {
         printDownload() {
             try {
                 const box = document.getElementById('box').innerHTML;
-            let w = window.open('', '_blank', 'height=600,width=800,top=150,left= 400');
+            let w = window.open('', '_blank', 'height=600,width=950,top=150,left= 400');
             w.document.write('<html><head><title></title>');
             w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;size:landscape;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
             w.document.write('</head><body >');
@@ -382,10 +395,17 @@ export default {
                     let periodo = element.academico? element.academico.nombre: 'Undefined';
                     let calificacionesArray = element.calificaciones;
                     let calificaciones = []
+                    let dhi = []
+                    let comportamiento = []
+                    let proyectos = []
                     for (let j = 0; j < calificacionesArray.length; j++) {
                         this.aux = this.aux+1
                         const res = calificacionesArray[j];
                         let materia = res.materia;
+                        if (res.dhi.length > 0)  dhi = res.dhi;
+                        if (res.comportamiento.length > 0)  comportamiento = res.comportamiento;
+                        if (res.proyectos.length > 0)  proyectos = res.proyectos;
+                        if (res.notas.length > 0) {
                         let a1 = res.notas[this.numQuimestre].a1;
                         let a2 = res.notas[this.numQuimestre].a2;
                         let a3 = res.notas[this.numQuimestre].a3;
@@ -427,7 +447,8 @@ export default {
                             exam2_20 : exam2_20,
                             final : final,
                             letras : letras,
-                        })
+                        }) 
+                        }  
                     }
                     result.push({
                         curso : curso,
@@ -435,6 +456,9 @@ export default {
                         nombre : nombre,
                         periodo : periodo,
                         calificaciones : calificaciones,
+                        dhi : dhi,
+                        comportamiento : comportamiento,
+                        proyectos : proyectos,
                     })
                 }
                 this.info = result;

@@ -327,6 +327,12 @@
                   <span class="sidenav-normal letras fuente">Setting </span>
                 </router-link>
               </li>
+              <li class="nav-item ">
+                <a @click="openApertura" href="javascript:;" class="nav-link ">
+                  <span class="sidenav-mini-icon"> A </span>
+                  <span class="sidenav-normal letras fuente">Apertura de notas </span>
+                </a>
+              </li>
             </ul>
           </div>
         </li>
@@ -378,6 +384,9 @@
         <div v-if="visibl">
           <Password @cerrarCuenta="close" />
         </div>
+        <div v-if="ifApertura">
+          <Apertura @myEventCloseApertura="close2" />
+        </div>
       </ul>
     </div>
 
@@ -389,13 +398,15 @@ export default {
   name: 'Header',
   components: {//../views/pagesAdmin/cuenta/Cuenta.vue
     Password: () => import( /* webpackChunkName: "Password" */ '../views/password/Password.vue'),
+    Apertura: () => import( /* webpackChunkName: "Apertura" */ '../views/settings/Apertura.vue'),
   },
   data() {
     return {
       user: this.$store.state.user,
       isMobile: false,
       visibl: false,
-      nombre : false
+      nombre : false,
+      ifApertura : false,
     }
   },
   beforeDestroy() {
@@ -424,8 +435,14 @@ export default {
     openCuenta() {
       this.visibl = true;
     },
+    openApertura() {
+      this.ifApertura = true;
+    },
     close() {
       this.visibl = false;
+    },
+    close2(){
+      this.ifApertura = false;
     },
     inforUsers() {
       const info = JSON.parse(localStorage.getItem('Xf'));

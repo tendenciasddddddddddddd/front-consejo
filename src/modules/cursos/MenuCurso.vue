@@ -1,97 +1,55 @@
 <template>
-    <ScrimModal @close="$router.go(-1)">
+    <ScrimModal @close="salir">
       <template v-slot:header>
     <div class="fjrDCGRR_tab">
-                 <div @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
+                 <div v-if="mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
                   <span style="color:#fff">  Notas</span>
                   
                  </div>
-                 <div @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Conducta</span>
-                    
+                 <div v-if="mate =='COMPORTAMIENTO'"
+                  @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Comportamiento</span>
                    </div>
-                   <div @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff">Proyectos</span>
-                    
+                   <div v-if="mate =='PROYECTOS ESCOLARES'"
+                    @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff">Proyectos</span>
                    </div>
-                   <div @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }"><span style="color:#fff">Supletorios</span>
-                    
+                   <div v-if="mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" 
+                   @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }">
+                   <span v-if="!$store.state.isAppMobile" style="color:#fff">Supletorios</span>
+                   <span v-else style="color:#fff">Suple..</span>
                    </div>
-                   <div @click="tabs=4" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 4 }"><span style="color:#fff">Planificación</span>
-                    
+                   <div v-if="mate =='DESARROLLO HUMANO INTEGRAL'"
+                    @click="tabs=5" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 5 }">
+                    <span v-if="!$store.state.isAppMobile" style="color:#fff">Desarrollo Humano Integral</span>
+                    <span v-else style="color:#fff">D.H.I</span>
+                  </div>
+                   <div  @click="tabs=4" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 4 }">
+                    <span v-if="!$store.state.isAppMobile" style="color:#fff">Planificación</span>
+                    <span v-else style="color:#fff">Plani..</span>
                    </div>
               </div>
        </template>
       <template v-slot:body>
-   
+     <vue-progress-bar style="margin-top:-6px;"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
-    <div v-else class="row" >
-      <div class="col-lg-2" v-if="$store.state.isAppMobile">
-        <div class=" position-sticky top-1">
-          <ul class="nav flex-column bg-white border-radius-lg p-1">
-            <a href="javascript:;" @click="$router.go(-1)" class="s-regresar me-2 ms-2 mb-3">
-              <svg class="me-2" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision"
-                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                viewBox="0 0 24 24" width="22" style="color: #000;">
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-              </svg>
-              Atrás</a>
-            <li class="nav-item">
-              <a class="nav-link " :class="{ 's-active': tabs == 0 }" data-scroll="" href="javascript:;"
-                @click="vueInit(0)">
-                
-                <span :class="{ 's-active2': tabs == 0 }" class="text-sm s-text-versel2 ms-2">Notas</span>
-              </a>
-            </li>
-            <li class="nav-item pt-1">
-              <a class="nav-link " :class="{ 's-active': tabs == 1 }" data-scroll="" href="javascript:;"
-                @click="vueInit(1)">
-                
-                <span :class="{ 's-active2': tabs == 1 }" class="text-sm s-text-versel2 ms-2">Supletorios</span>
-              </a>
-            </li>
-           
-            <li class="nav-item pt-1">
-              <a class="nav-link  " :class="{ 's-active': tabs == 3 }" data-scroll="" href="javascript:;"
-                @click="vueInit(3)">
-                
-                <span :class="{ 's-active2': tabs == 3 }" class="text-sm s-text-versel2 ms-2">Conducta</span>
-              </a>
-            </li>
-            <li class="nav-item pt-1">
-              <a class="nav-link " :class="{ 's-active': tabs == 2 }" data-scroll="" href="javascript:;"
-                @click="vueInit(2)">
-                
-                <span :class="{ 's-active2': tabs == 2 }" class="text-sm s-text-versel2 ms-2">Proyectos</span>
-              </a>
-            </li>
-            <li class="nav-item pt-1">
-              <a class="nav-link  " :class="{ 's-active': tabs == 4 }" data-scroll="" href="javascript:;"
-                @click="vueInit(4)">
-                
-                <span :class="{ 's-active2': tabs == 4 }" class="text-sm s-text-versel2 ms-2">Planificación</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class=" " :class="[$store.state.isAppMobile ? 'col-lg-10': 'col-lg-12']">
-        <section v-if="tabs == 0" >
+    <div v-else  >
+      <div >
+        <section v-if="tabs == 0 && mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" >
           <Calificaciones :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
-        <section v-if="tabs == 1">
+        <section v-if="tabs == 1 && mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'">
           <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
-        <section v-if="tabs == 2">
+        <section v-if="tabs == 2 && mate == 'PROYECTOS ESCOLARES'" >
           <Proyectos :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
-        <section v-if="tabs == 3">
+        <section v-if="tabs == 3 &&  mate =='COMPORTAMIENTO'">
           <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
         <section v-if="tabs == 4">
           <Planificacion :id="idDistributivo" :planificacion="planificacion" />
         </section>
-        <section v-if="tabs == 5">
-          En desarrollo
+        <section v-if="tabs == 5 && mate =='DESARROLLO HUMANO INTEGRAL'" >
+          <Dhi :object="inAlumnos" @getDataTask="getDataActualizada" />
         </section>
       </div>
     </div>
@@ -120,6 +78,7 @@ export default {
     Supletorios: () => import( /* webpackChunkName: "Supletorios" */ './pages/Supletorios.vue'),
     Comportamiento: () => import( /* webpackChunkName: "Comportamiento" */ './pages/Comportamiento.vue'),
     Proyectos: () => import( /* webpackChunkName: "Proyectos" */ './pages/Proyectos.vue'),
+    Dhi: () => import( /* webpackChunkName: "Dhi" */ './pages/Dhi.vue'),
   },
   data() {
     return {
@@ -146,6 +105,7 @@ export default {
           notas: [{ }],
           comportamiento : [{}],
           proyectos : [{}],
+          dhi: [{}]
         },
       },
       collectionTasks: [],
@@ -156,8 +116,8 @@ export default {
   },
   methods: {
     LoadCourse: function () {
-      const seccio = JSON.parse(localStorage.getItem("myCourse")); //quimestre
-      //const info = JSON.parse(localStorage.getItem("Xf"));
+      const seccio = JSON.parse(localStorage.getItem("myCourse")); 
+      if (!seccio) this.$router.push("/page-not-found")
       this.para = seccio.paralelo;
       this.name = seccio.nombre;
       this.mate = seccio.materia;
@@ -201,9 +161,9 @@ export default {
               this.isData = false;
               this.$Progress.finish();
             }
-            const text_1 = this.mate + ' - ' + this.para
-            const text_2 = 'Notas'
-            this.$store.commit('updateHeader', { text_1, text_2 })
+            if(this.mate == 'PROYECTOS ESCOLARES')this.tabs = 2
+            if(this.mate == 'COMPORTAMIENTO')this.tabs = 3
+            if(this.mate == 'DESARROLLO HUMANO INTEGRAL')this.tabs = 5
           })
           .catch((x) => {
             console.log(x);
@@ -216,18 +176,31 @@ export default {
     configDocenteMateria(array) {
       let contador = this.isVerific.length;
       if (contador > 0) {
-        const notass = [
+        var notass = []
+        var proyectos = [];
+        var comportamiento = [];
+        var dhi = [];
+        if(this.mate =='PROYECTOS ESCOLARES'){
+          proyectos = [{p1:'R',p2:'R'}, {p1:'R',p2:'R'}]
+        } else if(this.mate =='COMPORTAMIENTO'){
+          comportamiento = [{p1:'E',p2:'E'}, {p1:'E',p2:'E'}]
+        } else if(this.mate =='DESARROLLO HUMANO INTEGRAL'){
+          dhi = [{p1:'E',p2:'E'}, {p1:'E',p2:'E'}]
+        } 
+        else{
+          notass = [
           {  quimestre: 'p1', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',},
           { quimestre: 'p2', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',}
-        ]
-        const comportamiento = [{p1:'A',p2:'A'}, {p1:'A',p2:'A'}]
-        const proyectos = [{p1:'EX',p2:'EX'}, {p1:'EX',p2:'EX'}]
+        ] 
+        this.model2.calificaciones.promediof = '1';
+        }
         this.model2.calificaciones.docente = this.docentes;
         this.model2.calificaciones.materia = this.mate;
         this.model2.calificaciones.area = this.area;
         this.model2.calificaciones.notas = notass;
         this.model2.calificaciones.comportamiento = comportamiento;
-        this.model2.calificaciones.proyectos = proyectos
+        this.model2.calificaciones.proyectos = proyectos;
+        this.model2.calificaciones.dhi = dhi
         this.$proxies._notasProxi
           .updateReforma(array, this.model2) 
           .then(() => {
@@ -281,6 +254,11 @@ export default {
       }
      
     },
+    salir(){
+      localStorage.removeItem("myCourse");
+      this.$router.go(-1);
+      
+    },
     
     toast(message) {
       this.$toasted.info(message, {
@@ -299,7 +277,7 @@ export default {
   },
   created() {
     this.verificarUsuario();
-
+ 
   },
 
 }

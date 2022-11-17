@@ -115,10 +115,10 @@
 
                                         <tbody>
                                             <tr v-for="ite in item.calificaciones" :key="ite.id">
-                                                <td
+                                                <td v-if="ite.comportamiento.length > 0"
                                                     style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;">
                                                     {{ ite.materia }}</td>
-                                                <td
+                                                <td v-if="ite.comportamiento.length > 0"
                                                     style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;">
                                                     <div
                                                         style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
@@ -131,7 +131,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td
+                                                <td v-if="ite.comportamiento.length > 0"
                                                     style="padding: 4px 5px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;">
                                                     <div
                                                         style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
@@ -145,7 +145,7 @@
 
                                                     </div>
                                                 </td>
-                                                <td
+                                                <td v-if="ite.comportamiento.length > 0"
                                                     style="padding: 4px 5px;border-bottom-width: 0px;font-size: .65rem!important;text-align: center!important;">
                                                     {{ calcularPromedio80(
                                                             ite.comportamiento[0].p1, ite.comportamiento[0].p2,
@@ -175,11 +175,11 @@
                                             <tr>
                                                 <td
                                                     style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;">
-                                                   
+
                                                     COMPORTAMIENTO
                                                 </td>
                                                 <td style="border-bottom-width: 0px;font-size: .65rem!important;">
-                                                
+
                                                     <b>{{ total(item.calificaciones) }}</b>
                                                 </td>
                                             </tr>
@@ -244,19 +244,19 @@ export default {
         printDownload() {
             try {
                 const box = document.getElementById('box').innerHTML;
-            let w = window.open('', '_blank', 'height=600,width=800,top=150,left= 400');
-            w.document.write('<html><head><title></title>');
-            w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
-            w.document.write('</head><body >');
-            w.document.write(box);
-            w.document.write('</body></html>');
-            w.document.close()
-            w.setTimeout(function () {
-                w.print()
-            }, 1000)
-            this.statusbar = 100;
+                let w = window.open('', '_blank', 'height=600,width=800,top=150,left= 400');
+                w.document.write('<html><head><title></title>');
+                w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
+                w.document.write('</head><body >');
+                w.document.write(box);
+                w.document.write('</body></html>');
+                w.document.close()
+                w.setTimeout(function () {
+                    w.print()
+                }, 1000)
+                this.statusbar = 100;
             } catch (error) {
-                this.statusbar = 100; 
+                this.statusbar = 100;
                 this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
             }
         },
@@ -427,76 +427,81 @@ export default {
 
         total(array) {
             let auxH = 0
+            let constador = 0
             for (let i = 0; i < array.length; i++) {
                 const element = array[i].comportamiento;
-                let aux = 0;
-                let aux2 = 0;
-                let aux3 = 0;
-                let aux4 = 0;
-                let p1 = element[0].p1
-                let p2 = element[0].p2
-                let p3 = element[1].p1
-                let p4 = element[1].p2
-                switch (p1) {
-                case "A": aux = 5;
-                    break;
-                case "B": aux = 4;
-                    break;
-                case "C": aux = 3;
-                    break;
-                case "D": aux = 2;
-                    break;
-                case "E": aux = 1;
-                    break;
-                default:
-                    break;
+                if (element.length > 0) {
+                    let aux = 0;
+                    let aux2 = 0;
+                    let aux3 = 0;
+                    let aux4 = 0;
+                    let p1 = element[0].p1
+                    let p2 = element[0].p2
+                    let p3 = element[1].p1
+                    let p4 = element[1].p2
+                    switch (p1) {
+                        case "A": aux = 5;
+                            break;
+                        case "B": aux = 4;
+                            break;
+                        case "C": aux = 3;
+                            break;
+                        case "D": aux = 2;
+                            break;
+                        case "E": aux = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                    switch (p2) {
+                        case "A": aux2 = 5;
+                            break;
+                        case "B": aux2 = 4;
+                            break;
+                        case "C": aux2 = 3;
+                            break;
+                        case "D": aux2 = 2;
+                            break;
+                        case "E": aux2 = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                    switch (p3) {
+                        case "A": aux3 = 5;
+                            break;
+                        case "B": aux3 = 4;
+                            break;
+                        case "C": aux3 = 3;
+                            break;
+                        case "D": aux3 = 2;
+                            break;
+                        case "E": aux3 = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                    switch (p4) {
+                        case "A": aux4 = 5;
+                            break;
+                        case "B": aux4 = 4;
+                            break;
+                        case "C": aux4 = 3;
+                            break;
+                        case "D": aux4 = 2;
+                            break;
+                        case "E": aux4 = 1;
+                            break;
+                        default:
+                            break;
+                    }
+                    let prom = parseInt((aux + aux2 + aux3 + aux4) / 4)
+                    auxH = auxH + prom
+                    constador += constador
+                }
+
             }
-            switch (p2) {
-                case "A": aux2 = 5;
-                    break;
-                case "B": aux2 = 4;
-                    break;
-                case "C": aux2 = 3;
-                    break;
-                case "D": aux2 = 2;
-                    break;
-                case "E": aux2 = 1;
-                    break;
-                default:
-                    break;
-            }
-            switch (p3) {
-                case "A": aux3 = 5;
-                    break;
-                case "B": aux3 = 4;
-                    break;
-                case "C": aux3 = 3;
-                    break;
-                case "D": aux3 = 2;
-                    break;
-                case "E": aux3 = 1;
-                    break;
-                default:
-                    break;
-            }
-            switch (p4) {
-                case "A": aux4 = 5;
-                    break;
-                case "B": aux4 = 4;
-                    break;
-                case "C": aux4 = 3;
-                    break;
-                case "D": aux4 = 2;
-                    break;
-                case "E": aux4 = 1;
-                    break;
-                default:
-                    break;
-            }
-                let prom = parseInt((aux + aux2 + aux3 + aux4) / 4)
-                auxH = auxH + prom
-            }
-            let result = parseInt(auxH / array.length);
+            let result = parseInt(auxH / constador);
             var letra = 'E'
             switch (result) {
                 case 5: letra = 'A';

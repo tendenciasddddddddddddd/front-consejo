@@ -2,7 +2,7 @@
   <div>
       <Astronauta v-if="isPrint"/>
       <div v-else>
-        <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
+        <ActionRowNotas v-if="!ifsaved"  @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
       </div>
     <section style="height: calc(100vh - 140px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"

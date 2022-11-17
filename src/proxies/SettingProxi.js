@@ -23,6 +23,13 @@ export default class SettingProxi{
     editConfigure(id,params) {
         return this.axios.put(this.url + `/configure/${id}`, params);
     }
+    getApertura() {
+        return this.axios.get(this.url + `/configure/apertura/`);
+    }
+
+    editApertura(id,params) {
+        return this.axios.put(this.url + `/configure/apertura/${id}`, params);
+    }
 
 //------------------------------------------------------GESTION DE CANTONES--------------------------------------
 

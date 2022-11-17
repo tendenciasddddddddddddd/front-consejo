@@ -3,6 +3,7 @@
     <template v-slot:header>{{ mate }} Paralelo {{ para }}</template>
     <template v-slot:body>
       <Astronauta v-if="isPrint" />
+      <vue-progress-bar style="margin-top:-6px;"></vue-progress-bar>
       <ProgressBar v-if="isData"></ProgressBar>
       <div v-else class="row">
         <div class="text-end">
