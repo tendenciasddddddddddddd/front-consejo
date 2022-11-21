@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     getData() {
+      this.$Progress.start();
         this.isData = true;
         if (this.$route.params.id) {
           this.$proxies._aulaProxi
@@ -34,13 +35,12 @@ export default {
               this.collectionUser = this.info.estudiantes;
               this.collectionQuizz = this.info.examen.reverse();
               this.isData = false;
-              let text_1 = this.info.materia;
-              let text_2 = 'Tareas'
-              this.$store.commit('updateHeader',{text_1, text_2})
+              this.$Progress.finish();
             })
             .catch((err) => {
               console.log("Error", err);
               this.isData = false;
+              this.$Progress.fail();
             });
         }
       },

@@ -1,6 +1,5 @@
 <template>
   <div >
-    <vue-progress-bar  style="margin-top:-8px"></vue-progress-bar>
       <ProgressBar v-if="isData"></ProgressBar>
       <div v-else >
         <ActionRowHeader :FirstText="'Gestión'" :LastText="' Aulas virtuales'" :numPages="numPages"  :page="page" :IfAdd="1" @pagechanged="onPageChange" @changeSearch="changeSearch" @openCreateCourse="openChildNew"></ActionRowHeader>

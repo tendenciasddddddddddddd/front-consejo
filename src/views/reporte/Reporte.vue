@@ -9,15 +9,14 @@
                <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
                   <svg class="mt-5" style="color:black;" data-testid="geist-icon" fill="none" height="40" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="40" ><path d="M2.707 7.454V5.62C2.707 4.725 3.469 4 4.409 4h4.843c.451 0 .884.17 1.204.474l.49.467c.126.12.296.186.473.186h8.399c.94 0 1.55.695 1.55 1.59v.737m-18.661 0h-.354a.344.344 0 00-.353.35l.508 11.587c.015.34.31.609.668.609h17.283c.358 0 .652-.269.667-.61L22 7.805a.344.344 0 00-.353-.35h-.278m-18.662 0h18.662"></path></svg>
               </div>
-            </div><div class="intro_card_container" >
-               <div class="carmen align_center animate__animated animate__fadeInUp animations-5">
-                  <svg class="mt-5" style="color:black;" data-testid="geist-icon" fill="none" height="40" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="40" ><path d="M2.707 7.454V5.62C2.707 4.725 3.469 4 4.409 4h4.843c.451 0 .884.17 1.204.474l.49.467c.126.12.296.186.473.186h8.399c.94 0 1.55.695 1.55 1.59v.737m-18.661 0h-.354a.344.344 0 00-.353.35l.508 11.587c.015.34.31.609.668.609h17.283c.358 0 .652-.269.667-.61L22 7.805a.344.344 0 00-.353-.35h-.278m-18.662 0h18.662"></path></svg>
-              </div>
             </div>
           </div>
         </section>
        <div v-if="ifReportPdf">
              <ReportePdfAdmin  @myEventClosedModalReporte="closedChildReportPdf" ></ReportePdfAdmin>
+         </div>
+         <div v-if="ifReportNotas">
+             <ReporteNotas  @myEventClosedModalReporte="closedPDFNotas" />
          </div>
          <div v-if="ifConsolidado">
              <Consolidado  @myEventClosedModalConsolidado="closedChildConsolidado" ></Consolidado>
@@ -30,7 +29,7 @@
         </div>
         <div class="fixed-plugin">
     <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
-    border-radius: 20px 20px 2px 20px;
+     border-radius: 20px 20px 2px 20px;
     box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
@@ -56,6 +55,7 @@ export default {
       ifConsolidado : false,
       ifyoutuve : false,
       ifnotas: false,
+      ifReportNotas : false,
       arrays_of_options: [
         {
           id: "0",
@@ -65,9 +65,15 @@ export default {
         },
         {
           id: "1",
-          nombre: "Matriculas y Promociones",
+          nombre: "Matriculas y promociones",
           img: img2,
           description: "Generar reportes de matriculas, promociones, libretas y comportamiento",
+        },
+        {
+          id: "4",
+          nombre: "Reporte Notas",
+          img: img2,
+          description: "Generar reportes de notas por nivel y por paralelos",
         },
         {
           id: "2",
@@ -91,6 +97,7 @@ export default {
     // ReporteNotas: () => import( /* webpackChunkName: "ReporteNotas" */ "./pages/notas/ReporteNotas.vue"),
      VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
      History: () =>import( /* webpackChunkName: "History" */ "./pages/history/History.vue"),
+     ReporteNotas: () =>import( /* webpackChunkName: "ReporteNotas" */ "./pages/notas/ReporteNotas.vue"),
       CardsOptions
   },
   methods: {
@@ -110,6 +117,9 @@ export default {
          this.ifReportPdf = true;
       }
       if (num===2) {
+         this.ifReportNotas = true;
+      }
+      if (num===3) {
          this.ifnotas = true;
       }
     },
@@ -121,6 +131,9 @@ export default {
     },
     closedNotas: function() {
       this.ifnotas = false;
+    },
+    closedPDFNotas: function() {
+      this.ifReportNotas = false;
     },
     ClosedYoutuve: function(){
       this.ifyoutuve = false;

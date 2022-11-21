@@ -74,6 +74,7 @@ export default {
       }
     },
     getAll(pag, lim) {
+      this.$Progress.start();
       this.isLoading = true;
       this.subtitulo = lim + " filas por página";
       this.$proxies._usuarioProxi
@@ -85,9 +86,11 @@ export default {
           this.paginas = this.pagg.paginas;
           this.totalNotas = this.pagg.total;
           this.isLoading = false;
+          this.$Progress.finish();
         })
         .catch(() => {
           this.isLoading = false;
+          this.$Progress.fail();
         });
     },
 

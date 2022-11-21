@@ -2,7 +2,9 @@
   <div id="app" >
     <template v-if="hasConfig">
       <div v-if="isLoggedIn">
+       
         <Inicio />
+        <vue-progress-bar ></vue-progress-bar>
         <Header v-if="!$store.state.isAppMobile"></Header>
          <AppMovile v-else/>
         <main
@@ -13,6 +15,7 @@
           
           <!-- End Navbar -->
           <div class="container-fluid  py-1 mt-2" >
+           
            <router-view/>
             <!-- INICIO FOOTER -->
            <!-- <Help/> -->

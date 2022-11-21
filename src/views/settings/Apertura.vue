@@ -78,12 +78,14 @@ export default {
                     .then(() => {
                         this.isCarga = false;
                         this.close();
+                        this.$router.push("/");
                         this.toast('Actualizacion exitosa');
                     })
                     .catch(() => {
                         this.$dialog.alert("Error estado 500.");
                         this.isCarga = false;
                         this.close();
+                        this.$router.push("/");
                     });
             })
         },

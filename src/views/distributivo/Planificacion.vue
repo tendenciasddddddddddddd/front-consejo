@@ -60,7 +60,7 @@
         </div>
     </div>
 </template>
-<script >
+<script>
 import Spinner from "../../shared/Spinner";
 import Paginate2 from "../../shared/Paginate2.vue";
 import NoFound from "../../shared/NoFound";
@@ -91,6 +91,7 @@ export default {
             this.getAll(page, this.rows);
         },
         getAll(pag, lim) {
+            this.$Progress.start();
             this.isLoading = true;
             this.subtitulo = this.rows + ' filas por página';
             this.$proxies._gestionProxi
@@ -102,10 +103,12 @@ export default {
                     this.paginas = this.pagg.paginas;
                     this.totalNotas = this.pagg.total;
                     this.isLoading = false;
+                    this.$Progress.finish();
                 })
                 .catch(() => {
                     console.log("Error imposible");
                     this.isLoading = false;
+                    this.$Progress.fail();
                 });
         },
         verificarUsuario() {

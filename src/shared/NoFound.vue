@@ -6,7 +6,7 @@
                   src="../assets/img/basurero.webp"
                   alt="fondo"
                 />
-                <div class="  letra fuente">
+                <div class="letra h5 gordo negros" style="font-size: 17px;">
                   No hay elementos para mostrar
                 </div>
               </div>

@@ -35,6 +35,14 @@ export default {
       idUser: null,
       ifGrid : false,
       ifPassword : false,
+      isRole: false,
+      listRol : [],
+      roldocente : [],
+      roladmin : [],
+      rolvicerrector : [],
+      model: {
+        roles: null,
+      },
     };
   },
   methods: {
@@ -45,6 +53,42 @@ export default {
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
       }
+    },
+    __listRol() {
+      this.isRole = true;
+      this.$proxies._usuarioProxi.getRoles()
+        .then((x) => {
+          const data = x.data;
+          this.listRol = x.data
+          for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+            if (element.name === 'Docente') this.roldocente = element._id
+            if (element.name === 'Admin') this.roladmin = element._id
+            if (element.name === 'Vicerrector') this.rolvicerrector = element._id
+          }
+          this.isRole = false;
+        })
+        .catch(() => {
+          this.isRole = false;
+        });
+    },
+    selectOneRol(iduser,roles, id){
+      if (!roles.includes(id)) {
+        roles.push(id);
+      } else {
+        roles.splice(roles.indexOf(id), 1);
+      }
+      this.model.roles = roles
+          this.$proxies._registroProxi
+            .updateDocentes(iduser, this.model) 
+            .then(() => {
+              this.ifLoad = false;
+              this.toast("Actualización exitosa");
+            })
+            .catch(() => {
+              this.toast("Error");
+              this.ifLoad = false;
+            });
     },
     openChildDocente: function () {
       let aux = this.userIds.length;
@@ -72,6 +116,7 @@ export default {
       this.userIds = [];
     },
     getAll(pag, lim) {
+      this.$Progress.start();
       this.isLoading = true;
       this.subtitulo = this.rows + ' filas por página';
       this.$proxies._registroProxi
@@ -83,9 +128,11 @@ export default {
           this.paginas = this.pagg.paginas;
           this.totalNotas = this.pagg.total;
           this.isLoading = false;
+          this.$Progress.finish();
         })
         .catch(() => {
           this.isLoading = false;
+          this.$Progress.fail();
         });
     },
 
@@ -202,6 +249,7 @@ export default {
     },
     changeSearch(textSearch) { 
       if (textSearch.length > 3) {
+        this.$Progress.start();
         this.isSearch = true;
         this.isLoading = true;
         this.$proxies._registroProxi
@@ -209,10 +257,12 @@ export default {
           .then((x) => {
             this.info = x.data;
             this.isLoading = false;
+            this.$Progress.finish();
           })
           .catch(() => {
             console.log("Error imposible");
             this.isLoading = false;
+            this.$Progress.fail();
           });
       }
     },
@@ -245,5 +295,6 @@ export default {
   created() {
     this.verificarUsuario();
     this.getAll(1, 9);
+    this. __listRol();
   },
 };

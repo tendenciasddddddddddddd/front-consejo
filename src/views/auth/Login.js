@@ -1,4 +1,5 @@
 const image9 = require("../../assets/img/fondo2.webp")
+const image10 = require("../../assets/img/alterna.jpg")
 export default {
   name: "Login",
   components: {
@@ -20,7 +21,7 @@ export default {
       isVisible: "logins",
       code: "",
       emailss:'',
-      fondo:image9,
+      fondo:image10,
       //AUTH LOGIN GOOGLE
       model: {
         email: null,
@@ -148,4 +149,9 @@ export default {
         this.showPassword = !this.showPassword;
       }
   },
+  mounted() {
+    setTimeout(() => {
+      this.fondo=image9;
+    }, 1200)
+  }
 };

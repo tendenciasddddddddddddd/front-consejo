@@ -122,16 +122,19 @@ export default {
       if (idArrays.length > 0) {
         this.model.curso =  "Undefined";
         this.isTabla = true;
+        this.$Progress.start();
         this.$proxies._matriculaProxi
         .updateMatricula(idArrays, this.model)
         .then(() => {
           this.isTabla = false;
           this.__cambios(this.idCurso);
           this.toast("Cambio exitoso"  );
+          this.$Progress.finish();
         })
         .catch(() => {
           this.isTabla = false;
           this.$dialog.alert('Error en ng server')
+          this.$Progress.fail();
         });
       }else  {
         this.$dialog.alert('SELECIONE UN ESTUDIANTE')
@@ -166,6 +169,7 @@ export default {
 
   save(){
     if (this.check !=null) {
+      this.$Progress.start();
       var selectedRowData = this.leftApi.getSelectedRows();
       const idArrays = []
       selectedRowData.forEach(function (node) {
@@ -181,11 +185,12 @@ export default {
          this.__cambios(this.idCurso);
          this.toast("Registro exitoso "  );
          this.check = null;
-         
+         this.$Progress.finish();
        })
        .catch(() => {
          this.$dialog.alert('Error en ng server')
          this.isTabla = false;
+         this.$Progress.fail();
        });
     } else {
       this.$dialog.alert('SELECIONE UN PARALELO PARA CONTINUAR')
@@ -205,10 +210,11 @@ export default {
         .catch((err) => {
           console.log("Error", err);
           this.isLoading1 = false;
-          this.$Progress.finish();
+          this.$Progress.fail();
         });
     },
     __cambios(cursos) {
+      this.$Progress.start();
       this.isTabla = true;
       this.$proxies._matriculaProxi
         .getFullMatricula(cursos)
@@ -219,10 +225,12 @@ export default {
           const filterSave = this.filtros.filter((x) => x.curso != "Undefined");
           this.topRowData = filterSave
           this.isTabla = false; 
+          this.$Progress.finish();
         })
         .catch((err) => {
           console.log("Error", err);
           this.isTabla = false;
+          this.$Progress.fail();
         });
     },
 

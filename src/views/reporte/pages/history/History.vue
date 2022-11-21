@@ -201,6 +201,7 @@ export default {
 
     changeSearch(textSearch) { //queryUsuario
       if (textSearch.length > 3) {
+        this.$Progress.start();
         this.isSearch = true;
         this.isLoading = true;
         this.$proxies._migracionProxi
@@ -209,24 +210,29 @@ export default {
             this.collections = x.data;
             this.isLoading = false;
             this.search= '';
+            this.$Progress.finish();
           })
           .catch(() => {
             console.log("Error imposible");
             this.isLoading = false;
+            this.$Progress.fail();
           });
       }
     },
     __getPeriodo() {
+      this.$Progress.start();
       this.ifLoadPeriodo = true;
       this.$proxies._matriculaProxi
         .getFull()
         .then((x) => {
           this.arrayDocumentsLevel = x.data.niveles;
           this.ifLoadPeriodo = false;
+          this.$Progress.finish();
         })
         .catch((err) => {
           console.log("Error", err);
           this.ifLoadPeriodo = false;
+          this.$Progress.fail();
         });
     },
     __listNivele() {

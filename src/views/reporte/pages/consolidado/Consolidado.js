@@ -22,7 +22,7 @@ export default {
         this.$emit('myEventClosedModalConsolidado')
       },
         getData() {
-            
+          this.$Progress.start();
             this.ifLoad = true;
             this.$proxies._matriculaProxi
               .getMatriculas()
@@ -30,10 +30,12 @@ export default {
                 this.infoMat = x.data;
                 this.__todo();
                 this.ifLoad = false;
+                this.$Progress.finish();
               })
               .catch((err) => {
                 console.log("Error", err);
                 this.ifLoad = false;
+                this.$Progress.fail();
               });
         },
           __todo(){

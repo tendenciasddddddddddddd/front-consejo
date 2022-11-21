@@ -15,7 +15,6 @@
               </div>
       </template>
       <template v-slot:body>
-        <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
     <div v-else class="row">
       <div class="col-lg-2" v-if="$store.state.isAppMobile">

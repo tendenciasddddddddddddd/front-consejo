@@ -137,20 +137,24 @@ export default {
       }
     },
     __listNivele() {
+      this.$Progress.start();
       this.isLoading1 = true;
       this.$proxies._gestionProxi
         .getNiveles()
         .then((x) => {
           this.listniveles = x.data;
           this.isLoading1 = false;
+          this.$Progress.finish();
         })
         .catch((err) => {
           console.log("Error", err);
           this.isLoading1 = false;
+          this.$Progress.fail();
         });
     },
 
     __cambios(cursos, num) {
+      this.$Progress.start();
       this.infoMat = []
       this.selectPromocion(num)
       this.isTabla = true;
@@ -159,10 +163,12 @@ export default {
         .then((x) => {
           this.infoMat = x.data;
           this.isTabla = false;
+          this.$Progress.finish();
         })
         .catch((err) => {
           console.log("Error", err);
           this.isTabla = false;
+          this.$Progress.fail();
         });
     },
     selectPromocion: function(promocion) {

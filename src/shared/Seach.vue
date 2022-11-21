@@ -85,7 +85,7 @@ export default {
       { id: 7, txt: 'Registro de docentes', url: '/Docente'},
       { id: 8, txt: 'Cursos niveles', url: '/Cursos'},
       { id: 9, txt: 'Materias asignaturas', url: '/Materias'},
-      { id: 10, txt: 'Periodo académico', url: '/Periodo'},
+      { id: 10, txt: 'Periodo académico', url: '/Intensivo'},
       { id: 11, txt: 'Matriculas y generar paralelos', url: '/Intensivo'},
       { id: 12, txt: 'Generar reportes', url: '/opciones-reportes'},
       { id: 13, txt: 'Generar distributivo', url: '/Distributivo-v1'})

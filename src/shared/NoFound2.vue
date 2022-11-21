@@ -6,9 +6,10 @@
                   src="../assets/img/new/descarga.png"
                   alt="fondo"
                 />
-                <div class=" mt-4 letra fuente">
+                <div class="letra mt-4 h5 gordo negros" style="font-size: 16px;">
                   No hay datos de coincidencia para mostrar
                 </div>
+                
               </div>
             </div>
 </template>

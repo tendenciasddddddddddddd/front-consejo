@@ -29,7 +29,6 @@
               </div>
        </template>
       <template v-slot:body>
-     <vue-progress-bar style="margin-top:-6px;"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
     <div v-else  >
       <div >

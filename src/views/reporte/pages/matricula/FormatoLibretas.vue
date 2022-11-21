@@ -42,25 +42,25 @@
                                         <div >
                                             <div >
                                                 <table
-                                                style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                                style=" border-color: #000;border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
                                                     <thead>
                                                         <tr>
                                                             <th
-                                                                style="padding: 0px 2px;border-top: 1px solid #d9d9d9;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                                                style="padding: 0px 2px;border-top: 1px solid #000;border-bottom: 0px;border-right: 1px solid #000;">
                                                             </th>
-                                                            <th style="padding: 0px 2px;border-top: 1px solid #d9d9d9;">
+                                                            <th style="padding: 0px 2px;border-top: 1px solid #000;">
                                                             </th>
                                                             <th 
-                                                                style="padding: 0px 2px;border-top: 1px solid #d9d9d9;    font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
+                                                                style="padding: 0px 2px;border-top: 1px solid #000;    font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
                                                                 <span v-if="numQuimestre==0">PRIMER QUIMESTRE</span>
                                                                 <span v-else>SEGUNDO QUIMESTRE</span>
                                                             </th>
-                                                            <th style="padding: 0px 2px;border-top: 1px solid #d9d9d9;">
+                                                            <th style="padding: 0px 2px;border-top: 1px solid #000;">
                                                             </th>
                                                         </tr>
                                                         <tr>
                                                             <th
-                                                                style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);">
+                                                                style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid #000;">
                                                             </th>
                                                             <th style="padding: 1px 3px;"></th>
                                                             <th style="padding: 1px 3px; font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;"
@@ -73,7 +73,7 @@
                                                             </th>
                                                         </tr>
                                                         <tr>
-                                                            <th style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;"
+                                                            <th style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid #000;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;"
                                                                 >
                                                                 ASIGNATURAS
                                                             </th>
@@ -92,9 +92,9 @@
                                                         </tr>
                                                         <tr>
                                                             <th
-                                                                style="padding: 2px 3px;border-right: 1px solid rgb(223 227 235);">
+                                                                style="padding: 2px 3px;border-right: 1px solid #000;border-bottom: 1px solid #000;">
                                                             </th>
-                                                            <th style="min-width: 125px;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
+                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
                                                                >
                                                                 <div style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                                     <div style=" flex: 1 0 0%;padding-left: 7px;">a1</div>
@@ -105,7 +105,7 @@
                                                                     <div style=" flex: 1 0 0%;">pr</div>
                                                                 </div>
                                                             </th>
-                                                            <th style="min-width: 125px;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
+                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
                                                                >
                                                                 <div style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                                     <div style=" flex: 1 0 0%;padding-left: 7px;">b1</div>
@@ -116,7 +116,7 @@
                                                                     <div style=" flex: 1 0 0%;">pr</div>
                                                                 </div>
                                                             </th>
-                                                            <th style="min-width: 125px;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
+                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
                                                                 >
                                                                 <div style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                                     <div style=" flex: 1 0 0%;padding-left: 7px;">eq</div>
@@ -132,10 +132,10 @@
 
                                                     <tbody>
                                                         <tr v-for="ite in item.calificaciones" :key="ite.id">
-                                                            <td style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);  font-size: .65rem!important;"
+                                                            <td style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;  font-size: .65rem!important;"
                                                                 >
                                                                 {{ite.materia}}</td>
-                                                            <td style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235); font-size: .65rem!important;text-align: center!important;"
+                                                            <td style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000; font-size: .65rem!important;text-align: center!important;"
                                                                 >
                                                                 <div  v-if="parcial" style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                                     <div style=" flex: 1 0 0%;padding-left: 7px;">{{ite.a1}}
@@ -153,7 +153,7 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .65rem!important;text-align: center!important;"
+                                                            <td style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important;text-align: center!important;"
                                                                 >
                                                                 <div  v-if="parcial2" style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                                     <div style=" flex: 1 0 0%;padding-left: 7px;">{{ite.b1}}
@@ -190,13 +190,13 @@
                                                             </td>
                                                         </tr>
                                                         <tr  v-if="item.proyectos.length > 0">
-                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                                            <td style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;">
                                                                 PROYECTOS ESCOLARES</td>
-                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;"><span v-if="parcial">
+                                                            <td style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;"><span v-if="parcial">
                                                                 {{item.proyectos[numQuimestre].p1}}</span></td>
-                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;"><span v-if="parcial2">
+                                                            <td style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;"><span v-if="parcial2">
                                                                 {{item.proyectos[numQuimestre].p2}}</span> </td>
-                                                            <td style="padding: 1px 3px;border-top: 1px solid rgb(223 227 235);font-size: .65rem!important;">
+                                                            <td style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;">
                                                                 <span v-if="parcial && parcial2"> {{item.proyectos[numQuimestre].p1}}</span>
                                                             </td>
                                                         </tr>
@@ -225,10 +225,10 @@
 
                                                     </tbody>
                                                 </table>
-                                                <table  style=" border-color: rgb(223, 227, 235);border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                                <table  style=" border-color: #000;border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
                                                     <tbody>
                                                         <tr>
-                                                            <td style="border-bottom-width: 0px;border-right: 1px solid rgb(223 227 235);font-size: .55rem!important;">
+                                                            <td style="border-bottom-width: 0px;border-right: 1px solid #000;font-size: .55rem!important;">
                                                                 <b>Escala de Calificaciones Art. 194, reformado, Decreto
                                                                     presidencial No. 366-13 (Art.9)</b>
                                                                 <div style=" --bs-gutter-x: 1rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">

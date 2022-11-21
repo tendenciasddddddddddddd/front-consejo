@@ -1,20 +1,16 @@
 <template>
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  fixed-start croll " id="sidenav-main"
-    style="background-color: white !important; margin-top: 3.8rem!important;overflow-x: hidden;overflow-y: auto;">
+    style="background-color: white !important; margin-top: 3.5rem!important;overflow-x: hidden;overflow-y: auto;">
     <div class="sidenav-header">
-
-
       <a class="navbar-brand m-0" href="javascript:;">
                   <img :src="$store.state.avatar" alt="kal" class="avatar avatar-sm rounded-circle" style="width: 36px!important;"/>
         <span class="sidenav-mini-icon negros ms-2" style="font-size:16px">{{nombre.toString().split(' ')[0]}} </span>
       </a>
-
     </div>
-
     <div class="collapse navbar-collapse  w-auto h-auto max-height-vh-100 h-100" id="sidenav-collapse-main"
       style="overflow-x: hidden;overflow-y: hidden;">
       <ul class="navbar-nav">
-        <li class="nav-item" id="step_1">
+        <li class="nav-item" >
           <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link"
             :class="{'actived': $route.name === 'default'||$route.name === 'd1'||$route.name === 'e1'}"
             aria-controls="dashboardsExamples" role="button" aria-expanded="false">
@@ -165,7 +161,6 @@
             data-bs-toggle="collapse" href="#authExamples" class="nav-link " aria-controls="authExamples" role="button"
             aria-expanded="false">
             <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-
               <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 viewBox="0 0 24 24" width="20" style="color: #000;">
@@ -181,7 +176,6 @@
           $route.name === 'dh'||
           $route.name === 'dr'}">
             <ul class="nav ms-4 ps-3">
-
               <li :class="{'active': $route.name === 'd2'}" class="nav-item ">
                 <router-link to="/opciones-curso" :class="{'active': $route.name === 'd2'}"
                   class="nav-link ">
@@ -196,7 +190,6 @@
                   <span class="sidenav-normal letras fuente">Libretas </span>
                 </router-link>
               </li> -->
-
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">
                 <router-link to="/zoom" :class="{'active': $route.name === 'dr'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> Z </span>
@@ -205,8 +198,6 @@
               </li>
             </ul>
           </div>
-
-
         </li>
         <li class="nav-item" v-if="user.roles.includes('Docente')">
           <a :class="{'actived': $route.name === 'al'}" data-bs-toggle="collapse" href="#authExamples1"
@@ -217,18 +208,14 @@
             <span class="nav-link-text ms-1 mt-1">Aulas Virtuales</span>
           </a>
           <div class="collapse " id="authExamples1" :class="{'show':
-
           $route.name === 'al'}">
             <ul class="nav ms-4 ps-3">
-
-
               <li :class="{'active': $route.name === 'al'}" class="nav-item ">
                 <router-link to="/aulas-lista" :class="{'active': $route.name === 'al'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> A </span>
                   <span class="sidenav-normal letras fuente">Aulas</span>
                 </router-link>
               </li>
-
               <li :class="{'active': $route.name === 'a2'}" class="nav-item ">
                 <router-link to="/" :class="{'active': $route.name === 'a2'}" class="nav-link ">
                   <span class="sidenav-mini-icon"> C </span>
@@ -237,8 +224,6 @@
               </li>
             </ul>
           </div>
-
-
         </li>
         <li class="nav-item" v-if="user.roles.includes('Estudiante')">
           <a :class="{'actived': $route.name === 'e2'}" data-bs-toggle="collapse" href="#componentsExamples"
@@ -319,7 +304,7 @@
             </div>
             <span class="nav-link-text ms-1 mt-1">Configuración</span>
           </a>
-          <div class="collapse " id="pagePublic">
+          <div class="collapse " id="pagePublic" :class="{'show': $route.name === 's1'}">
             <ul class="nav ms-4 ps-3">
               <li :class="{'active': $route.name === 's1'}" class="nav-item ">
                 <router-link to="/settings" :class="{'active': $route.name === 's1'}" class="nav-link ">
@@ -343,7 +328,7 @@
               <svg class="icons" style="color: #000;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5 4h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6-6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6-6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 6h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zM5 16h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1zm6 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"></path></svg>
               
             </div>
-            <span class="nav-link-text ms-1 mt-1">Apps</span>
+            <span class="nav-link-text ms-1 mt-1">Aplicación</span>
           </a>
           <div :class="{'show': $route.name === 'app1'}" class="collapse " id="pageApps">
             <ul class="nav ms-4 ps-3">
@@ -356,31 +341,6 @@
             </ul>
           </div>
         </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OPCION</h6>
-        </li>
-        <div class="nav-item" id="step_6">
-         
-          <li>
-            <a @click=" logout()" class="nav-link " role="button" aria-expanded="false" style="padding-top: 0px;">
-              <div class="icon-shape icon-sm    text-center d-flex align-items-center justify-content-center  me-2">
-                <svg class="icons" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision"
-                  stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  viewBox="0 0 24 24" width="20" style="color: #000;">
-                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path>
-                  <path d="M16 17l5-5-5-5"></path>
-                  <path d="M21 12H9"></path>
-                </svg>
-              </div>
-              <span class="nav-link-text ms-1 mt-1 selectOption">
-                <span class="sidenav-mini-icon"> </span>
-
-                Cerrar sesión
-              </span>
-            </a>
-        
-          </li>
-        </div>
         <div v-if="visibl">
           <Password @cerrarCuenta="close" />
         </div>

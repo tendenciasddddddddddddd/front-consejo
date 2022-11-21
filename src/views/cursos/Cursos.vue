@@ -3,7 +3,7 @@
     <ActionsRow :longitude="isSelecUsers.length" @openModal="openModal" @remove="remove" @gets="gets"
       @desactiveState="desactiveState" />
     <Spinner v-if="isLoading"></Spinner>
-    <div v-else class="table-responsive mt-1">
+    <div v-else class="table-responsive ">
       <table class="dataTable-table table s-table-flush">
         <thead class="thead-light">
           <tr class="cabeza">

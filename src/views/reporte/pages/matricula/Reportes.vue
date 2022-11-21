@@ -67,6 +67,7 @@
                   </svg>
                    <b class="gordo " :class="{ links2: isSelecMatricula.length != 0}">Reporte matricula</b>
                 </a>
+              
               </div>
             </div>
             <div class="table-responsive ">
@@ -129,18 +130,22 @@
         <section v-if="ifmatricula" style="display: none">
           <FormatoMatricula :rowData="rowData" @changeStatus="changeStatus" :settings="settings" />
         </section>
+
         <section v-if="ifpromocion" style="display: none">
           <FormatoPromocion :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
             :settings="settings" />
         </section>
+
         <section v-if="ifPromocionInicial" style="display: none">
           <InicialesPromocion :numActual="numActual" :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
             :settings="settings" />
         </section>
+
         <section v-if="iflibretas" style="display: none">
           <FormatoLibretas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
             :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
         </section>
+
         <section v-if="ifconducta" style="display: none">
           <LibretasConducta :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
             :settings="settings" :numQuimestre="numQuimestre" />

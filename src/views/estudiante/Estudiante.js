@@ -80,6 +80,7 @@ export default {
       this.getAll(this.paginaActual, 9);
     },
     getAll(pag, lim) {
+      this.$Progress.start();
       this.isLoading = true;
       this.subtitulo = this.rows + ' filas por página';
       this.$proxies._registroProxi
@@ -91,10 +92,12 @@ export default {
           this.paginas = this.pagg.paginas;
           this.totalNotas = this.pagg.total;
           this.isLoading = false;
+          this.$Progress.finish();
         })
         .catch(() => {
           console.log("Error imposible");
           this.isLoading = false;
+          this.$Progress.fail();
         });
     },
     remove() {
@@ -176,6 +179,7 @@ export default {
     },
     changeSearch(textSearch) { //queryUsuario
       if (textSearch.length > 3) {
+        this.$Progress.start();
         this.isSearch = true;
         this.isLoading = true;
         this.$proxies._registroProxi
@@ -183,10 +187,12 @@ export default {
           .then((x) => {
             this.info = x.data;
             this.isLoading = false;
+            this.$Progress.finish();
           })
           .catch(() => {
             console.log("Error imposible");
             this.isLoading = false;
+            this.$Progress.fail();
           });
       }
     },

@@ -64,6 +64,7 @@ export default {
 
     get() {
         this.isVisile= false;
+        this.$Progress.start();
         if (this.user.id) {
           this.ifcarga = true;
           this.$proxies._registroProxi
@@ -71,9 +72,11 @@ export default {
             .then((x) => {
               this.model = x.data;
               this.ifcarga = false;
+              this.$Progress.finish();
             })
             .catch(() => {
               console.log("Error");
+              this.$Progress.fail();
             });
         }
       },
@@ -117,7 +120,7 @@ export default {
     },
     verificarUsuario(){
       let text_1 = 'Cuenta'
-      let text_2 = 'Información de perfil'
+      let text_2 = 'De perfil'
       this.$store.commit('updateHeader',{text_1, text_2})
       if(!restResourceService.docente(this.roles)&&!restResourceService.estudiante(this.roles)&&!restResourceService.admin(this.roles)){
         this.$router.push("/");

@@ -154,29 +154,35 @@ export default {
       this.page = page;
     },
     __listNivele() {
+      this.$Progress.start();
       this.isLoading1 = true;
       this.$proxies._gestionProxi
         .getNiveles()
         .then((x) => {
           this.listniveles = x.data;
           this.isLoading1 = false;
+          this.$Progress.finish();
         })
         .catch((err) => {
           console.log("Error", err);
           this.isLoading1 = false;
+          this.$Progress.fail();
         });
     },
     __cambios(cursos) {
+      this.$Progress.start();
       this.isTabla = true;
       this.$proxies._matriculaProxi
         .getFullMatricula(cursos)
         .then((x) => {
           this.infoMat = x.data.matriculados;
           this.isTabla = false;
+          this.$Progress.finish();
         })
         .catch((err) => {
           console.log("Error", err);
           this.isTabla = false;
+          this.$Progress.fail();
         });
     },
 

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <vue-progress-bar style="margin-top:-6px;"></vue-progress-bar>
         <ProgressBar v-if="isData"></ProgressBar>
         <div v-else>
             <ActionRowHeader :IfAdd="0" @changeSearch="changeSearch"></ActionRowHeader>
@@ -84,7 +83,7 @@
                 </div>
             </template>
             <template v-slot:acccion>
-                <button @click="goToBack" class="btn btnNaranja mt-2" >
+                <button @click="goToBack" class="btn btnNaranja mt-2">
                     Continuar
                 </button>
             </template>
@@ -259,8 +258,10 @@ export default {
             let text_1 = 'Cursos'
             let text_2 = 'Carga Horaria'
             this.$store.commit('updateHeader', { text_1, text_2 })
-            if (!restResourceService.docente(this.roles)) {
-                this.$router.push("/");
+            if (restResourceService.docente(this.roles) || restResourceService.Inspector(this.roles)|| restResourceService.admin(this.roles)) {
+                this.InitialSetup();
+            } else {
+                this.$router.push("/page-not-found");
             }
         },
         InitialSetup() {
@@ -289,8 +290,6 @@ export default {
     },
     created() {
         this.verificarUsuario();
-
-        this.InitialSetup()
     },
 };
 

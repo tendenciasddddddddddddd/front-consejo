@@ -1,6 +1,5 @@
 <template>
   <div>
-    <vue-progress-bar></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
     <template v-else>
       <NoFound2 v-if="!info" />

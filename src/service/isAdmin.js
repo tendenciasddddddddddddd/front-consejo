@@ -2,27 +2,23 @@
 export default class RestResource {
     
     admin(role) {
-        if (role==='Admin') {
-            return true;
-        }
-        else {
-            return false;
-        }
+        role.includes('Admin')
+        if (role.includes('Admin')) return true
+        return false;
     }
     docente(role) {
-        if (role==='Docente') {
-            return true;
-        }
-        else {
-            return false;
-        }
+        role.includes('Docente')
+        if (role.includes('Docente')) return true
+        return false;
     }
     estudiante(role) {
-        if (role==='Estudiante') {
-            return true;
-        }
-        else {
-            return false;
-        }
+        role.includes('Estudiante')
+        if (role.includes('Estudiante')) return true
+        return false;
+    }
+    Inspector(role) {
+        role.includes('Inspector')
+        if (role.includes('Inspector')) return true
+        return false;
     }
   }

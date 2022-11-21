@@ -27,6 +27,7 @@ export default {
       popular:'Crear Docente',
       ifLoad: false,
       ifcarga: false,
+      listRol: [],
       model: {
         _id: null,
         email: null,
@@ -44,6 +45,9 @@ export default {
         fkparroquia: null,
         titulo: null,
       },
+      isRole: false,
+      checked: "",
+      userIds: []
     };
   },
   methods: {
@@ -56,11 +60,31 @@ export default {
           .then((x) => {
             this.model = x.data;
             this.ifcarga = false;
+            this.userIds = x.data.roles;
           })
           .catch(() => {
             this.ifcarga = false;
           });
       }
+    },
+    
+    selectOne(ids) {
+      if (!this.userIds.includes(ids)) {
+        this.userIds.push(ids);
+      } else {
+        this.userIds.splice(this.userIds.indexOf(ids), 1);
+      }
+    },
+    __listRol() {
+      this.isRole = true;
+      this.$proxies._usuarioProxi.getRoles()
+        .then((x) => {
+          this.listRol = x.data;
+          this.isRole = false;
+        })
+        .catch(() => {
+          this.isRole = false;
+        });
     },
     save() {
       this.$validate().then((success) => {
@@ -156,6 +180,7 @@ export default {
   created() {
     this.verificarUsuario();
     this.get();
+    this.__listRol();
   },
 
   validators: {

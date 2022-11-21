@@ -57,15 +57,18 @@ export default {
       }
     },
     getAll() {
+      this.$Progress.start();
       this.isLoading = true;
       this.$proxies._matriculaProxi
         .getAllEstudiantes()
         .then((x) => {
           this.info = x.data;
           this.isLoading = false;
+          this.$Progress.finish();
         })
         .catch(() => {
           this.isLoading = false;
+          this.$Progress.fail();
         });
     },
 

@@ -257,13 +257,17 @@ export default {
   name: "Default",
   methods: {
     authenticate ()  {
+      let text_1 = 'Page'
+      let text_2 = 'Home'
+      this.$store.commit('updateHeader',{text_1, text_2})
+      this.$Progress.start();
       this.$proxies.identityProxy
         .userFound(this.login)
         .then(() => {
-        
+          this.$Progress.finish();
         })
         .catch(() => {
-         
+          this.$Progress.fail();
         });
     },
   },

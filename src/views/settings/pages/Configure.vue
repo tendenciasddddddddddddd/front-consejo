@@ -218,7 +218,6 @@ export default {
         });
     },
     save() {
-
       this.$validate().then(success => {
         if (!success) {
           this.toast('Por favor llena correctamente los campos solicitados');
@@ -240,6 +239,7 @@ export default {
 
     },
     gets() {
+      this.$Progress.start();
       this.ifAdd = false;
       this.isCarga = true;
       this.$proxies._settingProxi.getConfigure()
@@ -257,9 +257,11 @@ export default {
           this.model.vicerector = vicerector;
           this.model.logo = logo;
           this.isCarga = false;
+          this.$Progress.finish();
         }).catch(() => {
           console.log("Error")
           this.isCarga = false;
+          this.$Progress.fail();
         });
     },
     toast(message) {

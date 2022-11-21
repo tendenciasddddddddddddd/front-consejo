@@ -46,7 +46,6 @@
       </div> -->
       </div>
     </section>
-    <vue-progress-bar style="margin-top:-23px"></vue-progress-bar>
     <ProgressBar v-if="isData"></ProgressBar>
     <div v-else class="row">
       <div class="col-9">

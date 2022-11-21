@@ -259,6 +259,7 @@ export default {
       this.save(results)
     },
     getAll() {
+      this.$Progress.start();
       this.isLoading = true;
       this.$proxies._gestionProxi
         .getAllGrid()
@@ -273,10 +274,12 @@ export default {
             this.FormData(x.data)
           }
           this.isLoading = false;
+          this.$Progress.finish();
         })
         .catch(() => {
           console.log("Error imposible");
           this.isLoading = false;
+          this.$Progress.fail();
         });
     },
     FormData(array) {
