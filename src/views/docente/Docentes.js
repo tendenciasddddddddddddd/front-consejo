@@ -98,14 +98,16 @@ export default {
       }
     },
     openChildDocente2: function () {
-      this.idUser = null;
-      this.ifCreateUpdate = true;
+      this.$dialog.alert("::: No puede agregar usuarios :::");
+      //this.idUser = null;
+      //this.ifCreateUpdate = true;
     },
     closedChildDocente: function () {
       this.ifCreateUpdate = false;
     },
     openAgGrid: function () {
-      this.ifGrid = true;
+      this.$dialog.alert("::: No puede agregar usuarios :::");
+      //this.ifGrid = true;
     },
     closeAgGrid: function () {
       this.ifGrid = false;
