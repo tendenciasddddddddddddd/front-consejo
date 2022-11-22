@@ -333,7 +333,8 @@ export default {
     },
     methods: {
         printDownload() {
-            const box = document.getElementById('box').innerHTML;
+            try {
+                const box = document.getElementById('box').innerHTML;
             let w = window.open('', 'PRINT', 'height=600,width=900,top=150,left= 400');
             w.document.write('<html><head><title></title>');
             w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;size:landscape;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
@@ -344,8 +345,11 @@ export default {
             w.setTimeout(function () {
                 w.print()
             }, 1000)
-            this.statusbar = 100;
-
+            this.statusbar = 100; 
+            } catch (error) {
+                this.statusbar = 100; 
+                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+            }
         },
         inforUsers() {
             const info = JSON.parse(localStorage.getItem('Xf'));

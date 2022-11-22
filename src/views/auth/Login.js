@@ -1,5 +1,6 @@
-const image9 = require("../../assets/img/fondo2.webp")
 const image10 = require("../../assets/img/alterna.jpg")
+const image9 = require("../../assets/img/fondo2.webp")
+
 export default {
   name: "Login",
   components: {

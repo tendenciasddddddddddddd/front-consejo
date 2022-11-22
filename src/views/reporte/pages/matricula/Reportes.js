@@ -2,13 +2,12 @@ import Spinner from "../../../../shared/Spinner.vue";
 import ScrimModal from "../../../../shared/ScrimModal"
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
-import Paginate from "../../../../shared/Paginate.vue";
 import Astronauta from "../../../../shared/Astronauta"
 import Modal from "../../../../shared/Modal"
 export default {
   name: 'Report',
   components: {
-    Spinner, ScrimModal, Dropdown, NoFound,Paginate,Astronauta,Modal,
+    Spinner, ScrimModal, Dropdown, NoFound,Astronauta,Modal,
     FormatoMatricula: () => import( /* webpackChunkName: "FormatoMatricula" */ "./FormatoMatricula.vue"),
     FormatoPromocion: () => import( /* webpackChunkName: "FormatoPromocion" */ "./FormatoPromocion.vue"),
     FormatoLibretas: () => import( /* webpackChunkName: "FormatoLibretas" */ "./FormatoLibretas.vue"),
@@ -31,7 +30,7 @@ export default {
       ifconducta: false,
       ifPromocionInicial: false,
       isPrint: false,
-      searchQuery: '',
+      searchQuery: 'A',
       //Pagina 
     page: 1,
     perPage: 9,
@@ -48,6 +47,28 @@ export default {
     parcial: false,
     parcial2: false,
     numActual: 0,
+    paralelos: [
+      {
+        id: "0",
+        nombre: "A",
+      },
+      {
+        id: "1",
+        nombre: "B",
+      },
+      {
+        id: "2",
+        nombre: "C",
+      },
+      {
+        id: "3",
+        nombre: "D",
+      },
+      {
+        id: "4",
+        nombre: "Undefined",
+      },
+    ],
     }
   },
   watch: {
@@ -60,6 +81,7 @@ export default {
   computed: {
     displayedArticles: function () {
       if (this.searchQuery.length>0) {
+        this.isSelecMatricula = [];
         return this.infoMat.filter((item) => {
           return this.searchQuery
             .toLowerCase()
@@ -67,12 +89,15 @@ export default {
             .every((v) => item.curso.toLowerCase().includes(v));
         });
       }else{
-        return this.paginate(this.infoMat);
+        return this.infoMat;
       }
       
     }
   },
   methods: {
+    onChange(nom){
+      this.searchQuery = nom;  
+  },
     activar(){
       this.isActive=true;
     },

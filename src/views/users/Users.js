@@ -242,9 +242,9 @@ export default {
       }
     },
     openChildUser2: function () {
-      this.$dialog.alert("::: No puede agregar usuarios :::");
-      //this.idUser = null;
-      //this.ifCreateUpdate = true;
+      //this.$dialog.alert("::: No puede agregar usuarios :::");
+      this.idUser = null;
+      this.ifCreateUpdate = true;
     },
     closedChildUser: function () {
       this.ifCreateUpdate = false;

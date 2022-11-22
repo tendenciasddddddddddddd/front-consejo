@@ -11,14 +11,20 @@
           <div v-if="infoMat.length" class="mt-3 ">
             <div class="row mb-2">
               <div class="col-lg-4">
-                <div class="input-group" style="margin-bottom: 7px;">
-                  <span class="input-group-text text-body buscador busca">
-                    <svg style=" margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
-                  </span>
-                  <input class="form-control buscador buscaa" type="text" v-model="searchQuery" style="background: white;"
-                    placeholder="Buscar por paralelo">
+                    <div class="d-flex justify-content-start">
+                    <div v-for="ite in paralelos" :key="ite.id">
+                      <div class="form-check  me-2">
+                        <input class="form-check-input" type="radio" name="ite.id" :id="ite.id" :value="ite.nombre"
+                          @click="onChange(ite.nombre)" v-model="searchQuery"/>
+                        <span class="negros" for="ite._id">
+                          {{ ite.nombre }}</span>
+                      </div>
+                    </div>
+                    <div>
+                    </div>
+                  </div>
+                  
                 </div>
-              </div>
               <div class="col-lg-8 text-start">
                 
                 <div class="btn-group dropup">
@@ -119,8 +125,7 @@
                   </tr>
                 </tbody>
               </table>
-              <Paginate :numPages="numPages" :page="page" :total="infoMat.length" @pagechanged="onPageChange">
-              </Paginate>
+             
             </div>
           </div>
           <section v-else>

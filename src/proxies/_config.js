@@ -45,8 +45,8 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'https://wesweb.online/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ https://uecam.net/
-// https://uehuaca.com/  https://uelibertad.online/ https://api-escuelas-production.up.railway.app
+let url = 'https://uelibertad.online/api'; //http://localhost:3000/ https://uemah.com/api   http://66.29.154.165:3000/ https://uecam.net/
+// https://uehuaca.com/  https://uelibertad.online/ https://wesweb.online
 
 export default{
     identityProxy: new IdentityProxy(Axios, url),
