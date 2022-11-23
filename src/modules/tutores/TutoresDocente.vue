@@ -207,8 +207,11 @@ export default {
     },
     watch: {
         curso: function (value) {
-            this.isSelecMatricula = [];
-            this.__cambios(value._id, value.paralelo );
+            if (value) {
+                this.isSelecMatricula = [];
+               this.__cambios(value._id, value.paralelo );   
+            }
+           
         }
     },
     computed: {

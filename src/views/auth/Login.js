@@ -150,9 +150,9 @@ export default {
         this.showPassword = !this.showPassword;
       }
   },
-  mounted() {
+  created() {
     setTimeout(() => {
       this.fondo=image9;
-    }, 1200)
+    }, 1300)
   }
 };
