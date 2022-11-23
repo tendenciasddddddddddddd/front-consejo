@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 const state = {
     user : null,
-    avatar: 'https://res.cloudinary.com/ds7xbwpoo/image/upload/v1668542101/avatar_lmylxp.webp',
+    avatar: 'https://res.cloudinary.com/dbtlyhhcm/image/upload/v1669214496/avatar_zdsxb4.webp',
     isAppMobile: false,
     first_text: 'Pages',
     last_text: 'Inicio',
-    imgs: 'https://res.cloudinary.com/ds7xbwpoo/image/upload/v1668542101/avatar_lmylxp.webp',
+    imgs: 'https://res.cloudinary.com/dbtlyhhcm/image/upload/v1669214496/avatar_zdsxb4.webp',
 }
 export default new Vuex.Store({
     state,
