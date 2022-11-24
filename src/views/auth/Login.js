@@ -153,6 +153,6 @@ export default {
   created() {
     setTimeout(() => {
       this.fondo=image9;
-    }, 1300)
+    }, 2000)
   }
 };

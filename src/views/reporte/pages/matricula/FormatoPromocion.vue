@@ -182,9 +182,7 @@
                             </div>
                         </div>
                         <p style="text-align: right!important;">
-                            <b style="font-size: .65rem!important; margin-right: 3rem!important;">EL ÁNGEL, {{
-                                    fechasActual
-                            }} </b>
+                            <b style="font-size: .65rem!important; margin-right: 3rem!important;">{{$store.state.fechaReporter}}{{ fechasActual }}</b>
                         </p>
                         <div style="page-break-before:always;"></div>
                     </div>
@@ -256,13 +254,13 @@ export default {
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
-            const dateObj = new Date();
-            const month = monthNames[dateObj.getMonth()];
-            const day = String(dateObj.getDate()).padStart(2, '0');
-            const year = dateObj.getFullYear();
-            const output = month + '\n' + day + ',' + year;
-            this.fechasActual = output;
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
+      const dateObj = new Date();
+      const month = monthNames[dateObj.getMonth()];
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      const year = dateObj.getFullYear();
+      const output = day+" de "+ month + '\n' + ' del ' + year;
+      this.fechasActual = output;
         },
         trasformnumberToText(num) {
             let result = parseFloat(num);

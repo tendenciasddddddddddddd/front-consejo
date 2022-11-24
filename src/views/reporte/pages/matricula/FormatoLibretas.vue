@@ -94,26 +94,26 @@
                                                             <th
                                                                 style="padding: 2px 3px;border-right: 1px solid #000;border-bottom: 1px solid #000;">
                                                             </th>
-                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
+                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;    text-align: center!important;"
                                                                >
                                                                 <div style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                                    <div style=" flex: 1 0 0%;padding-left: 7px;">a1</div>
-                                                                    <div style=" flex: 1 0 0%;">a2</div>
-                                                                    <div style=" flex: 1 0 0%;">a3</div>
-                                                                    <div style=" flex: 1 0 0%;">a4</div>
-                                                                    <div style=" flex: 1 0 0%;">a5</div>
-                                                                    <div style=" flex: 1 0 0%;">pr</div>
+                                                                    <div style=" flex: 1 0 0%;padding-left: 7px;">Ins.1</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.2</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.3</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.4</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.5</div>
+                                                                    <div style=" flex: 1 0 0%;">PR</div>
                                                                 </div>
                                                             </th>
-                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
+                                                            <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important; text-align: center!important;"
                                                                >
                                                                 <div style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                                    <div style=" flex: 1 0 0%;padding-left: 7px;">b1</div>
-                                                                    <div style=" flex: 1 0 0%;">b2</div>
-                                                                    <div style=" flex: 1 0 0%;">b3</div>
-                                                                    <div style=" flex: 1 0 0%;">b4</div>
-                                                                    <div style=" flex: 1 0 0%;">b5</div>
-                                                                    <div style=" flex: 1 0 0%;">pr</div>
+                                                                    <div style=" flex: 1 0 0%;padding-left: 7px;">Ins.1</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.2</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.3</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.4</div>
+                                                                    <div style=" flex: 1 0 0%;">Ins.5</div>
+                                                                    <div style=" flex: 1 0 0%;">PR</div>
                                                                 </div>
                                                             </th>
                                                             <th style="min-width: 125px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;"
@@ -283,21 +283,15 @@
                                     <div
                             style="margin-top: 3rem!important;display: flex!important;justify-content: space-around!important;">
                             <div style="text-align: center!important;">
-                                <span>
-                                    <b>______________________________</b>
-                                </span> <br>
-                                <p style=" font-size: .875rem!important;">
-                                    <b>{{ settings.rector }}</b><br>
-                                    RECTOR/A
-                                </p>
+                               
                             </div>
                             <div style="text-align: center!important;">
                                 <span>
                                     <b>_____________________________</b>
                                 </span> <br>
                                 <p style="font-size: .875rem!important;">
-                                    <b>{{ settings.secretario }}</b><br>
-                                    SECRETARIO/A
+                                   
+                                    DOCENTE/TUTOR
                                 </p>
                             </div>
                         </div>

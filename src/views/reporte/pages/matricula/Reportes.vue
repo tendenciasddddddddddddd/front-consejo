@@ -10,22 +10,28 @@
         <section v-else>
           <div v-if="infoMat.length" class="mt-3 ">
             <div class="row mb-2">
-              <div class="col-lg-4">
+              <div class="col-lg-5">
                     <div class="d-flex justify-content-start">
-                    <div v-for="ite in paralelos" :key="ite.id">
+                      <div class="d-flex justify-content-start">
+                        <div v-for="ite in paralelos" :key="ite.id">
                       <div class="form-check  me-2">
-                        <input class="form-check-input" type="radio" name="ite.id" :id="ite.id" :value="ite.nombre"
-                          @click="onChange(ite.nombre)" v-model="searchQuery"/>
-                        <span class="negros" for="ite._id">
-                          {{ ite.nombre }}</span>
+                        <input class="form-check-input" type="radio" name="id"  :value="ite"
+                          @click="onChange(ite)" v-model="searchQuery"/>
+                        <span class="negros" for="ite">
+                          {{ ite}}</span>
                       </div>
                     </div>
-                    <div>
+                      </div>
+                    <div class="ms-3">
+                      <div class="input-group" style="min-width: 280px;">
+        <span class="input-group-text text-body buscador busca"><i class="fas fa-search" aria-hidden="true"></i></span>
+        <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
+    </div>
                     </div>
+                    
                   </div>
-                  
                 </div>
-              <div class="col-lg-8 text-start">
+              <div class="col-lg-7 text-start">
                 
                 <div class="btn-group dropup">
                   <a v-on="isSelecMatricula.length ? { click: () => conducta_pdf() } : {}" class="tamanio me-3" role="button"  :class="{ disabled: isSelecMatricula.length === 0 }">

@@ -20,6 +20,7 @@ export default {
       isLoading1: false,
       isTabla: false,
       infoMat: {},
+      order: {},
       info: null,
       isReporte: false,
       curso: "",
@@ -47,32 +48,14 @@ export default {
     parcial: false,
     parcial2: false,
     numActual: 0,
-    paralelos: [
-      {
-        id: "0",
-        nombre: "A",
-      },
-      {
-        id: "1",
-        nombre: "B",
-      },
-      {
-        id: "2",
-        nombre: "C",
-      },
-      {
-        id: "3",
-        nombre: "D",
-      },
-      {
-        id: "4",
-        nombre: "Undefined",
-      },
-    ],
+    paralelos: [],
+    search:  ""
     }
   },
   watch: {
     curso: function (value) {
+      this.searchQuery = 'A'
+      this.paralelos = [],
       this.isSelecMatricula = [];
       this.__cambios(value._id, value.num);
       this.numActual = value.num;
@@ -80,13 +63,13 @@ export default {
   },
   computed: {
     displayedArticles: function () {
-      if (this.searchQuery.length>0) {
+      if (this.search.length>0) {
         this.isSelecMatricula = [];
         return this.infoMat.filter((item) => {
-          return this.searchQuery
+          return this.search
             .toLowerCase()
             .split(" ")
-            .every((v) => item.curso.toLowerCase().includes(v));
+            .every((v) => item.nombre.toLowerCase().includes(v));
         });
       }else{
         return this.infoMat;
@@ -95,8 +78,10 @@ export default {
     }
   },
   methods: {
-    onChange(nom){
-      this.searchQuery = nom;  
+    onChange: function(nom){
+      this.infoMat = this.order.filter((x) => x.curso ==nom) 
+      this.isSelecMatricula = [];
+      this.allSelected = false;
   },
     activar(){
       this.isActive=true;
@@ -181,12 +166,43 @@ export default {
     __cambios(cursos, num) {
       this.$Progress.start();
       this.infoMat = []
+      this.order = []
       this.selectPromocion(num)
       this.isTabla = true;
       this.$proxies._matriculaProxi
         .getInfoListReport(cursos)
         .then((x) => {
-          this.infoMat = x.data;
+          const data = x.data;
+          this.paralelos = []
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              const element = data[i];
+              if (!this.paralelos.includes('A')) {
+                if (element.curso == "A") this.paralelos.push("A")
+              }
+              if (!this.paralelos.includes('B')) {
+                if (element.curso == "B") this.paralelos.push("B")
+              }
+              if (!this.paralelos.includes('C')) {
+                if (element.curso == "C") this.paralelos.push("C")
+              }
+              if (!this.paralelos.includes('D')) {
+                if (element.curso == "D") this.paralelos.push("D")
+              }
+              if (!this.paralelos.includes('Undefined')) {
+                if (element.curso == "Undefined") this.paralelos.push("Undefined")
+              }
+            }
+          }
+          this.order = data.sort(function (a, b) {
+            var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+            if (nameA < nameB) 
+              return -1;
+            if (nameA > nameB)
+              return 1;
+            return 0; 
+          });
+          this.infoMat = this.order.filter((x) => x.curso =="A")
           this.isTabla = false;
           this.$Progress.finish();
         })

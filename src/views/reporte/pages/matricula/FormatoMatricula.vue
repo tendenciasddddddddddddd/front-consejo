@@ -24,8 +24,8 @@
 
             </div>
             <hr style="height: 1px;background: #000;">
-            <div style="text-align: right!important;margin-right: 5rem!important;">
-              <span> <b>{{ fechasActual }}</b> </span>
+            <div style="text-align: right!important;margin-right: 3rem!important;">
+              <span> <b>{{$store.state.fechaReporter}}{{ fechasActual }}</b> </span>
             </div> <br><br><br><br>
             <span style="font-weight: 600;font-size: 1.25rem;line-height: 1.375;">
               CERTIFICADO DE MATRICULA</span>
@@ -165,7 +165,7 @@ export default {
       const month = monthNames[dateObj.getMonth()];
       const day = String(dateObj.getDate()).padStart(2, '0');
       const year = dateObj.getFullYear();
-      const output = month + '\n' + day + ',' + year;
+      const output = day+" de "+ month + '\n' + ' del ' + year;
       this.fechasActual = output;
     },
     fechaActual() {

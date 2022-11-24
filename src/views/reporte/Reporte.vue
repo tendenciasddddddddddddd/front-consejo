@@ -59,15 +59,15 @@ export default {
       arrays_of_options: [
         {
           id: "0",
-          nombre: "Consolidado",
+          nombre: "Listas",
           img: img1,
-          description: "Puedes generar un archivo del consolidado de las matriculas",
+          description: "Puedes generar un archivo con lista de las matriculas",
         },
         {
           id: "1",
-          nombre: "Matriculas y promociones",
+          nombre: "Matriculas, promociones y libretas",
           img: img2,
-          description: "Generar reportes de matriculas, promociones, libretas y comportamiento",
+          description: "Generar un archivo pdf",
         },
         {
           id: "4",

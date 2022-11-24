@@ -88,7 +88,8 @@ export default {
       { id: 10, txt: 'Periodo académico', url: '/Intensivo'},
       { id: 11, txt: 'Matriculas y generar paralelos', url: '/Intensivo'},
       { id: 12, txt: 'Generar reportes', url: '/opciones-reportes'},
-      { id: 13, txt: 'Generar distributivo', url: '/Distributivo-v1'})
+      { id: 13, txt: 'Generar distributivo', url: '/Distributivo-v1'},
+      { id: 14, txt: 'Libretas', url: '/opciones-reportes'})
 
       }
       else if (this.user.roles == 'Docente') {
