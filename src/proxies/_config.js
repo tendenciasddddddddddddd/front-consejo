@@ -45,7 +45,7 @@ Axios.interceptors.response.use(
     }
   );
 
-let url = 'https://uemah.com/api'; //http://localhost:3000/ https://uemah.com/api    https://uecam.net/
+let url = 'http://localhost:4000/api'; //http://localhost:3000/ https://uemah.com/api    https://uecam.net/
 // https://uehuaca.com/  https://uelibertad.online/ https://wesweb.online
 
 export default{
