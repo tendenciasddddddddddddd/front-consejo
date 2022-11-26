@@ -77,7 +77,8 @@ export default {
                     planificacion: res.planificacion,
                     nivel: res.nivel,
                     nombredoc: res.nombredoc,
-                    num: res.num
+                    num: res.num,
+                    ifComplementarias : res.ifComplementarias
                 };
                 let id = res._id;
                 localStorage.removeItem("myCourse");
@@ -122,6 +123,7 @@ export default {
                     const element = result[i].fnivel;
                     const element2 = result[i].fmateria;
                     const paralelo = result[i].paralelo;
+                    const ifComplementarias = result[i].ifComplementarias
                     const idDistributivo = result[i]._id;
                     this.listniveles.push({
                         _id: id,
@@ -133,7 +135,8 @@ export default {
                         planificacion: result[i].planificacion,
                         nivel: element.nombre,
                         num: element.num,
-                        nombredoc: this.nombreDocente
+                        nombredoc: this.nombreDocente,
+                        ifComplementarias : ifComplementarias
                     })
                 }
             }
