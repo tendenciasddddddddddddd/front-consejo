@@ -100,15 +100,15 @@
                                                     </b>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td
+                                            <tr v-for="ite in item.calificaciones" :key="ite.id">
+                                                <td v-if="ite.proyectos.length > 0"
                                                     style="font-size: .65rem!important;border-right: 1px solid #000;margin-bottom: 0!important;margin-left: 1rem!important;">
-                                                    EVA. PROYECTOS EDUCATIVOS</td>
-                                                <td
+                                                    ACT. COMPLEMENTARIAS</td>
+                                                <td v-if="ite.proyectos.length > 0"
                                                     style="font-size: .65rem!important;border-right: 1px solid #000;margin-bottom: 0!important;margin-left: 1rem!important;">
-                                                    PROYECTOS
-                                                    ESCOLARES </td>
-                                                <td
+                                                    {{ ite.materia
+                                                    }}</td>
+                                                <td v-if="ite.proyectos.length > 0"
                                                     style="font-size: .65rem!important;margin-bottom: 0!important;margin-left: 1rem!important;">
                                                     <div>
                                                         {{ calcularPryectos(item.calificaciones) }}
@@ -120,20 +120,7 @@
                                                 <td> </td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
-                                                <td
-                                                    style="border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important;">
-                                                    DESARROLLO
-                                                    HUMANO INTEGRAL</td>
-                                                <td
-                                                    style="border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important;">
-                                                    DESARROLLO
-                                                    HUMANO INTEGRAL </td>
-                                                <td style="font-size: .65rem!important;">
-                                                    <div> <b>{{ calcularDHI(item.calificaciones) }}</b> 
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                           
                                             <tr>
                                                 <td
                                                     style="border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important; margin-bottom: 0!important;">
@@ -286,9 +273,8 @@ export default {
             let aux4 = 0;
             var letra = 'NO'
             for (let i = 0; i < dataObj.length; i++) {
-                const element = dataObj[i].materia;
                 const proyectos = dataObj[i].proyectos
-                if (element == 'PROYECTOS ESCOLARES') {
+                if (proyectos.length > 0) {
                     let p1 = proyectos[0].p1
                     let p2 = proyectos[0].p2
                     let p3 = proyectos[1].p1

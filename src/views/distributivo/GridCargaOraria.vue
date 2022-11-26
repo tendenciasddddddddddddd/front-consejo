@@ -188,7 +188,7 @@ export default {
       this.$proxies._gestionProxi
         .getListMaterias()
         .then((x) => {
-          this.listMaterias = x.data;
+          this.listMaterias = x.data
           this.isMateria = false;
         })
         .catch((err) => {
@@ -228,7 +228,8 @@ export default {
               fdocente: docente[0]._id,
               fmateria: materia[0]._id,
               paralelo: node.data.paralelo,
-              planificacion: []
+              planificacion: [],
+              ifComplementarias : materia[0].estado == 1 ? 0 : 1,
             }) 
             } catch (error) {
               validate = true;

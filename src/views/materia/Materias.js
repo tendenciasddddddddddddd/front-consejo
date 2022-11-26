@@ -28,7 +28,8 @@ export default {
             model: {//-----------VARIABLES DEL MODELO A GUARDAR
               _id: null, 
               nombre: null,  
-              area: ''
+              area: '',
+              estado: ''
            },
            isSelecUsers: [],
            subtitulo: 'none',
@@ -36,6 +37,7 @@ export default {
            isCarga: false,
            visible: false,
            allSelected: false,
+           isComplentaria : ''
         }
     },
 
@@ -82,6 +84,7 @@ export default {
                   this.ifLoad = true;
                   this.model.nombre = this.model.nombre.trim();
                   this.model.area = this.model.area.trim();
+                  this.model.estado = this.isComplentaria == 1 ? 0 : 1;
                   this.$proxies._gestionProxi.updateMaterias(this.model._id, this.model)
                     .then(() => {
                       this.close();
@@ -103,6 +106,7 @@ export default {
                   this.ifLoad = true;
                   this.model.nombre = this.model.nombre.trim();
                   this.model.area = this.model.area.trim();
+                  this.model.estado = this.isComplentaria == 1 ? 0 : 1;
                   this.$proxies._gestionProxi.createMaterias(this.model)
                   .then(() => {
                     this.ifLoad = false;
@@ -130,6 +134,7 @@ export default {
               this.$proxies._gestionProxi.getMaterias(this.isSelecUsers[0])
                 .then((x) => {
                     this.model = x.data;
+                    this.isComplentaria = x.data.estado == 1 ? 0 : 1;
                     this.isCarga = false; 
                 }).catch(() => {
                     console.log("Error")
@@ -208,7 +213,7 @@ export default {
             this.$dialog
               .confirm(message, options)
               .then((dialog) => {
-                this.dialogState();
+                //this.dialogState();
                 setTimeout(() => {
                   dialog.close();
                   this.toast("Se cambio el estado del registro");
@@ -252,6 +257,7 @@ export default {
             this.model.nombre = "";
             this.model.area = "";
             this.MsmError = "";
+            this.isComplentaria = ""
           },
           close() {
             this.visible = false;
@@ -267,14 +273,14 @@ export default {
             .value(value)
             .required()
             .minLength(3)
-            .maxLength(50);
+            .maxLength(80);
         },
         'model.area'(value) {
           return this.$validator
             .value(value)
             .required()
             .minLength(3)
-            .maxLength(50);
+            .maxLength(80);
         },
     },
 }

@@ -13,7 +13,7 @@
                                         {{ settings.unidadeducativa }}
                                     </span><br>
                                     <p style="font-size: .75rem!important;">
-                                        REPORTE DE PROYECTOS
+                                        REPORTE DE ACTIVIDADES COMPLEMENTARIAS
                                     </p>
                                     <span style="font-size: .875rem!important;"><b>Año Lectivo: </b>2021-2022 &nbsp; {{ data.nivel }} -
                                         {{ data.paralelo }}</span> <span style="font-size: .65rem!important;">{{ data.materia }}</span>

@@ -202,7 +202,7 @@ export default {
       this.url = URL.createObjectURL(file);
       var formData = new FormData();
       formData.append("myFile", file);
-      axios.post("https://ueangel.online/api/upload", formData, {
+      axios.post("https://uelibertad.online/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

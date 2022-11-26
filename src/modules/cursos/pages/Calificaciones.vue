@@ -4,7 +4,7 @@
     <div v-else>
       <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
     </div>
-    <section style="height: calc(100vh - 140px);">
+    <section style="height: calc(100vh - 170px);">
       <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
         :enableFillHandle="true" @grid-ready="onGridReady"  :detailRowAutoHeight="true">
@@ -50,11 +50,11 @@ export default {
         headerName: 'QUIMESTRE 1',
         children: [
           
-          { field: "a1", headerName: 'IN1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "a5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a1", headerName: 'Ins1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a2", headerName: 'Ins2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a3", headerName: 'Ins3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a4", headerName: 'Ins4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "a5", headerName: 'Ins5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio1", headerName: 'PR1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
@@ -80,11 +80,11 @@ export default {
               return promedio;
             }
           },
-          { field: "b1", headerName: 'IN1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "b5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b1", headerName: 'Ins1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b2", headerName: 'Ins2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b3", headerName: 'Ins3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b4", headerName: 'Ins4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "b5", headerName: 'Ins5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio2", headerName: 'PR2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
@@ -119,7 +119,7 @@ export default {
             field: "promedio4", headerName: '80%', minWidth: 60,
             valueGetter: totalPromedioAportes,
           },
-          { field: "examenfinal", headerName: 'EX', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "examenfinal", headerName: 'EXA', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio5", headerName: '20%', minWidth: 60,
             valueGetter: totalParcialExamen,
@@ -133,11 +133,11 @@ export default {
       {
         headerName: 'QUIMESTRE 2',
         children: [
-          { field: "x1", headerName: 'IN1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter},
-          { field: "x2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "x3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "x4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "x5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x1", headerName: 'Ins1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter},
+          { field: "x2", headerName: 'Ins2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x3", headerName: 'Ins3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x4", headerName: 'Ins4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "x5", headerName: 'Ins5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio11", headerName: 'PR1', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
@@ -169,11 +169,11 @@ export default {
               return promedio;
             }
           },
-          { field: "y1", headerName: 'IN1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y2", headerName: 'IN2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y3", headerName: 'IN3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y4", headerName: 'IN4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
-          { field: "y5", headerName: 'IN5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y1", headerName: 'Ins1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y2", headerName: 'Ins2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y3", headerName: 'Ins3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y4", headerName: 'Ins4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "y5", headerName: 'Ins5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio22", headerName: 'PR2', minWidth: 60, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
@@ -213,7 +213,7 @@ export default {
             field: "promedio44", headerName: '80%', minWidth: 60, 
             valueGetter: totalPromedioAportes2,
           },
-          { field: "examenfinal2", headerName: 'EX', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
+          { field: "examenfinal2", headerName: 'EXA', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter },
           {
             field: "promedio55", headerName: '20%', minWidth: 60, 
             valueGetter: totalParcialExamen2,

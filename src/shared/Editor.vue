@@ -44,7 +44,7 @@ export default {
       this.isUploads = true;
       var formData = new FormData();
       formData.append("myFile", file);
-      axios.post("https://ueangel.online/api/upload/tareas", formData, {
+      axios.post("https://uelibertad.online/api/upload/tareas", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

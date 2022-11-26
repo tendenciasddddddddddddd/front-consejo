@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 10px; /* width of the entire scrollbar */
+    width: 11px; /* width of the entire scrollbar */
   }
 
   ::-webkit-scrollbar-track {
@@ -9,7 +9,7 @@
   ::-webkit-scrollbar-thumb {
     background-color: #dfdfe8; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
+    border: 1px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
   }
 
   .croll::-webkit-scrollbar {
@@ -24,13 +24,13 @@
   .croll::-webkit-scrollbar-thumb {
     background-color: #dfdfe8; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
+    border: 1px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
     visibility: hidden;
   }
   .croll:hover::-webkit-scrollbar-thumb {
     background-color: #dfdfe8; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
+    border: 1px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
     visibility: visible;
   }
   .ag-center-cols-clipper::-webkit-scrollbar {
@@ -45,13 +45,13 @@
   .ag-center-cols-clipper::-webkit-scrollbar-thumb {
     background-color: #dfdfe8; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
+    border: 1px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
     visibility: hidden;
   }
   .ag-center-cols-clipper:hover::-webkit-scrollbar-thumb {
     background-color: #dfdfe8; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
-    border: 3px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
+    border: 1px solid rgb(255, 255, 255); /* creates padding around scroll thumb */
     visibility: visible;
   }
 

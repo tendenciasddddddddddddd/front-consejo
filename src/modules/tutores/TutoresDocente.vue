@@ -107,6 +107,16 @@
           <Quimestral :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
             :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
         </section>
+        <div v-if="ifyoutuve">
+            <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
+        </div>
+        <div class="fixed-plugin" v-if="!$store.state.isAppMobile">
+            <a @click="ifyoutuve = true"
+                class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white"
+                style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px; box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
+                Ver video explicativo
+            </a>
+        </div>
             <section v-if="isActive">
                 <Modal @close="closeModal">
                     <template v-slot:header> Libretas escolares</template>
@@ -158,12 +168,15 @@
                         </button>
                     </template>
                 </Modal>
+                
             </section>
         </div>
     </div>
 </template>
   
 <script>
+import RestResource from "../../service/isAdmin";
+const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner.vue";
 import Dropdown from "../../shared/Dropdown.vue";
 import NoFound from "../../shared/NoFound"
@@ -175,10 +188,12 @@ export default {
     components: {
         Spinner, Dropdown, NoFound, Paginate, Astronauta, Modal,
         Quimestral: () => import( /* webpackChunkName: "FormatoLibretas" */ "./pages/Quimestral.vue"),
+        VueYoutuve: () => import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     },
     data() {
         return {
             user: this.$store.state.user,
+            roles: this.$store.state.user.roles,
             listniveles: [],
             isLoading1: false,
             isTabla: false,
@@ -203,6 +218,7 @@ export default {
             checked: 0,
             parcial: false,
             parcial2: false,
+            ifyoutuve: false,
         }
     },
     watch: {
@@ -221,7 +237,7 @@ export default {
                     return this.searchQuery
                         .toLowerCase()
                         .split(" ")
-                        .every((v) => item.curso.toLowerCase().includes(v));
+                        .every((v) => item.nombre.toLowerCase().includes(v));
                 });
             } else {
                 return this.paginate(this.infoMat);
@@ -230,6 +246,9 @@ export default {
         }
     },
     methods: {
+        ClosedYoutuve: function () {
+            this.ifyoutuve = false;
+        },
         activar() {
             this.isActive = true;
         },
@@ -270,7 +289,8 @@ export default {
             let text_1 = 'Tutores';
             let text_2 = 'Libretas'
             this.$store.commit('updateHeader',{text_1, text_2})
-            this.$proxies._settingProxi.getConfigure()
+            if (restResourceService.docente(this.roles) || restResourceService.Inspector(this.roles)|| restResourceService.admin(this.roles)) {
+                this.$proxies._settingProxi.getConfigure()
                 .then((x) => {
                     const { rector,logo, unidadeducativa, ubicacion, direccion, telefono } = x.data[0];
                     this.settings = {
@@ -284,11 +304,15 @@ export default {
                 }).catch(() => {
                     console.log("Error")
                 });
+            } else {
+                this.$router.push("/page-not-found");
+            }
+          
         },
         changeStatus(ev) {
             if (ev == '100') {
                 this.isPrint = false;
-                this.iflibretas = true
+                this.iflibretas = false;
             }
         },
         __listNivele() {

@@ -31,11 +31,11 @@
                                 <div>
                                     <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{ item.fnivel ?
                                             item.fnivel.nombre : 'Undefined'
-                                    }}</p>
+                                    }} - {{item.paralelo}}</p>
                                 </div>
                                 <div>
                                     <span class="text-xs  fuente mt-2" style="color: #516f90 !important;">
-                                        {{ 'PARALELO: ' + item.paralelo }}
+                                        {{item.createdAt }}
                                     </span>
                                     <span style="color:black">
                                         <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor"
@@ -206,6 +206,7 @@ export default {
                             nombre: res.nombre,
                             materia: res.fmateria.nombre,
                             area: res.fmateria.area,
+                            ifComplementarias : res.ifComplementarias,
                             idDistributivo: res._id,
                             planificacion: res.planificacion,
                             nivel: res.fnivel.nombre,

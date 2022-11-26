@@ -25,7 +25,7 @@
               Fecha modicado
             </th>
             <th class="text-uppercase text-center text-xxs font-weight-bolder">
-              Estado
+              Tronco libre
             </th>
           </tr>
         </thead>
@@ -77,7 +77,10 @@
             <p class=" text-xs fuente text-danger">
               {{ validation.firstError("model.nombre") }}
             </p>
-
+            <span class="parrafo">Esta materia es complementaria?</span>
+            <div v-if="!allSelected " class="form-check my-auto mt-2" style="min-height: 0rem;">
+                  <input class="form-check-input cheka" type="checkbox" v-model=" isComplentaria" />
+                </div> <br>
           </form>
         </template>
         <template v-slot:acccion>
