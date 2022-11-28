@@ -81,7 +81,6 @@ const gauthOption = {
 }
 Vue.use(GAuth, gauthOption)
 
-
 Vue.use(Vue2Editor);
 
 Vue.use({

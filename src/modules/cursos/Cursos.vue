@@ -71,7 +71,7 @@
                 @pagechanged="onPageChange"></Paginate>
         </div>
         <div v-if="ifyoutuve">
-            <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
+            <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'775632387'" />
         </div>
         <Modal v-if="!habilitar">
             <template v-slot:header>Módulo de notas</template>
@@ -159,7 +159,7 @@ export default {
                     return this.searchQuery
                         .toLowerCase()
                         .split(" ")
-                        .every((v) => item.fmateria.nombre.toLowerCase().includes(v));
+                        .every((v) => item.fmateria.nombre.toLowerCase().includes(v)||item.fnivel.nombre.toLowerCase().includes(v));
                 });
             } else {
                 return this.paginate(this.info);

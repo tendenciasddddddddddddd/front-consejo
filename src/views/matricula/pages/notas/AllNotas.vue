@@ -56,9 +56,18 @@ export default {
                 .getListDocentes()
                 .then((x) => {
                     const result = x.data;
+                    const data = []
                     for (let i = 0; i < result.length; i++) {
-                        this.listDocentes.push({ _id: result[i]._id, nombre: result[i].fullname })
+                        data.push({ _id: result[i]._id, nombre: result[i].fullname })
                     }
+                    this.listDocentes = data.sort(function (a, b) {
+                        var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+                        if (nameA < nameB)
+                            return -1;
+                        if (nameA > nameB)
+                            return 1;
+                        return 0;
+                    });
                     this.isDocente = false;
                 })
                 .catch((err) => {
@@ -78,7 +87,7 @@ export default {
                     nivel: res.nivel,
                     nombredoc: res.nombredoc,
                     num: res.num,
-                    ifComplementarias : res.ifComplementarias
+                    ifComplementarias: res.ifComplementarias
                 };
                 let id = res._id;
                 localStorage.removeItem("myCourse");
@@ -117,6 +126,7 @@ export default {
         },
         getData(result) {
             this.listniveles = []
+            const resulta = []
             if (result.length > 0) {
                 for (let i = 0; i < result.length; i++) {
                     let id = result[i].fnivel._id;
@@ -125,7 +135,7 @@ export default {
                     const paralelo = result[i].paralelo;
                     const ifComplementarias = result[i].ifComplementarias
                     const idDistributivo = result[i]._id;
-                    this.listniveles.push({
+                    resulta.push({
                         _id: id,
                         paralelo: paralelo,
                         nombre: element.nombre + ' (' + paralelo + ') ' + element2.nombre,
@@ -136,9 +146,17 @@ export default {
                         nivel: element.nombre,
                         num: element.num,
                         nombredoc: this.nombreDocente,
-                        ifComplementarias : ifComplementarias
+                        ifComplementarias: ifComplementarias
                     })
                 }
+                this.listniveles = resulta.sort(function (a, b) {
+                        var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+                        if (nameA < nameB)
+                            return -1;
+                        if (nameA > nameB)
+                            return 1;
+                        return 0;
+                    });
             }
         },
         close() {

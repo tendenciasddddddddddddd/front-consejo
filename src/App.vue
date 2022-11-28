@@ -79,4 +79,5 @@ export default {
 </script>
 <style>
   @import './assets/styles/mainstyles.css';
+  
 </style>
