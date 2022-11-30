@@ -88,7 +88,7 @@ export default {
                 canvas.toBlob(blob => {
                     form.append('myFile', blob);
                     axios
-                        .post("https://uelibertad.online/api/upload", form, {
+                        .post("https://ueangel.online/api/upload", form, {
                             headers: {
                                 "Content-Type": "multipart/form-data",
                             },

@@ -8,6 +8,27 @@
             <Spinner v-if="isTabla"></Spinner>
             <section v-else>
               <div v-if="infoMat.length" >
+                <div class="col-lg-5">
+                    <div class="d-flex justify-content-start">
+                      <div class="d-flex justify-content-start">
+                        <div v-for="ite in paralelos" :key="ite.id">
+                      <div class="form-check  me-2">
+                        <input class="form-check-input" type="radio" name="id"  :value="ite"
+                          @click="onChange(ite)" v-model="searchQuery"/>
+                        <span class="negros" for="ite">
+                          {{ ite}}</span>
+                      </div>
+                    </div>
+                      </div>
+                    <div class="ms-3">
+                      <div class="input-group" style="min-width: 280px;">
+        <span class="input-group-text text-body buscador busca"><i class="fas fa-search" aria-hidden="true"></i></span>
+        <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
+    </div>
+                    </div>
+                    
+                  </div>
+                </div>
                 <a role="button" v-if="!iseliminaddo" class="tamanio"
               :class="{ disabled: isSelecMatricula.length === 0 }" v-on="
                 isSelecMatricula.length ? { click: () => remove() } : {}
@@ -64,8 +85,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <Paginate :numPages="numPages" :page="page" :total="infoMat.length" @pagechanged="onPageChange">
-                </Paginate>
+              
               </div>
               </div>
               <section v-else>
@@ -85,14 +105,13 @@
 <script>
 import Spinner from "../../../../shared/Spinner.vue";
 import ScrimModal from "../../../../shared/ScrimModal"
-import Paginate from "../../../../shared/Paginate.vue";
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
 export default {
   name: "ListaMatricula",
   components: {
     //Espera,
-    Spinner, ScrimModal, Paginate, Dropdown, NoFound
+    Spinner, ScrimModal,  Dropdown, NoFound
   },
   props: {
     modalidad: {
@@ -115,38 +134,44 @@ export default {
       arrays: [],
       //PAGINATE 
       searchQuery: '',
-      //Pagina 
-      page: 1,
-      perPage: 10,
-      pages: [],
-      numPages: 0,
-      totalNotas: 0,
       allSelected: false,
       curso: '',
-      idCurso: ''
+      idCurso: '',
+      paralelos: [],
+      search:  "",
+      order: {},
     };
   },
   computed: {
-    displayedArticles: function() {
-      return this.paginate(this.infoMat);
-    },
+    displayedArticles: function () {
+      if (this.search.length>0) {
+        return this.infoMat.filter((item) => {
+          return this.search
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.nombre.toLowerCase().includes(v));
+        });
+      }else{
+        return this.infoMat;
+      }
+      
+    }
   },
   watch: {
     curso: function (value) {
       this.idCurso = value._id
+      this.searchQuery = 'A'
+      this.paralelos = [],
+      this.isSelecMatricula = [];
       this.__cambios(this.idCurso);
     }
   },
   methods: {
-    paginate(articles) {
-      let page = this.page;
-      let perPage = this.perPage;
-      let from = (page * perPage) - perPage;
-      let to = (page * perPage);
-
-      this.numPages = Math.ceil(articles.length / 8);
-      return articles.slice(from, to);
-    },
+    onChange: function(nom){
+      this.infoMat = this.order.filter((x) => x.curso ==nom) 
+      this.isSelecMatricula = [];
+      this.allSelected = false;
+  },
     verificarUsuario() {
       this.__listNivele();
     },
@@ -172,10 +197,42 @@ export default {
     __cambios(cursos) {
       this.$Progress.start();
       this.isTabla = true;
+      this.infoMat = []
+      this.order = []
       this.$proxies._matriculaProxi
         .getFullMatricula(cursos)
         .then((x) => {
-          this.infoMat = x.data.matriculados;
+          const data= x.data.matriculados;
+          this.paralelos = []
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              const element = data[i];
+              if (!this.paralelos.includes('A')) {
+                if (element.curso == "A") this.paralelos.push("A")
+              }
+              if (!this.paralelos.includes('B')) {
+                if (element.curso == "B") this.paralelos.push("B")
+              }
+              if (!this.paralelos.includes('C')) {
+                if (element.curso == "C") this.paralelos.push("C")
+              }
+              if (!this.paralelos.includes('D')) {
+                if (element.curso == "D") this.paralelos.push("D")
+              }
+              if (!this.paralelos.includes('Undefined')) {
+                if (element.curso == "Undefined") this.paralelos.push("Undefined")
+              }
+            }
+          }
+          this.order = data.sort(function (a, b) {
+            var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+            if (nameA < nameB) 
+              return -1;
+            if (nameA > nameB)
+              return 1;
+            return 0; 
+          });
+          this.infoMat = this.order.filter((x) => x.curso =="A")
           this.isTabla = false;
           this.$Progress.finish();
         })

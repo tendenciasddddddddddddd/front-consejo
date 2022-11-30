@@ -184,7 +184,107 @@
                                 </div>
                                 <div style="page-break-before:always;"></div><br><br>
                             </div>
-                           
+                            <div v-for="item in proyectoss" :key="item.id">  <br><br>
+                                <div>
+                                    <div>
+                                        <table
+                                            style=" border-color: #000;border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        style="padding: 0px 2px;border-top: 1px solid #000;border-bottom: 0px;border-right: 1px solid #000;">
+                                                    </th>
+
+                                                    <th
+                                                        style="padding: 0px 2px;border-top: 1px solid #000;    font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: right!important;">
+                                                        {{ item.materia }}
+                                                    </th>
+                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
+                                                    </th>
+                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th
+                                                        style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid #000;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
+                                                        ESTUDIANTES
+                                                    </th>
+                                                    <th
+                                                        style="padding: 1px 3px;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
+                                                        PRIMER QUIMESTRE
+                                                    </th>
+                                                    <th
+                                                        style="padding: 1px 3px;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
+                                                        SEGUNDO QUIMESTRE
+                                                    </th>
+
+                                                </tr>
+                                                <tr>
+                                                    <th
+                                                        style="padding: 2px 3px;border-right: 1px solid #000;border-bottom: 1px solid #000;">
+                                                    </th>
+                                                    <th
+                                                        style="min-width: 145px;padding: 2px 3px;border-bottom: 1px solid #000; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
+                                                        <div
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">p1</div>
+                                                            <div style=" flex: 1 0 0%;">p2</div>
+                                                            <div style=" flex: 1 0 0%;">QUI</div>
+                                                        </div>
+                                                    </th>
+                                                    <th
+                                                        style="min-width: 145px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
+                                                        <div
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">p1</div>
+                                                            <div style=" flex: 1 0 0%;">p2</div>
+                                                            <div style=" flex: 1 0 0%;">QUI</div>
+                                                        </div>
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr v-for="ite in item.data" :key="ite.id">
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;  font-size: .65rem!important;">
+                                                        {{ ite.nombre }}</td>
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
+                                                        <div
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p1 }}
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.p2 }}
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                {{ ite.pro }}
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;font-size: .65rem!important;text-align: center!important;">
+                                                        <div
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p3 }}
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;">{{ ite.p4 }}
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                {{ ite.pro2 }}
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> <div style="page-break-before:always;"></div><br><br>
+                            </div>
                             <div v-for="item in ccomportamiento" :key="item.id"> <br><br>
                                 <div>
                                     <div>
@@ -285,213 +385,6 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div>
-                            <div style="page-break-before:always;"></div>
-
-                            <div v-for="item in ddhi" :key="item.id">  <br><br>
-                                <div>
-                                    <div>
-                                        <table
-                                            style=" border-color: #000;border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
-                                            <thead>
-                                                <tr>
-                                                    <th
-                                                        style="padding: 0px 2px;border-top: 1px solid #000;border-bottom: 0px;border-right: 1px solid #000;">
-                                                    </th>
-
-                                                    <th
-                                                        style="padding: 0px 2px;border-top: 1px solid #000;    font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: right!important;">
-                                                        {{ item.materia }}
-                                                    </th>
-                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
-                                                    </th>
-                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
-                                                    </th>
-                                                </tr>
-
-                                                <tr>
-                                                    <th
-                                                        style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid #000;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
-                                                        ESTUDIANTES
-                                                    </th>
-                                                    <th
-                                                        style="padding: 1px 3px;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
-                                                        PRIMER QUIMESTRE
-                                                    </th>
-                                                    <th
-                                                        style="padding: 1px 3px;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
-                                                        SEGUNDO QUIMESTRE
-                                                    </th>
-
-                                                </tr>
-                                                <tr>
-                                                    <th
-                                                        style="padding: 2px 3px;border-right: 1px solid #000;border-bottom: 1px solid #000;">
-                                                    </th>
-                                                    <th
-                                                        style="min-width: 145px;padding: 2px 3px;border-bottom: 1px solid #000; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">p1</div>
-                                                            <div style=" flex: 1 0 0%;">p2</div>
-                                                            <div style=" flex: 1 0 0%;">QUI</div>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        style="min-width: 145px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">p1</div>
-                                                            <div style=" flex: 1 0 0%;">p2</div>
-                                                            <div style=" flex: 1 0 0%;">QUI</div>
-                                                        </div>
-                                                    </th>
-
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr v-for="ite in item.data" :key="ite.id">
-                                                    <td
-                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;  font-size: .65rem!important;">
-                                                        {{ ite.nombre }}</td>
-                                                    <td
-                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p1 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.p2 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
-                                                                {{ ite.pro }}
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                    <td
-                                                        style="padding: 2px 3px;border-bottom-width: 0px;font-size: .65rem!important;text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p3 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">{{ ite.p4 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
-                                                                {{ ite.pro2 }}
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="page-break-before:always;"></div>
-
-                            <div v-for="item in proyectoss" :key="item.id">  <br><br>
-                                <div>
-                                    <div>
-                                        <table
-                                            style=" border-color: #000;border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
-                                            <thead>
-                                                <tr>
-                                                    <th
-                                                        style="padding: 0px 2px;border-top: 1px solid #000;border-bottom: 0px;border-right: 1px solid #000;">
-                                                    </th>
-
-                                                    <th
-                                                        style="padding: 0px 2px;border-top: 1px solid #000;    font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: right!important;">
-                                                        {{ item.materia }}
-                                                    </th>
-                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
-                                                    </th>
-                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
-                                                    </th>
-                                                </tr>
-
-                                                <tr>
-                                                    <th
-                                                        style="padding: 1px 3px;border-bottom: 0px;border-right: 1px solid #000;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
-                                                        ESTUDIANTES
-                                                    </th>
-                                                    <th
-                                                        style="padding: 1px 3px;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
-                                                        PRIMER QUIMESTRE
-                                                    </th>
-                                                    <th
-                                                        style="padding: 1px 3px;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
-                                                        SEGUNDO QUIMESTRE
-                                                    </th>
-
-                                                </tr>
-                                                <tr>
-                                                    <th
-                                                        style="padding: 2px 3px;border-right: 1px solid #000;border-bottom: 1px solid #000;">
-                                                    </th>
-                                                    <th
-                                                        style="min-width: 145px;padding: 2px 3px;border-bottom: 1px solid #000; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">p1</div>
-                                                            <div style=" flex: 1 0 0%;">p2</div>
-                                                            <div style=" flex: 1 0 0%;">QUI</div>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        style="min-width: 145px;border-bottom: 1px solid #000;padding: 2px 3px; font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">p1</div>
-                                                            <div style=" flex: 1 0 0%;">p2</div>
-                                                            <div style=" flex: 1 0 0%;">QUI</div>
-                                                        </div>
-                                                    </th>
-
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr v-for="ite in item.data" :key="ite.id">
-                                                    <td
-                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;  font-size: .65rem!important;">
-                                                        {{ ite.nombre }}</td>
-                                                    <td
-                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p1 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.p2 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
-                                                                {{ ite.pro }}
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                    <td
-                                                        style="padding: 2px 3px;border-bottom-width: 0px;font-size: .65rem!important;text-align: center!important;">
-                                                        <div
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p3 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">{{ ite.p4 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
-                                                                {{ ite.pro2 }}
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div><br>
                             </div>
                             <div
                                 style="margin-top: 1.5rem!important;display: flex!important;justify-content: space-around!important;">

@@ -19,25 +19,16 @@
                                     </svg>
                                 </span>
                                 <input class="form-control buscador buscaa" type="text" v-model="searchQuery"
-                                    style="background: white;" placeholder="Buscar por paralelo">
+                                    style="background: white;" placeholder="Buscar por nombre">
                             </div>
                         </div>
                         <div class="col-lg-8 text-start">
-                            <div class="btn-group dropup">
-                                <a class="tamanio  me-3" role="button" @click="activar">
-                                    <svg class="me-1" data-testid="geist-icon" fill="none" height="18"
-                                        shape-rendering="geometricPrecision" stroke="currentColor"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                        viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
-                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-                                        <path d="M14 2v6h6"></path>
-                                        <path d="M16 13H8"></path>
-                                        <path d="M16 17H8"></path>
-                                        <path d="M10 9H8"></path>
-                                    </svg>
-                                    <b class="gordo links2">Generar libretas</b>
-                                </a>
-                            </div>
+                            <button :disabled="!isSelecMatricula.length" @click="activar" class="btn btnNaranja2"> 
+                                <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+                                <b>Libretas</b> </button>
+                          <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 ms-2"> 
+                            <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+                            <b>Consolidado parcial</b> </button>   
                         </div>
                     </div>
                     <div class="table-responsive ">
@@ -107,6 +98,10 @@
           <Quimestral :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
             :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
         </section>
+        <section v-if="ifParcial" style="display: none">
+          <Parcial :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
+            :numQuimestre="numQuimestre" :parcial="parcial3"  />
+        </section>
         <div v-if="ifyoutuve">
             <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
         </div>
@@ -119,7 +114,7 @@
         </div>
             <section v-if="isActive">
                 <Modal @close="closeModal">
-                    <template v-slot:header> Libretas escolares</template>
+                    <template v-slot:header> LIBRETAS ESCOLARES</template>
                     <template v-slot:body>
                         <div>
                             <p class="h6 fuente negros" style="font-weight:400;">
@@ -170,6 +165,60 @@
                 </Modal>
                 
             </section>
+            <section v-if="isActive2">
+          <Modal @close="closeModal2">
+            <template v-slot:header> CONSOLIDADO PARCIAL</template>
+            <template v-slot:body>
+              <div>
+                <p class="h6 fuente negros" style="font-weight:400;">
+                  Seleccionar uno de los dos quimestres
+                </p>
+                <div>
+                  <section>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" 
+                          :value="0" />
+                        <span class="parrafo"> Primer quimestre</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" 
+                          :value="1" />
+                        <span class="parrafo"> Segundo quimestre</span>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="mt-3 ">
+                    <p class="h6 fuente negros" style="font-weight:400;">
+                      Seleccionar un parciales para generar el reporte
+                    </p>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial3" type="radio" name="ite.id" :id="3"
+                          :value="3" />
+                        <span class="parrafo"> PARCIAL 1</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial3" type="radio" name="ite.id" :id="4"
+                          :value="4" />
+                        <span class="parrafo"> PARCIAL 2</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </template>
+            <template v-slot:acccion>
+              <button @click="paralelo_pdf" type="submit" class="btn btnNaranja mt-2">
+                Generar Reporte
+              </button>
+            </template>
+          </Modal>
+        </section>
         </div>
     </div>
 </template>
@@ -188,6 +237,7 @@ export default {
     components: {
         Spinner, Dropdown, NoFound, Paginate, Astronauta, Modal,
         Quimestral: () => import( /* webpackChunkName: "FormatoLibretas" */ "./pages/Quimestral.vue"),
+        Parcial: () => import( /* webpackChunkName: "Parcial" */ "./pages/Parcial.vue"),
         VueYoutuve: () => import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     },
     data() {
@@ -202,6 +252,7 @@ export default {
             rowData: [],
             iflibretas: false,
             isPrint: false,
+            ifParcial : false,
             searchQuery: '',
             //Pagina 
             page: 1,
@@ -213,12 +264,14 @@ export default {
             isSelecMatricula: [],
             allSelected: false,
             isActive: false,
+            isActive2: false,
             numQuimestre: 0,
             settings: {},
             checked: 0,
             parcial: false,
             parcial2: false,
             ifyoutuve: false,
+            parcial3: 3,
         }
     },
     watch: {
@@ -252,6 +305,9 @@ export default {
         activar() {
             this.isActive = true;
         },
+        openParcial(){
+      this.isActive2 = true;
+    },
         selectcursos(ids) {
             if (!this.isSelecMatricula.includes(ids)) {
                 this.isSelecMatricula.push(ids);
@@ -313,6 +369,7 @@ export default {
             if (ev == '100') {
                 this.isPrint = false;
                 this.iflibretas = false;
+                this.ifParcial = false;
             }
         },
         __listNivele() {
@@ -343,7 +400,15 @@ export default {
                 .getInfoListReport(cursos)
                 .then((x) => {
                     const datas = x.data
-                    this.infoMat = datas.filter((x) => x.curso == para)
+                    const filtro = datas.filter((x) => x.curso == para)
+                    this.infoMat =   filtro.sort(function (a, b) {
+            var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+            if (nameA < nameB) 
+              return -1;
+            if (nameA > nameB)
+              return 1;
+            return 0; 
+          });
                     this.isTabla = false;
                 })
                 .catch((err) => {
@@ -356,6 +421,9 @@ export default {
         },
         closeModal() {
             this.isActive = false;
+        },
+        closeModal2() {
+            this.isActive2 = false;
         },
         libretas_pdf: function () {
             if (this.isSelecMatricula.length > 0) {
@@ -372,6 +440,21 @@ export default {
                 this.$dialog.alert("Seleccione un estudiante al menos");
             }
         },
+        paralelo_pdf: function () {
+      if (this.isSelecMatricula.length > 0) {
+        if (this.parcial3 !='') {
+          this.numQuimestre = this.checked;
+          this.closeModal2();
+          this.isPrint = true;
+          this.ifParcial = true;
+          this.rowData = this.isSelecMatricula
+        }else {
+          this.$dialog.alert("Seleccionar un parcial");
+        }
+      }else {
+        this.$dialog.alert("Seleccione un estudiante al menos");
+      }
+    },
     },
     created() {
         this.verificarUsuario();

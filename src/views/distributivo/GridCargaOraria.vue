@@ -16,20 +16,36 @@
         <button v-on:click="clearData()" role="button" class="btn btnNaranja2 ms-3">
           Eliminar selección
         </button>
+        
         <button v-on:click="getRowData()" role="button" class="btn btnNaranja ms-3">
-          Guardar distributivo
+          Guardar cambios
+        </button>
+        <button v-on:click="openModal" role="button" class="btn btnNaranja2 ms-3">
+          Distributivo ordenado
         </button>
       </div>
     </div>
-
-    <Spinner v-if="isLoading"></Spinner>
+        <Spinner v-if="isLoading"></Spinner>
     <section v-else style="height: calc(100vh - 220px);">
-      <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
-        @grid-ready="onGridReady" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
+      <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
         :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable"
-        :enableRangeSelection="true" :suppressRowClickSelection="true" :enableFillHandle="true">
+        :enableRangeSelection="true" :suppressRowClickSelection="true" :enableFillHandle="true" @grid-ready="onGridReady($event, 0)">
       </ag-grid-vue>
     </section>
+   
+     <ScrimModal v-show="visible" @close="close">
+        <template v-slot:header> Lista de distributivo por curso y paralelo</template>
+        <template v-slot:body>
+          <Spinner v-if="isLoading"></Spinner>
+    <section v-else style="height: calc(100vh - 120px);">
+      <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="topColumns" :defaultColDef="defaultColDef" :editType="editType" :rowData="rowData"
+        :rowSelection="rowSelection" :rowDragManaged="true" :animateRows="true" :isRowSelectable="isRowSelectable"
+        :enableRangeSelection="true" :suppressRowClickSelection="true" :enableFillHandle="true" @grid-ready="onGridReady($event, 2)">
+      </ag-grid-vue>
+    </section>
+        </template>
+        
+      </ScrimModal>
     <div v-if="ifload" class="loadingg">
       <div class="inn ">
         <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando distributivo
@@ -44,7 +60,7 @@
         </div>
         <div class="fixed-plugin">
     <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff;
-    border-radius: 20px 20px 2px 20px;
+     border-radius: 20px 20px 2px 20px;
     box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
       Ver video explicativo
     </a>
@@ -61,6 +77,8 @@ export default {
   components: {
     AgGridVue, Spinner,
     VueYoutuve: () =>import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
+    ScrimModal: () =>
+        import(/* webpackChunkName: "ScrimModal" */ "../../shared/ScrimModal.vue"),
   },
   data: function () {
     return {
@@ -72,6 +90,7 @@ export default {
             for (let i = 0; i < this.listDocentes.length; i++) {
               arrays.push(this.listDocentes[i].fullname)
             }
+            arrays.sort()
             return {
               values: arrays
             };
@@ -85,6 +104,7 @@ export default {
             for (let i = 0; i < this.listniveles.length; i++) {
               arrays.push(this.listniveles[i].nombre)
             }
+            arrays.sort()
             return {
               values: arrays
             };
@@ -97,6 +117,7 @@ export default {
             for (let i = 0; i < this.listMaterias.length; i++) {
               arrays.push(this.listMaterias[i].nombre)
             }
+            arrays.sort()
             return {
               values: arrays
             };
@@ -104,11 +125,17 @@ export default {
         },
         {
           field: 'paralelo',headerName: 'PARALELO', cellEditor: 'agSelectCellEditor', editable: true,
-          minWidth: 120, maxWidth: 120, valueFormatter: saleValueFormatter,
+          minWidth: 70, maxWidth: 70, valueFormatter: saleValueFormatter,
           cellEditorParams: {
             values: ['A', 'B', 'C', 'D', 'E'],
           },
         },
+      ],
+      topColumns: [
+        { field: 'curso',  rowGroup: true, hide: true,},
+        { field: 'paralelo', rowGroup: true, hide: true,},
+        { field: 'nombre', headerName: 'DOCENTE', },
+        { field: 'materia',  },
       ],
       gridApi: null,
       columnApi: null,
@@ -119,6 +146,7 @@ export default {
       },
       editType: null,
       rowData: [],
+      topRowData: [],
       ifload: false,
       rowGroupPanelShow: 'always',
       rowSelection: 'multiple',
@@ -131,6 +159,9 @@ export default {
       listDocentes: [],
       listMaterias: {},
       ifyoutuve : false,
+      leftApi: null,
+      topApi: null,
+      visible : false
     };
   },
   created() {
@@ -146,6 +177,13 @@ export default {
     };
   },
   methods: {
+    openModal() {
+            this.visible = true;
+
+          },
+          close() {
+            this.visible = false;
+          },
     ClosedYoutuve: function(){
       this.ifyoutuve = false;
     },
@@ -200,11 +238,11 @@ export default {
     //  var num = this.rowData.length + 1;
       var array = []
       array.push({ nombre: 'En blanco', paralelo: 'En blanco', curso: 'En blanco', materia: 'En blanco' })
-      this.gridApi.applyTransaction({ add: array, addIndex: 0, });
+      this.leftApi.applyTransaction({ add: array, addIndex: 0, });
     },
     clearData() {
-      var selectedRowData = this.gridApi.getSelectedRows();
-      this.gridApi.applyTransaction({ remove: selectedRowData });
+      var selectedRowData = this.leftApi.getSelectedRows();
+      this.leftApi.applyTransaction({ remove: selectedRowData });
     },
 
     getRowData() {
@@ -215,7 +253,7 @@ export default {
       let arrayCursos = this.listniveles
       let arrayMaterias = this.listMaterias
       const results = []
-      this.gridApi.forEachNode(function (node) {
+      this.leftApi.forEachNode(function (node) {
         if (node.data != null) {
           if (node.data.paralelo != 'En blanco') {
             if (!validateParalelo(node.data.paralelo)) validate2 = true;
@@ -293,6 +331,7 @@ export default {
         result.push({ nombre: fullname, paralelo: element.paralelo, curso: nombre, materia: materia })
       }
       this.rowData = result
+      this.topRowData = result
     },
     save(arrays) {
       if (arrays.length > 0) {
@@ -312,9 +351,20 @@ export default {
         this.ifload = false;
       }
     },
-    onGridReady(params) {
+    onGridReady(params, side) {
       this.gridApi = params.api;
-      this.gridColumnApi = params.columnApi;
+      if (side === 0) {
+        this.leftApi = params.api;
+        this.leftColumnApi = params.columnApi;
+      }
+
+      if (side === 1) {
+        this.rightApi = params.api;
+        this.addGridDropZone();
+      }
+      if (side === 2) {
+        this.topApi = params.api;
+      }
     },
     toast(message) {
       this.$toasted.info(message, {

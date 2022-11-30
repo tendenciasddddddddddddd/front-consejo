@@ -10,33 +10,31 @@
           <section v-else>
             <div v-if="infoMat.length" class="mt-3 ">
               <div class="row mb-2">
-                <div class="col-lg-4">
-                    <div class="d-flex justify-content-start">
-                    <div v-for="ite in paralelos" :key="ite.id">
+                <div class="col-lg-5">
+                  <div class="d-flex justify-content-start">
+                      <div class="d-flex justify-content-start">
+                        <div v-for="ite in paralelos" :key="ite.id">
                       <div class="form-check  me-2">
-                        <input class="form-check-input" type="radio" name="ite.id" :id="ite.id" :value="ite.nombre"
-                          @click="onChange(ite.nombre)" v-model="searchQuery"/>
-                        <span class="negros" for="ite._id">
-                          {{ ite.nombre }}</span>
+                        <input class="form-check-input" type="radio" name="id"  :value="ite"
+                          @click="onChange(ite)" v-model="searchQuery"/>
+                        <span class="negros" for="ite">
+                          {{ ite}}</span>
                       </div>
                     </div>
-                    <div>
+                      </div>
+                    <div class="ms-3">
+                      <div class="input-group" style="min-width: 280px;">
+        <span class="input-group-text text-body buscador busca"><i class="fas fa-search" aria-hidden="true"></i></span>
+        <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
+    </div>
                     </div>
+                    
                   </div>
-                  
                 </div>
-                <div class="col-lg-8 text-start">
-   
-                  <a  v-on="isSelecMatricula.length ? { click: () => notas_pdf() } : {}" class="tamanio" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
-                    <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
-                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
-                      <path d="M6 9V2h12v7"></path>
-                      <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
-                      <path d="M6 14h12v8H6z"></path>
-                    </svg>
-                     <b class="gordo " :class="{ links2: isSelecMatricula.length != 0}">Consolidado de notas por curso</b>
-                  </a>
+                <div class="col-lg-7 text-start">
+                 <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2"> <b>Consolidado parcial</b> </button>
+                 <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> <b>Consolidado anual</b> </button>
+                 
                 </div>
               </div>
               <div class="table-responsive " v-if="displayedArticles.length">
@@ -101,7 +99,64 @@
             <ConsolidadoNotas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
               :numQuimestre="numQuimestre"  />
           </section>
-  
+          <section v-if="ifParcial" >
+            <ConsolidadoParcial :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
+              :numQuimestre="numQuimestre"  :parcial="parcial"/>
+          </section>
+          <section v-if="isActive">
+          <Modal @close="closeModal">
+            <template v-slot:header> CONSOLIDADO PARCIAL</template>
+            <template v-slot:body>
+              <div>
+                <p class="h6 fuente negros" style="font-weight:400;">
+                  Seleccionar uno de los dos quimestres
+                </p>
+                <div>
+                  <section>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" 
+                          :value="0" />
+                        <span class="parrafo"> Primer quimestre</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" 
+                          :value="1" />
+                        <span class="parrafo"> Segundo quimestre</span>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="mt-3 ">
+                    <p class="h6 fuente negros" style="font-weight:400;">
+                      Seleccionar un parciales para generar el reporte
+                    </p>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial" type="radio" name="ite.id" :id="3"
+                          :value="3" />
+                        <span class="parrafo"> PARCIAL 1</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial" type="radio" name="ite.id" :id="4"
+                          :value="4" />
+                        <span class="parrafo"> PARCIAL 2</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </template>
+            <template v-slot:acccion>
+              <button @click="paralelo_pdf" type="submit" class="btn btnNaranja mt-2">
+                Generar Reporte
+              </button>
+            </template>
+          </Modal>
+        </section>
         </div>
       </template>
       <template v-slot:footer>
@@ -118,11 +173,14 @@ import ScrimModal from "../../../../shared/ScrimModal"
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
 import Astronauta from "../../../../shared/Astronauta"
+import Modal from "../../../../shared/Modal"
 export default {
   name: 'Report',
   components: {
     Spinner, ScrimModal, Dropdown, NoFound,Astronauta,
     ConsolidadoNotas: () => import( /* webpackChunkName: "ConsolidadoNotas" */ "./ConsolidadoNotas.vue"),
+    ConsolidadoParcial: () => import( /* webpackChunkName: "ConsolidadoParcial" */ "./ConsolidadoParcial.vue"),
+    Modal
   },
   data() {
     return {
@@ -137,12 +195,7 @@ export default {
       ifConsolidado: false,
       isPrint: false,
       searchQuery: 'A',
-      //Pagina 
-    page: 1,
-    perPage: 9,
-    pages: [],
-    numPages:0,
-    totalNotas: 0,
+
     nextCourse: '',
     isSelecMatricula: [],
     allSelected: false,
@@ -150,33 +203,19 @@ export default {
     numQuimestre: 0,
     settings : {},
     numActual: 0,
-    paralelos: [
-        {
-          id: "0",
-          nombre: "A",
-        },
-        {
-          id: "1",
-          nombre: "B",
-        },
-        {
-          id: "2",
-          nombre: "C",
-        },
-        {
-          id: "3",
-          nombre: "D",
-        },
-        {
-          id: "4",
-          nombre: "Undefined",
-        },
-      ],
+    paralelos: [],
+    search:  "",
+    order: {},
+    ifParcial : false,
+    checked : 0,
+    parcial: 3,
     }
   },
   watch: {
     curso: function (value) {
       this.isSelecMatricula = [];
+      this.searchQuery = 'A'
+      this.paralelos = [],
       this.__cambios(value._id, value.num);
       this.numActual = value.num;
       this.deletedSelected()
@@ -184,23 +223,25 @@ export default {
   },
   computed: {
     displayedArticles: function () {
-      if (this.searchQuery.length>0) {
+      if (this.search.length>0) {
         return this.infoMat.filter((item) => {
-          return this.searchQuery
+          return this.search
             .toLowerCase()
             .split(" ")
-            .every((v) => item.curso.toLowerCase().includes(v));
+            .every((v) => item.nombre.toLowerCase().includes(v));
         });
       }else{
-        return this.infoMat
+        return this.infoMat;
       }
       
     }
   },
   methods: {
-    onChange(nom){
-        this.searchQuery = nom;  
-    },
+    onChange: function(nom){
+      this.infoMat = this.order.filter((x) => x.curso ==nom) 
+      this.isSelecMatricula = [];
+      this.allSelected = false;
+  },
     selectcursos(ids) {
       if (!this.isSelecMatricula.includes(ids)) {
         this.isSelecMatricula.push(ids);
@@ -221,15 +262,6 @@ export default {
       this.allSelected = false;
       this.isSelecMatricula = [];
     },
-    paginate(articles) {
-      let page = this.page;
-      let perPage = this.perPage;
-      let from = (page * perPage) - perPage;
-      let to = (page * perPage);
-      
-      this.numPages = Math.ceil(articles.length/8);
-      return articles.slice(from, to);
-  },
   onPageChange: function(page) {
     this.page = page;
 
@@ -255,6 +287,7 @@ export default {
       if (ev=='100') {
         this.isPrint = false;
         this.ifConsolidado = false;
+        this.ifParcial = false;
       }
     },
     __listNivele() {
@@ -277,11 +310,42 @@ export default {
     __cambios(cursos) {
       this.$Progress.start();
       this.infoMat = []
+      this.order = []
       this.isTabla = true;
       this.$proxies._matriculaProxi
         .getInfoListReport(cursos)
         .then((x) => {
-          this.infoMat = x.data;
+          const data= x.data;
+          this.paralelos = []
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              const element = data[i];
+              if (!this.paralelos.includes('A')) {
+                if (element.curso == "A") this.paralelos.push("A")
+              }
+              if (!this.paralelos.includes('B')) {
+                if (element.curso == "B") this.paralelos.push("B")
+              }
+              if (!this.paralelos.includes('C')) {
+                if (element.curso == "C") this.paralelos.push("C")
+              }
+              if (!this.paralelos.includes('D')) {
+                if (element.curso == "D") this.paralelos.push("D")
+              }
+              if (!this.paralelos.includes('Undefined')) {
+                if (element.curso == "Undefined") this.paralelos.push("Undefined")
+              }
+            }
+          }
+          this.order = data.sort(function (a, b) {
+            var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+            if (nameA < nameB) 
+              return -1;
+            if (nameA > nameB)
+              return 1;
+            return 0; 
+          });
+          this.infoMat = this.order.filter((x) => x.curso =="A")
           this.isTabla = false;
           this.$Progress.finish();
         })
@@ -296,6 +360,24 @@ export default {
     },
     closeModal(){
       this.isActive = false;
+    },
+    openParcial(){
+      this.isActive = true;
+    },
+    paralelo_pdf: function () {
+      if (this.isSelecMatricula.length > 0) {
+        if (this.parcial !='') {
+          this.numQuimestre = this.checked;
+          this.closeModal();
+          this.isPrint = true;
+          this.ifParcial = true;
+          this.rowData = this.isSelecMatricula
+        }else {
+          this.$dialog.alert("Seleccionar un parcial");
+        }
+      }else {
+        this.$dialog.alert("Seleccione un estudiante al menos");
+      }
     },
     notas_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
