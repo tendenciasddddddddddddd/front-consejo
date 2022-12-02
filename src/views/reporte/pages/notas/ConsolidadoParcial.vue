@@ -8,8 +8,8 @@
                         <div style="text-align: center!important;">
                             <div
                                 style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                <div style="flex: 0 0 auto;width: 12%;text-align: center!important;">
-                                    <img style="width: 100%!important" src="../../../../assets/img/ecuador.jpg"
+                                <div style="flex: 0 0 auto;width: 10%;text-align: center!important;">
+                                    <img style="width: 80%!important" :src="settings.logo"
                                         alt="Logo" />
                                 </div>
                                 <div style="flex: 0 0 auto; width: 86%;">
@@ -164,8 +164,7 @@ export default {
                 }, 1000)
                 this.statusbar = 100;
             } catch (error) {
-                this.statusbar = 100;
-                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+                this.statusbar = 500;
             }
         },
         onProgress(event) {

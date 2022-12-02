@@ -37,11 +37,12 @@
                                 <td class="text-xs text-center text-dark fuente">
                                     <span> {{ item.fdocente ? item.fdocente.fullname:'Undefined' }} </span>
                                 </td>
-                                <td class="text-sm text-center ">
+                                <td class="text-xs text-center negros">
                                     <div v-if="item.planificacion.length">
                                         <div v-for="items in item.planificacion" :key="items.id">
                                             <span style="background-color: rgb(0, 189, 165);" class="UIStatusDot-sc-1axnt8y-0 cqKvgt"></span>
-                                          <a class="links2 gordo" :href="items.url" target="_blank">Enlace de archivo</a>
+                                           
+                                            <a class="links2 gordo" :href="items.url" target="_blank"> {{items.nombre}}</a>
                                         </div>
                                         
                                     </div>

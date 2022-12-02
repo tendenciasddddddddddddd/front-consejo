@@ -44,7 +44,7 @@
                   resetPw
                 </th>
                 <th class="text-uppercase text-center text-xxs font-weight-bolder">
-                  (Doc)|(Vice)|(Admin)
+                  [Doc]|[Rector-Vice]|[Admin]
                 </th>
               </tr>
             </thead>

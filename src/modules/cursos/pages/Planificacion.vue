@@ -15,9 +15,11 @@
                             <tr class="cabeza">
                                 <th style="background-color: rgb(234, 240, 246); "
                                     class="text-center text-uppercase text-secondary text-xxs ">
-                                    url
+                                    NOMBRE
                                 </th>
-                                
+                                <th class="text-center text-uppercase text-secondary text-xxs ">
+                                    URL
+                                </th>
                                 <th class="text-center text-uppercase text-secondary text-xxs ">
                                     Acción
                                 </th>
@@ -25,6 +27,9 @@
                         </thead>
                         <tbody>
                             <tr v-for="item in planificacion" :key="item.id">
+                                <td class="align-middle negros text-sm">
+                                   {{item.nombre}}
+                                </td>
                                 <td class="align-middle  text-sm">
                                     <a :href="item.url" target="_blank" class="links2 gordo">
                                         {{ item.url.substring(0, 50) }} </a>
@@ -49,6 +54,47 @@
                 <NoFound2 v-else />
             </div>
             <div  v-else>
+                <div class="d-flex justify-content-start">
+                    <section class="mt-3 ">
+                    <p class="h6 negros gordo" style="font-weight:400;">
+                     PEIMER QUIMESTRE
+                    </p>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial1" type="radio" name="ite.id" :id="1"
+                          :value="1" />
+                        <span class="parrafo"> PARCIAL 1</span>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial2" type="radio" name="ite.id" :id="2"
+                          :value="2" />
+                        <span class="parrafo"> PARCIAL 2</span>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="mt-3 ms-4">
+                    <p class="h6 negros gordo" style="font-weight:400;">
+                     SEGUNDO QUIMESTRE
+                    </p>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial3" type="radio" name="ite.id" :id="3"
+                          :value="3" />
+                        <span class="parrafo"> PARCIAL 1</span>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="parcial4" type="radio" name="ite.id" :id="4"
+                          :value="4" />
+                        <span class="parrafo"> PARCIAL 2</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                
                 <Dropzone @uploadArchive="submitArchive" />
             </div>
         </div>
@@ -77,11 +123,16 @@ export default {
             model: {
                 planificacion: {
                     url: '',
+                    nombre: '',
                 },
             },
             isCarga: false,
             planificacion: [],
             iseliminaddo : false,
+            parcial1 : 1,
+            parcial2 : 0,
+            parcial3 : 0,
+            parcial4 : 0,
         }
     },
     mounted() {
@@ -101,6 +152,10 @@ export default {
                 return;
             }
             this.isCarga = true;
+            if (this.parcial1!=0) this.model.planificacion.nombre = 'QUIMESTRE 1 -- PARCIAL 1'
+            if (this.parcial2!=0) this.model.planificacion.nombre = 'QUIMESTRE 1 -- PARCIAL 2'
+            if (this.parcial3!=0) this.model.planificacion.nombre = 'QUIMESTRE 2 -- PARCIAL 1'
+            if (this.parcial4!=0) this.model.planificacion.nombre = 'QUIMESTRE 2 -- PARCIAL 2'
             this.$proxies._gestionProxi
                 .updatePlanificacion(this.id, this.model) //-----------EDITAR CON AXIOS
                 .then(() => {

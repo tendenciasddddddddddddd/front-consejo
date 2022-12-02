@@ -3,14 +3,13 @@ import ScrimModal from "../../../../shared/ScrimModal"
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
 import Astronauta from "../../../../shared/Astronauta"
-import Modal from "../../../../shared/Modal"
+import Emergente from "../../../../shared/Emergente.vue"
 export default {
   name: 'Report',
   components: {
-    Spinner, ScrimModal, Dropdown, NoFound,Astronauta,Modal,
+    Spinner, ScrimModal, Dropdown, NoFound,Astronauta,Emergente,
     FormatoMatricula: () => import( /* webpackChunkName: "FormatoMatricula" */ "./FormatoMatricula.vue"),
     FormatoPromocion: () => import( /* webpackChunkName: "FormatoPromocion" */ "./FormatoPromocion.vue"),
-    FormatoLibretas: () => import( /* webpackChunkName: "FormatoLibretas" */ "./FormatoLibretas.vue"),
     LibretasConducta: () => import( /* webpackChunkName: "LibretasConducta" */ "./LibretasConducta.vue"),
     InicialesPromocion: () => import( /* webpackChunkName: "InicialesPromocion" */ "./InicialesPromocion.vue"),
   },
@@ -32,12 +31,7 @@ export default {
       ifPromocionInicial: false,
       isPrint: false,
       searchQuery: 'A',
-      //Pagina 
-    page: 1,
-    perPage: 9,
-    pages: [],
-    numPages:0,
-    totalNotas: 0,
+      ifEmergente : false,
     nextCourse: '',
     isSelecMatricula: [],
     allSelected: false,
@@ -83,9 +77,6 @@ export default {
       this.isSelecMatricula = [];
       this.allSelected = false;
   },
-    activar(){
-      this.isActive=true;
-    },
     selectcursos(ids) {
       if (!this.isSelecMatricula.includes(ids)) {
         this.isSelecMatricula.push(ids);
@@ -141,9 +132,16 @@ export default {
         this.isPrint = false;
         this.ifmatricula = false
         this.ifpromocion = false
-        this.iflibretas = false
         this.ifconducta = false;
         this.ifPromocionInicial = false
+      }
+      if (ev=='500'){
+        this.isPrint = false;
+        this.ifmatricula = false
+        this.ifpromocion = false
+        this.ifconducta = false;
+        this.ifPromocionInicial = false
+        this.ifEmergente = true;
       }
     },
     __listNivele() {
@@ -222,9 +220,7 @@ export default {
     close() {
       this.$emit('myEventClosedModalReporte');
     },
-    closeModal(){
-      this.isActive = false;
-    },
+
     get: function () {
       if (this.isSelecMatricula.length > 0) {
         this.isPrint = true;
@@ -244,21 +240,7 @@ export default {
         this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
-    libretas_pdf: function () {
-      if (this.isSelecMatricula.length > 0) {
-        if (this.parcial !='' || this.parcial2 !='') {
-          this.numQuimestre = this.checked;
-          this.closeModal();
-          this.isPrint = true;
-          this.iflibretas = true
-          this.rowData = this.isSelecMatricula
-        }else {
-          this.$dialog.alert("Seleccionar un parcial");
-        }
-      }else {
-        this.$dialog.alert("Seleccione un estudiante al menos");
-      }
-    },
+   
     conducta_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
           this.isPrint = true;

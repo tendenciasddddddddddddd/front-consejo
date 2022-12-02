@@ -43,10 +43,37 @@ export default {
       arraysMatricula: [],
       fecha: '',
       objetosRechasados: [],
-      isOptionsModalidad: ''
+      isOptionsModalidad: '',
+      paralelos: [
+        {
+          id: "0",
+          nombre: "A",
+        },
+        {
+          id: "1",
+          nombre: "B",
+        },
+        {
+          id: "2",
+          nombre: "C",
+        },
+        {
+          id: "3",
+          nombre: "D",
+        },
+        {
+          id: "4",
+          nombre: "E",
+        },
+      ],
+      check: null,
     };
   },
   methods: {
+    onChange(id) {
+      this.check = id;
+      this.isSelected = true;
+    },
     verificarUsuario() {
       if (!restResourceService.admin(this.roles)) {
         this.$router.push("/");
@@ -113,6 +140,7 @@ export default {
       this.model.nmatricula = null;
       this.model.folio = null;
       this.isSelecUsers = [];
+      this.check = null;
     },
 
     quitar(){
@@ -137,7 +165,7 @@ export default {
             academico = this.model.academico._id;
             fknivel = this.model.fknivel._id;
             this.arraysMatricula.push({fkestudiante:fkestudiante, nombre: nombre, estado: 1, fecha:this.fecha,
-              academico: academico, fknivel: fknivel, typo: this.isModalidad, curso: "Undefined", nmatricula:'1', folio: '1'})
+              academico: academico, fknivel: fknivel, typo: this.isModalidad, curso: this.check, nmatricula:'1', folio: '1'})
          }        
          this.$proxies._matriculaProxi
            .createMatricula(this.arraysMatricula, this.isModalidad)

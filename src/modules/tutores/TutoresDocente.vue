@@ -2,8 +2,9 @@
     <div>
         <Spinner v-if="isLoading1"></Spinner>
         <div v-else>
-            <Dropdown v-model="curso" :options="listniveles" />
+            <span class="negros gordo h6">{{this.listniveles[0]? this.listniveles[0].nombre : "SIN CURSO ASIGNADO"}}</span>
             <Astronauta v-if="isPrint" />
+            <Emergente @closeEmergente="(ifEmergente=false)" v-if="ifEmergente" />
             <Spinner v-if="isTabla"></Spinner>
             <section v-else>
                 <div v-if="infoMat.length" class="mt-3 ">
@@ -29,6 +30,7 @@
                           <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 ms-2"> 
                             <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
                             <b>Consolidado parcial</b> </button>   
+                            <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> <b>Consolidado anual</b> </button>
                         </div>
                     </div>
                     <div class="table-responsive ">
@@ -76,7 +78,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="text-xs text-center text-dark fuente">
+                                    <td class="text-xs text-center negros gordo ">
                                         {{ item.curso }}
                                     </td>
                                     <td class="text-xs text-center text-dark fuente">
@@ -102,6 +104,10 @@
           <Parcial :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
             :numQuimestre="numQuimestre" :parcial="parcial3"  />
         </section>
+        <section v-if="ifConsolidado" style="display: none">
+            <ConsolidadoNotas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
+              :numQuimestre="numQuimestre"  />
+          </section>
         <div v-if="ifyoutuve">
             <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
         </div>
@@ -227,17 +233,18 @@
 import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner.vue";
-import Dropdown from "../../shared/Dropdown.vue";
 import NoFound from "../../shared/NoFound"
 import Paginate from "../../shared/Paginate.vue";
 import Astronauta from "../../shared/Astronauta"
+import Emergente from "../../shared/Emergente.vue"
 import Modal from "../../shared/Modal"
 export default {
     name: 'Report',
     components: {
-        Spinner, Dropdown, NoFound, Paginate, Astronauta, Modal,
+        Spinner,  NoFound, Paginate, Astronauta, Modal,Emergente,
         Quimestral: () => import( /* webpackChunkName: "FormatoLibretas" */ "./pages/Quimestral.vue"),
         Parcial: () => import( /* webpackChunkName: "Parcial" */ "./pages/Parcial.vue"),
+        ConsolidadoNotas: () => import( /* webpackChunkName: "ConsolidadoNotas" */ "../../views/reporte/pages/notas/ConsolidadoNotas.vue"),
         VueYoutuve: () => import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
     },
     data() {
@@ -254,7 +261,7 @@ export default {
             isPrint: false,
             ifParcial : false,
             searchQuery: '',
-            //Pagina 
+            ifEmergente : false,
             page: 1,
             perPage: 9,
             pages: [],
@@ -272,6 +279,7 @@ export default {
             parcial2: false,
             ifyoutuve: false,
             parcial3: 3,
+            ifConsolidado : false,
         }
     },
     watch: {
@@ -369,8 +377,16 @@ export default {
             if (ev == '100') {
                 this.isPrint = false;
                 this.iflibretas = false;
+                this.ifConsolidado = false;
                 this.ifParcial = false;
             }
+            if (ev=='500'){
+                this.isPrint = false;
+                this.iflibretas = false;
+                this.ifParcial = false;
+                this.ifConsolidado = false;
+                this.ifEmergente = true;
+      }
         },
         __listNivele() {
             this.isLoading1 = true;
@@ -383,6 +399,8 @@ export default {
                             const element = result[i].fnivel;
                             const paralelo = result[i].paralelo
                             this.listniveles.push({_id: element._id, paralelo: paralelo, nombre: element.nombre + ':: PARALELO (' + paralelo + ')'})
+                            this.__cambios(element._id, paralelo)
+                            break;
                         }
                     }
                     this.isLoading1 = false;
@@ -414,6 +432,7 @@ export default {
                 .catch((err) => {
                     console.log("Error", err);
                     this.isTabla = false;
+                    this.isLoading1 = false;
                 });
         },
         close() {
@@ -425,6 +444,15 @@ export default {
         closeModal2() {
             this.isActive2 = false;
         },
+        notas_pdf: function () {
+      if (this.isSelecMatricula.length > 0) {
+          this.isPrint = true;
+          this.ifConsolidado = true;
+          this.rowData = this.isSelecMatricula
+      }else {
+        this.$dialog.alert("Selecione un estudiante por lo menos");
+      }
+    },
         libretas_pdf: function () {
             if (this.isSelecMatricula.length > 0) {
                 if (this.parcial != '' || this.parcial2 != '') {

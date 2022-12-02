@@ -6,18 +6,19 @@
       <div v-else>
         <Dropdown v-model="curso" :options="listniveles" />
         <Astronauta v-if="isPrint" />
+        <Emergente @closeEmergente="(ifEmergente=false)" v-if="ifEmergente" />
         <Spinner v-if="isTabla"></Spinner>
         <section v-else>
           <div v-if="infoMat.length" class="mt-3 ">
             <div class="row mb-2">
-              <div class="col-lg-5">
+              <div class="col-lg-6">
                     <div class="d-flex justify-content-start">
                       <div class="d-flex justify-content-start">
                         <div v-for="ite in paralelos" :key="ite.id">
                       <div class="form-check  me-2">
                         <input class="form-check-input" type="radio" name="id"  :value="ite"
                           @click="onChange(ite)" v-model="searchQuery"/>
-                        <span class="negros" for="ite">
+                        <span class="negros gordo" for="ite">
                           {{ ite}}</span>
                       </div>
                     </div>
@@ -31,54 +32,36 @@
                     
                   </div>
                 </div>
-              <div class="col-lg-7 text-start">
-                
-                <div class="btn-group dropup">
-                  <a v-on="isSelecMatricula.length ? { click: () => conducta_pdf() } : {}" class="tamanio me-3" role="button"  :class="{ disabled: isSelecMatricula.length === 0 }">
-                    <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
-                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
-                      <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
-                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path>
-                    </svg>
-                   <b class="gordo" :class="{ links2: isSelecMatricula.length != 0}"> Conducta</b>
-                  </a>
-                </div>
-                <div class="btn-group dropup">
-                  <a v-on="isSelecMatricula.length ? { click: () => activar() } : {}" class="tamanio  me-3" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
-                    <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
-                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
-                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-                      <path d="M14 2v6h6"></path>
-                      <path d="M16 13H8"></path>
-                      <path d="M16 17H8"></path>
-                      <path d="M10 9H8"></path>
-                    </svg>
-                    <b class="gordo" :class="{ links2: isSelecMatricula.length != 0}"> Libretas</b>
-                  </a>
-
-                </div>
-
-                <a v-on="isSelecMatricula.length ? { click: () => get2() } : {}" class="tamanio me-3" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
-                  <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
-                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
-                    <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
-                    <path d="M13 2v7h7"></path>
-                  </svg>
-                   <b class="gordo" :class="{ links2: isSelecMatricula.length != 0}">Promoción</b>
-                </a>
-                <a  v-on="isSelecMatricula.length ? { click: () => get() } : {}" class="tamanio" role="button" :class="{ disabled: isSelecMatricula.length === 0 }">
-                  <svg class="me-1" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
+              <div class="col-lg-6 text-start">
+                <button :disabled="!isSelecMatricula.length" @click="conducta_pdf()" class="btn btnNaranja2 me-2"> 
+                  <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
                     <path d="M6 9V2h12v7"></path>
                     <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
                     <path d="M6 14h12v8H6z"></path>
                   </svg>
-                   <b class="gordo " :class="{ links2: isSelecMatricula.length != 0}">Reporte matricula</b>
-                </a>
+                  <b>Comportamiento</b> </button>
+                  <button :disabled="!isSelecMatricula.length" @click="get2()" class="btn btnNaranja2 me-2"> 
+                  <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
+                    <path d="M6 9V2h12v7"></path>
+                    <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
+                    <path d="M6 14h12v8H6z"></path>
+                  </svg>
+                  <b>Promociones</b> </button>
+
+                  <button :disabled="!isSelecMatricula.length" @click="get()" class="btn btnNaranja2 me-2"> 
+                  <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
+                    <path d="M6 9V2h12v7"></path>
+                    <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
+                    <path d="M6 14h12v8H6z"></path>
+                  </svg>
+                  <b>Reporte matricula</b> </button>
+                
               
               </div>
             </div>
@@ -152,65 +135,13 @@
             :settings="settings" />
         </section>
 
-        <section v-if="iflibretas" style="display: none">
-          <FormatoLibretas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
-            :numQuimestre="numQuimestre" :parcial="parcial" :parcial2="parcial2" />
-        </section>
+      
 
         <section v-if="ifconducta" style="display: none">
           <LibretasConducta :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse"
             :settings="settings" :numQuimestre="numQuimestre" />
         </section>
-        <section v-if="isActive">
-          <Modal @close="closeModal">
-            <template v-slot:header> Libretas escolares</template>
-            <template v-slot:body>
-              <div>
-                <p class="h6 fuente negros" style="font-weight:400;">
-                  Seleccionar uno de los dos quimestres
-                </p>
-                <div>
-                  <section>
-                    <div class="">
-                      <div class="form-check mb-1">
-                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="0"
-                          :value="0" />
-                        <span class="parrafo"> Primer quimestre</span>
-                      </div>
-                    </div>
-                    <div class="mt-3">
-                      <div class="form-check mb-1">
-                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="1"
-                          :value="1" />
-                        <span class="parrafo"> Segundo quimestre</span>
-                      </div>
-                    </div>
-                  </section>
-                  <section class="mt-3 ">
-                    <p class="h6 fuente negros" style="font-weight:400;">
-                      Seleccionar uno o varios parciales para generar el reporte
-                    </p>
-                    <div>
-                      <div class="form-check my-auto supcheka">
-                        <input class="form-check-input cheka" type="checkbox" value="1" v-model="parcial" />
-                      </div> <span class="ms-4 parrafo negros">Primer parcial</span>
-                    </div>
-                    <div class="mt-3">
-                      <div class="form-check my-auto supcheka">
-                        <input class="form-check-input cheka" type="checkbox" value="2" v-model="parcial2" />
-                      </div><span class="ms-4 parrafo negros">Segundo parcial</span>
-                    </div>
-                  </section>
-                </div>
-              </div>
-            </template>
-            <template v-slot:acccion>
-              <button @click="libretas_pdf" type="submit" class="btn btnNaranja mt-2">
-                Generar Reporte
-              </button>
-            </template>
-          </Modal>
-        </section>
+       
       </div>
     </template>
     <template v-slot:footer>

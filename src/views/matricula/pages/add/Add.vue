@@ -88,23 +88,37 @@
                         id="matricula"
                         class="p-3"
                       >
-                       <h6 class="negros" style=" font-weight: 600;">Llenar los datos</h6>
-                        <Spinner v-if="isLoading2"></Spinner>
-                        <div v-else class="col-12 ">
-                          <a class="parrafo mt-4">A que cursos</a>
-                           <Dropdown  v-model="model.fknivel"  :options="listniveles"/>
-                          <p class="mb-0 text-sm text-danger">
-                            {{ validation.firstError("model.fknivel") }}
-                          </p>
-                        </div>
-                          <Spinner v-if="isLoading1"></Spinner>
-                        <div v-else class="col-12 mt-2">
-                          <span class="parrafo">A que período</span>
+                      <Spinner v-if="isLoading1"></Spinner>
+                        <div v-else >
+                          <h6 class="negros" style=" font-weight: 600;">A que período</h6>
                             <Dropdown  v-model="model.academico"  :options="listPeriodo"/>
                           <p class="mb-0 text-sm text-danger">
                             {{ validation.firstError("model.academico") }}
                           </p>
                         </div>
+                        <Spinner v-if="isLoading2"></Spinner>
+                        <div v-else class="mt-2 ">
+                          <h6 class="negros" style=" font-weight: 600;">A que cursos</h6>
+                           <Dropdown  v-model="model.fknivel"  :options="listniveles"/>
+                          <p class="mb-0 text-sm text-danger">
+                            {{ validation.firstError("model.fknivel") }}
+                          </p>
+                        </div>
+                      <h6 class="negros mt-2" style=" font-weight: 600;">A que paralelo</h6>
+                      <div class="d-flex justify-content-start">
+                    <div v-for="ite in paralelos" :key="ite.id">
+                      <div class="form-check  me-2">
+                        <input class="form-check-input" type="radio" name="ite.id" :id="ite.id" :value="ite.id"
+                          @click="onChange(ite.nombre)" />
+                        <span class="negros" for="ite._id">
+                          {{ ite.nombre }}</span>
+                      </div>
+                    </div>
+                   
+                  </div>
+                       
+                       
+                          
                       </form>
                       <div class="text-end me-3">
                         <span style="color:#8e9ba4" class="me-2 text-sm">{{fecha}}</span>

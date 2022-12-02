@@ -187,7 +187,7 @@
                 <router-link to="/tutoresDocente" :class="{'active': $route.name === 'dh'}"
                   class="nav-link ">
                   <span class="sidenav-mini-icon"> L </span>
-                  <span class="sidenav-normal letras fuente">Libretas </span>
+                  <span class="sidenav-normal letras fuente">Reportes </span>
                 </router-link>
               </li>
               <li :class="{'active': $route.name === 'dr'}" class="nav-item ">

@@ -446,7 +446,7 @@ export default {
             total: 0,
             aux: 0,
             curso: 'None',
-            paralelo: 'None'
+            paralelo: 'None',
         }
     },
     watch: {
@@ -470,8 +470,8 @@ export default {
                 }, 1000)
                 this.statusbar = 100;
             } catch (error) {
-                this.statusbar = 100;
-                this.$dialog.alert('Por favor permitir siempre ventanas emergentes y redirecciones')
+                this.statusbar = 500;
+             //   this.$dialog.alert('<b>HOLA PERROS</b>Por favor permitir siempre ventanas emergentes y redirecciones')
             }
         },
         onProgress(event) {

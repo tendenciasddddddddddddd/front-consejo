@@ -198,8 +198,10 @@ export default {
             const info = JSON.parse(localStorage.getItem("Xf"));
 
             for (let i = 0; i < this.info.length; i++) {
+               
                 const res = this.info[i];
                 if (res._id == id) {
+                    console.log(this.info[i])
                     try {
                         var myCourse = {
                             paralelo: res.paralelo,
@@ -239,6 +241,7 @@ export default {
                 this.$proxies._gestionProxi
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
+                        console.log(x.data)
                         this.info = x.data;
                         this.isData = false;
                         this.$Progress.finish();

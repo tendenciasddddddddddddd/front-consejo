@@ -6,12 +6,13 @@ import Paginate from "../../../../shared/Paginate.vue";
 import ScrimModal from "../../../../shared/ScrimModal"
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
+import Modal from "../../../../shared/Modal"
 
 export default {
   name: "EslistarParalelo",
   components: {
     Spinner,
-    Paginate,ScrimModal, Dropdown, NoFound, AgGridVue
+    Paginate,ScrimModal, Dropdown, NoFound, AgGridVue, Modal
   },
   data() {
     return {
@@ -34,12 +35,10 @@ export default {
           id: "3",
           nombre: "D",
         },
-        {
-          id: "4",
-          nombre: "E",
-        },
+       
       ],
       check: null,
+      check2 : null,
       listPeriodo: null,
       isLoading1: false,
       listniveles: null,
@@ -54,6 +53,14 @@ export default {
         asistencias: [],
         iniciales: [],
         dhi: []
+      },
+      model2: {
+        curso: null,
+        calificaciones: [],
+        asistencias: [],
+        iniciales: [],
+        dhi: [],
+        fknivel: null
       },
       isSelecCurosos: {},
       isClick: false,
@@ -99,6 +106,8 @@ export default {
       ],
       rowSelection: null,
       groupDisplayType: 'groupRows',
+      isCambio : false,
+      modelCambios :''
     };
   },
   watch: {
@@ -110,6 +119,39 @@ export default {
   methods: {
     onQuickFilterChanged() {
       this.leftApi.setQuickFilter(document.getElementById('quickFilter').value);
+    },
+    update (){
+      if (this.check2 !=null) {
+       
+        var selectedRowData = this.leftApi.getSelectedRows();
+        const idArrays = []
+        selectedRowData.forEach(function (node) {
+          idArrays.push(node._id);
+        })
+         if (idArrays.length==0) return; 
+         this.$Progress.start();
+         this.model2.curso = this.check2;
+         this.model2.fknivel = this.modelCambios._id;
+         this.isTabla = true;
+         this.$proxies._matriculaProxi
+         .updateMatricula(idArrays, this.model2)
+         .then(() => {
+          this.isTabla = false;
+           this.__cambios(this.idCurso);
+           this.toast("Cambio exitoso "  );
+           this.closeModal()
+           this.modelCambios = ''
+           this.check2 = null;
+           this.$Progress.finish();
+         })
+         .catch(() => {
+           this.$dialog.alert('Error en ng server')
+           this.isTabla = false;
+           this.$Progress.fail();
+         });
+      } else  {
+        this.$dialog.alert('LLENE LOS CAMPOS')
+      }
     },
     onRemoveSelected2() {
       var selectedRowData = this.topApi.getSelectedRows();
@@ -143,9 +185,20 @@ export default {
     getRowId(params) {
       return params.data.nombre;
     },
+    closeModal: function(){
+      this.isCambio = false;
+    },
+    openModal: function(){
+      this.isCambio = true
+      this.modelCambios = ''
+      this.check2 = null;
+    },
     onChange(id) {
       this.check = id;
       this.isSelected = true;
+    },
+    onChange2(id) {
+      this.check2 = id;
     },
     loadGrids() {
       this.leftRowData = [...this.rawData];
@@ -221,9 +274,23 @@ export default {
         .then((x) => {
           this.filtros = x.data.matriculados;
           this.infoMat = this.filtros.filter((x) => x.curso == "Undefined");
-          this.leftRowData = this.infoMat
+          this.leftRowData = this.infoMat.sort(function (a, b) {
+            var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+            if (nameA < nameB) 
+              return -1;
+            if (nameA > nameB)
+              return 1;
+            return 0; 
+          });
           const filterSave = this.filtros.filter((x) => x.curso != "Undefined");
-          this.topRowData = filterSave
+          this.topRowData =  filterSave.sort(function (a, b) {
+            var nameA = a.nombre.toLowerCase(), nameB = b.nombre.toLowerCase();
+            if (nameA < nameB) 
+              return -1;
+            if (nameA > nameB)
+              return 1;
+            return 0; 
+          });
           this.isTabla = false; 
           this.$Progress.finish();
         })

@@ -104,7 +104,7 @@ export default {
             for (let i = 0; i < this.listniveles.length; i++) {
               arrays.push(this.listniveles[i].nombre)
             }
-            arrays.sort()
+           // arrays.sort()
             return {
               values: arrays
             };
@@ -188,7 +188,7 @@ export default {
       this.ifyoutuve = false;
     },
     onQuickFilterChanged() {
-      this.gridApi.setQuickFilter(document.getElementById('quickFilter').value);
+      this.leftApi.setQuickFilter(document.getElementById('quickFilter').value);
     },
     verificarUsuario() {
       let text_1 = 'Pages'
@@ -266,7 +266,7 @@ export default {
               fdocente: docente[0]._id,
               fmateria: materia[0]._id,
               paralelo: node.data.paralelo,
-              planificacion: [],
+              planificacion: node.data.planificacion,
               ifComplementarias : materia[0].estado == 1 ? 0 : 1,
             }) 
             } catch (error) {
@@ -328,7 +328,7 @@ export default {
         let  fullname  = element.fdocente? element.fdocente.fullname : 'Undefined';
         let  nombre  = element.fnivel? element.fnivel.nombre : 'Undefined';
         let materia =  element.fmateria? element.fmateria.nombre : 'Undefined';
-        result.push({ nombre: fullname, paralelo: element.paralelo, curso: nombre, materia: materia })
+        result.push({ nombre: fullname, paralelo: element.paralelo, curso: nombre, materia: materia, planificacion: element.planificacion })
       }
       this.rowData = result
       this.topRowData = result

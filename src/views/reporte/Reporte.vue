@@ -65,13 +65,13 @@ export default {
         },
         {
           id: "1",
-          nombre: "Matriculas, promociones y libretas",
+          nombre: "Matriculas, promociones y conducta",
           img: img2,
           description: "Generar un archivo pdf",
         },
         {
           id: "4",
-          nombre: "Reporte Notas",
+          nombre: "Libretas y notas",
           img: img2,
           description: "Generar reportes de notas por nivel y por paralelos",
         },
@@ -83,7 +83,7 @@ export default {
         },
          {
           id: "3",
-          nombre: "Permisos",
+          nombre: "Archivo DECE",
           img: img4,
           description: "Puedes generar reportes de permisos según sea necesario",
         },

@@ -6,6 +6,7 @@
         <div v-else>
           <Dropdown v-model="curso" :options="listniveles" />
           <Astronauta v-if="isPrint" />
+          <Emergente @closeEmergente="(ifEmergente=false)" v-if="ifEmergente" />
           <Spinner v-if="isTabla"></Spinner>
           <section v-else>
             <div v-if="infoMat.length" class="mt-3 ">
@@ -17,7 +18,7 @@
                       <div class="form-check  me-2">
                         <input class="form-check-input" type="radio" name="id"  :value="ite"
                           @click="onChange(ite)" v-model="searchQuery"/>
-                        <span class="negros" for="ite">
+                        <span class="negros gordo" for="ite">
                           {{ ite}}</span>
                       </div>
                     </div>
@@ -32,7 +33,8 @@
                   </div>
                 </div>
                 <div class="col-lg-7 text-start">
-                 <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2"> <b>Consolidado parcial</b> </button>
+                  <button :disabled="!isSelecMatricula.length" @click="openLibreta()" class="btn btnNaranja2 me-2"> <b>Libretas</b> </button>
+                 <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 me-2"> <b>Consolidado parcial</b> </button>
                  <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> <b>Consolidado anual</b> </button>
                  
                 </div>
@@ -99,10 +101,14 @@
             <ConsolidadoNotas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
               :numQuimestre="numQuimestre"  />
           </section>
-          <section v-if="ifParcial" >
+          <section v-if="ifParcial" style="display: none">
             <ConsolidadoParcial :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
               :numQuimestre="numQuimestre"  :parcial="parcial"/>
           </section>
+          <section v-if="iflibretas" style="display: none">
+          <FormatoLibretas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
+            :numQuimestre="numQuimestre" :parcial="parcial3" :parcial2="parcial2" />
+        </section>
           <section v-if="isActive">
           <Modal @close="closeModal">
             <template v-slot:header> CONSOLIDADO PARCIAL</template>
@@ -157,6 +163,56 @@
             </template>
           </Modal>
         </section>
+        <section v-if="isActive2">
+          <Modal @close="closeModal2">
+            <template v-slot:header> Libretas escolares</template>
+            <template v-slot:body>
+              <div>
+                <p class="h6 fuente negros" style="font-weight:400;">
+                  Seleccionar uno de los dos quimestres
+                </p>
+                <div>
+                  <section>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="0"
+                          :value="0" />
+                        <span class="parrafo"> Primer quimestre</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="1"
+                          :value="1" />
+                        <span class="parrafo"> Segundo quimestre</span>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="mt-3 ">
+                    <p class="h6 fuente negros" style="font-weight:400;">
+                      Seleccionar uno o varios parciales para generar el reporte
+                    </p>
+                    <div>
+                      <div class="form-check my-auto supcheka">
+                        <input class="form-check-input cheka" type="checkbox" value="1" v-model="parcial3" />
+                      </div> <span class="ms-4 parrafo negros">Primer parcial</span>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check my-auto supcheka">
+                        <input class="form-check-input cheka" type="checkbox" value="2" v-model="parcial2" />
+                      </div><span class="ms-4 parrafo negros">Segundo parcial</span>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </template>
+            <template v-slot:acccion>
+              <button @click="libretas_pdf" type="submit" class="btn btnNaranja mt-2">
+                Generar Reporte
+              </button>
+            </template>
+          </Modal>
+        </section>
         </div>
       </template>
       <template v-slot:footer>
@@ -173,13 +229,15 @@ import ScrimModal from "../../../../shared/ScrimModal"
 import Dropdown from "../../../../shared/Dropdown.vue";
 import NoFound from "../../../../shared/NoFound"
 import Astronauta from "../../../../shared/Astronauta"
+import Emergente from "../../../../shared/Emergente.vue"
 import Modal from "../../../../shared/Modal"
 export default {
   name: 'Report',
   components: {
-    Spinner, ScrimModal, Dropdown, NoFound,Astronauta,
+    Spinner, ScrimModal, Dropdown, NoFound,Astronauta,Emergente,
     ConsolidadoNotas: () => import( /* webpackChunkName: "ConsolidadoNotas" */ "./ConsolidadoNotas.vue"),
     ConsolidadoParcial: () => import( /* webpackChunkName: "ConsolidadoParcial" */ "./ConsolidadoParcial.vue"),
+    FormatoLibretas: () => import( /* webpackChunkName: "FormatoLibretas" */ "./FormatoLibretas.vue"),
     Modal
   },
   data() {
@@ -195,11 +253,12 @@ export default {
       ifConsolidado: false,
       isPrint: false,
       searchQuery: 'A',
-
+      ifEmergente : false,
     nextCourse: '',
     isSelecMatricula: [],
     allSelected: false,
     isActive:false,
+    isActive2:false,
     numQuimestre: 0,
     settings : {},
     numActual: 0,
@@ -209,6 +268,9 @@ export default {
     ifParcial : false,
     checked : 0,
     parcial: 3,
+    iflibretas : false,
+    parcial2 : false,
+    parcial3 : false,
     }
   },
   watch: {
@@ -288,6 +350,14 @@ export default {
         this.isPrint = false;
         this.ifConsolidado = false;
         this.ifParcial = false;
+        this.iflibretas = false;
+      }
+      if (ev=='500'){
+        this.isPrint = false;
+        this.ifConsolidado = false;
+        this.ifParcial = false;
+        this.iflibretas = false;
+        this.ifEmergente = true;
       }
     },
     __listNivele() {
@@ -361,8 +431,14 @@ export default {
     closeModal(){
       this.isActive = false;
     },
+    closeModal2(){
+      this.isActive2 = false;
+    },
     openParcial(){
       this.isActive = true;
+    },
+    openLibreta(){
+      this.isActive2 = true;
     },
     paralelo_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
@@ -386,6 +462,21 @@ export default {
           this.rowData = this.isSelecMatricula
       }else {
         this.$dialog.alert("Selecione un estudiante por lo menos");
+      }
+    },
+    libretas_pdf: function () {
+      if (this.isSelecMatricula.length > 0) {
+        if (this.parcial !='' || this.parcial2 !='') {
+          this.numQuimestre = this.checked;
+          this.closeModal2();
+          this.isPrint = true;
+          this.iflibretas = true
+          this.rowData = this.isSelecMatricula
+        }else {
+          this.$dialog.alert("Seleccionar un parcial");
+        }
+      }else {
+        this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
   },
