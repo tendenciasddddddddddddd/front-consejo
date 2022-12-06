@@ -284,9 +284,9 @@ margin-left: 0px !important;
     line-height: 24px;
   }
 
-  .fuente {
+  /* .fuente {
     font-family: Avenir Next W02, Helvetica, Arial, sans-serif;
-  }
+  } */
   .colorhs {
     color: #0091ae;
   }
@@ -322,11 +322,11 @@ margin-left: 0px !important;
   }
   a.disabled {
     cursor: not-allowed !important;
-    color: #b0c1d4 !important;
+    color: #899bbd !important;
   }
   .inactivo {
     pointer-events: none;
-    color: #b0c1d4 !important;
+    color: #899bbd !important;
   }
   .supcheka {
     min-height: 0rem !important;

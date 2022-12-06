@@ -1,18 +1,11 @@
 <template>
   <div>
-    <div class="card-header pb-0 text-center">
-      <h3 class="negros fuente ">
-        PLATAFORMA
-      </h3>
-      <p class="h5 fuente gordo">
-        Restablece tu contraseña
-      </p>
-      <p class="parrafo">
-        Introduce la dirección de correo electrónico en la que deseas recibir la
-        información para restablecer la contraseña.
-      </p>
-    </div>
-    <div class="card-body">
+    
+    <div class="card-body pt-2">
+      <div class="pt-4 pb-2">
+                    <h5 class="negros gordo text-center pb-0 fs-4">PLATAFORMA</h5>
+                    <p class="text-center small">Ingrese su email o cédula y contraseña para iniciar sesión</p>
+                  </div>
       <form @submit.prevent="ResetPassword" class="text-start">
         <p class="parrafo">Dirección de correo</p>
         <div class="mb-3">
@@ -49,7 +42,7 @@
     </div>
     <div class="mb-4">
       <a @click="activeGoBackLogin" href="javascript:;" class="tamanio ms-4"
-        >Volver a <b class="links2 ms-2 gordo">Inicio de sesión</b>
+        > <b class="links2 ms-2 gordo">Volver a inicio de sesión</b>
       </a>
     </div>
   </div>

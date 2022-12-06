@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mb-3 mt-2">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="input-group" style="margin-bottom: 7px;">
           <span class="input-group-text negros buscador busca">
           <svg style=" margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M15.2 16.34a7.5 7.5 0 1 1 1.38-1.45l4.2 4.2a1 1 0 1 1-1.42 1.41l-4.16-4.16zm-4.7.16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
@@ -9,7 +9,7 @@
         <input type="text" id="quickFilter" v-on:input="onQuickFilterChanged()" class="form-control buscador buscaa" placeholder="Buscar" />
         </div>
       </div>
-      <div class="col-sm-8 ">
+      <div class="col-sm-7 ">
         <button v-on:click="onBtAdd()" role="button" class="btn btnNaranja2 ">
           Insertar fila
         </button>

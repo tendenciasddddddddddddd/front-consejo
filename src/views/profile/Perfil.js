@@ -119,8 +119,8 @@ export default {
         });
     },
     verificarUsuario(){
-      let text_1 = 'Cuenta'
-      let text_2 = 'De perfil'
+      let text_1 = 'Page'
+      let text_2 = 'Perfil'
       this.$store.commit('updateHeader',{text_1, text_2})
       if(!restResourceService.docente(this.roles)&&!restResourceService.estudiante(this.roles)&&!restResourceService.admin(this.roles)){
         this.$router.push("/");

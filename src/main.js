@@ -16,9 +16,9 @@ import GAuth from 'vue-google-oauth2'
 import VuejsDialog from 'vuejs-dialog';
 
 // Usa Bootstrap
-import './assets/css/nucleo-icons.css'
-import './assets/css/nucleo-svg.css'
-import './assets/css/soft-ui-dashboard.min.css?v=1.0.3'
+import './assets/css/bootstrap.min.css'
+import './assets/bootstrap-icons/bootstrap-icons.css'
+
 
 import "vue-select/dist/vue-select.css";
 

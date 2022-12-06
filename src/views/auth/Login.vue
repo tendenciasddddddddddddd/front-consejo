@@ -1,50 +1,39 @@
 <template>
   <div v-bind:style="{ 'background-image': 'url(' + fondo + ')' }" style="
       background-size: 100% auto;background-position: top;    min-height: calc(100vh - 50px);">
-        <main class="main-content main-content-bg mt-0"  >
-      <section>
-        <div class="page-header " style="    height: 85vh;background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));">
-          <div class="container">
-            <div class="row" >
-              <div class="col-xl-5 col-lg-5 col-md-6  mx-auto" >
-                <div class="">
-                  <div v-if="isVisible == 'logins'" class="card card-plain  mt-4" style="background: #fff;border-radius: 6px;">
-                    <div class="card-header pb-0 text-center" >
-                      <h3 class="negros fuente">
-                        PLATAFORMA
-                      </h3>
-                      <p class="parrafo">
-                        Ingrese su email o cédula y contraseña para iniciar sesión
-                      </p>
-                    </div>
-                    <div class="card-body">
-                      <form @submit.prevent="authenticate" class="text-start">
-                        <span class="parrafo ">Cédula o dirección de correo </span>
-                        <div class="mb-3 mt-1">
-                          <input v-model="login.email" id="username" type="text" class="form-control buscador fuente"
+   <div style="    height: 85vh;background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));">
+    <div class="container" >
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 d-flex flex-column align-items-center justify-content-center">
+              
+              <div class="card mb-3" v-if="isVisible == 'logins'"  >
+                <div class="card-body pt-2">
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">PLATAFORMA</h5>
+                    <p class="text-center small">Ingrese su email o cédula y contraseña para iniciar sesión</p>
+                  </div>
+                  <form @submit.prevent="authenticate">
+                    <div class="col-12"> <label for="yourUsername" class="form-label">Cédula o dirección de correo</label>
+                      <input v-model="login.email" id="username" type="text" class="form-control buscador fuente"
                             aria-label="Email" required autocomplete="off" />
-                        </div>
-
-                        <span class="parrafo mt-2">Contraseña
-                          <span style="font-size: 17px;cursor: pointer;" class="ms-2"><i @click="toggleShow" class="fas"
-                              :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
-
-                        </span>
-                        <div class="mb-3 mt-1">
-                          <input v-if="showPassword" type="text" class="form-control buscador fuente"
+                    </div>
+                    <div class="col-12 mb-2"> <label for="yourPassword" class="form-label">Contraseña
+                      <span style="font-size: 17px;cursor: pointer;" class="ms-2">
+                        <svg @click="toggleShow" v-if="showPassword" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color: #000"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        <svg @click="toggleShow" v-else data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color:#000"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"></path><path d="M1 1l22 22"></path></svg>
+                       </span>
+                    </label>  <input v-if="showPassword" type="text" class="form-control buscador fuente"
                             v-model="login.password" />
                           <input v-else v-model="login.password" id="password" type="password"
-                            class="form-control buscador fuente"  aria-label="Password"
-                            required />
-                        </div>
-                        <a @click="isVisible = 'passw'" href="javascript:;" class="tamanio links2 gordo">
+                            class="form-control buscador fuente" aria-label="Password" required />
+                    </div>
+                    <a @click="isVisible = 'passw'" href="javascript:;" class="tamanio links2 gordo mt-2">
                           <b class="gordo">Olvidé mi contraseña</b>
                         </a>
-                        <div class="form-check form-switch mt-2">
-                          <input class="form-check-input" type="checkbox" id="rememberMe" />
-                          <label class="form-check-label" for="rememberMe">Recordarme</label>
-                        </div>
-                        <div class="text-center">
+                   
+                    <div class="text-center">
                           <button v-if="isLoading" class="btn btnNaranja w-100 mt-4 mb-0" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Cargando...
@@ -75,21 +64,19 @@
                             </p>
                           </div>
                         </div>
-                      </form>
-                    </div><br>
+                  </form>
+                </div>
+              </div>
+              <!--  REXUPERAR CONTRASEÑA  -->
 
-                  </div>
-
-                  <!--  REXUPERAR CONTRASEÑA  -->
-
-                  <div v-if="isVisible == 'passw'" class="card card-plain mt-4"  style="background: #fff;border-radius: 6px;">
+              <div v-if="isVisible == 'passw'" class="card mb-3"  style="background: #fff;border-radius: 6px;">
                     <ResetPass @emitGoBackLogin="goBackLogin" @emitCambioPageResset="goRessetPassword"
                       @emitGoUserError="goUserError" />
                   </div>
 
                   <!--  VEFIFICAR CODE  -->
 
-                  <div v-if="isVisible == 'forgot'" class="card card-plain mt-3" style="background: #fff;border-radius: 6px;">
+                  <div v-if="isVisible == 'forgot'" class="card mb-3" style="background: #fff;border-radius: 6px;">
 
                     <CheckCode :codex="code" @emitGoPageUpdatePassword="goUpdatePassword"
                       @emitGoBackLogin2="goBackLogin"/>
@@ -98,27 +85,23 @@
 
                   <!--  RESET PASS  -->
 
-                  <div v-if="isVisible == 'resett'" class="card card-plain mt-3" style="background: #fff;border-radius: 6px;">
+                  <div v-if="isVisible == 'resett'" class="card mb-3" style="background: #fff;border-radius: 6px;">
                     <Update :email="emailss" @emitGoBackLogin3="goBackLogin"/>
                   </div>
 
                   <!--  ERROR DE CUENTA  -->
 
-                  <div v-if="isVisible == 'error'" class="card card-plain mt-3" style="background: #fff;border-radius: 6px;">
+                  <div v-if="isVisible == 'error'" class="card mb-3" style="background: #fff;border-radius: 6px;">
                     <UserError @emitGoBackLogin1="goBackLogin"></UserError>
                   </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
       </section>
-    </main>
-
-   
-    <!-- -------- style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));" ------- -->
-    <footer class="footer py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));">
+    </div>
+    
+   </div>
+   <footer class="footer py-5" style="border-top:0px !important; background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));">
       <div class="container">
         <div class="row">
           <div class="col-8 mx-auto text-center mt-1">
@@ -129,7 +112,8 @@
         </div>
       </div>
     </footer>
-    <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+
+    
   </div>
 </template>
 <script src="./Login.js"></script>

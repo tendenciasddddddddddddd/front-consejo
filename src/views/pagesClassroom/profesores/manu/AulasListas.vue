@@ -18,13 +18,13 @@
                                         </span>
                                     </span>
                                     <div class="stack_stack__A16oG ms-3">
-                                        <span class="cardTitle fuente"
+                                        <span class="cardTitle "
                                             style="font-size: 16px;margin-top: -5px;">{{item.materia}}</span>
                                         <span class="tag fuente tag-purple">{{item.icono}}</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{item.nombre}}</p>
+                                    <p class="cardTitle  mt-2" style="font-size: .80rem;"> {{item.nombre}}</p>
                                 </div>
                                 <div>
                                     <span class="text-xs  fuente mt-2" style="color: #516f90 !important;">

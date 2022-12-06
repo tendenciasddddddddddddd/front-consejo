@@ -21,7 +21,7 @@
                                         </span>
                                     </span>
                                     <div class="stack_stack__A16oG ms-3">
-                                        <span class="cardTitle fuente" style="font-size: 16px;margin-top: -5px;">{{
+                                        <span class="cardTitle " style="font-size: 16px;margin-top: -5px;">{{
                                                 item.fmateria ?
                                                     item.fmateria.nombre : 'Undefined'
                                         }}</span>
@@ -29,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="cardTitle fuente mt-2" style="font-size: .80rem;"> {{ item.fnivel ?
+                                    <p class="cardTitle  mt-2" style="font-size: .80rem;"> {{ item.fnivel ?
                                             item.fnivel.nombre : 'Undefined'
                                     }} - {{item.paralelo}}</p>
                                 </div>
@@ -201,7 +201,6 @@ export default {
                
                 const res = this.info[i];
                 if (res._id == id) {
-                    console.log(this.info[i])
                     try {
                         var myCourse = {
                             paralelo: res.paralelo,
@@ -241,7 +240,6 @@ export default {
                 this.$proxies._gestionProxi
                     .updateInfoDocentes(this.user.id)
                     .then((x) => {
-                        console.log(x.data)
                         this.info = x.data;
                         this.isData = false;
                         this.$Progress.finish();

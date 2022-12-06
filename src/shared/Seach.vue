@@ -39,13 +39,7 @@
       </section>
           <!-- fin cuerpo -->
         </div>
-        <div class="modalFooter">
-          <div class="text-end">
-            <a @click="close()" class="btn btnNaranja mt-2" style="background-color: #0c2ccc !important;">
-              Continuar
-            </a>
-          </div>
-        </div>
+       
       </div>
     </div>
       </div>
@@ -89,9 +83,10 @@ export default {
       { id: 11, txt: 'Matriculas y generar paralelos', url: '/Intensivo'},
       { id: 12, txt: 'Generar reportes', url: '/opciones-reportes'},
       { id: 13, txt: 'Generar distributivo', url: '/Distributivo-v1'},
-      { id: 14, txt: 'Libretas', url: '/opciones-reportes'})
-
-      }
+      { id: 14, txt: 'Libretas', url: '/opciones-reportes'},
+      { id: 15, txt: 'Registro de notas', url: '/Intensivo'},
+      { id: 15, txt: 'Reporte de notas', url: '/opciones-reportes'},
+      )}
       else if (this.user.roles == 'Docente') {
         this.admins.push({
           id: 1, txt: 'Perfil configurar', url: '/perfil'},

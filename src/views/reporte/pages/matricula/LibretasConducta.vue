@@ -280,7 +280,7 @@ export default {
         },
         __calcularfechaActual() {
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
       const dateObj = new Date();
       const month = monthNames[dateObj.getMonth()];
       const day = String(dateObj.getDate()).padStart(2, '0');

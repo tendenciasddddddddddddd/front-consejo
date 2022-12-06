@@ -1,20 +1,34 @@
 <template>
   <div>
-    <div class="contenidotabs">
-          <a class="tabss " @click="istabs=1" :class="{ 'tabsActive links': istabs=='1' }">Perfil</a>
-          <a class="tabss " @click="istabs=2" :class="{ 'tabsActive links': istabs=='2' }">Información general
-          </a>
-        </div>
-        <hr style="margin-top:-0px;border-top: 1px solid rgb(203, 214, 226); opacity: inherit;" />
+    <ul class="nav nav-tabs nav-tabs-bordered" role="tablist">
+
+<li class="nav-item" role="presentation">
+  <button class="nav-link" data-bs-toggle="tab" @click="istabs=1"  :class="{ 'active': istabs=='1' }"
+  data-bs-target="#profile-overview" aria-selected="false" role="tab" tabindex="-1">Visión general</button>
+</li>
+
+<li class="nav-item" role="presentation">
+  <button class="nav-link " data-bs-toggle="tab" @click="(istabs=2)" :class="{ 'active': istabs=='2' }"
+  data-bs-target="#profile-edit" aria-selected="true" role="tab">Información general</button>
+</li>
+
+
+
+<li class="nav-item" role="presentation">
+  <button @click="open" class="nav-link" data-bs-toggle="tab"
+  data-bs-target="#profile-change-password" aria-selected="false" tabindex="-1" role="tab">Cambiar foto</button>
+</li>
+
+</ul>
 
       <div class=" row" v-if="istabs=='1'">
           <Spinner v-if="ifcarga"></Spinner>
           <div v-else class="col-lg-5">
-            <p class="fuente negros mt-2"><b>Foto de perfil</b></p>
+            <p class="fuente negros mt-4"><b>Foto de perfil</b></p>
             <div class="d-flex justify-content-between">
               <div class=" position-relative">
-                <div @click="open" class="maperr avatar avatar-xl">
-                  <img :src="img1 ? img1 : foto" class=" " alt="abc" style="border-radius: 50%;" />
+                <div @click="open" class=" avatar avatar-xl">
+                  <img :src="img1 ? img1 : foto"  alt="abc" class="rounded-circle"/>
                 </div>
               </div>
               <button @click="open" class="btn btnNaranja2 mt-2">
@@ -23,29 +37,28 @@
             </div>
             <hr>
             <form @submit.prevent="save" id="pefilD">
-                  <span class="parrafo negros">Apellidos Nombres</span>
+              <h6 class="card-title negros">Apellidos Nombres</h6>
                   <CustomInput v-model="model.fullname" />
-                  <div class="mb-2 text-sm ">
+                  <div class=" text-sm ">
                     {{ validation.firstError("model.fullname") }}
                   </div>
-                 
-                  <span class="parrafo negros">Email</span>
+                  <h6 class="card-title negros">Email</h6>
                   <CustomInput v-model="model.email" />
 
-              <div class="row mt-2">
+              <div class="row ">
                 <div class="col-sm-6 ">
-                  <span class="parrafo negros">Parroquia</span>
+                  <h6 class="card-title negros">Parroquia</h6>
                   <CustomInput v-model="model.fkparroquia" />
                 </div>
                 <div class="col-sm-6 ">
-                  <span class="parrafo negros">Etnia</span>
+                  <h6 class="card-title negros">Etnia</h6>
                   <CustomInput v-model="model.fketnia" />
                 </div>
               </div>
-                  <span class="parrafo negros">Teléfono</span>
+                  <h6 class="card-title negros">Teléfono</h6>
                   <CustomInput v-model="model.telefono" />
                   
-                  <span class="parrafo mt-2  negros">Género</span>
+                  <h6 class="card-title negros">Genero</h6>
                   <CustomInput v-model="model.sexo" />
             </form> <br>
             <ButtonLoading v-if="ifLoad" />

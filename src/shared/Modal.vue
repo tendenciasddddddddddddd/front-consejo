@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade show" style="overflow-y: auto;  z-index: 9999;display:block;" tabindex="-1" role="dialog" >
-           <div class="modal-dialog mt-8" role="document">
+           <div class="modal-dialog modal-dialog-centered mt-8" role="document">
              <div class="modal-content">
                
                <div class="modal-body croll">

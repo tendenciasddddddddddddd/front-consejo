@@ -65,10 +65,10 @@
                 class="dropdown-menu px-2 py-3">
                 <li>
                   <a
-                   @click="goChangedQuery(9)"
+                   @click="goChangedQuery(8)"
                     class="dropdown-item border-radius-md fuente"
                     href="javascript:;"
-                    >9 filas por página</a
+                    >8 filas por página</a
                   >
                 </li>
                 <li>

@@ -7,9 +7,8 @@
           <table class="dataTable-table table s-table-flush">
             <thead class="thead-light">
               <tr class="cabeza">
-                 <th style="background-color: rgb(234, 240, 246); "
-                  >
-                   <div v-if="!isSearch" class="d-flex ms-3">
+                <th style="background-color: rgb(234, 240, 246); ">
+                   <div v-if="!isSearch" class="d-flex ms-3" >
                       <div v-if="!allSelected " class="form-check " style="min-height: 0rem;margin-bottom: 0rem;">
                         <input
                           class="form-check-input cheka"
@@ -17,12 +16,12 @@
                           @click="selectAll"
                         />
                       </div>
-                       <i @click="deletedSelected" v-else  class="fa fa-minus s-icon-all" aria-hidden="true"></i>
+                       <svg @click="deletedSelected" style="cursor: pointer;color: #8b3dff;" v-else  data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" ><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
                       <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
                         Nombres
                       </span>
                     </div>
-                     <div v-else>
+                     <div  v-else>
                         <a @click="salirBusqueda" type="button" class=" tamanio ">
                             <i class="fa fa-times me-2  iconos"></i>
                            <b class="links2">Limpiar filtro </b>
@@ -70,9 +69,10 @@
                 <td class="text-xs colorestabla fuente">{{ item.cedula }}</td>
                 <td class="text-sm text-center colorestabla fuente"> {{ item.email?item.email:'No tiene email' }}</td>
                 <td class="text-sm text-center "> 
-                  <span class="resetpp" @click="resetPassword(item._id)" v-tooltip.top-center="'Resetear contraseña de ' + item.fullname">
+                  <span style="cursor:pointer"  @click="resetPassword(item._id)" v-tooltip.top-center="'Resetear contraseña de ' + item.fullname">
                     <svg v-if="!ifPassword"  class="negros" data-testid="geist-icon" fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20" ><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
                   </span>
+        
                   </td>
                 <td class="d-flex justify-content-center">
                   <div class="form-check my-auto supcheka me-3">

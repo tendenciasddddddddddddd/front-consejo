@@ -1,6 +1,5 @@
 <template>
     <div >
-      <vue-progress-bar  style="margin-top:-13px"></vue-progress-bar>
       <ProgressBar v-if="isData"></ProgressBar>
       <div v-else>
        <ActionRowHeader :numPages="numPages"  :page="page" :IfAdd="0" @pagechanged="onPageChange" @changeSearch="changeSearch" ></ActionRowHeader>

@@ -46,8 +46,8 @@
                           <div class="d-flex px-2 py-1 ms-2" >
                             <div>
                               <img
-                                :src="item.foto"
-                                class="avatar avatar-sm me-2"
+                                :src="item.foto" style="width:40px"
+                                class="rounded-circle avatar-sm me-2"
                                 alt="avatar image"
                               />
                             </div>

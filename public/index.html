@@ -10,74 +10,103 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-      rel="stylesheet"
-    />
- 
-    <script
-      src="https://kit.fontawesome.com/42d5adcbca.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="mains.css">
+   <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     
+   <link rel="stylesheet" href="mains.css" /> 
   </head>
 
-  <body class="g-sidenav-show g-sidenav-hidden">
-    <!-- Navbar Dark -->
-    <!-- <div class="inicio2" style="    border: 1px solid #738ccb;
-    background: linear-gradient(104.19deg,rgba(37,1,83,0) 39.91%,#3b0388 77.15%),linear-gradient(96.54deg,rgba(6,189,196,0.78) 13.14%,rgba(2,214,215,0) 57.93%),#440496;">
-      <div class="d-flex justify-content-end mb-3">
-        <div
-          class="fuente text-sm"
-          style="padding-right: 15px; padding-top: 5px;"
-        > <a target="_blank" href="#" style="color: #fff;"> Soporte</a>
-        </div>
-        &nbsp;&nbsp;
-        <div
-          class="fuente text-sm"
-          style="padding-right: 15px; padding-top: 5px;"
-        > <a target="_blank" href="#" style="color: #fff;"> Recursos</a>
-         
-        </div>
-        &nbsp;
-      </div>
-    </div> -->
-
+  <body >
     <div id="app"></div>
-    <script async defer src="statics/js/core/bootstrap.min.js"></script>
-    <script
-      async
-      defer
-      src="https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/soft-ui-dashboard.min.js?v=1.0.3"
-    ></script>
+    <script async defer  src="statics/js/bootstrap.bundle.min.js"></script>
+    <!-- <script async defer src="statics/jss/main.js"></script> -->
     <style>
-       .input-group .form-control:focus {
-    border-left: 1px solid #00d0e4 !important;
-    border-right: 1px solid #00d0e4 !important;
-  }
-  a:hover{
-    color: #7300e6 !important;
-  }
-  .btn{
-    box-shadow: none !important;
-  }
-  .btn:hover:not(.btn-icon-only) {
-     box-shadow: none !important;
-     transform: none !important; 
+      .input-group .form-control:focus {
+        border-left: 1px solid #00d0e4 !important;
+        border-right: 1px solid #00d0e4 !important;
+      }
+      a{
+        text-decoration: none !important;
+      }
+      a:hover {
+        color: #7300e6 !important;
+      }
+      .btn {
+        box-shadow: none !important;
+      }
+      .btn:hover:not(.btn-icon-only) {
+        box-shadow: none !important;
+        transform: none !important;
+      }
+      .ag-row {
+        border-bottom: 1px solid #e0e0e0 !important;
+        color: #000 !important;
+      }
+      .ag-ltr .ag-cell {
+        border-right: 1px solid #e0e0e0;
+      }
+      .navbar-vertical .navbar-nav .nav-link {
+        color: rgb(13 18 22 / 86%);
+      }
+      .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-link,
+      .navbar-vertical
+        .navbar-nav
+        .nav-item
+        .collapsing
+        .nav
+        .nav-item
+        .nav-link {
+        color: rgb(13 18 22 / 86%);
+      }
+      .text-xxs {
+    font-size: .65rem!important;
 }
-.ag-row {
-  border-bottom: 1px solid #e0e0e0 !important;
-  color: #000 !important;
+.text-xs {
+    font-size: .75rem!important;
 }
-.ag-ltr .ag-cell {
-    border-right: 1px solid #e0e0e0 ;
+.text-sm {
+    font-size: .875rem!important;
 }
-.navbar-vertical .navbar-nav .nav-link {
-  color: rgb(13 18 22 / 86%);
+.dataTable-table {
+    max-width: 100%;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
 }
-.navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-link, .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item .nav-link {
-  color: rgb(13 18 22 / 86%);
+.fixed-plugin .fixed-plugin-button {
+    background: #fff;
+    border-radius: 50%;
+    bottom: 30px;
+    right: 30px;
+    font-size: 1.25rem;
+    z-index: 990;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 16%);
+    cursor: pointer;
+}
+.fixed-plugin.show .card {
+    right: 0;
+}
+.fixed-plugin .card {
+    position: fixed !important;
+    right: -500px;
+    top: 0;
+    height: 100%;
+    left: auto !important;
+    transform: unset !important;
+    width: 500px;
+    border-radius: 0;
+    padding: 0 10px;
+    transition: 0.2s ease;
+    z-index: 1020;
+}
+.form-check-input:checked {
+    background-color: #8b3dff !important;
+    border-color: #0d6efd;
+}
+.sidebar-nav .nav-link.collapsed {
+    color: #000 !important;
+    background: #fff;
 }
     </style>
   </body>

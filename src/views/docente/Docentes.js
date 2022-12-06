@@ -26,7 +26,7 @@ export default {
       subtitulo: 'none',
       iseliminaddo: false,
       isSearch: false,
-      rows: 9,
+      rows: 8,
       selected: [],
       allSelected: false,
       userIds: [],
@@ -106,7 +106,7 @@ export default {
       this.ifCreateUpdate = false;
     },
     openAgGrid: function () {
-      this.$dialog.alert("::: No puede agregar usuarios :::");
+      
       this.ifGrid = true;
     },
     closeAgGrid: function () {
@@ -114,7 +114,7 @@ export default {
     },
     refreshData: function () {
       this.ifCreateUpdate = false;
-      this.getAll(this.paginaActual, 9);
+      this.getAll(this.paginaActual, 8);
       this.userIds = [];
     },
     getAll(pag, lim) {
@@ -190,7 +190,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 9);
+            this.getAll(this.paginaActual, 8);
             this.allSelected = false;
           })
           .catch(() => {
@@ -229,7 +229,7 @@ export default {
           .then(() => {
             this.iseliminaddo = false;
             this.userIds = [];
-            this.getAll(this.paginaActual, 9);
+            this.getAll(this.paginaActual, 8);
           })
           .catch(() => {
             this.iseliminaddo = false;
@@ -269,7 +269,7 @@ export default {
       }
     },
     salirBusqueda: function() {
-      this.getAll(1, 9);
+      this.getAll(1, 8);
       this.isSearch = false;
     },
     changedQuery(num) {
@@ -296,7 +296,7 @@ export default {
   },
   created() {
     this.verificarUsuario();
-    this.getAll(1, 9);
+    this.getAll(1, 8);
     this. __listRol();
   },
 };

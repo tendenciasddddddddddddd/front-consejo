@@ -33,9 +33,9 @@
                   </div>
                 </div>
                 <div class="col-lg-7 text-start">
-                  <button :disabled="!isSelecMatricula.length" @click="openLibreta()" class="btn btnNaranja2 me-2"> <b>Libretas</b> </button>
-                 <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 me-2"> <b>Consolidado parcial</b> </button>
-                 <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> <b>Consolidado anual</b> </button>
+                  <button :disabled="!isSelecMatricula.length" @click="openLibreta()" class="btn btnNaranja2 me-2"> Libretas </button>
+                 <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 me-2"> Consolidado parcial </button>
+                 <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> Consolidado anual </button>
                  
                 </div>
               </div>
@@ -193,12 +193,12 @@
                       Seleccionar uno o varios parciales para generar el reporte
                     </p>
                     <div>
-                      <div class="form-check my-auto supcheka">
+                      <div class="form-check ">
                         <input class="form-check-input cheka" type="checkbox" value="1" v-model="parcial3" />
-                      </div> <span class="ms-4 parrafo negros">Primer parcial</span>
+                      </div> <label class="form-check-label ms-4 parrafo negros">Primer parcial</label>
                     </div>
                     <div class="mt-3">
-                      <div class="form-check my-auto supcheka">
+                      <div class="form-check ">
                         <input class="form-check-input cheka" type="checkbox" value="2" v-model="parcial2" />
                       </div><span class="ms-4 parrafo negros">Segundo parcial</span>
                     </div>

@@ -291,19 +291,6 @@ margin-top: -5px;
     right: 0px;
     z-index: 9999;
   }
-  .maperr {
-    background: #fff;
-    height: 72px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-  }
-  .maperr:hover {
-    opacity: 0.3;
-    border-radius: 50%;
-    cursor: pointer;
-    background: rgb(81, 111, 144);
-  }
   .fondot {
     max-height: 380px !important;
   }
@@ -338,23 +325,7 @@ margin-top: -5px;
       border-left: 1px solid rgb(203, 214, 226);
       cursor: pointer;
   }
-  .tabss:hover{
-    color: rgb(124, 152, 182);
-  }
-  .contenidotabs {
-      display: inline-flex;
-      margin-bottom: -1px;
-      border: 1px solid rgb(203, 214, 226);
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-    
-  }
-  .tabsActive{
-    font-weight: 700!important;
-    background-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    color: #030008;
-  }
+
 
   /*header nanbar*/
   .s-header-notification {
@@ -370,14 +341,7 @@ margin-top: -5px;
   .bg-body, .bg-white {
     background-color: #ededf4; 
 }
-.navbar-vertical .navbar-nav>.nav-item .nav-link.actived {
-   color: rgb(8, 8, 8);
-   background-color: rgb(57 76 96 / 15%);
-   padding: 6px 20px 6px 15px;
-   font-weight: 700;
-   border-radius: 3px;
-    
-}
+
 .letras{
     
  font-size: 14px;
@@ -416,7 +380,7 @@ margin-top: -5px;
 
 }
 
-.vs__dropdown-option--highlight{background:#e5f5f8!important;color:#fff} 
+.vs__dropdown-option--highlight{background:#e5f5f8!important;color:rgb(5, 5, 5) !important;} 
 
 div#bg {
   -webkit-background-size: cover;
@@ -715,10 +679,7 @@ margin-bottom: 12px!important;
   background-color: white !important;
   outline: 2px solid #8b3dff !important;
 }
-.form-check-input:checked[type=checkbox], .form-check-input:checked[type=radio] {
- background-image: linear-gradient(
-310deg,#8b3dff,#8b3dff) !important;
-}
+
 .dropdown-item:focus, .dropdown-item:hover {
   color: #344767;
   background-color: #e5f5f8 !important;
@@ -1315,7 +1276,7 @@ body.modal-open {
 .s-table-flush {
   border-color: rgb(223, 227, 235) !important;
   border-style: solid;
-  border-width: 0px 1px 1px; 
+  border-width: 0px 1px 0px; 
   border-top: 1px solid rgb(223, 227, 235);
 }
 .s-icon-all{

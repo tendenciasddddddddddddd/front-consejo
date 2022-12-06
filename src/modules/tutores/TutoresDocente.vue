@@ -26,11 +26,11 @@
                         <div class="col-lg-8 text-start">
                             <button :disabled="!isSelecMatricula.length" @click="activar" class="btn btnNaranja2"> 
                                 <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
-                                <b>Libretas</b> </button>
+                                Libretas </button>
                           <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 ms-2"> 
                             <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
-                            <b>Consolidado parcial</b> </button>   
-                            <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> <b>Consolidado anual</b> </button>
+                            Consolidado parcial </button>   
+                            <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> Consolidado anual </button>
                         </div>
                     </div>
                     <div class="table-responsive ">
@@ -263,7 +263,7 @@ export default {
             searchQuery: '',
             ifEmergente : false,
             page: 1,
-            perPage: 9,
+            perPage: 8,
             pages: [],
             numPages: 0,
             totalNotas: 0,

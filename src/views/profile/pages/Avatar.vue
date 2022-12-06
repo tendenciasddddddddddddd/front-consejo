@@ -10,12 +10,15 @@
                     </p>
                 </div>
                 <div v-if="!isFile" class="fontImg mt-4 text-center p-6">
-                    <i style="font-size:66px;" class="fa fa-picture-o" aria-hidden="true"></i>
+                    <div class="p-5">
+                        <svg class="text-center " data-testid="geist-icon" fill="none" height="64" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="64" ><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg><br>
                     <span style="cursor: pointer;" class="button fuente tamanio links" @click="$refs.file.click()">
                         <input type="file" class="btn btnNaranja" ref="file" @change="uploadImage($event)"
                             accept=".png, .jpg, .jpeg" />
                         <b>Elegir una foto</b>
                     </span>
+                    </div>
+                    
                 </div>
                 <div v-else class="mt-3">
                     <span style="cursor: pointer;" class="button fuente tamanio links" @click="$refs.file.click()">

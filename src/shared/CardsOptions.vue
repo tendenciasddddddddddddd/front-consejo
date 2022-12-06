@@ -5,7 +5,7 @@
   >
     <router-link :to="ruta" href="javascript:;"
       ><img alt="" role="presentation" class="card_image" :src="img" />
-      <p class="cardTitle fuente " style="font-size: 20px;">
+      <p class="cardTitle " style="font-size: 20px;">
         {{ nombre }}
       </p>
       <a class="img__description ">

@@ -1,22 +1,19 @@
 <template>
   <div>
-    <div class="card-header pb-0 text-center">
-      <h2 class=" fuente negros">
-       Plataforma
-       
-      </h2>
-      <p class="h5 fuente" style="font-weight: 400;">
-        Es un placer conocerte.
-      </p>
-      <p class="parrafo">
+   
+    <div class="card-body pt-2">
+      <div class="pt-4 pb-2 text-center">
+        <h5 class="negros gordo text-center pb-0 fs-4">PLATAFORMA</h5>
+        <p class="parrafo">
         Antes de empezar, pongamos en orden todos los detalles de tu cuenta. {{email}}
       </p>
     </div>
-    <div class="card-body">
       <form @submit.prevent="ResetCount" class="text-start">
         <p class="parrafo">Nueva contraseña
-          <span style="font-size: 17px;cursor: pointer;" class="ms-2"><i @click="toggleShow" class="fas"
-                              :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
+          <span style="font-size: 17px;cursor: pointer;" class="ms-2">
+            <svg @click="toggleShow" v-if="showPassword" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color: #000"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        <svg @click="toggleShow" v-else data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="color:#000"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"></path><path d="M1 1l22 22"></path></svg>
+          </span>
         </p>
         <div class="mb-3">
 
@@ -51,7 +48,7 @@
         @click="activeGoBackLogin"
         href="javascript:;"
         class=" tamanio ms-4"
-        >Volver a <b class="links2 ms-2 gordo">Inicio de sesión</b>
+        > <b class="links2 ms-2 gordo">Volver a inicio de sesión</b>
       </a>
     </div>
   </div>
