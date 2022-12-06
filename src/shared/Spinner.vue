@@ -1,9 +1,9 @@
 <template>
     <div  class="text-center">
-
-            <div class="s-spinner-border" style="color: black;" role="status">
-              <span class="sr-only"></span>
-          </div>
+      <div class="spinner-border " role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+          
         </div>
 </template>
 
