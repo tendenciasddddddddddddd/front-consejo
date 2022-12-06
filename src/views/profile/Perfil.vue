@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="nav nav-tabs nav-tabs-bordered" role="tablist">
+    <ul class="nav nav-pills mb-3" role="tablist">
 
 <li class="nav-item" role="presentation">
   <button class="nav-link" data-bs-toggle="tab" @click="istabs=1"  :class="{ 'active': istabs=='1' }"
@@ -62,7 +62,7 @@
                   <CustomInput v-model="model.sexo" />
             </form> <br>
             <ButtonLoading v-if="ifLoad" />
-            <button v-else type="submit" class=" btn btnNaranja" form="pefilD"  style="background-color: #8b3dff !important;">
+            <button v-else type="submit" class=" btn btnNaranja" form="pefilD" >
               Actualizar Información 
             </button>
             <br> <br> <br>

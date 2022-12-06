@@ -363,7 +363,7 @@ export default {
         printDownload() {
             try {
                 const box = document.getElementById('box').innerHTML;
-                let w = window.open('', '', 'fullscreen=yes');
+                let w = window.open('', '_blank', 'height=600,width=950,top=150,left= 400');
                 w.document.write('<html><head><title></title>');
                 w.document.write('<style type="text/css" media="print"> @media print{@page { margin-top: 0;margin-bottom: 0;size:landscape;}body  { padding-top: 6px; padding-bottom: 6px ;}} </style>');
                 w.document.write('</head><body >');

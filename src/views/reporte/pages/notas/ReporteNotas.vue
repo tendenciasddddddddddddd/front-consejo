@@ -193,15 +193,20 @@
                       Seleccionar uno o varios parciales para generar el reporte
                     </p>
                     <div>
-                      <div class="form-check ">
-                        <input class="form-check-input cheka" type="checkbox" value="1" v-model="parcial3" />
-                      </div> <label class="form-check-label ms-4 parrafo negros">Primer parcial</label>
-                    </div>
-                    <div class="mt-3">
-                      <div class="form-check ">
-                        <input class="form-check-input cheka" type="checkbox" value="2" v-model="parcial2" />
-                      </div><span class="ms-4 parrafo negros">Segundo parcial</span>
-                    </div>
+                                        <div class="form-check ">
+                                            <input class="form-check-input cheka" type="checkbox" value="1"
+                                                v-model="parcial3" />
+                                                <label class="form-check-label  parrafo negros"> &nbsp; Primer parcial</label>
+                                        </div> 
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="form-check ">
+                                            <input class="form-check-input cheka" type="checkbox" value="2"
+                                                v-model="parcial2" />
+                                                <label class="form-check-label parrafo negros">&nbsp; Segundo parcial</label>
+                                        </div>
+                                    </div>
+
                   </section>
                 </div>
               </div>
