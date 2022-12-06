@@ -48,7 +48,7 @@
                           <div v-if="!allSelected" class="form-check my-auto" style="min-height: 0rem;">
                             <input class="form-check-input cheka" type="checkbox" @click="selectAll" />
                           </div>
-                          <i @click="deletedSelected" v-else class="fa fa-minus s-icon-all" aria-hidden="true"></i>
+                          <svg @click="deletedSelected" style="cursor: pointer;color: #8b3dff;" v-else  data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" ><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
                           <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
                             Nombres
                           </span>

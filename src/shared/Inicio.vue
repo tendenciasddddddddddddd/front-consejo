@@ -12,7 +12,6 @@
               </path>
             </svg>
         U.E.G.M</span>
-        
 
       </span>
       
