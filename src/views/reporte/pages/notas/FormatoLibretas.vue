@@ -592,8 +592,8 @@ export default {
         },
         promdioParcial(array) {
             let sum = 0
-            let pro = 0
-            let cont = 0
+            let result = 0
+            let cont = 0;
             if (array.length > 0) {
                 for (let i = 0; i < array.length; i++) {
                     const element = array[i].prom1;
@@ -603,14 +603,15 @@ export default {
                         cont += 1
                     }
                 }
-                pro = (sum / cont).toFixed(2);
+                let pro = (sum / cont);
+                 result = trunc(pro,2)
             }
-            return pro
+            return result
         },
         promdioParcial2(array) {
             let sum = 0
-            let pro = 0
-            let cont = 0
+            let result = 0
+            let cont = 0;
             if (array.length > 0) {
                 for (let i = 0; i < array.length; i++) {
                     const element = array[i].prom2;
@@ -620,9 +621,10 @@ export default {
                         cont += 1
                     }
                 }
-                pro = (sum / cont).toFixed(2);
+                let pro = (sum / cont);
+                 result = trunc(pro,2)
             }
-            return pro
+            return result
         },
         promedioP1(array) {
             let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
@@ -640,7 +642,7 @@ export default {
             } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
                 suma = a1; aux = 1
             }
-            prom = (suma / aux).toFixed(2);
+            prom = (suma / aux).toFixed(2)
             return prom;
         },
         promedioP2(array) {
@@ -796,6 +798,12 @@ export default {
         this.initialSetup()
         this.__calcularfechaActual()
     }
+}
+function trunc (x, posiciones = 0) {
+  var s = x.toString()
+  var decimalLength = s.indexOf('.') + 1
+  var numStr = s.substr(0, decimalLength + posiciones)
+  return Number(numStr)
 }
 </script>
   
