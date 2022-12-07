@@ -6,7 +6,7 @@
                 @changeSearch="changeSearch" />
         </div>
         <section style="height: calc(100vh - 140px);">
-            <ag-grid-vue style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
+            <ag-grid-vue :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
                 :rowData="rowData" :defaultColDef="defaultColDef" :enableRangeSelection="true"
                 :suppressCopySingleCellRanges="true" @grid-ready="onGridReady" :enableFillHandle="true">
             </ag-grid-vue>

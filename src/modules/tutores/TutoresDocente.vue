@@ -2,7 +2,7 @@
     <div>
         <Spinner v-if="isLoading1"></Spinner>
         <div v-else>
-            <span class="negros gordo h6">{{this.listniveles[0]? this.listniveles[0].nombre : "SIN CURSO ASIGNADO"}}</span>
+            <Dropdown v-model="curso" :options="listniveles" />
             <Astronauta v-if="isPrint" />
             <Emergente @closeEmergente="(ifEmergente=false)" v-if="ifEmergente" />
             <Spinner v-if="isTabla"></Spinner>
@@ -234,6 +234,7 @@
 import RestResource from "../../service/isAdmin";
 const restResourceService = new RestResource();
 import Spinner from "../../shared/Spinner.vue";
+import Dropdown from "../../shared/Dropdown.vue";
 import NoFound from "../../shared/NoFound"
 import Paginate from "../../shared/Paginate.vue";
 import Astronauta from "../../shared/Astronauta"
@@ -242,7 +243,7 @@ import Modal from "../../shared/Modal"
 export default {
     name: 'Report',
     components: {
-        Spinner,  NoFound, Paginate, Astronauta, Modal,Emergente,
+        Spinner,  NoFound, Paginate, Astronauta, Modal,Emergente,Dropdown,
         Quimestral: () => import( /* webpackChunkName: "FormatoLibretas" */ "./pages/Quimestral.vue"),
         Parcial: () => import( /* webpackChunkName: "Parcial" */ "./pages/Parcial.vue"),
         ConsolidadoNotas: () => import( /* webpackChunkName: "ConsolidadoNotas" */ "../../views/reporte/pages/notas/ConsolidadoNotas.vue"),
@@ -399,9 +400,7 @@ export default {
                         for (let i = 0; i < result.length; i++) {
                             const element = result[i].fnivel;
                             const paralelo = result[i].paralelo
-                            this.listniveles.push({_id: element._id, paralelo: paralelo, nombre: element.nombre + ':: PARALELO (' + paralelo + ')'})
-                            this.__cambios(element._id, paralelo)
-                            break;
+                            this.listniveles.push({_id: element._id, nombre: element.nombre + '--' + paralelo, paralelo: paralelo})
                         }
                     }
                     this.isLoading1 = false;

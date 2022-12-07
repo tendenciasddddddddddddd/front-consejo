@@ -149,18 +149,35 @@
                                                         style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
                                                         <div v-if="parcial"
                                                             style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.a1 }}
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">
+                                                                <span v-if="(ite.a1 != 'NaN')"> {{
+                                                                        ite.a1
+                                                                }}</span>
                                                             </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.a2 }}
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                <span v-if="(ite.a2 != 'NaN')"> {{
+                                                                        ite.a2
+                                                                }}</span>
                                                             </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.a3 }}
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                <span v-if="(ite.a3 != 'NaN')"> {{
+                                                                        ite.a3
+                                                                }}</span>
                                                             </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.a4 }}
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                <span v-if="(ite.a4 != 'NaN')"> {{
+                                                                        ite.a4
+                                                                }}</span>
                                                             </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">{{ ite.a5 }}
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                <span v-if="(ite.a5 != 'NaN')"> {{
+                                                                        ite.a5
+                                                                }}</span>
                                                             </div>
                                                             <div style=" flex: 1 0 0%;padding-right: 5px;">
-                                                                {{ ite.prom1 }}
+                                                                <span
+                                                                    v-if="(ite.prom1 != 'NaN') ">
+                                                                    <b>{{ ite.prom1 }}</b> </span>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -168,18 +185,35 @@
                                                         style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important;text-align: center!important;">
                                                         <div v-if="parcial2"
                                                             style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
-                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.b1 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">{{ ite.b2 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">{{ ite.b3 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">{{ ite.b4 }}
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">{{ ite.b5 }}
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">
+                                                                <span v-if="(ite.b1 != 'NaN') "> {{
+                                                                        ite.b1
+                                                                }}</span>
                                                             </div>
                                                             <div style=" flex: 1 0 0%;">
-                                                                {{ ite.prom2 }}
+                                                                <span v-if="(ite.b2 != 'NaN') "> {{
+                                                                        ite.b2
+                                                                }}</span>
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;">
+                                                                <span v-if="(ite.b3 != 'NaN') "> {{
+                                                                        ite.b3
+                                                                }}</span>
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;">
+                                                                <span v-if="(ite.b4 != 'NaN') "> {{
+                                                                        ite.b4
+                                                                }}</span>
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;">
+                                                                <span v-if="(ite.b5 != 'NaN') "> {{
+                                                                        ite.b5
+                                                                }}</span>
+                                                            </div>
+                                                            <div style=" flex: 1 0 0%;">
+                                                                <span
+                                                                    v-if="(ite.prom2 != 'NaN') && (ite.prom2 != '1.00')">
+                                                                    <b>{{ ite.prom2 }}</b> </span>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -200,6 +234,26 @@
                                                             <div style=" flex: 1 0 0%;">{{ ite.letras }}</div>
 
                                                         </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .60rem!important;">
+                                                        <b>PROMEDIO</b>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: right !important;">
+                                                        <span v-if="parcial">
+                                                            <b>{{ promdioParcial(item.calificaciones) }}</b> </span>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: right  !important;">
+                                                        <span v-if="parcial2">
+                                                            <b>{{ promdioParcial2(item.calificaciones) }}</b> </span>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: right  !important;">
+                                                        <span></span>
                                                     </td>
                                                 </tr>
                                                 <tr v-for="ite in item.proyectos" :key="ite.id">
@@ -241,7 +295,33 @@
                                                     <td
                                                         style="padding: 1px 3px;font-size: .65rem!important;border-top: 1px solid #000;">
                                                         <span v-if="parcial && parcial2">
-                                                            {{ calcularComportamiento(item.comportamiento[numQuimestre].p1, item.comportamiento[numQuimestre].p2) }}
+                                                            {{
+                                                                    calcularComportamiento(item.comportamiento[numQuimestre].p1,
+                                                                        item.comportamiento[numQuimestre].p2)
+                                                            }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr v-if="item.dhi.length > 0">
+                                                    <td
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-top: 1px solid #000;">
+                                                        DESARROLLO HUMANO INTEGRAL </td>
+                                                    <td
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-top: 1px solid #000;">
+                                                        <span v-if="parcial">{{ item.dhi[numQuimestre].p1
+                                                        }}</span>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-top: 1px solid #000;">
+                                                        <span v-if="parcial2">{{ item.dhi[numQuimestre].p2
+                                                        }}</span>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-top: 1px solid #000;">
+                                                        <span v-if="parcial && parcial2">
+                                                            {{ calcularComportamiento(item.dhi[numQuimestre].p1,
+                                                                    item.dhi[numQuimestre].p2)
+                                                            }}
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -402,6 +482,22 @@ export default {
                     this.ifload = false;
                 });
         },
+        ifDecimal(num) {
+            if (num != '') {
+                var partes = num.split('.'); 
+                var re = /^-?[0-9]+$/;
+                if (re.test(num)) {
+                    return num + ".00";
+                } else if (partes[1].length ==1) {
+                    return num + "0";
+                } else {
+                    return num
+                }
+            } else {
+                return '';
+            }
+
+        },
         FormData(array) {
             try {
                 let result = []
@@ -431,19 +527,19 @@ export default {
                                 })
                             }
                             if (res.notas.length > 0) {
-                                let a1 = res.notas[this.numQuimestre].a1;
-                                let a2 = res.notas[this.numQuimestre].a2;
-                                let a3 = res.notas[this.numQuimestre].a3;
-                                let a4 = res.notas[this.numQuimestre].a4;
-                                let a5 = res.notas[this.numQuimestre].a5;
+                                let a1 = this.ifDecimal(res.notas[this.numQuimestre].a1);
+                                let a2 = this.ifDecimal(res.notas[this.numQuimestre].a2);
+                                let a3 = this.ifDecimal(res.notas[this.numQuimestre].a3);
+                                let a4 = this.ifDecimal(res.notas[this.numQuimestre].a4);
+                                let a5 = this.ifDecimal(res.notas[this.numQuimestre].a5);
                                 let prom1 = this.promedioP1(res.notas[this.numQuimestre])
                                 let prom1_80 = ((prom1 * 8) / 10).toFixed(2);
                                 // SEGUNDO PARCIAL 
-                                let b1 = res.notas[this.numQuimestre].b1;
-                                let b2 = res.notas[this.numQuimestre].b2;
-                                let b3 = res.notas[this.numQuimestre].b3;
-                                let b4 = res.notas[this.numQuimestre].b4;
-                                let b5 = res.notas[this.numQuimestre].b5;
+                                let b1 = this.ifDecimal(res.notas[this.numQuimestre].b1);
+                                let b2 = this.ifDecimal(res.notas[this.numQuimestre].b2);
+                                let b3 = this.ifDecimal(res.notas[this.numQuimestre].b3);
+                                let b4 = this.ifDecimal(res.notas[this.numQuimestre].b4);
+                                let b5 = this.ifDecimal(res.notas[this.numQuimestre].b5);
                                 let prom2 = this.promedioP2(res.notas[this.numQuimestre])
                                 let prom2_80 = ((prom2 * 8) / 10).toFixed(2);
                                 let equivalPeriodos = ((parseFloat(prom1_80) + parseFloat(prom2_80)) / 2).toFixed(2);
@@ -493,6 +589,40 @@ export default {
                 console.log("Error", error);
                 this.ifload = false;
             }
+        },
+        promdioParcial(array) {
+            let sum = 0
+            let pro = 0
+            let cont = 0
+            if (array.length > 0) {
+                for (let i = 0; i < array.length; i++) {
+                    const element = array[i].prom1;
+                    const num = parseFloat(element);
+                    if (num <= 10 && num >= 1) {
+                        sum = sum + num
+                        cont += 1
+                    }
+                }
+                pro = (sum / cont).toFixed(2);
+            }
+            return pro
+        },
+        promdioParcial2(array) {
+            let sum = 0
+            let pro = 0
+            let cont = 0
+            if (array.length > 0) {
+                for (let i = 0; i < array.length; i++) {
+                    const element = array[i].prom2;
+                    const num = parseFloat(element);
+                    if (num <= 10 && num >= 1) {
+                        sum = sum + num
+                        cont += 1
+                    }
+                }
+                pro = (sum / cont).toFixed(2);
+            }
+            return pro
         },
         promedioP1(array) {
             let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
@@ -595,8 +725,8 @@ export default {
                 default:
                     break;
             }
-           
-            var result = parseInt((aux + aux2 ) / 2)
+
+            var result = parseInt((aux + aux2) / 2)
             switch (result) {
                 case 5: letra = 'A Muy Satisfactorio';
                     break;
