@@ -484,7 +484,7 @@ export default {
         },
         ifDecimal(num) {
             if (num != '') {
-                var partes = num.split('.'); 
+                var partes = num.toString().split('.'); 
                 var re = /^-?[0-9]+$/;
                 if (re.test(num)) {
                     return num + ".00";
@@ -606,7 +606,8 @@ export default {
                 let pro = (sum / cont);
                  result = trunc(pro,2)
             }
-            return result
+             return this.ifDecimal(result)
+            //return result
         },
         promdioParcial2(array) {
             let sum = 0
