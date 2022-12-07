@@ -133,8 +133,25 @@ export default {
         nombre = notas[j].docente;
         materia = notas[j].materia;
         let calificar = notas[j].notas;
-        parcial1 = ResultServiceNota.calcular_primer_quimestre(calificar, 0)
-        parcial2 = ResultServiceNota.calcular_primer_quimestre(calificar, 1)
+        if (calificar.length > 0) {
+          parcial1 = ResultServiceNota.calcular_primer_quimestre(calificar, 0)
+          parcial2 = ResultServiceNota.calcular_primer_quimestre(calificar, 1)
+        }
+        let proyectos = notas[j].proyectos;
+        if (proyectos.length > 0) {
+          parcial1 = ResultServiceNota.calcular_primer_quimestre_proyectos(proyectos, 0)
+          parcial2 = ResultServiceNota.calcular_primer_quimestre_proyectos(proyectos, 1)
+        }
+        let comportamiento = notas[j].comportamiento;
+        if (comportamiento.length > 0) {
+          parcial1 = ResultServiceNota.calcular_primer_quimestre_comportamiento(comportamiento, 0)
+          parcial2 = ResultServiceNota.calcular_primer_quimestre_comportamiento(comportamiento, 1)
+        }
+        let dhi = notas[j].dhi;
+        if (dhi.length > 0) {
+          parcial1 = ResultServiceNota.calcular_primer_quimestre_comportamiento(dhi, 0)
+          parcial2 = ResultServiceNota.calcular_primer_quimestre_comportamiento(dhi, 1)
+        }
         foranea = notas[j]._id;
         this.inAlumnos.push({
           name: nombre,

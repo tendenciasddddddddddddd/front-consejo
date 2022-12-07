@@ -150,7 +150,7 @@
                                                     <td
                                                         style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important;text-align: center!important;">
                                                         <div v-if="parcial2"
-                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);">
                                                             <div style=" flex: 1 0 0%;padding-left: 7px;">
                                                                 <span v-if="(ite.b1 != 'NaN')"> {{ ite.b1}}</span>
                                                             </div>
@@ -188,11 +188,11 @@
                                                         style="padding: 1px 3px;border-top: 1px solid #000;font-size: .60rem!important;">
                                                        <b>PROMEDIO</b> </td>
                                                     <td
-                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: center !important;">
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: right !important;">
                                                         <span v-if="parcial"> <b>{{promdioParcial(item.data)}}</b> </span>
                                                     </td>
                                                     <td
-                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: center !important;">
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: right !important;">
                                                         <span v-if="parcial2"> <b>{{promdioParcial2(item.data)}}</b> </span>
                                                     </td>
                                                     <td
@@ -466,6 +466,212 @@
                                        A=Muy Satisfactorio &nbsp;&nbsp; B=Satisfactorio&nbsp;&nbsp; C=Poco Satisfactorio&nbsp;&nbsp; D=Mejorable&nbsp;&nbsp; E=Insatisfactorio
                                     </div>
                                 </div>
+                                <div style="page-break-before:always;"></div> <br> <br>
+                            </div>
+                         
+                        </div>
+
+ <!-- ------     COMPORTAMIENTO                   -->
+                        <div style="text-align: center!important;" v-for="item in ccomportamiento" :key="item.id">
+                            <div
+                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;">
+                                <div style="flex: 0 0 auto;width: 12%;text-align: center!important;">
+                                    <img style="width: 70%!important" :src="settings.logo" alt="Logo" />
+                                </div>
+                                <div style="flex: 0 0 auto; width: 86%;">
+                                    <span style="color:#000;font-weight: 600;font-size: 1.25rem;line-height: 1.375;">
+                                        {{ settings.unidadeducativa }}
+                                    </span><br>
+                                    <p
+                                        style="margin-top:-1px;text-align: center!important;font-size: .75rem!important;">
+                                        Dirección: {{ settings.direccion }} Teléf: {{ settings.telefono }} <br>
+                                        {{ settings.ubicacion }}
+                                    </p>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div
+                                style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                <div
+                                    style="padding-left: 16px;font-size: .75rem!important; flex: 0 0 auto; width: 50%;text-align: left!important;">
+                                    <p>Curso : {{curso}} - {{ paralelo}}  <br>
+                                     Asignatura : {{ item.materia }} <br>
+                                     Profesor(a) : {{ item.docente }}</p>
+                                </div>
+                                <div
+                                    style="font-size: .75rem!important; flex: 0 0 auto; width: 47%;text-align: right!important;">
+                                    <span>PERIODO: <b>2022-2023</b></span><br>
+                                    <span>FECHA: {{ fechasActual }}</span>
+                                </div>
+                            </div>
+                            <div > 
+                                <div>
+                                    <table
+                                            style=" border-color: #000;border-style: solid;border-width: 0px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        style="padding: 0px 2px;border-top: 1px solid #000;border-bottom: 0px;border-right: 1px solid #000;">
+                                                    </th>
+                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
+                                                    </th>
+                                                    <th
+                                                        style="padding: 0px 2px;border-top: 1px solid #000;    font-size: .65rem!important;font-weight: 700!important;text-transform: uppercase!important;    text-align: right!important;">
+                                                        <span v-if="numQuimestre == 0">PRIMER QUIMESTRE</span>
+                                                        <span v-else>SEGUNDO QUIMESTRE</span>
+                                                    </th>
+                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
+                                                    </th>
+                                                    <th style="padding: 0px 2px;border-top: 1px solid #000;">
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th
+                                                        style="padding: 1px 3px;border-bottom: 1px solid #000;border-right: 1px solid #000;font-size: .65rem!important;font-weight: 700!important;  text-align: center!important;">
+                                                        ESTUDIANTES
+                                                    </th>
+                                                    <th
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-bottom: 1px solid #000;font-weight: 700!important;  text-align: center!important;">
+                                                        PARCIAL 1
+                                                    </th>
+                                                    <th
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-bottom: 1px solid #000;font-weight: 700!important;  text-align: center!important;">
+                                                        PARCIAL 2
+                                                    </th>
+                                                    <th
+                                                        style="padding: 1px 3px;font-size: .65rem!important;border-bottom: 1px solid #000;font-weight: 700!important;  text-align: center!important;">
+                                                        PROMEDIO
+                                                    </th>
+                                                </tr>
+                                               
+                                            </thead>
+
+                                            <tbody>
+                                                <tr v-for="ite in item.data" :key="ite.id">
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;  font-size: .65rem!important;">
+                                                        {{ ite.nombre }}</td>
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
+                                                        <div v-if="parcial"
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p1 }}
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;border-right: 1px solid #000;font-size: .65rem!important;text-align: center!important;">
+                                                        <div v-if="parcial2"
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 7px;">{{ ite.p2 }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 2px 3px;border-bottom-width: 0px;font-size: .65rem!important;text-align: center!important;">
+                                                        <div v-if="parcial && parcial2"
+                                                            style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
+                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
+                                                                {{ ite.pro }}
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .60rem!important;">
+                                                       <b>PROMEDIO</b> </td>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: center !important;">
+                                                        <span v-if="parcial"> <b>{{promdioComportamientoLetras(item.data)}}</b> </span>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: center !important;">
+                                                        <span v-if="parcial2"> <b>{{promdioComportamientoLetras2(item.data)}}</b> </span>
+                                                    </td>
+                                                    <td
+                                                        style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: center !important;">
+                                                        <span ></span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div style="display: flex!important;">
+                                            <table style="margin-top: 8px; border-color: #000;border-style: solid;border-width: 1px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                            <thead style="font-size: .65rem!important;text-align: center!important;">
+                                                <th></th>
+                                                <th>A</th>
+                                                <th>B</th>
+                                                <th>C</th>
+                                                <th>D</th>
+                                                <th>E</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr  style="font-size: .65rem!important;text-align: center!important;">
+                                                    <td style="border-top: 1px solid #000;"> <b>Ʃ</b> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial">{{mediaLetrasA(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial">{{mediaLetrasBB(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial">{{mediaLetrasC(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial">{{mediaLetrasD(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial">{{mediaLetrasE(item.data)}}</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table style="margin-top: 8px; border-color: #000;border-style: solid;border-width: 1px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                            <thead style="font-size: .65rem!important;text-align: center!important;">
+                                                <th></th>
+                                                <th>A</th>
+                                                <th>B</th>
+                                                <th>C</th>
+                                                <th>D</th>
+                                                <th>E</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="font-size: .65rem!important;text-align: center!important;">
+                                                    <td style="border-top: 1px solid #000;"> <b>Ʃ</b> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial2">{{mediaLetrasA2(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial2">{{mediaLetrasBB2(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial2">{{mediaLetrasC2(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial2">{{mediaLetrasD2(item.data)}}</span> </td>
+                                                    <td style="border-top: 1px solid #000;"><span v-if="parcial2">{{mediaLetrasE2(item.data)}}</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table style="margin-top: 8px; border-color: #000;border-style: solid;border-width: 1px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                            <thead style="font-size: .65rem!important;text-align: center!important;">
+                                                <th></th>
+                                                <th>A</th>
+                                                <th>B</th>
+                                                <th>C</th>
+                                                <th>D</th>
+                                                <th>E</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="font-size: .65rem!important;text-align: center!important;">
+                                                    <td style="border-top: 1px solid #000;"> <b>Ʃ</b> </td>
+                                                    <td style="border-top: 1px solid #000;"></td>
+                                                    <td style="border-top: 1px solid #000;"></td>
+                                                    <td style="border-top: 1px solid #000;"></td>
+                                                    <td style="border-top: 1px solid #000;"></td>
+                                                    <td style="border-top: 1px solid #000;"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style=" margin-top: 10px;   font-size: 12px;">
+                                            _________________________ <br>
+                                           <b>FIRMA TUTOR</b> 
+                                        </div> 
+                                        </div>
+                                    <div  style="margin-top: 8px;font-size: .75rem; border-color: #000;border-style: solid;border-width: 1px 1px 1px;max-width: 100%; width: 100%; border-spacing: 0; border-collapse: separate;">
+                                        9,10.DA=Domina Aprend. &nbsp;&nbsp; 7,8.AA=Alcanza Aprend.&nbsp;&nbsp; 5,6.PA=Próximo Alcanzar &nbsp;&nbsp; 1,2,3,4.NA=No Alcanza.&nbsp;&nbsp;
+                                       A=Muy Satisfactorio &nbsp;&nbsp; B=Satisfactorio&nbsp;&nbsp; C=Poco Satisfactorio&nbsp;&nbsp; D=Mejorable&nbsp;&nbsp; E=Insatisfactorio
+                                    </div>
+                                </div>
                                 <div style="page-break-before:always;"></div>
                             </div>
                          
@@ -558,7 +764,7 @@ export default {
         },
         ifDecimal(num){
             if (num != '') {
-                var partes = num.split('.'); 
+                var partes = num.toString().split('.'); 
                 var re = /^-?[0-9]+$/;
                 if (re.test(num)) {
                     return num + ".00";
@@ -771,20 +977,21 @@ export default {
         },
         promdioParcial(array){
             let sum = 0
-            let pro = 0
-            let cont = 0
-          if (array.length > 0) {
-            for (let i = 0; i < array.length; i++) {
-                const element = array[i].prom1;
-                const num = parseFloat(element);
-                if (num <= 10 && num >= 1) {
-                    sum = sum + num
-                    cont += 1
-                } 
+            let result = 0
+            let cont = 0;
+            if (array.length > 0) {
+                for (let i = 0; i < array.length; i++) {
+                    const element = array[i].prom1;
+                    const num = parseFloat(element);
+                    if (num <= 10 && num >= 1) {
+                        sum = sum + num
+                        cont += 1
+                    }
+                }
+                let pro = (sum / cont);
+                 result = trunc(pro,2)
             }
-             pro = (sum / cont).toFixed(2);
-          }
-          return pro
+             return this.ifDecimal(result)
         },
         mediaParcialDA(array){
         let cont = 0
@@ -841,20 +1048,21 @@ export default {
         //------------------------------------------------------------
         promdioParcial2(array){
             let sum = 0
-            let pro = 0
-            let cont = 0
-          if (array.length > 0) {
-            for (let i = 0; i < array.length; i++) {
-                const element = array[i].prom2;
-                const num = parseFloat(element);
-                if (num <= 10 && num >= 1) {
-                    sum = sum + num
-                    cont += 1
-                } 
+            let result = 0
+            let cont = 0;
+            if (array.length > 0) {
+                for (let i = 0; i < array.length; i++) {
+                    const element = array[i].prom2;
+                    const num = parseFloat(element);
+                    if (num <= 10 && num >= 1) {
+                        sum = sum + num
+                        cont += 1
+                    }
+                }
+                let pro = (sum / cont);
+                 result = trunc(pro,2)
             }
-             pro = (sum / cont).toFixed(2);
-          }
-          return pro
+             return this.ifDecimal(result)
         },
         mediaParcialDA2(array){
         let cont = 0
@@ -960,7 +1168,7 @@ export default {
             let cont = 0
           if (array.length > 0) {
             for (let i = 0; i < array.length; i++) {
-                const element = array[i].p1;
+                const element = array[i].p2;
                 if (element =='EX') {
                     cont += 1 
                 }
@@ -972,7 +1180,7 @@ export default {
             let cont = 0
           if (array.length > 0) {
             for (let i = 0; i < array.length; i++) {
-                const element = array[i].p1;
+                const element = array[i].p2;
                 if (element =='MB') {
                     cont += 1 
                 }
@@ -984,7 +1192,7 @@ export default {
             let cont = 0
           if (array.length > 0) {
             for (let i = 0; i < array.length; i++) {
-                const element = array[i].p1;
+                const element = array[i].p2;
                 if (element =='B') {
                     cont += 1 
                 }
@@ -996,7 +1204,7 @@ export default {
             let cont = 0
           if (array.length > 0) {
             for (let i = 0; i < array.length; i++) {
-                const element = array[i].p1;
+                const element = array[i].p2;
                 if (element =='R') {
                     cont += 1 
                 }
@@ -1079,6 +1287,211 @@ export default {
                     break;
             }
             return `${letra}`;
+        },
+        ///---------------------------PARA COMPORTAMIENTO---------------------------
+        promdioComportamientoLetras(array){
+            let aux2 = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                let aux = 0;
+                const element = array[i].p1;
+                switch (element) {
+                    case "A": aux = 5;
+                    break;
+                case "B": aux = 4;
+                    break;
+                case "C": aux = 3;
+                    break;
+                case "D": aux = 2;
+                    break;
+                case "E": aux = 1;
+                    break;
+                default:
+                    break;
+            }
+            aux2 = aux2 +aux;
+            }
+           
+          }
+          var result = parseInt((aux2) / array.length)
+          var letra = 'E'
+            switch (result) {
+                case 5: letra = 'A';
+                    break;
+                case 4: letra = 'B';
+                    break;
+                case 3: letra = 'C';
+                    break;
+                case 2: letra = 'D';
+                    break;
+                case 1: letra = 'E';
+                    break;
+                default:
+                    break;
+            }
+            return `${letra}`;
+        },
+        promdioComportamientoLetras2(array){
+            let aux2 = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                let aux = 0;
+                const element = array[i].p2;
+                switch (element) {
+                    case "A": aux = 5;
+                    break;
+                case "B": aux = 4;
+                    break;
+                case "C": aux = 3;
+                    break;
+                case "D": aux = 2;
+                    break;
+                case "E": aux = 1;
+                    break;
+                default:
+                    break;
+            }
+            aux2 = aux2 +aux;
+            }
+           
+          }
+          var result = parseInt((aux2) / array.length)
+          var letra = 'E'
+            switch (result) {
+                case 5: letra = 'A';
+                    break;
+                case 4: letra = 'B';
+                    break;
+                case 3: letra = 'C';
+                    break;
+                case 2: letra = 'D';
+                    break;
+                case 1: letra = 'E';
+                    break;
+                default:
+                    break;
+            }
+            return `${letra}`;
+        },
+        mediaLetrasA(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='A') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasBB(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='B') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasC(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='C') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasD(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='D') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasE(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='E') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasA2(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='A') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasBB2(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='B') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasC2(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='C') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasD2(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='D') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
+        },
+        mediaLetrasE2(array){
+            let cont = 0
+          if (array.length > 0) {
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i].p1;
+                if (element =='E') {
+                    cont += 1 
+                }
+            }
+          }
+          return cont
         },
         promedioP1(array) {
             let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
@@ -1230,6 +1643,12 @@ export default {
         this.initialSetup()
         this.__calcularfechaActual()
     }
+}
+function trunc (x, posiciones = 0) {
+  var s = x.toString()
+  var decimalLength = s.indexOf('.') + 1
+  var numStr = s.substr(0, decimalLength + posiciones)
+  return Number(numStr)
 }
 </script>
   

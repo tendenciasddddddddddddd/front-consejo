@@ -212,7 +212,7 @@
                                                             </div>
                                                             <div style=" flex: 1 0 0%;">
                                                                 <span
-                                                                    v-if="(ite.prom2 != 'NaN') && (ite.prom2 != '1.00')">
+                                                                    v-if="(ite.prom2 != 'NaN')">
                                                                     <b>{{ ite.prom2 }}</b> </span>
                                                             </div>
                                                         </div>
@@ -253,7 +253,9 @@
                                                     </td>
                                                     <td
                                                         style="padding: 1px 3px;border-top: 1px solid #000;font-size: .65rem!important;text-align: right  !important;">
-                                                        <span></span>
+                                                        <span v-if="(parcial && parcial2)">
+                                                            <b>{{ promdioFinal(item.calificaciones) }}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                     </td>
                                                 </tr>
                                                 <tr v-for="ite in item.proyectos" :key="ite.id">
@@ -564,7 +566,7 @@ export default {
                                     prom2: prom2,
                                     prom2_80: prom2_80,
                                     equivalPeriodos: equivalPeriodos,
-                                    examen: examen,
+                                    examen: this.ifDecimal(res.notas[this.numQuimestre].examen),
                                     exam2_20: exam2_20,
                                     final: final,
                                     letras: letras,
@@ -625,7 +627,25 @@ export default {
                 let pro = (sum / cont);
                  result = trunc(pro,2)
             }
-            return result
+            return this.ifDecimal(result)
+        },
+        promdioFinal(array){
+            let sum = 0
+            let result = 0
+            let cont = 0;
+            if (array.length > 0) {
+                for (let i = 0; i < array.length; i++) {
+                    const element = array[i].final;
+                    const num = parseFloat(element);
+                    if (num <= 10 && num >= 1) {
+                        sum = sum + num
+                        cont += 1
+                    }
+                }
+                let pro = (sum / cont);
+                 result = trunc(pro,2)
+            }
+            return this.ifDecimal(result)
         },
         promedioP1(array) {
             let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)

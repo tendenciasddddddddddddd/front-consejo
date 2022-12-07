@@ -341,4 +341,104 @@ let promedio_primer_segundo = ((parseFloat(promedio002) + parseFloat(promedio001
       parseFloat(promedio1_parcial80) + parseFloat(promedio1_parcial20);
     return promedioTotal1.toFixed(2);
   }
+  calcular_primer_quimestre_proyectos(obj, numArray) {
+    let aux = 0;
+    let aux2 = 0;
+    var letra = 'NO'
+    let p1 = obj[numArray].p1
+    let p2 = obj[numArray].p2;
+            switch (p1) {
+                case "EX": aux = 5;
+                    break;
+                case "MB": aux = 4;
+                    break;
+                case "B": aux = 3;
+                    break;
+                case "R": aux = 2;
+                    break;
+                default:
+                    break;
+            }
+            switch (p2) {
+                case "EX": aux2 = 5;
+                    break;
+                case "MB": aux2 = 4;
+                    break;
+                case "B": aux2 = 3;
+                    break;
+                case "R": aux2 = 2;
+                    break;
+                default:
+                    break;
+            }
+
+            var result = parseInt((aux + aux2) / 2)
+            switch (result) {
+                case 5: letra = 'EX Excelente';
+                    break;
+                case 4: letra = 'MB Muy Buena';
+                    break;
+                case 3: letra = 'B Buena';
+                    break;
+                case 2: letra = 'R Regular';
+                    break;
+                default:
+                    break;
+            }
+
+            return letra;
+  }
+  calcular_primer_quimestre_comportamiento(obj, numArray) {
+    let aux = 0;
+    let aux2 = 0;
+    var letra = 'NO'
+    let p1 = obj[numArray].p1
+    let p2 = obj[numArray].p2;
+            switch (p1) {
+              case "A": aux = 5;
+              break;
+          case "B": aux = 4;
+              break;
+          case "C": aux = 3;
+              break;
+          case "D": aux = 2;
+              break;
+          case "E": aux = 1;
+              break;
+          default:
+              break;
+            }
+            switch (p2) {
+              case "A": aux2 = 5;
+              break;
+          case "B": aux2 = 4;
+              break;
+          case "C": aux2 = 3;
+              break;
+          case "D": aux2 = 2;
+              break;
+          case "E": aux2 = 1;
+              break;
+          default:
+              break;
+            }
+
+            var result = parseInt((aux + aux2) / 2)
+            switch (result) {
+              case 5: letra = 'A Muy Satisfactorio';
+              break;
+          case 4: letra = 'B Satisfactorio';
+              break;
+          case 3: letra = 'C Poco Satisfactorio';
+              break;
+          case 2: letra = 'D Mejorable o Falla';
+              break;
+          case 1: letra = 'E Insatisfactorio';
+              break;
+          default:
+              break;
+            }
+
+            return letra;
+  }
 }
