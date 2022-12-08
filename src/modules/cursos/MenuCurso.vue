@@ -2,62 +2,53 @@
   <ScrimModal @close="salir">
     <template v-slot:header>
   <div class="fjrDCGRR_tab">
-    <div v-if="mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
-                  <span style="color:#fff">  Notas</span>
-                  
+               <div v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
+                <span style="color:#fff">  Notas</span>
+                
+               </div>
+               <div v-if="mate =='COMPORTAMIENTO'"
+                @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Comportamiento</span>
                  </div>
-                 <div v-if="mate =='COMPORTAMIENTO'"
-                  @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Comportamiento</span>
-                   </div>
-                   <div v-if="mate =='PROYECTOS ESCOLARES'"
-                    @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff">Proyectos</span>
-                   </div>
-                   <div v-if="mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" 
-                   @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }">
-                   <span v-if="!$store.state.isAppMobile" style="color:#fff">Supletorios</span>
-                   <span v-else style="color:#fff">Suple..</span>
-                   </div>
-                   <div v-if="mate =='DESARROLLO HUMANO INTEGRAL'"
-                    @click="tabs=5" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 5 }">
-                    <span v-if="!$store.state.isAppMobile" style="color:#fff">Desarrollo Humano Integral</span>
-                    <span v-else style="color:#fff">D.H.I</span>
-                  </div>
-                   <div  @click="tabs=4" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 4 }">
-                    <span v-if="!$store.state.isAppMobile" style="color:#fff">Planificación</span>
-                    <span v-else style="color:#fff">Plani..</span>
-                   </div>
+                 <div v-if="ifComplementarias =='1'"
+                  @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff">Complementarias</span>
+                 </div>
+                 <div v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" 
+                 @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }">
+                 <span v-if="!$store.state.isAppMobile" style="color:#fff">Supletorios</span>
+                 <span v-else style="color:#fff">Suple..</span>
+                 </div>
+                
+                 <div  @click="tabs=4" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 4 }">
+                  <span v-if="!$store.state.isAppMobile" style="color:#fff">Planificación</span>
+                  <span v-else style="color:#fff">Plani..</span>
+                 </div>
             </div>
      </template>
     <template v-slot:body>
   <ProgressBar v-if="isData"></ProgressBar>
   <div v-else  >
     <div >
-      
-     
-      <section v-if="tabs == 0 && mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" >
+      <section v-if="tabs == 0 && ifComplementarias !='1'&&ifComplementarias !='COMPORTAMIENTO'" >
         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
         <Calificaciones :object="inAlumnos" @getDataTask="getDataActualizada" />
-        </section>
-        <section v-if="tabs == 1 && mate !='PROYECTOS ESCOLARES'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'">
-          <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
-          <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
-        </section>
-        <section v-if="tabs == 2 && mate == 'PROYECTOS ESCOLARES'" >
-          <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
-          <Proyectos :object="inAlumnos" @getDataTask="getDataActualizada" />
-        </section>
-        <section v-if="tabs == 3 &&  mate =='COMPORTAMIENTO'">
-          <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
-          <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
-        </section>
-        <section v-if="tabs == 4">
-          <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
-          <Planificacion :id="idDistributivo" :planificacion="planificacion" />
-        </section>
-        <section v-if="tabs == 5 && mate =='DESARROLLO HUMANO INTEGRAL'" >
-          <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
-          <Dhi :object="inAlumnos" @getDataTask="getDataActualizada" />
-        </section>
+      </section>
+      <section v-if="tabs == 1 && ifComplementarias !='1'&&ifComplementarias !='COMPORTAMIENTO'">
+         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
+        <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
+      </section>
+      <section v-if="tabs == 2 && ifComplementarias == '1'" >
+         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
+        <Proyectos :object="inAlumnos" @getDataTask="getDataActualizada" />
+      </section>
+      <section v-if="tabs == 3 &&  mate =='COMPORTAMIENTO'">
+        <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
+        <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
+      </section>
+      <section v-if="tabs == 4">
+         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
+        <Planificacion :id="idDistributivo" :planificacion="planificacion" />
+      </section>
+     
     </div>
   </div>
     </template>
@@ -85,7 +76,6 @@ components: {
   Supletorios: () => import( /* webpackChunkName: "Supletorios" */ './pages/Supletorios.vue'),
   Comportamiento: () => import( /* webpackChunkName: "Comportamiento" */ './pages/Comportamiento.vue'),
   Proyectos: () => import( /* webpackChunkName: "Proyectos" */ './pages/Proyectos.vue'),
-  Dhi: () => import( /* webpackChunkName: "Dhi" */ './pages/Dhi.vue'),
 },
 data() {
   return {
@@ -171,7 +161,7 @@ methods: {
             this.isData = false;
             this.$Progress.finish();
           }
-          if(this.mate == 'PROYECTOS ESCOLARES')this.tabs = 2
+          if(this.ifComplementarias == '1')this.tabs = 2
           if(this.mate == 'COMPORTAMIENTO')this.tabs = 3
           if(this.mate == 'DESARROLLO HUMANO INTEGRAL')this.tabs = 5
         })
@@ -189,9 +179,9 @@ methods: {
       var proyectos = [];
       var comportamiento = [];
       var dhi = [];
-      if(this.mate =='PROYECTOS ESCOLARES'){
-          proyectos = [{p1:'R',p2:'R'}, {p1:'R',p2:'R'}]
-        } else if(this.mate =='COMPORTAMIENTO'){
+      if(this.ifComplementarias =='1'){
+        proyectos = [{p1:'R',p2:'R'}, {p1:'R',p2:'R'}]
+      } else if(this.mate =='COMPORTAMIENTO'){
         comportamiento = [{p1:'E',p2:'E'}, {p1:'E',p2:'E'}]
       } else if(this.mate =='DESARROLLO HUMANO INTEGRAL'){
         dhi = [{p1:'E',p2:'E'}, {p1:'E',p2:'E'}]
@@ -286,7 +276,6 @@ methods: {
 },
 created() {
   this.verificarUsuario();
-
 },
 }
 </script>

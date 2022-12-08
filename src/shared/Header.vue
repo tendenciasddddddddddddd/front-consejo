@@ -79,11 +79,11 @@
         </router-link>
       </li>
       
-      <!-- <li>
+      <li>
         <router-link to="/tutores" @click.native="Resize" :class="{'actives': $route.name === '4444'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === '4444'}"></i><span>Tutores</span>
         </router-link>
-      </li> -->
+      </li>
       <li>
         <router-link to="/planificacion" @click.native="Resize" :class="{'actives': $route.name === '3333'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === '3333'}"></i><span>Planificaciones</span>
@@ -146,11 +146,11 @@
           <i class="bi bi-circle" :class="{'activex': $route.name === 'd2'}"></i><span>Cursos asignados</span>
         </router-link>
       </li>
-      <!-- <li>
+      <li>
         <router-link to="/tutoresDocente" @click.native="Resize" :class="{'actives': $route.name === 'dh'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === 'dh'}"></i><span>Reportes</span>
         </router-link>
-      </li> -->
+      </li>
       <li>
         <router-link to="/zoom" @click.native="Resize" :class="{'actives': $route.name === 'dr'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === 'dr'}"></i><span>Zoom</span>

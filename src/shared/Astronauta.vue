@@ -8,9 +8,9 @@
             </div>
         </template>
         <template v-slot:acccion>
-            <button  class="btn btnNaranja mt-2" >
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-               Procesando
+            <button  class="btn btnNaranja mt-2" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Cargando...
             </button>
         </template>
     </Modal>

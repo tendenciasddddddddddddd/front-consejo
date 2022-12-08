@@ -25,10 +25,10 @@
                         </div>
                         <div class="col-lg-8 text-start">
                             <button :disabled="!isSelecMatricula.length" @click="activar" class="btn btnNaranja2"> 
-                                <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
                                 Libretas </button>
+                                <button :disabled="!isSelecMatricula.length" @click="openJuntas()" class="btn btnNaranja2 ms-2">
+                  Juntas de curso </button>
                           <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 ms-2"> 
-                            <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="18" ><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
                             Consolidado parcial </button>   
                             <button :disabled="!isSelecMatricula.length" @click="notas_pdf()" class="btn btnNaranja2 ms-2"> Consolidado anual </button>
                         </div>
@@ -107,6 +107,10 @@
             <ConsolidadoNotas :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
               :numQuimestre="numQuimestre"  />
           </section>
+          <section v-if="ifjuntas" style="display: none">
+          <JuntasCurso :rowData="rowData" @changeStatus="changeStatus" :nextCourse="nextCourse" :settings="settings"
+            :numQuimestre="numQuimestre" :parcial="parcial10" :parcial2="parcial11" />
+        </section>
         <div v-if="ifyoutuve">
             <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
         </div>
@@ -226,6 +230,59 @@
             </template>
           </Modal>
         </section>
+        <section v-if="isActive3">
+          <Modal @close="closeModal3">
+            <template v-slot:header> Juntas de cursos</template>
+            <template v-slot:body>
+              <div>
+                <p class="h6 fuente negros" style="font-weight:400;">
+                  Seleccionar uno de los dos quimestres
+                </p>
+                <div>
+                  <section>
+                    <div class="">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="0"
+                          :value="0" />
+                        <span class="parrafo"> Primer quimestre</span>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" v-model="checked" type="radio" name="ite.id" :id="1"
+                          :value="1" />
+                        <span class="parrafo"> Segundo quimestre</span>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="mt-3 ">
+                    <p class="h6 fuente negros" style="font-weight:400;">
+                      Seleccionar uno o varios parciales para generar el reporte
+                    </p>
+                    <div>
+                      <div class="form-check ">
+                        <input class="form-check-input cheka" type="checkbox" value="10" v-model="parcial10" />
+                        <label class="form-check-label  parrafo negros"> &nbsp; Primer parcial</label>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="form-check ">
+                        <input class="form-check-input cheka" type="checkbox" value="11" v-model="parcial11" />
+                        <label class="form-check-label parrafo negros">&nbsp; Segundo parcial</label>
+                      </div>
+                    </div>
+
+                  </section>
+                </div>
+              </div>
+            </template>
+            <template v-slot:acccion>
+              <button @click="juntas_pdf" type="submit" class="btn btnNaranja mt-2">
+                Generar Reporte
+              </button>
+            </template>
+          </Modal>
+        </section>
         </div>
     </div>
 </template>
@@ -244,10 +301,11 @@ export default {
     name: 'Report',
     components: {
         Spinner,  NoFound, Paginate, Astronauta, Modal,Emergente,Dropdown,
-        Quimestral: () => import( /* webpackChunkName: "FormatoLibretas" */ "./pages/Quimestral.vue"),
+        Quimestral: () => import( /* webpackChunkName: "FormatoLibretas" */ "../../views/reporte/pages/notas/FormatoLibretas.vue"),
         Parcial: () => import( /* webpackChunkName: "Parcial" */ "./pages/Parcial.vue"),
         ConsolidadoNotas: () => import( /* webpackChunkName: "ConsolidadoNotas" */ "../../views/reporte/pages/notas/ConsolidadoNotas.vue"),
         VueYoutuve: () => import( /* webpackChunkName: "VueYoutuve" */ "../../shared/VueYoutuve.vue"),
+        JuntasCurso: () => import( /* webpackChunkName: "JuntasCurso" */ "../../views/reporte/pages/notas/JuntasCurso.vue"),
     },
     data() {
         return {
@@ -274,6 +332,7 @@ export default {
             allSelected: false,
             isActive: false,
             isActive2: false,
+            isActive3: false,
             numQuimestre: 0,
             settings: {},
             checked: 0,
@@ -282,6 +341,9 @@ export default {
             ifyoutuve: false,
             parcial3: 3,
             ifConsolidado : false,
+            ifjuntas: false,
+           parcial10 : false,
+           parcial11 : false, 
         }
     },
     watch: {
@@ -381,12 +443,14 @@ export default {
                 this.iflibretas = false;
                 this.ifConsolidado = false;
                 this.ifParcial = false;
+                this.ifjuntas = false;
             }
             if (ev=='500'){
                 this.isPrint = false;
                 this.iflibretas = false;
                 this.ifParcial = false;
                 this.ifConsolidado = false;
+                this.ifjuntas = false;
                 this.ifEmergente = true;
       }
         },
@@ -441,9 +505,15 @@ export default {
         closeModal() {
             this.isActive = false;
         },
+        closeModal3: function() {
+      this.isActive3 = false;
+    },
         closeModal2() {
             this.isActive2 = false;
         },
+        openJuntas: function() {
+      this.isActive3 = true;
+    },
         notas_pdf: function () {
       if (this.isSelecMatricula.length > 0) {
           this.isPrint = true;
@@ -451,6 +521,21 @@ export default {
           this.rowData = this.isSelecMatricula
       }else {
         this.$dialog.alert("Selecione un estudiante por lo menos");
+      }
+    },
+    juntas_pdf (){
+      if (this.isSelecMatricula.length > 0) {
+        if (this.parcial10 != '' || this.parcial11 != '') {
+          this.numQuimestre = this.checked;
+          this.closeModal3();
+          this.isPrint = true;
+          this.ifjuntas = true
+          this.rowData = this.isSelecMatricula
+        } else {
+          this.$dialog.alert("Seleccionar un parcial");
+        }
+      } else {
+        this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
         libretas_pdf: function () {
