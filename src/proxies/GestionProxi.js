@@ -83,6 +83,10 @@ export default class GestionProxi {
         return this.axios.get(this.url + `/distributivo/fulldistributivo`);
     }
 
+    async getEstadistica() {
+        return await this.axios.get(this.url + `/distributivo/estadistica`);
+    }
+
     removeDistributivo(id, params) {
         return this.axios.put(this.url + `/distributivo/${id}`, params);
     }

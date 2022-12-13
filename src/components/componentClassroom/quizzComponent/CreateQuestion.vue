@@ -29,11 +29,11 @@
             {{ validation.firstError("model.examen.time") }}
           </p>
 
-           <!-- <span class="parrafo">Intentos permitidos</span>
+           <span class="parrafo">Intentos permitidos</span>
           <CustomInput aria-disabled="" v-model="model.examen.intenAllowed" />
           <p class="mb-2 text-xs text-danger">
             {{ validation.firstError("model.examen.intenAllowed") }}
-          </p> -->
+          </p>
 
           <span class="parrafo">Presentacion de preguntas aleatorias</span>
            <div class="form-check form-switch mt-1">
@@ -127,8 +127,8 @@ export default {
     vueInit(){
        if (this.collects._id != undefined) {
         this.model.examen = this.collects
-        this.start = this.collects.startDate;
-        this.end = this.collects.endDate;
+        this.model.examen.startDate = new Date(this.collects.startDate);
+        this.model.examen.endDate = new Date(this.collects.endDate);
       }
     },
     close() {

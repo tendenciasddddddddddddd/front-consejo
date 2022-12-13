@@ -36,6 +36,7 @@
       Ver video explicativo
     </a>
   </div>
+
     </div>
 </template>
 <script>

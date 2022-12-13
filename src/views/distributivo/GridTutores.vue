@@ -33,9 +33,17 @@
       <div v-if="ifload" class="loadingg">
         <div class="inn ">
           <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Configurando distributivo
-            <div class="spinner-border text-light mt-2" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
+            <div  class="text-center me-3">
+      <div class="spinner-grow text-danger me-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning me-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+    <div class="spinner-grow text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+        </div>
           </h4>
         </div>
       </div>

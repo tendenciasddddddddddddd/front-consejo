@@ -9,12 +9,12 @@
     </div>
     <NoFound v-else />
     <div v-if="isAnswer">
-      <AnswerQuizz :isSelecUser="isSelecUsers" :itemQuizz="itemQuizz" @EventClose="closed" @getData="getDataAll" />
+      <AnswerQuizz :isSelecUser="isSelecUsers" :itemQuizz="itemQuizz" @EventClose="closed" @getData="getDataAll" :idQuizzSend="idQuizzSend"/>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="js">
 import NoFound from "../../../shared/NoFound"
 import ActionRowUser from "../../../shared/ActionRowUser.vue";
 import Paginate from "../../../shared/Paginate"
@@ -48,7 +48,8 @@ export default {
       numPages: 0,
       searchQuery: '',
       idQuizz: '',
-      itemQuizz: {}
+      itemQuizz: {},
+      idQuizzSend : ''
     }
   },
   computed: {
@@ -68,7 +69,6 @@ export default {
   },
   methods: {
     openModal: function (item) {
-     
       let array = this.object.filter((x) => x._id == item)
       if (array.length > 0) {
         if (array[0].security=='') {
@@ -109,10 +109,12 @@ export default {
     },
     clickComnitnue(objects){
      let contador = 0;
+     this.idQuizzSend = ''
         if (objects.answers.length > 0) {
           for (let i = 0; i < objects.answers.length; i++) {
             if (objects.answers[i].idUser == this.usuario) {
               contador++
+              this.idQuizzSend = objects.answers[i]._id
             }
           }
         }

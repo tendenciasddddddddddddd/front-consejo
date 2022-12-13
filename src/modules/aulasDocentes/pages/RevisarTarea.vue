@@ -1,6 +1,11 @@
 <template>
     <ScrimModal @close="close">
-        <template v-slot:header> {{ collects.nombre }}</template>
+        <template v-slot:header> {{ collects.nombre }}  
+            <a v-if="collects.archivo" :href="collects.archivo" target="_blank" class=" btn btnNaranja2 ms-3" style=" padding: 10px !important;color: rgb(0, 0, 0) !important;
+    background-color: rgb(255, 255, 255) !important;" >
+                                   <span >Mostrar archivo cargado</span>
+                                </a>
+        </template>
         <template v-slot:body>
             <div class="row">
                 <div class="col-sm-3 croll panel1" style="overflow-y: auto;">
@@ -50,10 +55,9 @@
                             </span> 
                              
                             <span v-else class="text-sm negros ">
-                                <a :href="detalleTask.tarea" target="_blank" class=" btn btnNaranja w-100" style="    padding: 10px !important;">
+                                <a :href="detalleTask.tarea" target="_blank" class=" btn btnNaranja w-100" style=" padding: 10px !important;">
                                    <span class="">Click para revisar el trabajo</span>
                                 </a>
-                               
                             </span>
                             <hr>
                             <div   style="overflow-y: auto;height: calc(85vh - 150px);overflow-x: auto;">

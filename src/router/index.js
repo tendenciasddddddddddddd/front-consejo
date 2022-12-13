@@ -68,6 +68,12 @@ const routes = [{
     component: () => import( /* webpackChunkName: "Planificacion" */ '../views/distributivo/Planificacion.vue'),
   },
 
+  { //-------------------------------------EATDISTICAS------------------------------
+    path: '/estadistica',
+    name: '777',
+    component: () => import( /* webpackChunkName: "Estadisticas" */ '../views/distributivo/Estadisticas.vue'),
+  },
+
   { //-------------------------------------DISTRIBUTIVO------------------------------
     path: '/tutores',
     name: '4444',
@@ -144,12 +150,12 @@ const routes = [{
   {
     path: '/aulas-lista',
     name: 'al',
-    component: () => import( /* webpackChunkName: "AulasListas" */ '../views/pagesClassroom/profesores/manu/AulasListas.vue'),
+    component: () => import( /* webpackChunkName: "AulasListas" */ '../modules/aulasDocentes/ListaAulas.vue'),
   },
   {
     path: '/modulo-aula/:id',
     name: 'al',
-    component: () => import( /* webpackChunkName: "ModuloAula" */ '../views/pagesClassroom/profesores/Modulos/ModuloAula.vue'),
+    component: () => import( /* webpackChunkName: "ModuloAula" */ '../modules/aulasDocentes/ModuloAulas.vue'),
   },
  
    ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------

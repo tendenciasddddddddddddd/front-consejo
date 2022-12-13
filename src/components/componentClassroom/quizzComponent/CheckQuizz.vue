@@ -45,12 +45,12 @@
                 <div class="col-sm-6 " style="border-right: 1px solid rgb(203 214 226);">
                     <NoFound2 v-if="!detalleTask.id" />
                     <section v-else>
-                        <span class="h5 negros gordo ">
+                        <div class="h5 negros gordo text-center mb-3">
                             <b class=" text-media">{{ detalleTask.nombre }}</b><br>
-                        </span>
+                        </div>
                         <div  v-for="item in collects.surveys" :key="item.id">
-                            <h5 class=" negros" v-html="item.question" style="font-weight: 400;">
-                            </h5>
+                            <h6 class=" negros" v-html="item.question" style="font-weight: 400;">
+                            </h6>
                             <div>
                                 <ul>
                                     <li v-for="(option) in item.options" :key="option.id" >
@@ -188,7 +188,7 @@ export default {
                             tarea = this.collects.entrega[j].link;
                             nota = this.collects.entrega[j].puntage;
                             responses = this.collects.entrega[j].responses;
-                            break;
+                           // break;
                         }
                     }
                     this.dataUser.push({ id: id, tarea: tarea, idTask: idTask, nombre: nombre, nota: nota, responses: responses })

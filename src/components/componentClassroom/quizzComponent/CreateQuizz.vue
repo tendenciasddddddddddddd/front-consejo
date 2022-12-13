@@ -1,14 +1,14 @@
 <template>
-    <ScrimModal @close="close">
+    <ScrimModal @close="closeD">
         <template v-slot:header> Examen ({{ surveys.length }} Preguntas)</template>
         <template v-slot:body>
             <div class="flex-containes2" direction="row" wrap="nowrap" style="margin-top: -1rem;">
-                <section class="s-column1 croll">
+                <section class="s-column1 croll mt-2" >
                     <NoFound2 v-if="surveys.length == 0" />
                     <Encuesta v-else v-for="survey in surveys" :key="survey.id" :survey="survey"
                         @removeQuiz="removeQuiz" @editQuizz="editQuizz" />
                 </section>
-                <section class="s-column2" style="background-color: rgb(64 87 109 / 7%);">
+                <section class="s-column2" style="background: #f6f9ff;">
                     <Spinner v-if="ifCambio" />
                     <div v-else class="exam-question-screen__content-area croll " style="overflow-y: auto;">
                         <div v-if="isOptionQuizz == 0" class="mt-7">
@@ -23,14 +23,14 @@
                             @editSurvey="editSurvey($event)"/>
                         </div>
                         <div v-if="isOptionQuizz == 3" class="text-center">
-                            <SelectMany @addSurvey="pushSurvey($event)" :arrayEdit="arrayEdit"/>
+                            <SelectMany @addSurvey="pushSurvey($event)" :arrayEdit="arrayEdit" @editSurvey="editSurvey($event)"/>
                         </div>
                     </div>
                 </section>
             </div>
         </template>
         <template v-slot:footer>
-            <button href="javascript:;" @click="clickOption(0)" class="btn btnNaranja2">Cambiar pregunta</button>
+            <button href="javascript:;" @click="clickOption(0)" class="btn btnNaranja2">Cambiar tipo de pregunta</button>
             <button href="javascript:;" @click="save" class="btn btnNaranja ms-3">Finalizar con
                 ({{ surveys.length }}) preguntas</button>
         </template>
@@ -50,6 +50,7 @@ export default {
     name: "CreateQuizz",
     props: {
         id: String,
+        preguntas : Object
     },
     components: {
         ScrimModal, AgregarEncuesta, Encuesta, OptionQuizz, TrueOrFalse, SelectMany, NoFound2, Spinner
@@ -63,15 +64,24 @@ export default {
                 question: '',
                 option: [{ text: '' }],
                 reqq: [],
-                tipo: 0
+                tipo: 0,
+                id : 0
             },
             arrayEdit: [],
             ifCambio: false,
         }
     },
     methods: {
+        initialSetup(){
+            if (this.preguntas._id) {
+                this.surveys = this.preguntas.surveys
+            }
+        },
         close() {
             this.$emit('EventClose')
+        },
+        closeD() {
+            this.$dialog.alert(' :::PARA SALIR DE CLICK EN EL BOTON FINALIZAR CON (X) PREGUNTAS:::')
         },
         vueInit() {
 
@@ -102,14 +112,12 @@ export default {
             this.clickOption(0);
         },
         editSurvey(obj) {
-            console.log(obj)
             for (var i in this.surveys) {
                 if (this.surveys[i].id == obj.id) {
                     this.surveys[i] = obj;
                     break; 
                 }
             }
-            console.log(this.surveys)
             this.clickOption(0);
         },
         removeQuiz(id) {
@@ -118,8 +126,6 @@ export default {
         editQuizz(array) {
             this.ifCambio = true;
             this.isOptionQuizz = 0;
-            console.log(array)
-            console.log(this.surveys)
             this.arrayEdit = []
             this.arrayEdit = this.surveys.filter((x) => x.id == array)
             if (this.arrayEdit.length > 0) {
@@ -145,7 +151,26 @@ export default {
         },
         save() {
             this.model = this.surveys;
-            if (this.surveys.length > 0) {
+            if (this.surveys.length == 0) {
+                this.$dialog.alert('❌ :::El examen tiene que tener minimo una pregunta:::') 
+                return
+            }
+            if ( this.preguntas._id){
+                this.ifLoad = true;
+                this.$proxies._aulaProxi
+                    .sendQuestions2(this.id, this.model) //-----------EDITAR CON AXIOS
+                    .then(() => {
+                        this.ifLoad = false;
+                        this.getData();
+                        this.toast('Las preguntas fueron registradas!!');
+                        this.close();
+                    })
+                    .catch(() => {
+                        this.clickOption(0);
+                        this.$dialog.alert(':::No podemos procesar la solicitud, Intente otra vez:::')
+                        this.ifLoad = false;
+                    });
+            } else {
                 this.ifLoad = true;
                 this.$proxies._aulaProxi
                     .sendQuestions(this.id, this.model) //-----------EDITAR CON AXIOS
@@ -160,8 +185,6 @@ export default {
                         this.$dialog.alert(':::No podemos procesar la solicitud, Intente otra vez:::')
                         this.ifLoad = false;
                     });
-            } else {
-                this.$dialog.alert('❌ :::El examen tiene que tener minimo una pregunta:::')
             }
         },
         toast(message) {
@@ -180,7 +203,7 @@ export default {
         },
     },
     created() {//sendQuestions
-
+      this.initialSetup() 
     },
 }
 function removeFunction(myObjects, prop, valu) {

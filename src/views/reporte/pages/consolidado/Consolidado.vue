@@ -22,7 +22,7 @@
   </Modal>
 
 </template>
-<script >
+<script lang="js">
 import Modal from "../../../../shared/Modal.vue";
 import ButtonLoading from "../../../../shared/ButtonLoading.vue";
 export default {

@@ -11,9 +11,9 @@
         </div>
        
         <div lass="mt-2">
-          <a v-if="collects.archivo" class="parrafo" style=" cursor: pointer;" target="_blank"
+          <a v-if="collects.archivo" class="btn btnNaranja" style=" cursor: pointer;padding: 10px !important;" target="_blank"
             :href="collects.archivo">
-            <span class=" links">Detalle de esta tarea (Desacargar)</span>
+            <span class="">Detalle de tarea (Desacargar)</span>
           </a>
         </div>
         <Dropzone @uploadArchive="submitArchive" />

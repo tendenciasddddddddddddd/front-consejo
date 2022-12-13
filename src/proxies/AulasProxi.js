@@ -84,11 +84,19 @@ export default class AulasProxi {
         return this.axios.put(this.url + `/quizz/send/${id}`, params); //editQuizz
     }
 
+    sendQuestions2(id, params) {
+        return this.axios.put(this.url + `/quizz/send2/${id}`, params); //editQuizz
+    }
+
     editQuizz(id, params) {
         return this.axios.put(this.url + `/quizz/editQuizz/${id}`, params);
     }
 
     solveQuiz(id, params) {
         return this.axios.put(this.url + `/quizz/solve/${id}`, params); // Resolver examne
+    }
+
+    solveQuiz2(id, params) {
+        return this.axios.put(this.url + `/quizz/solve2/${id}`, params); // Resolver examne
     }
 }

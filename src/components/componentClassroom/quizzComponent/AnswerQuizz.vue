@@ -48,6 +48,7 @@ export default {
     name: "CreateQuizz",
     props: {
         itemQuizz: Object,
+        idQuizzSend : String
     },
     components: {
         ScrimModal,  AnswerOne, AnswerMany
@@ -79,7 +80,6 @@ export default {
             this.$emit('EventClose')
         },
         vueInit() {
-           
             if (this.itemQuizz.randomize) {
                 let questions = this.itemQuizz.surveys
                 questions = shuffle(questions);
@@ -107,9 +107,8 @@ export default {
             this.model.idUser = this.user.id;
             this.model.responses = this.response;
             this.model.puntage = this.contador
-            console.log(this.model)
             this.ifLoad = true;
-            this.$proxies._aulaProxi
+                this.$proxies._aulaProxi
                 .solveQuiz(this.itemQuizz._id, this.model) //-----------EDITAR CON AXIOS
                 .then(() => {
                     this.getData();
@@ -121,7 +120,7 @@ export default {
                 .catch(() => {
                     this.$dialog.alert("El servidor responde con un codigo de estado 413.");
                     this.ifLoad = false;
-                });
+                }); 
         },
         getData() {
             this.$emit('getData');

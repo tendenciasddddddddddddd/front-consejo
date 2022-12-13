@@ -1,7 +1,7 @@
 <template>
     <div>
         <ActionRowDocente :allSelecteds="allSelected" :longitude="isSelecUsers.length" @changeSearch="changeSearchs"
-            @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @selectAll="selectAlls" />
+            @getDataAlls="getDataAll" @deletedSelected="deletedSelect" @remove="remove" @selectAll="selectAlls" @openModal="openModal"/>
         <NoFound v-if="displayedArticles.length == 0" />
         <section  class="row" v-else>
             <div v-for="(item, index) in displayedArticles" :key="item.id" class="liTask  col-sm-6">
@@ -13,7 +13,7 @@
                                 :value="item._id" @click="selectOne(item._id)" />
                         </div>
                         <div class="d-flex flex-column justify-content-center ms-3">
-                            <h6 class="mb-0 text-sm negros">
+                            <h6 class="mb-0 text-sm negros gordo">
                                 {{ item.name }}
                             </h6>
                             <div class="text-sm colorestabla fuente">
@@ -35,10 +35,12 @@
             <Paginate :numPages="numPages" :page="page" :total="objectUser.length" @pagechanged="onPageChange">
             </Paginate>
         </section>
+        <div v-if="ifAdd">
+        <AgregarEstudiantes :objectUser="objectUser"  @myEventTask="closedAdd" @getData="getDataAll"/>
+      </div>
     </div>
 </template>
-
-<script>
+<script lang="js">
 import NoFound from "../../../shared/NoFound"
 import ActionRowDocente from "../../../shared/ActionRowDocente.vue";
 import Paginate from "../../../shared/Paginate"
@@ -47,7 +49,8 @@ export default {
     props: {
         objectUser: Array,
     },
-    components: { NoFound, ActionRowDocente, Paginate },
+    components: { NoFound, ActionRowDocente, Paginate,
+        AgregarEstudiantes: () => import( /* webpackChunkName: "AgregarEstudiantes" */ "./AgregarEstudiantes.vue"), },
     data() {
         return {
             colors: ["#00875a", "#00b8d9", "#6554c0", "#ff5630", "#57d9a3,#00875a", "#00b8d9", "#6554c0", "#ff5630", "#57d9a3,#00875a", "#00b8d9", "#6554c0", "#ff5630", "#57d9a3"],
@@ -58,6 +61,7 @@ export default {
             perPage: 10,
             pages: [],
             numPages: 0,
+            ifAdd : false
         }
     },
     computed: {
@@ -82,6 +86,12 @@ export default {
             let to = (page * perPage);
             this.numPages = Math.ceil(articles.length / this.perPage);
             return articles.slice(from, to);
+        },
+        closedAdd: function (){
+            this.ifAdd = false
+        },
+        openModal (){
+            this.ifAdd = true
         },
         onPageChange(page) {
             this.page = page;

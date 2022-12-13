@@ -94,10 +94,10 @@
 
   <li class="nav-item" v-if="user.roles.includes('Admin')">
     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#"
-    :class="{'activesli': $route.name === '77'||$route.name === 'r2'}">
+    :class="{'activesli': $route.name === '77'||$route.name === 'r2'|| $route.name === '777'}">
       <i class="bi bi-bar-chart"></i><span>Matriculas</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" :class="{'show': $route.name === '77'|| $route.name === 'r2'}">
+    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav" :class="{'show': $route.name === '77'|| $route.name === 'r2'|| $route.name === '777'}">
       <li>
         <router-link to="/Intensivo" @click.native="Resize" :class="{'actives': $route.name === '77'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === '77'}"></i><span>Matricula</span>
@@ -106,6 +106,11 @@
       <li>
         <router-link to="/opciones-reportes" @click.native="Resize" :class="{'actives': $route.name === 'r2'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === 'r2'}"></i><span>Reportes</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/estadistica" @click.native="Resize" :class="{'actives': $route.name === '777'}">
+          <i class="bi bi-circle" :class="{'activex': $route.name === '777'}"></i><span>Estadistica notas</span>
         </router-link>
       </li>
     </ul>

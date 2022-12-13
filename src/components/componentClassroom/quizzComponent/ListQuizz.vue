@@ -11,7 +11,7 @@
               </div>
 
               <div @click="openChildRewiewQuizz(item)" class="d-flex flex-column justify-content-center ms-3">
-                <h6 class="mb-0 text-sm negros " >
+                <h6 class="mb-0 text-sm negros gordo" >
                   {{ item.nombre }}
                 </h6>
                 <div class="text-xs colorestabla  negros">
@@ -21,14 +21,15 @@
                   </div>
                 </div>
               </div>
-              <div   class="mt-1 ms-6"><span class="text-sm negros">
+              <div   class="mt-3" style="margin-left: 30px;"><span class="text-sm negros">
                 <TimeEgo :fecha="item.fechad" />
               </span></div>
             
             </div>
           <div class="dropstart ms-auto">
             <div class="d-flex ">
-             <button class="btn btnNaranja2 ms-3">Duplicar examen</button>
+              <button @click="editarPreguntasExamen(item)" class="btn btnNaranja2 ms-3">Edit preguntas</button>
+             <button @click="migrar(item)" class="btn btnNaranja2 ms-3">Migrar</button>
            </div>
           </div>
         </div>
@@ -40,11 +41,14 @@
       <CreateQuestion :collects="collestQuizz" @EventClose="closed" @getData="getDataAll" />
     </div>
      <div v-if="isQuizz">
-      <CreateQuizz :id="idQuizz"  @EventClose="closed"  @getData="getDataAll"/>
+      <CreateQuizz :id="idQuizz" :preguntas="preguntas" @EventClose="closed"  @getData="getDataAll"/>
     </div>
     <div v-if="isCheckQuizz">
       <CheckQuizz  :collects="checkTasks" :id="idQuizz" :objectUser="objectUser"  @myEventquizz="closeCheckTask"  @getData="getDataAll"/>
     </div>
+    <div v-if="ifMigrar">
+        <MigrarExamen :detalleTask="detalleTask"  @myEventTask="closedMigrar" @getData="getDataAll"/>
+      </div>
   </div>
 </template>
 <script>
@@ -63,6 +67,7 @@ export default {
     CreateQuizz: () => import( /* webpackChunkName: "CreateQuizz" */ "./CreateQuizz.vue"),
     CreateQuestion: () => import( /* webpackChunkName: "CreateQuestion" */ "./CreateQuestion.vue"),
     CheckQuizz: () => import( /* webpackChunkName: "CheckQuizz" */ "./CheckQuizz.vue"),
+    MigrarExamen: () => import( /* webpackChunkName: "MigrarExamen" */ "./MigrarExamen.vue"),
   },
   data() {
     return {
@@ -80,6 +85,9 @@ export default {
        numPages:0,
        searchQuery: '',
        idQuizz: '',
+       preguntas : {},
+       ifMigrar : false,
+       detalleTask : ''
     }
   },
   computed: {
@@ -108,6 +116,19 @@ export default {
         }
         
       }
+    },
+    migrar: function(item){
+      this.detalleTask = item;
+      console.log(item);
+      this.ifMigrar = true
+    },
+    closedMigrar: function(){
+        this.ifMigrar = false
+      },
+    editarPreguntasExamen: function(items){
+      this.idQuizz = items._id
+        this.preguntas = items;
+        this.isQuizz= true;
     },
     openModal: function () {
       this.collestQuizz = {}

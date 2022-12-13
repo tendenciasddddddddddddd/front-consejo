@@ -38,8 +38,8 @@
                 viewBox="0 0 24 24" width="20" style="color: currentcolor;">
                 <path d="M12 5v14"></path>
                 <path d="M5 12h14"></path>
-            </svg>
-            Agregar pregunta</button>
+            </svg> {{ifEdit ? 'Actualizar esta pregunta': 'Guardar pregunta'}}
+            </button>
         </div>
     </div>
 </template>
@@ -92,13 +92,23 @@ export default {
         addSurvey() {
             if(this.replyText()) return;
             if(!this.correctAnswer()) return;
-            this.$emit("addSurvey", {
+            if (this.ifEdit) {
+                this.$emit("editSurvey", {
+                id: this.arrayEdit[0].id,
+                question: this.question,
+                options: this.options,
+                reqq: this.resOption,
+                tipo: 3
+            });
+            } else {
+                this.$emit("addSurvey", {
                 id: Math.random().toString(),
                 question: this.question,
                 options: this.options,
                 reqq: this.resOption,
                 tipo: 3
             });
+            }
             this.question = "";
             this.resOption= [];
             this.options = defaultOption();

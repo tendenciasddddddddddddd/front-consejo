@@ -21,8 +21,7 @@
                 viewBox="0 0 24 24" width="20" style="color: currentcolor;">
                 <path d="M12 5v14"></path>
                 <path d="M5 12h14"></path>
-            </svg>
-            Agregar pregunta</button>
+            </svg>{{ifEdit ? 'Actualizar esta pregunta': 'Guardar pregunta'}}</button>
         </div>
        
 
