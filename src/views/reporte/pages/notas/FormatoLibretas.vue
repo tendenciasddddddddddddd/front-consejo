@@ -107,9 +107,7 @@
                                                             style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                             <div style=" flex: 1 0 0%;padding-left: 7px;">Ins.1</div>
                                                             <div style=" flex: 1 0 0%;">Ins.2</div>
-                                                            <div style=" flex: 1 0 0%;">Ins.3</div>
-                                                            <div style=" flex: 1 0 0%;">Ins.4</div>
-                                                            <div style=" flex: 1 0 0%;">Ins.5</div>
+                                                            <div style=" flex: 1 0 0%;">Ref.</div>
                                                             <div style=" flex: 1 0 0%;">PR</div>
                                                         </div>
                                                     </th>
@@ -119,9 +117,7 @@
                                                             style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                                             <div style=" flex: 1 0 0%;padding-left: 7px;">Ins.1</div>
                                                             <div style=" flex: 1 0 0%;">Ins.2</div>
-                                                            <div style=" flex: 1 0 0%;">Ins.3</div>
-                                                            <div style=" flex: 1 0 0%;">Ins.4</div>
-                                                            <div style=" flex: 1 0 0%;">Ins.5</div>
+                                                            <div style=" flex: 1 0 0%;">Ref.</div>
                                                             <div style=" flex: 1 0 0%;">PR</div>
                                                         </div>
                                                     </th>
@@ -164,16 +160,7 @@
                                                                         ite.a3
                                                                 }}</span>
                                                             </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
-                                                                <span v-if="(ite.a4 != 'NaN')"> {{
-                                                                        ite.a4
-                                                                }}</span>
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;padding-left: 5px;">
-                                                                <span v-if="(ite.a5 != 'NaN')"> {{
-                                                                        ite.a5
-                                                                }}</span>
-                                                            </div>
+                                                           
                                                             <div style=" flex: 1 0 0%;padding-right: 5px;">
                                                                 <span
                                                                     v-if="(ite.prom1 != 'NaN') ">
@@ -200,16 +187,7 @@
                                                                         ite.b3
                                                                 }}</span>
                                                             </div>
-                                                            <div style=" flex: 1 0 0%;">
-                                                                <span v-if="(ite.b4 != 'NaN') "> {{
-                                                                        ite.b4
-                                                                }}</span>
-                                                            </div>
-                                                            <div style=" flex: 1 0 0%;">
-                                                                <span v-if="(ite.b5 != 'NaN') "> {{
-                                                                        ite.b5
-                                                                }}</span>
-                                                            </div>
+                                                            
                                                             <div style=" flex: 1 0 0%;">
                                                                 <span
                                                                     v-if="(ite.prom2 != 'NaN')">
@@ -648,40 +626,44 @@ export default {
             return this.ifDecimal(result)
         },
         promedioP1(array) {
-            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
+            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3)
             let suma = 0;
             let prom = 0;
             let aux = 0;
-            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
-                suma = a1 + a2 + a3 + a4 + a5; aux = 5
-            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4; aux = 4
-            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2 + a3; aux = 3
-            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2; aux = 2
-            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1; aux = 1
-            }
+            if(a1!=''&&a2!=''&&a3!=''){
+      suma = a1 + a2 + a3 ; aux =3
+    }  if (a1!=''&&a2!=''&&isNaN(a3)){
+      suma = a1 + a2  ; aux =2
+    } if(a1!=''&&isNaN(a2)&&a3!=''){
+      suma = a1 +  a3 ; aux =2
+    } if(isNaN(a1)&&a2!=''&&a3!=''){
+      suma = a2 +  a3 ; aux =2
+    } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+      suma = a1; aux =1
+    } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
+      suma = a3; aux =1
+    }
             prom = (suma / aux).toFixed(2)
             return prom;
         },
         promedioP2(array) {
-            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3), a4 = parseFloat(array.b4), a5 = parseFloat(array.b5)
+            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3)
             let suma = 0;
             let prom = 0;
             let aux = 0;
-            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
-                suma = a1 + a2 + a3 + a4 + a5; aux = 5
-            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4; aux = 4
-            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2 + a3; aux = 3
-            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2; aux = 2
-            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1; aux = 1
-            }
+            if(a1!=''&&a2!=''&&a3!=''){
+      suma = a1 + a2 + a3 ; aux =3
+    }  if (a1!=''&&a2!=''&&isNaN(a3)){
+      suma = a1 + a2  ; aux =2
+    } if(a1!=''&&isNaN(a2)&&a3!=''){
+      suma = a1 +  a3 ; aux =2
+    } if(isNaN(a1)&&a2!=''&&a3!=''){
+      suma = a2 +  a3 ; aux =2
+    } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+      suma = a1; aux =1
+    } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
+      suma = a3; aux =1
+    }
             prom = (suma / aux).toFixed(2);
             return prom;
         },

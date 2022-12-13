@@ -694,40 +694,44 @@ export default {
             }
         },
         promedioP1(array) {
-            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
+            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3)
             let suma = 0;
             let prom = 0;
             let aux = 0;
-            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
-                suma = a1 + a2 + a3 + a4 + a5; aux = 5
-            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4; aux = 4
-            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2 + a3; aux = 3
-            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2; aux = 2
-            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1; aux = 1
-            }
+            if(a1!=''&&a2!=''&&a3!=''){
+      suma = a1 + a2 + a3 ; aux =3
+    }  if (a1!=''&&a2!=''&&isNaN(a3)){
+      suma = a1 + a2  ; aux =2
+    } if(a1!=''&&isNaN(a2)&&a3!=''){
+      suma = a1 +  a3 ; aux =2
+    } if(isNaN(a1)&&a2!=''&&a3!=''){
+      suma = a2 +  a3 ; aux =2
+    } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+      suma = a1; aux =1
+    } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
+      suma = a3; aux =1
+    }
             prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP2(array) {
-            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3), a4 = parseFloat(array.b4), a5 = parseFloat(array.b5)
+            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3)
             let suma = 0;
             let prom = 0;
             let aux = 0;
-            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
-                suma = a1 + a2 + a3 + a4 + a5; aux = 5
-            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4; aux = 4
-            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2 + a3; aux = 3
-            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1 + a2; aux = 2
-            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-                suma = a1; aux = 1
-            }
+            if(a1!=''&&a2!=''&&a3!=''){
+      suma = a1 + a2 + a3 ; aux =3
+    }  if (a1!=''&&a2!=''&&isNaN(a3)){
+      suma = a1 + a2  ; aux =2
+    } if(a1!=''&&isNaN(a2)&&a3!=''){
+      suma = a1 +  a3 ; aux =2
+    } if(isNaN(a1)&&a2!=''&&a3!=''){
+      suma = a2 +  a3 ; aux =2
+    } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+      suma = a1; aux =1
+    } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
+      suma = a3; aux =1
+    }
             prom = (suma / aux).toFixed(2);
             return prom;
         },

@@ -9,8 +9,7 @@
                             <div
                                 style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
                                 <div style="flex: 0 0 auto;width: 10%;text-align: center!important;">
-                                    <img style="width: 80%!important" :src="settings.logo"
-                                        alt="Logo" />
+                                    <img style="width: 80%!important" :src="settings.logo" alt="Logo" />
                                 </div>
                                 <div style="flex: 0 0 auto; width: 86%;">
                                     <span style="color:#000;font-weight: 700;font-size: .80rem;line-height: 1.375;">
@@ -19,8 +18,8 @@
                                     <p
                                         style="margin-top:-1px;font-weight: 700;text-align: center!important;font-size: .80rem!important;">
                                         CONCENTRADO DE CALIFICACIONES POR PARALELO <br>
-                                        <span>{{numQuimestre ? "SEGUNDO QUIMESTRE": "PRIMER QUIMESTRE"}}</span>
-                                        <span v-if="(parcial==3)"> - PRIMERA PARCIAL</span>
+                                        <span>{{ numQuimestre ? "SEGUNDO QUIMESTRE" : "PRIMER QUIMESTRE" }}</span>
+                                        <span v-if="(parcial == 3)"> - PRIMERA PARCIAL</span>
                                         <span v-else> - SEGUNDA PARCIAL</span>
                                     </p>
 
@@ -65,9 +64,12 @@
                                                     style="padding: 2px 3px;border-bottom-width: 0px;  font-size: .60rem!important;">
                                                     {{ item.nombre }}</td>
                                                 <td v-for="ite in item.data" :key="ite.id"
-                                                style="padding: 2px 3px;border-bottom-width: 0px;border-left: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
+                                                    style="padding: 2px 3px;border-bottom-width: 0px;border-left: 1px solid #000; font-size: .65rem!important;text-align: center!important;">
                                                     <span v-if="ite.prom1 != 'NaN'">
-                                                    <span v-bind:style= "ite.prom1<7 ? 'color:red !important' : ''">{{ ite.prom1 }}</span>
+                                                        <span
+                                                            v-bind:style="ite.prom1 < 7 ? 'color:red !important' : ''">{{
+                                                                    ite.prom1
+                                                            }}</span>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -205,11 +207,11 @@ export default {
                             let materia = res.materia;
                             if (res.proyectos.length > 0) {
                                 let pro = 0
-                                if (this.parcial ==3) {
+                                if (this.parcial == 3) {
                                     pro = res.proyectos[this.numQuimestre].p1
-                                } else if (this.parcial ==4){
+                                } else if (this.parcial == 4) {
                                     pro = res.proyectos[this.numQuimestre].p2
-                                } 
+                                }
                                 proyectos.push({
                                     nombre: nombre,
                                     materia: materia,
@@ -217,10 +219,10 @@ export default {
                                 })
                             }
                             if (res.notas.length > 0) {
-                                let  prom1 = 1
-                                if (this.parcial ==3) {
+                                let prom1 = 1
+                                if (this.parcial == 3) {
                                     prom1 = this.promedioP1(res.notas[this.numQuimestre])
-                                }else if(this.parcial ==4){
+                                } else if (this.parcial == 4) {
                                     prom1 = this.promedioP2(res.notas[this.numQuimestre])
                                 }
                                 calificaciones.push({
@@ -335,39 +337,43 @@ export default {
             return `${letra}`;
         },
         promedioP1(array) {
-            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3), a4 = parseFloat(array.a4), a5 = parseFloat(array.a5)
+            let a1 = parseFloat(array.a1), a2 = parseFloat(array.a2), a3 = parseFloat(array.a3)
             let suma = 0;
             let prom = 0;
             let aux = 0;
-            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
-                suma = a1 + a2 + a3 + a4 + a5; aux = 5
-            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4; aux = 4
-            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
+            if (a1 != '' && a2 != '' && a3 != '') {
                 suma = a1 + a2 + a3; aux = 3
-            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+            } if (a1 != '' && a2 != '' && isNaN(a3)) {
                 suma = a1 + a2; aux = 2
-            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+            } if (a1 != '' && isNaN(a2) && a3 != '') {
+                suma = a1 + a3; aux = 2
+            } if (isNaN(a1) && a2 != '' && a3 != '') {
+                suma = a2 + a3; aux = 2
+            } if (a1 != '' && isNaN(a2) && isNaN(a3)) {
                 suma = a1; aux = 1
+            } if (isNaN(a1) && isNaN(a2) && a3 != '') {
+                suma = a3; aux = 1
             }
             prom = (suma / aux).toFixed(2);
             return prom;
         },
         promedioP2(array) {
-            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3), a4 = parseFloat(array.b4), a5 = parseFloat(array.b5)
+            let a1 = parseFloat(array.b1), a2 = parseFloat(array.b2), a3 = parseFloat(array.b3)
             let suma = 0;
             let prom = 0;
             let aux = 0;
-            if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && a5 != '') {
-                suma = a1 + a2 + a3 + a4 + a5; aux = 5
-            } if (a1 != '' && a2 != '' && a3 != '' && a4 != '' && isNaN(a5)) {
-                suma = a1 + a2 + a3 + a4; aux = 4
-            } if (a1 != '' && a2 != '' && a3 != '' && isNaN(a4) && isNaN(a5)) {
+            if (a1 != '' && a2 != '' && a3 != '') {
                 suma = a1 + a2 + a3; aux = 3
-            } if (a1 != '' && a2 != '' && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+            } if (a1 != '' && a2 != '' && isNaN(a3)) {
                 suma = a1 + a2; aux = 2
-            } if (a1 != '' && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
+            } if (a1 != '' && isNaN(a2) && a3 != '') {
+                suma = a1 + a3; aux = 2
+            } if (isNaN(a1) && a2 != '' && a3 != '') {
+                suma = a2 + a3; aux = 2
+            } if (a1 != '' && isNaN(a2) && isNaN(a3)) {
                 suma = a1; aux = 1
+            } if (isNaN(a1) && isNaN(a2) && a3 != '') {
+                suma = a3; aux = 1
             }
             prom = (suma / aux).toFixed(2);
             return prom;

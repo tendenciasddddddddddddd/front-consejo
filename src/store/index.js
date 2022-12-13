@@ -10,7 +10,7 @@ const state = {
     first_text: 'Pages',
     last_text: 'Inicio',
     imgs: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
-    fechaReporter:'Tulcán, ', //El Ángel //La Libertad //Garcia Moreno //Tulcán
+    fechaReporter:'El Ángel, ', //El Ángel //La Libertad //Garcia Moreno //Tulcán
 }
 export default new Vuex.Store({
     state,

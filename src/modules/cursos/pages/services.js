@@ -138,58 +138,40 @@ export default class quialifyservice {
   calcular_promedio_final(obj) {
     let a1 = parseFloat(obj.a1),
       a2 = parseFloat(obj.a2),
-      a3 = parseFloat(obj.a3),
-      a4 = parseFloat(obj.a4),
-      a5 = parseFloat(obj.a5);
+      a3 = parseFloat(obj.a3)
     let suma = 0;
     let aux = 0;
-    if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && a5 != "") {
-      suma = a1 + a2 + a3 + a4 + a5;
-      aux = 5;
-    }
-    if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && isNaN(a5)) {
-      suma = a1 + a2 + a3 + a4;
-      aux = 4;
-    }
-    if (a1 != "" && a2 != "" && a3 != "" && isNaN(a4) && isNaN(a5)) {
-      suma = a1 + a2 + a3;
-      aux = 3;
-    }
-    if (a1 != "" && a2 != "" && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-      suma = a1 + a2;
-      aux = 2;
-    }
-    if (a1 != "" && isNaN(a2) && isNaN(a3) && isNaN(a4) && isNaN(a5)) {
-      suma = a1;
-      aux = 1;
+    if(a1!=''&&a2!=''&&a3!=''){
+      suma = a1 + a2 + a3 ; aux =3
+    }  if (a1!=''&&a2!=''&&isNaN(a3)){
+      suma = a1 + a2  ; aux =2
+    } if(a1!=''&&isNaN(a2)&&a3!=''){
+      suma = a1 +  a3 ; aux =2
+    } if(isNaN(a1)&&a2!=''&&a3!=''){
+      suma = a2 +  a3 ; aux =2
+    } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+      suma = a1; aux =1
+    } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
+      suma = a3; aux =1
     }
     let promedio001 = (suma / aux).toFixed(2);
     let b1 = parseFloat(obj.b1),
       b2 = parseFloat(obj.b2),
-      b3 = parseFloat(obj.b3),
-      b4 = parseFloat(obj.b4),
-      b5 = parseFloat(obj.b5);
+      b3 = parseFloat(obj.b3)
     let suma2 = 0;
     let aux2 = 0;
-    if (b1 != "" && b2 != "" && b3 != "" && b4 != "" && b5 != "") {
-      suma2 = b1 + b2 + b3 + b4 + b5;
-      aux2 = 5;
-    }
-    if (b1 != "" && b2 != "" && b3 != "" && b4 != "" && isNaN(b5)) {
-      suma2 = b1 + b2 + b3 + b4;
-      aux2 = 4;
-    }
-    if (b1 != "" && b2 != "" && b3 != "" && isNaN(b4) && isNaN(b5)) {
-      suma2 = b1 + b2 + b3;
-      aux2 = 3;
-    }
-    if (b1 != "" && b2 != "" && isNaN(b3) && isNaN(b4) && isNaN(b5)) {
-      suma2 = b1 + b2;
-      aux2 = 2;
-    }
-    if (b1 != "" && isNaN(b2) && isNaN(b3) && isNaN(b4) && isNaN(b5)) {
-      suma2 = b1;
-      aux2 = 1;
+    if(b1!=''&&b2!=''&&b3!=''){
+      suma = b1 + b2 + b3 ; aux =3
+    }  if (b1!=''&&b2!=''&&isNaN(b3)){
+      suma = b1 + b2  ; aux =2
+    } if(b1!=''&&isNaN(b2)&&b3!=''){
+      suma = b1 +  b3 ; aux =2
+    } if(isNaN(b1)&&b2!=''&&b3!=''){
+      suma = b2 +  b3 ; aux =2
+    } if (b1!=''&&isNaN(b2)&&isNaN(b3)){
+      suma = b1; aux =1
+    } if (isNaN(b1)&&isNaN(b2)&&b3!=''){
+      suma = b3; aux =1
     }
     let promedio002 = (suma2 / aux2).toFixed(2);
     let promedio_primer_segundo = (
@@ -206,58 +188,40 @@ export default class quialifyservice {
     //-------------------------SEGUNDO PARCIAL --------------------
     let x1 = parseFloat(obj.x1),
       x2 = parseFloat(obj.x2),
-      x3 = parseFloat(obj.x3),
-      x4 = parseFloat(obj.x4),
-      x5 = parseFloat(obj.x5);
+      x3 = parseFloat(obj.x3)
     let suma3 = 0;
     let aux3 = 0;
-    if (x1 != "" && x2 != "" && x3 != "" && x4 != "" && x5 != "") {
-      suma3 = x1 + x2 + x3 + x4 + x5;
-      aux3 = 5;
-    }
-    if (x1 != "" && x2 != "" && x3 != "" && x4 != "" && isNaN(x5)) {
-      suma3 = x1 + x2 + x3 + x4;
-      aux3 = 4;
-    }
-    if (x1 != "" && x2 != "" && x3 != "" && isNaN(x4) && isNaN(x5)) {
-      suma3 = x1 + x2 + x3;
-      aux3 = 3;
-    }
-    if (x1 != "" && x2 != "" && isNaN(x3) && isNaN(x4) && isNaN(x5)) {
-      suma3 = x1 + x2;
-      aux3 = 2;
-    }
-    if (x1 != "" && isNaN(x2) && isNaN(x3) && isNaN(x4) && isNaN(x5)) {
-      suma3 = x1;
-      aux3 = 1;
+    if(x1!=''&&x2!=''&&x3!=''){
+      suma = x1 + x2 + x3 ; aux =3
+    }  if (x1!=''&&x2!=''&&isNaN(x3)){
+      suma = x1 + x2  ; aux =2
+    } if(x1!=''&&isNaN(x2)&&x3!=''){
+      suma = x1 +  x3 ; aux =2
+    } if(isNaN(x1)&&x2!=''&&x3!=''){
+      suma = x2 +  x3 ; aux =2
+    } if (x1!=''&&isNaN(x2)&&isNaN(x3)){
+      suma = x1; aux =1
+    } if (isNaN(x1)&&isNaN(x2)&&x3!=''){
+      suma = x3; aux =1
     }
     let promedio003 = (suma3 / aux3).toFixed(2);
     let y1 = parseFloat(obj.y1),
       y2 = parseFloat(obj.y2),
-      y3 = parseFloat(obj.y3),
-      y4 = parseFloat(obj.y4),
-      y5 = parseFloat(obj.y5);
+      y3 = parseFloat(obj.y3)
     let suma4 = 0;
     let aux4 = 0;
-    if (y1 != "" && y2 != "" && y3 != "" && y4 != "" && y5 != "") {
-      suma4 = y1 + y2 + y3 + y4 + y5;
-      aux4 = 5;
-    }
-    if (y1 != "" && y2 != "" && y3 != "" && y4 != "" && isNaN(y5)) {
-      suma4 = y1 + y2 + y3 + y4;
-      aux4 = 4;
-    }
-    if (y1 != "" && y2 != "" && y3 != "" && isNaN(y4) && isNaN(y5)) {
-      suma4 = y1 + y2 + y3;
-      aux4 = 3;
-    }
-    if (y1 != "" && y2 != "" && isNaN(y3) && isNaN(y4) && isNaN(y5)) {
-      suma4 = y1 + y2;
-      aux4 = 2;
-    }
-    if (y1 != "" && isNaN(y2) && isNaN(y3) && isNaN(y4) && isNaN(y5)) {
-      suma4 = y1;
-      aux4 = 1;
+    if(y1!=''&&y2!=''&&y3!=''){
+      suma = y1 + y2 + y3 ; aux =3
+    }  if (y1!=''&&y2!=''&&isNaN(y3)){
+      suma = y1 + y2  ; aux =2
+    } if(y1!=''&&isNaN(y2)&&y3!=''){
+      suma = y1 +  y3 ; aux =2
+    } if(isNaN(y1)&&y2!=''&&y3!=''){
+      suma = y2 +  y3 ; aux =2
+    } if (y1!=''&&isNaN(y2)&&isNaN(y3)){
+      suma = y1; aux =1
+    } if (isNaN(y1)&&isNaN(y2)&&y3!=''){
+      suma = y3; aux =1
     }
     let promedio004 = (suma4 / aux4).toFixed(2);
     let promedio_tercer_cuarto = (
