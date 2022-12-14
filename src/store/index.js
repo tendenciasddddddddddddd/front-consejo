@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 const state = {
     user : null,
-    avatar: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
+    avatar: 'https://res.cloudinary.com/eulib/image/upload/v1668606170/avatar_afkm29.webp',
     isAppMobile: false,
     first_text: 'Pages',
     last_text: 'Inicio',
-    imgs: 'https://res.cloudinary.com/stebann/image/upload/v1634918496/default-100_namn33.webp',
-    fechaReporter:'El Ángel, ', //El Ángel //La Libertad //Garcia Moreno //Tulcán
+    imgs: 'https://res.cloudinary.com/eulib/image/upload/v1668606170/avatar_afkm29.webp',
+    fechaReporter:'La Libertad, ', //El Ángel //La Libertad //Garcia Moreno //Tulcán
 }
 export default new Vuex.Store({
     state,

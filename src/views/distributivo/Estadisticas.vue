@@ -2,11 +2,14 @@
     <div>
         <Spinner v-if="isLoading"></Spinner>
         <div v-else>
+            <div v-if="isLoading1">cargando..</div>
+                <Dropdown v-model="curso" :options="listniveles" />
             <div v-if="!displayedArticles.length">
                 <NoFound />
             </div>
             <div v-else>
-                <div class="row">
+               
+                <div class="row mt-3">
                     <div class="col-sm-6" v-for="(item) in displayedArticles" :key="item.id">
                         <div class="table-responsive mt-2">
                     <div class="card">
@@ -17,7 +20,7 @@
                             <div class="progress mt-3">
                                 <div class="progress-bar progress-bar-striped  progress-bar-animated" role="progressbar"
                                   :style="{ 'width': item.porcentaje + '%' }"
-                                    :aria-valuenow="item.porcentaje" aria-valuemin="0" aria-valuemax="100"></div>
+                                    :aria-valuenow="item.porcentaje" aria-valuemin="0" aria-valuemax="100">{{item.porcentaje}}%</div>
                             </div>
                         </div>
                     </div>
@@ -34,15 +37,20 @@
 import Spinner from "../../shared/Spinner";
 import Paginate from "../../shared/Paginate"
 import NoFound from "../../shared/NoFound";
+import Dropdown from "../../shared/Dropdown.vue";
+import RestResource from "../../service/isAdmin";
+const restResourceService = new RestResource();
 export default {
     name: 'Planificacion',
     components: {
         Spinner,
         NoFound,
-        Paginate
+        Paginate,
+        Dropdown
     },
     data() {
         return {
+            roles: this.$store.state.user.roles,
             isLoading: false,
             info: [],
             searchQuery: '',
@@ -51,8 +59,16 @@ export default {
          perPage: 20,
          pages: [],
          numPages:0,
+         listniveles: {},
+         curso : ''
         }
     },
+    watch: {
+    curso: function (value) {
+        if (value!=null) 
+        this.__cambios(value);
+    }
+  },
     computed: {
       displayedArticles: function () {
         if (this.searchQuery.length>1) {
@@ -60,7 +76,7 @@ export default {
             return this.searchQuery
               .toLowerCase()
               .split(" ")
-              .every((v) => item.docente.toLowerCase().includes(v));
+              .every((v) => item.curso.toLowerCase().includes(v));
           });
         }else{
           return this.paginate(this.info);
@@ -76,6 +92,22 @@ export default {
         let to = (page * perPage);
         this.numPages = Math.ceil(articles.length/this.perPage);
         return articles.slice(from, to);
+    },
+    __listNivele() {
+      this.isLoading1 = true;
+      this.$proxies._gestionProxi
+        .getNiveles()
+        .then((x) => {
+          this.listniveles = x.data;
+          this.isLoading1 = false;
+        })
+        .catch((err) => {
+          console.log("Error", err);
+          this.isLoading1 = false;
+        });
+    },
+    __cambios(value){
+        this.searchQuery = value.nombre
     },
     onPageChange(page) {
         this.page = page;
@@ -150,7 +182,6 @@ export default {
                                             }
                                         }
                                     }
-
                                 }
                             }
                             if (contador > 2) break;
@@ -161,18 +192,20 @@ export default {
             } catch (error) {
                 console.log(error)
             }
-
         },
         verificarUsuario() {
             let text_1 = 'Estadistica'
             let text_2 = 'Cumplimiento de notas'
             this.$store.commit('updateHeader', { text_1, text_2 })
+            if (!restResourceService.admin(this.roles)) {
+            this.$router.push("/");
+      }
         },
     },
     created() {
         this.verificarUsuario()
         this.getAll();
+        this.__listNivele();
     },
-
 }
 </script>

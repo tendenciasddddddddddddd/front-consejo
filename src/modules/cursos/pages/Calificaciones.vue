@@ -50,66 +50,67 @@ export default {
         headerName: 'PRIMER QUIMESTRE',
         children: [
           
-          { field: "a1", headerName: 'Insumo 1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "a2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "a3", headerName: 'Refuerzo', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          
+          { field: "a1", headerName: 'Insumo 1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "a2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "a3", headerName: 'Insumo 3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "a4", headerName: 'Insumo 4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "a5", headerName: 'Insumo 5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
             field: "promedio1", headerName: 'PARCIAL 1', minWidth: 85,cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.a1.toString().replace(",", "."),p2 = params.data.a2.toString().replace(",", "."),
-               p3 = params.data.a3.toString().replace(",", ".")
-              let a1 = parseFloat(p1), a2 = parseFloat(p2), a3 = parseFloat(p3)
+               p3 = params.data.a3.toString().replace(",", "."),p4 = params.data.a4.toString().replace(",", "."),
+               p5 = params.data.a5.toString().replace(",", ".")
+              let a1 = parseFloat(p1)==0? 0.001: parseFloat(p1),  a2 = parseFloat(p2)==0? 0.001: parseFloat(p2), 
+              a3 = parseFloat(p3)==0? 0.001: parseFloat(p3), a4 = parseFloat(p4)==0? 0.001: parseFloat(p4), a5 = parseFloat(p5)==0? 0.001: parseFloat(p5)
               let suma = 0;
               let promedio = 0;
               let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''){
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2 + a3 ; aux =3
-              }  if (a1!=''&&a2!=''&&isNaN(a3)){
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2  ; aux =2
-              } if(a1!=''&&isNaN(a2)&&a3!=''){
-                suma = a1 +  a3 ; aux =2
-              } if(isNaN(a1)&&a2!=''&&a3!=''){
-                suma = a2 +  a3 ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1; aux =1
-              } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
-                suma = a3; aux =1
-              }
+              } 
               promedio = (suma / aux).toFixed(2);
               return promedio;
             }
           },
-          { field: "b1", headerName: 'Insumo 1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "b2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "b3", headerName: 'Refuerzo', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          
+          { field: "b1", headerName: 'Insumo 1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "b2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "b3", headerName: 'Insumo 3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "b4", headerName: 'Insumo 4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "b5", headerName: 'Insumo 5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
             field: "promedio2", headerName: 'PARCIAL 2', minWidth: 85,  cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.b1.toString().replace(",", "."), p2 = params.data.b2.toString().replace(",", "."),
-                  p3 = params.data.b3.toString().replace(",", ".")
-              let a1 = parseFloat(p1), a2 = parseFloat(p2), a3 = parseFloat(p3)
+                  p3 = params.data.b3.toString().replace(",", "."), p4 = params.data.b4.toString().replace(",", "."),
+                  p5 = params.data.b5.toString().replace(",", ".")
+                  let a1 = parseFloat(p1)==0? 0.001: parseFloat(p1),  a2 = parseFloat(p2)==0? 0.001: parseFloat(p2), 
+              a3 = parseFloat(p3)==0? 0.001: parseFloat(p3), a4 = parseFloat(p4)==0? 0.001: parseFloat(p4), a5 = parseFloat(p5)==0? 0.001: parseFloat(p5)
               let suma = 0;
               let promedio = 0;
               let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''){
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2 + a3 ; aux =3
-              }  if (a1!=''&&a2!=''&&isNaN(a3)){
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2  ; aux =2
-              } if(a1!=''&&isNaN(a2)&&a3!=''){
-                suma = a1 +  a3 ; aux =2
-              } if(isNaN(a1)&&a2!=''&&a3!=''){
-                suma = a2 +  a3 ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1; aux =1
-              } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
-                suma = a3; aux =1
               } 
               promedio = (suma / aux).toFixed(2);
               return promedio;
             },
-
           },
           {
             field: "promedio3", headerName: 'PROMEDIO', minWidth: 85,
@@ -119,7 +120,7 @@ export default {
             field: "promedio4", headerName: '80%', minWidth: 60,
             valueGetter: totalPromedioAportes,
           },
-          { field: "examenfinal", headerName: 'EXAMEN', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
+          { field: "examenfinal", headerName: 'EXAMEN', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
             field: "promedio5", headerName: '20%', minWidth: 60,
             valueGetter: totalParcialExamen,
@@ -133,68 +134,74 @@ export default {
       {
         headerName: 'SEGUNDO QUIMESTRE',
         children: [
-          { field: "x1", headerName: 'Insumo 1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "x2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "x3", headerName: 'Refuerzo', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-         
+          { field: "x1", headerName: 'Insumo 1', editable: true ,columnGroupShow: 'open', valueFormatter: saleValueFormatter,},
+          { field: "x2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "x3", headerName: 'Insumo 3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "x4", headerName: 'Insumo 4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "x5", headerName: 'Insumo 5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
             field: "promedio11", headerName: 'Parcial 1', minWidth: 85, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.x1.toString().replace(",", ".")
-              let a1 = parseFloat(p1)
+              let a1 = parseFloat(p1)==0? 0.001: parseFloat(p1)
               let p2 = params.data.x2.toString().replace(",", ".")
-              let a2 = parseFloat(p2)
+              let a2 = parseFloat(p2)==0? 0.001: parseFloat(p2)
               let p3 = params.data.x3.toString().replace(",", ".")
-              let a3 = parseFloat(p3)
+              let a3 = parseFloat(p3) ==0? 0.001: parseFloat(p3)
+              let p4 = params.data.x4.toString().replace(",", ".")
+              let a4 = parseFloat(p4)==0? 0.001: parseFloat(p4)
+              let p5 = params.data.x5.toString().replace(",", ".")
+              let a5 = parseFloat(p5)==0? 0.001: parseFloat(p5)
               let suma = 0;
               let promedio = 0;
               let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''){
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2 + a3 ; aux =3
-              }  if (a1!=''&&a2!=''&&isNaN(a3)){
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2  ; aux =2
-              } if(a1!=''&&isNaN(a2)&&a3!=''){
-                suma = a1 +  a3 ; aux =2
-              } if(isNaN(a1)&&a2!=''&&a3!=''){
-                suma = a2 +  a3 ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1; aux =1
-              } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
-                suma = a3; aux =1
-              }
+              } 
               promedio = (suma / aux).toFixed(2);
               return promedio;
             }
           },
-          { field: "y1", headerName: 'Insumo 1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "y2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          { field: "y3", headerName: 'Refuerzo', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
-          
+          { field: "y1", headerName: 'Insumo 1', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "y2", headerName: 'Insumo 2', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "y3", headerName: 'Insumo 3', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "y4", headerName: 'Insumo 4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
+          { field: "y5", headerName: 'Insumo 5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
             field: "promedio22", headerName: 'Parcial 2', minWidth: 85, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.y1.toString().replace(",", ".")
-              let a1 = parseFloat(p1)
+              let a1 = parseFloat(p1)==0? 0.001: parseFloat(p1)
               let p2 = params.data.y2.toString().replace(",", ".")
-              let a2 = parseFloat(p2)
+              let a2 = parseFloat(p2)==0? 0.001: parseFloat(p2)
               let p3 = params.data.y3.toString().replace(",", ".")
-              let a3 = parseFloat(p3)
+              let a3 = parseFloat(p3)==0? 0.001: parseFloat(p3)
+              let p4 = params.data.y4.toString().replace(",", ".")
+              let a4 = parseFloat(p4)==0? 0.001: parseFloat(p4)
+              let p5 = params.data.y5.toString().replace(",", ".")
+              let a5 = parseFloat(p5)==0? 0.001: parseFloat(p5)
               let suma = 0;
               let promedio = 0;
               let aux = 0;
-              if(a1!=''&&a2!=''&&a3!=''){
+              if(a1!=''&&a2!=''&&a3!=''&&a4!=''&&a5!=''){
+                suma = a1 + a2 + a3 + a4 + a5; aux =5
+              } if (a1!=''&&a2!=''&&a3!=''&&a4!=''&&isNaN(a5)){
+                suma = a1 + a2 + a3 + a4; aux =4
+              } if (a1!=''&&a2!=''&&a3!=''&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2 + a3 ; aux =3
-              }  if (a1!=''&&a2!=''&&isNaN(a3)){
+              } if (a1!=''&&a2!=''&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1 + a2  ; aux =2
-              } if(a1!=''&&isNaN(a2)&&a3!=''){
-                suma = a1 +  a3 ; aux =2
-              } if(isNaN(a1)&&a2!=''&&a3!=''){
-                suma = a2 +  a3 ; aux =2
-              } if (a1!=''&&isNaN(a2)&&isNaN(a3)){
+              } if (a1!=''&&isNaN(a2)&&isNaN(a3)&&isNaN(a4)&&isNaN(a5)){
                 suma = a1; aux =1
-              } if (isNaN(a1)&&isNaN(a2)&&a3!=''){
-                suma = a3; aux =1
-              }
+              } 
               promedio = (suma / aux).toFixed(2);
               return promedio;
             }
@@ -207,7 +214,7 @@ export default {
             field: "promedio44", headerName: '80%', minWidth: 60, 
             valueGetter: totalPromedioAportes2,
           },
-          { field: "examenfinal2", headerName: 'EXAMEN', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, cellStyle:cellStyle2},
+          { field: "examenfinal2", headerName: 'EXAMEN', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
             field: "promedio55", headerName: '20%', minWidth: 60, 
             valueGetter: totalParcialExamen2,
@@ -392,7 +399,6 @@ var saleValueFormatter = function (params) {
       return '❓';
     }
   };
-
 var totalValueGetter = function (params) {
   var q1 = params.getValue('promedio1');
   var q2 = params.getValue('promedio2');
@@ -469,11 +475,11 @@ var cellStyle = function (params) {
     backgroundColor: color,
   };
 };
- var cellStyle2 = function () {
-   return {
-     backgroundColor: '#dfeaf9',
-   };
- };
+// var cellStyle2 = function () {
+//   return {
+//     backgroundColor: '#dfeaf9',
+//   };
+// };
 var numberToColor = function (val) {
   if (val < 7) {
     return '#fbe4e7';
