@@ -1,6 +1,6 @@
 <template>
-    <div class="row ">
-        <div class="col-lg-4">
+    <div class="row mt-2">
+        <div class="col-sm-4 d-none d-lg-block" >
             <div class="input-group">
                 <span class="input-group-text text-body buscador busca">
                     <svg style="margin-top: -7px;"  data-testid="geist-icon" fill="none" height="20"
@@ -14,15 +14,15 @@
                 <input type="text" v-model="search" class="form-control buscador buscaa" placeholder="Buscar" />
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-sm-8">
             <div class="d-flex justify-content-end mb-3">
-                <button  v-if="longitude != 0" role="botton"   class="btn btnNaranja3 me-2"  @click="$emit('remove')">
+                <button   role="botton" :disabled="longitude == 0"  class="btn btnNaranja3 me-2"  @click="$emit('remove')">
                     Eliminar
                 </button> 
-                <button  v-if="longitude == 1"  class="btn btnNaranja2 me-2"  @click="$emit('gets')">
+                <button   :disabled="longitude != 1"  class="btn btnNaranja2 me-2"  @click="$emit('gets')">
                     Editar
                 </button>
-                <button  class="btn btnNaranja2 me-2"  @click="$emit('getDataAlls')">
+                <button  class="btn btnNaranja2 me-2 d-none d-lg-block"  @click="$emit('getDataAlls')">
                     Actualizar
                 </button> 
                 <button  class="btn btnNaranja" @click="$emit('openModal')">
@@ -54,14 +54,3 @@ export default {
     }
 }
 </script>
-<style>
-.btnOption {
-    width: 34px;
-    height: 34px;
-    border-radius: 5px;
-    border: 1px solid #E8EAF0;
-}
-.center-icon {
-    margin: 5px;
-}
-</style>

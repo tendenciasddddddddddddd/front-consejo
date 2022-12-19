@@ -36,7 +36,7 @@
               <div class="col-lg-7 text-start">
                 <button :disabled="!isSelecMatricula.length" @click="openLibreta()" class="btn btnNaranja2 me-2">
                   Libretas </button>
-                  <button :disabled="!isSelecMatricula.length" @click="openJuntas()" class="btn btnNaranja2 me-2">
+                <button :disabled="!isSelecMatricula.length" @click="openJuntas()" class="btn btnNaranja2 me-2">
                   Juntas de curso </button>
                 <button :disabled="!isSelecMatricula.length" @click="openParcial()" class="btn btnNaranja2 me-2">
                   Consolidado parcial </button>
@@ -283,9 +283,29 @@
             </template>
           </Modal>
         </section>
+        <div v-if="isData" class="loadingg">
+      <div class="inn ">
+        <h4 style="font-weight:400" class="text-white mb-0 fadeIn2 fadeInBottom">Actualizando materias
+          <div  class="text-center me-3">
+      <div class="spinner-grow text-danger me-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning me-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+    <div class="spinner-grow text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+        </div>
+        </h4>
+      </div>
+    </div>
       </div>
     </template>
     <template v-slot:footer>
+      <button @click="limpiarMaterias" class="btn btnNaranja2 me-2" :disabled="isSelecMatricula.length == 0">
+        Actualizar materias
+      </button>
       <button @click="close" class="btn btnNaranja2 me-3">
         <b>Salir de aqui</b>
       </button>
@@ -344,8 +364,10 @@ export default {
       parcial2: false,
       parcial3: false,
       ifjuntas: false,
-      parcial10 : false,
-      parcial11 : false,
+      parcial10: false,
+      parcial11: false,
+      idcurso: null,
+      isData: false,
     }
   },
   watch: {
@@ -353,7 +375,8 @@ export default {
       this.isSelecMatricula = [];
       this.searchQuery = 'A'
       this.paralelos = [],
-        this.__cambios(value._id, value.num);
+        this.idcurso = value._id
+      this.__cambios(value._id, value.num);
       this.numActual = value.num;
       this.deletedSelected()
     }
@@ -370,7 +393,6 @@ export default {
       } else {
         return this.infoMat;
       }
-
     }
   },
   methods: {
@@ -401,7 +423,6 @@ export default {
     },
     onPageChange: function (page) {
       this.page = page;
-
     },
     verificarUsuario() {
       this.$proxies._settingProxi.getConfigure()
@@ -453,7 +474,6 @@ export default {
           this.$Progress.fail();
         });
     },
-
     __cambios(cursos) {
       this.$Progress.start();
       this.infoMat = []
@@ -511,7 +531,7 @@ export default {
     closeModal2() {
       this.isActive2 = false;
     },
-    closeModal3: function() {
+    closeModal3: function () {
       this.isActive3 = false;
     },
     openParcial() {
@@ -520,7 +540,7 @@ export default {
     openLibreta() {
       this.isActive2 = true;
     },
-    openJuntas: function() {
+    openJuntas: function () {
       this.isActive3 = true;
     },
     paralelo_pdf: function () {
@@ -547,7 +567,7 @@ export default {
         this.$dialog.alert("Selecione un estudiante por lo menos");
       }
     },
-    juntas_pdf (){
+    juntas_pdf() {
       if (this.isSelecMatricula.length > 0) {
         if (this.parcial10 != '' || this.parcial11 != '') {
           this.numQuimestre = this.checked;
@@ -577,15 +597,67 @@ export default {
         this.$dialog.alert("Seleccione un estudiante al menos");
       }
     },
+    async limpiarMaterias() {
+      try {
+        if (!this.idcurso) return;
+      this.isData = true;
+      if (this.isSelecMatricula.length > 0) {
+        var distributivo = []
+        var matricula = []
+        await this.$proxies._gestionProxi
+          .updateClearData(this.idcurso)
+          .then((x) => {
+            distributivo = x.data;
+          })
+          .catch((err) => {
+            console.log("Error", err);
+            this.isData = false;
+          });
+        await this.$proxies._matriculaProxi
+          .getMatriculaReporte(this.isSelecMatricula[0])
+          .then((x) => {
+            matricula = x.data;
+          })
+          .catch((x) => {
+            console.log("Error", x);
+            this.isData = false;
+          });
+        const calificaciones = matricula[0].calificaciones
+        let arrayDistributivo = []
+        for (let i = 0; i < distributivo.length; i++) {
+          const element = distributivo[i].fmateria ? distributivo[i].fmateria.nombre : 'Undefined';
+          arrayDistributivo.push(element)
+        }
+        let intersection = calificaciones.filter(x => !arrayDistributivo.includes(x.materia));
+        let modelo = []
+        for (let h = 0; h < intersection.length; h++) {
+          const ele = intersection[h]._id;
+          modelo.push(ele)
+        }
+        if (modelo.length > 0) {
+          this.$proxies._matriculaProxi
+            .removeMateriaMatricula(this.isSelecMatricula, modelo)
+            .then(() => {
+              this.isData = false;
+            })
+            .catch(() => {
+              this.isData = false;
+            });
+        } else {this.isData = false;}
+      } else {
+        this.isData = false;
+        this.$dialog.alert("Seleccione todos los estudiantes");
+      }
+      } catch (error) {
+        console.log(error);
+        this.isData = false;
+      }
+     
+    }
   },
   created() {
     this.verificarUsuario();
     this.__listNivele();
   },
 };
-
-
 </script>
-  
-    
-  

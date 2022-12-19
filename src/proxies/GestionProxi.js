@@ -110,6 +110,10 @@ export default class GestionProxi {
     async updateInfoDocentes(id) {
         return await this.axios.get(this.url + `/distributivo/nuedist?id=${id}`);
     }
+
+    async updateClearData(id) {
+        return await this.axios.get(this.url + `/distributivo/clearData?id=${id}`);
+    }
     //------------------------------------------------------GESTION DE Parroquia--------------------------------------
 
     getAllGridTutor() {

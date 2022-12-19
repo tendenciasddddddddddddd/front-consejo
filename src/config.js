@@ -1,10 +1,10 @@
 export default {
-        apiKey: "AIzaSyA6x0KZAi9JB9iHKIQk2leOrGfuuatNA4c",
-        authDomain: "back-ends.firebaseapp.com",
-        projectId: "back-ends",
-        storageBucket: "back-ends.appspot.com",
-        messagingSenderId: "144052097147",
-        appId: "1:144052097147:web:cdb1a963ea6d425fcad2de",
-        measurementId: "G-S41ZEJ6E0W"
+        apiKey: "AIzaSyB_HGcSDUNdCJ5_cxtNjLZJxD90tLWRAig",
+  authDomain: "libertad-5a1fe.firebaseapp.com",
+  projectId: "libertad-5a1fe",
+  storageBucket: "libertad-5a1fe.appspot.com",
+  messagingSenderId: "230060676813",
+  appId: "1:230060676813:web:c5057684c9f071a4ed3b84",
+  measurementId: "G-DRWLHJMY3H"
 }
 

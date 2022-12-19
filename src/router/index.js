@@ -159,11 +159,7 @@ const routes = [{
   },
  
    ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------
-  {
-    path: '/all-lista',
-    name: 'es2',
-    component: () => import( /* webpackChunkName: "AllAulas" */ '../views/pagesClassroom/alumnos/allAulas/AllAulas.vue'),
-  },
+
   {
     path: '/my-lista',
     name: 'es1',

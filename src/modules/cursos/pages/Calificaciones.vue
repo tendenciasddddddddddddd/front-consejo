@@ -4,7 +4,7 @@
     <div v-else>
       <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
     </div>
-    <section style="height: calc(100vh - 170px);">
+    <section style="height: calc(100vh - 210px);">
       <ag-grid-vue :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
         :enableFillHandle="true" @grid-ready="onGridReady"  :detailRowAutoHeight="true">

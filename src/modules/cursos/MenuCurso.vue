@@ -1,51 +1,46 @@
 <template>
   <ScrimModal @close="salir">
     <template v-slot:header>
-  <div class="fjrDCGRR_tab">
-               <div v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" @click="tabs=0" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 0 }">
-                <span style="color:#fff">  Notas</span>
-                
-               </div>
-               <div v-if="mate =='COMPORTAMIENTO'"
-                @click="tabs=3" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 3 }"><span style="color:#fff">Comportamiento</span>
-                 </div>
-                 <div v-if="ifComplementarias =='1'"
-                  @click="tabs=2" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 2 }"><span style="color:#fff">Complementarias</span>
-                 </div>
-                 <div v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'&&mate !='DESARROLLO HUMANO INTEGRAL'" 
-                 @click="tabs=1" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 1 }">
-                 <span v-if="!$store.state.isAppMobile" style="color:#fff">Supletorios</span>
-                 <span v-else style="color:#fff">Suple..</span>
-                 </div>
-                
-                 <div  @click="tabs=4" class=" inn_tab s-text-versel3" :class="{ 'canvaActive': tabs == 4 }">
-                  <span v-if="!$store.state.isAppMobile" style="color:#fff">Planificación</span>
-                  <span v-else style="color:#fff">Plani..</span>
-                 </div>
-            </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'">
+            <a class="nav-link " style="cursor:pointer" aria-current="page" @click="tabs=0"  :class="{ 'active': tabs == 0 }" >
+              Notas</a>
+          </li>
+          <li class="nav-item" v-if="ifComplementarias =='1'" >
+            <a class="nav-link " style="cursor:pointer" :class="{ 'active': tabs == 2 }" aria-current="page" @click="tabs=2" >Complementarias</a>
+          </li>
+          <li class="nav-item" v-if="mate =='COMPORTAMIENTO'" >
+            <a class="nav-link " style="cursor:pointer" :class="{ 'active': tabs == 3 }" aria-current="page" @click="tabs=3" >Comportamiento</a>
+          </li>
+          <li class="nav-item" v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'" >
+            <a @click="tabs=1" style="cursor:pointer" :class="{ 'active': tabs == 1 }" class="nav-link" >Supletorios</a>
+          </li>
+          <li class="nav-item"  >
+            <a @click="tabs=4" style="cursor:pointer" :class="{ 'active': tabs == 4 }" class="nav-link" >Planificación</a>
+          </li>
+          <li class="nav-item"  >
+            <span class="nav-link text-white ms-5"> <b>{{nivel}} [{{para}}] --{{mate}}</b> </span>
+          </li>
+         
+        </ul>
      </template>
     <template v-slot:body>
   <ProgressBar v-if="isData"></ProgressBar>
   <div v-else  >
     <div >
       <section v-if="tabs == 0 && ifComplementarias !='1'&&ifComplementarias !='COMPORTAMIENTO'" >
-        <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
         <Calificaciones :object="inAlumnos" @getDataTask="getDataActualizada" />
       </section>
       <section v-if="tabs == 1 && ifComplementarias !='1'&&ifComplementarias !='COMPORTAMIENTO'">
-         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
         <Supletorios :object="inAlumnos" @getDataTask="getDataActualizada" />
       </section>
       <section v-if="tabs == 2 && ifComplementarias == '1'" >
-         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
         <Proyectos :object="inAlumnos" @getDataTask="getDataActualizada" />
       </section>
       <section v-if="tabs == 3 &&  mate =='COMPORTAMIENTO'">
-        <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
         <Comportamiento :object="inAlumnos" @getDataTask="getDataActualizada" />
       </section>
       <section v-if="tabs == 4">
-         <div class="text-center"> <span class="negros gordo ">{{nivel}} [{{para}}] --{{mate}} </span></div>
         <Planificacion :id="idDistributivo" :planificacion="planificacion" />
       </section>
      
