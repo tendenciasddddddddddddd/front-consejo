@@ -183,8 +183,8 @@ methods: {
       } 
       else{
         notass = [
-        {  quimestre: 'p1', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',},
-        { quimestre: 'p2', promedio: '', examen: '1', a1: '1', a2: '', a3: '', a4: '', a5: '', b1: '1', b2: '', b3: '', b4: '', b5: '',}
+        {  quimestre: 'p1', promedio: '', examen: '0', a1: '0', a2: '', a3: '', a4: '', a5: '', b1: '0', b2: '', b3: '', b4: '', b5: '',},
+        { quimestre: 'p2', promedio: '', examen: '0', a1: '0', a2: '', a3: '', a4: '', a5: '', b1: '0', b2: '', b3: '', b4: '', b5: '',}
       ] 
       this.model2.calificaciones.promediof = '1';
       }

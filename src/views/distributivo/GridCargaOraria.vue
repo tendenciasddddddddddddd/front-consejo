@@ -9,20 +9,20 @@
         <input type="text" id="quickFilter" v-on:input="onQuickFilterChanged()" class="form-control buscador buscaa" placeholder="Buscar" />
         </div>
       </div>
-      <div class="col-sm-7 ">
+      <div class="col-sm-8 ">
         <button v-on:click="onBtAdd()" role="button" class="btn btnNaranja2 ">
           Insertar fila
         </button>
         <button v-on:click="clearData()" role="button" class="btn btnNaranja2 ms-3">
-          Eliminar selección
+          Eliminar
         </button>
-        
+        <button v-on:click="openModal" role="button" class="btn btnNaranja2 ms-3">
+          Distri.. ordenado
+        </button>
         <button v-on:click="getRowData()" role="button" class="btn btnNaranja ms-3">
           Guardar cambios
         </button>
-        <button v-on:click="openModal" role="button" class="btn btnNaranja2 ms-3">
-          Distributivo ordenado
-        </button>
+        
       </div>
     </div>
         <Spinner v-if="isLoading"></Spinner>

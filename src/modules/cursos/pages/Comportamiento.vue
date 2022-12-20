@@ -6,7 +6,8 @@
                 @changeSearch="changeSearch" />
         </div>
         <section style="height: calc(100vh - 210px);">
-            <ag-grid-vue  :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
+            <ag-grid-vue :groupHeaderHeight="45"
+    :headerHeight="130" :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs"
                 :rowData="rowData" :defaultColDef="defaultColDef" :enableRangeSelection="true"
                 :suppressCopySingleCellRanges="true" @grid-ready="onGridReady" :enableFillHandle="true">
             </ag-grid-vue>
@@ -17,7 +18,15 @@
         </div>
     </div>
 </template>
-    
+<style>
+.ag-header-cell-label .ag-header-cell-text {
+   /*Force the width corresponding at how much width
+     we need once the text is laid out vertically*/
+   width: 55px !important;
+   writing-mode: vertical-lr !important; transform: rotate(180deg) !important;
+   line-height: 2em;
+   margin-top: 10px;
+ }</style> 
 <script>
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";

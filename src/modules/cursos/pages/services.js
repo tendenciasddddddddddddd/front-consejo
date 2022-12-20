@@ -275,11 +275,11 @@ export default class quialifyservice {
   return result;
   }
   calcular_primer_quimestre(obj, numArray) {
-    let a1 = parseFloat(obj[numArray].a1),
-    a2 = parseFloat(obj[numArray].a2),
-    a3 = parseFloat(obj[numArray].a3),
-    a4 = parseFloat(obj[numArray].a4),
-    a5 = parseFloat(obj[numArray].a5);
+    let a1 = parseFloat(obj[numArray].a1)==0? 0.001: parseFloat(obj[numArray].a1),
+    a2 = parseFloat(obj[numArray].a2)==0? 0.001: parseFloat(obj[numArray].a2),
+    a3 = parseFloat(obj[numArray].a3)==0? 0.001: parseFloat(obj[numArray].a3),
+    a4 = parseFloat(obj[numArray].a4)==0? 0.001: parseFloat(obj[numArray].a4),
+    a5 = parseFloat(obj[numArray].a5)==0? 0.001: parseFloat(obj[numArray].a5);
   let suma = 0;
   let aux = 0;
   if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && a5 != "") {
@@ -303,11 +303,11 @@ export default class quialifyservice {
     aux = 1;
   }
   let promedio001 = (suma / aux).toFixed(2);
-  let b1 = parseFloat(obj[numArray].b1),
-  b2 = parseFloat(obj[numArray].b2),
-  b3 = parseFloat(obj[numArray].b3),
-  b4 = parseFloat(obj[numArray].b4),
-  b5 = parseFloat(obj[numArray].b5);
+  let b1 = parseFloat(obj[numArray].b1)==0? 0.001: parseFloat(obj[numArray].b1),
+  b2 = parseFloat(obj[numArray].b2)==0? 0.001: parseFloat(obj[numArray].b2),
+  b3 = parseFloat(obj[numArray].b3)==0? 0.001: parseFloat(obj[numArray].b3),
+  b4 = parseFloat(obj[numArray].b4)==0? 0.001: parseFloat(obj[numArray].b4),
+  b5 = parseFloat(obj[numArray].b5)==0? 0.001: parseFloat(obj[numArray].b5);
 let suma2 = 0;
 let aux2 = 0;
 if (b1 != "" && b2 != "" && b3 != "" && b4 != "" && b5 != "") {
@@ -335,7 +335,7 @@ let promedio_primer_segundo = ((parseFloat(promedio002) + parseFloat(promedio001
 
     let promedio1 = promedio_primer_segundo;
     let promedio1_parcial80 = ((promedio1 * 8) / 10).toFixed(2);
-    let examen1 = parseFloat(obj[numArray].examen);
+    let examen1 = parseFloat(obj[numArray].examen)==0? 0.001: parseFloat(obj[numArray].examen);
     let promedio1_parcial20 = ((examen1 * 2) / 10).toFixed(2);
     let promedioTotal1 =
       parseFloat(promedio1_parcial80) + parseFloat(promedio1_parcial20);

@@ -5,7 +5,10 @@
       <ActionRowNotas v-if="!ifsaved" @remove="remove" @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
     </div>
     <section style="height: calc(100vh - 210px);">
-      <ag-grid-vue :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
+      <ag-grid-vue :groupHeaderHeight="50"
+    :headerHeight="130"
+    :floatingFiltersHeight="50"  :pivotHeaderHeight="100"
+    :pivotGroupHeaderHeight="50" :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
         :enableFillHandle="true" @grid-ready="onGridReady"  :detailRowAutoHeight="true">
     </ag-grid-vue>
@@ -15,7 +18,16 @@
     </div>
   </div>
 </template>
-
+<style>
+ .ag-header-cell-label .ag-header-cell-text {
+    /*Force the width corresponding at how much width
+      we need once the text is laid out vertically*/
+      writing-mode: vertical-lr !important; transform: rotate(180deg) !important;
+    width: 55px !important;
+   
+    line-height: 2em;
+    margin-top: 10px;
+  }</style>
 <script>
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -35,7 +47,7 @@ export default {
       rowData: [],
       defaultColDef: {
         flex: 1,
-        minWidth: 80,
+        minWidth: 48,
         resizable: true,
         sortable: true,
         filter: true,
@@ -113,20 +125,20 @@ export default {
             },
           },
           {
-            field: "promedio3", headerName: 'PROMEDIO', minWidth: 85,
+            field: "promedio3", headerName: 'PROM. PARCIALES', minWidth: 85,
             valueGetter: totalValueGetter,
           },
           {
-            field: "promedio4", headerName: '80%', minWidth: 60,
+            field: "promedio4", headerName: 'PROM. 80%', minWidth: 60,
             valueGetter: totalPromedioAportes,
           },
           { field: "examenfinal", headerName: 'EXAMEN', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
-            field: "promedio5", headerName: '20%', minWidth: 60,
+            field: "promedio5", headerName: 'PROM. 20%', minWidth: 60,
             valueGetter: totalParcialExamen,
           },
           {
-            field: "qfinal", headerName: 'QUIM 1',  cellStyle: cellStyle,
+            field: "qfinal", headerName: 'PROM. QUIM 1',  cellStyle: cellStyle,
             valueGetter: totalFinalQuim,
           },
         ]
@@ -140,7 +152,7 @@ export default {
           { field: "x4", headerName: 'Insumo 4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           { field: "x5", headerName: 'Insumo 5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
-            field: "promedio11", headerName: 'Parcial 1', minWidth: 85, cellStyle: cellStyle, columnGroupShow: 'open',
+            field: "promedio11", headerName: 'PARCIAL 1', minWidth: 85, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.x1.toString().replace(",", ".")
               let a1 = parseFloat(p1)==0? 0.001: parseFloat(p1)
@@ -176,7 +188,7 @@ export default {
           { field: "y4", headerName: 'Insumo 4', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           { field: "y5", headerName: 'Insumo 5', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
-            field: "promedio22", headerName: 'Parcial 2', minWidth: 85, cellStyle: cellStyle, columnGroupShow: 'open',
+            field: "promedio22", headerName: 'PARCIAL 2', minWidth: 85, cellStyle: cellStyle, columnGroupShow: 'open',
             valueGetter: params => {
               let p1 = params.data.y1.toString().replace(",", ".")
               let a1 = parseFloat(p1)==0? 0.001: parseFloat(p1)
@@ -207,20 +219,20 @@ export default {
             }
           },
           {
-            field: "promedio33", headerName: 'PROMEDIO', minWidth: 85, 
+            field: "promedio33", headerName: 'PROM. PARCIALES', minWidth: 85, 
             valueGetter: totalValueGetter2,
           },
           {
-            field: "promedio44", headerName: '80%', minWidth: 60, 
+            field: "promedio44", headerName: 'PROM. 80%', minWidth: 60, 
             valueGetter: totalPromedioAportes2,
           },
           { field: "examenfinal2", headerName: 'EXAMEN', editable: true, columnGroupShow: 'open', valueFormatter: saleValueFormatter, },
           {
-            field: "promedio55", headerName: '20%', minWidth: 60, 
+            field: "promedio55", headerName: 'PROM. 20%', minWidth: 60, 
             valueGetter: totalParcialExamen2,
           },
           {
-            field: "qfinal2", headerName: 'QUIM 2',  cellStyle: cellStyle, 
+            field: "qfinal2", headerName: 'PROM. QUIM 2',  cellStyle: cellStyle, 
             valueGetter: totalFinalQuim2,
           },
         ]
@@ -228,7 +240,7 @@ export default {
       {
         headerName: 'P ANUAL',
         children: [
-        { field: "promed", headerName: 'PA', minWidth: 100, cellStyle: cellStyle, valueGetter: totalPromedioAnual},
+        { field: "promed", headerName: 'PROM. ANUAL', minWidth: 100, cellStyle: cellStyle, valueGetter: totalPromedioAnual},
        
         ]
       }

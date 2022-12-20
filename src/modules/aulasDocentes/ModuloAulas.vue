@@ -88,7 +88,15 @@ export default {
             this.idCourse = this.collection._id;
             this.CourseClave = this.collection.codigo;
             this.collectionTasks = this.collection.task.reverse();
-            this.collectionUser = this.collection.estudiantes;
+            const est = this.collection.estudiantes;
+            this.collectionUser = est.sort(function (a, b) {
+              var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+              if (nameA < nameB) //sort string ascending
+                return -1;
+              if (nameA > nameB)
+                return 1;
+              return 0; //default return value (no sorting)
+            });
             this.collectionQuizz = this.collection.examen.reverse();
             let text_1 = this.collection.materia;
             let text_2 = 'Tareas'

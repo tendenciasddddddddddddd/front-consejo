@@ -38,7 +38,13 @@
     </template>
   </ScrimModal>
 </template>
-
+<style>
+  .ag-header-cell-label .ag-header-cell-text {
+    writing-mode: horizontal-tb !important; transform: rotate(0deg) !important;
+    line-height: 2em;
+    margin-top: 10px;
+    width: 150px !important;
+  }</style>
 <script>
 import RestResource from "../../../service/isAdmin";
 const restResourceService = new RestResource();

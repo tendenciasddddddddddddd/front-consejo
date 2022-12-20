@@ -982,8 +982,8 @@ export default {
             if (array.length > 0) {
                 for (let i = 0; i < array.length; i++) {
                     const element = array[i].prom1;
-                    const num = parseFloat(element);
-                    if (num <= 10 && num >= 1) {
+                    const num = parseFloat(element)==0? 0.001: parseFloat(element);
+                    if (num <= 10 && num >= 0) {
                         sum = sum + num
                         cont += 1
                     }
@@ -1038,7 +1038,7 @@ export default {
             for (let i = 0; i < array.length; i++) {
                 const element = array[i].prom1;
                 const num = parseFloat(element);
-                if (num < 5 && num >= 1) {
+                if (num < 5 && num >= 0) {
                     cont += 1 
                 }
             }
@@ -1053,8 +1053,8 @@ export default {
             if (array.length > 0) {
                 for (let i = 0; i < array.length; i++) {
                     const element = array[i].prom2;
-                    const num = parseFloat(element);
-                    if (num <= 10 && num >= 1) {
+                    const num = parseFloat(element)==0? 0.001: parseFloat(element);
+                    if (num <= 10 && num >= 0) {
                         sum = sum + num
                         cont += 1
                     }
@@ -1109,7 +1109,7 @@ export default {
             for (let i = 0; i < array.length; i++) {
                 const element = array[i].prom2;
                 const num = parseFloat(element);
-                if (num < 5 && num >= 1) {
+                if (num < 5 && num >= 0) {
                     cont += 1 
                 }
             }

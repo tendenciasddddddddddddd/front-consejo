@@ -5,7 +5,8 @@
         <ActionRowNotas v-if="!ifsaved"  @save="save" @openModal="onBtExport" @open="open" @changeSearch="changeSearch"/>
       </div>
     <section style="height: calc(100vh - 210px);">
-      <ag-grid-vue  :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
+      <ag-grid-vue  :groupHeaderHeight="45"
+    :headerHeight="130" :rowHeight="26" style="width: 100%; height: 100%;" class="ag-theme-alpine" :columnDefs="columnDefs" :rowData="rowData"
       :defaultColDef="defaultColDef" :enableRangeSelection="true" :suppressCopySingleCellRanges="true"
       
       @grid-ready="onGridReady">
@@ -16,7 +17,15 @@
     </div>
   </div>
 </template>
-  
+<style>
+.ag-header-cell-label .ag-header-cell-text {
+   /*Force the width corresponding at how much width
+     we need once the text is laid out vertically*/
+   width: 55px !important;
+   writing-mode: vertical-lr !important; transform: rotate(180deg) !important;
+   line-height: 2em;
+   margin-top: 10px;
+ }</style>
   <script>
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -42,15 +51,15 @@
         rowSelection: null,
         columnDefs: [
           { field: "nombres", headerName: 'ESTUDIANTES', minWidth: 270, pinned: 'left', },
-          { field: "quim1", headerName: 'QUIM 1', minWidth: 60 },
-          { field: "quim2", headerName: 'QUIM 2', minWidth: 60 },
-          { field: "promed", headerName: 'P ANUAL', minWidth: 70, cellStyle: cellStyle },
+          { field: "quim1", headerName: 'PROM. QUIM 1', minWidth: 60 },
+          { field: "quim2", headerName: 'PROM. QUIM 2', minWidth: 60 },
+          { field: "promed", headerName: 'PROM. ANUAL', minWidth: 70, cellStyle: cellStyle },
           {
           field: "suple", headerName: 'SUPLETORIO', minWidth: 60, editable: true, valueFormatter: saleValueFormatter,},
           { field: "reme", headerName: 'REMEDIAL', minWidth: 60, editable: true, valueFormatter: saleValueFormatter },
           { field: "gracia", headerName: 'GRACIA', minWidth: 60, editable: true, valueFormatter: saleValueFormatter },
           {
-            field: "pfinal", headerName: 'PF', minWidth: 60, cellStyle: cellStyle,
+            field: "pfinal", headerName: 'PROM. FINAL', minWidth: 60, cellStyle: cellStyle,
             valueGetter: params => {
               let su = params.data.suple.toString().replace(",", ".")
               let suple = parseFloat(su)
