@@ -75,7 +75,13 @@
   </div> 
   </div>
 </template>
-
+<style>
+  .ag-header-cell-label .ag-header-cell-text {
+    writing-mode: horizontal-tb !important; transform: rotate(0deg) !important;
+    line-height: 2em;
+    margin-top: 10px;
+    width: 150px !important;
+  }</style>
 <script>
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -179,7 +185,6 @@ export default {
     this.__listmaterias();
     this.getAll();
     this.editType = 'fullRow';
-
     this.isRowSelectable = (rowNode) => {
       return !rowNode.group;
     };
@@ -187,7 +192,6 @@ export default {
   methods: {
     openModal() {
             this.visible = true;
-
           },
           close() {
             this.visible = false;
@@ -252,7 +256,6 @@ export default {
       var selectedRowData = this.leftApi.getSelectedRows();
       this.leftApi.applyTransaction({ remove: selectedRowData });
     },
-
     getRowData() {
       this.ifload = true;
       let validate = false;
@@ -352,7 +355,6 @@ export default {
           })
           .catch(() => {
             this.ifload = false;
-
             this.toast("error.response.message");
           });
       } else {
@@ -365,7 +367,6 @@ export default {
         this.leftApi = params.api;
         this.leftColumnApi = params.columnApi;
       }
-
       if (side === 1) {
         this.rightApi = params.api;
         this.addGridDropZone();

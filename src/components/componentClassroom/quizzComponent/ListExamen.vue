@@ -223,9 +223,8 @@ export default {
         for (let j = 0; j < array.length; j++) {
           if (array[j].idUser == this.usuario) {
             estado = true;
-            let calcule = parseInt(array[j].puntage)
+            let calcule = parseFloat(array[j].puntage)
             nota = ((calcule*10)/longitudArray).toFixed(2)
-            break;
           }
         }
         this.collections.push({

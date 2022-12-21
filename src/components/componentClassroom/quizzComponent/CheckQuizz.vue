@@ -202,7 +202,7 @@ export default {
             this.subpanel = false;
             this.detalleTask = item;
             let long = this.collects.surveys.length;
-            let not = parseInt(this.detalleTask.nota?this.detalleTask.nota:'0')
+            let not = parseFloat(this.detalleTask.nota?this.detalleTask.nota:'0')
             this.aprox = not = ((not*10)/long).toFixed(2)
             if (item.tarea == '') {
                 this.subpanel = true

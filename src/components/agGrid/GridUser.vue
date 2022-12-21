@@ -49,6 +49,13 @@
       </template>
     </ScrimModal>
 </template>
+<style>
+  .ag-header-cell-label .ag-header-cell-text {
+    writing-mode: horizontal-tb !important; transform: rotate(0deg) !important;
+    line-height: 2em;
+    margin-top: 10px;
+    width: 150px !important;
+  }</style>
 <script>
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";

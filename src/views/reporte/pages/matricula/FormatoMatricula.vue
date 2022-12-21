@@ -19,7 +19,7 @@
                   Dirección: {{ settings.direccion }} Teléf: {{ settings.telefono }}
                 </span> <br>
                 <span style="font-size: .75rem!important;color:#000;">
-                  El Ángel {{ settings.ubicacion }}</span>
+                   {{ settings.ubicacion }}</span>
               </div>
 
             </div>
