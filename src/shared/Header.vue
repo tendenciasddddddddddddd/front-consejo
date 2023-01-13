@@ -84,11 +84,7 @@
           <i class="bi bi-circle" :class="{'activex': $route.name === '4444'}"></i><span>Tutores</span>
         </router-link>
       </li>
-      <li>
-        <router-link to="/planificacion" @click.native="Resize" :class="{'actives': $route.name === '3333'}">
-          <i class="bi bi-circle" :class="{'activex': $route.name === '3333'}"></i><span>Planificaciones</span>
-        </router-link>
-      </li>
+      
     </ul>
   </li><!-- End Tables Nav -->
 
@@ -108,11 +104,7 @@
           <i class="bi bi-circle" :class="{'activex': $route.name === 'r2'}"></i><span>Reportes</span>
         </router-link>
       </li>
-      <li>
-        <router-link to="/estadistica" @click.native="Resize" :class="{'actives': $route.name === '777'}">
-          <i class="bi bi-circle" :class="{'activex': $route.name === '777'}"></i><span>Estadistica notas</span>
-        </router-link>
-      </li>
+    
     </ul>
   </li><!-- End Charts Nav -->
 
@@ -156,11 +148,7 @@
           <i class="bi bi-circle" :class="{'activex': $route.name === 'dh'}"></i><span>Reportes</span>
         </router-link>
       </li>
-      <li>
-        <router-link to="/zoom" @click.native="Resize" :class="{'actives': $route.name === 'dr'}">
-          <i class="bi bi-circle" :class="{'activex': $route.name === 'dr'}"></i><span>Zoom</span>
-        </router-link>
-      </li>
+     
     </ul>
   </li>
   <li class="nav-item" v-if="user.roles.includes('Estudiante')">
@@ -185,26 +173,8 @@
       
     </ul>
   </li>
-  <li class="nav-item" v-if="user.roles.includes('Docente')">
-    <router-link class="nav-link collapsed" @click.native="Resize" to="/aulas-lista" :class="{'activesli': $route.name === 'al'}">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icons"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 18.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5h6.5c.275 0 .5.225.5.5v13.5H4Zm8.5 1.497V20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5c1.102 0 2 .895 2 2v3.997h2L20 9c1.105 0 2 .892 2 2v7l-1.5-.001V11c0-.278-.222-.5-.5-.5l-3.126-.001-4.374-.002v8l7.5.003a.5.5 0 0 0 .5-.5H22a2 2 0 0 1-2 2l-7.5-.003ZM5 7.497h4.5v-1.5H5v1.5Zm0 3h4.5v-1.5H5v1.5Zm4.5 3H5v-1.5h4.5v1.5Zm-4.5 3h4.5v-1.5H5v1.5Zm11-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Zm3-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Z" fill="currentColor"></path></svg>
-      <span class="ms-2">Aulas Virtuales</span>
-    </router-link>
-   
-  </li>
-  <li class="nav-item" v-if="user.roles.includes('Estudiante')">
-    <router-link class="nav-link collapsed" to="/my-lista"  @click.native="Resize" :class="{'activesli': $route.name === 'es1'}">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icons"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 18.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5h6.5c.275 0 .5.225.5.5v13.5H4Zm8.5 1.497V20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5c1.102 0 2 .895 2 2v3.997h2L20 9c1.105 0 2 .892 2 2v7l-1.5-.001V11c0-.278-.222-.5-.5-.5l-3.126-.001-4.374-.002v8l7.5.003a.5.5 0 0 0 .5-.5H22a2 2 0 0 1-2 2l-7.5-.003ZM5 7.497h4.5v-1.5H5v1.5Zm0 3h4.5v-1.5H5v1.5Zm4.5 3H5v-1.5h4.5v1.5Zm-4.5 3h4.5v-1.5H5v1.5Zm11-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Zm3-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Z" fill="currentColor"></path></svg>
-      <span class="ms-2">Aulas Virtuales</span>
-    </router-link>
-   
-  </li>
-  <li class="nav-item">
-    <router-link class="nav-link collapsed" to="/apps" @click.native="Resize" :class="{'activesli': $route.name === 'app1'}">
-      <i class="bi bi-card-list"></i>
-      <span>Aplicaciones</span>
-    </router-link>
-  </li>
+ 
+ 
 
 
   <div v-if="visibl">

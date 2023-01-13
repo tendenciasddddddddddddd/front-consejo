@@ -15,9 +15,7 @@
           <li class="nav-item" v-if="ifComplementarias !='1'&&mate !='COMPORTAMIENTO'" >
             <a @click="tabs=1" style="cursor:pointer" :class="{ 'active': tabs == 1 }" class="nav-link" >Supletorios</a>
           </li>
-          <li class="nav-item"  >
-            <a @click="tabs=4" style="cursor:pointer" :class="{ 'active': tabs == 4 }" class="nav-link" >Planificación</a>
-          </li>
+        
           <li class="nav-item"  >
             <span class="nav-link text-white ms-5"> <b>{{nivel}} [{{para}}] --{{mate}}</b> </span>
           </li>

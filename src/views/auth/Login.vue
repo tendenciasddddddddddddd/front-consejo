@@ -43,26 +43,7 @@
                           </button>
                           <br>
                           <br>
-                          <hr class="mt-1" />
 
-                          <div v-if="!isAuthGoogle" class="google-btn mt-4" @click="loginGoogleAuth()">
-                            <div class="google-icon-wrapper">
-                              <img class="google-icon"
-                                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
-
-                            </div>
-                            <p class="btn-text fuente text-center">
-                              Iniciar sesión con Google
-                            </p>
-                          </div>
-                          <div v-else class="google-btn mt-4">
-                            <div class="google-icon-wrapper">
-                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            </div>
-                            <p class="btn-text fuente text-center">
-                              Trabajando...
-                            </p>
-                          </div>
                         </div>
                   </form>
                 </div>

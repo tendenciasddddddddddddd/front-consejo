@@ -43,7 +43,7 @@ const restResourceService = new RestResource();
 const img1 = require("../../assets/img/shapes/90260b20-d6c6-418f-9961-9282c5d85d78.png")
 const img2 = require("../../assets/img/icons/pdf.png")
 const img3 = require("../../assets/img/icons/smiling_face.svg")
-const img4 = require("../../assets/img/logs/documents.svg")
+//const img4 = require("../../assets/img/logs/documents.svg")
 import CardsOptions from "../../shared/CardsClick.vue"
 export default {
   name: "MenuZonas",
@@ -81,12 +81,7 @@ export default {
           img: img3,
           description: "Generar reportes de matriculas y notas de todos los años",
         },
-         {
-          id: "3",
-          nombre: "Archivo DECE",
-          img: img4,
-          description: "Puedes generar reportes de permisos según sea necesario",
-        },
+        
        
       ]
     };

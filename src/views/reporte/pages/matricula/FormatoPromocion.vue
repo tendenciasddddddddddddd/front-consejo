@@ -19,8 +19,7 @@
                                 </span><br>
                                 <p style="margin-top:-1px;text-align: center!important;font-size: .75rem!important;">
                                     CERTIFICADO ANUAL DE PROMOCIÓN <br>
-                                    <span style="font-size: .75rem!important;">AÑO LECTIVO <b>{{ item.academico.nombre
-                                    }}</b></span>
+                                    <span style="font-size: .75rem!important;">AÑO LECTIVO <b>{{ item.academico? item.academico.nombre: 'Udefinid'}}</b></span>
                                 </p>
                             </div>
                             <div style="width: 10%;text-align: end!important;">
