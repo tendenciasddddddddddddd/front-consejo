@@ -43,7 +43,7 @@
                   resetPw
                 </th>
                 <th class="text-uppercase text-center text-xxs font-weight-bolder">
-                  [Doc]|[Rector-Vice]|[Admin]
+                  [Doc]|[Inspector]|[Admin]
                 </th>
               </tr>
             </thead>
@@ -112,11 +112,7 @@
     <div v-if="ifGrid">
       <GridUser :typo="'DOCS'" :role="'Docente'" @myEventClosedAgGrid="closeAgGrid" @clickAlumnos="refreshData"/>
     </div>
-    <div class="fixed-plugin">
-    <a @click="ifyoutuve=true" class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white" style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px;  box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
-      Ver video explicativo
-    </a>
-  </div>
+    
   </div>
 </template>
 <script src="./Docentes.js"></script>

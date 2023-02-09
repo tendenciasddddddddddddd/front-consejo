@@ -7,10 +7,7 @@
   data-bs-target="#profile-overview" aria-selected="false" role="tab" tabindex="-1">Visión general</button>
 </li>
 
-<li class="nav-item" role="presentation">
-  <button class="nav-link " data-bs-toggle="tab" @click="(istabs=2)" :class="{ 'active': istabs=='2' }"
-  data-bs-target="#profile-edit" aria-selected="true" role="tab">Información general</button>
-</li>
+
 
 
 

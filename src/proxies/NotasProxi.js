@@ -70,6 +70,15 @@ export default class NotasProxi {
     }
    //nota estudiantes
     get(id) {
-    return this.axios.get(this.url + `/notas/nota/${id}`);
-}
+    return this.axios.get(this.url + `/notas/nota/${id}`);  
+    }
+
+    //-------------------------ASISTENCIA----------------justificar
+    updateAsistencia(id, params) {
+        return this.axios.put(this.url + `/asistencia/${id}`, params); //RUTA ARBOL 1
+    }
+
+    justificarAsistencia(id, params) {
+        return this.axios.put(this.url + `/asistencia/justificar/${id}`, params); //RUTA ARBOL 1
+    }
 }

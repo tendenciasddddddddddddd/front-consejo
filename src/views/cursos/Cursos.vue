@@ -14,13 +14,11 @@
                 </div>
                 <svg @click="deletedSelected" style="cursor: pointer;color: #8b3dff;" v-else  data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" ><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
                 <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
-                  Num
+                  Curso
                 </span>
               </div>
             </th>
-            <th class="text-uppercase text-center text-xxs font-weight-bolder">
-              Curso
-            </th>
+           
             <th class="text-uppercase text-center text-xxs font-weight-bolder">
               Fecha M
             </th>
@@ -38,13 +36,11 @@
                     @click="selectUser(item._id)" />
                 </div>
                 <a class="mb-0 ms-3 text-sm negros fuente">
-                  {{ item.num }}
+                  {{ item.nombre }}
                 </a>
               </div>
             </td>
-            <td class="text-xs text-center font-weight-normal fuente negros">
-              {{ item.nombre}}
-            </td>
+           
             <td class="text-xs text-center font-weight-normal fuente">
               {{ item.updatedAt.substring(0, 10) }}
             </td>

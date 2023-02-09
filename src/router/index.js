@@ -146,29 +146,16 @@ const routes = [{
     component:() => import( /* webpackChunkName: "HistoriaEst" */ '../views/pagesAlumnos/historialE/HistoriaEst.vue'),
   },
   
-  ////------------------------------------AULAS VIRTUALES DOCENTES-----------------------------
-  {
-    path: '/aulas-lista',
-    name: 'al',
-    component: () => import( /* webpackChunkName: "AulasListas" */ '../modules/aulasDocentes/ListaAulas.vue'),
-  },
-  {
-    path: '/modulo-aula/:id',
-    name: 'al',
-    component: () => import( /* webpackChunkName: "ModuloAula" */ '../modules/aulasDocentes/ModuloAulas.vue'),
-  },
- 
-   ////------------------------------------AULAS VIRTUALES ESTUDIANTES-----------------------------
 
   {
-    path: '/my-lista',
-    name: 'es1',
-    component: () => import( /* webpackChunkName: "MyAulas" */ '../views/pagesClassroom/alumnos/myAulas/MyAulas.vue'),
+    path: '/crear-asistencia',
+    name: 'as1',
+    component:() => import( /* webpackChunkName: "CreateAsistencia" */ '../views/asistencias/CreateAsistencia.vue'),
   },
   {
-    path: '/module-aulas/:id',
-    name: 'es1',
-    component: () => import( /* webpackChunkName: "ModuleAulas" */ '../views/pagesClassroom/alumnos/Modulo/ModuleAulas.vue'),
+    path: '/lista-asistencia',
+    name: 'as2',
+    component:() => import( /* webpackChunkName: "ListaAsistencia" */ '../views/asistencias/ListaAsistencia.vue'),
   },
   
   { path: "*", component: PageNotFound },

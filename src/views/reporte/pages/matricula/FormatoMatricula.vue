@@ -31,7 +31,7 @@
               CERTIFICADO DE MATRICULA</span>
             <div c style="margin-top: 6rem!important;display: flex!important;justify-content: space-around!important;">
               <div>Matrícula No. <b>{{ item.nmatricula }}</b> </div>
-              <div>Año Lectivo: <b>{{ item.academico.nombre }}</b> </div>
+              <div>Año Lectivo: <b>{{ item.academico ? item.academico.nombre : '2022-2023' }}</b> </div>
             </div>
             <div
               style=" --bs-gutter-x: 1.5rem; --bs-gutter-y: 0; display: flex;flex-wrap: wrap;margin-top: calc(var(--bs-gutter-y) * -1);margin-right: calc(var(--bs-gutter-x) * -.5);margin-left: calc(var(--bs-gutter-x) * -.5);">
@@ -41,7 +41,7 @@
                     Certifico que el(a) Estudiante: <b> {{ item.nombre }}</b>
                     previo los requisitos legales, se matriculó en <b>{{ item.fknivel.nombre }}</b> de la
                     <b>{{ settings.unidadeducativa }}</b> en el Año Lectivo: <br>
-                    <b>{{ item.academico.nombre }}</b>
+                    <b>{{ item.academico ? item.academico.nombre : '2022-2023' }}</b>
                   </p>
                 </div>
                 <div style="width: 560px;margin-top: 1rem!important;">

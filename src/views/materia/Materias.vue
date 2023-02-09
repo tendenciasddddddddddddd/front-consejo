@@ -14,7 +14,7 @@
                 </div>
                 <svg @click="deletedSelected" style="cursor: pointer;color: #8b3dff;" v-else  data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" ><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
                 <span class="ms-3 text-uppercase text-center text-xxs font-weight-bolder">
-                  Nombre
+                  Área
                 </span>
               </div>
             </th>
@@ -24,9 +24,7 @@
             <th class="text-uppercase text-center text-xxs font-weight-bolder">
               Fecha modicado
             </th>
-            <th class="text-uppercase text-center text-xxs font-weight-bolder">
-              Tronco libre
-            </th>
+            
           </tr>
         </thead>
         <tbody>
@@ -48,12 +46,7 @@
             <td class="mb-0 ms-3 text-xs colorestabla fuente text-center">
               {{ item.updatedAt.substring(0,10) }}
             </td>
-            <td class="text-sm text-center font-weight-normal fuente">
-              <span class="icon">
-                      <svg v-if="item.estado.includes('1')" data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="#000;"><path d="M20 6L9 17l-5-5"></path></svg>
-                      <svg v-else data-testid="geist-icon" fill="none" height="22" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="22" style="#000;"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
-                    </span>
-            </td>
+            
           </tr>
         </tbody>
       </table>
@@ -77,10 +70,7 @@
             <p class=" text-xs fuente text-danger">
               {{ validation.firstError("model.nombre") }}
             </p>
-            <span class="parrafo">Esta materia es complementaria?</span>
-            <div v-if="!allSelected " class="form-check my-auto mt-2" style="min-height: 0rem;">
-                  <input class="form-check-input cheka" type="checkbox" v-model=" isComplentaria" />
-                </div> <br>
+            <br>
           </form>
         </template>
         <template v-slot:acccion>

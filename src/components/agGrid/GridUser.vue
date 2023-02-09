@@ -89,7 +89,7 @@ export default {
         { field: 'fullname', headerName: 'APELLIDOS/NOMBRES*', editable: true, minWidth:280 },
         { field: 'fknacionalidad', headerName: 'NACIONALIDAD (OPC)', editable: true },
         { field: 'fkparroquia', headerName: 'PARROQUIA (OPC)', editable: true },
-        { field: 'sexo', headerName: 'SEXO (OPC)', editable: true, maxWidth: 130 },
+        { field: 'sexo', headerName: 'GÉNERO (OPC)', editable: true, maxWidth: 130 },
         { field: 'telefono', headerName: 'TELÉFONO (OPC)', editable: true, cellStyle: cellStyle3 },
         { field: 'email', headerName: 'EMAIL (OPC)', editable: true, cellStyle: cellStyle2 },
       ],

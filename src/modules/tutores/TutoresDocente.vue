@@ -114,13 +114,7 @@
         <div v-if="ifyoutuve">
             <VueYoutuve @ClosedYoutuve="ClosedYoutuve" :videoId="'pf_3Ip_leRY'" />
         </div>
-        <div class="fixed-plugin" v-if="!$store.state.isAppMobile">
-            <a @click="ifyoutuve = true"
-                class="fuente text-sm fixed-plugin-button text-dark position-fixed px-3 py-2 text-white"
-                style="background-color: #8b3dff; border-radius: 20px 20px 2px 20px; box-shadow: 0 5px 20px 0 rgb(12 73 84 / 20%);">
-                Ver video explicativo
-            </a>
-        </div>
+        
             <section v-if="isActive">
                 <Modal @close="closeModal">
                     <template v-slot:header> LIBRETAS ESCOLARES</template>

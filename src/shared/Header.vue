@@ -33,15 +33,11 @@
   </li><!-- End Components Nav -->
 
   <li class="nav-item" v-if="user.roles.includes('Admin')">
-    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#" :class="{'activesli': $route.name === '1'||$route.name === '222'||$route.name === '333'}">
+    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#" :class="{'activesli': $route.name === '222'||$route.name === '333'}">
       <i class="bi bi-journal-text"></i><span>Registros</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav"  :class="{'show': $route.name === '1'||$route.name === '222'||$route.name === '333'}">
-      <li>
-        <router-link to="/Users" @click.native="Resize" :class="{'actives': $route.name === '1'}">
-          <i class="bi bi-circle" :class="{'activex': $route.name === '1'}"></i><span>Usuarios de sistema</span>
-        </router-link>
-      </li>
+    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav"  :class="{'show': $route.name === '222'||$route.name === '333'}">
+     
       <li>
         <router-link to="/Estudiate" @click.native="Resize" :class="{'actives': $route.name === '222'}">
           <i class="bi bi-circle" :class="{'activex': $route.name === '222'}"></i><span>Estudiantes</span>
@@ -56,7 +52,7 @@
     </ul>
   </li><!-- End Forms Nav -->
 
-  <li class="nav-item"  v-if="user.roles.includes('Admin')||user.roles.includes('Vicerrector')" id="step_3">
+  <li class="nav-item"  v-if="user.roles.includes('Admin')" id="step_3">
     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#" 
     :class="{'activesli': $route.name === '1111'||$route.name === '2222'||$route.name === '3333'||$route.name === '1234'||$route.name === '4444'}">
       <i class="bi bi-layout-text-window-reverse"></i><span>Gestión Curso</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -175,8 +171,29 @@
   </li>
  
  
-
-
+ 
+  <li class="nav-item"  v-if="user.roles.includes('Admin')||user.roles.includes('Vicerrector')">
+    <a class="nav-link collapsed" data-bs-target="#asistencia-mi" data-bs-toggle="collapse" href="#"
+    :class="{'activesli': $route.name === 'as1'||$route.name === 'as2'}">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icons"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 18.5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5h6.5c.275 0 .5.225.5.5v13.5H4Zm8.5 1.497V20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5c1.102 0 2 .895 2 2v3.997h2L20 9c1.105 0 2 .892 2 2v7l-1.5-.001V11c0-.278-.222-.5-.5-.5l-3.126-.001-4.374-.002v8l7.5.003a.5.5 0 0 0 .5-.5H22a2 2 0 0 1-2 2l-7.5-.003ZM5 7.497h4.5v-1.5H5v1.5Zm0 3h4.5v-1.5H5v1.5Zm4.5 3H5v-1.5h4.5v1.5Zm-4.5 3h4.5v-1.5H5v1.5Zm11-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Zm3-3h-2v-1.5h2v1.5Zm0 3h-2v-1.5h2v1.5Z" fill="currentColor"></path></svg>
+      <span class="ms-2">Asistencia</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="asistencia-mi" class="nav-content collapse " data-bs-parent="#sidebar-nav" :class="{'show':
+          $route.name === 'as1'||
+          $route.name === 'as2'}">
+      <li>
+        <router-link to="/crear-asistencia" @click.native="Resize" :class="{'actives': $route.name === 'as1'}">
+          <i class="bi bi-circle" :class="{'activex': $route.name === 'as1'}"></i><span>Registrar Asistencia</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/lista-asistencia" @click.native="Resize" :class="{'actives': $route.name === 'as2'}">
+          <i class="bi bi-circle" :class="{'activex': $route.name === 'as2'}"></i><span>Lista asistencia</span>
+        </router-link>
+      </li>
+     
+    </ul>
+  </li>
   <div v-if="visibl">
           <Password @cerrarCuenta="close" />
         </div>

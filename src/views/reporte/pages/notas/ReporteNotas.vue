@@ -33,7 +33,7 @@
 
                 </div>
               </div>
-              <div class="col-lg-7 text-start">
+              <div class="col-lg-7 text-end">
                 <button :disabled="!isSelecMatricula.length" @click="openLibreta()" class="btn btnNaranja2 me-2">
                   Libretas </button>
                 <button :disabled="!isSelecMatricula.length" @click="openJuntas()" class="btn btnNaranja2 me-2">

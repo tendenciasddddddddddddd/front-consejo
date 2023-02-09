@@ -32,16 +32,8 @@
                     
                   </div>
                 </div>
-              <div class="col-lg-6 text-start">
-                <button :disabled="!isSelecMatricula.length" @click="conducta_pdf()" class="btn btnNaranja2 me-2"> 
-                  <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
-                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    viewBox="0 0 24 24" width="18" style="margin-top: -3px;">
-                    <path d="M6 9V2h12v7"></path>
-                    <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
-                    <path d="M6 14h12v8H6z"></path>
-                  </svg>
-                  Comportamiento </button>
+              <div class="col-lg-6 text-end">
+            
                   <button :disabled="!isSelecMatricula.length" @click="get2()" class="btn btnNaranja2 me-2"> 
                   <svg class="me-2" data-testid="geist-icon" fill="none" height="18" shape-rendering="geometricPrecision"
                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
